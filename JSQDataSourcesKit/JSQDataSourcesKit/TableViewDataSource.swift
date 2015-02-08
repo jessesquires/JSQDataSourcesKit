@@ -20,27 +20,6 @@ import Foundation
 import UIKit
 
 
-extension UITableView {
-
-    public func registerNibs(nibs: [UINib], forReuseIdentifiers identifiers: [String]) {
-        assert(nibs.count == identifiers.count, "Arrays of nibs and identifiers must have equal counts")
-
-        for index in 0..<nibs.count {
-            registerNib(nibs[index], forCellReuseIdentifier: identifiers[index])
-        }
-    }
-
-    public func registerClasses(classes: [AnyClass], forReuseIdentifiers identifiers: [String]) {
-        assert(classes.count == identifiers.count, "Arrays of classes and identifiers must have equal counts")
-
-        for index in 0..<classes.count {
-            registerClass(classes[index], forCellReuseIdentifier: identifiers[index])
-        }
-    }
-
-}
-
-
 public protocol TableViewCellFactoryType {
 
     typealias DataItem
@@ -77,35 +56,70 @@ public struct TableViewCellFactory<Cell: UITableViewCell, DataItem>: TableViewCe
 }
 
 
-public class TableViewDataSource <SectionCollection: CollectionType, CellFactory: TableViewCellFactoryType, DataItem
-                                    where
-                                    SectionCollection.Index == Int,
-                                    SectionCollection.Generator.Element: CollectionType,
-                                    SectionCollection.Generator.Element.Generator.Element == DataItem,
-                                    SectionCollection.Generator.Element.Index == Int,
-                                    CellFactory.DataItem == DataItem>: NSObject, UITableViewDataSource {
+public class TableViewDataSourceProvider <SectionCollection: CollectionType, CellFactory: TableViewCellFactoryType, DataItem
+                                            where
+                                            SectionCollection.Index == Int,
+                                            SectionCollection.Generator.Element: CollectionType,
+                                            SectionCollection.Generator.Element.Generator.Element == DataItem,
+                                            SectionCollection.Generator.Element.Index == Int,
+                                            CellFactory.DataItem == DataItem> {
 
     public var sections: SectionCollection
 
     public let cellFactory: CellFactory
 
+    public var dataSource: UITableViewDataSource { return bridgedDataSource }
+
+    private let bridgedDataSource: BridgedTableViewDataSource!
+
     public init(sections: SectionCollection, cellFactory: CellFactory) {
         self.sections = sections
         self.cellFactory = cellFactory
+
+        self.bridgedDataSource = BridgedTableViewDataSource(
+            numberOfSections: {
+                [unowned self] () -> Int in
+                return countElements(self.sections)
+            },
+            numberOfRowsInSection: {
+                [unowned self] (section) -> Int in
+                return countElements(self.sections[section])
+            },
+            cellForRowAtIndexPath: {
+                [unowned self] (tableView, indexPath) -> UITableViewCell in
+                return self.cellFactory.cellForItem(sections[indexPath.section][indexPath.row], inTableView: tableView, atIndexPath: indexPath)
+        })
     }
 
-    // MARK: table view data source
+}
 
-    public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return countElements(sections)
+
+private class BridgedTableViewDataSource: NSObject, UITableViewDataSource {
+
+    typealias NumberOfSectionsHandler = () -> Int
+    typealias NumberOfRowsIntSectionHandler = (Int) -> Int
+    typealias CellForRowAtIndexPathHandler = (UITableView, NSIndexPath) -> UITableViewCell
+
+    private let numberOfSections: NumberOfSectionsHandler
+    private let numberOfRowsInSection: NumberOfRowsIntSectionHandler
+    private let cellForRowAtIndexPath: CellForRowAtIndexPathHandler
+
+    init(numberOfSections: NumberOfSectionsHandler, numberOfRowsInSection: NumberOfRowsIntSectionHandler, cellForRowAtIndexPath: CellForRowAtIndexPathHandler) {
+        self.numberOfSections = numberOfSections
+        self.numberOfRowsInSection = numberOfRowsInSection
+        self.cellForRowAtIndexPath = cellForRowAtIndexPath
     }
 
-    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return countElements(sections[section])
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return numberOfSections()
     }
 
-    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return cellFactory.cellForItem(sections[indexPath.section][indexPath.row], inTableView: tableView, atIndexPath: indexPath)
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return numberOfRowsInSection(section)
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        return cellForRowAtIndexPath(tableView, indexPath)
     }
 
 }
