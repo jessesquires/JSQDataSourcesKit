@@ -30,17 +30,18 @@ class TableViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
-    var dataSourceProvider: TableViewDataSourceProvider<[[ViewModel]], TableViewCellFactory<TableViewCell, ViewModel>, ViewModel>?
+    var dataSourceProvider: TableViewDataSourceProvider<ViewModel, TableViewSection<ViewModel>, TableViewCellFactory<TableViewCell, ViewModel> >?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.registerNib(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
 
-        let sections = [
-            [ ViewModel(), ViewModel(), ViewModel(), ViewModel(), ViewModel(), ViewModel() ],
-            [ ViewModel(), ViewModel(), ViewModel(), ViewModel(), ViewModel(), ViewModel() ]
-        ]
+        let section0 = TableViewSection(dataItems: [ ViewModel(), ViewModel(), ViewModel() ], headerTitle: "First Section")
+        let section1 = TableViewSection(dataItems: [ ViewModel(), ViewModel(), ViewModel(), ViewModel(), ViewModel(), ViewModel() ], headerTitle: "Second Section")
+        let section2 = TableViewSection(dataItems: [ ViewModel(), ViewModel() ], headerTitle: "Third Section")
+
+        let allSections = [section0, section1, section2]
 
         let factory = TableViewCellFactory(reuseIdentifier: "cell") { (cell: TableViewCell, model: ViewModel, tableView: UITableView, indexPath: NSIndexPath) -> TableViewCell in
             cell.textLabel?.text = model.title
@@ -48,7 +49,7 @@ class TableViewController: UIViewController {
             return cell
         }
 
-        self.dataSourceProvider = TableViewDataSourceProvider(sections: sections, cellFactory: factory, tableView: self.tableView)
+        self.dataSourceProvider = TableViewDataSourceProvider(sections: allSections, cellFactory: factory, tableView: self.tableView)
 
     }
 

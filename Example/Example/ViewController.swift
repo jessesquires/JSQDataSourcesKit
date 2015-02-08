@@ -17,7 +17,6 @@
 //
 
 import UIKit
-import JSQDataSourcesKit
 
 class ViewController: UIViewController {
 
