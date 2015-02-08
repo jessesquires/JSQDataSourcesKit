@@ -67,7 +67,7 @@ public struct TableViewCellFactory<Cell: UITableViewCell, DataItem>: TableViewCe
 
     public func cellForItem(item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell {
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as Cell
-        return cell
+        return configureCell(cell, forItem: item, inTableView: tableView, atIndexPath: indexPath)
     }
 
     public func configureCell(cell: Cell, forItem item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell {
