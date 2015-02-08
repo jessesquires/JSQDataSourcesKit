@@ -1,6 +1,8 @@
 # JSQDataSourcesKit
 
-*Data source objects that keep your view controllers light*, a Swift rewrite of [RSTDataSourceKit](https://github.com/rosettastone/RSTDataSourceKit).
+*Data source objects that keep your view controllers light*
+
+A Swift rewrite of [RSTDataSourceKit](https://github.com/rosettastone/RSTDataSourceKit), inspired by [Andy Matuschak's](https://github.com/andymatuschak) *type-safe value-oriented collection view [data source](https://gist.github.com/andymatuschak/f1e1691fa1a327468f8e)*. 
 
 ### Work in-progress
 
