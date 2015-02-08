@@ -16,7 +16,6 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-import Foundation
 import UIKit
 
 
@@ -27,30 +26,32 @@ public protocol TableViewCellFactoryType {
 
     func cellForItem(item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell
 
-    func configureCell(cell: Cell, forItem item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell
+    func configureCell(cell: Cell, forItem item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath)
 
 }
 
 
 public struct TableViewCellFactory<Cell: UITableViewCell, DataItem>: TableViewCellFactoryType {
 
-    typealias CellConfigurationClosure = (Cell, DataItem, UITableView, NSIndexPath) -> Cell
+    typealias CellConfigurationHandler = (Cell, DataItem, UITableView, NSIndexPath) -> Void
 
     private let reuseIdentifier: String
-    private let cellConfigurator: CellConfigurationClosure
+    
+    private let cellConfigurator: CellConfigurationHandler
 
-    public init(reuseIdentifier: String, cellConfigurator: CellConfigurationClosure) {
+    public init(reuseIdentifier: String, cellConfigurator: CellConfigurationHandler) {
         self.reuseIdentifier = reuseIdentifier
         self.cellConfigurator = cellConfigurator
     }
 
     public func cellForItem(item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell {
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as Cell
-        return configureCell(cell, forItem: item, inTableView: tableView, atIndexPath: indexPath)
+        configureCell(cell, forItem: item, inTableView: tableView, atIndexPath: indexPath)
+        return cell
     }
 
-    public func configureCell(cell: Cell, forItem item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell {
-        return self.cellConfigurator(cell, item, tableView, indexPath)
+    public func configureCell(cell: Cell, forItem item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) {
+        self.cellConfigurator(cell, item, tableView, indexPath)
     }
 
 }
