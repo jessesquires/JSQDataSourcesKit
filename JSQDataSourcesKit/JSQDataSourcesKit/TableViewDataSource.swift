@@ -85,9 +85,9 @@ public struct TableViewSection <DataItem>: TableViewSectionInfo {
 
 
 public class TableViewDataSourceProvider <DataItem, SectionInfo: TableViewSectionInfo, CellFactory: TableViewCellFactoryType
-    where
-    SectionInfo.DataItem == DataItem,
-CellFactory.DataItem == DataItem> {
+                                            where
+                                            SectionInfo.DataItem == DataItem,
+                                            CellFactory.DataItem == DataItem> {
 
     public var sections: [SectionInfo]
 
