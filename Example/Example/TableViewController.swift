@@ -37,9 +37,9 @@ class TableViewController: UIViewController {
 
         tableView.registerNib(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
 
-        let section0 = TableViewSection(dataItems: [ ViewModel(), ViewModel(), ViewModel() ], headerTitle: "First Section")
-        let section1 = TableViewSection(dataItems: [ ViewModel(), ViewModel(), ViewModel(), ViewModel(), ViewModel(), ViewModel() ], headerTitle: "Second Section")
-        let section2 = TableViewSection(dataItems: [ ViewModel(), ViewModel() ], headerTitle: "Third Section")
+        let section0 = TableViewSection(dataItems: [ ViewModel(), ViewModel(), ViewModel() ], headerTitle: "First")
+        let section1 = TableViewSection(dataItems: [ ViewModel(), ViewModel(), ViewModel(), ViewModel(), ViewModel(), ViewModel() ], headerTitle: "Second", footerTitle: "Only 2nd has a footer")
+        let section2 = TableViewSection(dataItems: [ ViewModel(), ViewModel() ], headerTitle: "Third")
 
         let allSections = [section0, section1, section2]
 
@@ -50,7 +50,7 @@ class TableViewController: UIViewController {
         }
 
         self.dataSourceProvider = TableViewDataSourceProvider(sections: allSections, cellFactory: factory, tableView: self.tableView)
-
+        
     }
 
 }
