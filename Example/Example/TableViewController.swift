@@ -48,9 +48,7 @@ class TableViewController: UIViewController {
             return cell
         }
 
-        self.dataSourceProvider = TableViewDataSourceProvider(sections: sections, cellFactory: factory)
-
-        self.tableView.dataSource = self.dataSourceProvider?.dataSource
+        self.dataSourceProvider = TableViewDataSourceProvider(sections: sections, cellFactory: factory, tableView: self.tableView)
 
     }
 

@@ -72,7 +72,7 @@ public class TableViewDataSourceProvider <SectionCollection: CollectionType, Cel
 
     private let bridgedDataSource: BridgedTableViewDataSource!
 
-    public init(sections: SectionCollection, cellFactory: CellFactory) {
+    public init(sections: SectionCollection, cellFactory: CellFactory, tableView: UITableView? = nil) {
         self.sections = sections
         self.cellFactory = cellFactory
 
@@ -89,6 +89,8 @@ public class TableViewDataSourceProvider <SectionCollection: CollectionType, Cel
                 [unowned self] (tableView, indexPath) -> UITableViewCell in
                 return self.cellFactory.cellForItem(sections[indexPath.section][indexPath.row], inTableView: tableView, atIndexPath: indexPath)
         })
+
+        tableView?.dataSource = self.dataSource
     }
 
 }
