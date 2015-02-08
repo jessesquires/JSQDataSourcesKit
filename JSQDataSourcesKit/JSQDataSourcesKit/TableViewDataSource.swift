@@ -121,7 +121,8 @@ public class TableViewDataSourceProvider <DataItem, SectionInfo: TableViewSectio
             titleForFooterInSection: {
                 [unowned self] (section) -> String? in
                 return self.sections[section].footerTitle
-        })
+            }
+        )
 
         tableView?.dataSource = self.dataSource
     }
