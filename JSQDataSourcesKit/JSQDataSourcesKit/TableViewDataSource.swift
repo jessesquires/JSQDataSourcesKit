@@ -106,25 +106,21 @@ public class TableViewDataSourceProvider <DataItem, SectionInfo: TableViewSectio
         self.cellFactory = cellFactory
 
         self.bridgedDataSource = BridgedTableViewDataSource(
-            numberOfSections: {
-                [unowned self] () -> Int in
-                return self.sections.count
+            numberOfSections: { [unowned self] () -> Int in
+                self.sections.count
             },
-            numberOfRowsInSection: {
-                [unowned self] (section) -> Int in
-                return self.sections[section].dataItems.count
+            numberOfRowsInSection: { [unowned self] (section) -> Int in
+                self.sections[section].dataItems.count
             },
-            cellForRowAtIndexPath: {
-                [unowned self] (tableView, indexPath) -> UITableViewCell in
-                return self.cellFactory.cellForItem(sections[indexPath.section].dataItems[indexPath.row], inTableView: tableView, atIndexPath: indexPath)
+            cellForRowAtIndexPath: { [unowned self] (tableView, indexPath) -> UITableViewCell in
+                let dataItem = sections[indexPath.section].dataItems[indexPath.row]
+                return self.cellFactory.cellForItem(dataItem, inTableView: tableView, atIndexPath: indexPath)
             },
-            titleForHeaderInSection: {
-                [unowned self] (section) -> String? in
-                return self.sections[section].headerTitle
+            titleForHeaderInSection: { [unowned self] (section) -> String? in
+                self.sections[section].headerTitle
             },
-            titleForFooterInSection: {
-                [unowned self] (section) -> String? in
-                return self.sections[section].footerTitle
+            titleForFooterInSection: { [unowned self] (section) -> String? in
+                self.sections[section].footerTitle
             }
         )
 
@@ -153,23 +149,18 @@ public class TableViewFetchedResultsDataSourceProvider <DataItem, SectionInfo: T
         self.cellFactory = cellFactory
 
         self.bridgedDataSource = BridgedTableViewDataSource(
-            numberOfSections: {
-                [unowned self] () -> Int in
-                return self.fetchedResultsController.sections?.count ?? 0
+            numberOfSections: { [unowned self] () -> Int in
+                self.fetchedResultsController.sections?.count ?? 0
             },
-            numberOfRowsInSection: {
-                [unowned self] (section) -> Int in
+            numberOfRowsInSection: { [unowned self] (section) -> Int in
                 let sectionInfo = self.fetchedResultsController.sections?[section] as NSFetchedResultsSectionInfo
                 return sectionInfo.numberOfObjects ?? 0
             },
-            cellForRowAtIndexPath: {
-                [unowned self] (tableView, indexPath) -> UITableViewCell in
+            cellForRowAtIndexPath: { [unowned self] (tableView, indexPath) -> UITableViewCell in
                 let dataItem = self.fetchedResultsController.objectAtIndexPath(indexPath) as DataItem
                 return self.cellFactory.cellForItem(dataItem, inTableView: tableView, atIndexPath: indexPath)
             },
-            titleForHeaderInSection: {
-                [unowned self] (section) -> String? in
-
+            titleForHeaderInSection: { [unowned self] (section) -> String? in
                 if self.fetchedResultsController.fetchedObjects?.count == 0 {
                     return nil
                 }
@@ -177,8 +168,7 @@ public class TableViewFetchedResultsDataSourceProvider <DataItem, SectionInfo: T
                 let sectionInfo = self.fetchedResultsController.sections?[section] as NSFetchedResultsSectionInfo
                 return sectionInfo.name
             },
-            titleForFooterInSection: {
-                [unowned self] (section) -> String? in
+            titleForFooterInSection: { [unowned self] (section) -> String? in
                 return nil
             }
         )
