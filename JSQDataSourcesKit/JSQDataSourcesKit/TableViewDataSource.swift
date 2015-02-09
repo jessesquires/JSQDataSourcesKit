@@ -16,7 +16,9 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
+import Foundation
 import UIKit
+import CoreData
 
 
 public protocol TableViewCellFactoryType {
@@ -129,6 +131,61 @@ public class TableViewDataSourceProvider <DataItem, SectionInfo: TableViewSectio
         tableView?.dataSource = self.dataSource
     }
 
+}
+
+
+public class TableViewFetchedResultsDataSourceProvider <DataItem, SectionInfo: TableViewSectionInfo, CellFactory: TableViewCellFactoryType
+                                                        where
+                                                        SectionInfo.DataItem == DataItem,
+                                                        CellFactory.DataItem == DataItem> {
+
+    public let fetchedResultsController: NSFetchedResultsController
+
+    public let cellFactory: CellFactory
+
+    public var dataSource: UITableViewDataSource { return bridgedDataSource }
+
+    private let bridgedDataSource: BridgedTableViewDataSource!
+
+    public init(fetchedResultsController: NSFetchedResultsController, delegate: NSFetchedResultsControllerDelegate? = nil, cellFactory: CellFactory, tableView: UITableView? = nil) {
+        self.fetchedResultsController = fetchedResultsController
+        self.fetchedResultsController.delegate = delegate
+        self.cellFactory = cellFactory
+
+        self.bridgedDataSource = BridgedTableViewDataSource(
+            numberOfSections: {
+                [unowned self] () -> Int in
+                return self.fetchedResultsController.sections?.count ?? 0
+            },
+            numberOfRowsInSection: {
+                [unowned self] (section) -> Int in
+                let sectionInfo = self.fetchedResultsController.sections?[section] as NSFetchedResultsSectionInfo
+                return sectionInfo.numberOfObjects ?? 0
+            },
+            cellForRowAtIndexPath: {
+                [unowned self] (tableView, indexPath) -> UITableViewCell in
+                let dataItem = self.fetchedResultsController.objectAtIndexPath(indexPath) as DataItem
+                return self.cellFactory.cellForItem(dataItem, inTableView: tableView, atIndexPath: indexPath)
+            },
+            titleForHeaderInSection: {
+                [unowned self] (section) -> String? in
+
+                if self.fetchedResultsController.fetchedObjects?.count == 0 {
+                    return nil
+                }
+
+                let sectionInfo = self.fetchedResultsController.sections?[section] as NSFetchedResultsSectionInfo
+                return sectionInfo.name
+            },
+            titleForFooterInSection: {
+                [unowned self] (section) -> String? in
+                return nil
+            }
+        )
+
+        tableView?.dataSource = self.dataSource
+    }
+    
 }
 
 
