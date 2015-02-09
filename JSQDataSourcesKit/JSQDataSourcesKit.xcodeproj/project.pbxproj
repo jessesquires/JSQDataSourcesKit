@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		88614C0F1A8810EC00C51236 /* TableViewFetchedResultsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88614C0E1A8810EC00C51236 /* TableViewFetchedResultsControllerDelegate.swift */; };
+		88614C0F1A8810EC00C51236 /* TableViewFetchedResultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88614C0E1A8810EC00C51236 /* TableViewFetchedResultsDelegate.swift */; };
 		88B323411A86D7B1007FB904 /* TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B323401A86D7B1007FB904 /* TableViewDataSource.swift */; };
 		88DB89821A86D0C900DED153 /* JSQDataSourcesKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 88DB89811A86D0C900DED153 /* JSQDataSourcesKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		88DB89881A86D0C900DED153 /* JSQDataSourcesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88DB897C1A86D0C900DED153 /* JSQDataSourcesKit.framework */; };
@@ -25,7 +25,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		88614C0E1A8810EC00C51236 /* TableViewFetchedResultsControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewFetchedResultsControllerDelegate.swift; sourceTree = "<group>"; };
+		88614C0E1A8810EC00C51236 /* TableViewFetchedResultsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewFetchedResultsDelegate.swift; sourceTree = "<group>"; };
 		88B323401A86D7B1007FB904 /* TableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSource.swift; sourceTree = "<group>"; };
 		88DB897C1A86D0C900DED153 /* JSQDataSourcesKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSQDataSourcesKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88DB89801A86D0C900DED153 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -77,7 +77,7 @@
 			children = (
 				88DB89811A86D0C900DED153 /* JSQDataSourcesKit.h */,
 				88B323401A86D7B1007FB904 /* TableViewDataSource.swift */,
-				88614C0E1A8810EC00C51236 /* TableViewFetchedResultsControllerDelegate.swift */,
+				88614C0E1A8810EC00C51236 /* TableViewFetchedResultsDelegate.swift */,
 				88DB897F1A86D0C900DED153 /* Supporting Files */,
 			);
 			path = JSQDataSourcesKit;
@@ -216,7 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88B323411A86D7B1007FB904 /* TableViewDataSource.swift in Sources */,
-				88614C0F1A8810EC00C51236 /* TableViewFetchedResultsControllerDelegate.swift in Sources */,
+				88614C0F1A8810EC00C51236 /* TableViewFetchedResultsDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

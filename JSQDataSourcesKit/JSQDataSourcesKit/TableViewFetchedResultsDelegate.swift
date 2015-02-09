@@ -20,7 +20,7 @@ import Foundation
 import UIKit
 import CoreData
 
-public class TableViewFetchedResultsControllerDelegate <Cell: UITableViewCell, DataItem>: NSFetchedResultsControllerDelegate {
+public class TableViewFetchedResultsDelegate <Cell: UITableViewCell, DataItem>: NSFetchedResultsControllerDelegate {
 
     public weak var tableView: UITableView?
 
