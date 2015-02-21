@@ -119,6 +119,41 @@ public class CollectionViewDataSourceProvider <DataItem, SectionInfo: Collection
 }
 
 
+public class CollectionViewFetchedResultsDataSourceProvider <DataItem, SectionInfo: CollectionViewSectionInfo, CellFactory: CollectionViewCellFactoryType
+                                                             where
+                                                             SectionInfo.DataItem == DataItem,
+                                                             CellFactory.DataItem == DataItem> {
+
+    public let fetchedResultsController: NSFetchedResultsController
+
+    public let cellFactory: CellFactory
+
+    public var dataSource: UICollectionViewDataSource { return bridgedDataSource }
+
+    public init(fetchedResultsController: NSFetchedResultsController, cellFactory: CellFactory, collectionView: UICollectionView? = nil) {
+        self.fetchedResultsController = fetchedResultsController
+        self.cellFactory = cellFactory
+
+        collectionView?.dataSource = self.dataSource
+    }
+
+    private lazy var bridgedDataSource: BridgedCollectionViewDataSource = BridgedCollectionViewDataSource(
+        numberOfSections: { [unowned self] () -> Int in
+            self.fetchedResultsController.sections?.count ?? 0
+        },
+        numberOfItemsInSection: { [unowned self] (section) -> Int in
+            let sectionInfo = self.fetchedResultsController.sections?[section] as! NSFetchedResultsSectionInfo
+            return sectionInfo.numberOfObjects ?? 0
+        },
+        cellForItemAtIndexPath: { [unowned self] (collectionView, indexPath) -> UICollectionViewCell in
+            let dataItem = self.fetchedResultsController.objectAtIndexPath(indexPath) as! DataItem
+            return self.cellFactory.cellForItem(dataItem, inCollectionView: collectionView, atIndexPath: indexPath)
+        }
+    )
+
+}
+
+
 @objc private class BridgedCollectionViewDataSource: NSObject, UICollectionViewDataSource {
 
     typealias NumberOfSectionsHandler = () -> Int
