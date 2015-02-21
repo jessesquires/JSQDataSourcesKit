@@ -137,9 +137,8 @@ public class TableViewFetchedResultsDataSourceProvider <DataItem, SectionInfo: T
 
     public var dataSource: UITableViewDataSource { return bridgedDataSource }
 
-    public init(fetchedResultsController: NSFetchedResultsController, delegate: NSFetchedResultsControllerDelegate? = nil, cellFactory: CellFactory, tableView: UITableView? = nil) {
+    public init(fetchedResultsController: NSFetchedResultsController, cellFactory: CellFactory, tableView: UITableView? = nil) {
         self.fetchedResultsController = fetchedResultsController
-        self.fetchedResultsController.delegate = delegate
         self.cellFactory = cellFactory
 
         tableView?.dataSource = self.dataSource
@@ -171,6 +170,7 @@ public class TableViewFetchedResultsDataSourceProvider <DataItem, SectionInfo: T
     )
     
 }
+
 
 @objc private class BridgedTableViewDataSource: NSObject, UITableViewDataSource {
 
