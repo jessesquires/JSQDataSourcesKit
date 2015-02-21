@@ -70,15 +70,13 @@ public protocol CollectionViewSectionInfo {
 
 public struct CollectionViewSection <DataItem>: CollectionViewSectionInfo {
 
-    typealias TableViewRowCollection = [DataItem]
-
-    public var dataItems: TableViewRowCollection
+    public var dataItems: [DataItem]
 
     public let headerTitle: String?
 
     public let footerTitle: String?
 
-    public init(dataItems: TableViewRowCollection, headerTitle: String? = nil, footerTitle: String? = nil) {
+    public init(dataItems: [DataItem], headerTitle: String? = nil, footerTitle: String? = nil) {
         self.dataItems = dataItems
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle

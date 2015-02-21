@@ -24,7 +24,6 @@ struct CViewModel {
     let text = "Text"
 }
 
-
 let collectionCellId = "cell"
 
 

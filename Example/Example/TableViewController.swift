@@ -24,6 +24,8 @@ struct TViewModel {
     let title = "My Cell Title"
 }
 
+let tableCellId = "cell"
+
 
 class TableViewController: UIViewController {
 
@@ -34,7 +36,7 @@ class TableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.registerNib(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        tableView.registerNib(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: tableCellId)
 
         let section0 = TableViewSection(dataItems: [ TViewModel(), TViewModel(), TViewModel() ], headerTitle: "First")
         let section1 = TableViewSection(dataItems: [ TViewModel(), TViewModel(), TViewModel(), TViewModel(), TViewModel(), TViewModel() ], headerTitle: "Second", footerTitle: "Only 2nd has a footer")
@@ -42,7 +44,7 @@ class TableViewController: UIViewController {
 
         let allSections = [section0, section1, section2]
 
-        let factory = TableViewCellFactory(reuseIdentifier: "cell") { (cell: TableViewCell, model: TViewModel, tableView: UITableView, indexPath: NSIndexPath) -> TableViewCell in
+        let factory = TableViewCellFactory(reuseIdentifier: tableCellId) { (cell: TableViewCell, model: TViewModel, tableView: UITableView, indexPath: NSIndexPath) -> TableViewCell in
             cell.textLabel?.text = model.title
             cell.detailTextLabel?.text = "\(indexPath.section), \(indexPath.row)"
             return cell
