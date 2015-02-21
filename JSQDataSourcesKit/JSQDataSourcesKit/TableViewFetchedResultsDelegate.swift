@@ -62,8 +62,8 @@ public class TableViewFetchedResultsDelegate <DataItem, CellFactory: TableViewCe
                 tableView?.deleteRowsAtIndexPaths([i], withRowAnimation: .Fade)
             }
         case .Update:
-            if let i = indexPath, cell = tableView?.cellForRowAtIndexPath(i) {
-                cellFactory.configureCell(cell as! CellFactory.Cell, forItem: anObject as! DataItem, inTableView: tableView!, atIndexPath: indexPath!)
+            if let i = indexPath, cell = tableView?.cellForRowAtIndexPath(i) as? CellFactory.Cell, view = tableView {
+                cellFactory.configureCell(cell, forItem: anObject as! DataItem, inTableView: view, atIndexPath: i)
             }
         case .Move:
             if let deleteIndexPath = indexPath {
