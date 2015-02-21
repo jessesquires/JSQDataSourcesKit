@@ -60,10 +60,8 @@ public class TableViewFetchedResultsDelegate <Cell: UITableViewCell, DataItem>: 
                 tableView?.deleteRowsAtIndexPaths([i], withRowAnimation: .Fade)
             }
         case .Update:
-            if let i = indexPath {
-                if let tableCell = tableView?.cellForRowAtIndexPath(i) {
-                    cellFactory.configureCell(tableCell as Cell, forItem: anObject as DataItem, inTableView: tableView!, atIndexPath: indexPath!)
-                }
+            if let i = indexPath, cell = tableView?.cellForRowAtIndexPath(i) {
+                cellFactory.configureCell(cell as! Cell, forItem: anObject as! DataItem, inTableView: tableView!, atIndexPath: indexPath!)
             }
         case .Move:
             if let deleteIndexPath = indexPath {
