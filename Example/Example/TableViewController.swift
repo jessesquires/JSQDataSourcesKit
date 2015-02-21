@@ -17,11 +17,10 @@
 //
 
 import UIKit
-
 import JSQDataSourcesKit
 
 
-struct ViewModel {
+struct TViewModel {
     let title = "My Cell Title"
 }
 
@@ -30,20 +29,20 @@ class TableViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
-    var dataSourceProvider: TableViewDataSourceProvider<ViewModel, TableViewSection<ViewModel>, TableViewCellFactory<TableViewCell, ViewModel> >?
+    var dataSourceProvider: TableViewDataSourceProvider<TViewModel, TableViewSection<TViewModel>, TableViewCellFactory<TableViewCell, TViewModel> >?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.registerNib(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
 
-        let section0 = TableViewSection(dataItems: [ ViewModel(), ViewModel(), ViewModel() ], headerTitle: "First")
-        let section1 = TableViewSection(dataItems: [ ViewModel(), ViewModel(), ViewModel(), ViewModel(), ViewModel(), ViewModel() ], headerTitle: "Second", footerTitle: "Only 2nd has a footer")
-        let section2 = TableViewSection(dataItems: [ ViewModel(), ViewModel() ], headerTitle: "Third")
+        let section0 = TableViewSection(dataItems: [ TViewModel(), TViewModel(), TViewModel() ], headerTitle: "First")
+        let section1 = TableViewSection(dataItems: [ TViewModel(), TViewModel(), TViewModel(), TViewModel(), TViewModel(), TViewModel() ], headerTitle: "Second", footerTitle: "Only 2nd has a footer")
+        let section2 = TableViewSection(dataItems: [ TViewModel(), TViewModel() ], headerTitle: "Third")
 
         let allSections = [section0, section1, section2]
 
-        let factory = TableViewCellFactory(reuseIdentifier: "cell") { (cell: TableViewCell, model: ViewModel, tableView: UITableView, indexPath: NSIndexPath) -> TableViewCell in
+        let factory = TableViewCellFactory(reuseIdentifier: "cell") { (cell: TableViewCell, model: TViewModel, tableView: UITableView, indexPath: NSIndexPath) -> TableViewCell in
             cell.textLabel?.text = model.title
             cell.detailTextLabel?.text = "\(indexPath.section), \(indexPath.row)"
             return cell
