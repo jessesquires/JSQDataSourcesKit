@@ -177,19 +177,19 @@ public class TableViewFetchedResultsDataSourceProvider <DataItem, SectionInfo: T
 @objc private class BridgedTableViewDataSource: NSObject, UITableViewDataSource {
 
     typealias NumberOfSectionsHandler = () -> Int
-    typealias NumberOfRowsIntSectionHandler = (Int) -> Int
+    typealias NumberOfRowsInSectionHandler = (Int) -> Int
     typealias CellForRowAtIndexPathHandler = (UITableView, NSIndexPath) -> UITableViewCell
     typealias TitleForHeaderInSectionHandler = (Int) -> String?
     typealias TitleForFooterInSectionHandler = (Int) -> String?
 
     private let numberOfSections: NumberOfSectionsHandler
-    private let numberOfRowsInSection: NumberOfRowsIntSectionHandler
+    private let numberOfRowsInSection: NumberOfRowsInSectionHandler
     private let cellForRowAtIndexPath: CellForRowAtIndexPathHandler
     private let titleForHeaderInSection: TitleForHeaderInSectionHandler
     private let titleForFooterInSection: TitleForFooterInSectionHandler
 
     init(numberOfSections: NumberOfSectionsHandler,
-        numberOfRowsInSection: NumberOfRowsIntSectionHandler,
+        numberOfRowsInSection: NumberOfRowsInSectionHandler,
         cellForRowAtIndexPath: CellForRowAtIndexPathHandler,
         titleForHeaderInSection: TitleForHeaderInSectionHandler,
         titleForFooterInSection: TitleForFooterInSectionHandler) {
