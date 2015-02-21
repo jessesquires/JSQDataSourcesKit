@@ -21,13 +21,15 @@ import UIKit
 import CoreData
 
 
-public class TableViewFetchedResultsDelegate <Cell: UITableViewCell, DataItem>: NSFetchedResultsControllerDelegate {
+public class TableViewFetchedResultsDelegate <DataItem, CellFactory: TableViewCellFactoryType
+                                                where
+                                                CellFactory.DataItem == DataItem>: NSFetchedResultsControllerDelegate {
 
     public weak var tableView: UITableView?
 
-    public let cellFactory: TableViewCellFactory<Cell, DataItem>
+    public let cellFactory: CellFactory
 
-    public init(tableView: UITableView, cellFactory: TableViewCellFactory<Cell, DataItem>) {
+    public init(tableView: UITableView, cellFactory: CellFactory) {
         self.tableView = tableView
         self.cellFactory = cellFactory
     }
@@ -61,7 +63,7 @@ public class TableViewFetchedResultsDelegate <Cell: UITableViewCell, DataItem>: 
             }
         case .Update:
             if let i = indexPath, cell = tableView?.cellForRowAtIndexPath(i) {
-                cellFactory.configureCell(cell as! Cell, forItem: anObject as! DataItem, inTableView: tableView!, atIndexPath: indexPath!)
+                cellFactory.configureCell(cell as! CellFactory.Cell, forItem: anObject as! DataItem, inTableView: tableView!, atIndexPath: indexPath!)
             }
         case .Move:
             if let deleteIndexPath = indexPath {
