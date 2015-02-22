@@ -65,16 +65,47 @@ class FetchedCollectionViewController: UIViewController {
 
 
     @IBAction func didTapAddButton(sender: UIBarButtonItem) {
-        println("add")
+        collectionView.deselectAllItems()
 
         let newThing = Thing.newThing(stack.context)
         stack.saveAndWait()
         dataSourceProvider?.performFetch()
+
+        if let indexPath = dataSourceProvider?.fetchedResultsController.indexPathForObject(newThing) {
+            collectionView.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: .CenteredVertically)
+        }
+
+        println("Added new thing: \(newThing)")
     }
 
 
     @IBAction func didTapDeleteButton(sender: UIBarButtonItem) {
-        println("delete")
+        if let indexPaths = collectionView.indexPathsForSelectedItems() as? [NSIndexPath] {
+
+            println("Deleting things at indexPaths: \(indexPaths)")
+
+            for i in indexPaths {
+                let thingToDelete = dataSourceProvider?.fetchedResultsController.objectAtIndexPath(i) as! Thing
+                stack.context.deleteObject(thingToDelete)
+            }
+
+            stack.saveAndWait()
+            dataSourceProvider?.performFetch()
+        }
+
+    }
+
+}
+
+
+extension UICollectionView {
+
+    func deselectAllItems() {
+        if let indexPaths = indexPathsForSelectedItems() as? [NSIndexPath] {
+            for i in indexPaths {
+                deselectItemAtIndexPath(i, animated: true)
+            }
+        }
     }
 
 }
