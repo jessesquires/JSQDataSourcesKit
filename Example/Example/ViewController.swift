@@ -18,17 +18,18 @@
 
 import UIKit
 
-let shouldAddFakeObjects = false
-
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if shouldAddFakeObjects {
-            let stack = CoreDataStack()
+        let stack = CoreDataStack()
+        let fetchRequest = Thing.fetchRequest()
+        let results = stack.context.executeFetchRequest(fetchRequest, error: nil)
+
+        if results?.count == 0 {
             
-            for i in 0...9 {
+            for i in 1...20 {
                 let t = Thing.newThing(stack.context)
                 println("Add new thing = \(t)")
             }
@@ -39,4 +40,3 @@ class ViewController: UIViewController {
     }
 
 }
-

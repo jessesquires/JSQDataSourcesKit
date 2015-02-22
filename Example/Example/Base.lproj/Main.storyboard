@@ -8,11 +8,14 @@
         <!--Navigation Controller-->
         <scene sceneID="BSm-Xz-ob8">
             <objects>
-                <navigationController id="lN3-9f-3Nq" sceneMemberID="viewController">
+                <navigationController toolbarHidden="NO" id="lN3-9f-3Nq" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5C0-5W-ao9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="0cO-7y-8Td">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="KwA-HX-gF8" kind="relationship" relationship="rootViewController" id="RSF-Id-GHU"/>
                     </connections>
@@ -123,8 +126,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="CcJ-mr-HDj" firstAttribute="bottom" secondItem="bMa-0t-K4e" secondAttribute="bottomMargin" id="825-LP-OGf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="CcJ-mr-HDj" secondAttribute="trailing" constant="-16" id="Qkt-9X-8IQ"/>
-                            <constraint firstItem="jYw-J8-iBj" firstAttribute="top" secondItem="CcJ-mr-HDj" secondAttribute="bottom" id="sRd-Nz-kWD"/>
                             <constraint firstItem="CcJ-mr-HDj" firstAttribute="top" secondItem="bMa-0t-K4e" secondAttribute="topMargin" id="yaa-kv-UDR"/>
                             <constraint firstItem="CcJ-mr-HDj" firstAttribute="leading" secondItem="bMa-0t-K4e" secondAttribute="leadingMargin" constant="-16" id="zCd-hG-ZYc"/>
                         </constraints>
@@ -165,8 +168,8 @@
                         <constraints>
                             <constraint firstItem="GDz-wB-5KC" firstAttribute="top" secondItem="gxv-8y-8A6" secondAttribute="topMargin" id="0LY-yx-b3X"/>
                             <constraint firstItem="GDz-wB-5KC" firstAttribute="leading" secondItem="gxv-8y-8A6" secondAttribute="leadingMargin" constant="-16" id="JY7-Y3-Zfl"/>
+                            <constraint firstItem="GDz-wB-5KC" firstAttribute="bottom" secondItem="gxv-8y-8A6" secondAttribute="bottomMargin" id="NKd-SX-v9w"/>
                             <constraint firstAttribute="trailingMargin" secondItem="GDz-wB-5KC" secondAttribute="trailing" constant="-16" id="nAc-a5-cDh"/>
-                            <constraint firstItem="rf4-AP-GPv" firstAttribute="top" secondItem="GDz-wB-5KC" secondAttribute="bottom" id="yk8-Ix-gwb"/>
                         </constraints>
                     </view>
                     <connections>
@@ -196,9 +199,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="k5b-4p-dQE" firstAttribute="bottom" secondItem="sEe-ch-tLm" secondAttribute="bottomMargin" id="4zC-rk-j6R"/>
                             <constraint firstItem="k5b-4p-dQE" firstAttribute="top" secondItem="sEe-ch-tLm" secondAttribute="topMargin" id="Goi-GW-zBL"/>
                             <constraint firstItem="k5b-4p-dQE" firstAttribute="leading" secondItem="sEe-ch-tLm" secondAttribute="leadingMargin" constant="-16" id="gcm-Jm-f5W"/>
-                            <constraint firstItem="Be2-Vm-Kgy" firstAttribute="top" secondItem="k5b-4p-dQE" secondAttribute="bottom" id="qOi-bT-fuN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="k5b-4p-dQE" secondAttribute="trailing" constant="-16" id="rQy-W4-shy"/>
                         </constraints>
                     </view>
@@ -239,7 +242,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="sXw-00-jfj" secondAttribute="trailing" constant="-16" id="BTy-Rf-G39"/>
                             <constraint firstItem="sXw-00-jfj" firstAttribute="top" secondItem="Dyu-MX-OdU" secondAttribute="topMargin" id="KuI-To-IgS"/>
                             <constraint firstItem="sXw-00-jfj" firstAttribute="leading" secondItem="Dyu-MX-OdU" secondAttribute="leadingMargin" constant="-16" id="OxQ-2q-bgh"/>
-                            <constraint firstItem="XWV-Oh-zW8" firstAttribute="top" secondItem="sXw-00-jfj" secondAttribute="bottom" id="ldt-kV-ABH"/>
+                            <constraint firstItem="sXw-00-jfj" firstAttribute="bottom" secondItem="Dyu-MX-OdU" secondAttribute="bottomMargin" id="zRz-QH-JkT"/>
                         </constraints>
                     </view>
                     <connections>

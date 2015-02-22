@@ -28,7 +28,8 @@ class FetchedTableViewController: UIViewController {
 
     var dataSourceProvider: TableViewFetchedResultsDataSourceProvider<Thing, TableViewCellFactory<TableViewCell, Thing> >?
 
-    
+    var fetchedResultsDelegate: TableViewFetchedResultsDelegate<Thing, TableViewCellFactory<TableViewCell, Thing> >?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -42,6 +43,9 @@ class FetchedTableViewController: UIViewController {
         }
 
         let frc: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: Thing.fetchRequest(), managedObjectContext: stack.context, sectionNameKeyPath: "category", cacheName: nil)
+
+        self.fetchedResultsDelegate = TableViewFetchedResultsDelegate(tableView: self.tableView, cellFactory: factory)
+        frc.delegate = self.fetchedResultsDelegate
 
         self.dataSourceProvider = TableViewFetchedResultsDataSourceProvider(fetchedResultsController: frc, cellFactory: factory, tableView: tableView)
     }
