@@ -77,66 +77,61 @@ public class CollectionViewFetchedResultsDelegateProvider <DataItem, CellFactory
             self.objectChanges.append(changes)
         },
         didChangeContent: { [unowned self] (controller) -> Void in
-            self.applySectionChanges()
-            self.applyObjectChanges()
+
+            self.collectionView?.performBatchUpdates({ () -> Void in
+                self.applySectionChanges()
+
+            }, completion:{ (finished) -> Void in
+                self.sectionChanges.removeAll(keepCapacity: false)
+            })
+
+            self.collectionView?.performBatchUpdates({ () -> Void in
+                self.applyObjectChanges()
+
+            }, completion:{ (finished) -> Void in
+                self.objectChanges.removeAll(keepCapacity: false)
+            })
         }
     )
 
     private func applySectionChanges() {
-        if self.sectionChanges.count == 0 {
-            return
-        }
+        for eachChange in self.sectionChanges {
+            for (changeType: NSFetchedResultsChangeType, index: SectionIndex) in eachChange {
 
-        self.collectionView?.performBatchUpdates({ () -> Void in
+                let sections = NSIndexSet(index: index)
 
-            for eachChange in self.sectionChanges {
-                for (changeType: NSFetchedResultsChangeType, index: SectionIndex) in eachChange {
-
-                    let sections = NSIndexSet(index: index)
-
-                    switch(changeType) {
-                    case .Insert:
-                        self.collectionView?.insertSections(sections)
-                    case .Delete:
-                        self.collectionView?.deleteSections(sections)
-                    case .Update:
-                        self.collectionView?.reloadSections(sections)
-                    case .Move:
-                        break
-                    }
+                switch(changeType) {
+                case .Insert:
+                    self.collectionView?.insertSections(sections)
+                case .Delete:
+                    self.collectionView?.deleteSections(sections)
+                case .Update:
+                    self.collectionView?.reloadSections(sections)
+                case .Move:
+                    break
                 }
             }
-            }, completion:{ (finished) -> Void in
-                self.sectionChanges.removeAll(keepCapacity: false)
-            })
+        }
     }
 
     private func applyObjectChanges() {
-        if self.objectChanges.count == 0 {
-            return
-        }
+        for eachChange in self.objectChanges {
+            for (changeType: NSFetchedResultsChangeType, indexes: [NSIndexPath]) in eachChange {
 
-        self.collectionView?.performBatchUpdates({ () -> Void in
-
-            for eachChange in self.objectChanges {
-                for (changeType: NSFetchedResultsChangeType, indexes: [NSIndexPath]) in eachChange {
-
-                    switch(changeType) {
-                    case .Insert:
-                        self.collectionView?.insertItemsAtIndexPaths([indexes.first!])
-                    case .Delete:
-                        self.collectionView?.deleteItemsAtIndexPaths([indexes.first!])
-                    case .Update:
-                        self.collectionView?.reloadItemsAtIndexPaths([indexes.first!])
-                    case .Move:
-                        self.collectionView?.moveItemAtIndexPath(indexes.first!, toIndexPath: indexes.last!)
+                switch(changeType) {
+                case .Insert:
+                    self.collectionView?.insertItemsAtIndexPaths(indexes)
+                case .Delete:
+                    self.collectionView?.deleteItemsAtIndexPaths(indexes)
+                case .Update:
+                    self.collectionView?.reloadItemsAtIndexPaths(indexes)
+                case .Move:
+                    if let first = indexes.first, last = indexes.last {
+                        self.collectionView?.moveItemAtIndexPath(first, toIndexPath: last)
                     }
-
                 }
             }
-            }, completion:{ (finished) -> Void in
-                self.objectChanges.removeAll(keepCapacity: false)
-            })
+        }
     }
 
 }
