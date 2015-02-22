@@ -6,21 +6,23 @@ A Swift rewrite of [RSTDataSourceKit](https://github.com/rosettastone/RSTDataSou
 
 #### NOTE: this project is still a work in-progress
 
-## Getting Started
-
-*There are 4 generic, type-safe, sectioned data source objects.*
+## Data Sources
 
 ##### `CollectionViewDataSourceProvider`
-For use as a typical `UICollectionView` data source.
-
-##### `CollectionViewFetchedResultsDataSourceProvider`
-For use with a `UICollectionView` and  `NSFetchedResultsController`.
 
 ##### `TableViewDataSourceProvider`
-For use as a typical `UITableView` data source.
+
+## Data Sources for `NSFetchedResultsController`
+
+##### `CollectionViewFetchedResultsDataSourceProvider`
 
 ##### `TableViewFetchedResultsDataSourceProvider`
-For use with a `UITableView` and  `NSFetchedResultsController`.
+
+## Delegates for `NSFetchedResultsController`
+
+##### `CollectionViewFetchedResultsDelegateProvider`
+
+##### `TableViewFetchedResultsDelegateProvider`
 
 ## Contribute
 
