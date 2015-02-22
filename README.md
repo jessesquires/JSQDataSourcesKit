@@ -8,21 +8,21 @@ A Swift rewrite of [RSTDataSourceKit](https://github.com/rosettastone/RSTDataSou
 
 ## Data Sources
 
-##### `CollectionViewDataSourceProvider`
+`CollectionViewDataSourceProvider`
 
-##### `TableViewDataSourceProvider`
+`TableViewDataSourceProvider`
 
 ## Data Sources for `NSFetchedResultsController`
 
-##### `CollectionViewFetchedResultsDataSourceProvider`
+`CollectionViewFetchedResultsDataSourceProvider`
 
-##### `TableViewFetchedResultsDataSourceProvider`
+`TableViewFetchedResultsDataSourceProvider`
 
 ## Delegates for `NSFetchedResultsController`
 
-##### `CollectionViewFetchedResultsDelegateProvider`
+`CollectionViewFetchedResultsDelegateProvider`
 
-##### `TableViewFetchedResultsDelegateProvider`
+`TableViewFetchedResultsDelegateProvider`
 
 ## Contribute
 
