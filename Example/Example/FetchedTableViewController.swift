@@ -24,10 +24,32 @@ class FetchedTableViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
+    let stack = CoreDataStack()
+
     var dataSourceProvider: TableViewFetchedResultsDataSourceProvider<Thing, TableViewCellFactory<TableViewCell, Thing> >?
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        tableView.registerNib(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: tableCellId)
+
+        let factory = TableViewCellFactory(reuseIdentifier: tableCellId) { (cell: TableViewCell, model: Thing, tableView: UITableView, indexPath: NSIndexPath) -> TableViewCell in
+            cell.textLabel?.text = model.displayName
+            cell.detailTextLabel?.text = "\(indexPath.section), \(indexPath.row)"
+            return cell
+        }
+
+        let frc: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: Thing.fetchRequest(), managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
+
+        self.dataSourceProvider = TableViewFetchedResultsDataSourceProvider(fetchedResultsController: frc, cellFactory: factory, tableView: tableView)
     }
-    
+
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.dataSourceProvider?.fetchedResultsController.performFetch(nil)
+    }
+
 }

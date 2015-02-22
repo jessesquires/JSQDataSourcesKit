@@ -24,7 +24,7 @@
         <!--JSQDataSourcesKit-->
         <scene sceneID="efe-1M-2HL">
             <objects>
-                <viewController id="KwA-HX-gF8" sceneMemberID="viewController">
+                <viewController id="KwA-HX-gF8" customClass="ViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="M4E-BH-Tal"/>
                         <viewControllerLayoutGuide type="bottom" id="7Kf-ce-jPD"/>

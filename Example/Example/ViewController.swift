@@ -18,7 +18,7 @@
 
 import UIKit
 
-let shouldAddFakeObjects = true
+let shouldAddFakeObjects = false
 
 class ViewController: UIViewController {
 
@@ -29,10 +29,11 @@ class ViewController: UIViewController {
             let stack = CoreDataStack()
             
             for i in 0...9 {
-                Thing.newThing(stack.context)
+                let t = Thing.newThing(stack.context)
+                println("Add new thing = \(t)")
             }
             
-            stack.saveAndWait()
+            assert(stack.saveAndWait())
         }
 
     }
