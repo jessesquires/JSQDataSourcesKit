@@ -26,7 +26,9 @@ public class CollectionViewFetchedResultsDelegateProvider <DataItem, CellFactory
 
     typealias SectionIndex = Int
     typealias SectionChangesDictionary = [NSFetchedResultsChangeType : SectionIndex]
-    typealias ObjectChangesDictionary = [NSFetchedResultsChangeType : [NSIndexPath]]
+
+    typealias ObjectIndexPaths = [NSIndexPath]
+    typealias ObjectChangesDictionary = [NSFetchedResultsChangeType : ObjectIndexPaths]
 
     public weak var collectionView: UICollectionView?
 
@@ -47,23 +49,31 @@ public class CollectionViewFetchedResultsDelegateProvider <DataItem, CellFactory
 
     private lazy var bridgedDelegate: BridgedFetchedResultsDelegate = BridgedFetchedResultsDelegate(
         willChangeContent: { [unowned self] (controller) -> Void in
+            println("*** will change content")
+
             self.sectionChanges.removeAll(keepCapacity: false)
             self.objectChanges.removeAll(keepCapacity: false)
         },
         didChangeSection: { [unowned self] (controller, sectionInfo, sectionIndex, changeType) -> Void in
+            println("*** did change section \(sectionIndex)")
+
             let changes: SectionChangesDictionary = [changeType : sectionIndex]
             self.sectionChanges.append(changes)
         },
-        didChangeObject: { [unowned self] (controller, anyObject, indexPath, changeType, newIndexPath) -> Void in
+        didChangeObject: { [unowned self] (controller, anyObject, indexPath: NSIndexPath?, changeType, newIndexPath: NSIndexPath?) -> Void in
+            println("*** did change object")
+
             var changes = ObjectChangesDictionary()
 
             switch changeType {
             case .Insert:
-                if let i = newIndexPath {
-                    changes[changeType] = [i]
+                if let insertIndexPath = newIndexPath {
+                    changes[changeType] = [insertIndexPath]
                 }
             case .Delete:
-                fallthrough
+                if let deleteIndexPath = indexPath {
+                    changes[changeType] = [deleteIndexPath]
+                }
             case .Update:
                 if let i = indexPath {
                     changes[changeType] = [i]
@@ -77,22 +87,84 @@ public class CollectionViewFetchedResultsDelegateProvider <DataItem, CellFactory
             self.objectChanges.append(changes)
         },
         didChangeContent: { [unowned self] (controller) -> Void in
+            println("*** did change content")
 
-            self.collectionView?.performBatchUpdates({ () -> Void in
-                self.applySectionChanges()
+            if self.sectionChanges.count > 0 {
+                self.collectionView?.performBatchUpdates({ () -> Void in
+                    println("applying section changes...")
+                    self.applySectionChanges()
 
-            }, completion:{ (finished) -> Void in
-                self.sectionChanges.removeAll(keepCapacity: false)
-            })
+                }, completion:{ (finished) -> Void in
+                    println("section changes complete!")
+                    // self.sectionChanges.removeAll(keepCapacity: false)
+                })
+            }
 
-            self.collectionView?.performBatchUpdates({ () -> Void in
-                self.applyObjectChanges()
+            if self.objectChanges.count > 0 && self.sectionChanges.count == 0 {
 
-            }, completion:{ (finished) -> Void in
-                self.objectChanges.removeAll(keepCapacity: false)
-            })
+                println("checking should reload? ...")
+                if self.reloadForKnownIssue() || self.collectionView?.window == nil {
+                    println("reload!")
+                    self.collectionView?.reloadData()
+                }
+                else {
+                    self.collectionView?.performBatchUpdates({ () -> Void in
+
+                        println("applying object changes...")
+                        self.applyObjectChanges()
+
+                        }, completion:{ (finished) -> Void in
+
+                            println("object changes complete!")
+                            // self.objectChanges.removeAll(keepCapacity: false)
+                    })
+                }
+            }
+            
+            self.sectionChanges.removeAll(keepCapacity: false)
+            self.objectChanges.removeAll(keepCapacity: false)
+
         }
     )
+
+    private func reloadForKnownIssue() -> Bool {
+
+        var shouldReload: Bool = false
+
+        for eachChange in self.objectChanges {
+            for (changeType: NSFetchedResultsChangeType, indexes: [NSIndexPath]) in eachChange {
+
+                switch(changeType) {
+                case .Insert:
+                    if let indexPath = indexes.first {
+                        if self.collectionView?.numberOfItemsInSection(indexPath.section) == 0 {
+                            shouldReload = true
+                        }
+                        else {
+                            shouldReload = false
+                        }
+                    }
+
+                case .Delete:
+                    if let indexPath = indexes.first {
+                        if self.collectionView?.numberOfItemsInSection(indexPath.section) == 1 {
+                            shouldReload = true
+                        }
+                        else {
+                            shouldReload = false
+                        }
+                    }
+
+                case .Update:
+                    shouldReload = false
+                case .Move:
+                    shouldReload = false
+                }
+            }
+        }
+
+        return shouldReload
+    }
 
     private func applySectionChanges() {
         for eachChange in self.sectionChanges {
