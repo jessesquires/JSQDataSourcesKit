@@ -2,25 +2,27 @@
 
 *Type-safe, value-oriented data source objects that keep your view controllers light*
 
-A Swift rewrite of [RSTDataSourceKit](https://github.com/rosettastone/RSTDataSourceKit), inspired by [Andy Matuschak's](https://github.com/andymatuschak) *type-safe value-oriented collection view [data source](https://gist.github.com/andymatuschak/f1e1691fa1a327468f8e)*. 
+A Swift rewrite of [RSTDataSourceKit](https://github.com/rosettastone/RSTDataSourceKit) inspired by [Andy Matuschak's](https://github.com/andymatuschak) *type-safe, value-oriented collection view data source [gist](https://gist.github.com/andymatuschak/f1e1691fa1a327468f8e)*. 
 
 #### NOTE: this project is still a work in-progress
 
-## Getting Started
+## Data Sources
 
-*There are 4 generic, type-safe, sectioned data source objects.*
+`CollectionViewDataSourceProvider`
 
-##### `CollectionViewDataSourceProvider`
-For use as a typical `UICollectionView` data source.
+`TableViewDataSourceProvider`
 
-##### `CollectionViewFetchedResultsDataSourceProvider`
-For use with a `UICollectionView` and  `NSFetchedResultsController`.
+## Data Sources for `NSFetchedResultsController`
 
-##### `TableViewDataSourceProvider`
-For use as a typical `UITableView` data source.
+`CollectionViewFetchedResultsDataSourceProvider`
 
-##### `TableViewFetchedResultsDataSourceProvider`
-For use with a `UITableView` and  `NSFetchedResultsController`.
+`TableViewFetchedResultsDataSourceProvider`
+
+## Delegates for `NSFetchedResultsController`
+
+`CollectionViewFetchedResultsDelegateProvider`
+
+`TableViewFetchedResultsDelegateProvider`
 
 ## Contribute
 
