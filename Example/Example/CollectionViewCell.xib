@@ -14,11 +14,8 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="neB-XB-c37">
-                        <rect key="frame" x="8" y="41" width="109" height="44"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="44" id="C2Q-Hz-57I"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="8" y="8" width="109" height="109"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -28,7 +25,8 @@
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="neB-XB-c37" secondAttribute="trailing" constant="8" id="1QN-JF-PsA"/>
-                <constraint firstAttribute="centerY" secondItem="neB-XB-c37" secondAttribute="centerY" id="XLr-JE-wHz"/>
+                <constraint firstAttribute="bottom" secondItem="neB-XB-c37" secondAttribute="bottom" constant="8" id="8Kr-4A-rpC"/>
+                <constraint firstItem="neB-XB-c37" firstAttribute="top" secondItem="umB-Vc-z0Z" secondAttribute="top" constant="8" id="eNC-J0-Gpe"/>
                 <constraint firstItem="neB-XB-c37" firstAttribute="leading" secondItem="umB-Vc-z0Z" secondAttribute="leading" constant="8" id="jEJ-fT-gTl"/>
             </constraints>
             <size key="customSize" width="123" height="126"/>
