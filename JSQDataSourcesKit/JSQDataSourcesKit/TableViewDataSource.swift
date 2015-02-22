@@ -126,10 +126,8 @@ public class TableViewDataSourceProvider <DataItem, SectionInfo: TableViewSectio
 }
 
 
-public class TableViewFetchedResultsDataSourceProvider <DataItem, SectionInfo: TableViewSectionInfo, CellFactory: TableViewCellFactoryType
-                                                        where
-                                                        SectionInfo.DataItem == DataItem,
-                                                        CellFactory.DataItem == DataItem> {
+public class TableViewFetchedResultsDataSourceProvider <DataItem, CellFactory: TableViewCellFactoryType
+                                                        where CellFactory.DataItem == DataItem> {
 
     public let fetchedResultsController: NSFetchedResultsController
 

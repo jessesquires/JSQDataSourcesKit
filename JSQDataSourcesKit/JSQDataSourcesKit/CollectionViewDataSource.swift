@@ -119,10 +119,8 @@ public class CollectionViewDataSourceProvider <DataItem, SectionInfo: Collection
 }
 
 
-public class CollectionViewFetchedResultsDataSourceProvider <DataItem, SectionInfo: CollectionViewSectionInfo, CellFactory: CollectionViewCellFactoryType
-                                                             where
-                                                             SectionInfo.DataItem == DataItem,
-                                                             CellFactory.DataItem == DataItem> {
+public class CollectionViewFetchedResultsDataSourceProvider <DataItem, CellFactory: CollectionViewCellFactoryType
+                                                             where CellFactory.DataItem == DataItem> {
 
     public let fetchedResultsController: NSFetchedResultsController
 
