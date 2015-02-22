@@ -135,6 +135,13 @@ public class CollectionViewFetchedResultsDataSourceProvider <DataItem, CellFacto
         collectionView?.dataSource = self.dataSource
     }
 
+    public func performFetch() -> () {
+        var error: NSError?
+        if !self.fetchedResultsController.performFetch(&error) {
+            println("*** Fetch error: \(error)")
+        }
+    }
+
     private lazy var bridgedDataSource: BridgedCollectionViewDataSource = BridgedCollectionViewDataSource(
         numberOfSections: { [unowned self] () -> Int in
             self.fetchedResultsController.sections?.count ?? 0

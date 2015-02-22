@@ -28,6 +28,7 @@ class FetchedCollectionViewController: UIViewController {
 
     var dataSourceProvider: CollectionViewFetchedResultsDataSourceProvider<Thing, CollectionViewCellFactory<CollectionViewCell, Thing> >?
 
+    var delegateProvider: CollectionViewFetchedResultsDelegateProvider<Thing, CollectionViewCellFactory<CollectionViewCell, Thing> >?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,19 +49,25 @@ class FetchedCollectionViewController: UIViewController {
 
         let frc: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: Thing.fetchRequest(), managedObjectContext: stack.context, sectionNameKeyPath: "category", cacheName: nil)
 
-        self.dataSourceProvider = CollectionViewFetchedResultsDataSourceProvider(fetchedResultsController: frc, cellFactory: factory, collectionView: self.collectionView)
+        self.delegateProvider = CollectionViewFetchedResultsDelegateProvider(collectionView: collectionView, cellFactory: factory, controller: frc)
+
+        self.dataSourceProvider = CollectionViewFetchedResultsDataSourceProvider(fetchedResultsController: frc, cellFactory: factory, collectionView: collectionView)
     }
 
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.dataSourceProvider?.fetchedResultsController.performFetch(nil)
+        self.dataSourceProvider?.performFetch()
     }
 
 
     @IBAction func didTapAddButton(sender: UIBarButtonItem) {
         println("add")
+
+        let newThing = Thing.newThing(stack.context)
+        stack.saveAndWait()
+        dataSourceProvider?.performFetch()
     }
 
 
