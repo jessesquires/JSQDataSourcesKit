@@ -1,3 +1,20 @@
+//
+//  Created by Jesse Squires
+//  http://www.jessesquires.com
+//
+//
+//  Documentation
+//  http://cocoadocs.org/docsets/JSQDataSourcesKit
+//
+//
+//  GitHub
+//  https://github.com/jessesquires/JSQDataSourcesKit
+//
+//
+//  License
+//  Copyright (c) 2015 Jesse Squires
+//  Released under an MIT license: http://opensource.org/licenses/MIT
+//
 
 import Foundation
 import CoreData
@@ -7,7 +24,7 @@ public class CoreDataStack {
     public let context: NSManagedObjectContext
     public let persistentStoreCoordinator: NSPersistentStoreCoordinator
     
-    public init(inMemory: Bool = true) {
+    public init(inMemory: Bool = false) {
         let modelURL = NSBundle.mainBundle().URLForResource("Model", withExtension: "momd")!
         
         let model = NSManagedObjectModel(contentsOfURL: modelURL)!
