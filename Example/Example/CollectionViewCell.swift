@@ -21,5 +21,10 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var label: UILabel!
-    
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.selectedBackgroundView = UIView()
+        self.selectedBackgroundView.backgroundColor = UIColor.lightGrayColor()
+    }
 }
