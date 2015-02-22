@@ -12,16 +12,16 @@ A Swift rewrite of [RSTDataSourceKit](https://github.com/rosettastone/RSTDataSou
 
 There are 4 generic, type-safe data source objects.
 
-#### `CollectionViewDataSourceProvider`
+##### `CollectionViewDataSourceProvider`
 For use as a typical `UICollectionView` data source.
 
-#### `CollectionViewFetchedResultsDataSourceProvider`
+##### `CollectionViewFetchedResultsDataSourceProvider`
 For use with a `UICollectionView` and  `NSFetchedResultsController`.
 
-#### `TableViewDataSourceProvider`
+##### `TableViewDataSourceProvider`
 For use as a typical `UITableView` data source.
 
-#### `TableViewFetchedResultsDataSourceProvider`
+##### `TableViewFetchedResultsDataSourceProvider`
 For use with a `UITableView` and  `NSFetchedResultsController`.
 
 ## Contribute
