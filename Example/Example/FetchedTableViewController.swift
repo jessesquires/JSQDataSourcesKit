@@ -36,11 +36,12 @@ class FetchedTableViewController: UIViewController {
 
         let factory = TableViewCellFactory(reuseIdentifier: tableCellId) { (cell: TableViewCell, model: Thing, tableView: UITableView, indexPath: NSIndexPath) -> TableViewCell in
             cell.textLabel?.text = model.displayName
+            cell.textLabel?.textColor = model.displayColor
             cell.detailTextLabel?.text = "\(indexPath.section), \(indexPath.row)"
             return cell
         }
 
-        let frc: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: Thing.fetchRequest(), managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
+        let frc: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: Thing.fetchRequest(), managedObjectContext: stack.context, sectionNameKeyPath: "category", cacheName: nil)
 
         self.dataSourceProvider = TableViewFetchedResultsDataSourceProvider(fetchedResultsController: frc, cellFactory: factory, tableView: tableView)
     }
