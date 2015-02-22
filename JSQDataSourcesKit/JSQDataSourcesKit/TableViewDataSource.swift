@@ -142,11 +142,13 @@ public class TableViewFetchedResultsDataSourceProvider <DataItem, CellFactory: T
         tableView?.dataSource = self.dataSource
     }
 
-    public func performFetch() -> () {
-        var error: NSError?
-        if !self.fetchedResultsController.performFetch(&error) {
-            println("*** Fetch error: \(error)")
+    public func performFetch(error: NSErrorPointer = nil) -> Bool {
+        let success = self.fetchedResultsController.performFetch(error)
+        if !success {
+            println("*** ERROR: \(toString(TableViewFetchedResultsDataSourceProvider.self))"
+                + "\n\t [\(__LINE__)] \(__FUNCTION__) Could not perform fetch error: \(error)")
         }
+        return success
     }
 
     private lazy var bridgedDataSource: BridgedTableViewDataSource = BridgedTableViewDataSource(

@@ -135,11 +135,13 @@ public class CollectionViewFetchedResultsDataSourceProvider <DataItem, CellFacto
         collectionView?.dataSource = self.dataSource
     }
 
-    public func performFetch() -> () {
-        var error: NSError?
-        if !self.fetchedResultsController.performFetch(&error) {
-            println("*** Fetch error: \(error)")
+    public func performFetch(error: NSErrorPointer = nil) -> Bool {
+        let success = self.fetchedResultsController.performFetch(error)
+        if !success {
+            println("*** ERROR: \(toString(CollectionViewFetchedResultsDataSourceProvider.self))"
+                    + "\n\t [\(__LINE__)] \(__FUNCTION__) Could not perform fetch error: \(error)")
         }
+        return success
     }
 
     private lazy var bridgedDataSource: BridgedCollectionViewDataSource = BridgedCollectionViewDataSource(
