@@ -22,8 +22,8 @@ import CoreData
 
 
 public class TableViewFetchedResultsDelegate <DataItem, CellFactory: TableViewCellFactoryType
-                                                where
-                                                CellFactory.DataItem == DataItem>: NSFetchedResultsControllerDelegate {
+                                              where
+                                              CellFactory.DataItem == DataItem>: NSFetchedResultsControllerDelegate {
 
     public weak var tableView: UITableView?
 
