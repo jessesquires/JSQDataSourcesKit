@@ -18,10 +18,23 @@
 
 import UIKit
 
+let shouldAddFakeObjects = true
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if shouldAddFakeObjects {
+            let stack = CoreDataStack()
+            
+            for i in 0...9 {
+                Thing.newThing(stack.context)
+            }
+            
+            stack.saveAndWait()
+        }
+
     }
 
 }
