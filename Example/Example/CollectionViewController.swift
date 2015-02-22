@@ -19,14 +19,6 @@
 import UIKit
 import JSQDataSourcesKit
 
-
-struct CViewModel {
-    let text = "Text"
-}
-
-let collectionCellId = "cell"
-
-
 class CollectionViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!

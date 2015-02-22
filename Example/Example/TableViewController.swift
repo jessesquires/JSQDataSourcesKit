@@ -19,14 +19,6 @@
 import UIKit
 import JSQDataSourcesKit
 
-
-struct TViewModel {
-    let title = "My Cell Title"
-}
-
-let tableCellId = "cell"
-
-
 class TableViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!

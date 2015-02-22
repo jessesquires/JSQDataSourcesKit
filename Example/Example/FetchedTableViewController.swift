@@ -24,6 +24,8 @@ class FetchedTableViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
+    var dataSourceProvider: TableViewFetchedResultsDataSourceProvider<Thing, TableViewCellFactory<TableViewCell, Thing> >?
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
