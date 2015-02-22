@@ -65,15 +65,28 @@ class FetchedTableViewController: UIViewController {
 
         self.dataSourceProvider?.performFetch()
         self.tableView.reloadData()
-        
+
         if let indexPath = self.dataSourceProvider?.fetchedResultsController.indexPathForObject(newThing) {
             self.tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Middle)
         }
     }
     
-
+    
     @IBAction func didTapDeleteButton(sender: UIBarButtonItem) {
-        println("delete")
-    }
+        if let indexPaths = self.tableView.indexPathsForSelectedRows() as? [NSIndexPath] {
 
+            println("Deleting things at indexPaths: \(indexPaths)")
+
+            for i in indexPaths {
+                let thingToDelete = self.dataSourceProvider?.fetchedResultsController.objectAtIndexPath(i) as! Thing
+                self.stack.context.deleteObject(thingToDelete)
+            }
+
+            self.stack.saveAndWait()
+
+            self.dataSourceProvider?.performFetch()
+            self.tableView.reloadData()
+        }
+    }
+    
 }
