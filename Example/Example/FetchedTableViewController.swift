@@ -28,7 +28,7 @@ class FetchedTableViewController: UIViewController {
 
     var dataSourceProvider: TableViewFetchedResultsDataSourceProvider<Thing, TableViewCellFactory<TableViewCell, Thing> >?
 
-    var fetchedResultsDelegate: TableViewFetchedResultsDelegate<Thing, TableViewCellFactory<TableViewCell, Thing> >?
+    var delegateProvider: TableViewFetchedResultsDelegateProvider<Thing, TableViewCellFactory<TableViewCell, Thing> >?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,8 +44,7 @@ class FetchedTableViewController: UIViewController {
 
         let frc: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: Thing.fetchRequest(), managedObjectContext: stack.context, sectionNameKeyPath: "category", cacheName: nil)
 
-        self.fetchedResultsDelegate = TableViewFetchedResultsDelegate(tableView: self.tableView, cellFactory: factory)
-        frc.delegate = self.fetchedResultsDelegate
+        self.delegateProvider = TableViewFetchedResultsDelegateProvider(tableView: tableView, cellFactory: factory, controller: frc)
 
         self.dataSourceProvider = TableViewFetchedResultsDataSourceProvider(fetchedResultsController: frc, cellFactory: factory, tableView: tableView)
     }
@@ -59,33 +58,38 @@ class FetchedTableViewController: UIViewController {
 
 
     @IBAction func didTapAddButton(sender: UIBarButtonItem) {
-        let newThing = Thing.newThing(self.stack.context)
+
+        if let indexPaths = tableView.indexPathsForSelectedRows() as? [NSIndexPath] {
+            for i in indexPaths {
+                tableView.deselectRowAtIndexPath(i, animated: true)
+            }
+        }
+
+        let newThing = Thing.newThing(stack.context)
+        stack.saveAndWait()
+        dataSourceProvider?.performFetch()
+
+        if let indexPath = dataSourceProvider?.fetchedResultsController.indexPathForObject(newThing) {
+            tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Middle)
+        }
 
         println("Added new thing: \(newThing)")
-
-        self.dataSourceProvider?.performFetch()
-        self.tableView.reloadData()
-
-        if let indexPath = self.dataSourceProvider?.fetchedResultsController.indexPathForObject(newThing) {
-            self.tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Middle)
-        }
     }
-    
-    
+
+
     @IBAction func didTapDeleteButton(sender: UIBarButtonItem) {
-        if let indexPaths = self.tableView.indexPathsForSelectedRows() as? [NSIndexPath] {
+
+        if let indexPaths = tableView.indexPathsForSelectedRows() as? [NSIndexPath] {
 
             println("Deleting things at indexPaths: \(indexPaths)")
 
             for i in indexPaths {
-                let thingToDelete = self.dataSourceProvider?.fetchedResultsController.objectAtIndexPath(i) as! Thing
-                self.stack.context.deleteObject(thingToDelete)
+                let thingToDelete = dataSourceProvider?.fetchedResultsController.objectAtIndexPath(i) as! Thing
+                stack.context.deleteObject(thingToDelete)
             }
-
-            self.stack.saveAndWait()
-
-            self.dataSourceProvider?.performFetch()
-            self.tableView.reloadData()
+            
+            stack.saveAndWait()
+            dataSourceProvider?.performFetch()
         }
     }
     
