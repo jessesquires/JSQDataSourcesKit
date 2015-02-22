@@ -19,6 +19,8 @@
 import Foundation
 import CoreData
 
+//  A quick and dirty core data stack, don't do this
+
 public class CoreDataStack {
     
     public let context: NSManagedObjectContext
@@ -48,7 +50,6 @@ public class CoreDataStack {
         }
 
         var success = false
-
         self.context.performBlockAndWait { () -> Void in
             var error: NSError?
             success = self.context.save(&error)
@@ -57,7 +58,7 @@ public class CoreDataStack {
                 println("*** Error saving managed object context: \(error)")
             }
         }
-        
         return success
     }
+
 }

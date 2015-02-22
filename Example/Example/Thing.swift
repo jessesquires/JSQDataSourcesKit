@@ -20,8 +20,6 @@ import Foundation
 import CoreData
 import UIKit
 
-
-
 public class Thing: NSManagedObject {
 
     @NSManaged public var category: String
@@ -55,4 +53,26 @@ public class Thing: NSManagedObject {
         return request
     }
 
+}
+
+
+public enum Category: String {
+    case Red = "Red"
+    case Blue = "Blue"
+    case Green = "Green"
+
+    var color: UIColor {
+        switch(self) {
+        case .Red: return UIColor.redColor()
+        case .Blue: return UIColor.blueColor()
+        case .Green: return UIColor.greenColor()
+        }
+    }
+
+    static var random: Category {
+        let i = Int(arc4random_uniform(UInt32(allCases.count))) % allCases.count
+        return allCases[i]
+    }
+
+    static let allCases: [Category] = [.Red, .Blue, .Green]
 }

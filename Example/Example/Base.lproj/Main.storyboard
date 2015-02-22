@@ -88,15 +88,27 @@
                                     <segue destination="gM7-lb-ytW" kind="show" id="3pd-oe-mbw"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the trashcan to clear everything from Core Data. Tap the + to add 5 new fake items to Core Data." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7a-Ib-rPD">
+                                <rect key="frame" x="16" y="460" width="568" height="88"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="88" id="7MV-0Z-eTA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="2dR-eZ-5MY" firstAttribute="top" secondItem="5Q1-qs-W79" secondAttribute="bottom" constant="8" id="69e-Tb-o0b"/>
                             <constraint firstItem="9GA-68-uFb" firstAttribute="top" secondItem="2dR-eZ-5MY" secondAttribute="bottom" constant="8" id="8Ec-JW-A9K"/>
                             <constraint firstItem="5Q1-qs-W79" firstAttribute="top" secondItem="L7c-b2-VNf" secondAttribute="bottom" constant="8" id="8Gp-xr-QGl"/>
+                            <constraint firstItem="f7a-Ib-rPD" firstAttribute="leading" secondItem="6sj-EQ-HHn" secondAttribute="leadingMargin" id="8vI-bW-Dqx"/>
                             <constraint firstAttribute="centerX" secondItem="2dR-eZ-5MY" secondAttribute="centerX" id="GWG-el-7i4"/>
                             <constraint firstItem="L7c-b2-VNf" firstAttribute="top" secondItem="M4E-BH-Tal" secondAttribute="bottom" constant="107" id="IWp-fJ-Blh"/>
                             <constraint firstAttribute="centerX" secondItem="L7c-b2-VNf" secondAttribute="centerX" id="T7Z-0u-Ga8"/>
+                            <constraint firstItem="7Kf-ce-jPD" firstAttribute="top" secondItem="f7a-Ib-rPD" secondAttribute="bottom" constant="8" id="dpc-vU-F3a"/>
+                            <constraint firstItem="f7a-Ib-rPD" firstAttribute="trailing" secondItem="6sj-EQ-HHn" secondAttribute="trailingMargin" id="m6n-qk-3Hi"/>
                             <constraint firstAttribute="centerX" secondItem="5Q1-qs-W79" secondAttribute="centerX" id="rWD-AV-pKx"/>
                             <constraint firstAttribute="centerX" secondItem="9GA-68-uFb" secondAttribute="centerX" id="vhi-WL-yZM"/>
                         </constraints>

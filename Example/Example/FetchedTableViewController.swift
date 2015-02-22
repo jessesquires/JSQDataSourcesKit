@@ -22,8 +22,12 @@ import JSQDataSourcesKit
 
 class FetchedTableViewController: UIViewController {
 
+    // MARK: outlets
+
     @IBOutlet weak var tableView: UITableView!
 
+
+    // MARK: properties
 
     let stack = CoreDataStack()
 
@@ -32,11 +36,15 @@ class FetchedTableViewController: UIViewController {
     var delegateProvider: TableViewFetchedResultsDelegateProvider<Thing, TableViewCellFactory<TableViewCell, Thing> >?
 
 
+    // MARK: view lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // register cells
         tableView.registerNib(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: tableCellId)
 
+        // create factory
         let factory = TableViewCellFactory(reuseIdentifier: tableCellId) { (cell: TableViewCell, model: Thing, tableView: UITableView, indexPath: NSIndexPath) -> TableViewCell in
             cell.textLabel?.text = model.displayName
             cell.textLabel?.textColor = model.displayColor
@@ -44,10 +52,15 @@ class FetchedTableViewController: UIViewController {
             return cell
         }
 
+        // create fetched results controller
         let frc: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: Thing.fetchRequest(), managedObjectContext: stack.context, sectionNameKeyPath: "category", cacheName: nil)
 
+        // create delegate provider
+        // by passing `frc` the provider automatically sets `frc.delegate = self.delegateProvider.delegate`
         self.delegateProvider = TableViewFetchedResultsDelegateProvider(tableView: tableView, cellFactory: factory, controller: frc)
 
+        // create data source provider
+        // by passing `self.tableView`, the provider automatically sets `self.tableView.dataSource = self.dataSourceProvider.dataSource`
         self.dataSourceProvider = TableViewFetchedResultsDataSourceProvider(fetchedResultsController: frc, cellFactory: factory, tableView: tableView)
     }
 
@@ -58,6 +71,8 @@ class FetchedTableViewController: UIViewController {
         self.dataSourceProvider?.performFetch()
     }
 
+
+    // MARK: actions
 
     @IBAction func didTapAddButton(sender: UIBarButtonItem) {
         tableView.deselectAllRows()
@@ -92,6 +107,8 @@ class FetchedTableViewController: UIViewController {
     
 }
 
+
+// MARK: extensions
 
 extension UITableView {
 

@@ -22,7 +22,12 @@ import JSQDataSourcesKit
 
 class FetchedCollectionViewController: UIViewController {
 
+    // MARK: outlets
+
     @IBOutlet weak var collectionView: UICollectionView!
+
+    
+    // MARK: properties
 
     let stack = CoreDataStack()
 
@@ -30,18 +35,24 @@ class FetchedCollectionViewController: UIViewController {
 
     var delegateProvider: CollectionViewFetchedResultsDelegateProvider<Thing, CollectionViewCellFactory<CollectionViewCell, Thing> >?
 
+
+    // MARK: view lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // configure layout
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: 100, height: 100)
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         layout.minimumInteritemSpacing = 10
         layout.minimumLineSpacing = 10
-        
         collectionView.allowsMultipleSelection = true
 
+        // register cells
         collectionView.registerNib(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: collectionCellId)
 
+        // create factory
         let factory = CollectionViewCellFactory(reuseIdentifier: collectionCellId) { (cell: CollectionViewCell, model: Thing, collectionView: UICollectionView, indexPath: NSIndexPath) -> CollectionViewCell in
             cell.label.text = model.displayName
             cell.label.textColor = UIColor.whiteColor()
@@ -49,10 +60,15 @@ class FetchedCollectionViewController: UIViewController {
             return cell
         }
 
+        // create fetched results controller
         let frc: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: Thing.fetchRequest(), managedObjectContext: stack.context, sectionNameKeyPath: "category", cacheName: nil)
 
+        // create delegate provider
+        // by passing `frc` the provider automatically sets `frc.delegate = self.delegateProvider.delegate`
         self.delegateProvider = CollectionViewFetchedResultsDelegateProvider(collectionView: collectionView, cellFactory: factory, controller: frc)
 
+        // create data source provider
+        // by passing `self.collectionView`, the provider automatically sets `self.collectionView.dataSource = self.dataSourceProvider.dataSource`
         self.dataSourceProvider = CollectionViewFetchedResultsDataSourceProvider(fetchedResultsController: frc, cellFactory: factory, collectionView: collectionView)
     }
 
@@ -63,6 +79,8 @@ class FetchedCollectionViewController: UIViewController {
         self.dataSourceProvider?.performFetch()
     }
 
+
+    // MARK: actions
 
     @IBAction func didTapAddButton(sender: UIBarButtonItem) {
         collectionView.deselectAllItems()
@@ -97,6 +115,8 @@ class FetchedCollectionViewController: UIViewController {
 
 }
 
+
+// MARK: extensions
 
 extension UICollectionView {
 
