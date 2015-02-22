@@ -21,6 +21,127 @@ import UIKit
 import CoreData
 
 
+public class CollectionViewFetchedResultsDelegateProvider <DataItem, CellFactory: CollectionViewCellFactoryType
+                                                            where CellFactory.DataItem == DataItem> {
+
+    typealias SectionIndex = Int
+    typealias SectionChangesDictionary = [NSFetchedResultsChangeType : SectionIndex]
+    typealias ObjectChangesDictionary = [NSFetchedResultsChangeType : [NSIndexPath]]
+
+    public weak var collectionView: UICollectionView?
+
+    public let cellFactory: CellFactory
+
+    public var delegate: NSFetchedResultsControllerDelegate { return bridgedDelegate }
+
+    public init(collectionView: UICollectionView, cellFactory: CellFactory, controller: NSFetchedResultsController? = nil) {
+        self.collectionView = collectionView
+        self.cellFactory = cellFactory
+
+        controller?.delegate = self.delegate
+    }
+
+    private var sectionChanges = [SectionChangesDictionary]()
+    
+    private var objectChanges = [ObjectChangesDictionary]()
+
+    private lazy var bridgedDelegate: BridgedFetchedResultsDelegate = BridgedFetchedResultsDelegate(
+        willChangeContent: { [unowned self] (controller) -> Void in
+            self.sectionChanges.removeAll(keepCapacity: false)
+            self.objectChanges.removeAll(keepCapacity: false)
+        },
+        didChangeSection: { [unowned self] (controller, sectionInfo, sectionIndex, changeType) -> Void in
+            let changes: SectionChangesDictionary = [changeType : sectionIndex]
+            self.sectionChanges.append(changes)
+        },
+        didChangeObject: { [unowned self] (controller, anyObject, indexPath, changeType, newIndexPath) -> Void in
+            var changes = ObjectChangesDictionary()
+
+            switch changeType {
+            case .Insert:
+                if let i = newIndexPath {
+                    changes[changeType] = [i]
+                }
+            case .Delete:
+                fallthrough
+            case .Update:
+                if let i = indexPath {
+                    changes[changeType] = [i]
+                }
+            case .Move:
+                if let old = indexPath, new = newIndexPath {
+                    changes[changeType] = [old, new]
+                }
+            }
+            
+            self.objectChanges.append(changes)
+        },
+        didChangeContent: { [unowned self] (controller) -> Void in
+            self.applySectionChanges()
+            self.applyObjectChanges()
+        }
+    )
+
+    private func applySectionChanges() {
+        if self.sectionChanges.count == 0 {
+            return
+        }
+
+        self.collectionView?.performBatchUpdates({ () -> Void in
+
+            for eachChange in self.sectionChanges {
+                for (changeType: NSFetchedResultsChangeType, index: SectionIndex) in eachChange {
+
+                    let sections = NSIndexSet(index: index)
+
+                    switch(changeType) {
+                    case .Insert:
+                        self.collectionView?.insertSections(sections)
+                    case .Delete:
+                        self.collectionView?.deleteSections(sections)
+                    case .Update:
+                        self.collectionView?.reloadSections(sections)
+                    case .Move:
+                        break
+                    }
+                }
+            }
+            }, completion:{ (finished) -> Void in
+                self.sectionChanges.removeAll(keepCapacity: false)
+            })
+    }
+
+    private func applyObjectChanges() {
+        if self.objectChanges.count == 0 {
+            return
+        }
+
+        self.collectionView?.performBatchUpdates({ () -> Void in
+
+            for eachChange in self.objectChanges {
+                for (changeType: NSFetchedResultsChangeType, indexes: [NSIndexPath]) in eachChange {
+
+                    switch(changeType) {
+                    case .Insert:
+                        self.collectionView?.insertItemsAtIndexPaths([indexes.first!])
+                    case .Delete:
+                        self.collectionView?.deleteItemsAtIndexPaths([indexes.first!])
+                    case .Update:
+                        self.collectionView?.reloadItemsAtIndexPaths([indexes.first!])
+                    case .Move:
+                        self.collectionView?.moveItemAtIndexPath(indexes.first!, toIndexPath: indexes.last!)
+                    }
+
+                }
+            }
+            }, completion:{ (finished) -> Void in
+                self.objectChanges.removeAll(keepCapacity: false)
+            })
+    }
+
+}
+
+
 public class TableViewFetchedResultsDelegateProvider <DataItem, CellFactory: TableViewCellFactoryType
                                                       where CellFactory.DataItem == DataItem> {
 
