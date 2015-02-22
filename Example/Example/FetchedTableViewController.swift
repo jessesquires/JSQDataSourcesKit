@@ -24,11 +24,13 @@ class FetchedTableViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
+
     let stack = CoreDataStack()
 
     var dataSourceProvider: TableViewFetchedResultsDataSourceProvider<Thing, TableViewCellFactory<TableViewCell, Thing> >?
 
     var delegateProvider: TableViewFetchedResultsDelegateProvider<Thing, TableViewCellFactory<TableViewCell, Thing> >?
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,12 +60,7 @@ class FetchedTableViewController: UIViewController {
 
 
     @IBAction func didTapAddButton(sender: UIBarButtonItem) {
-
-        if let indexPaths = tableView.indexPathsForSelectedRows() as? [NSIndexPath] {
-            for i in indexPaths {
-                tableView.deselectRowAtIndexPath(i, animated: true)
-            }
-        }
+        tableView.deselectAllRows()
 
         let newThing = Thing.newThing(stack.context)
         stack.saveAndWait()
@@ -78,7 +75,6 @@ class FetchedTableViewController: UIViewController {
 
 
     @IBAction func didTapDeleteButton(sender: UIBarButtonItem) {
-
         if let indexPaths = tableView.indexPathsForSelectedRows() as? [NSIndexPath] {
 
             println("Deleting things at indexPaths: \(indexPaths)")
@@ -91,6 +87,20 @@ class FetchedTableViewController: UIViewController {
             stack.saveAndWait()
             dataSourceProvider?.performFetch()
         }
+
     }
     
+}
+
+
+extension UITableView {
+
+    func deselectAllRows() {
+        if let indexPaths = indexPathsForSelectedRows() as? [NSIndexPath] {
+            for i in indexPaths {
+                deselectRowAtIndexPath(i, animated: true)
+            }
+        }
+    }
+
 }
