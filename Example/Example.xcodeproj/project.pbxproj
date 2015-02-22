@@ -13,6 +13,7 @@
 		88BD67411A99577000F93FA6 /* Thing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BD67401A99577000F93FA6 /* Thing.swift */; };
 		88BD67471A99597600F93FA6 /* FetchedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BD67461A99597600F93FA6 /* FetchedTableViewController.swift */; };
 		88BD67491A9959F500F93FA6 /* FetchedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BD67481A9959F500F93FA6 /* FetchedCollectionViewController.swift */; };
+		88BD674B1A995B2A00F93FA6 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BD674A1A995B2A00F93FA6 /* CoreDataStack.swift */; };
 		88C9777A1A87115D0085C350 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C977781A87115D0085C350 /* TableViewCell.swift */; };
 		88C9777B1A87115D0085C350 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88C977791A87115D0085C350 /* TableViewCell.xib */; };
 		88D21DA31A9932BD00E736DC /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D21DA21A9932BD00E736DC /* CollectionViewCell.swift */; };
@@ -79,6 +80,7 @@
 		88BD67401A99577000F93FA6 /* Thing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thing.swift; sourceTree = "<group>"; };
 		88BD67461A99597600F93FA6 /* FetchedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedTableViewController.swift; sourceTree = "<group>"; };
 		88BD67481A9959F500F93FA6 /* FetchedCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedCollectionViewController.swift; sourceTree = "<group>"; };
+		88BD674A1A995B2A00F93FA6 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		88C977781A87115D0085C350 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		88C977791A87115D0085C350 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		88D21DA21A9932BD00E736DC /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 		88BD67441A99579A00F93FA6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				88BD674A1A995B2A00F93FA6 /* CoreDataStack.swift */,
 				88BD673D1A99572F00F93FA6 /* Model.xcdatamodeld */,
 				88BD67401A99577000F93FA6 /* Thing.swift */,
 			);
@@ -356,6 +359,7 @@
 				88B3233F1A86D5ED007FB904 /* CollectionViewController.swift in Sources */,
 				88BD67471A99597600F93FA6 /* FetchedTableViewController.swift in Sources */,
 				88D21DA31A9932BD00E736DC /* CollectionViewCell.swift in Sources */,
+				88BD674B1A995B2A00F93FA6 /* CoreDataStack.swift in Sources */,
 				88BD673F1A99572F00F93FA6 /* Model.xcdatamodeld in Sources */,
 				88DB89C91A86D1A900DED153 /* ViewController.swift in Sources */,
 				88B3233D1A86D5E3007FB904 /* TableViewController.swift in Sources */,

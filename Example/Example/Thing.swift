@@ -19,9 +19,21 @@
 import Foundation
 import CoreData
 
-class Thing: NSManagedObject {
+public class Thing: NSManagedObject {
 
-    @NSManaged var name: String
-    @NSManaged var number: Int
+    @NSManaged public var name: String
+    @NSManaged public var number: Int
+
+    public convenience init(context: NSManagedObjectContext) {
+        let entityDescription = NSEntityDescription.entityForName("Thing", inManagedObjectContext: context)!
+        self.init(entity: entityDescription, insertIntoManagedObjectContext: context)
+    }
+
+    public class func newThing(context: NSManagedObjectContext) -> Thing {
+        let t = Thing(context: context)
+        t.name = NSProcessInfo.processInfo().globallyUniqueString
+        t.number = Int(arc4random_uniform(10000))
+        return t
+    }
 
 }
