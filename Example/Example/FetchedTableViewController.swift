@@ -54,7 +54,26 @@ class FetchedTableViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.dataSourceProvider?.fetchedResultsController.performFetch(nil)
+        self.dataSourceProvider?.performFetch()
+    }
+
+
+    @IBAction func didTapAddButton(sender: UIBarButtonItem) {
+        let newThing = Thing.newThing(self.stack.context)
+
+        println("Added new thing: \(newThing)")
+
+        self.dataSourceProvider?.performFetch()
+        self.tableView.reloadData()
+        
+        if let indexPath = self.dataSourceProvider?.fetchedResultsController.indexPathForObject(newThing) {
+            self.tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Middle)
+        }
+    }
+    
+
+    @IBAction func didTapDeleteButton(sender: UIBarButtonItem) {
+        println("delete")
     }
 
 }

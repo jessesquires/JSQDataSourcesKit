@@ -58,4 +58,14 @@ class FetchedCollectionViewController: UIViewController {
         self.dataSourceProvider?.fetchedResultsController.performFetch(nil)
     }
 
+
+    @IBAction func didTapAddButton(sender: UIBarButtonItem) {
+        println("add")
+    }
+
+
+    @IBAction func didTapDeleteButton(sender: UIBarButtonItem) {
+        println("delete")
+    }
+
 }

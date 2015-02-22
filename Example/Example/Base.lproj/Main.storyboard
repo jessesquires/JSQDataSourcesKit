@@ -101,6 +101,19 @@
                             <constraint firstAttribute="centerX" secondItem="9GA-68-uFb" secondAttribute="centerX" id="vhi-WL-yZM"/>
                         </constraints>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem systemItem="trash" id="fnV-OU-0bU">
+                            <connections>
+                                <action selector="didTapDeleteButton:" destination="KwA-HX-gF8" id="aLT-kq-cbo"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="NJ2-Wq-PZw"/>
+                        <barButtonItem systemItem="add" id="htk-aj-WfA">
+                            <connections>
+                                <action selector="didTapAddButton:" destination="KwA-HX-gF8" id="PFt-Uq-QHA"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="JSQDataSourcesKit" id="dpA-Vi-tyN"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uu6-7Z-Elg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -205,6 +218,19 @@
                             <constraint firstAttribute="trailingMargin" secondItem="k5b-4p-dQE" secondAttribute="trailing" constant="-16" id="rQy-W4-shy"/>
                         </constraints>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem systemItem="trash" id="iQL-G9-RNT">
+                            <connections>
+                                <action selector="didTapDeleteButton:" destination="zRN-xw-0sz" id="o8z-Jc-DYp"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="84T-7s-Fao"/>
+                        <barButtonItem systemItem="add" id="8KW-7J-GNU">
+                            <connections>
+                                <action selector="didTapAddButton:" destination="zRN-xw-0sz" id="fie-Ag-gU5"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <connections>
                         <outlet property="tableView" destination="k5b-4p-dQE" id="pi5-QG-otb"/>
                     </connections>
@@ -245,6 +271,19 @@
                             <constraint firstItem="sXw-00-jfj" firstAttribute="bottom" secondItem="Dyu-MX-OdU" secondAttribute="bottomMargin" id="zRz-QH-JkT"/>
                         </constraints>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem systemItem="trash" id="5DB-4z-WM4">
+                            <connections>
+                                <action selector="didTapDeleteButton:" destination="gM7-lb-ytW" id="YhR-0X-eUu"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="LgC-Mj-oJb"/>
+                        <barButtonItem systemItem="add" id="1Wv-fY-B5K">
+                            <connections>
+                                <action selector="didTapAddButton:" destination="gM7-lb-ytW" id="oRM-QN-Y5k"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <connections>
                         <outlet property="collectionView" destination="sXw-00-jfj" id="rhe-QC-9Yf"/>
                     </connections>
