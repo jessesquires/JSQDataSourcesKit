@@ -49,7 +49,7 @@ public class CollectionViewFetchedResultsDelegateProvider <DataItem> {
             self.objectChanges.removeAll(keepCapacity: false)
         },
         didChangeSection: { [unowned self] (controller, sectionInfo, sectionIndex, changeType) -> Void in
-            println("*** did change section \(sectionIndex)")
+            println("*** did change section type:\(changeType.rawValue), index:\(sectionIndex)")
 
             let changes: SectionChangesDictionary = [changeType : sectionIndex]
             self.sectionChanges.append(changes)
@@ -162,14 +162,10 @@ public class CollectionViewFetchedResultsDelegateProvider <DataItem> {
                 let section = NSIndexSet(index: index)
 
                 switch(changeType) {
-                case .Insert:
-                    self.collectionView?.insertSections(section)
-                case .Delete:
-                    self.collectionView?.deleteSections(section)
-                case .Update:
-                    self.collectionView?.reloadSections(section)
-                case .Move:
-                    break
+                case .Insert: self.collectionView?.insertSections(section)
+                case .Delete: self.collectionView?.deleteSections(section)
+                case .Update: self.collectionView?.reloadSections(section)
+                case .Move: break
                 }
             }
         }
@@ -180,12 +176,9 @@ public class CollectionViewFetchedResultsDelegateProvider <DataItem> {
             for (changeType: NSFetchedResultsChangeType, indexes: [NSIndexPath]) in eachChange {
 
                 switch(changeType) {
-                case .Insert:
-                    self.collectionView?.insertItemsAtIndexPaths(indexes)
-                case .Delete:
-                    self.collectionView?.deleteItemsAtIndexPaths(indexes)
-                case .Update:
-                    self.collectionView?.reloadItemsAtIndexPaths(indexes)
+                case .Insert: self.collectionView?.insertItemsAtIndexPaths(indexes)
+                case .Delete: self.collectionView?.deleteItemsAtIndexPaths(indexes)
+                case .Update: self.collectionView?.reloadItemsAtIndexPaths(indexes)
                 case .Move:
                     if let first = indexes.first, last = indexes.last {
                         self.collectionView?.moveItemAtIndexPath(first, toIndexPath: last)
