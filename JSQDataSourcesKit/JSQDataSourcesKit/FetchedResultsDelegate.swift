@@ -21,8 +21,7 @@ import UIKit
 import CoreData
 
 
-public class CollectionViewFetchedResultsDelegateProvider <DataItem, CellFactory: CollectionViewCellFactoryType
-                                                            where CellFactory.DataItem == DataItem> {
+public class CollectionViewFetchedResultsDelegateProvider <DataItem> {
 
     typealias SectionIndex = Int
     typealias SectionChangesDictionary = [NSFetchedResultsChangeType : SectionIndex]
@@ -32,13 +31,10 @@ public class CollectionViewFetchedResultsDelegateProvider <DataItem, CellFactory
 
     public weak var collectionView: UICollectionView?
 
-    public let cellFactory: CellFactory
-
     public var delegate: NSFetchedResultsControllerDelegate { return bridgedDelegate }
 
-    public init(collectionView: UICollectionView, cellFactory: CellFactory, controller: NSFetchedResultsController? = nil) {
+    public init(collectionView: UICollectionView, controller: NSFetchedResultsController? = nil) {
         self.collectionView = collectionView
-        self.cellFactory = cellFactory
 
         controller?.delegate = self.delegate
     }
@@ -49,8 +45,6 @@ public class CollectionViewFetchedResultsDelegateProvider <DataItem, CellFactory
 
     private lazy var bridgedDelegate: BridgedFetchedResultsDelegate = BridgedFetchedResultsDelegate(
         willChangeContent: { [unowned self] (controller) -> Void in
-            println("*** will change content")
-
             self.sectionChanges.removeAll(keepCapacity: false)
             self.objectChanges.removeAll(keepCapacity: false)
         },
@@ -61,7 +55,7 @@ public class CollectionViewFetchedResultsDelegateProvider <DataItem, CellFactory
             self.sectionChanges.append(changes)
         },
         didChangeObject: { [unowned self] (controller, anyObject, indexPath: NSIndexPath?, changeType, newIndexPath: NSIndexPath?) -> Void in
-            println("*** did change object")
+            println("*** did change object: old = \(indexPath), new = \(newIndexPath)")
 
             var changes = ObjectChangesDictionary()
 
@@ -89,41 +83,36 @@ public class CollectionViewFetchedResultsDelegateProvider <DataItem, CellFactory
         didChangeContent: { [unowned self] (controller) -> Void in
             println("*** did change content")
 
-            if self.sectionChanges.count > 0 {
-                self.collectionView?.performBatchUpdates({ () -> Void in
-                    println("applying section changes...")
-                    self.applySectionChanges()
+            self.collectionView?.performBatchUpdates({ () -> Void in
 
-                }, completion:{ (finished) -> Void in
-                    println("section changes complete!")
-                    // self.sectionChanges.removeAll(keepCapacity: false)
-                })
-            }
+                // println("first object changes....")
+                // FIXES edge case: delete 1 item from each section, where 1 section has 1 item, thus that section is deleted
+                // however, afterwards this breaks
 
-            if self.objectChanges.count > 0 && self.sectionChanges.count == 0 {
+                // TODO: add a check to see if object changes should be applied first
+                // self.applyObjectChanges()
 
-                println("checking should reload? ...")
-                if self.reloadForKnownIssue() || self.collectionView?.window == nil {
-                    println("reload!")
-                    self.collectionView?.reloadData()
-                }
-                else {
-                    self.collectionView?.performBatchUpdates({ () -> Void in
+                println("applying section changes...")
+                self.applySectionChanges()
 
+                if self.objectChanges.count > 0 && self.sectionChanges.count == 0 {
+
+                    println("checking should reload? ...")
+                    if self.reloadForKnownIssue() || self.collectionView?.window == nil {
+                        println("reload!")
+                        self.collectionView?.reloadData()
+                    }
+                    else {
                         println("applying object changes...")
                         self.applyObjectChanges()
-
-                        }, completion:{ (finished) -> Void in
-
-                            println("object changes complete!")
-                            // self.objectChanges.removeAll(keepCapacity: false)
-                    })
+                    }
                 }
-            }
-            
-            self.sectionChanges.removeAll(keepCapacity: false)
-            self.objectChanges.removeAll(keepCapacity: false)
 
+                }, completion:{ (finished) -> Void in
+                    println("ALL changes complete!")
+                    self.sectionChanges.removeAll(keepCapacity: false)
+                    self.objectChanges.removeAll(keepCapacity: false)
+            })
         }
     )
 
@@ -170,15 +159,15 @@ public class CollectionViewFetchedResultsDelegateProvider <DataItem, CellFactory
         for eachChange in self.sectionChanges {
             for (changeType: NSFetchedResultsChangeType, index: SectionIndex) in eachChange {
 
-                let sections = NSIndexSet(index: index)
+                let section = NSIndexSet(index: index)
 
                 switch(changeType) {
                 case .Insert:
-                    self.collectionView?.insertSections(sections)
+                    self.collectionView?.insertSections(section)
                 case .Delete:
-                    self.collectionView?.deleteSections(sections)
+                    self.collectionView?.deleteSections(section)
                 case .Update:
-                    self.collectionView?.reloadSections(sections)
+                    self.collectionView?.reloadSections(section)
                 case .Move:
                     break
                 }
