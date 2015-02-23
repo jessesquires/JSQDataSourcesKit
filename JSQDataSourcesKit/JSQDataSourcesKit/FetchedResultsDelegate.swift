@@ -91,22 +91,6 @@ public class CollectionViewFetchedResultsDelegateProvider <DataItem> {
         }
     )
 
-    private func applySectionChanges() {
-        for eachChange in self.sectionChanges {
-            for (changeType: NSFetchedResultsChangeType, index: SectionIndex) in eachChange {
-
-                let section = NSIndexSet(index: index)
-
-                switch(changeType) {
-                case .Insert: self.collectionView?.insertSections(section)
-                case .Delete: self.collectionView?.deleteSections(section)
-                case .Update: self.collectionView?.reloadSections(section)
-                case .Move: break
-                }
-            }
-        }
-    }
-
     private func applyObjectChanges() {
         for eachChange in self.objectChanges {
             for (changeType: NSFetchedResultsChangeType, indexes: [NSIndexPath]) in eachChange {
@@ -119,6 +103,22 @@ public class CollectionViewFetchedResultsDelegateProvider <DataItem> {
                     if let first = indexes.first, last = indexes.last {
                         self.collectionView?.moveItemAtIndexPath(first, toIndexPath: last)
                     }
+                }
+            }
+        }
+    }
+
+    private func applySectionChanges() {
+        for eachChange in self.sectionChanges {
+            for (changeType: NSFetchedResultsChangeType, index: SectionIndex) in eachChange {
+
+                let section = NSIndexSet(index: index)
+
+                switch(changeType) {
+                case .Insert: self.collectionView?.insertSections(section)
+                case .Delete: self.collectionView?.deleteSections(section)
+                case .Update: self.collectionView?.reloadSections(section)
+                case .Move: break
                 }
             }
         }
