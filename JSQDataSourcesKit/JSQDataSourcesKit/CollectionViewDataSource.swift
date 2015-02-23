@@ -160,7 +160,8 @@ public class CollectionViewFetchedResultsDataSourceProvider <DataItem, CellFacto
 
 }
 
-
+// This separate type is required for Objective-C (i.e., Cocoa) inter-op
+// Because the DataSourceProvider is generic it cannot be bridged to Objective-C. (i.e., it cannot be assigned to `UICollectionView.dataSource`)
 @objc private class BridgedCollectionViewDataSource: NSObject, UICollectionViewDataSource {
 
     typealias NumberOfSectionsHandler = () -> Int

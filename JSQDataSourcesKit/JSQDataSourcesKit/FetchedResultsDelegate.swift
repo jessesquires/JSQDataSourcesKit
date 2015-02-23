@@ -192,6 +192,8 @@ public class TableViewFetchedResultsDelegateProvider <DataItem, CellFactory: Tab
 }
 
 
+// This separate type is required for Objective-C (i.e. Cocoa) inter-op
+// Because the DelegateProvider is generic it cannot be bridged to Objective-C. (i.e., it cannot be assigned to `NSFetchedResultsController.delegate`)
 @objc private class BridgedFetchedResultsDelegate: NSFetchedResultsControllerDelegate {
 
     typealias WillChangeContentHandler = (NSFetchedResultsController) -> Void

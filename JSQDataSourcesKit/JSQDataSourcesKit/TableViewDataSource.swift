@@ -179,6 +179,8 @@ public class TableViewFetchedResultsDataSourceProvider <DataItem, CellFactory: T
 }
 
 
+// This separate type is required for Objective-C (i.e., Cocoa) inter-op
+// Because the DataSourceProvider is generic it cannot be bridged to Objective-C. (i.e., it cannot be assigned to `UITableView.dataSource`)
 @objc private class BridgedTableViewDataSource: NSObject, UITableViewDataSource {
 
     typealias NumberOfSectionsHandler = () -> Int
