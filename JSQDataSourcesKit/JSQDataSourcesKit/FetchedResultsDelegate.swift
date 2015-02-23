@@ -45,18 +45,14 @@ public class CollectionViewFetchedResultsDelegateProvider <DataItem> {
 
     private lazy var bridgedDelegate: BridgedFetchedResultsDelegate = BridgedFetchedResultsDelegate(
         willChangeContent: { [unowned self] (controller) -> Void in
-            self.sectionChanges.removeAll(keepCapacity: false)
-            self.objectChanges.removeAll(keepCapacity: false)
+            self.sectionChanges.removeAll()
+            self.objectChanges.removeAll()
         },
         didChangeSection: { [unowned self] (controller, sectionInfo, sectionIndex, changeType) -> Void in
-            println("*** did change section type:\(changeType.rawValue), index:\(sectionIndex)")
-
             let changes: SectionChangesDictionary = [changeType : sectionIndex]
             self.sectionChanges.append(changes)
         },
         didChangeObject: { [unowned self] (controller, anyObject, indexPath: NSIndexPath?, changeType, newIndexPath: NSIndexPath?) -> Void in
-            println("*** did change object: old = \(indexPath), new = \(newIndexPath)")
-
             var changes = ObjectChangesDictionary()
 
             switch changeType {
@@ -81,79 +77,19 @@ public class CollectionViewFetchedResultsDelegateProvider <DataItem> {
             self.objectChanges.append(changes)
         },
         didChangeContent: { [unowned self] (controller) -> Void in
-            println("*** did change content")
 
             self.collectionView?.performBatchUpdates({ () -> Void in
-
-                // println("first object changes....")
-                // FIXES edge case: delete 1 item from each section, where 1 section has 1 item, thus that section is deleted
-                // however, afterwards this breaks
-
-                // TODO: add a check to see if object changes should be applied first
-                // self.applyObjectChanges()
-
-                println("applying section changes...")
+                self.applyObjectChanges()
                 self.applySectionChanges()
-
-                if self.objectChanges.count > 0 && self.sectionChanges.count == 0 {
-
-                    println("checking should reload? ...")
-                    if self.reloadForKnownIssue() || self.collectionView?.window == nil {
-                        println("reload!")
-                        self.collectionView?.reloadData()
-                    }
-                    else {
-                        println("applying object changes...")
-                        self.applyObjectChanges()
-                    }
-                }
-
-                }, completion:{ (finished) -> Void in
-                    println("ALL changes complete!")
-                    self.sectionChanges.removeAll(keepCapacity: false)
-                    self.objectChanges.removeAll(keepCapacity: false)
+            },
+            completion:{ (finished) -> Void in
+                self.sectionChanges.removeAll()
+                self.objectChanges.removeAll()
             })
+
+            return // Swift compiler bug: single statement void closure
         }
     )
-
-    private func reloadForKnownIssue() -> Bool {
-
-        var shouldReload: Bool = false
-
-        for eachChange in self.objectChanges {
-            for (changeType: NSFetchedResultsChangeType, indexes: [NSIndexPath]) in eachChange {
-
-                switch(changeType) {
-                case .Insert:
-                    if let indexPath = indexes.first {
-                        if self.collectionView?.numberOfItemsInSection(indexPath.section) == 0 {
-                            shouldReload = true
-                        }
-                        else {
-                            shouldReload = false
-                        }
-                    }
-
-                case .Delete:
-                    if let indexPath = indexes.first {
-                        if self.collectionView?.numberOfItemsInSection(indexPath.section) == 1 {
-                            shouldReload = true
-                        }
-                        else {
-                            shouldReload = false
-                        }
-                    }
-
-                case .Update:
-                    shouldReload = false
-                case .Move:
-                    shouldReload = false
-                }
-            }
-        }
-
-        return shouldReload
-    }
 
     private func applySectionChanges() {
         for eachChange in self.sectionChanges {
