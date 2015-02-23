@@ -4,21 +4,25 @@
 
 A Swift rewrite of [RSTDataSourceKit](https://github.com/rosettastone/RSTDataSourceKit) inspired by [Andy Matuschak's](https://github.com/andymatuschak) *type-safe, value-oriented collection view data source [gist](https://gist.github.com/andymatuschak/f1e1691fa1a327468f8e)*. 
 
-#### NOTE: this project is still a work in-progress
+>#### NOTE: work in-progress, but almost done!
 
-## Data Sources
+## About
+
+This framework aims to the reduce boilerplate code regarding the `UITableView`, `UICollectionView`, and `NSFetchedResultsController` data source objects, as well as the `NSFetchedResultsControllerDelegate` object. It helps [keep view controllers light](http://www.objc.io/issue-1/), while focusing on type-safety, [SOLID](http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)) design principles, and easy interoperability with Cocoa.
+
+##### Data Sources
 
 `CollectionViewDataSourceProvider`
 
 `TableViewDataSourceProvider`
 
-## Data Sources for `NSFetchedResultsController`
+##### Data Sources for `NSFetchedResultsController`
 
 `CollectionViewFetchedResultsDataSourceProvider`
 
 `TableViewFetchedResultsDataSourceProvider`
 
-## Delegates for `NSFetchedResultsController`
+##### Delegates for `NSFetchedResultsControllerDelegate`
 
 `CollectionViewFetchedResultsDelegateProvider`
 
