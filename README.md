@@ -7,6 +7,8 @@ A Swift rewrite of [RSTDataSourceKit](https://github.com/rosettastone/RSTDataSou
 >#### NOTE: work in-progress, but almost done!
 >**TODO:**
 >
+> 0. support collection view supplementary views (headers & footers)
+>
 > 1. unit tests
 >
 > 2. docs
