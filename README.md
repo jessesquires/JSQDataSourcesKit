@@ -28,6 +28,15 @@ A Swift rewrite of [RSTDataSourceKit](https://github.com/rosettastone/RSTDataSou
 
 Please follow these sweet [contribution guidelines](https://github.com/jessesquires/HowToContribute).
 
+## Credits
+
+Created by [**@jesse_squires**](https://twitter.com/jesse_squires)
+
+* Inspired by **[andymatuschak](https://github.com/andymatuschak) /** [gist f1e1691fa1a327468f8e](https://gist.github.com/andymatuschak/f1e1691fa1a327468f8e)
+* Inspired by **[ashfurrow](https://github.com/ashfurrow) /** [UICollectionView-NSFetchedResultsController](https://github.com/ashfurrow/UICollectionView-NSFetchedResultsController)
+
+
+
 ## License
 
 `JSQDataSourcesKit` is released under an [MIT License][mitLink]. See `LICENSE` for details.
