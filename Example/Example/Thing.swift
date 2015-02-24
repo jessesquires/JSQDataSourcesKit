@@ -42,7 +42,7 @@ public class Thing: NSManagedObject {
     public class func newThing(context: NSManagedObjectContext) -> Thing {
         let t = Thing(context: context)
         t.category = Category.random.rawValue
-        t.name = split(NSProcessInfo.processInfo().globallyUniqueString, { $0 == "-" }).first!
+        t.name = split(NSProcessInfo.processInfo().globallyUniqueString, isSeparator: { $0 == "-" }).first!
         t.number = Int32(arc4random_uniform(10000))
         return t
     }
