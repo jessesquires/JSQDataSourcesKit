@@ -33,6 +33,18 @@ struct FakeTableModel: Equatable {
 class FakeTableCell: UITableViewCell { }
 
 
+class FakeTableView: UITableView {
+
+    var dequeueCellExpectation: XCTestExpectation?
+    var fakeCell: FakeTableCell?
+
+    override func dequeueReusableCellWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> AnyObject {
+        self.dequeueCellExpectation?.fulfill()
+        return self.fakeCell!
+    }
+}
+
+
 class TableViewDataSourceTests: XCTestCase {
 
     var fakeModel = FakeTableModel()
@@ -45,7 +57,7 @@ class TableViewDataSourceTests: XCTestCase {
         }
     }
 
-    var fakeTableView = UITableView(frame: CGRect(x: 0, y: 0, width: 320, height: 600), style: .Plain)
+    var fakeTableView = FakeTableView(frame: CGRect(x: 0, y: 0, width: 320, height: 600), style: .Plain)
 
     var fakeIndexPath: NSIndexPath!
 
@@ -54,6 +66,8 @@ class TableViewDataSourceTests: XCTestCase {
         super.setUp()
 
         self.fakeTableView.registerClass(FakeTableCell.self, forCellReuseIdentifier: self.fakeReuseId)
+        self.fakeTableView.dequeueCellExpectation = self.expectationWithDescription("dequeue cell expectation")
+        self.fakeTableView.fakeCell = self.fakeCell
 
         self.fakeIndexPath = NSIndexPath(forRow: 0, inSection: 0)
     }
@@ -65,8 +79,8 @@ class TableViewDataSourceTests: XCTestCase {
     func testTableViewDataSource() {
 
         // GIVEN: a cell factory
-        let factory = TableViewCellFactory(reuseIdentifier: "") { (cell: FakeTableCell, model: FakeTableModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
-            XCTAssertEqual(cell, self.fakeCell)
+        let factory = TableViewCellFactory(reuseIdentifier: self.fakeReuseId) { (cell: FakeTableCell, model: FakeTableModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
+            XCTAssertEqual(cell, self.fakeTableView.fakeCell!)
             XCTAssertEqual(model, self.fakeModel)
             XCTAssertEqual(tableView, self.fakeTableView)
             XCTAssertEqual(indexPath, self.fakeIndexPath)
@@ -91,6 +105,12 @@ class TableViewDataSourceTests: XCTestCase {
             XCTFail("")
         }
 
+        let cell = dataSource.tableView(self.fakeTableView, cellForRowAtIndexPath: self.fakeIndexPath)
+        XCTAssertEqual(cell, self.fakeTableView.fakeCell!)
+
+        self.waitForExpectationsWithTimeout(1, handler: { (error) -> Void in
+            XCTAssertNil(error)
+        })
 
     }
 
