@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		881F6FFC1A9EE2A800037CD2 /* TableViewDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881F6FFB1A9EE2A800037CD2 /* TableViewDataSourceTests.swift */; };
 		88614C0F1A8810EC00C51236 /* FetchedResultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88614C0E1A8810EC00C51236 /* FetchedResultsDelegate.swift */; };
 		88B323411A86D7B1007FB904 /* TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B323401A86D7B1007FB904 /* TableViewDataSource.swift */; };
 		88D21DA11A992C8000E736DC /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D21DA01A992C8000E736DC /* CollectionViewDataSource.swift */; };
 		88DB89821A86D0C900DED153 /* JSQDataSourcesKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 88DB89811A86D0C900DED153 /* JSQDataSourcesKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		88DB89881A86D0C900DED153 /* JSQDataSourcesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88DB897C1A86D0C900DED153 /* JSQDataSourcesKit.framework */; };
-		88DB898F1A86D0C900DED153 /* JSQDataSourcesKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DB898E1A86D0C900DED153 /* JSQDataSourcesKitTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +26,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		881F6FFB1A9EE2A800037CD2 /* TableViewDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceTests.swift; sourceTree = "<group>"; };
 		88614C0E1A8810EC00C51236 /* FetchedResultsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsDelegate.swift; sourceTree = "<group>"; };
 		88B323401A86D7B1007FB904 /* TableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSource.swift; sourceTree = "<group>"; };
 		88D21DA01A992C8000E736DC /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
@@ -34,7 +35,6 @@
 		88DB89811A86D0C900DED153 /* JSQDataSourcesKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSQDataSourcesKit.h; sourceTree = "<group>"; };
 		88DB89871A86D0C900DED153 /* JSQDataSourcesKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JSQDataSourcesKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		88DB898D1A86D0C900DED153 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		88DB898E1A86D0C900DED153 /* JSQDataSourcesKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSQDataSourcesKitTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +97,7 @@
 		88DB898B1A86D0C900DED153 /* JSQDataSourcesKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				88DB898E1A86D0C900DED153 /* JSQDataSourcesKitTests.swift */,
+				881F6FFB1A9EE2A800037CD2 /* TableViewDataSourceTests.swift */,
 				88DB898C1A86D0C900DED153 /* Supporting Files */,
 			);
 			path = JSQDataSourcesKitTests;
@@ -228,7 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88DB898F1A86D0C900DED153 /* JSQDataSourcesKitTests.swift in Sources */,
+				881F6FFC1A9EE2A800037CD2 /* TableViewDataSourceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
