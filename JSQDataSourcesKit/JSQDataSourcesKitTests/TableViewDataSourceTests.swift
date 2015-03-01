@@ -196,17 +196,17 @@ class TableViewDataSourceTests: XCTestCase {
         let dataSource = dataSourceProvider.dataSource
 
         // WHEN: we call the table view data source methods
-        let sections = dataSource.numberOfSectionsInTableView?(self.fakeTableView)
-        let rows = dataSource.tableView(self.fakeTableView, numberOfRowsInSection: 0)
+        let numSections = dataSource.numberOfSectionsInTableView?(self.fakeTableView)
+        let numRows = dataSource.tableView(self.fakeTableView, numberOfRowsInSection: 0)
         let cell = dataSource.tableView(self.fakeTableView, cellForRowAtIndexPath: expectedIndexPath)
         let header = dataSource.tableView?(self.fakeTableView, titleForHeaderInSection: 0)
         let footer = dataSource.tableView?(self.fakeTableView, titleForFooterInSection: 0)
 
         // THEN: we receive the expected return values
-        XCTAssertNotNil(sections, "Number of sections should not be nil")
-        XCTAssertEqual(sections!, dataSourceProvider.sections.count, "Data source should return expected number of sections")
+        XCTAssertNotNil(numSections, "Number of sections should not be nil")
+        XCTAssertEqual(numSections!, dataSourceProvider.sections.count, "Data source should return expected number of sections")
 
-        XCTAssertEqual(rows, section0.count, "Data source should return expected number of rows for section 0")
+        XCTAssertEqual(numRows, section0.count, "Data source should return expected number of rows for section 0")
 
         XCTAssertNotNil(cell.reuseIdentifier, "Cell reuse identifier should not be nil")
         XCTAssertEqual(cell.reuseIdentifier!, self.fakeReuseId, "Data source should return cells with the expected identifier")
@@ -224,11 +224,77 @@ class TableViewDataSourceTests: XCTestCase {
         self.waitForExpectationsWithTimeout(1, handler: { (error) -> Void in
             XCTAssertNil(error, "Expectations should not error")
         })
-        
     }
-    
-    func test_test_ThatTableViewDataSourceReturnsExpectedData_ForMultipleSections() {
-        
+
+    func test_ThatTableViewDataSourceReturnsExpectedData_ForMultipleSections() {
+
+        // GIVEN: some table view sections
+        let section0 = TableViewSection(dataItems: [FakeTableModel(), FakeTableModel(), FakeTableModel()], headerTitle: "Header", footerTitle: "Footer")
+        let section1 = TableViewSection(dataItems: [FakeTableModel()], headerTitle: "Header Title")
+        let section2 = TableViewSection(dataItems: [FakeTableModel(), FakeTableModel()], footerTitle: "Footer")
+        let section3 = TableViewSection(dataItems: [FakeTableModel(), FakeTableModel(), FakeTableModel(), FakeTableModel(), FakeTableModel()])
+        let allSections = [section0, section1, section2, section3]
+
+        var factoryExpectation = self.expectationWithDescription("factory_\(__FUNCTION__)")
+
+        // GIVEN: a cell factory
+        let factory = TableViewCellFactory(reuseIdentifier: self.fakeReuseId) { (cell: FakeTableCell, model: FakeTableModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
+            XCTAssertEqual(cell.reuseIdentifier!, self.fakeReuseId, "Dequeued cell should have expected identifier")
+            XCTAssertEqual(tableView, self.fakeTableView, "TableView should equal the tableView for the data source")
+
+            XCTAssertEqual(model, allSections[indexPath.section][indexPath.row], "Model object should equal expected value")
+
+            factoryExpectation.fulfill()
+
+            return cell
+        }
+
+        // GIVEN: a data source provider
+        let dataSourceProvider = TableViewDataSourceProvider(sections: allSections, cellFactory: factory, tableView: self.fakeTableView)
+        let dataSource = dataSourceProvider.dataSource
+
+        // WHEN: we call the table view data source methods
+        let numSections = dataSource.numberOfSectionsInTableView?(self.fakeTableView)
+
+        // THEN: we receive the expected return values
+        XCTAssertNotNil(numSections, "Number of sections should not be nil")
+        XCTAssertEqual(numSections!, dataSourceProvider.sections.count, "Data source should return expected number of sections")
+
+        for sectionIndex in 0..<dataSourceProvider.sections.count {
+
+            for rowIndex in 0..<dataSourceProvider[sectionIndex].dataItems.count {
+
+                let expectationName = "\(__FUNCTION__)_\(sectionIndex)_\(rowIndex)"
+                self.fakeTableView.dequeueCellExpectation = self.expectationWithDescription(self.dequeueCellExpectationName + expectationName)
+
+                // WHEN: we call the table view data source methods
+                let numRows = dataSource.tableView(self.fakeTableView, numberOfRowsInSection: sectionIndex)
+                let header = dataSource.tableView?(self.fakeTableView, titleForHeaderInSection: sectionIndex)
+                let footer = dataSource.tableView?(self.fakeTableView, titleForFooterInSection: sectionIndex)
+
+                let cell = dataSource.tableView(self.fakeTableView, cellForRowAtIndexPath: NSIndexPath(forRow: rowIndex, inSection: sectionIndex))
+
+                // THEN: we receive the expected return values
+                XCTAssertEqual(numRows, dataSourceProvider[sectionIndex].count, "Data source should return expected number of rows for section \(sectionIndex)")
+
+                XCTAssertNotNil(cell.reuseIdentifier, "Cell reuse identifier should not be nil")
+                XCTAssertEqual(cell.reuseIdentifier!, self.fakeReuseId, "Data source should return cells with the expected identifier")
+
+                XCTAssertTrue(header == dataSourceProvider[sectionIndex].headerTitle, "Data source should return expected header title for section \(sectionIndex)")
+                XCTAssertTrue(footer == dataSourceProvider[sectionIndex].footerTitle, "Data source should return expected footer title for section \(sectionIndex)")
+
+                // THEN: the tableView calls `dequeueReusableCellWithIdentifier`
+                // THEN: the cell factory calls its `CellConfigurationHandler`
+                self.waitForExpectationsWithTimeout(1, handler: { (error) -> Void in
+                    XCTAssertNil(error, "Expectations should not error")
+                })
+                
+                // reset expectation names for next loop, ignore last item
+                if !(sectionIndex == dataSourceProvider.sections.count - 1 && rowIndex == dataSourceProvider[sectionIndex].count - 1) {
+                    factoryExpectation = self.expectationWithDescription("factory_" + expectationName)
+                }
+            }
+        }
     }
     
 }
