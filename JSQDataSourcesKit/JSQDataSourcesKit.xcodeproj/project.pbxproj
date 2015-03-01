@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		881F6FFC1A9EE2A800037CD2 /* TableViewDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881F6FFB1A9EE2A800037CD2 /* TableViewDataSourceTests.swift */; };
+		88342F3D1AA2FDE000AC9FC0 /* CollectionViewDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88342F3C1AA2FDE000AC9FC0 /* CollectionViewDataSourceTests.swift */; };
 		88614C0F1A8810EC00C51236 /* FetchedResultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88614C0E1A8810EC00C51236 /* FetchedResultsDelegate.swift */; };
 		88B323411A86D7B1007FB904 /* TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B323401A86D7B1007FB904 /* TableViewDataSource.swift */; };
 		88D21DA11A992C8000E736DC /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D21DA01A992C8000E736DC /* CollectionViewDataSource.swift */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		881F6FFB1A9EE2A800037CD2 /* TableViewDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceTests.swift; sourceTree = "<group>"; };
+		88342F3C1AA2FDE000AC9FC0 /* CollectionViewDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSourceTests.swift; sourceTree = "<group>"; };
 		88614C0E1A8810EC00C51236 /* FetchedResultsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsDelegate.swift; sourceTree = "<group>"; };
 		88B323401A86D7B1007FB904 /* TableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSource.swift; sourceTree = "<group>"; };
 		88D21DA01A992C8000E736DC /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 		88DB898B1A86D0C900DED153 /* JSQDataSourcesKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				88342F3C1AA2FDE000AC9FC0 /* CollectionViewDataSourceTests.swift */,
 				881F6FFB1A9EE2A800037CD2 /* TableViewDataSourceTests.swift */,
 				88DB898C1A86D0C900DED153 /* Supporting Files */,
 			);
@@ -229,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				881F6FFC1A9EE2A800037CD2 /* TableViewDataSourceTests.swift in Sources */,
+				88342F3D1AA2FDE000AC9FC0 /* CollectionViewDataSourceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
