@@ -51,25 +51,38 @@ class FakeTableView: UITableView {
 
 class TableViewDataSourceTests: XCTestCase {
 
+
     // MARK: setup
 
     let fakeReuseId = "fakeCellId"
-
     let fakeTableView = FakeTableView(frame: CGRect(x: 0, y: 0, width: 320, height: 600), style: .Plain)
+    let dequeueCellExpectationName = "tableview_dequeue_cell_expectation"
 
     override func setUp() {
         super.setUp()
 
         self.fakeTableView.registerClass(FakeTableCell.self, forCellReuseIdentifier: self.fakeReuseId)
-        self.fakeTableView.dequeueCellExpectation = self.expectationWithDescription("tableview_dequeue_cell_expectation")
     }
-    
+
     override func tearDown() {
         super.tearDown()
     }
 
 
     // MARK: tests
+
+    func test_ThatTableViewSectionInfoReturnsExpectedDataFromSubscript() {
+
+        // GIVEN: a model and section
+        let expectedModel = FakeTableModel()
+        let section = TableViewSection(dataItems: [ FakeTableModel(), FakeTableModel(), expectedModel, FakeTableModel(), FakeTableModel()], headerTitle: "Header", footerTitle: "Footer")
+
+        // WHEN: we ask for an item at a specific index
+        let item = section[2]
+
+        // THEN: we receive the expected item
+        XCTAssertEqual(item, expectedModel, "Model returned from subscript should equal expected model")
+    }
 
     func test_ThatTableViewDataSourceReturnsExpectedData_ForSingleSection() {
 
@@ -81,6 +94,7 @@ class TableViewDataSourceTests: XCTestCase {
         let allSections = [section0]
 
         let factoryExpectation = self.expectationWithDescription("\(__FUNCTION__)")
+        self.fakeTableView.dequeueCellExpectation = self.expectationWithDescription(self.dequeueCellExpectationName + "_\(__FUNCTION__)")
 
         // GIVEN: a cell factory
         let factory = TableViewCellFactory(reuseIdentifier: self.fakeReuseId) { (cell: FakeTableCell, model: FakeTableModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
@@ -128,7 +142,11 @@ class TableViewDataSourceTests: XCTestCase {
         self.waitForExpectationsWithTimeout(1, handler: { (error) -> Void in
             XCTAssertNil(error, "Expectations should not error")
         })
-
+        
     }
-
+    
+    func test_test_ThatTableViewDataSourceReturnsExpectedData_ForMultipleSections() {
+        
+    }
+    
 }

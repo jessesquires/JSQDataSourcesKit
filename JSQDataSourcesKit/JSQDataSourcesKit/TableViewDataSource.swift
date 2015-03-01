@@ -87,6 +87,15 @@ public struct TableViewSection <DataItem>: TableViewSectionInfo {
         self.footerTitle = footerTitle
     }
 
+    public subscript (index: Int) -> DataItem {
+        get  {
+            return dataItems[index]
+        }
+        set {
+            self.dataItems.insert(newValue, atIndex: index)
+        }
+    }
+
 }
 
 
