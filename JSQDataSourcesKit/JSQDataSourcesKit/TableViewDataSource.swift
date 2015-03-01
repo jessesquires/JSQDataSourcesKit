@@ -24,6 +24,7 @@ import CoreData
 public protocol TableViewCellFactoryType {
 
     typealias DataItem
+
     typealias Cell: UITableViewCell
 
     func cellForItem(item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell
@@ -37,9 +38,9 @@ public struct TableViewCellFactory <Cell: UITableViewCell, DataItem>: TableViewC
 
     typealias CellConfigurationHandler = (Cell, DataItem, UITableView, NSIndexPath) -> Cell
 
-    private let reuseIdentifier: String
+    public let reuseIdentifier: String
 
-    private let cellConfigurator: CellConfigurationHandler
+    public let cellConfigurator: CellConfigurationHandler
 
     public init(reuseIdentifier: String, cellConfigurator: CellConfigurationHandler) {
         self.reuseIdentifier = reuseIdentifier
@@ -52,13 +53,14 @@ public struct TableViewCellFactory <Cell: UITableViewCell, DataItem>: TableViewC
     }
 
     public func configureCell(cell: Cell, forItem item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell {
-        return self.cellConfigurator(cell, item, tableView, indexPath)
+        return cellConfigurator(cell, item, tableView, indexPath)
     }
 
 }
 
 
 public protocol TableViewSectionInfo {
+
     typealias DataItem
 
     var dataItems: [DataItem] { get }
@@ -92,7 +94,7 @@ public struct TableViewSection <DataItem>: TableViewSectionInfo {
             return dataItems[index]
         }
         set {
-            self.dataItems.insert(newValue, atIndex: index)
+            dataItems.insert(newValue, atIndex: index)
         }
     }
 
