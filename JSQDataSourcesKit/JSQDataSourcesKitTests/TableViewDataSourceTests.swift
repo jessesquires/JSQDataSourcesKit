@@ -71,7 +71,7 @@ class TableViewDataSourceTests: XCTestCase {
 
     // MARK: tests
 
-    func test_ThatTableViewSectionInfoReturnsExpectedDataFromSubscript() {
+    func test_ThatTableViewSectionReturnsExpectedDataFromSubscript() {
 
         // GIVEN: a model and a table view section
         let expectedModel = FakeTableModel()
@@ -82,6 +82,22 @@ class TableViewDataSourceTests: XCTestCase {
 
         // THEN: we receive the expected item
         XCTAssertEqual(item, expectedModel, "Model returned from subscript should equal expected model")
+    }
+
+    func test_ThatTableViewSectionSetsExpectedDataAtSubscript() {
+
+        // GIVEN: a table view section
+        var section = TableViewSection(dataItems: [FakeTableModel(), FakeTableModel(), FakeTableModel(), FakeTableModel()])
+        let count = section.dataItems.count
+
+        // WHEN: we set an item at a specific index
+        let index = 1
+        let expectedModel = FakeTableModel()
+        section[index] = expectedModel
+
+        // THEN: the item at the specified index is replaced with the new item
+        XCTAssertEqual(section[index], expectedModel, "Model set at subscript should equal expected model")
+        XCTAssertEqual(count, section.count, "Section count should remain unchanged")
     }
 
     func test_ThatTableViewSectionInfoReturnsExpectedCount() {

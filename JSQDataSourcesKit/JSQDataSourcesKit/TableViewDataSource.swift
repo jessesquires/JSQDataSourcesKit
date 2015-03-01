@@ -90,11 +90,11 @@ public struct TableViewSection <DataItem>: TableViewSectionInfo {
     }
 
     public subscript (index: Int) -> DataItem {
-        get  {
+        get {
             return dataItems[index]
         }
         set {
-            dataItems.insert(newValue, atIndex: index)
+            dataItems[index] = newValue
         }
     }
 
