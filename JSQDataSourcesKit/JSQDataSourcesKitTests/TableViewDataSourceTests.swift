@@ -73,9 +73,9 @@ class TableViewDataSourceTests: XCTestCase {
 
     func test_ThatTableViewSectionInfoReturnsExpectedDataFromSubscript() {
 
-        // GIVEN: a model and section
+        // GIVEN: a model and a table view section
         let expectedModel = FakeTableModel()
-        let section = TableViewSection(dataItems: [ FakeTableModel(), FakeTableModel(), expectedModel, FakeTableModel(), FakeTableModel()], headerTitle: "Header", footerTitle: "Footer")
+        let section = TableViewSection(dataItems: [FakeTableModel(), FakeTableModel(), expectedModel, FakeTableModel(), FakeTableModel()])
 
         // WHEN: we ask for an item at a specific index
         let item = section[2]
@@ -84,13 +84,27 @@ class TableViewDataSourceTests: XCTestCase {
         XCTAssertEqual(item, expectedModel, "Model returned from subscript should equal expected model")
     }
 
+    func test_ThatTableViewSectionInfoReturnsExpectedCount() {
+
+        // GIVEN: items and a table view section
+        let items = [FakeTableModel(), FakeTableModel(), FakeTableModel(), FakeTableModel()]
+        let section = TableViewSection(dataItems: items)
+
+        // WHEN: we ask the section for its count
+        let count = section.count
+
+        // THEN: we receive the expected count
+        XCTAssertEqual(count, items.count, "Count should equal expected count")
+        XCTAssertEqual(count, section.dataItems.count, "Count should equal expected count")
+    }
+
     func test_ThatTableViewDataSourceReturnsExpectedData_ForSingleSection() {
 
         // GIVEN: a single TableViewSection with data items
         let expectedModel = FakeTableModel()
         let expectedIndexPath = NSIndexPath(forRow: 2, inSection: 0)
 
-        let section0 = TableViewSection(dataItems: [ FakeTableModel(), FakeTableModel(), expectedModel, FakeTableModel(), FakeTableModel()], headerTitle: "Header", footerTitle: "Footer")
+        let section0 = TableViewSection(dataItems: [FakeTableModel(), FakeTableModel(), expectedModel, FakeTableModel(), FakeTableModel()], headerTitle: "Header", footerTitle: "Footer")
         let allSections = [section0]
 
         let factoryExpectation = self.expectationWithDescription("\(__FUNCTION__)")
