@@ -51,14 +51,11 @@ class FakeTableView: UITableView {
 
 class TableViewDataSourceTests: XCTestCase {
 
-    // MARK: properties
+    // MARK: setup
 
     let fakeReuseId = "fakeCellId"
 
-    var fakeTableView = FakeTableView(frame: CGRect(x: 0, y: 0, width: 320, height: 600), style: .Plain)
-
-
-    // MARK: setup
+    let fakeTableView = FakeTableView(frame: CGRect(x: 0, y: 0, width: 320, height: 600), style: .Plain)
 
     override func setUp() {
         super.setUp()
