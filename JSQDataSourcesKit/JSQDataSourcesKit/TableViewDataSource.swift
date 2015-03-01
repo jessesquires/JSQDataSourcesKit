@@ -119,6 +119,15 @@ public class TableViewDataSourceProvider <DataItem, SectionInfo: TableViewSectio
         tableView?.dataSource = self.dataSource
     }
 
+    public subscript (index: Int) -> SectionInfo {
+        get {
+            return sections[index]
+        }
+        set {
+            sections[index] = newValue
+        }
+    }
+
     private lazy var bridgedDataSource: BridgedTableViewDataSource = BridgedTableViewDataSource(
         numberOfSections: { [unowned self] () -> Int in
             self.sections.count
@@ -190,7 +199,7 @@ public class TableViewFetchedResultsDataSourceProvider <DataItem, CellFactory: T
             return nil
         }
     )
-    
+
 }
 
 
