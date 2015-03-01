@@ -77,6 +77,10 @@ public struct TableViewSection <DataItem>: TableViewSectionInfo {
 
     public let footerTitle: String?
 
+    public var count: Int {
+        return dataItems.count
+    }
+
     public init(dataItems: [DataItem], headerTitle: String? = nil, footerTitle: String? = nil) {
         self.dataItems = dataItems
         self.headerTitle = headerTitle
