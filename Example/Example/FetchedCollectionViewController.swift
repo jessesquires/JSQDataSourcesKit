@@ -31,7 +31,9 @@ class FetchedCollectionViewController: UIViewController {
 
     let stack = CoreDataStack()
 
-    var dataSourceProvider: CollectionViewFetchedResultsDataSourceProvider<Thing, CollectionViewCellFactory<CollectionViewCell, Thing> >?
+    typealias ThingCellFactory = CollectionViewCellFactory<CollectionViewCell, Thing>
+    typealias ThingSupplementaryViewFactory = CollectionViewSupplementaryViewFactory<UICollectionReusableView, Thing>
+    var dataSourceProvider: CollectionViewFetchedResultsDataSourceProvider<Thing, ThingCellFactory, ThingSupplementaryViewFactory>?
 
     var delegateProvider: CollectionViewFetchedResultsDelegateProvider<Thing>?
 
@@ -44,20 +46,28 @@ class FetchedCollectionViewController: UIViewController {
         // configure layout
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: 100, height: 100)
+        layout.headerReferenceSize = CGSizeMake(collectionView.frame.size.width, 50)
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         layout.minimumInteritemSpacing = 10
         layout.minimumLineSpacing = 10
         collectionView.allowsMultipleSelection = true
 
-        // register cells
+        // register cells and supplementary views
         collectionView.registerNib(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: collectionCellId)
+        collectionView.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
 
-        // create factory
-        let factory = CollectionViewCellFactory(reuseIdentifier: collectionCellId) { (cell: CollectionViewCell, model: Thing, collectionView: UICollectionView, indexPath: NSIndexPath) -> CollectionViewCell in
+        // create cell factory
+        let cellFactory = CollectionViewCellFactory(reuseIdentifier: collectionCellId) { (cell: CollectionViewCell, model: Thing, collectionView: UICollectionView, indexPath: NSIndexPath) -> CollectionViewCell in
             cell.label.text = model.displayName
             cell.label.textColor = UIColor.whiteColor()
             cell.backgroundColor = model.displayColor
             return cell
+        }
+
+        // create supplementary view factory
+        let headerFactory = CollectionViewSupplementaryViewFactory(reuseIdentifier: "header") { (view, model: Thing, kind, collectionView, indexPath: NSIndexPath) -> UICollectionReusableView in
+            view.backgroundColor = model.displayColor
+            return view
         }
 
         // create fetched results controller
@@ -69,7 +79,7 @@ class FetchedCollectionViewController: UIViewController {
 
         // create data source provider
         // by passing `self.collectionView`, the provider automatically sets `self.collectionView.dataSource = self.dataSourceProvider.dataSource`
-        self.dataSourceProvider = CollectionViewFetchedResultsDataSourceProvider(fetchedResultsController: frc, cellFactory: factory, collectionView: collectionView)
+        self.dataSourceProvider = CollectionViewFetchedResultsDataSourceProvider(fetchedResultsController: frc, cellFactory: cellFactory, supplementaryViewFactory: headerFactory, collectionView: collectionView)
     }
 
 

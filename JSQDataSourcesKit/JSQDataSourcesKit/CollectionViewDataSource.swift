@@ -20,9 +20,11 @@ import Foundation
 import UIKit
 import CoreData
 
+
 public protocol CollectionViewCellFactoryType {
 
     typealias DataItem
+
     typealias Cell: UICollectionViewCell
 
     func cellForItem(item: DataItem, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell
@@ -36,7 +38,7 @@ public struct CollectionViewCellFactory <Cell: UICollectionViewCell, DataItem>: 
 
     typealias CellConfigurationHandler = (Cell, DataItem, UICollectionView, NSIndexPath) -> Cell
 
-    private let reuseIdentifier: String
+    public let reuseIdentifier: String
 
     private let cellConfigurator: CellConfigurationHandler
 
@@ -51,7 +53,44 @@ public struct CollectionViewCellFactory <Cell: UICollectionViewCell, DataItem>: 
     }
 
     public func configureCell(cell: Cell, forItem item: DataItem, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell {
-        return self.cellConfigurator(cell, item, collectionView, indexPath)
+        return cellConfigurator(cell, item, collectionView, indexPath)
+    }
+
+}
+
+
+public protocol CollectionViewSupplementaryViewFactoryType {
+
+    typealias DataItem
+
+    typealias SupplementaryView: UICollectionReusableView
+
+    func supplementaryViewForItem(item: DataItem, kind: String, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> SupplementaryView
+
+    func configureSupplementaryView(view: SupplementaryView, forItem item: DataItem, kind: String, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> SupplementaryView
+}
+
+
+public struct CollectionViewSupplementaryViewFactory <SupplementaryView: UICollectionReusableView, DataItem>: CollectionViewSupplementaryViewFactoryType {
+
+    typealias SupplementaryViewConfigurationHandler = (SupplementaryView, DataItem, String, UICollectionView, NSIndexPath) -> SupplementaryView
+
+    public let reuseIdentifier: String
+
+    private let supplementaryViewConfigurator: SupplementaryViewConfigurationHandler
+
+    public init(reuseIdentifier: String, supplementaryViewConfigurator: SupplementaryViewConfigurationHandler) {
+        self.reuseIdentifier = reuseIdentifier
+        self.supplementaryViewConfigurator = supplementaryViewConfigurator
+    }
+
+    public func supplementaryViewForItem(item: DataItem, kind: String, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> SupplementaryView {
+        let view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: reuseIdentifier, forIndexPath: indexPath) as! SupplementaryView
+        return configureSupplementaryView(view, forItem: item, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
+    }
+
+    public func configureSupplementaryView(view: SupplementaryView, forItem item: DataItem, kind: String, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> SupplementaryView {
+        return supplementaryViewConfigurator(view, item, kind, collectionView, indexPath)
     }
 
 }
@@ -85,20 +124,25 @@ public struct CollectionViewSection <DataItem>: CollectionViewSectionInfo {
 }
 
 
-public class CollectionViewDataSourceProvider <DataItem, SectionInfo: CollectionViewSectionInfo, CellFactory: CollectionViewCellFactoryType
+public class CollectionViewDataSourceProvider <DataItem, SectionInfo: CollectionViewSectionInfo,
+                                                CellFactory: CollectionViewCellFactoryType, SupplementaryViewFactory: CollectionViewSupplementaryViewFactoryType
                                                 where
                                                 SectionInfo.DataItem == DataItem,
-                                                CellFactory.DataItem == DataItem> {
+                                                CellFactory.DataItem == DataItem,
+                                                SupplementaryViewFactory.DataItem == DataItem> {
 
     public var sections: [SectionInfo]
 
     public let cellFactory: CellFactory
 
+    public let supplementaryViewFactory: SupplementaryViewFactory
+
     public var dataSource: UICollectionViewDataSource { return bridgedDataSource }
 
-    public init(sections: [SectionInfo], cellFactory: CellFactory, collectionView: UICollectionView? = nil) {
+    public init(sections: [SectionInfo], cellFactory: CellFactory, supplementaryViewFactory: SupplementaryViewFactory, collectionView: UICollectionView? = nil) {
         self.sections = sections
         self.cellFactory = cellFactory
+        self.supplementaryViewFactory = supplementaryViewFactory
 
         collectionView?.dataSource = self.dataSource
     }
@@ -113,24 +157,34 @@ public class CollectionViewDataSourceProvider <DataItem, SectionInfo: Collection
         cellForItemAtIndexPath: { [unowned self] (collectionView, indexPath) -> UICollectionViewCell in
             let dataItem = self.sections[indexPath.section].dataItems[indexPath.row]
             return self.cellFactory.cellForItem(dataItem, inCollectionView: collectionView, atIndexPath: indexPath)
+        },
+        supplementaryViewAtIndexPath: { [unowned self] (collectionView, kind, indexPath) -> UICollectionReusableView in
+            let dataItem = self.sections[indexPath.section].dataItems[indexPath.row]
+            return self.supplementaryViewFactory.supplementaryViewForItem(dataItem, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
         }
     )
-
+    
 }
 
 
-public class CollectionViewFetchedResultsDataSourceProvider <DataItem, CellFactory: CollectionViewCellFactoryType
-                                                             where CellFactory.DataItem == DataItem> {
+public class CollectionViewFetchedResultsDataSourceProvider <DataItem, CellFactory: CollectionViewCellFactoryType,
+                                                             SupplementaryViewFactory: CollectionViewSupplementaryViewFactoryType
+                                                             where
+                                                             CellFactory.DataItem == DataItem,
+                                                             SupplementaryViewFactory.DataItem == DataItem> {
 
     public let fetchedResultsController: NSFetchedResultsController
 
     public let cellFactory: CellFactory
 
+    public let supplementaryViewFactory: SupplementaryViewFactory
+
     public var dataSource: UICollectionViewDataSource { return bridgedDataSource }
 
-    public init(fetchedResultsController: NSFetchedResultsController, cellFactory: CellFactory, collectionView: UICollectionView? = nil) {
+    public init(fetchedResultsController: NSFetchedResultsController, cellFactory: CellFactory, supplementaryViewFactory: SupplementaryViewFactory, collectionView: UICollectionView? = nil) {
         self.fetchedResultsController = fetchedResultsController
         self.cellFactory = cellFactory
+        self.supplementaryViewFactory = supplementaryViewFactory
 
         collectionView?.dataSource = self.dataSource
     }
@@ -155,6 +209,10 @@ public class CollectionViewFetchedResultsDataSourceProvider <DataItem, CellFacto
         cellForItemAtIndexPath: { [unowned self] (collectionView, indexPath) -> UICollectionViewCell in
             let dataItem = self.fetchedResultsController.objectAtIndexPath(indexPath) as! DataItem
             return self.cellFactory.cellForItem(dataItem, inCollectionView: collectionView, atIndexPath: indexPath)
+        },
+        supplementaryViewAtIndexPath: { [unowned self] (collectionView, kind, indexPath) -> UICollectionReusableView in
+            let dataItem = self.fetchedResultsController.objectAtIndexPath(indexPath) as! DataItem
+            return self.supplementaryViewFactory.supplementaryViewForItem(dataItem, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
         }
     )
 
@@ -167,18 +225,22 @@ public class CollectionViewFetchedResultsDataSourceProvider <DataItem, CellFacto
     typealias NumberOfSectionsHandler = () -> Int
     typealias NumberOfItemsInSectionHandler = (Int) -> Int
     typealias CellForItemAtIndexPathHandler = (UICollectionView, NSIndexPath) -> UICollectionViewCell
+    typealias SupplementaryViewAtIndexPathHandler = (UICollectionView, String, NSIndexPath) -> UICollectionReusableView
 
     private let numberOfSections: NumberOfSectionsHandler
     private let numberOfItemsInSection: NumberOfItemsInSectionHandler
     private let cellForItemAtIndexPath: CellForItemAtIndexPathHandler
+    private let supplementaryViewAtIndexPath: SupplementaryViewAtIndexPathHandler
 
     init(numberOfSections: NumberOfSectionsHandler,
         numberOfItemsInSection: NumberOfItemsInSectionHandler,
-        cellForItemAtIndexPath: CellForItemAtIndexPathHandler) {
+        cellForItemAtIndexPath: CellForItemAtIndexPathHandler,
+        supplementaryViewAtIndexPath: SupplementaryViewAtIndexPathHandler) {
 
             self.numberOfSections = numberOfSections
             self.numberOfItemsInSection = numberOfItemsInSection
             self.cellForItemAtIndexPath = cellForItemAtIndexPath
+            self.supplementaryViewAtIndexPath = supplementaryViewAtIndexPath
     }
 
     @objc func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -191,6 +253,10 @@ public class CollectionViewFetchedResultsDataSourceProvider <DataItem, CellFacto
 
     @objc func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         return cellForItemAtIndexPath(collectionView, indexPath)
+    }
+
+    @objc func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        return supplementaryViewAtIndexPath(collectionView, kind, indexPath)
     }
 
 }
