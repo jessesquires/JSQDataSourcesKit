@@ -21,6 +21,7 @@ import UIKit
 import CoreData
 
 
+// here, `DataItem` is Phantom Type
 public class CollectionViewFetchedResultsDelegateProvider <DataItem> {
 
     typealias SectionIndex = Int
@@ -88,8 +89,7 @@ public class CollectionViewFetchedResultsDelegateProvider <DataItem> {
             })
 
             return // Swift compiler bug: single statement void closure
-        }
-    )
+        })
 
     private func applyObjectChanges() {
         for eachChange in self.objectChanges {
@@ -186,14 +186,15 @@ public class TableViewFetchedResultsDelegateProvider <DataItem, CellFactory: Tab
         didChangeContent: { [unowned self] (controller) -> Void in
             self.tableView?.endUpdates()
             return // Swift compiler bug: single statement void closure
-        }
-    )
-
+        })
 }
 
 
-// This separate type is required for Objective-C (i.e. Cocoa) inter-op
-// Because the DelegateProvider is generic it cannot be bridged to Objective-C. (i.e., it cannot be assigned to `NSFetchedResultsController.delegate`)
+/**
+*   This separate type is required for Objective-C interoperability (interacting with Cocoa).
+*   Because the DelegateProvider is generic it cannot be bridged to Objective-C.
+*   That is, it cannot be assigned to `NSFetchedResultsController.delegate`
+*/
 @objc private class BridgedFetchedResultsDelegate: NSFetchedResultsControllerDelegate {
 
     typealias WillChangeContentHandler = (NSFetchedResultsController) -> Void
@@ -217,20 +218,19 @@ public class TableViewFetchedResultsDelegateProvider <DataItem, CellFactory: Tab
             self.didChangeContent = didChangeContent
     }
 
-    @objc func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    @objc private func controllerWillChangeContent(controller: NSFetchedResultsController) {
         willChangeContent(controller)
     }
 
-    @objc func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    @objc private func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
         didChangeSection(controller, sectionInfo, sectionIndex, type)
     }
 
-    @objc func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    @objc private func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         didChangeObject(controller, anObject, indexPath, type, newIndexPath)
     }
 
-    @objc func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    @objc private func controllerDidChangeContent(controller: NSFetchedResultsController) {
         didChangeContent(controller)
     }
-
 }
