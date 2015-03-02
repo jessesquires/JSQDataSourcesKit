@@ -39,7 +39,7 @@ public struct TableViewCellFactory <Cell: UITableViewCell, DataItem>: TableViewC
 
     public let reuseIdentifier: String
 
-    public let cellConfigurator: CellConfigurationHandler
+    private let cellConfigurator: CellConfigurationHandler
 
     public init(reuseIdentifier: String, cellConfigurator: CellConfigurationHandler) {
         self.reuseIdentifier = reuseIdentifier
@@ -141,8 +141,7 @@ public class TableViewDataSourceProvider <DataItem, SectionInfo: TableViewSectio
         },
         titleForFooterInSection: { [unowned self] (section) -> String? in
             self.sections[section].footerTitle
-        }
-    )
+        })
 }
 
 
