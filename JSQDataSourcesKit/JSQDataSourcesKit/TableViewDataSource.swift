@@ -30,7 +30,6 @@ public protocol TableViewCellFactoryType {
     func cellForItem(item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell
 
     func configureCell(cell: Cell, forItem item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell
-
 }
 
 
@@ -48,14 +47,12 @@ public struct TableViewCellFactory <Cell: UITableViewCell, DataItem>: TableViewC
     }
 
     public func cellForItem(item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! Cell
-        return configureCell(cell, forItem: item, inTableView: tableView, atIndexPath: indexPath)
+        return tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! Cell
     }
 
     public func configureCell(cell: Cell, forItem item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell {
         return cellConfigurator(cell, item, tableView, indexPath)
     }
-
 }
 
 
@@ -97,7 +94,6 @@ public struct TableViewSection <DataItem>: TableViewSectionInfo {
             dataItems[index] = newValue
         }
     }
-
 }
 
 
@@ -137,7 +133,8 @@ public class TableViewDataSourceProvider <DataItem, SectionInfo: TableViewSectio
         },
         cellForRowAtIndexPath: { [unowned self] (tableView, indexPath) -> UITableViewCell in
             let dataItem = self.sections[indexPath.section].dataItems[indexPath.row]
-            return self.cellFactory.cellForItem(dataItem, inTableView: tableView, atIndexPath: indexPath)
+            let cell = self.cellFactory.cellForItem(dataItem, inTableView: tableView, atIndexPath: indexPath)
+            return self.cellFactory.configureCell(cell, forItem: dataItem, inTableView: tableView, atIndexPath: indexPath)
         },
         titleForHeaderInSection: { [unowned self] (section) -> String? in
             self.sections[section].headerTitle
@@ -146,7 +143,6 @@ public class TableViewDataSourceProvider <DataItem, SectionInfo: TableViewSectio
             self.sections[section].footerTitle
         }
     )
-
 }
 
 
@@ -180,31 +176,29 @@ public class TableViewFetchedResultsDataSourceProvider <DataItem, CellFactory: T
             self.fetchedResultsController.sections?.count ?? 0
         },
         numberOfRowsInSection: { [unowned self] (section) -> Int in
-            let sectionInfo = self.fetchedResultsController.sections?[section] as! NSFetchedResultsSectionInfo
-            return sectionInfo.numberOfObjects ?? 0
+            let sectionInfo = self.fetchedResultsController.sections?[section] as? NSFetchedResultsSectionInfo
+            return sectionInfo?.numberOfObjects ?? 0
         },
         cellForRowAtIndexPath: { [unowned self] (tableView, indexPath) -> UITableViewCell in
             let dataItem = self.fetchedResultsController.objectAtIndexPath(indexPath) as! DataItem
-            return self.cellFactory.cellForItem(dataItem, inTableView: tableView, atIndexPath: indexPath)
+            let cell = self.cellFactory.cellForItem(dataItem, inTableView: tableView, atIndexPath: indexPath)
+            return self.cellFactory.configureCell(cell, forItem: dataItem, inTableView: tableView, atIndexPath: indexPath)
         },
         titleForHeaderInSection: { [unowned self] (section) -> String? in
-            if self.fetchedResultsController.fetchedObjects?.count == 0 {
-                return nil
-            }
-
-            let sectionInfo = self.fetchedResultsController.sections?[section] as! NSFetchedResultsSectionInfo
-            return sectionInfo.name
+            let sectionInfo = self.fetchedResultsController.sections?[section] as? NSFetchedResultsSectionInfo
+            return sectionInfo?.name
         },
-        titleForFooterInSection: { [unowned self] (section) -> String? in
+        titleForFooterInSection: { (section) -> String? in
             return nil
-        }
-    )
-
+        })
 }
 
 
-// This separate type is required for Objective-C (i.e., Cocoa) inter-op
-// Because the DataSourceProvider is generic it cannot be bridged to Objective-C. (i.e., it cannot be assigned to `UITableView.dataSource`)
+/**
+*   This separate type is required for Objective-C interoperability (interacting with Cocoa).
+*   Because the DataSourceProvider is generic it cannot be bridged to Objective-C. 
+*   That is, it cannot be assigned to `UITableView.dataSource`.
+*/
 @objc private class BridgedTableViewDataSource: NSObject, UITableViewDataSource {
 
     typealias NumberOfSectionsHandler = () -> Int
@@ -232,24 +226,23 @@ public class TableViewFetchedResultsDataSourceProvider <DataItem, CellFactory: T
             self.titleForFooterInSection = titleForFooterInSection
     }
 
-    @objc func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    @objc private func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return numberOfSections()
     }
 
-    @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    @objc private func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return numberOfRowsInSection(section)
     }
 
-    @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    @objc private func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         return cellForRowAtIndexPath(tableView, indexPath)
     }
 
-    @objc func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    @objc private func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return titleForHeaderInSection(section)
     }
 
-    @objc func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    @objc private func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return titleForFooterInSection(section)
     }
-    
 }
