@@ -172,7 +172,6 @@ public class TableViewFetchedResultsDelegateProvider <DataItem, CellFactory: Tab
                 if let i = indexPath, cell = self.tableView?.cellForRowAtIndexPath(i) as? CellFactory.Cell, view = self.tableView {
                     self.cellFactory.configureCell(cell, forItem: anyObject as! DataItem, inTableView: view, atIndexPath: i)
                 }
-                break
             case .Move:
                 if let deleteIndexPath = indexPath {
                     self.tableView?.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
