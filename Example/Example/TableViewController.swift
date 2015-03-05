@@ -27,8 +27,10 @@ class TableViewController: UIViewController {
 
 
     // MARK: properties
-
-    var dataSourceProvider: TableViewDataSourceProvider<TViewModel, TableViewSection<TViewModel>, TableViewCellFactory<TableViewCell, TViewModel> >?
+    
+    typealias Section = TableViewSection<TViewModel>
+    typealias CellFactory = TableViewCellFactory<TableViewCell, TViewModel>
+    var dataSourceProvider: TableViewDataSourceProvider<TViewModel, Section, CellFactory>?
 
 
     // MARK: view lifecycle
