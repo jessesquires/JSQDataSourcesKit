@@ -97,10 +97,10 @@ public struct TableViewSection <DataItem>: TableViewSectionInfo {
 }
 
 
-public class TableViewDataSourceProvider <DataItem, SectionInfo: TableViewSectionInfo, CellFactory: TableViewCellFactoryType
-                                            where
-                                            SectionInfo.DataItem == DataItem,
-                                            CellFactory.DataItem == DataItem> {
+public final class TableViewDataSourceProvider <DataItem, SectionInfo: TableViewSectionInfo, CellFactory: TableViewCellFactoryType
+                                                where
+                                                SectionInfo.DataItem == DataItem,
+                                                CellFactory.DataItem == DataItem> {
 
     public var sections: [SectionInfo]
 
@@ -145,8 +145,8 @@ public class TableViewDataSourceProvider <DataItem, SectionInfo: TableViewSectio
 }
 
 
-public class TableViewFetchedResultsDataSourceProvider <DataItem, CellFactory: TableViewCellFactoryType
-                                                        where CellFactory.DataItem == DataItem> {
+public final class TableViewFetchedResultsDataSourceProvider <DataItem, CellFactory: TableViewCellFactoryType
+                                                              where CellFactory.DataItem == DataItem> {
 
     public let fetchedResultsController: NSFetchedResultsController
 
@@ -198,7 +198,7 @@ public class TableViewFetchedResultsDataSourceProvider <DataItem, CellFactory: T
 *   Because the DataSourceProvider is generic it cannot be bridged to Objective-C. 
 *   That is, it cannot be assigned to `UITableView.dataSource`.
 */
-@objc private class BridgedTableViewDataSource: NSObject, UITableViewDataSource {
+@objc private final class BridgedTableViewDataSource: NSObject, UITableViewDataSource {
 
     typealias NumberOfSectionsHandler = () -> Int
     typealias NumberOfRowsInSectionHandler = (Int) -> Int

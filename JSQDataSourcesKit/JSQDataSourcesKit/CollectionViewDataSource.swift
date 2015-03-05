@@ -128,12 +128,12 @@ public struct CollectionViewSection <DataItem>: CollectionViewSectionInfo {
 }
 
 
-public class CollectionViewDataSourceProvider <DataItem, SectionInfo: CollectionViewSectionInfo,
-                                                CellFactory: CollectionViewCellFactoryType, SupplementaryViewFactory: CollectionViewSupplementaryViewFactoryType
-                                                where
-                                                SectionInfo.DataItem == DataItem,
-                                                CellFactory.DataItem == DataItem,
-                                                SupplementaryViewFactory.DataItem == DataItem> {
+public final class CollectionViewDataSourceProvider <DataItem, SectionInfo: CollectionViewSectionInfo,
+                                                     CellFactory: CollectionViewCellFactoryType, SupplementaryViewFactory: CollectionViewSupplementaryViewFactoryType
+                                                     where
+                                                     SectionInfo.DataItem == DataItem,
+                                                     CellFactory.DataItem == DataItem,
+                                                     SupplementaryViewFactory.DataItem == DataItem> {
 
     public var sections: [SectionInfo]
 
@@ -180,11 +180,11 @@ public class CollectionViewDataSourceProvider <DataItem, SectionInfo: Collection
 }
 
 
-public class CollectionViewFetchedResultsDataSourceProvider <DataItem, CellFactory: CollectionViewCellFactoryType,
-                                                             SupplementaryViewFactory: CollectionViewSupplementaryViewFactoryType
-                                                             where
-                                                             CellFactory.DataItem == DataItem,
-                                                             SupplementaryViewFactory.DataItem == DataItem> {
+public final class CollectionViewFetchedResultsDataSourceProvider <DataItem, CellFactory: CollectionViewCellFactoryType,
+                                                                    SupplementaryViewFactory: CollectionViewSupplementaryViewFactoryType
+                                                                    where
+                                                                    CellFactory.DataItem == DataItem,
+                                                                    SupplementaryViewFactory.DataItem == DataItem> {
 
     public let fetchedResultsController: NSFetchedResultsController
 
@@ -237,7 +237,7 @@ public class CollectionViewFetchedResultsDataSourceProvider <DataItem, CellFacto
 *   Because the DataSourceProvider is generic it cannot be bridged to Objective-C.
 *   That is, it cannot be assigned to `UICollectionView.dataSource`.
 */
-@objc private class BridgedCollectionViewDataSource: NSObject, UICollectionViewDataSource {
+@objc private final class BridgedCollectionViewDataSource: NSObject, UICollectionViewDataSource {
 
     typealias NumberOfSectionsHandler = () -> Int
     typealias NumberOfItemsInSectionHandler = (Int) -> Int

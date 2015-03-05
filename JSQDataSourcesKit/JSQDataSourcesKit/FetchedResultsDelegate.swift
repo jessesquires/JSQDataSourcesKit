@@ -22,7 +22,7 @@ import CoreData
 
 
 // here, `DataItem` is Phantom Type
-public class CollectionViewFetchedResultsDelegateProvider <DataItem> {
+public final class CollectionViewFetchedResultsDelegateProvider <DataItem> {
 
     typealias SectionIndex = Int
     typealias SectionChangesDictionary = [NSFetchedResultsChangeType : SectionIndex]
@@ -127,8 +127,8 @@ public class CollectionViewFetchedResultsDelegateProvider <DataItem> {
 }
 
 
-public class TableViewFetchedResultsDelegateProvider <DataItem, CellFactory: TableViewCellFactoryType
-                                                      where CellFactory.DataItem == DataItem> {
+public final class TableViewFetchedResultsDelegateProvider <DataItem, CellFactory: TableViewCellFactoryType
+                                                            where CellFactory.DataItem == DataItem> {
 
     public weak var tableView: UITableView?
 
@@ -194,7 +194,7 @@ public class TableViewFetchedResultsDelegateProvider <DataItem, CellFactory: Tab
 *   Because the DelegateProvider is generic it cannot be bridged to Objective-C.
 *   That is, it cannot be assigned to `NSFetchedResultsController.delegate`
 */
-@objc private class BridgedFetchedResultsDelegate: NSFetchedResultsControllerDelegate {
+@objc private final class BridgedFetchedResultsDelegate: NSFetchedResultsControllerDelegate {
 
     typealias WillChangeContentHandler = (NSFetchedResultsController) -> Void
     typealias DidChangeSectionHandler = (NSFetchedResultsController, NSFetchedResultsSectionInfo, Int, NSFetchedResultsChangeType) -> Void
