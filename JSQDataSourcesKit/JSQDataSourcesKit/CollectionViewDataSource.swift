@@ -109,8 +109,21 @@ public struct CollectionViewSection <DataItem>: CollectionViewSectionInfo {
 
     public var dataItems: [DataItem]
 
+    public var count: Int {
+        return dataItems.count
+    }
+
     public init(dataItems: [DataItem]) {
         self.dataItems = dataItems
+    }
+
+    public subscript (index: Int) -> DataItem {
+        get {
+            return dataItems[index]
+        }
+        set {
+            dataItems[index] = newValue
+        }
     }
 }
 
@@ -136,6 +149,15 @@ public class CollectionViewDataSourceProvider <DataItem, SectionInfo: Collection
         self.supplementaryViewFactory = supplementaryViewFactory
 
         collectionView?.dataSource = self.dataSource
+    }
+
+    public subscript (index: Int) -> SectionInfo {
+        get {
+            return sections[index]
+        }
+        set {
+            sections[index] = newValue
+        }
     }
 
     private lazy var bridgedDataSource: BridgedCollectionViewDataSource = BridgedCollectionViewDataSource(
