@@ -28,9 +28,10 @@ class CollectionViewController: UIViewController {
     // MARK: properties
 
     typealias CellFactory = CollectionViewCellFactory<CollectionViewCell, CViewModel>
-    typealias SupplementaryViewFactory = CollectionSupplementaryViewFactory<TitledCollectionReusableView, CViewModel>
+    typealias HeaderViewFactory = TitledCollectionReusableViewFactory<CViewModel>
     typealias Section = CollectionViewSection<CViewModel>
-    var dataSourceProvider: CollectionViewDataSourceProvider<CViewModel, Section, CellFactory, SupplementaryViewFactory>?
+
+    var dataSourceProvider: CollectionViewDataSourceProvider<CViewModel, Section, CellFactory, HeaderViewFactory>?
 
     // MARK: view lifecycle
     
@@ -62,12 +63,15 @@ class CollectionViewController: UIViewController {
         }
 
         // create supplementary view factory
-        let headerFactory = CollectionSupplementaryViewFactory(reuseIdentifier: TitledCollectionReusableView.identifier) { (view: TitledCollectionReusableView, model: CViewModel, kind, collectionView, indexPath: NSIndexPath) -> TitledCollectionReusableView in
-            view.label.text = "Section \(indexPath.section)"
-            view.label.textColor = UIColor.whiteColor()
-            view.backgroundColor = UIColor.darkGrayColor()
-            return view
-        }
+        let headerFactory = TitledCollectionReusableViewFactory(
+            dataConfigurator: { (header, item: CViewModel, kind, collectionView, indexPath) -> TitledCollectionReusableView in
+                header.label.text = "Section \(indexPath.section)"
+                return header
+            },
+            styleConfigurator: { (headerView) -> Void in
+                headerView.backgroundColor = UIColor.darkGrayColor()
+                headerView.label.textColor = UIColor.whiteColor()
+        })
 
         // create data source provider
         // by passing `self.collectionView`, the provider automatically sets `self.collectionView.dataSource = self.dataSourceProvider.dataSource`
