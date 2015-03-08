@@ -33,6 +33,7 @@ func ==(lhs: FakeTableModel, rhs: FakeTableModel) -> Bool {
     return lhs.name == rhs.name
 }
 
+
 class FakeTableCell: UITableViewCell { }
 
 
@@ -61,7 +62,7 @@ class TableViewDataSourceTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        self.fakeTableView.registerClass(FakeTableCell.self, forCellReuseIdentifier: self.fakeReuseId)
+        fakeTableView.registerClass(FakeTableCell.self, forCellReuseIdentifier: fakeReuseId)
     }
 
     override func tearDown() {
