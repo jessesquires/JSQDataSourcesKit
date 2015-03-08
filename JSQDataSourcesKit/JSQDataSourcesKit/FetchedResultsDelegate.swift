@@ -84,6 +84,12 @@ public final class CollectionViewFetchedResultsDelegateProvider <DataItem> {
                 self.applySectionChanges()
             },
             completion:{ (finished) -> Void in
+
+                if self.sectionChanges.count > 0 {
+                    // if sections have changed, reload to update supplementary views
+                    self.collectionView?.reloadData()
+                }
+
                 self.sectionChanges.removeAll()
                 self.objectChanges.removeAll()
             })
