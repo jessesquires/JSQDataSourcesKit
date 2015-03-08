@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionReusableView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="JSQDataSourcesKit.TitledCollectionHeaderView" id="U6b-Vx-4bR" customClass="TitledCollectionHeaderView" customModule="JSQDataSourcesKit" customModuleProvider="target">
+        <collectionReusableView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="JSQDataSourcesKit.TitledCollectionReusableView" id="U6b-Vx-4bR" customClass="TitledCollectionReusableView" customModule="JSQDataSourcesKit" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>

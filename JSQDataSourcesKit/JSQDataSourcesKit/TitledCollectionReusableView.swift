@@ -18,9 +18,9 @@
 
 import UIKit
 
-public class TitledCollectionHeaderView: UICollectionReusableView {
+public class TitledCollectionReusableView: UICollectionReusableView {
 
-    public typealias ConfigurationHandler = (TitledCollectionHeaderView) -> Void
+    public typealias ConfigurationHandler = (TitledCollectionReusableView) -> Void
 
     @IBOutlet private weak var _label: UILabel!
     @IBOutlet private weak var _leftSpacing: NSLayoutConstraint!
@@ -70,13 +70,13 @@ public class TitledCollectionHeaderView: UICollectionReusableView {
 
     public class var identifier: String {
         get {
-            return toString(TitledCollectionHeaderView.self)
+            return toString(TitledCollectionReusableView.self)
         }
     }
 
     public class var nib: UINib {
         get {
-            return UINib(nibName: "TitledCollectionHeaderView", bundle: NSBundle(forClass: TitledCollectionHeaderView.self))
+            return UINib(nibName: "TitledCollectionReusableView", bundle: NSBundle(forClass: TitledCollectionReusableView.self))
         }
     }
 

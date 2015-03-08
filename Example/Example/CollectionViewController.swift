@@ -28,7 +28,7 @@ class CollectionViewController: UIViewController {
     // MARK: properties
 
     typealias CellFactory = CollectionViewCellFactory<CollectionViewCell, CViewModel>
-    typealias SupplementaryViewFactory = CollectionViewSupplementaryViewFactory<TitledCollectionHeaderView, CViewModel>
+    typealias SupplementaryViewFactory = CollectionViewSupplementaryViewFactory<TitledCollectionReusableView, CViewModel>
     typealias Section = CollectionViewSection<CViewModel>
     var dataSourceProvider: CollectionViewDataSourceProvider<CViewModel, Section, CellFactory, SupplementaryViewFactory>?
 
@@ -47,7 +47,7 @@ class CollectionViewController: UIViewController {
 
         // register cells and supplementary views
         collectionView.registerNib(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: collectionCellId)
-        collectionView.registerNib(TitledCollectionHeaderView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: TitledCollectionHeaderView.identifier)
+        collectionView.registerNib(TitledCollectionReusableView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: TitledCollectionReusableView.identifier)
 
         // create view models
         let section0 = CollectionViewSection(dataItems: [ CViewModel(), CViewModel(), CViewModel()])
@@ -62,7 +62,7 @@ class CollectionViewController: UIViewController {
         }
 
         // create supplementary view factory
-        let headerFactory = CollectionViewSupplementaryViewFactory(reuseIdentifier: TitledCollectionHeaderView.identifier) { (view: TitledCollectionHeaderView, model: CViewModel, kind, collectionView, indexPath: NSIndexPath) -> TitledCollectionHeaderView in
+        let headerFactory = CollectionViewSupplementaryViewFactory(reuseIdentifier: TitledCollectionReusableView.identifier) { (view: TitledCollectionReusableView, model: CViewModel, kind, collectionView, indexPath: NSIndexPath) -> TitledCollectionReusableView in
             view.label.text = "Section \(indexPath.section)"
             view.label.textColor = UIColor.whiteColor()
             view.backgroundColor = UIColor.darkGrayColor()
