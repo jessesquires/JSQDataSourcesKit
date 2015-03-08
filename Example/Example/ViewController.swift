@@ -51,3 +51,20 @@ class ViewController: UITableViewController {
     }
 
 }
+
+
+// MARK: extensions
+
+extension UIAlertController {
+
+    class func showHelpAlert(presenter: UIViewController) {
+        let alert = UIAlertController(title: "Help",
+            message: "Tap + to add a new item. The new item will be highlighted (selected) in gray."
+            + "\n\nSelect item(s), then tap the trashcan to delete them.",
+            preferredStyle: .Alert)
+
+        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+
+        presenter.presentViewController(alert, animated: true, completion: nil)
+    }
+}

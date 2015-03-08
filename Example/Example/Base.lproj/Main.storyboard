@@ -109,7 +109,8 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Help" footerTitle="Below, tap the trash to clear everything from Core Data. Tap the + to add 5 random items to Core Data." id="acM-0L-qyg">
+                            <tableViewSection headerTitle="Help" id="acM-0L-qyg">
+                                <string key="footerTitle">For the Fetched Results Data Sources: tap the trash to clear everything from Core Data. Tap the + to add 5 random items to Core Data.</string>
                                 <cells/>
                             </tableViewSection>
                         </sections>
@@ -149,7 +150,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="CcJ-mr-HDj">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="CcJ-mr-HDj">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                             </tableView>
@@ -242,6 +243,12 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="84T-7s-Fao"/>
+                        <barButtonItem title="Help?" id="0Cs-n1-UbW">
+                            <connections>
+                                <action selector="didTapHelpButton:" destination="zRN-xw-0sz" id="nja-vt-od5"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Cw4-mX-gZd"/>
                         <barButtonItem systemItem="add" id="8KW-7J-GNU">
                             <connections>
                                 <action selector="didTapAddButton:" destination="zRN-xw-0sz" id="fie-Ag-gU5"/>
@@ -295,6 +302,12 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="LgC-Mj-oJb"/>
+                        <barButtonItem title="Help?" id="hMq-bh-My1">
+                            <connections>
+                                <action selector="didTapHelpButton:" destination="gM7-lb-ytW" id="KXn-dS-0qH"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="7Ap-id-Pof"/>
                         <barButtonItem systemItem="add" id="1Wv-fY-B5K">
                             <connections>
                                 <action selector="didTapAddButton:" destination="gM7-lb-ytW" id="oRM-QN-Y5k"/>

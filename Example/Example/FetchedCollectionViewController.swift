@@ -127,6 +127,7 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
     // MARK: actions
 
     @IBAction func didTapAddButton(sender: UIBarButtonItem) {
+
         collectionView.deselectAllItems()
 
         let newThing = Thing.newThing(stack.context)
@@ -157,6 +158,11 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
 
     }
 
+
+    @IBAction func didTapHelpButton(sender: UIBarButtonItem) {
+        UIAlertController.showHelpAlert(self)
+    }
+    
 }
 
 

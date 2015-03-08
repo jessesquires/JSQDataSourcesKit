@@ -106,7 +106,12 @@ class FetchedTableViewController: UIViewController {
         }
 
     }
-    
+
+
+    @IBAction func didTapHelpButton(sender: UIBarButtonItem) {
+        UIAlertController.showHelpAlert(self)
+    }
+
 }
 
 
