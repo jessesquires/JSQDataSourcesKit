@@ -35,13 +35,13 @@ public protocol CollectionViewCellFactoryType {
 
 public struct CollectionViewCellFactory <Cell: UICollectionViewCell, DataItem>: CollectionViewCellFactoryType {
 
-    typealias CellConfigurationHandler = (Cell, DataItem, UICollectionView, NSIndexPath) -> Cell
+    typealias ConfigurationHandler = (Cell, DataItem, UICollectionView, NSIndexPath) -> Cell
 
     public let reuseIdentifier: String
 
-    private let cellConfigurator: CellConfigurationHandler
+    private let cellConfigurator: ConfigurationHandler
 
-    public init(reuseIdentifier: String, cellConfigurator: CellConfigurationHandler) {
+    public init(reuseIdentifier: String, cellConfigurator: ConfigurationHandler) {
         self.reuseIdentifier = reuseIdentifier
         self.cellConfigurator = cellConfigurator
     }
@@ -74,13 +74,13 @@ public protocol CollectionSupplementaryViewFactoryType {
 
 public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectionReusableView, DataItem>: CollectionSupplementaryViewFactoryType {
 
-    typealias SupplementaryViewConfigurationHandler = (SupplementaryView, DataItem, SupplementaryViewKind, UICollectionView, NSIndexPath) -> SupplementaryView
+    typealias ConfigurationHandler = (SupplementaryView, DataItem, SupplementaryViewKind, UICollectionView, NSIndexPath) -> SupplementaryView
 
     public let reuseIdentifier: String
 
-    private let supplementaryViewConfigurator: SupplementaryViewConfigurationHandler
+    private let supplementaryViewConfigurator: ConfigurationHandler
 
-    public init(reuseIdentifier: String, supplementaryViewConfigurator: SupplementaryViewConfigurationHandler) {
+    public init(reuseIdentifier: String, supplementaryViewConfigurator: ConfigurationHandler) {
         self.reuseIdentifier = reuseIdentifier
         self.supplementaryViewConfigurator = supplementaryViewConfigurator
     }
