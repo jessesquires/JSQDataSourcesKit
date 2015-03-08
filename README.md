@@ -20,6 +20,13 @@ This framework aims to the reduce boilerplate code regarding the `UITableView`, 
 
 Read the fucking [docs](http://www.jessesquires.com/JSQDataSourcesKit/). Generated with [jazzy](https://github.com/realm/jazzy). Hosted by [GitHub Pages](https://pages.github.com).
 
+````bash
+# re-generate documentation
+$ cd /path/to/JSQDataSourcesKit/
+$ ./build_docs.sh
+$ open _docs/
+````
+
 ## Getting Started
 
 ````swift
