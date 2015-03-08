@@ -35,7 +35,7 @@ public protocol CollectionViewCellFactoryType {
 
 public struct CollectionViewCellFactory <Cell: UICollectionViewCell, DataItem>: CollectionViewCellFactoryType {
 
-    typealias ConfigurationHandler = (Cell, DataItem, UICollectionView, NSIndexPath) -> Cell
+    public typealias ConfigurationHandler = (Cell, DataItem, UICollectionView, NSIndexPath) -> Cell
 
     public let reuseIdentifier: String
 
@@ -74,7 +74,7 @@ public protocol CollectionSupplementaryViewFactoryType {
 
 public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectionReusableView, DataItem>: CollectionSupplementaryViewFactoryType {
 
-    typealias ConfigurationHandler = (SupplementaryView, DataItem, SupplementaryViewKind, UICollectionView, NSIndexPath) -> SupplementaryView
+    public typealias ConfigurationHandler = (SupplementaryView, DataItem, SupplementaryViewKind, UICollectionView, NSIndexPath) -> SupplementaryView
 
     public let reuseIdentifier: String
 

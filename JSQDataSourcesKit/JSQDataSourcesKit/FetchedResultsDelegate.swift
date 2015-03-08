@@ -24,11 +24,11 @@ import CoreData
 // here, `DataItem` is Phantom Type
 public final class CollectionViewFetchedResultsDelegateProvider <DataItem> {
 
-    typealias SectionIndex = Int
-    typealias SectionChangesDictionary = [NSFetchedResultsChangeType : SectionIndex]
+    private typealias SectionIndex = Int
+    private typealias SectionChangesDictionary = [NSFetchedResultsChangeType : SectionIndex]
 
-    typealias ObjectIndexPaths = [NSIndexPath]
-    typealias ObjectChangesDictionary = [NSFetchedResultsChangeType : ObjectIndexPaths]
+    private typealias ObjectIndexPaths = [NSIndexPath]
+    private typealias ObjectChangesDictionary = [NSFetchedResultsChangeType : ObjectIndexPaths]
 
     public weak var collectionView: UICollectionView?
 

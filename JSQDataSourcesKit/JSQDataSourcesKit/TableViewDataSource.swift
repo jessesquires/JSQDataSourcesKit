@@ -35,7 +35,7 @@ public protocol TableViewCellFactoryType {
 
 public struct TableViewCellFactory <Cell: UITableViewCell, DataItem>: TableViewCellFactoryType {
 
-    typealias CellConfigurationHandler = (Cell, DataItem, UITableView, NSIndexPath) -> Cell
+    public typealias CellConfigurationHandler = (Cell, DataItem, UITableView, NSIndexPath) -> Cell
 
     public let reuseIdentifier: String
 
