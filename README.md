@@ -12,6 +12,12 @@ A Swift rewrite of [RSTDataSourceKit](https://github.com/rosettastone/RSTDataSou
 
 This framework aims to the reduce boilerplate code regarding the `UITableView`, `UICollectionView`, and `NSFetchedResultsController` data source objects, as well as the `NSFetchedResultsControllerDelegate` object. It helps [keep view controllers light](http://www.objc.io/issue-1/), while focusing on type-safety, [SOLID](http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)) design principles, and easy interoperability with Cocoa.
 
+## Installation
+
+> TODO
+
+### Framework Components
+
 ##### Data Sources
 
 `CollectionViewDataSourceProvider`
@@ -30,8 +36,33 @@ This framework aims to the reduce boilerplate code regarding the `UITableView`, 
 
 `TableViewFetchedResultsDelegateProvider`
 
+##### Section objects
+
+`CollectionViewSection`
+
+`TableViewSection`
+
+##### Factories
+
+`CollectionViewCellFactory`
+
+`CollectionSupplementaryViewFactory`
+
+`TitledCollectionReusableViewFactory`
+
+`TableViewCellFactory`
+
+##### Views
+
+`TitledCollectionReusableView`
+
+This is a `UICollectionReusableView` with a single `UILabel` intended for use as an analog to `tableView(_:titleForHeaderInSection:)` when using a `CollectionViewFetchedResultsDelegateProvider`. These views can be created via a `TitledCollectionReusableViewFactory`.
+
 ## Getting Started
 
+````swift
+import JSQDataSourcesKit
+````
 > TODO
 
 ##### Demo Project
