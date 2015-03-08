@@ -222,7 +222,7 @@ class TableViewDataSourceTests: XCTestCase {
         XCTAssertEqual(footer!, section0.footerTitle!, "Data source should return expected footer title")
 
         // THEN: the tableView calls `dequeueReusableCellWithIdentifier`
-        // THEN: the cell factory calls its `CellConfigurationHandler`
+        // THEN: the cell factory calls its `ConfigurationHandler`
         self.waitForExpectationsWithTimeout(1, handler: { (error) -> Void in
             XCTAssertNil(error, "Expectations should not error")
         })
@@ -286,7 +286,7 @@ class TableViewDataSourceTests: XCTestCase {
                 XCTAssertTrue(footer == dataSourceProvider[sectionIndex].footerTitle, "Data source should return expected footer title for section \(sectionIndex)")
 
                 // THEN: the tableView calls `dequeueReusableCellWithIdentifier`
-                // THEN: the cell factory calls its `CellConfigurationHandler`
+                // THEN: the cell factory calls its `ConfigurationHandler`
                 self.waitForExpectationsWithTimeout(1, handler: { (error) -> Void in
                     XCTAssertNil(error, "Expectations should not error")
                 })
