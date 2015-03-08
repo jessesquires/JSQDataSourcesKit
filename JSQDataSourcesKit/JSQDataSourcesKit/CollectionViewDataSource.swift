@@ -180,7 +180,7 @@ public final class CollectionViewDataSourceProvider <DataItem, SectionInfo: Coll
             }
 
             // we must not return nil here, per the `UICollectionViewDataSource` docs
-            // however, this will never get called as it is the consumer's responsibilty
+            // however, this will never get called as it is the client's responsibilty
             // supplementary views are hidden by returning `CGSizeZero` from `collectionView(_:layout:referenceSizeForHeaderInSection:)`
             return UICollectionReusableView()
         })
@@ -238,7 +238,7 @@ public final class CollectionViewFetchedResultsDataSourceProvider <DataItem, Cel
                 return factory.configureSupplementaryView(view, forItem: dataItem, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
             }
             // we must not return nil here, per the `UICollectionViewDataSource` docs
-            // however, this will never get called as it is the consumer's responsibilty
+            // however, this will never get called as it is the client's responsibilty
             // supplementary views are hidden by returning `CGSizeZero` from `collectionView(_:layout:referenceSizeForHeaderInSection:)`
             return UICollectionReusableView()
         })
