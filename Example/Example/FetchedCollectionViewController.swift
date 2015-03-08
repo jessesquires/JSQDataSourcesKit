@@ -26,20 +26,22 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
 
     @IBOutlet weak var collectionView: UICollectionView!
 
-    
+
     // MARK: properties
 
     let stack = CoreDataStack()
 
     typealias ThingCellFactory = CollectionViewCellFactory<CollectionViewCell, Thing>
     typealias ThingHeaderViewFactory = TitledCollectionReusableViewFactory<Thing>
-    var dataSourceProvider: CollectionViewFetchedResultsDataSourceProvider<Thing, ThingCellFactory, ThingHeaderViewFactory>?
+    typealias ThingSupplementaryViewFactory = ComposedCollectionSupplementaryViewFactory<Thing>
+
+    var dataSourceProvider: CollectionViewFetchedResultsDataSourceProvider<Thing, ThingCellFactory, ThingSupplementaryViewFactory>?
 
     var delegateProvider: CollectionViewFetchedResultsDelegateProvider<Thing>?
 
 
     // MARK: view lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -56,6 +58,7 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
         // register cells and supplementary views
         collectionView.registerNib(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: collectionCellId)
         collectionView.registerNib(TitledCollectionReusableView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: TitledCollectionReusableView.identifier)
+        collectionView.registerNib(TitledCollectionReusableView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: TitledCollectionReusableView.identifier)
 
         // create cell factory
         let cellFactory = CollectionViewCellFactory(reuseIdentifier: collectionCellId) { (cell: CollectionViewCell, model: Thing, collectionView: UICollectionView, indexPath: NSIndexPath) -> CollectionViewCell in
@@ -65,16 +68,30 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
             return cell
         }
 
-        // create supplementary (header) view factory
+        // create supplementary view factories
         let headerFactory = TitledCollectionReusableViewFactory(
             dataConfigurator: { (header, item: Thing, kind, collectionView, indexPath) -> TitledCollectionReusableView in
-                header.label.text = "\(item.category) (section \(indexPath.section))"
+                header.label.text = "\(item.category) (header \(indexPath.section))"
                 header.label.textColor = item.displayColor
                 return header
             },
-            styleConfigurator: { (headerView) -> Void in
-                headerView.backgroundColor = UIColor.darkGrayColor()
+            styleConfigurator: { (header) -> Void in
+                header.backgroundColor = UIColor.darkGrayColor()
         })
+
+        let footerFactory = TitledCollectionReusableViewFactory(
+            dataConfigurator: { (footer, item: Thing, kind, collectionView, indexPath) -> TitledCollectionReusableView in
+                footer.label.text = "\(item.category) (footer \(indexPath.section))"
+                footer.label.textColor = item.displayColor
+                return footer
+            },
+            styleConfigurator: { (footer) -> Void in
+                footer.backgroundColor = UIColor.lightGrayColor()
+                footer.label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
+                footer.label.textAlignment = .Center
+        })
+
+        let composedFactory = ComposedCollectionSupplementaryViewFactory(headerViewFactory: headerFactory, footerViewFactory: footerFactory)
 
         // create fetched results controller
         let frc: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: Thing.fetchRequest(), managedObjectContext: stack.context, sectionNameKeyPath: "category", cacheName: nil)
@@ -85,7 +102,7 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
 
         // create data source provider
         // by passing `self.collectionView`, the provider automatically sets `self.collectionView.dataSource = self.dataSourceProvider.dataSource`
-        self.dataSourceProvider = CollectionViewFetchedResultsDataSourceProvider(fetchedResultsController: frc, cellFactory: cellFactory, supplementaryViewFactory: headerFactory, collectionView: collectionView)
+        self.dataSourceProvider = CollectionViewFetchedResultsDataSourceProvider(fetchedResultsController: frc, cellFactory: cellFactory, supplementaryViewFactory: composedFactory, collectionView: collectionView)
     }
 
 
@@ -100,6 +117,10 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.size.width, height: 50)
+    }
+
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.size.width, height: 25)
     }
 
 
@@ -142,7 +163,7 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
 // MARK: extensions
 
 extension UICollectionView {
-
+    
     func deselectAllItems() {
         if let indexPaths = indexPathsForSelectedItems() as? [NSIndexPath] {
             for i in indexPaths {
@@ -150,5 +171,5 @@ extension UICollectionView {
             }
         }
     }
-
+    
 }

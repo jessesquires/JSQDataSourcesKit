@@ -19,6 +19,7 @@
 		88C9777B1A87115D0085C350 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88C977791A87115D0085C350 /* TableViewCell.xib */; };
 		88D21DA31A9932BD00E736DC /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D21DA21A9932BD00E736DC /* CollectionViewCell.swift */; };
 		88D21DA61A9932CD00E736DC /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88D21DA51A9932CD00E736DC /* CollectionViewCell.xib */; };
+		88D629731AAC081300798997 /* ComposedSupplementaryViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D629721AAC081300798997 /* ComposedSupplementaryViewFactory.swift */; };
 		88DB89C71A86D1A900DED153 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DB89C61A86D1A900DED153 /* AppDelegate.swift */; };
 		88DB89C91A86D1A900DED153 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DB89C81A86D1A900DED153 /* ViewController.swift */; };
 		88DB89CC1A86D1A900DED153 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88DB89CA1A86D1A900DED153 /* Main.storyboard */; };
@@ -87,6 +88,7 @@
 		88C977791A87115D0085C350 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		88D21DA21A9932BD00E736DC /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		88D21DA51A9932CD00E736DC /* CollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
+		88D629721AAC081300798997 /* ComposedSupplementaryViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposedSupplementaryViewFactory.swift; sourceTree = "<group>"; };
 		88DB89C11A86D1A900DED153 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88DB89C51A86D1A900DED153 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88DB89C61A86D1A900DED153 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				88D21DA51A9932CD00E736DC /* CollectionViewCell.xib */,
 				88B3233E1A86D5ED007FB904 /* CollectionViewController.swift */,
 				88BD67481A9959F500F93FA6 /* FetchedCollectionViewController.swift */,
+				88D629721AAC081300798997 /* ComposedSupplementaryViewFactory.swift */,
 			);
 			name = CollectionView;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88D629731AAC081300798997 /* ComposedSupplementaryViewFactory.swift in Sources */,
 				88BD67411A99577000F93FA6 /* Thing.swift in Sources */,
 				88C9777A1A87115D0085C350 /* TableViewCell.swift in Sources */,
 				88BD67491A9959F500F93FA6 /* FetchedCollectionViewController.swift in Sources */,
