@@ -25,6 +25,7 @@ class CollectionViewController: UIViewController, UICollectionViewDelegateFlowLa
 
     @IBOutlet weak var collectionView: UICollectionView!
 
+
     // MARK: properties
 
     typealias CellFactory = CollectionViewCellFactory<CollectionViewCell, CViewModel>
@@ -32,6 +33,7 @@ class CollectionViewController: UIViewController, UICollectionViewDelegateFlowLa
     typealias Section = CollectionViewSection<CViewModel>
 
     var dataSourceProvider: CollectionViewDataSourceProvider<CViewModel, Section, CellFactory, HeaderViewFactory>?
+
 
     // MARK: view lifecycle
     
@@ -63,7 +65,7 @@ class CollectionViewController: UIViewController, UICollectionViewDelegateFlowLa
             return cell
         }
 
-        // create supplementary view factory
+        // create supplementary (header) view factory
         let headerFactory = TitledCollectionReusableViewFactory(
             dataConfigurator: { (header, item: CViewModel, kind, collectionView, indexPath) -> TitledCollectionReusableView in
                 header.label.text = "Section \(indexPath.section)"
@@ -79,6 +81,7 @@ class CollectionViewController: UIViewController, UICollectionViewDelegateFlowLa
         self.dataSourceProvider = CollectionViewDataSourceProvider(sections: allSections, cellFactory: cellFactory, supplementaryViewFactory: headerFactory, collectionView: self.collectionView)
 
     }
+
 
     // MARK: collection view delegate flow layout
 

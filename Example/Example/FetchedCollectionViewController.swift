@@ -20,7 +20,7 @@ import UIKit
 import CoreData
 import JSQDataSourcesKit
 
-class FetchedCollectionViewController: UIViewController {
+class FetchedCollectionViewController: UIViewController, UICollectionViewDelegateFlowLayout {
 
     // MARK: outlets
 
@@ -32,8 +32,8 @@ class FetchedCollectionViewController: UIViewController {
     let stack = CoreDataStack()
 
     typealias ThingCellFactory = CollectionViewCellFactory<CollectionViewCell, Thing>
-    typealias ThingSupplementaryViewFactory = CollectionSupplementaryViewFactory<UICollectionReusableView, Thing>
-    var dataSourceProvider: CollectionViewFetchedResultsDataSourceProvider<Thing, ThingCellFactory, ThingSupplementaryViewFactory>?
+    typealias ThingHeaderViewFactory = TitledCollectionReusableViewFactory<Thing>
+    var dataSourceProvider: CollectionViewFetchedResultsDataSourceProvider<Thing, ThingCellFactory, ThingHeaderViewFactory>?
 
     var delegateProvider: CollectionViewFetchedResultsDelegateProvider<Thing>?
 
@@ -46,15 +46,16 @@ class FetchedCollectionViewController: UIViewController {
         // configure layout
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: 100, height: 100)
-        layout.headerReferenceSize = CGSizeMake(collectionView.frame.size.width, 50)
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         layout.minimumInteritemSpacing = 10
         layout.minimumLineSpacing = 10
+
+        collectionView.delegate = self
         collectionView.allowsMultipleSelection = true
 
         // register cells and supplementary views
         collectionView.registerNib(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: collectionCellId)
-        collectionView.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
+        collectionView.registerNib(TitledCollectionReusableView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: TitledCollectionReusableView.identifier)
 
         // create cell factory
         let cellFactory = CollectionViewCellFactory(reuseIdentifier: collectionCellId) { (cell: CollectionViewCell, model: Thing, collectionView: UICollectionView, indexPath: NSIndexPath) -> CollectionViewCell in
@@ -64,11 +65,16 @@ class FetchedCollectionViewController: UIViewController {
             return cell
         }
 
-        // create supplementary view factory
-        let headerFactory = CollectionSupplementaryViewFactory(reuseIdentifier: "header") { (view, model: Thing, kind, collectionView, indexPath: NSIndexPath) -> UICollectionReusableView in
-            view.backgroundColor = model.displayColor
-            return view
-        }
+        // create supplementary (header) view factory
+        let headerFactory = TitledCollectionReusableViewFactory(
+            dataConfigurator: { (header, item: Thing, kind, collectionView, indexPath) -> TitledCollectionReusableView in
+                header.label.text = "\(item.category) (section \(indexPath.section))"
+                header.label.textColor = item.displayColor
+                return header
+            },
+            styleConfigurator: { (headerView) -> Void in
+                headerView.backgroundColor = UIColor.darkGrayColor()
+        })
 
         // create fetched results controller
         let frc: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: Thing.fetchRequest(), managedObjectContext: stack.context, sectionNameKeyPath: "category", cacheName: nil)
@@ -87,6 +93,13 @@ class FetchedCollectionViewController: UIViewController {
         super.viewWillAppear(animated)
 
         self.dataSourceProvider?.performFetch()
+    }
+
+
+    // MARK: collection view delegate flow layout
+
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.size.width, height: 50)
     }
 
 
