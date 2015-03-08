@@ -16,47 +16,9 @@ This framework aims to the reduce boilerplate code regarding the `UITableView`, 
 
 > TODO
 
-## Framework Components
+## Documentation
 
-##### Data Sources
-
-`CollectionViewDataSourceProvider`
-
-`TableViewDataSourceProvider`
-
-##### Data Sources for `NSFetchedResultsController`
-
-`CollectionViewFetchedResultsDataSourceProvider`
-
-`TableViewFetchedResultsDataSourceProvider`
-
-##### Delegates for `NSFetchedResultsControllerDelegate`
-
-`CollectionViewFetchedResultsDelegateProvider`
-
-`TableViewFetchedResultsDelegateProvider`
-
-##### Section objects
-
-`CollectionViewSection`
-
-`TableViewSection`
-
-##### Factories
-
-`CollectionViewCellFactory`
-
-`CollectionSupplementaryViewFactory`
-
-`TitledCollectionReusableViewFactory`
-
-`TableViewCellFactory`
-
-##### Views
-
-`TitledCollectionReusableView`
-
-This is a `UICollectionReusableView` with a single `UILabel` intended for use as an analog to `tableView(_:titleForHeaderInSection:)` when using a `CollectionViewFetchedResultsDelegateProvider`. These views can be created via a `TitledCollectionReusableViewFactory`.
+Read the fucking [docs](http://www.jessesquires.com/JSQDataSourcesKit/). Generated with [jazzy](https://github.com/realm/jazzy). Hosted by [GitHub Pages](https://pages.github.com).
 
 ## Getting Started
 
