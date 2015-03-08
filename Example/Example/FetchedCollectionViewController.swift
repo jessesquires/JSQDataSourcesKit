@@ -32,7 +32,7 @@ class FetchedCollectionViewController: UIViewController {
     let stack = CoreDataStack()
 
     typealias ThingCellFactory = CollectionViewCellFactory<CollectionViewCell, Thing>
-    typealias ThingSupplementaryViewFactory = CollectionViewSupplementaryViewFactory<UICollectionReusableView, Thing>
+    typealias ThingSupplementaryViewFactory = CollectionSupplementaryViewFactory<UICollectionReusableView, Thing>
     var dataSourceProvider: CollectionViewFetchedResultsDataSourceProvider<Thing, ThingCellFactory, ThingSupplementaryViewFactory>?
 
     var delegateProvider: CollectionViewFetchedResultsDelegateProvider<Thing>?
@@ -65,7 +65,7 @@ class FetchedCollectionViewController: UIViewController {
         }
 
         // create supplementary view factory
-        let headerFactory = CollectionViewSupplementaryViewFactory(reuseIdentifier: "header") { (view, model: Thing, kind, collectionView, indexPath: NSIndexPath) -> UICollectionReusableView in
+        let headerFactory = CollectionSupplementaryViewFactory(reuseIdentifier: "header") { (view, model: Thing, kind, collectionView, indexPath: NSIndexPath) -> UICollectionReusableView in
             view.backgroundColor = model.displayColor
             return view
         }

@@ -28,7 +28,7 @@ class CollectionViewController: UIViewController {
     // MARK: properties
 
     typealias CellFactory = CollectionViewCellFactory<CollectionViewCell, CViewModel>
-    typealias SupplementaryViewFactory = CollectionViewSupplementaryViewFactory<TitledCollectionReusableView, CViewModel>
+    typealias SupplementaryViewFactory = CollectionSupplementaryViewFactory<TitledCollectionReusableView, CViewModel>
     typealias Section = CollectionViewSection<CViewModel>
     var dataSourceProvider: CollectionViewDataSourceProvider<CViewModel, Section, CellFactory, SupplementaryViewFactory>?
 
@@ -62,7 +62,7 @@ class CollectionViewController: UIViewController {
         }
 
         // create supplementary view factory
-        let headerFactory = CollectionViewSupplementaryViewFactory(reuseIdentifier: TitledCollectionReusableView.identifier) { (view: TitledCollectionReusableView, model: CViewModel, kind, collectionView, indexPath: NSIndexPath) -> TitledCollectionReusableView in
+        let headerFactory = CollectionSupplementaryViewFactory(reuseIdentifier: TitledCollectionReusableView.identifier) { (view: TitledCollectionReusableView, model: CViewModel, kind, collectionView, indexPath: NSIndexPath) -> TitledCollectionReusableView in
             view.label.text = "Section \(indexPath.section)"
             view.label.textColor = UIColor.whiteColor()
             view.backgroundColor = UIColor.darkGrayColor()

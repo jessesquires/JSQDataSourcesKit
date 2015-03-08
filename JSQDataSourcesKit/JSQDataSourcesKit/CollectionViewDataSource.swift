@@ -58,7 +58,7 @@ public struct CollectionViewCellFactory <Cell: UICollectionViewCell, DataItem>: 
 
 public typealias SupplementaryViewKind = String
 
-public protocol CollectionViewSupplementaryViewFactoryType {
+public protocol CollectionSupplementaryViewFactoryType {
 
     typealias DataItem
 
@@ -72,7 +72,7 @@ public protocol CollectionViewSupplementaryViewFactoryType {
 }
 
 
-public struct CollectionViewSupplementaryViewFactory <SupplementaryView: UICollectionReusableView, DataItem>: CollectionViewSupplementaryViewFactoryType {
+public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectionReusableView, DataItem>: CollectionSupplementaryViewFactoryType {
 
     typealias SupplementaryViewConfigurationHandler = (SupplementaryView, DataItem, SupplementaryViewKind, UICollectionView, NSIndexPath) -> SupplementaryView
 
@@ -129,7 +129,7 @@ public struct CollectionViewSection <DataItem>: CollectionViewSectionInfo {
 
 
 public final class CollectionViewDataSourceProvider <DataItem, SectionInfo: CollectionViewSectionInfo,
-                                                     CellFactory: CollectionViewCellFactoryType, SupplementaryViewFactory: CollectionViewSupplementaryViewFactoryType
+                                                     CellFactory: CollectionViewCellFactoryType, SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
                                                      where
                                                      SectionInfo.DataItem == DataItem,
                                                      CellFactory.DataItem == DataItem,
@@ -181,7 +181,7 @@ public final class CollectionViewDataSourceProvider <DataItem, SectionInfo: Coll
 
 
 public final class CollectionViewFetchedResultsDataSourceProvider <DataItem, CellFactory: CollectionViewCellFactoryType,
-                                                                    SupplementaryViewFactory: CollectionViewSupplementaryViewFactoryType
+                                                                    SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
                                                                     where
                                                                     CellFactory.DataItem == DataItem,
                                                                     SupplementaryViewFactory.DataItem == DataItem> {
