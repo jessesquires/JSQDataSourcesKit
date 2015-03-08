@@ -80,6 +80,12 @@ public class TitledCollectionReusableView: UICollectionReusableView {
         }
     }
 
+    public override func prepareForReuse() {
+        super.prepareForReuse()
+        _label?.text = nil
+        _label?.attributedText = nil
+    }
+
     public func configureWithHandler(handler: ConfigurationHandler) {
         handler(self)
     }
