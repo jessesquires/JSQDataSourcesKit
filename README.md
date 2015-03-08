@@ -16,7 +16,7 @@ This framework aims to the reduce boilerplate code regarding the `UITableView`, 
 
 > TODO
 
-### Framework Components
+## Framework Components
 
 ##### Data Sources
 
