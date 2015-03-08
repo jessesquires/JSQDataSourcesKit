@@ -139,11 +139,11 @@ public final class CollectionViewDataSourceProvider <DataItem, SectionInfo: Coll
 
     public let cellFactory: CellFactory
 
-    public let supplementaryViewFactory: SupplementaryViewFactory
+    public let supplementaryViewFactory: SupplementaryViewFactory?
 
     public var dataSource: UICollectionViewDataSource { return bridgedDataSource }
 
-    public init(sections: [SectionInfo], cellFactory: CellFactory, supplementaryViewFactory: SupplementaryViewFactory, collectionView: UICollectionView? = nil) {
+    public init(sections: [SectionInfo], cellFactory: CellFactory, supplementaryViewFactory: SupplementaryViewFactory? = nil, collectionView: UICollectionView? = nil) {
         self.sections = sections
         self.cellFactory = cellFactory
         self.supplementaryViewFactory = supplementaryViewFactory
@@ -173,9 +173,16 @@ public final class CollectionViewDataSourceProvider <DataItem, SectionInfo: Coll
             return self.cellFactory.configureCell(cell, forItem: dataItem, inCollectionView: collectionView, atIndexPath: indexPath)
         },
         supplementaryViewAtIndexPath: { [unowned self] (collectionView, kind, indexPath) -> UICollectionReusableView in
-            let dataItem = self.sections[indexPath.section].dataItems[indexPath.row]
-            let view = self.supplementaryViewFactory.supplementaryViewForItem(dataItem, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
-            return self.supplementaryViewFactory.configureSupplementaryView(view, forItem: dataItem, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
+            if let factory = self.supplementaryViewFactory {
+                let dataItem = self.sections[indexPath.section].dataItems[indexPath.row]
+                let view = factory.supplementaryViewForItem(dataItem, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
+                return factory.configureSupplementaryView(view, forItem: dataItem, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
+            }
+
+            // we must not return nil here, per the `UICollectionViewDataSource` docs
+            // however, this will never get called as it is the consumer's responsibilty
+            // supplementary views are hidden by returning `CGSizeZero` from `collectionView(_:layout:referenceSizeForHeaderInSection:)`
+            return UICollectionReusableView()
         })
 }
 
@@ -190,11 +197,11 @@ public final class CollectionViewFetchedResultsDataSourceProvider <DataItem, Cel
 
     public let cellFactory: CellFactory
 
-    public let supplementaryViewFactory: SupplementaryViewFactory
+    public let supplementaryViewFactory: SupplementaryViewFactory?
 
     public var dataSource: UICollectionViewDataSource { return bridgedDataSource }
 
-    public init(fetchedResultsController: NSFetchedResultsController, cellFactory: CellFactory, supplementaryViewFactory: SupplementaryViewFactory, collectionView: UICollectionView? = nil) {
+    public init(fetchedResultsController: NSFetchedResultsController, cellFactory: CellFactory, supplementaryViewFactory: SupplementaryViewFactory? = nil, collectionView: UICollectionView? = nil) {
         self.fetchedResultsController = fetchedResultsController
         self.cellFactory = cellFactory
         self.supplementaryViewFactory = supplementaryViewFactory
@@ -225,9 +232,15 @@ public final class CollectionViewFetchedResultsDataSourceProvider <DataItem, Cel
             return self.cellFactory.configureCell(cell, forItem: dataItem, inCollectionView: collectionView, atIndexPath: indexPath)
         },
         supplementaryViewAtIndexPath: { [unowned self] (collectionView, kind, indexPath) -> UICollectionReusableView in
-            let dataItem = self.fetchedResultsController.objectAtIndexPath(indexPath) as! DataItem
-            let view = self.supplementaryViewFactory.supplementaryViewForItem(dataItem, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
-            return self.supplementaryViewFactory.configureSupplementaryView(view, forItem: dataItem, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
+            if let factory = self.supplementaryViewFactory {
+                let dataItem = self.fetchedResultsController.objectAtIndexPath(indexPath) as! DataItem
+                let view = factory.supplementaryViewForItem(dataItem, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
+                return factory.configureSupplementaryView(view, forItem: dataItem, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
+            }
+            // we must not return nil here, per the `UICollectionViewDataSource` docs
+            // however, this will never get called as it is the consumer's responsibilty
+            // supplementary views are hidden by returning `CGSizeZero` from `collectionView(_:layout:referenceSizeForHeaderInSection:)`
+            return UICollectionReusableView()
         })
 }
 
