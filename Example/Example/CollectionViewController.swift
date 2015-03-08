@@ -28,7 +28,7 @@ class CollectionViewController: UIViewController {
     // MARK: properties
 
     typealias CellFactory = CollectionViewCellFactory<CollectionViewCell, CViewModel>
-    typealias SupplementaryViewFactory = CollectionViewSupplementaryViewFactory<UICollectionReusableView, CViewModel>
+    typealias SupplementaryViewFactory = CollectionViewSupplementaryViewFactory<TitledCollectionHeaderView, CViewModel>
     typealias Section = CollectionViewSection<CViewModel>
     var dataSourceProvider: CollectionViewDataSourceProvider<CViewModel, Section, CellFactory, SupplementaryViewFactory>?
 
@@ -45,14 +45,15 @@ class CollectionViewController: UIViewController {
         layout.minimumInteritemSpacing = 10
         layout.minimumLineSpacing = 10
 
-        // register cells
+        // register cells and supplementary views
         collectionView.registerNib(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: collectionCellId)
-        collectionView.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
+        collectionView.registerNib(TitledCollectionHeaderView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: TitledCollectionHeaderView.identifier)
 
         // create view models
-        let section0 = CollectionViewSection(dataItems: [ CViewModel(), CViewModel(), CViewModel(), CViewModel() ])
-        let section1 = CollectionViewSection(dataItems: [ CViewModel(), CViewModel(), CViewModel() ])
-        let allSections = [section0, section1]
+        let section0 = CollectionViewSection(dataItems: [ CViewModel(), CViewModel(), CViewModel()])
+        let section1 = CollectionViewSection(dataItems: [ CViewModel(), CViewModel(), CViewModel(), CViewModel(), CViewModel(), CViewModel() ])
+        let section2 = CollectionViewSection(dataItems: [ CViewModel() ])
+        let allSections = [section0, section1, section2]
 
         // create cell factory
         let cellFactory = CollectionViewCellFactory(reuseIdentifier: collectionCellId) { (cell: CollectionViewCell, model: CViewModel, collectionView: UICollectionView, indexPath: NSIndexPath) -> CollectionViewCell in
@@ -61,7 +62,9 @@ class CollectionViewController: UIViewController {
         }
 
         // create supplementary view factory
-        let headerFactory = CollectionViewSupplementaryViewFactory(reuseIdentifier: "header") { (view, model: CViewModel, kind, collectionView, indexPath: NSIndexPath) -> UICollectionReusableView in
+        let headerFactory = CollectionViewSupplementaryViewFactory(reuseIdentifier: TitledCollectionHeaderView.identifier) { (view: TitledCollectionHeaderView, model: CViewModel, kind, collectionView, indexPath: NSIndexPath) -> TitledCollectionHeaderView in
+            view.label.text = "Section \(indexPath.section)"
+            view.label.textColor = UIColor.whiteColor()
             view.backgroundColor = UIColor.darkGrayColor()
             return view
         }

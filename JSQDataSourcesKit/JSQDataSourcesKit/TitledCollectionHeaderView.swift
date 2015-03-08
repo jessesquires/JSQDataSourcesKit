@@ -64,7 +64,7 @@ public class TitledCollectionHeaderView: UICollectionReusableView {
         }
         set {
             super.backgroundColor = newValue
-            label.backgroundColor = newValue
+            _label?.backgroundColor = newValue
         }
     }
 
