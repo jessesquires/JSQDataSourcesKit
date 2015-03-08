@@ -21,3 +21,7 @@ DerivedData
 # CocoaPods
 
 Pods/
+
+# jazzy docs
+
+_docs/
