@@ -35,13 +35,15 @@ public struct TitledCollectionReusableViewFactory <DataItem>: CollectionSuppleme
         self.styleConfigurator = styleConfigurator
     }
 
-    public func supplementaryViewForItem(item: DataItem, kind: SupplementaryViewKind, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> TitledCollectionReusableView {
-        let view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: TitledCollectionReusableView.identifier, forIndexPath: indexPath) as! TitledCollectionReusableView
-        styleConfigurator(view)
-        return view
+    public func supplementaryViewForItem(item: DataItem, kind: SupplementaryViewKind,
+        inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> TitledCollectionReusableView {
+            let view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: TitledCollectionReusableView.identifier, forIndexPath: indexPath) as! TitledCollectionReusableView
+            styleConfigurator(view)
+            return view
     }
 
-    public func configureSupplementaryView(view: TitledCollectionReusableView, forItem item: DataItem, kind: SupplementaryViewKind, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> TitledCollectionReusableView {
-        return dataConfigurator(view, item, kind, collectionView, indexPath)
+    public func configureSupplementaryView(view: TitledCollectionReusableView, forItem item: DataItem, kind: SupplementaryViewKind,
+        inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> TitledCollectionReusableView {
+            return dataConfigurator(view, item, kind, collectionView, indexPath)
     }
 }
