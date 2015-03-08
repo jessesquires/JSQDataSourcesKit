@@ -36,7 +36,13 @@ This framework aims to the reduce boilerplate code regarding the `UITableView`, 
 
 ##### Demo Project
 
-> TODO
+The example app included exercises *all* functionality in this framework. Open `JSQDataSourcesKit.xcworkspace`, select the `Example` scheme, then build and run. 
+
+## Unit tests
+
+There's a suite of unit tests for the `JSQDataSourcesKit.framework`. To run them, open `JSQDataSourcesKit.xcworkspace`, select the `JSQDataSourcesKit` scheme, then &#x2318;-u.
+
+These tests are well commented and serve as further documentation for how to use this library.
 
 ## Contribute
 
