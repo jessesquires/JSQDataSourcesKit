@@ -146,7 +146,7 @@ class TableViewDataSourceTests: XCTestCase {
         let section1 = TableViewSection(dataItems: [FakeTableModel()], headerTitle: "Header Title")
 
         // GIVEN: a cell factory
-        let factory = TableViewCellFactory(reuseIdentifier: "cellid") { (cell: FakeTableCell, model: FakeTableModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
+        let factory = TableViewCellFactory(reuseIdentifier: "reuseId") { (cell: UITableViewCell, model: FakeTableModel, view: UITableView, index: NSIndexPath) -> UITableViewCell in
             return cell
         }
 
