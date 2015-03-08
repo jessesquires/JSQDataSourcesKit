@@ -24,23 +24,23 @@ import JSQDataSourcesKit
 
 // MARK: fakes
 
-struct FakeCollectionModel: Equatable {
+private struct FakeCollectionModel: Equatable {
     let name = NSProcessInfo.processInfo().globallyUniqueString
 }
 
 
-func ==(lhs: FakeCollectionModel, rhs: FakeCollectionModel) -> Bool {
+private func ==(lhs: FakeCollectionModel, rhs: FakeCollectionModel) -> Bool {
     return lhs.name == rhs.name
 }
 
 
-class FakeCollectionCell: UICollectionViewCell { }
+private class FakeCollectionCell: UICollectionViewCell { }
 
 
-class FakeCollectionSupplementaryView: UICollectionReusableView { }
+private class FakeCollectionSupplementaryView: UICollectionReusableView { }
 
 
-class FakeCollectionView: UICollectionView {
+private class FakeCollectionView: UICollectionView {
 
     var dequeueCellExpectation: XCTestExpectation?
 
@@ -68,7 +68,7 @@ class CollectionViewDataSourceTests: XCTestCase {
     let fakeSupplementaryViewReuseId = "fakeSupplementaryId"
     let fakeSupplementaryViewKind = "fakeSupplementaryKind"
 
-    let fakeCollectionView = FakeCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 600), collectionViewLayout: UICollectionViewFlowLayout())
+    private let fakeCollectionView = FakeCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 600), collectionViewLayout: UICollectionViewFlowLayout())
     let dequeueCellExpectationName = "collectionview_dequeue_cell_expectation"
     let dequeueSupplementaryViewExpectationName = "collectionview_dequeue_supplementaryview_expectation"
 

@@ -24,20 +24,20 @@ import JSQDataSourcesKit
 
 // MARK: fakes
 
-struct FakeTableModel: Equatable {
+private struct FakeTableModel: Equatable {
     let name = NSProcessInfo.processInfo().globallyUniqueString
 }
 
 
-func ==(lhs: FakeTableModel, rhs: FakeTableModel) -> Bool {
+private func ==(lhs: FakeTableModel, rhs: FakeTableModel) -> Bool {
     return lhs.name == rhs.name
 }
 
 
-class FakeTableCell: UITableViewCell { }
+private class FakeTableCell: UITableViewCell { }
 
 
-class FakeTableView: UITableView {
+private class FakeTableView: UITableView {
 
     var dequeueCellExpectation: XCTestExpectation?
 
@@ -56,7 +56,8 @@ class TableViewDataSourceTests: XCTestCase {
     // MARK: setup
 
     let fakeReuseId = "fakeCellId"
-    let fakeTableView = FakeTableView(frame: CGRect(x: 0, y: 0, width: 320, height: 600), style: .Plain)
+    
+    private let fakeTableView = FakeTableView(frame: CGRect(x: 0, y: 0, width: 320, height: 600), style: .Plain)
     let dequeueCellExpectationName = "tableview_dequeue_cell_expectation"
 
     override func setUp() {
