@@ -18,12 +18,10 @@
 
 import UIKit
 
-/**
-   A `TitledCollectionReusableView` is a `UICollectionReusableView` with a single `UILabel` intended for use as an
-   analog to a `UITableView` header title (via `tableView(_:titleForHeaderInSection:)`)
-   when using a `CollectionViewFetchedResultsDelegateProvider`.
-   These views can be created via a `TitledCollectionReusableViewFactory`.
-*/
+///  A `TitledCollectionReusableView` is a `UICollectionReusableView` subclass with a single `UILabel` intended for use as an
+///  analog to a `UITableView` header title (via `tableView(_:titleForHeaderInSection:)`)
+///  when using a `CollectionViewFetchedResultsDelegateProvider`.
+///  These views can be created via a `TitledCollectionReusableViewFactory`. 
 public class TitledCollectionReusableView: UICollectionReusableView {
 
     public typealias ConfigurationHandler = (TitledCollectionReusableView) -> Void

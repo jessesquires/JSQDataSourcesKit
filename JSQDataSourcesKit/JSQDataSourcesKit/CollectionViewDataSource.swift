@@ -21,14 +21,37 @@ import UIKit
 import CoreData
 
 
+///  An instance conforming to `CollectionViewCellFactoryType` is responsible for initializing
+///  and configuring collection view cells to be consumed by an instance of `CollectionViewDataSourceProvider`.
+///
+///  The `CollectionViewCellFactoryType` protocol has two associated types, `DataItem` and `Cell`.
+///  These associated types describe the type of model instances backing the collection view and its cells,
+///  and the type of cells in the collection view, respectively. 
 public protocol CollectionViewCellFactoryType {
 
+    /// The type of the instance (model object) backing the collection view and its cells.
     typealias DataItem
 
+    /// The type of `UICollectionViewCell` cell that the factory produces.
     typealias Cell: UICollectionViewCell
 
+    ///  Creates and returns a new or dequeued instance of `Cell`.
+    ///
+    ///  :param: item           The model instance (data object) at `indexPath`.
+    ///  :param: collectionView The collection view requesting this information.
+    ///  :param: indexPath      The index path that specifies the location of `item`.
+    ///
+    ///  :returns: An initialized or dequeued `UICollectionViewCell` of type `Cell`.
     func cellForItem(item: DataItem, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell
 
+    ///  Configures and returns the specified cell.
+    ///
+    ///  :param: cell           The cell to configure.
+    ///  :param: item           The model instance (data object) at `indexPath`.
+    ///  :param: collectionView The collection view requesting this information.
+    ///  :param: indexPath      The index path that specifies the location of `item`.
+    ///
+    ///  :returns: A configured `UICollectionViewCell` of type `Cell`.
     func configureCell(cell: Cell, forItem item: DataItem, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell
 }
 
