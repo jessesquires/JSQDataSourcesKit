@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7519.1" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7519.1" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7513.1"/>
     </dependencies>
@@ -28,9 +28,9 @@
             <connections>
                 <outlet property="_bottomSpacing" destination="tb0-CV-HzK" id="bpF-wi-Pcc"/>
                 <outlet property="_label" destination="DyE-kD-CcR" id="ju0-a0-VSm"/>
-                <outlet property="_leftSpacing" destination="1lX-se-MH3" id="Tmd-8g-bfj"/>
-                <outlet property="_rightSpacing" destination="dcV-6d-Sqv" id="CAM-2u-5Wp"/>
+                <outlet property="_leadingSpacing" destination="1lX-se-MH3" id="kzl-9e-MMC"/>
                 <outlet property="_topSpacing" destination="WxF-za-dbi" id="Y3d-cW-QKb"/>
+                <outlet property="_trailingSpacing" destination="dcV-6d-Sqv" id="wzk-ee-Fgd"/>
             </connections>
             <point key="canvasLocation" x="735" y="390"/>
         </collectionReusableView>

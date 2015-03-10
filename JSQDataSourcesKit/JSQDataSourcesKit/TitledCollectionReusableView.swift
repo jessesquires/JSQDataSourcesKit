@@ -25,35 +25,40 @@ import UIKit
 public class TitledCollectionReusableView: UICollectionReusableView {
 
     @IBOutlet private weak var _label: UILabel!
-    @IBOutlet private weak var _leftSpacing: NSLayoutConstraint!
+    @IBOutlet private weak var _leadingSpacing: NSLayoutConstraint!
     @IBOutlet private weak var _topSpacing: NSLayoutConstraint!
-    @IBOutlet private weak var _rightSpacing: NSLayoutConstraint!
+    @IBOutlet private weak var _trailingSpacing: NSLayoutConstraint!
     @IBOutlet private weak var _bottomSpacing: NSLayoutConstraint!
 
+    /// Returns the label of the reusable view.
     public var label: UILabel {
         get {
             return _label
         }
     }
 
-    public var leftSpacing: NSLayoutConstraint {
+    /// Returns the leading spacing constraint between the label and its superview.
+    public var leadingSpacing: NSLayoutConstraint {
         get {
-            return _leftSpacing
+            return _leadingSpacing
         }
     }
 
+    /// Returns the top spacing constraint between the label and its superview.
     public var topSpacing: NSLayoutConstraint {
         get {
             return _topSpacing
         }
     }
 
-    public var rightSpacing: NSLayoutConstraint {
+    /// Returns the trailing constraint between the label and its superview.
+    public var trailingSpacing: NSLayoutConstraint {
         get {
-            return _rightSpacing
+            return _trailingSpacing
         }
     }
 
+    /// Returns the bottom spacing constraint between the label and its superview.
     public var bottomSpacing: NSLayoutConstraint {
         get {
             return _bottomSpacing
@@ -70,12 +75,14 @@ public class TitledCollectionReusableView: UICollectionReusableView {
         }
     }
 
+    /// Returns the default string used to identify instances of `TitledCollectionReusableView`.
     public class var identifier: String {
         get {
             return toString(TitledCollectionReusableView.self)
         }
     }
 
+    /// Returns the `UINib` object initialized for the view.
     public class var nib: UINib {
         get {
             return UINib(nibName: "TitledCollectionReusableView", bundle: NSBundle(forClass: TitledCollectionReusableView.self))
