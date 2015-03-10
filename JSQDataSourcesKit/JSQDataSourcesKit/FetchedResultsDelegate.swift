@@ -37,7 +37,7 @@ public final class CollectionViewFetchedResultsDelegateProvider <DataItem> {
     public init(collectionView: UICollectionView, controller: NSFetchedResultsController? = nil) {
         self.collectionView = collectionView
 
-        controller?.delegate = self.delegate
+        controller?.delegate = delegate
     }
 
     private var sectionChanges = [SectionChangesDictionary]()
@@ -93,21 +93,21 @@ public final class CollectionViewFetchedResultsDelegateProvider <DataItem> {
                 self.sectionChanges.removeAll()
                 self.objectChanges.removeAll()
             })
-
+            
             return // Swift compiler bug: single statement void closure
         })
 
     private func applyObjectChanges() {
-        for eachChange in self.objectChanges {
+        for eachChange in objectChanges {
             for (changeType: NSFetchedResultsChangeType, indexes: [NSIndexPath]) in eachChange {
 
                 switch(changeType) {
-                case .Insert: self.collectionView?.insertItemsAtIndexPaths(indexes)
-                case .Delete: self.collectionView?.deleteItemsAtIndexPaths(indexes)
-                case .Update: self.collectionView?.reloadItemsAtIndexPaths(indexes)
+                case .Insert: collectionView?.insertItemsAtIndexPaths(indexes)
+                case .Delete: collectionView?.deleteItemsAtIndexPaths(indexes)
+                case .Update: collectionView?.reloadItemsAtIndexPaths(indexes)
                 case .Move:
                     if let first = indexes.first, last = indexes.last {
-                        self.collectionView?.moveItemAtIndexPath(first, toIndexPath: last)
+                        collectionView?.moveItemAtIndexPath(first, toIndexPath: last)
                     }
                 }
             }
@@ -115,15 +115,15 @@ public final class CollectionViewFetchedResultsDelegateProvider <DataItem> {
     }
 
     private func applySectionChanges() {
-        for eachChange in self.sectionChanges {
+        for eachChange in sectionChanges {
             for (changeType: NSFetchedResultsChangeType, index: SectionIndex) in eachChange {
 
                 let section = NSIndexSet(index: index)
 
                 switch(changeType) {
-                case .Insert: self.collectionView?.insertSections(section)
-                case .Delete: self.collectionView?.deleteSections(section)
-                case .Update: self.collectionView?.reloadSections(section)
+                case .Insert: collectionView?.insertSections(section)
+                case .Delete: collectionView?.deleteSections(section)
+                case .Update: collectionView?.reloadSections(section)
                 case .Move: break
                 }
             }
@@ -146,7 +146,7 @@ public final class TableViewFetchedResultsDelegateProvider <DataItem, CellFactor
         self.tableView = tableView
         self.cellFactory = cellFactory
 
-        controller?.delegate = self.delegate
+        controller?.delegate = delegate
     }
 
     private lazy var bridgedDelegate: BridgedFetchedResultsDelegate = BridgedFetchedResultsDelegate(
@@ -207,10 +207,10 @@ public final class TableViewFetchedResultsDelegateProvider <DataItem, CellFactor
     typealias DidChangeObjectHandler = (NSFetchedResultsController, AnyObject, NSIndexPath?, NSFetchedResultsChangeType, NSIndexPath?) -> Void
     typealias DidChangeContentHandler = (NSFetchedResultsController) -> Void
 
-    private let willChangeContent: WillChangeContentHandler
-    private let didChangeSection: DidChangeSectionHandler
-    private let didChangeObject: DidChangeObjectHandler
-    private let didChangeContent: DidChangeContentHandler
+    let willChangeContent: WillChangeContentHandler
+    let didChangeSection: DidChangeSectionHandler
+    let didChangeObject: DidChangeObjectHandler
+    let didChangeContent: DidChangeContentHandler
 
     init(willChangeContent: WillChangeContentHandler,
         didChangeSection: DidChangeSectionHandler,
@@ -223,19 +223,21 @@ public final class TableViewFetchedResultsDelegateProvider <DataItem, CellFactor
             self.didChangeContent = didChangeContent
     }
 
-    @objc private func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    @objc func controllerWillChangeContent(controller: NSFetchedResultsController) {
         willChangeContent(controller)
     }
 
-    @objc private func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    @objc func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo,
+                          atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
         didChangeSection(controller, sectionInfo, sectionIndex, type)
     }
 
-    @objc private func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    @objc func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?,
+                          forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         didChangeObject(controller, anObject, indexPath, type, newIndexPath)
     }
 
-    @objc private func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    @objc func controllerDidChangeContent(controller: NSFetchedResultsController) {
         didChangeContent(controller)
     }
 }

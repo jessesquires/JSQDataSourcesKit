@@ -24,8 +24,6 @@ import UIKit
 ///  These views can be created via a `TitledCollectionReusableViewFactory`. 
 public class TitledCollectionReusableView: UICollectionReusableView {
 
-    public typealias ConfigurationHandler = (TitledCollectionReusableView) -> Void
-
     @IBOutlet private weak var _label: UILabel!
     @IBOutlet private weak var _leftSpacing: NSLayoutConstraint!
     @IBOutlet private weak var _topSpacing: NSLayoutConstraint!
@@ -89,9 +87,4 @@ public class TitledCollectionReusableView: UICollectionReusableView {
         _label?.text = nil
         _label?.attributedText = nil
     }
-
-    public func configureWithHandler(handler: ConfigurationHandler) {
-        handler(self)
-    }
-    
 }

@@ -112,7 +112,7 @@ public final class TableViewDataSourceProvider <DataItem, SectionInfo: TableView
         self.sections = sections
         self.cellFactory = cellFactory
 
-        tableView?.dataSource = self.dataSource
+        tableView?.dataSource = dataSource
     }
 
     public subscript (index: Int) -> SectionInfo {
@@ -158,7 +158,7 @@ public final class TableViewFetchedResultsDataSourceProvider <DataItem, CellFact
         self.fetchedResultsController = fetchedResultsController
         self.cellFactory = cellFactory
 
-        tableView?.dataSource = self.dataSource
+        tableView?.dataSource = dataSource
     }
 
     public func performFetch(error: NSErrorPointer = nil) -> Bool {
@@ -206,11 +206,11 @@ public final class TableViewFetchedResultsDataSourceProvider <DataItem, CellFact
     typealias TitleForHeaderInSectionHandler = (Int) -> String?
     typealias TitleForFooterInSectionHandler = (Int) -> String?
 
-    private let numberOfSections: NumberOfSectionsHandler
-    private let numberOfRowsInSection: NumberOfRowsInSectionHandler
-    private let cellForRowAtIndexPath: CellForRowAtIndexPathHandler
-    private let titleForHeaderInSection: TitleForHeaderInSectionHandler
-    private let titleForFooterInSection: TitleForFooterInSectionHandler
+    let numberOfSections: NumberOfSectionsHandler
+    let numberOfRowsInSection: NumberOfRowsInSectionHandler
+    let cellForRowAtIndexPath: CellForRowAtIndexPathHandler
+    let titleForHeaderInSection: TitleForHeaderInSectionHandler
+    let titleForFooterInSection: TitleForFooterInSectionHandler
 
     init(numberOfSections: NumberOfSectionsHandler,
         numberOfRowsInSection: NumberOfRowsInSectionHandler,
@@ -225,23 +225,23 @@ public final class TableViewFetchedResultsDataSourceProvider <DataItem, CellFact
             self.titleForFooterInSection = titleForFooterInSection
     }
 
-    @objc private func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    @objc func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return numberOfSections()
     }
 
-    @objc private func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return numberOfRowsInSection(section)
     }
 
-    @objc private func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         return cellForRowAtIndexPath(tableView, indexPath)
     }
 
-    @objc private func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    @objc func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return titleForHeaderInSection(section)
     }
 
-    @objc private func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    @objc func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return titleForFooterInSection(section)
     }
 }

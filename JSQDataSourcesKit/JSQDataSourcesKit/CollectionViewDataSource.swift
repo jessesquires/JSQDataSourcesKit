@@ -171,7 +171,7 @@ public final class CollectionViewDataSourceProvider <DataItem, SectionInfo: Coll
         self.cellFactory = cellFactory
         self.supplementaryViewFactory = supplementaryViewFactory
 
-        collectionView?.dataSource = self.dataSource
+        collectionView?.dataSource = dataSource
     }
 
     public subscript (index: Int) -> SectionInfo {
@@ -229,11 +229,11 @@ public final class CollectionViewFetchedResultsDataSourceProvider <DataItem, Cel
         self.cellFactory = cellFactory
         self.supplementaryViewFactory = supplementaryViewFactory
 
-        collectionView?.dataSource = self.dataSource
+        collectionView?.dataSource = dataSource
     }
 
     public func performFetch(error: NSErrorPointer = nil) -> Bool {
-        let success = self.fetchedResultsController.performFetch(error)
+        let success = fetchedResultsController.performFetch(error)
         if !success {
             println("*** ERROR: \(toString(CollectionViewFetchedResultsDataSourceProvider.self))"
                     + "\n\t [\(__LINE__)] \(__FUNCTION__) Could not perform fetch error: \(error)")
@@ -280,10 +280,10 @@ public final class CollectionViewFetchedResultsDataSourceProvider <DataItem, Cel
     typealias CellForItemAtIndexPathHandler = (UICollectionView, NSIndexPath) -> UICollectionViewCell
     typealias SupplementaryViewAtIndexPathHandler = (UICollectionView, String, NSIndexPath) -> UICollectionReusableView
 
-    private let numberOfSections: NumberOfSectionsHandler
-    private let numberOfItemsInSection: NumberOfItemsInSectionHandler
-    private let cellForItemAtIndexPath: CellForItemAtIndexPathHandler
-    private let supplementaryViewAtIndexPath: SupplementaryViewAtIndexPathHandler
+    let numberOfSections: NumberOfSectionsHandler
+    let numberOfItemsInSection: NumberOfItemsInSectionHandler
+    let cellForItemAtIndexPath: CellForItemAtIndexPathHandler
+    let supplementaryViewAtIndexPath: SupplementaryViewAtIndexPathHandler
 
     init(numberOfSections: NumberOfSectionsHandler,
         numberOfItemsInSection: NumberOfItemsInSectionHandler,
@@ -296,20 +296,20 @@ public final class CollectionViewFetchedResultsDataSourceProvider <DataItem, Cel
             self.supplementaryViewAtIndexPath = supplementaryViewAtIndexPath
     }
 
-    @objc private func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    @objc func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return numberOfSections()
     }
 
-    @objc private func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    @objc func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return numberOfItemsInSection(section)
     }
 
-    @objc private func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    @objc func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         return cellForItemAtIndexPath(collectionView, indexPath)
     }
 
-    @objc private func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: SupplementaryViewKind,
-                                      atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    @objc func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: SupplementaryViewKind,
+                              atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         return supplementaryViewAtIndexPath(collectionView, kind, indexPath)
     }
 }

@@ -19,4 +19,5 @@
 #import <UIKit/UIKit.h>
 
 FOUNDATION_EXPORT double JSQDataSourcesKitVersionNumber;
+
 FOUNDATION_EXPORT const unsigned char JSQDataSourcesKitVersionString[];
