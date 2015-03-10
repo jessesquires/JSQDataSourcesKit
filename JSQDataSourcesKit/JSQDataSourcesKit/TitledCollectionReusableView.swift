@@ -65,6 +65,7 @@ public class TitledCollectionReusableView: UICollectionReusableView {
         }
     }
 
+    /// The view’s background color. Note: setting this property also sets the background color for `label`.
     public override var backgroundColor: UIColor? {
         get {
             return super.backgroundColor
@@ -89,7 +90,8 @@ public class TitledCollectionReusableView: UICollectionReusableView {
         }
     }
 
-    public override func prepareForReuse() {
+    ///  Performs any clean up necessary to prepare the view for use again.
+    override public func prepareForReuse() {
         super.prepareForReuse()
         _label?.text = nil
         _label?.attributedText = nil
