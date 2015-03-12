@@ -35,13 +35,13 @@ public protocol TableViewCellFactoryType {
 
 public struct TableViewCellFactory <Cell: UITableViewCell, DataItem>: TableViewCellFactoryType {
 
-    public typealias CellConfigurationHandler = (Cell, DataItem, UITableView, NSIndexPath) -> Cell
+    public typealias ConfigurationHandler = (Cell, DataItem, UITableView, NSIndexPath) -> Cell
 
     public let reuseIdentifier: String
 
-    private let cellConfigurator: CellConfigurationHandler
+    private let cellConfigurator: ConfigurationHandler
 
-    public init(reuseIdentifier: String, cellConfigurator: CellConfigurationHandler) {
+    public init(reuseIdentifier: String, cellConfigurator: ConfigurationHandler) {
         self.reuseIdentifier = reuseIdentifier
         self.cellConfigurator = cellConfigurator
     }
