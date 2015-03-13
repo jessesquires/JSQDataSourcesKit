@@ -2,7 +2,7 @@
 
 *Type-safe, value-oriented data source objects that keep your view controllers light*
 
-A Swift rewrite of [RSTDataSourceKit](https://github.com/rosettastone/RSTDataSourceKit) inspired by [Andy Matuschak's](https://github.com/andymatuschak) *type-safe, value-oriented collection view data source [gist](https://gist.github.com/andymatuschak/f1e1691fa1a327468f8e)*. 
+A Swift framework of data source and delegate objects inspired by [Andy Matuschak's](https://github.com/andymatuschak) *type-safe, value-oriented collection view data source [gist](https://gist.github.com/andymatuschak/f1e1691fa1a327468f8e)*. 
 
 >#### NOTE: work in-progress, but almost done!
 >
@@ -10,7 +10,7 @@ A Swift rewrite of [RSTDataSourceKit](https://github.com/rosettastone/RSTDataSou
 
 ## About
 
-This framework aims to the reduce boilerplate code regarding the `UITableView`, `UICollectionView`, and `NSFetchedResultsController` data source objects, as well as the `NSFetchedResultsControllerDelegate` object. It helps [keep view controllers light](http://www.objc.io/issue-1/), while focusing on type-safety, [SOLID](http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)) design principles, and easy interoperability with Cocoa.
+This framework reduces the boilerplate code regarding the `UITableView`, `UICollectionView`, and `NSFetchedResultsController` data source objects, as well as the `NSFetchedResultsControllerDelegate` object. It helps [keep view controllers light](http://www.objc.io/issue-1/), while focusing on type-safety, [SOLID](http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)) design principles, and easy interoperability with Cocoa. Further, it brings a more focused and data-driven perspective to these data sources. That is, if you want to change your view, you change your data and its structure.
 
 ## Installation
 
