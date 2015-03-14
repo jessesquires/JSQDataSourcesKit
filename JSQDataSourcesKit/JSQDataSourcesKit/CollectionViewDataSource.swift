@@ -216,23 +216,35 @@ public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectio
     }
 }
 
-
+///  An instance conforming to `CollectionViewSectionInfo` represents a section of items in a collection view.
 public protocol CollectionViewSectionInfo {
 
+    /// The type of elements stored in the section.
     typealias DataItem
 
+    /// Returns the elements in the collection view section.
     var dataItems: [DataItem] { get }
 }
 
 
+///  A `CollectionViewSection` is a concrete `CollectionViewSectionInfo`.
+///  A section instance is responsible for managing the elements in a section.
+///  Elements in the section may be accessed or replaced via its subscripting interface.
 public struct CollectionViewSection <DataItem>: CollectionViewSectionInfo {
 
+    /// The elements in the collection view section.
     public var dataItems: [DataItem]
 
+    /// Returns the number of elements in the section.
     public var count: Int {
         return dataItems.count
     }
 
+    ///  Initializes and returns a new collection view section.
+    ///
+    ///  :param: dataItems The elements in the section.
+    ///
+    ///  :returns: A new `CollectionViewSection` instance.
     public init(dataItems: [DataItem]) {
         self.dataItems = dataItems
     }
