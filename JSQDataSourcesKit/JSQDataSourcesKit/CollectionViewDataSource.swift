@@ -23,23 +23,22 @@ import CoreData
 
 ///  An instance conforming to `CollectionViewCellFactoryType` is responsible for initializing
 ///  and configuring collection view cells to be consumed by an instance of `CollectionViewDataSourceProvider`.
-///
 ///  The `CollectionViewCellFactoryType` protocol has two associated types, `DataItem` and `Cell`.
-///  These associated types describe the type of model instances backing the collection view and its cells,
+///  These associated types describe the type of model instances backing the collection view
 ///  and the type of cells in the collection view, respectively. 
 public protocol CollectionViewCellFactoryType {
 
-    /// The type of the instance (model object) backing the collection view and its cells.
+    /// The type of the instance (model object) backing the collection view.
     typealias DataItem
 
-    /// The type of `UICollectionViewCell` cell that the factory produces.
+    /// The type of `UICollectionViewCell` that the factory produces.
     typealias Cell: UICollectionViewCell
 
-    ///  Creates and returns a new or dequeued instance of `Cell`.
+    ///  Creates and returns a new or dequeued `Cell` instance.
     ///
     ///  :param: item           The model instance (data object) at `indexPath`.
     ///  :param: collectionView The collection view requesting this information.
-    ///  :param: indexPath      The index path that specifies the location of `item`.
+    ///  :param: indexPath      The index path that specifies the location of `cell` and `item`.
     ///
     ///  :returns: An initialized or dequeued `UICollectionViewCell` of type `Cell`.
     func cellForItem(item: DataItem, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell
@@ -49,47 +48,107 @@ public protocol CollectionViewCellFactoryType {
     ///  :param: cell           The cell to configure.
     ///  :param: item           The model instance (data object) at `indexPath`.
     ///  :param: collectionView The collection view requesting this information.
-    ///  :param: indexPath      The index path that specifies the location of `item`.
+    ///  :param: indexPath      The index path that specifies the location of `cell` and `item`.
     ///
     ///  :returns: A configured `UICollectionViewCell` of type `Cell`.
     func configureCell(cell: Cell, forItem item: DataItem, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell
 }
 
 
+///  A `CollectionViewCellFactory` is a concrete `CollectionViewCellFactoryType`.
+///  This factory is responsible for producing and configuring collection view cells for a specific data item.
 public struct CollectionViewCellFactory <Cell: UICollectionViewCell, DataItem>: CollectionViewCellFactoryType {
 
+    ///  Configures the cell for the specified data item, collection view and index path.
+    ///
+    ///  :param: Cell             The cell to be configured at the index path.
+    ///  :param: DataItem         The data item at the index path.
+    ///  :param: UICollectionView The collection view requesting this information.
+    ///  :param: NSIndexPath      The index path at which the cell will be displayed.
+    ///
+    ///  :returns: The configured cell.
     public typealias ConfigurationHandler = (Cell, DataItem, UICollectionView, NSIndexPath) -> Cell
 
+    /// A unique identifier that describes the purpose of the cells that the factory produces.
+    /// The factory dequeues cells from the collection view with this reuse identifier.
     public let reuseIdentifier: String
 
     private let cellConfigurator: ConfigurationHandler
 
+    ///  Initializes and returns a new collection view cell factory.
+    ///
+    ///  :param: reuseIdentifier  The reuse identifier with which the factory will dequeue cells.
+    ///  :param: cellConfigurator The closure with which the factory will configure cells.
+    ///
+    ///  :returns: A new `CollectionViewCellFactory` instance.
     public init(reuseIdentifier: String, cellConfigurator: ConfigurationHandler) {
         self.reuseIdentifier = reuseIdentifier
         self.cellConfigurator = cellConfigurator
     }
 
+    ///  Creates and returns a new or dequeued `Cell` instance.
+    ///
+    ///  :param: item           The model instance (data object) at `indexPath`.
+    ///  :param: collectionView The collection view requesting this information.
+    ///  :param: indexPath      The index path that specifies the location of `cell` and `item`.
+    ///
+    ///  :returns: An initialized or dequeued `UICollectionViewCell` of type `Cell`.
     public func cellForItem(item: DataItem, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell {
         return collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! Cell
     }
 
+    ///  Configures and returns the specified cell.
+    ///
+    ///  :param: cell           The cell to configure.
+    ///  :param: item           The model instance (data object) at `indexPath`.
+    ///  :param: collectionView The collection view requesting this information.
+    ///  :param: indexPath      The index path that specifies the location of `cell` and `item`.
+    ///
+    ///  :returns: A configured `UICollectionViewCell` of type `Cell`.
     public func configureCell(cell: Cell, forItem item: DataItem, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell {
         return cellConfigurator(cell, item, collectionView, indexPath)
     }
 }
 
 
+///  Describes a collection view element kind, such as `UICollectionElementKindSectionHeader`.
 public typealias SupplementaryViewKind = String
 
+
+///  An instance conforming to `CollectionSupplementaryViewFactoryType` is responsible for initializing
+///  and configuring collection view supplementary views to be consumed by an instance of `CollectionViewDataSourceProvider`.
+///
+///  The `CollectionSupplementaryViewFactoryType` protocol has two associated types, `DataItem` and `SupplementaryView`.
+///  These associated types describe the type of model instances backing the collection view
+///  and the type of supplementary views in the collection view, respectively.
 public protocol CollectionSupplementaryViewFactoryType {
 
+    /// The type of the instance (model object) backing the collection view.
     typealias DataItem
 
+    /// The type of `UICollectionReusableView` that the factory produces.
     typealias SupplementaryView: UICollectionReusableView
 
+    ///  Creates annd returns a new or dequeued `SupplementaryView` instance.
+    ///
+    ///  :param: item           The model instance (data object) at `indexPath`.
+    ///  :param: kind           An identifier that describes the type of the supplementary view.
+    ///  :param: collectionView The collection view requesting this information.
+    ///  :param: indexPath      The index path that specifies the location of the new supplementary view.
+    ///
+    ///  :returns: An initialized or dequeued `UICollectionReusableView` of type `SupplementaryView`.
     func supplementaryViewForItem(item: DataItem, kind: SupplementaryViewKind,
                                   inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> SupplementaryView
 
+    ///  Configures and returns the specified supplementary view.
+    ///
+    ///  :param: view           The supplementary view to configure.
+    ///  :param: item           The model instance (data object) at `indexPath`.
+    ///  :param: kind           An identifier that describes the type of the supplementary view.
+    ///  :param: collectionView The collection view requesting this information.
+    ///  :param: indexPath      The index path that specifies the location of `view` and `item`.
+    ///
+    ///  :returns: A configured `UICollectionReusableView` of type `SupplementaryView`.
     func configureSupplementaryView(view: SupplementaryView, forItem item: DataItem, kind: SupplementaryViewKind,
                                     inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> SupplementaryView
 }
