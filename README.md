@@ -32,7 +32,47 @@ $ open _docs/
 ````swift
 import JSQDataSourcesKit
 ````
-> TODO
+
+##### Design
+
+This framework is composed of different data source and delegate `Provider` classes. Instances of a `Provider` own a collection of model objects and a cell factory, and are responsible for *providing* a data source or delegate.
+
+##### Example
+
+The following illustrates a simple example of how these components interact for a table view. Other scenarios follow similarly, for example, a collection view.
+
+````swift
+// Given a view controller with a table view
+
+// register cells
+let nib = UINib(nibName: "MyCellNib", bundle: nil)
+self.tableView.registerNib(nib, forCellReuseIdentifier: "MyCellIdentifier")
+
+// create sections with your model objects
+let section0 = TableViewSection(dataItems: [ /* array of type T */ ])
+let section1 = TableViewSection(dataItems: [ /* array of type T */ ])
+let allSections = [section0, section1]
+
+// create cell factory, it receives a cell identifier and configuration closure
+let factory = TableViewCellFactory(reuseIdentifier: "MyCellIdentifier") 
+    { (cell: UITableViewCell, model: T, tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell in
+      // configure the cell
+      return cell
+}
+
+// create data source provider
+self.dataSourceProvider = TableViewDataSourceProvider(sections: allSections, cellFactory: factory)
+
+// set the table view's data source
+self.tableView.dataSource = self.dataSourceProvider.dataSource
+
+// Clients are responsible for the following:
+//
+// 1. registering cells with the table view (or collection view)
+//
+// 2. adding and removing cells as the data source is modified 
+//    (i.e. as self.dataSourceProvider.sections changes)
+````
 
 ##### Demo Project
 
