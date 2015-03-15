@@ -21,14 +21,36 @@ import UIKit
 import CoreData
 
 
+///  An instance conforming to `TableViewCellFactoryType` is responsible for initializing
+///  and configuring table view cells to be consumed by an instance of `TableViewDataSourceProvider`.
+///  The `TableViewCellFactoryType` protocol has two associated types, `DataItem` and `Cell`.
+///  These associated types describe the type of model instances backing the table view
+///  and the type of cells in the table view, respectively.
 public protocol TableViewCellFactoryType {
 
+    ///  The type of the instance (model object) backing the table view.
     typealias DataItem
 
+    ///  The type of `UITableViewCell` that the factory produces.
     typealias Cell: UITableViewCell
 
+    ///  Creates and returns a new `Cell` instance, or dequeues an existing cell for reuse.
+    ///
+    ///  :param: item      The model instance (data object) at `indexPath`.
+    ///  :param: tableView The table view requesting this information.
+    ///  :param: indexPath The index path that specifies the location of `cell` and `item`.
+    ///
+    ///  :returns: An initialized or dequeued `UITableViewCell` of type `Cell`.
     func cellForItem(item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell
 
+    ///  Configures and returns the specified cell.
+    ///
+    ///  :param: cell      The cell to configure.
+    ///  :param: item      The model instance (data object) at `indexPath`.
+    ///  :param: tableView The table view requesting this information.
+    ///  :param: indexPath The index path that specifies the location of `cell` and `item`.
+    ///
+    ///  :returns: A configured `UITableViewCell` of type `Cell`.
     func configureCell(cell: Cell, forItem item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell
 }
 
