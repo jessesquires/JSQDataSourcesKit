@@ -124,7 +124,6 @@ public typealias SupplementaryViewKind = String
 
 ///  An instance conforming to `CollectionSupplementaryViewFactoryType` is responsible for initializing
 ///  and configuring collection view supplementary views to be consumed by an instance of `CollectionViewDataSourceProvider`.
-///
 ///  The `CollectionSupplementaryViewFactoryType` protocol has two associated types, `DataItem` and `SupplementaryView`.
 ///  These associated types describe the type of model instances backing the collection view
 ///  and the type of supplementary views in the collection view, respectively.
