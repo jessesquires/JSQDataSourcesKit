@@ -28,10 +28,10 @@ import CoreData
 ///  and the type of cells in the collection view, respectively. 
 public protocol CollectionViewCellFactoryType {
 
-    /// The type of the instance (model object) backing the collection view.
+    ///  The type of the instance (model object) backing the collection view.
     typealias DataItem
 
-    /// The type of `UICollectionViewCell` that the factory produces.
+    ///  The type of `UICollectionViewCell` that the factory produces.
     typealias Cell: UICollectionViewCell
 
     ///  Creates and returns a new `Cell` instance, or dequeues an existing cell for reuse.
@@ -57,6 +57,12 @@ public protocol CollectionViewCellFactoryType {
 
 ///  A `CollectionViewCellFactory` is a concrete `CollectionViewCellFactoryType`.
 ///  This factory is responsible for producing and configuring collection view cells for a specific data item.
+///  <br/><br/>
+///  **The factory has the following type parameters:**
+///  <br/>
+///  ````
+///  <Cell: UICollectionViewCell, DataItem>
+///  ````
 public struct CollectionViewCellFactory <Cell: UICollectionViewCell, DataItem>: CollectionViewCellFactoryType {
 
     ///  Configures the cell for the specified data item, collection view and index path.
@@ -69,14 +75,14 @@ public struct CollectionViewCellFactory <Cell: UICollectionViewCell, DataItem>: 
     ///  :returns: The configured cell.
     public typealias ConfigurationHandler = (Cell, DataItem, UICollectionView, NSIndexPath) -> Cell
 
-    /// A unique identifier that describes the purpose of the cells that the factory produces.
-    /// The factory dequeues cells from the collection view with this reuse identifier.
-    /// Clients are responsible for registering a cell for this identifier with the collection view.
+    ///  A unique identifier that describes the purpose of the cells that the factory produces.
+    ///  The factory dequeues cells from the collection view with this reuse identifier.
+    ///  Clients are responsible for registering a cell for this identifier with the collection view.
     public let reuseIdentifier: String
 
     private let cellConfigurator: ConfigurationHandler
 
-    ///  Initializes and returns a new collection view cell factory.
+    ///  Constructs a new collection view cell factory.
     ///
     ///  :param: reuseIdentifier  The reuse identifier with which the factory will dequeue cells.
     ///  :param: cellConfigurator The closure with which the factory will configure cells.
@@ -124,10 +130,10 @@ public typealias SupplementaryViewKind = String
 ///  and the type of supplementary views in the collection view, respectively.
 public protocol CollectionSupplementaryViewFactoryType {
 
-    /// The type of the instance (model object) backing the collection view.
+    ///  The type of the instance (model object) backing the collection view.
     typealias DataItem
 
-    /// The type of `UICollectionReusableView` that the factory produces.
+    ///  The type of `UICollectionReusableView` that the factory produces.
     typealias SupplementaryView: UICollectionReusableView
 
     ///  Creates and returns a new `SupplementaryView` instance, or dequeues an existing view for reuse.
@@ -157,6 +163,12 @@ public protocol CollectionSupplementaryViewFactoryType {
 
 ///  A `CollectionSupplementaryViewFactory` is a concrete `CollectionSupplementaryViewFactoryType`.
 ///  This factory is responsible for producing and configuring supplementary views for a collection view for a specific data item.
+///  <br/><br/>
+///  **The factory has the following type parameters:**
+///  <br/>
+///  ````
+///  <SupplementaryView: UICollectionReusableView, DataItem>
+///  ````
 public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectionReusableView, DataItem>: CollectionSupplementaryViewFactoryType {
 
     ///  Configures the supplementary view for the specified data item, collection view, and index path.
@@ -170,14 +182,14 @@ public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectio
     ///  :returns: The configured supplementary view.
     public typealias ConfigurationHandler = (SupplementaryView, DataItem, SupplementaryViewKind, UICollectionView, NSIndexPath) -> SupplementaryView
 
-    /// A unique identifier that describes the purpose of the supplementary views that the factory produces.
-    /// The factory dequeues supplementary views from the collection view with this reuse identifier.
-    /// Clients are responsible for registering a view for this identifier and a supplementary view kind with the collection view.
+    ///  A unique identifier that describes the purpose of the supplementary views that the factory produces.
+    ///  The factory dequeues supplementary views from the collection view with this reuse identifier.
+    ///  Clients are responsible for registering a view for this identifier and a supplementary view kind with the collection view.
     public let reuseIdentifier: String
 
     private let supplementaryViewConfigurator: ConfigurationHandler
 
-    ///  Initializes and returns a new supplementary view factory.
+    ///  Constructs a new supplementary view factory.
     ///
     ///  :param: reuseIdentifier               The reuse identifier with which the factory will dequeue supplementary views.
     ///  :param: supplementaryViewConfigurator The closure with which the factory will configure supplementary views.
@@ -219,10 +231,10 @@ public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectio
 ///  An instance conforming to `CollectionViewSectionInfo` represents a section of items in a collection view.
 public protocol CollectionViewSectionInfo {
 
-    /// The type of elements stored in the section.
+    ///  The type of elements stored in the section.
     typealias DataItem
 
-    /// Returns the elements in the collection view section.
+    ///  Returns the elements in the collection view section.
     var dataItems: [DataItem] { get }
 }
 
@@ -230,17 +242,23 @@ public protocol CollectionViewSectionInfo {
 ///  A `CollectionViewSection` is a concrete `CollectionViewSectionInfo`.
 ///  A section instance is responsible for managing the elements in a section.
 ///  Elements in the section may be accessed or replaced via its subscripting interface.
+///  <br/><br/>
+///  **The section has the following type parameters:**
+///  <br/>
+///  ````
+///  <DataItem>
+///  ````
 public struct CollectionViewSection <DataItem>: CollectionViewSectionInfo {
 
-    /// The elements in the collection view section.
+    ///  The elements in the collection view section.
     public var dataItems: [DataItem]
 
-    /// Returns the number of elements in the section.
+    ///  Returns the number of elements in the section.
     public var count: Int {
         return dataItems.count
     }
 
-    ///  Initializes and returns a new collection view section.
+    ///  Constructs a new collection view section.
     ///
     ///  :param: dataItems The elements in the section.
     ///
@@ -260,6 +278,21 @@ public struct CollectionViewSection <DataItem>: CollectionViewSectionInfo {
 }
 
 
+///  A `CollectionViewDataSourceProvider` is responsible for providing a data source for a collection view.
+///  An instance of `CollectionViewDataSourceProvider` owns an array of section instances, a cell factory, and a supplementary view factory.
+///  Clients are responsbile for registering cells and supplementary views with the collection view.
+///  Clients are also responsible for adding, removing, or reloading cells and sections as the provider's `sections` are modified.
+///  Sections may be accessed or replaced via the provider's subscripting interface.
+///  <br/><br/>
+///  **The data source provider has the following type parameters:**
+///  <br/>
+///  ````
+///  <DataItem, SectionInfo: CollectionViewSectionInfo, CellFactory: CollectionViewCellFactoryType, SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
+///  where
+///  SectionInfo.DataItem == DataItem,
+///  CellFactory.DataItem == DataItem,
+///  SupplementaryViewFactory.DataItem == DataItem>
+///  ````
 public final class CollectionViewDataSourceProvider <DataItem, SectionInfo: CollectionViewSectionInfo,
                                                      CellFactory: CollectionViewCellFactoryType, SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
                                                      where
@@ -267,14 +300,26 @@ public final class CollectionViewDataSourceProvider <DataItem, SectionInfo: Coll
                                                      CellFactory.DataItem == DataItem,
                                                      SupplementaryViewFactory.DataItem == DataItem> {
 
+    ///  The sections in the collection view.
     public var sections: [SectionInfo]
 
+    ///  Returns the cell factory for this data source provider.
     public let cellFactory: CellFactory
 
+    ///  Returns the supplementary view factory for this data source provider, or `nil` if it does not exist.
     public let supplementaryViewFactory: SupplementaryViewFactory?
 
+    ///  Returns the object that provides the data for the collection view.
     public var dataSource: UICollectionViewDataSource { return bridgedDataSource }
 
+    ///  Constructs a new data source provider for a collection view.
+    ///
+    ///  :param: sections                 The sections to display in the collection view.
+    ///  :param: cellFactory              The cell factory from which the collection view data source will dequeue cells.
+    ///  :param: supplementaryViewFactory The supplementary view factory from which the collection view data source will dequeue supplementary views.
+    ///  :param: collectionView           The collection view whose data source will be provided by this provider.
+    ///
+    ///  :returns: A new `CollectionViewDataSourceProvider` instance.
     public init(sections: [SectionInfo], cellFactory: CellFactory, supplementaryViewFactory: SupplementaryViewFactory? = nil, collectionView: UICollectionView? = nil) {
         self.sections = sections
         self.cellFactory = cellFactory
