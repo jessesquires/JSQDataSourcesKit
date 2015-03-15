@@ -28,7 +28,7 @@ import CoreData
 ///  and the type of cells in the collection view, respectively. 
 public protocol CollectionViewCellFactoryType {
 
-    ///  The type of the instance (model object) backing the collection view.
+    ///  The type of elements backing the collection view.
     typealias DataItem
 
     ///  The type of `UICollectionViewCell` that the factory produces.
@@ -129,7 +129,7 @@ public typealias SupplementaryViewKind = String
 ///  and the type of supplementary views in the collection view, respectively.
 public protocol CollectionSupplementaryViewFactoryType {
 
-    ///  The type of the instance (model object) backing the collection view.
+    ///  The type of elements backing the collection view.
     typealias DataItem
 
     ///  The type of `UICollectionReusableView` that the factory produces.

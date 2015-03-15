@@ -28,7 +28,7 @@ import CoreData
 ///  and the type of cells in the table view, respectively.
 public protocol TableViewCellFactoryType {
 
-    ///  The type of the instance (model object) backing the table view.
+    ///  The type of elements backing the table view.
     typealias DataItem
 
     ///  The type of `UITableViewCell` that the factory produces.
@@ -55,53 +55,118 @@ public protocol TableViewCellFactoryType {
 }
 
 
+///  A `TableViewCellFactory` is a concrete `TableViewCellFactoryType`.
+///  This factory is responsible for producing and configuring table view cells for a specific data item.
+///  <br/><br/>
+///  **The factory has the following type parameters:**
+///  <br/>
+///  ````
+///  <Cell: UITableViewCell, DataItem>
+///  ````
 public struct TableViewCellFactory <Cell: UITableViewCell, DataItem>: TableViewCellFactoryType {
 
+    ///  Configures the cell for the specified data item, table view and index path.
+    ///
+    ///  :param: Cell        The cell to be configured at the index path.
+    ///  :param: DataItem    The data item at the index path.
+    ///  :param: UITableView The table view requesting this information.
+    ///  :param: NSIndexPath The index path at which the cell will be displayed.
+    ///
+    ///  :returns: The configured cell.
     public typealias ConfigurationHandler = (Cell, DataItem, UITableView, NSIndexPath) -> Cell
 
+    ///  A unique identifier that describes the purpose of the cells that the factory produces.
+    ///  The factory dequeues cells from the table view with this reuse identifier.
+    ///  Clients are responsible for registering a cell for this identifier with the table view.
     public let reuseIdentifier: String
 
     private let cellConfigurator: ConfigurationHandler
 
+    ///  Constructs a new table view cell factory.
+    ///
+    ///  :param: reuseIdentifier  The reuse identifier with which the factory will dequeue cells.
+    ///  :param: cellConfigurator The closure with which the factory will configure cells.
+    ///
+    ///  :returns: A new `TableViewCellFactory` instance.
     public init(reuseIdentifier: String, cellConfigurator: ConfigurationHandler) {
         self.reuseIdentifier = reuseIdentifier
         self.cellConfigurator = cellConfigurator
     }
 
+    ///  Creates and returns a new `Cell` instance, or dequeues an existing cell for reuse.
+    ///
+    ///  :param: item      The model instance (data object) at `indexPath`.
+    ///  :param: tableView The table view requesting this information.
+    ///  :param: indexPath The index path that specifies the location of `cell` and `item`.
+    ///
+    ///  :returns: An initialized or dequeued `UITableViewCell` of type `Cell`.
     public func cellForItem(item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell {
         return tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! Cell
     }
 
+    ///  Configures and returns the specified cell.
+    ///
+    ///  :param: cell      The cell to configure.
+    ///  :param: item      The model instance (data object) at `indexPath`.
+    ///  :param: tableView The table view requesting this information.
+    ///  :param: indexPath The index path that specifies the location of `cell` and `item`.
+    ///
+    ///  :returns: A configured `UITableViewCell` of type `Cell`.
     public func configureCell(cell: Cell, forItem item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell {
         return cellConfigurator(cell, item, tableView, indexPath)
     }
 }
 
 
+///  An instance conforming to `TableViewSectionInfo` represents a section of items in a table view.
 public protocol TableViewSectionInfo {
 
+    ///  The type of elements stored in the section.
     typealias DataItem
 
+    ///  Returns the elements in the table view section.
     var dataItems: [DataItem] { get }
 
+    ///  Returns the header title for the section.
     var headerTitle: String? { get }
 
+    ///  Returns the footer title for the section.
     var footerTitle: String? { get }
 }
 
 
+///  A `TableViewSection` is a concrete `TableViewSectionInfo`.
+///  A section instance is responsible for managing the elements in a section.
+///  Elements in the section may be accessed or replaced via its subscripting interface.
+///  <br/><br/>
+///  **The section has the following type parameters:**
+///  <br/>
+///  ````
+///  <DataItem>
+///  ````
 public struct TableViewSection <DataItem>: TableViewSectionInfo {
 
+    ///  The elements in the collection view section.
     public var dataItems: [DataItem]
 
+    ///  The header title for the section.
     public let headerTitle: String?
 
+    ///  The footer title for the section.
     public let footerTitle: String?
 
+    ///  Returns the number of elements in the section.
     public var count: Int {
         return dataItems.count
     }
 
+    ///  Constructs a new table view section.
+    ///
+    ///  :param: dataItems   The elements in the section.
+    ///  :param: headerTitle The section header title.
+    ///  :param: footerTitle The section footer title.
+    ///
+    ///  :returns: A new `TableViewSection` instance.
     public init(dataItems: [DataItem], headerTitle: String? = nil, footerTitle: String? = nil) {
         self.dataItems = dataItems
         self.headerTitle = headerTitle
