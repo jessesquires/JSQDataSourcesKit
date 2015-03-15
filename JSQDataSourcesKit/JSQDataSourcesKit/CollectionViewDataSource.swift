@@ -278,7 +278,7 @@ public struct CollectionViewSection <DataItem>: CollectionViewSectionInfo {
 }
 
 
-///  A `CollectionViewDataSourceProvider` is responsible for providing a data source for a collection view.
+///  A `CollectionViewDataSourceProvider` is responsible for providing a data source object for a collection view.
 ///  An instance of `CollectionViewDataSourceProvider` owns an array of section instances, a cell factory, and a supplementary view factory.
 ///  Clients are responsbile for registering cells and supplementary views with the collection view.
 ///  Clients are also responsible for adding, removing, or reloading cells and sections as the provider's `sections` are modified.
@@ -364,20 +364,46 @@ public final class CollectionViewDataSourceProvider <DataItem, SectionInfo: Coll
 }
 
 
+///  A `CollectionViewFetchedResultsDataSourceProvider` is responsible for providing a data source object for a collection view
+///  that is backed by an `NSFetchedResultsController` instance. 
+///  This provider owns a fetched results controller, a cell factory, and a supplementary view factory.
+///  Clients are responsbile for registering cells and supplementary views with the collection view.
+///  <br/><br/>
+///  **The data source provider has the following type parameters:**
+///  <br/>
+///  ````
+///  <DataItem, CellFactory: CollectionViewCellFactoryType,
+///  SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
+///  where
+///  CellFactory.DataItem == DataItem,
+///  SupplementaryViewFactory.DataItem == DataItem>
+///  ````
 public final class CollectionViewFetchedResultsDataSourceProvider <DataItem, CellFactory: CollectionViewCellFactoryType,
                                                                     SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
                                                                     where
                                                                     CellFactory.DataItem == DataItem,
                                                                     SupplementaryViewFactory.DataItem == DataItem> {
 
+    ///  Returns the fetched results controller that provides the data for the collection view data source.
     public let fetchedResultsController: NSFetchedResultsController
 
+    ///  Returns the cell factory for this data source provider.
     public let cellFactory: CellFactory
 
+    ///  Returns the supplementary view factory for this data source provider, or `nil` if it does not exist.
     public let supplementaryViewFactory: SupplementaryViewFactory?
 
+    ///  Returns the object that provides the data for the collection view.
     public var dataSource: UICollectionViewDataSource { return bridgedDataSource }
 
+    ///  Constructs a new data source provider for the collection view.
+    ///
+    ///  :param: fetchedResultsController The fetched results controller to provide the data for the collection view.
+    ///  :param: cellFactory              The cell factory from which the collection view data source will dequeue cells.
+    ///  :param: supplementaryViewFactory The supplementary view factory from which the collection view data source will dequeue supplementary views.
+    ///  :param: collectionView           The collection view whose data source will be provided by this provider.
+    ///
+    ///  :returns: A new `CollectionViewFetchedResultsDataSourceProvider` instance.
     public init(fetchedResultsController: NSFetchedResultsController, cellFactory: CellFactory, supplementaryViewFactory: SupplementaryViewFactory? = nil, collectionView: UICollectionView? = nil) {
         self.fetchedResultsController = fetchedResultsController
         self.cellFactory = cellFactory
@@ -386,13 +412,17 @@ public final class CollectionViewFetchedResultsDataSourceProvider <DataItem, Cel
         collectionView?.dataSource = dataSource
     }
 
-    public func performFetch(error: NSErrorPointer = nil) -> Bool {
-        let success = fetchedResultsController.performFetch(error)
+    ///  Executes the fetch request for the provider's `fetchedResultsController`.
+    ///
+    ///  :returns: A tuple containing a `Bool` value that indicates if the fetch executed successfully and an `NSError?` if an error occured.
+    public func performFetch() -> (success: Bool, error: NSError?) {
+        var error: NSError? = nil
+        let success = fetchedResultsController.performFetch(&error)
         if !success {
             println("*** ERROR: \(toString(CollectionViewFetchedResultsDataSourceProvider.self))"
-                    + "\n\t [\(__LINE__)] \(__FUNCTION__) Could not perform fetch error: \(error)")
+                + "\n\t [\(__LINE__)] \(__FUNCTION__) Could not perform fetch error: \(error)")
         }
-        return success
+        return (success, error)
     }
 
     private lazy var bridgedDataSource: BridgedCollectionViewDataSource = BridgedCollectionViewDataSource(
