@@ -52,7 +52,7 @@ public struct TitledCollectionReusableViewFactory <DataItem>: CollectionSuppleme
 
     private let styleConfigurator: StyleConfigurationHandler
 
-    ///  Constructs a new `TitledCollectionReusableView` factory.
+    ///  Constructs a new `TitledCollectionReusableViewFactory`.
     ///
     ///  :param: dataConfigurator  The closure with which the factory will configure the `TitledCollectionReusableView` with the backing data item.
     ///  :param: styleConfigurator The closure with which the factory will configure the style attributes of new `TitledCollectionReusableView`.
