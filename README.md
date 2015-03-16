@@ -19,6 +19,8 @@ This framework reduces the boilerplate code regarding the `UITableView`, `UIColl
 From [CocoaPods](http://cocoapods.org):
 
 ````ruby
+use_frameworks!
+
 # For latest release in cocoapods
 pod 'JSQDataSourcesKit'  
 
