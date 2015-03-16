@@ -8,9 +8,26 @@ A Swift framework of data source and delegate objects inspired by [Andy Matuscha
 
 This framework reduces the boilerplate code regarding the `UITableView`, `UICollectionView`, and `NSFetchedResultsController` data source objects, as well as the `NSFetchedResultsControllerDelegate` object. It helps [keep view controllers light](http://www.objc.io/issue-1/), while focusing on type-safety, [SOLID](http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)) design principles, and easy interoperability with Cocoa. Further, it brings a more focused and data-driven perspective to these data sources. If you want to change your view then you change your data and its structure, without needing to update any data source or delegate protocol methods.
 
+## Requirements
+
+* iOS 8
+* Swift 1.2
+
 ## Installation
 
-> TODO
+From [CocoaPods](http://cocoapods.org):
+
+````ruby
+# For latest release in cocoapods
+pod 'JSQDataSourcesKit'  
+
+# Feeling adventurous? Get the latest on develop
+pod 'JSQDataSourcesKit', :git => 'https://github.com/jessesquires/JSQDataSourcesKit.git', :branch => 'develop'
+````
+
+Without CocoaPods:
+
+> TODO:
 
 ## Documentation
 
