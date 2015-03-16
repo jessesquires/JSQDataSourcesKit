@@ -25,9 +25,17 @@ pod 'JSQDataSourcesKit'
 pod 'JSQDataSourcesKit', :git => 'https://github.com/jessesquires/JSQDataSourcesKit.git', :branch => 'develop'
 ````
 
-Without CocoaPods:
+Manually:
 
-> TODO:
+1. Clone this repo and add the `JSQDataSourcesKit.xcodeproj` to your project
+2. Select your project app target "Build Phases" tab
+3. Add the `JSQDataSourcesKit.framework` to the "Link Binary With Libraries"  
+4. Create a new build phase of type "Copy Files" and set the "Destination" to "Frameworks"
+5. Add the `JSQDataSourcesKit.framework` and check "Code Sign On Copy"
+
+For an example, see the demo project included in this repo.
+
+For more information, see the [Framework Programming Guide](https://developer.apple.com/library/mac/documentation/MacOSX/Conceptual/BPFrameworks/Tasks/IncludingFrameworks.html#//apple_ref/doc/uid/20002257-BAJJBBHJ).
 
 ## Documentation
 
