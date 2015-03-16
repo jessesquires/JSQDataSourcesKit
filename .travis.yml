@@ -1,0 +1,11 @@
+language: objective-c
+
+before_install: 
+- gem install cocoapods
+- brew update
+- if brew outdated | grep -qx xctool; then brew upgrade xctool; fi
+
+script: 
+- xctool clean build test -workspace JSQDataSourcesKit.xcworkspace -scheme Example -sdk iphonesimulator8.3 ONLY_ACTIVE_ARCH=NO
+
+- xctool clean build test -project JSQDataSourcesKit/JSQDataSourcesKit.xcodeproj -scheme JSQDataSourcesKit -sdk iphonesimulator8.3 ONLY_ACTIVE_ARCH=NO
