@@ -1,5 +1,5 @@
 # JSQDataSourcesKit 
-[![Build Status](https://secure.travis-ci.org/jessesquires/JSQDataSourcesKit.svg)](http://travis-ci.org/jessesquires/JSQDataSourcesKit) [![Version Status](http://img.shields.io/cocoapods/v/JSQDataSourcesKit.png)][docsLink] [![license MIT](http://img.shields.io/badge/license-MIT-orange.png)][mitLink]
+[![Version Status](http://img.shields.io/cocoapods/v/JSQDataSourcesKit.png)][docsLink] [![license MIT](http://img.shields.io/badge/license-MIT-orange.png)][mitLink]
 
 *Type-safe, value-oriented data source objects that keep your view controllers light*
 
