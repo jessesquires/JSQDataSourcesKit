@@ -184,17 +184,41 @@ public struct TableViewSection <DataItem>: TableViewSectionInfo {
 }
 
 
+///  A `TableViewDataSourceProvider` is responsible for providing a data source object for a table view.
+///  An instance of `TableViewDataSourceProvider` owns an array of section instances and a cell factory.
+///  Clients are responsbile for registering cells with the table view.
+///  Clients are also responsible for adding, removing, or reloading cells and sections as the provider's `sections` are modified.
+///  Sections may be accessed or replaced via the provider's subscripting interface.
+///  <br/><br/>
+///  **The data source provider has the following type parameters:**
+///  <br/>
+///  ````
+///  <DataItem, SectionInfo: TableViewSectionInfo, CellFactory: TableViewCellFactoryType
+///  where
+///  SectionInfo.DataItem == DataItem,
+///  CellFactory.DataItem == DataItem>
+///  ````
 public final class TableViewDataSourceProvider <DataItem, SectionInfo: TableViewSectionInfo, CellFactory: TableViewCellFactoryType
                                                 where
                                                 SectionInfo.DataItem == DataItem,
                                                 CellFactory.DataItem == DataItem> {
 
+    ///  The sections in the table view
     public var sections: [SectionInfo]
 
+    ///  Returns the cell factory for this data source provider.
     public let cellFactory: CellFactory
 
+    ///  Returns the object that provides the data for the table view.
     public var dataSource: UITableViewDataSource { return bridgedDataSource }
 
+    ///  Constructs a new data source provider for a table view.
+    ///
+    ///  :param: sections    The sections to display in the table view.
+    ///  :param: cellFactory The cell factory from which the table view data source will dequeue cells.
+    ///  :param: tableView   The table view whose data source will be provided by this provider.
+    ///
+    ///  :returns: A new `TableViewDataSourceProvider` instance.
     public init(sections: [SectionInfo], cellFactory: CellFactory, tableView: UITableView? = nil) {
         self.sections = sections
         self.cellFactory = cellFactory
