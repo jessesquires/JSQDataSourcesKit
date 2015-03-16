@@ -256,15 +256,36 @@ public final class TableViewDataSourceProvider <DataItem, SectionInfo: TableView
 }
 
 
+///  A `TableViewFetchedResultsDataSourceProvider` is responsible for providing a data source object for a table view
+///  that is backed by an `NSFetchedResultsController` instance.
+///  This provider owns a fetched results controller and a cell factory.
+///  Clients are responsbile for registering cells with the table view.
+///  <br/><br/>
+///  **The data source provider has the following type parameters:**
+///  <br/>
+///  ````
+///  <DataItem, CellFactory: TableViewCellFactoryType
+///  where CellFactory.DataItem == DataItem>
+///  ````
 public final class TableViewFetchedResultsDataSourceProvider <DataItem, CellFactory: TableViewCellFactoryType
                                                               where CellFactory.DataItem == DataItem> {
 
+    ///  Returns the fetched results controller that provides the data for the table view data source.
     public let fetchedResultsController: NSFetchedResultsController
 
+    ///  Returns the cell factory for this data source provider.
     public let cellFactory: CellFactory
 
+    ///  Returns the object that provides the data for the table view.
     public var dataSource: UITableViewDataSource { return bridgedDataSource }
 
+    ///  Constructs a new data source provider for the table view.
+    ///
+    ///  :param: fetchedResultsController The fetched results controller that provides the data for the table view.
+    ///  :param: cellFactory              The cell factory from which the table view data source will dequeue cells.
+    ///  :param: tableView                The table view whose data source will be provided by this provider.
+    ///
+    ///  :returns: A new `TableViewFetchedResultsDataSourceProvider` instance.
     public init(fetchedResultsController: NSFetchedResultsController, cellFactory: CellFactory, tableView: UITableView? = nil) {
         self.fetchedResultsController = fetchedResultsController
         self.cellFactory = cellFactory
@@ -272,13 +293,17 @@ public final class TableViewFetchedResultsDataSourceProvider <DataItem, CellFact
         tableView?.dataSource = dataSource
     }
 
-    public func performFetch(error: NSErrorPointer = nil) -> Bool {
-        let success = self.fetchedResultsController.performFetch(error)
+    ///  Executes the fetch request for the provider's `fetchedResultsController`.
+    ///
+    ///  :returns: A tuple containing a `Bool` value that indicates if the fetch executed successfully and an `NSError?` if an error occured.
+    public func performFetch() -> (success: Bool, error: NSError?) {
+        var error: NSError? = nil
+        let success = fetchedResultsController.performFetch(&error)
         if !success {
             println("*** ERROR: \(toString(TableViewFetchedResultsDataSourceProvider.self))"
                 + "\n\t [\(__LINE__)] \(__FUNCTION__) Could not perform fetch error: \(error)")
         }
-        return success
+        return (success, error)
     }
 
     private lazy var bridgedDataSource: BridgedTableViewDataSource = BridgedTableViewDataSource(

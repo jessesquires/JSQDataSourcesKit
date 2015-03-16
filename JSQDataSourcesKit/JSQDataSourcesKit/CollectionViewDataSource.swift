@@ -397,7 +397,7 @@ public final class CollectionViewFetchedResultsDataSourceProvider <DataItem, Cel
 
     ///  Constructs a new data source provider for the collection view.
     ///
-    ///  :param: fetchedResultsController The fetched results controller to provide the data for the collection view.
+    ///  :param: fetchedResultsController The fetched results controller that provides the data for the collection view.
     ///  :param: cellFactory              The cell factory from which the collection view data source will dequeue cells.
     ///  :param: supplementaryViewFactory The supplementary view factory from which the collection view data source will dequeue supplementary views.
     ///  :param: collectionView           The collection view whose data source will be provided by this provider.
