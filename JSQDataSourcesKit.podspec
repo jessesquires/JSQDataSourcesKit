@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
    s.authors = { 'Jesse Squires' => 'jesse.squires.developer@gmail.com' }
    s.source = { :git => 'https://github.com/jessesquires/JSQDataSourcesKit.git', :tag => s.version }
 
-   spec.platform = :ios, '8.0'
+   s.platform = :ios, '8.0'
 
    s.source_files = 'JSQDataSourcesKit/JSQDataSourcesKit/*.swift'
    s.resources = 'JSQDataSourcesKit/JSQDataSourcesKit/*.xib'
