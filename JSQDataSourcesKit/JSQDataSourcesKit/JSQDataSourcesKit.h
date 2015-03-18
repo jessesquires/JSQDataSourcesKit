@@ -4,7 +4,7 @@
 //
 //
 //  Documentation
-//  http://www.jessesquires.com/JSQDataSourcesKit/
+//  http://jessesquires.com/JSQDataSourcesKit
 //
 //
 //  GitHub
@@ -16,7 +16,7 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 FOUNDATION_EXPORT double JSQDataSourcesKitVersionNumber;
 
