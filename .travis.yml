@@ -1,7 +1,6 @@
 language: objective-c
 
 before_install: 
-- gem install cocoapods
 - brew update
 - if brew outdated | grep -qx xctool; then brew upgrade xctool; fi
 
