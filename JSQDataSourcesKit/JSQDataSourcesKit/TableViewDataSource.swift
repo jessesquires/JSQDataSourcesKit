@@ -28,11 +28,15 @@ import CoreData
 ///  and the type of cells in the table view, respectively.
 public protocol TableViewCellFactoryType {
 
+    // MARK: Associated types
+
     ///  The type of elements backing the table view.
     typealias DataItem
 
     ///  The type of `UITableViewCell` that the factory produces.
     typealias Cell: UITableViewCell
+
+    // MARK: Methods
 
     ///  Creates and returns a new `Cell` instance, or dequeues an existing cell for reuse.
     ///
@@ -65,6 +69,8 @@ public protocol TableViewCellFactoryType {
 ///  ````
 public struct TableViewCellFactory <Cell: UITableViewCell, DataItem>: TableViewCellFactoryType {
 
+    // MARK: Typealiases
+
     ///  Configures the cell for the specified data item, table view and index path.
     ///
     ///  :param: Cell        The cell to be configured at the index path.
@@ -75,12 +81,16 @@ public struct TableViewCellFactory <Cell: UITableViewCell, DataItem>: TableViewC
     ///  :returns: The configured cell.
     public typealias ConfigurationHandler = (Cell, DataItem, UITableView, NSIndexPath) -> Cell
 
+    // MARK: Properties
+
     ///  A unique identifier that describes the purpose of the cells that the factory produces.
     ///  The factory dequeues cells from the table view with this reuse identifier.
     ///  Clients are responsible for registering a cell for this identifier with the table view.
     public let reuseIdentifier: String
 
     private let cellConfigurator: ConfigurationHandler
+
+    // MARK: Initialization
 
     ///  Constructs a new table view cell factory.
     ///
@@ -92,6 +102,8 @@ public struct TableViewCellFactory <Cell: UITableViewCell, DataItem>: TableViewC
         self.reuseIdentifier = reuseIdentifier
         self.cellConfigurator = cellConfigurator
     }
+
+    // MARK: Methods
 
     ///  Creates and returns a new `Cell` instance, or dequeues an existing cell for reuse.
     ///
@@ -121,8 +133,12 @@ public struct TableViewCellFactory <Cell: UITableViewCell, DataItem>: TableViewC
 ///  An instance conforming to `TableViewSectionInfo` represents a section of items in a table view.
 public protocol TableViewSectionInfo {
 
+    // MARK: Associated types
+
     ///  The type of elements stored in the section.
     typealias DataItem
+
+    // MARK: Computed properties
 
     ///  Returns the elements in the table view section.
     var dataItems: [DataItem] { get }
@@ -146,6 +162,8 @@ public protocol TableViewSectionInfo {
 ///  ````
 public struct TableViewSection <DataItem>: TableViewSectionInfo {
 
+    // MARK: Properties
+
     ///  The elements in the collection view section.
     public var dataItems: [DataItem]
 
@@ -160,6 +178,8 @@ public struct TableViewSection <DataItem>: TableViewSectionInfo {
         return dataItems.count
     }
 
+    // MARK: Initialization
+
     ///  Constructs a new table view section.
     ///
     ///  :param: dataItems   The elements in the section.
@@ -172,6 +192,8 @@ public struct TableViewSection <DataItem>: TableViewSectionInfo {
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
     }
+
+    // MARK: Subscript
 
     public subscript (index: Int) -> DataItem {
         get {
@@ -203,6 +225,8 @@ public final class TableViewDataSourceProvider <DataItem, SectionInfo: TableView
                                                 SectionInfo.DataItem == DataItem,
                                                 CellFactory.DataItem == DataItem> {
 
+    // MARK: Properties
+
     ///  The sections in the table view
     public var sections: [SectionInfo]
 
@@ -211,6 +235,8 @@ public final class TableViewDataSourceProvider <DataItem, SectionInfo: TableView
 
     ///  Returns the object that provides the data for the table view.
     public var dataSource: UITableViewDataSource { return bridgedDataSource }
+
+    // MARK: Initialization
 
     ///  Constructs a new data source provider for a table view.
     ///
@@ -226,6 +252,8 @@ public final class TableViewDataSourceProvider <DataItem, SectionInfo: TableView
         tableView?.dataSource = dataSource
     }
 
+    // MARK: Subscript
+
     public subscript (index: Int) -> SectionInfo {
         get {
             return sections[index]
@@ -234,6 +262,8 @@ public final class TableViewDataSourceProvider <DataItem, SectionInfo: TableView
             sections[index] = newValue
         }
     }
+
+    // MARK: Private
 
     private lazy var bridgedDataSource: BridgedTableViewDataSource = BridgedTableViewDataSource(
         numberOfSections: { [unowned self] () -> Int in
@@ -270,6 +300,8 @@ public final class TableViewDataSourceProvider <DataItem, SectionInfo: TableView
 public final class TableViewFetchedResultsDataSourceProvider <DataItem, CellFactory: TableViewCellFactoryType
                                                               where CellFactory.DataItem == DataItem> {
 
+    // MARK: Properties
+
     ///  Returns the fetched results controller that provides the data for the table view data source.
     public let fetchedResultsController: NSFetchedResultsController
 
@@ -278,6 +310,8 @@ public final class TableViewFetchedResultsDataSourceProvider <DataItem, CellFact
 
     ///  Returns the object that provides the data for the table view.
     public var dataSource: UITableViewDataSource { return bridgedDataSource }
+
+    // MARK: Initialization
 
     ///  Constructs a new data source provider for the table view.
     ///
@@ -293,6 +327,8 @@ public final class TableViewFetchedResultsDataSourceProvider <DataItem, CellFact
         tableView?.dataSource = dataSource
     }
 
+    // MARK: Methods
+
     ///  Executes the fetch request for the provider's `fetchedResultsController`.
     ///
     ///  :returns: A tuple containing a `Bool` value that indicates if the fetch executed successfully and an `NSError?` if an error occured.
@@ -306,6 +342,8 @@ public final class TableViewFetchedResultsDataSourceProvider <DataItem, CellFact
         return (success, error)
     }
 
+    // MARK: Private
+    
     private lazy var bridgedDataSource: BridgedTableViewDataSource = BridgedTableViewDataSource(
         numberOfSections: { [unowned self] () -> Int in
             self.fetchedResultsController.sections?.count ?? 0

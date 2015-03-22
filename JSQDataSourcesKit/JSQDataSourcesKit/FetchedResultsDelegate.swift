@@ -40,11 +40,15 @@ public final class CollectionViewFetchedResultsDelegateProvider <DataItem> {
     private typealias ObjectIndexPaths = [NSIndexPath]
     private typealias ObjectChangesDictionary = [NSFetchedResultsChangeType : ObjectIndexPaths]
 
+    // MARK: Properties
+
     ///  The collection view that displays the data from the `NSFetchedResultsController` for which this provider provides a delegate.
     public weak var collectionView: UICollectionView?
 
     ///  Returns the object that is notified when the fetched results changed.
     public var delegate: NSFetchedResultsControllerDelegate { return bridgedDelegate }
+
+    // MARK: Initialization
 
     ///  Constructs a new delegate provider for a fetched results controller.
     ///
@@ -57,6 +61,8 @@ public final class CollectionViewFetchedResultsDelegateProvider <DataItem> {
 
         controller?.delegate = delegate
     }
+
+    // MARK: Private
 
     private var sectionChanges = [SectionChangesDictionary]()
     
@@ -162,6 +168,8 @@ public final class CollectionViewFetchedResultsDelegateProvider <DataItem> {
 public final class TableViewFetchedResultsDelegateProvider <DataItem, CellFactory: TableViewCellFactoryType
                                                             where CellFactory.DataItem == DataItem> {
 
+    // MARK: Properties
+
     ///  The table view that displays the data from the `NSFetchedResultsController` for which this provider provides a delegate.
     public weak var tableView: UITableView?
 
@@ -170,6 +178,8 @@ public final class TableViewFetchedResultsDelegateProvider <DataItem, CellFactor
 
     ///  Returns the object that is notified when the fetched results changed.
     public var delegate: NSFetchedResultsControllerDelegate { return bridgedDelegate }
+
+    // MARK: Initialization
 
     ///  Constructs a new delegate provider for a fetched results controller.
     ///
@@ -185,6 +195,8 @@ public final class TableViewFetchedResultsDelegateProvider <DataItem, CellFactor
         controller?.delegate = delegate
     }
 
+    // MARK: Private
+    
     private lazy var bridgedDelegate: BridgedFetchedResultsDelegate = BridgedFetchedResultsDelegate(
         willChangeContent: { [unowned self] (controller) -> Void in
             self.tableView?.beginUpdates()

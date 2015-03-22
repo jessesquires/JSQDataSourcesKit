@@ -28,11 +28,15 @@ import CoreData
 ///  and the type of cells in the collection view, respectively. 
 public protocol CollectionViewCellFactoryType {
 
+    // MARK: Associated types
+
     ///  The type of elements backing the collection view.
     typealias DataItem
 
     ///  The type of `UICollectionViewCell` that the factory produces.
     typealias Cell: UICollectionViewCell
+
+    // MARK: Methods
 
     ///  Creates and returns a new `Cell` instance, or dequeues an existing cell for reuse.
     ///
@@ -65,6 +69,8 @@ public protocol CollectionViewCellFactoryType {
 ///  ````
 public struct CollectionViewCellFactory <Cell: UICollectionViewCell, DataItem>: CollectionViewCellFactoryType {
 
+    // MARK: Typealiases
+
     ///  Configures the cell for the specified data item, collection view and index path.
     ///
     ///  :param: Cell             The cell to be configured at the index path.
@@ -75,12 +81,16 @@ public struct CollectionViewCellFactory <Cell: UICollectionViewCell, DataItem>: 
     ///  :returns: The configured cell.
     public typealias ConfigurationHandler = (Cell, DataItem, UICollectionView, NSIndexPath) -> Cell
 
+    // MARK: Properties
+
     ///  A unique identifier that describes the purpose of the cells that the factory produces.
     ///  The factory dequeues cells from the collection view with this reuse identifier.
     ///  Clients are responsible for registering a cell for this identifier with the collection view.
     public let reuseIdentifier: String
 
     private let cellConfigurator: ConfigurationHandler
+
+    // MARK: Initialization
 
     ///  Constructs a new collection view cell factory.
     ///
@@ -92,6 +102,8 @@ public struct CollectionViewCellFactory <Cell: UICollectionViewCell, DataItem>: 
         self.reuseIdentifier = reuseIdentifier
         self.cellConfigurator = cellConfigurator
     }
+
+    // MARK: Methods
 
     ///  Creates and returns a new `Cell` instance, or dequeues an existing cell for reuse.
     ///
@@ -129,11 +141,15 @@ public typealias SupplementaryViewKind = String
 ///  and the type of supplementary views in the collection view, respectively.
 public protocol CollectionSupplementaryViewFactoryType {
 
+    // MARK: Associated types
+
     ///  The type of elements backing the collection view.
     typealias DataItem
 
     ///  The type of `UICollectionReusableView` that the factory produces.
     typealias SupplementaryView: UICollectionReusableView
+
+    // MARK: Methods
 
     ///  Creates and returns a new `SupplementaryView` instance, or dequeues an existing view for reuse.
     ///
@@ -170,6 +186,8 @@ public protocol CollectionSupplementaryViewFactoryType {
 ///  ````
 public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectionReusableView, DataItem>: CollectionSupplementaryViewFactoryType {
 
+    // MARK: Typealiases
+
     ///  Configures the supplementary view for the specified data item, collection view, and index path.
     ///
     ///  :param: SupplementaryView     The supplementary view to be configured at the index path.
@@ -181,12 +199,16 @@ public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectio
     ///  :returns: The configured supplementary view.
     public typealias ConfigurationHandler = (SupplementaryView, DataItem, SupplementaryViewKind, UICollectionView, NSIndexPath) -> SupplementaryView
 
+    // MARK: Properties
+
     ///  A unique identifier that describes the purpose of the supplementary views that the factory produces.
     ///  The factory dequeues supplementary views from the collection view with this reuse identifier.
     ///  Clients are responsible for registering a view for this identifier and a supplementary view kind with the collection view.
     public let reuseIdentifier: String
 
     private let supplementaryViewConfigurator: ConfigurationHandler
+
+    // MARK: Initialization
 
     ///  Constructs a new supplementary view factory.
     ///
@@ -198,6 +220,8 @@ public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectio
         self.reuseIdentifier = reuseIdentifier
         self.supplementaryViewConfigurator = supplementaryViewConfigurator
     }
+
+    // MARK: Methods
 
     ///  Creates and returns a new `SupplementaryView` instance, or dequeues an existing view for reuse.
     ///
@@ -230,8 +254,12 @@ public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectio
 ///  An instance conforming to `CollectionViewSectionInfo` represents a section of items in a collection view.
 public protocol CollectionViewSectionInfo {
 
+    // MARK: Associated types
+
     ///  The type of elements stored in the section.
     typealias DataItem
+
+    // MARK: Computed properties
 
     ///  Returns the elements in the collection view section.
     var dataItems: [DataItem] { get }
@@ -249,6 +277,8 @@ public protocol CollectionViewSectionInfo {
 ///  ````
 public struct CollectionViewSection <DataItem>: CollectionViewSectionInfo {
 
+    // MARK: Properties
+
     ///  The elements in the collection view section.
     public var dataItems: [DataItem]
 
@@ -256,6 +286,8 @@ public struct CollectionViewSection <DataItem>: CollectionViewSectionInfo {
     public var count: Int {
         return dataItems.count
     }
+
+    // MARK: Initialization
 
     ///  Constructs a new collection view section.
     ///
@@ -265,6 +297,8 @@ public struct CollectionViewSection <DataItem>: CollectionViewSectionInfo {
     public init(dataItems: [DataItem]) {
         self.dataItems = dataItems
     }
+
+    // MARK: Subscript
 
     public subscript (index: Int) -> DataItem {
         get {
@@ -299,6 +333,8 @@ public final class CollectionViewDataSourceProvider <DataItem, SectionInfo: Coll
                                                      CellFactory.DataItem == DataItem,
                                                      SupplementaryViewFactory.DataItem == DataItem> {
 
+    // MARK: Properties
+
     ///  The sections in the collection view.
     public var sections: [SectionInfo]
 
@@ -310,6 +346,8 @@ public final class CollectionViewDataSourceProvider <DataItem, SectionInfo: Coll
 
     ///  Returns the object that provides the data for the collection view.
     public var dataSource: UICollectionViewDataSource { return bridgedDataSource }
+
+    // MARK: Initialization
 
     ///  Constructs a new data source provider for a collection view.
     ///
@@ -327,6 +365,8 @@ public final class CollectionViewDataSourceProvider <DataItem, SectionInfo: Coll
         collectionView?.dataSource = dataSource
     }
 
+    // MARK: Subscript
+
     public subscript (index: Int) -> SectionInfo {
         get {
             return sections[index]
@@ -335,6 +375,8 @@ public final class CollectionViewDataSourceProvider <DataItem, SectionInfo: Coll
             sections[index] = newValue
         }
     }
+
+    // MARK: Private
 
     private lazy var bridgedDataSource: BridgedCollectionViewDataSource = BridgedCollectionViewDataSource(
         numberOfSections: { [unowned self] () -> Int in
@@ -383,6 +425,8 @@ public final class CollectionViewFetchedResultsDataSourceProvider <DataItem, Cel
                                                                     CellFactory.DataItem == DataItem,
                                                                     SupplementaryViewFactory.DataItem == DataItem> {
 
+    // MARK: Properties
+
     ///  Returns the fetched results controller that provides the data for the collection view data source.
     public let fetchedResultsController: NSFetchedResultsController
 
@@ -394,6 +438,8 @@ public final class CollectionViewFetchedResultsDataSourceProvider <DataItem, Cel
 
     ///  Returns the object that provides the data for the collection view.
     public var dataSource: UICollectionViewDataSource { return bridgedDataSource }
+
+    // MARK: Initialization
 
     ///  Constructs a new data source provider for the collection view.
     ///
@@ -411,6 +457,8 @@ public final class CollectionViewFetchedResultsDataSourceProvider <DataItem, Cel
         collectionView?.dataSource = dataSource
     }
 
+    // MARK: Methods
+
     ///  Executes the fetch request for the provider's `fetchedResultsController`.
     ///
     ///  :returns: A tuple containing a `Bool` value that indicates if the fetch executed successfully and an `NSError?` if an error occured.
@@ -423,6 +471,8 @@ public final class CollectionViewFetchedResultsDataSourceProvider <DataItem, Cel
         }
         return (success, error)
     }
+
+    // MARK: Private
 
     private lazy var bridgedDataSource: BridgedCollectionViewDataSource = BridgedCollectionViewDataSource(
         numberOfSections: { [unowned self] () -> Int in

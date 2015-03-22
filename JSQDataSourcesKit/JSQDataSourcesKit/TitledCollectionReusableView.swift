@@ -24,11 +24,15 @@ import UIKit
 ///  These views can be created via a `TitledCollectionReusableViewFactory`. 
 public class TitledCollectionReusableView: UICollectionReusableView {
 
+    // MARK: Outlets
+
     @IBOutlet private weak var _label: UILabel!
     @IBOutlet private weak var _leadingSpacing: NSLayoutConstraint!
     @IBOutlet private weak var _topSpacing: NSLayoutConstraint!
     @IBOutlet private weak var _trailingSpacing: NSLayoutConstraint!
     @IBOutlet private weak var _bottomSpacing: NSLayoutConstraint!
+
+    // MARK: Properties
 
     /// Returns the label of the reusable view.
     public var label: UILabel {
@@ -76,6 +80,8 @@ public class TitledCollectionReusableView: UICollectionReusableView {
         }
     }
 
+    // MARK: Class properties
+
     /// Returns the default string used to identify instances of `TitledCollectionReusableView`.
     public class var identifier: String {
         get {
@@ -89,6 +95,8 @@ public class TitledCollectionReusableView: UICollectionReusableView {
             return UINib(nibName: "TitledCollectionReusableView", bundle: NSBundle(forClass: TitledCollectionReusableView.self))
         }
     }
+
+    // MARK: Methods
 
     ///  Performs any clean up necessary to prepare the view for use again.
     override public func prepareForReuse() {

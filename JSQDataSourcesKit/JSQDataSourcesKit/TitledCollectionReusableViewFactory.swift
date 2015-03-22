@@ -30,6 +30,8 @@ import UIKit
 ///  ````
 public struct TitledCollectionReusableViewFactory <DataItem>: CollectionSupplementaryViewFactoryType {
 
+    // MARK: Typealiases
+
     ///  Configures the `TitledCollectionReusableView` for the specified data item, collection view, and index path.
     ///  **This closure is called each time the collection view requests updates for a section's supplementary views.**
     ///
@@ -48,9 +50,13 @@ public struct TitledCollectionReusableViewFactory <DataItem>: CollectionSuppleme
     ///  :param: TitledCollectionReusableView The `TitledCollectionReusableView` to be configured at the index path.
     public typealias StyleConfigurationHandler = (TitledCollectionReusableView) -> Void
 
+    // MARK: Private Properties
+
     private let dataConfigurator: DataConfigurationHandler
 
     private let styleConfigurator: StyleConfigurationHandler
+
+    // MARK: Initialization
 
     ///  Constructs a new `TitledCollectionReusableViewFactory`.
     ///
@@ -62,6 +68,8 @@ public struct TitledCollectionReusableViewFactory <DataItem>: CollectionSuppleme
         self.dataConfigurator = dataConfigurator
         self.styleConfigurator = styleConfigurator
     }
+
+    // MARK: Methods
 
     ///  Creates and returns a new `TitledCollectionReusableView` instance, or dequeues an existing one for reuse.
     ///
