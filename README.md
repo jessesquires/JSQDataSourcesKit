@@ -42,7 +42,7 @@ For more information, see the [Framework Programming Guide](https://developer.ap
 
 ## Documentation
 
-Read the fucking [docs](http://www.jessesquires.com/JSQDataSourcesKit/). Generated with [jazzy](https://github.com/realm/jazzy). Hosted by [GitHub Pages](https://pages.github.com).
+Read the fucking [docs][docsLink]. Generated with [jazzy](https://github.com/realm/jazzy). Hosted by [GitHub Pages](https://pages.github.com).
 
 ````bash
 # regenerate documentation
