@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		880659701AC4A9D900005BF5 /* JSQDataSourcesKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 88DB897C1A86D0C900DED153 /* JSQDataSourcesKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		881F6FFC1A9EE2A800037CD2 /* TableViewDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881F6FFB1A9EE2A800037CD2 /* TableViewDataSourceTests.swift */; };
 		8827576B1AABC292006691B7 /* TitledCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882757691AABC292006691B7 /* TitledCollectionReusableView.swift */; };
 		8827576C1AABC292006691B7 /* TitledCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8827576A1AABC292006691B7 /* TitledCollectionReusableView.xib */; };
@@ -28,6 +29,20 @@
 			remoteInfo = JSQDataSourcesKit;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8806596F1AC4A9CB00005BF5 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				880659701AC4A9D900005BF5 /* JSQDataSourcesKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		881F6FFB1A9EE2A800037CD2 /* TableViewDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceTests.swift; sourceTree = "<group>"; };
@@ -162,6 +177,7 @@
 				88DB89831A86D0C900DED153 /* Sources */,
 				88DB89841A86D0C900DED153 /* Frameworks */,
 				88DB89851A86D0C900DED153 /* Resources */,
+				8806596F1AC4A9CB00005BF5 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
