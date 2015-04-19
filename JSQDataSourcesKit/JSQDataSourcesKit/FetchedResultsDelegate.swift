@@ -30,15 +30,9 @@ import CoreData
 ///  <DataItem>
 ///  ````
 ///  <br/>
-///  Here, the `DataItem` type parameter acts as a [phatom type](http://www.objc.io/snippets/13.html). 
+///  Here, the `DataItem` type parameter acts as a phatom type.
 ///  This type should correpsond to the type of objects that the `NSFetchedResultsController` fetches.
 public final class CollectionViewFetchedResultsDelegateProvider <DataItem> {
-
-    private typealias SectionIndex = Int
-    private typealias SectionChangesDictionary = [NSFetchedResultsChangeType : SectionIndex]
-
-    private typealias ObjectIndexPaths = [NSIndexPath]
-    private typealias ObjectChangesDictionary = [NSFetchedResultsChangeType : ObjectIndexPaths]
 
     // MARK: Properties
 
@@ -63,6 +57,12 @@ public final class CollectionViewFetchedResultsDelegateProvider <DataItem> {
     }
 
     // MARK: Private
+
+    private typealias SectionIndex = Int
+    private typealias SectionChangesDictionary = [NSFetchedResultsChangeType : SectionIndex]
+
+    private typealias ObjectIndexPaths = [NSIndexPath]
+    private typealias ObjectChangesDictionary = [NSFetchedResultsChangeType : ObjectIndexPaths]
 
     private var sectionChanges = [SectionChangesDictionary]()
     
@@ -117,8 +117,6 @@ public final class CollectionViewFetchedResultsDelegateProvider <DataItem> {
                 self.sectionChanges.removeAll()
                 self.objectChanges.removeAll()
             })
-            
-            return // Swift compiler bug: single statement void closure
         })
 
     private func applyObjectChanges() {
@@ -200,7 +198,6 @@ public final class TableViewFetchedResultsDelegateProvider <DataItem, CellFactor
     private lazy var bridgedDelegate: BridgedFetchedResultsDelegate = BridgedFetchedResultsDelegate(
         willChangeContent: { [unowned self] (controller) -> Void in
             self.tableView?.beginUpdates()
-            return // Swift compiler bug: single statement void closure
         },
         didChangeSection: { [unowned self] (controller, sectionInfo, sectionIndex, changeType) -> Void in
             switch changeType {
@@ -238,7 +235,6 @@ public final class TableViewFetchedResultsDelegateProvider <DataItem, CellFactor
         },
         didChangeContent: { [unowned self] (controller) -> Void in
             self.tableView?.endUpdates()
-            return // Swift compiler bug: single statement void closure
         })
 }
 
