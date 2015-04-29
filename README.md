@@ -1,5 +1,5 @@
 # JSQDataSourcesKit 
-[![Version Status](http://img.shields.io/cocoapods/v/JSQDataSourcesKit.png)][docsLink] [![license MIT](http://img.shields.io/badge/license-MIT-orange.png)][mitLink]
+[![Version Status](http://img.shields.io/cocoapods/v/JSQDataSourcesKit.png)][docsLink] [![license MIT](http://img.shields.io/badge/license-MIT-orange.png)][mitLink] [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 *Type-safe, value-oriented data source objects that keep your view controllers light*
 
@@ -16,7 +16,7 @@ This framework reduces the boilerplate code regarding the `UITableView`, `UIColl
 
 ## Installation
 
-From [CocoaPods](http://cocoapods.org):
+#### [CocoaPods](http://cocoapods.org)
 
 ````ruby
 use_frameworks!
@@ -28,7 +28,13 @@ pod 'JSQDataSourcesKit'
 pod 'JSQDataSourcesKit', :git => 'https://github.com/jessesquires/JSQDataSourcesKit.git', :branch => 'develop'
 ````
 
-Manually:
+#### [Carthage](https://github.com/Carthage/Carthage)
+
+````bash
+github "jessesquires/JSQDataSourcesKit"
+````
+
+#### Manually
 
 1. Clone this repo and add the `JSQDataSourcesKit.xcodeproj` to your project
 2. Select your project app target "Build Phases" tab
