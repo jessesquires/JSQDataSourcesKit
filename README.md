@@ -50,12 +50,7 @@ For more information, see the [Framework Programming Guide](https://developer.ap
 
 Read the fucking [docs][docsLink]. Generated with [jazzy](https://github.com/realm/jazzy). Hosted by [GitHub Pages](https://pages.github.com).
 
-````bash
-# regenerate documentation
-$ cd /path/to/JSQDataSourcesKit/
-$ ./build_docs.sh
-$ open _docs/
-````
+More information on the [gh-pages](https://github.com/jessesquires/JSQDataSourcesKit/tree/gh-pages) branch.
 
 ## Getting Started
 
