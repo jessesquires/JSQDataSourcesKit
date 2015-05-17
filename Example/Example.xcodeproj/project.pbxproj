@@ -89,7 +89,7 @@
 		88D21DA21A9932BD00E736DC /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		88D21DA51A9932CD00E736DC /* CollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
 		88D629721AAC081300798997 /* ComposedSupplementaryViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposedSupplementaryViewFactory.swift; sourceTree = "<group>"; };
-		88DB89C11A86D1A900DED153 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		88DB89C11A86D1A900DED153 /* DataSources.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataSources.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88DB89C51A86D1A900DED153 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88DB89C61A86D1A900DED153 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88DB89C81A86D1A900DED153 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -180,7 +180,7 @@
 		88DB89C21A86D1A900DED153 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				88DB89C11A86D1A900DED153 /* Example.app */,
+				88DB89C11A86D1A900DED153 /* DataSources.app */,
 				88DB89D61A86D1A900DED153 /* ExampleTests.xctest */,
 			);
 			name = Products;
@@ -251,7 +251,7 @@
 			);
 			name = Example;
 			productName = Example;
-			productReference = 88DB89C11A86D1A900DED153 /* Example.app */;
+			productReference = 88DB89C11A86D1A900DED153 /* DataSources.app */;
 			productType = "com.apple.product-type.application";
 		};
 		88DB89D51A86D1A900DED153 /* ExampleTests */ = {
@@ -455,6 +455,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = DataSources;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -491,6 +492,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = DataSources;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -504,7 +506,7 @@
 				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = DataSources;
 			};
 			name = Debug;
 		};
@@ -515,7 +517,7 @@
 				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = DataSources;
 			};
 			name = Release;
 		};
