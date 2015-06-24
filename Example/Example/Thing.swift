@@ -39,6 +39,10 @@ public class Thing: NSManagedObject {
         super.init(entity: entityDescription, insertIntoManagedObjectContext: context)
     }
 
+    public override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    }
+
     public class func newThing(context: NSManagedObjectContext) -> Thing {
         let t = Thing(context: context)
         t.category = Category.random.rawValue

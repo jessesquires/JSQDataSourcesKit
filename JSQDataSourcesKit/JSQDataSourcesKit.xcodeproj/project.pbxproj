@@ -11,16 +11,16 @@
 		8827576C1AABC292006691B7 /* TitledCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8827576A1AABC292006691B7 /* TitledCollectionReusableView.xib */; };
 		8827576E1AABCF84006691B7 /* TitledCollectionReusableViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8827576D1AABCF84006691B7 /* TitledCollectionReusableViewFactory.swift */; };
 		88614C0F1A8810EC00C51236 /* FetchedResultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88614C0E1A8810EC00C51236 /* FetchedResultsDelegate.swift */; };
-		887863481B369A5600E2F51C /* JSQDataSourcesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88DB897C1A86D0C900DED153 /* JSQDataSourcesKit.framework */; };
-		887863501B369A6F00E2F51C /* CollectionViewDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8878634E1B369A6F00E2F51C /* CollectionViewDataSourceTests.swift */; };
-		887863511B369A6F00E2F51C /* TableViewDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8878634F1B369A6F00E2F51C /* TableViewDataSourceTests.swift */; };
 		88B323411A86D7B1007FB904 /* TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B323401A86D7B1007FB904 /* TableViewDataSource.swift */; };
+		88BAB94F1B3A6CB200CA6899 /* JSQDataSourcesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88DB897C1A86D0C900DED153 /* JSQDataSourcesKit.framework */; };
 		88D21DA11A992C8000E736DC /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D21DA01A992C8000E736DC /* CollectionViewDataSource.swift */; };
 		88DB89821A86D0C900DED153 /* JSQDataSourcesKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 88DB89811A86D0C900DED153 /* JSQDataSourcesKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		88F8F0F11B3A6A56008A3EAD /* CollectionViewDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F8F0EF1B3A6A56008A3EAD /* CollectionViewDataSourceTests.swift */; };
+		88F8F0F21B3A6A56008A3EAD /* TableViewDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F8F0F01B3A6A56008A3EAD /* TableViewDataSourceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		887863491B369A5600E2F51C /* PBXContainerItemProxy */ = {
+		88BAB94D1B3A6CAE00CA6899 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 88DB89731A86D0C900DED153 /* Project object */;
 			proxyType = 1;
@@ -34,26 +34,18 @@
 		8827576A1AABC292006691B7 /* TitledCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitledCollectionReusableView.xib; sourceTree = "<group>"; };
 		8827576D1AABCF84006691B7 /* TitledCollectionReusableViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledCollectionReusableViewFactory.swift; sourceTree = "<group>"; };
 		88614C0E1A8810EC00C51236 /* FetchedResultsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsDelegate.swift; sourceTree = "<group>"; };
-		887863431B369A5600E2F51C /* JSQDataSourcesKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JSQDataSourcesKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		887863471B369A5600E2F51C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8878634E1B369A6F00E2F51C /* CollectionViewDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSourceTests.swift; sourceTree = "<group>"; };
-		8878634F1B369A6F00E2F51C /* TableViewDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceTests.swift; sourceTree = "<group>"; };
 		88B323401A86D7B1007FB904 /* TableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSource.swift; sourceTree = "<group>"; };
 		88D21DA01A992C8000E736DC /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
 		88DB897C1A86D0C900DED153 /* JSQDataSourcesKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSQDataSourcesKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88DB89801A86D0C900DED153 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88DB89811A86D0C900DED153 /* JSQDataSourcesKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSQDataSourcesKit.h; sourceTree = "<group>"; };
+		88F8F0E31B3A6A2A008A3EAD /* JSQDataSourcesKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JSQDataSourcesKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		88F8F0E71B3A6A2A008A3EAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88F8F0EF1B3A6A56008A3EAD /* CollectionViewDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSourceTests.swift; sourceTree = "<group>"; };
+		88F8F0F01B3A6A56008A3EAD /* TableViewDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		887863401B369A5600E2F51C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				887863481B369A5600E2F51C /* JSQDataSourcesKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		88DB89781A86D0C900DED153 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -61,32 +53,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		88F8F0E01B3A6A2A008A3EAD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88BAB94F1B3A6CB200CA6899 /* JSQDataSourcesKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		887863441B369A5600E2F51C /* JSQDataSourcesKitTests */ = {
-			isa = PBXGroup;
-			children = (
-				8878634E1B369A6F00E2F51C /* CollectionViewDataSourceTests.swift */,
-				8878634F1B369A6F00E2F51C /* TableViewDataSourceTests.swift */,
-				887863521B369A7F00E2F51C /* Supporting Files */,
-			);
-			path = JSQDataSourcesKitTests;
-			sourceTree = "<group>";
-		};
-		887863521B369A7F00E2F51C /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				887863471B369A5600E2F51C /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		88DB89721A86D0C900DED153 = {
 			isa = PBXGroup;
 			children = (
 				88DB897E1A86D0C900DED153 /* JSQDataSourcesKit */,
-				887863441B369A5600E2F51C /* JSQDataSourcesKitTests */,
+				88F8F0E41B3A6A2A008A3EAD /* JSQDataSourcesKitTests */,
 				88DB897D1A86D0C900DED153 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -95,7 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				88DB897C1A86D0C900DED153 /* JSQDataSourcesKit.framework */,
-				887863431B369A5600E2F51C /* JSQDataSourcesKitTests.xctest */,
+				88F8F0E31B3A6A2A008A3EAD /* JSQDataSourcesKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -123,6 +105,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		88F8F0E41B3A6A2A008A3EAD /* JSQDataSourcesKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				88F8F0EF1B3A6A56008A3EAD /* CollectionViewDataSourceTests.swift */,
+				88F8F0EE1B3A6A3E008A3EAD /* Supporting Files */,
+				88F8F0F01B3A6A56008A3EAD /* TableViewDataSourceTests.swift */,
+			);
+			path = JSQDataSourcesKitTests;
+			sourceTree = "<group>";
+		};
+		88F8F0EE1B3A6A3E008A3EAD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				88F8F0E71B3A6A2A008A3EAD /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -137,24 +137,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		887863421B369A5600E2F51C /* JSQDataSourcesKitTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8878634B1B369A5600E2F51C /* Build configuration list for PBXNativeTarget "JSQDataSourcesKitTests" */;
-			buildPhases = (
-				8878633F1B369A5600E2F51C /* Sources */,
-				887863401B369A5600E2F51C /* Frameworks */,
-				887863411B369A5600E2F51C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8878634A1B369A5600E2F51C /* PBXTargetDependency */,
-			);
-			name = JSQDataSourcesKitTests;
-			productName = JSQDataSourcesKitTests;
-			productReference = 887863431B369A5600E2F51C /* JSQDataSourcesKitTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		88DB897B1A86D0C900DED153 /* JSQDataSourcesKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 88DB89921A86D0C900DED153 /* Build configuration list for PBXNativeTarget "JSQDataSourcesKit" */;
@@ -173,6 +155,24 @@
 			productReference = 88DB897C1A86D0C900DED153 /* JSQDataSourcesKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		88F8F0E21B3A6A2A008A3EAD /* JSQDataSourcesKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 88F8F0EB1B3A6A2A008A3EAD /* Build configuration list for PBXNativeTarget "JSQDataSourcesKitTests" */;
+			buildPhases = (
+				88F8F0DF1B3A6A2A008A3EAD /* Sources */,
+				88F8F0E01B3A6A2A008A3EAD /* Frameworks */,
+				88F8F0E11B3A6A2A008A3EAD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				88BAB94E1B3A6CAE00CA6899 /* PBXTargetDependency */,
+			);
+			name = JSQDataSourcesKitTests;
+			productName = JSQDataSourcesKitTests;
+			productReference = 88F8F0E31B3A6A2A008A3EAD /* JSQDataSourcesKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -183,11 +183,11 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Hexed Bits";
 				TargetAttributes = {
-					887863421B369A5600E2F51C = {
-						CreatedOnToolsVersion = 7.0;
-					};
 					88DB897B1A86D0C900DED153 = {
 						CreatedOnToolsVersion = 6.1.1;
+					};
+					88F8F0E21B3A6A2A008A3EAD = {
+						CreatedOnToolsVersion = 7.0;
 					};
 				};
 			};
@@ -204,19 +204,12 @@
 			projectRoot = "";
 			targets = (
 				88DB897B1A86D0C900DED153 /* JSQDataSourcesKit */,
-				887863421B369A5600E2F51C /* JSQDataSourcesKitTests */,
+				88F8F0E21B3A6A2A008A3EAD /* JSQDataSourcesKitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		887863411B369A5600E2F51C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		88DB897A1A86D0C900DED153 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -225,18 +218,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		8878633F1B369A5600E2F51C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
+		88F8F0E11B3A6A2A008A3EAD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				887863511B369A6F00E2F51C /* TableViewDataSourceTests.swift in Sources */,
-				887863501B369A6F00E2F51C /* CollectionViewDataSourceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
 		88DB89771A86D0C900DED153 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -249,47 +240,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		88F8F0DF1B3A6A2A008A3EAD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88F8F0F21B3A6A56008A3EAD /* TableViewDataSourceTests.swift in Sources */,
+				88F8F0F11B3A6A56008A3EAD /* CollectionViewDataSourceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8878634A1B369A5600E2F51C /* PBXTargetDependency */ = {
+		88BAB94E1B3A6CAE00CA6899 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 88DB897B1A86D0C900DED153 /* JSQDataSourcesKit */;
-			targetProxy = 887863491B369A5600E2F51C /* PBXContainerItemProxy */;
+			targetProxy = 88BAB94D1B3A6CAE00CA6899 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		8878634C1B369A5600E2F51C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = JSQDataSourcesKitTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hexedbits.JSQDataSourcesKitTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-			};
-			name = Debug;
-		};
-		8878634D1B369A5600E2F51C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = JSQDataSourcesKitTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hexedbits.JSQDataSourcesKitTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 		88DB89901A86D0C900DED153 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -381,16 +351,15 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				DYLIB_CURRENT_VERSION = "";
+				DYLIB_INSTALL_NAME_BASE = "";
 				INFOPLIST_FILE = JSQDataSourcesKit/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				INSTALL_PATH = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hexedbits.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -400,30 +369,51 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				DYLIB_CURRENT_VERSION = "";
+				DYLIB_INSTALL_NAME_BASE = "";
 				INFOPLIST_FILE = JSQDataSourcesKit/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				INSTALL_PATH = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hexedbits.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
+			};
+			name = Release;
+		};
+		88F8F0EC1B3A6A2A008A3EAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = JSQDataSourcesKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hexedbits.JSQDataSourcesKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		88F8F0ED1B3A6A2A008A3EAD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = JSQDataSourcesKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hexedbits.JSQDataSourcesKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8878634B1B369A5600E2F51C /* Build configuration list for PBXNativeTarget "JSQDataSourcesKitTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8878634C1B369A5600E2F51C /* Debug */,
-				8878634D1B369A5600E2F51C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
 		88DB89761A86D0C900DED153 /* Build configuration list for PBXProject "JSQDataSourcesKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -438,6 +428,15 @@
 			buildConfigurations = (
 				88DB89931A86D0C900DED153 /* Debug */,
 				88DB89941A86D0C900DED153 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		88F8F0EB1B3A6A2A008A3EAD /* Build configuration list for PBXNativeTarget "JSQDataSourcesKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88F8F0EC1B3A6A2A008A3EAD /* Debug */,
+				88F8F0ED1B3A6A2A008A3EAD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

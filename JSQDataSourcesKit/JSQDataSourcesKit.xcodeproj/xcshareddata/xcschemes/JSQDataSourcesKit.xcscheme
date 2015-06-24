@@ -20,20 +20,6 @@
                ReferencedContainer = "container:JSQDataSourcesKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "887863421B369A5600E2F51C"
-               BuildableName = "JSQDataSourcesKitTests.xctest"
-               BlueprintName = "JSQDataSourcesKitTests"
-               ReferencedContainer = "container:JSQDataSourcesKit.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -47,7 +33,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "887863421B369A5600E2F51C"
+               BlueprintIdentifier = "88F8F0E21B3A6A2A008A3EAD"
                BuildableName = "JSQDataSourcesKitTests.xctest"
                BlueprintName = "JSQDataSourcesKitTests"
                ReferencedContainer = "container:JSQDataSourcesKit.xcodeproj">
