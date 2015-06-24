@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
    s.name = 'JSQDataSourcesKit'
-   s.version = '1.0.0'
+   s.version = '2.0.0'
    s.license = 'MIT'
 
    s.summary = 'Type-safe, value-oriented data source objects that keep your view controllers light'
