@@ -98,18 +98,22 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
 
         // create delegate provider
         // by passing `frc` the provider automatically sets `frc.delegate = self.delegateProvider.delegate`
-        self.delegateProvider = CollectionViewFetchedResultsDelegateProvider(collectionView: collectionView, controller: frc)
+        delegateProvider = CollectionViewFetchedResultsDelegateProvider(collectionView: collectionView, controller: frc)
 
         // create data source provider
         // by passing `self.collectionView`, the provider automatically sets `self.collectionView.dataSource = self.dataSourceProvider.dataSource`
-        self.dataSourceProvider = CollectionViewFetchedResultsDataSourceProvider(fetchedResultsController: frc, cellFactory: cellFactory, supplementaryViewFactory: composedFactory, collectionView: collectionView)
+        dataSourceProvider = CollectionViewFetchedResultsDataSourceProvider(fetchedResultsController: frc, cellFactory: cellFactory, supplementaryViewFactory: composedFactory, collectionView: collectionView)
     }
 
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.dataSourceProvider?.performFetch()
+        do {
+            try dataSourceProvider?.fetchedResultsController.performFetch()
+        } catch {
+            print("Fetch error = \(error)")
+        }
     }
 
 
@@ -132,20 +136,25 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
 
         let newThing = Thing.newThing(stack.context)
         stack.saveAndWait()
-        dataSourceProvider?.performFetch()
+
+        do {
+            try dataSourceProvider?.fetchedResultsController.performFetch()
+        } catch {
+            print("Fetch error = \(error)")
+        }
 
         if let indexPath = dataSourceProvider?.fetchedResultsController.indexPathForObject(newThing) {
             collectionView.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: .CenteredVertically)
         }
 
-        println("Added new thing: \(newThing)")
+        print("Added new thing: \(newThing)")
     }
 
 
     @IBAction func didTapDeleteButton(sender: UIBarButtonItem) {
-        if let indexPaths = collectionView.indexPathsForSelectedItems() as? [NSIndexPath] {
+        if let indexPaths = collectionView.indexPathsForSelectedItems() {
 
-            println("Deleting things at indexPaths: \(indexPaths)")
+            print("Deleting things at indexPaths: \(indexPaths)")
 
             for i in indexPaths {
                 let thingToDelete = dataSourceProvider?.fetchedResultsController.objectAtIndexPath(i) as! Thing
@@ -153,7 +162,12 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
             }
 
             stack.saveAndWait()
-            dataSourceProvider?.performFetch()
+
+            do {
+                try dataSourceProvider?.fetchedResultsController.performFetch()
+            } catch {
+                print("Fetch error = \(error)")
+            }
         }
 
     }
@@ -162,7 +176,7 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
     @IBAction func didTapHelpButton(sender: UIBarButtonItem) {
         UIAlertController.showHelpAlert(self)
     }
-    
+
 }
 
 
@@ -171,7 +185,7 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
 extension UICollectionView {
     
     func deselectAllItems() {
-        if let indexPaths = indexPathsForSelectedItems() as? [NSIndexPath] {
+        if let indexPaths = indexPathsForSelectedItems() {
             for i in indexPaths {
                 deselectItemAtIndexPath(i, animated: true)
             }

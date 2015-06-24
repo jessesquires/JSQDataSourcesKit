@@ -18,10 +18,13 @@
 
 import UIKit
 
-///  A `TitledCollectionReusableView` is a `UICollectionReusableView` subclass with a single `UILabel` intended for use as an
-///  analog to a `UITableView` header title (via `tableView(_:titleForHeaderInSection:)`)
-///  when using a `CollectionViewFetchedResultsDelegateProvider`.
-///  These views can be created via a `TitledCollectionReusableViewFactory`. 
+/**
+A `TitledCollectionReusableView` is a `UICollectionReusableView` subclass with a single `UILabel`
+intended for use as an analog to a `UITableView` header title (via `tableView(_:titleForHeaderInSection:)`)
+when using a `CollectionViewFetchedResultsDelegateProvider`.
+
+These views can be created via a `TitledCollectionReusableViewFactory`.
+*/
 public class TitledCollectionReusableView: UICollectionReusableView {
 
     // MARK: Outlets
@@ -34,42 +37,43 @@ public class TitledCollectionReusableView: UICollectionReusableView {
 
     // MARK: Properties
 
-    /// Returns the label of the reusable view.
+    /// - returns: The label of the reusable view.
     public var label: UILabel {
         get {
             return _label
         }
     }
 
-    /// Returns the leading spacing constraint between the label and its superview.
+    /// - returns: The leading spacing constraint between the label and its superview.
     public var leadingSpacing: NSLayoutConstraint {
         get {
             return _leadingSpacing
         }
     }
 
-    /// Returns the top spacing constraint between the label and its superview.
+    /// - returns: The top spacing constraint between the label and its superview.
     public var topSpacing: NSLayoutConstraint {
         get {
             return _topSpacing
         }
     }
 
-    /// Returns the trailing constraint between the label and its superview.
+    /// - returns: The trailing constraint between the label and its superview.
     public var trailingSpacing: NSLayoutConstraint {
         get {
             return _trailingSpacing
         }
     }
 
-    /// Returns the bottom spacing constraint between the label and its superview.
+    /// - returns: The bottom spacing constraint between the label and its superview.
     public var bottomSpacing: NSLayoutConstraint {
         get {
             return _bottomSpacing
         }
     }
 
-    /// The view’s background color. Note: setting this property also sets the background color for `label`.
+    /// The view’s background color.
+    /// - Note: setting this property also sets the background color for `label`.
     public override var backgroundColor: UIColor? {
         get {
             return super.backgroundColor
@@ -82,14 +86,14 @@ public class TitledCollectionReusableView: UICollectionReusableView {
 
     // MARK: Class properties
 
-    /// Returns the default string used to identify instances of `TitledCollectionReusableView`.
+    /// - returns: The default string used to identify instances of `TitledCollectionReusableView`.
     public class var identifier: String {
         get {
-            return toString(TitledCollectionReusableView.self)
+            return String(TitledCollectionReusableView.self)
         }
     }
 
-    /// Returns the `UINib` object initialized for the view.
+    /// - returns: The `UINib` object initialized for the view.
     public class var nib: UINib {
         get {
             return UINib(nibName: "TitledCollectionReusableView", bundle: NSBundle(forClass: TitledCollectionReusableView.self))
@@ -98,7 +102,7 @@ public class TitledCollectionReusableView: UICollectionReusableView {
 
     // MARK: Methods
 
-    ///  Performs any clean up necessary to prepare the view for use again.
+    /// :nodoc:
     override public func prepareForReuse() {
         super.prepareForReuse()
         _label?.text = nil

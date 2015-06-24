@@ -46,12 +46,12 @@ private class FakeCollectionView: UICollectionView {
 
     var dequeueSupplementaryViewExpectation: XCTestExpectation?
 
-    override func dequeueReusableCellWithReuseIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath!) -> AnyObject {
+    override func dequeueReusableCellWithReuseIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         dequeueCellExpectation?.fulfill()
         return super.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath)
     }
 
-    override func dequeueReusableSupplementaryViewOfKind(elementKind: String, withReuseIdentifier identifier: String, forIndexPath indexPath: NSIndexPath!) -> AnyObject {
+    override func dequeueReusableSupplementaryViewOfKind(elementKind: String, withReuseIdentifier identifier: String, forIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         dequeueSupplementaryViewExpectation?.fulfill()
         return super.dequeueReusableSupplementaryViewOfKind(elementKind, withReuseIdentifier: identifier, forIndexPath: indexPath)
     }
@@ -63,7 +63,7 @@ private let FakeSupplementaryViewKind = "FakeSupplementaryViewKind"
 
 private class FakeFlowLayout: UICollectionViewFlowLayout {
 
-    private override func layoutAttributesForSupplementaryViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes! {
+    private override func layoutAttributesForSupplementaryViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
         if elementKind == FakeSupplementaryViewKind {
             return UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: elementKind, withIndexPath: indexPath)
         }
@@ -218,7 +218,7 @@ class CollectionViewDataSourceTests: XCTestCase {
 
         // GIVEN: a cell factory
         let factory = CollectionViewCellFactory(reuseIdentifier: self.fakeCellReuseId) { (cell: FakeCollectionCell, model: FakeCollectionModel, view: UICollectionView, indexPath: NSIndexPath) -> FakeCollectionCell in
-            XCTAssertEqual(cell.reuseIdentifier, self.fakeCellReuseId, "Dequeued cell should have expected identifier")
+            XCTAssertEqual(cell.reuseIdentifier!, self.fakeCellReuseId, "Dequeued cell should have expected identifier")
             XCTAssertEqual(view, self.fakeCollectionView, "CollectionView should equal the collectionView for the data source")
 
             XCTAssertEqual(model, expectedModel, "Model object should equal expected value")
@@ -249,7 +249,7 @@ class CollectionViewDataSourceTests: XCTestCase {
 
         XCTAssertEqual(numRows, section0.count, "Data source should return expected number of rows for section 0")
 
-        XCTAssertEqual(cell.reuseIdentifier, self.fakeCellReuseId, "Data source should return cells with the expected identifier")
+        XCTAssertEqual(cell.reuseIdentifier!, self.fakeCellReuseId, "Data source should return cells with the expected identifier")
 
         // THEN: the collectionView calls `dequeueReusableCellWithReuseIdentifier`
         // THEN: the cell factory calls its `ConfigurationHandler`
@@ -270,7 +270,7 @@ class CollectionViewDataSourceTests: XCTestCase {
 
         // GIVEN: a cell factory
         let cellFactory = CollectionViewCellFactory(reuseIdentifier: self.fakeCellReuseId) { (cell: FakeCollectionCell, model: FakeCollectionModel, view: UICollectionView, indexPath: NSIndexPath) -> FakeCollectionCell in
-            XCTAssertEqual(cell.reuseIdentifier, self.fakeCellReuseId, "Dequeued cell should have expected identifier")
+            XCTAssertEqual(cell.reuseIdentifier!, self.fakeCellReuseId, "Dequeued cell should have expected identifier")
             XCTAssertEqual(view, self.fakeCollectionView, "CollectionView should equal the collectionView for the data source")
 
             XCTAssertEqual(model, allSections[indexPath.section][indexPath.item], "Model object should equal expected value")
@@ -285,7 +285,7 @@ class CollectionViewDataSourceTests: XCTestCase {
         // GIVEN: a supplementary view factory
         let supplementaryViewFactory = CollectionSupplementaryViewFactory(reuseIdentifier: self.fakeSupplementaryViewReuseId)
             { (view: FakeCollectionSupplementaryView, model: FakeCollectionModel, kind: String, collectionView: UICollectionView, indexPath: NSIndexPath) -> FakeCollectionSupplementaryView in
-                XCTAssertEqual(view.reuseIdentifier, self.fakeSupplementaryViewReuseId, "Dequeued supplementary view should have expected identifier")
+                XCTAssertEqual(view.reuseIdentifier!, self.fakeSupplementaryViewReuseId, "Dequeued supplementary view should have expected identifier")
                 XCTAssertEqual(collectionView, self.fakeCollectionView, "CollectionView should equal the collectionView for the data source")
 
                 XCTAssertEqual(model, allSections[indexPath.section][indexPath.item], "Model object should equal expected value")
@@ -324,10 +324,10 @@ class CollectionViewDataSourceTests: XCTestCase {
                 // THEN: we receive the expected return values
                 XCTAssertEqual(numRows, dataSourceProvider[sectionIndex].count, "Data source should return expected number of rows for section \(sectionIndex)")
 
-                XCTAssertEqual(cell.reuseIdentifier, self.fakeCellReuseId, "Data source should return cells with the expected identifier")
+                XCTAssertEqual(cell.reuseIdentifier!, self.fakeCellReuseId, "Data source should return cells with the expected identifier")
 
                 XCTAssertNotNil(supplementaryView, "Supplementary view should not be nil")
-                XCTAssertEqual(supplementaryView!.reuseIdentifier, self.fakeSupplementaryViewReuseId, "Data source should return supplementary views with the expected identifier")
+                XCTAssertEqual(supplementaryView!.reuseIdentifier!, self.fakeSupplementaryViewReuseId, "Data source should return supplementary views with the expected identifier")
 
                 // THEN: the collectionView calls `dequeueReusableCellWithReuseIdentifier`
                 // THEN: the cell factory calls its `ConfigurationHandler`

@@ -32,7 +32,7 @@ class FetchedTableViewController: UIViewController {
     let stack = CoreDataStack()
 
     typealias CellFactory = TableViewCellFactory<TableViewCell, Thing>
-    
+
     var dataSourceProvider: TableViewFetchedResultsDataSourceProvider<Thing, CellFactory>?
 
     var delegateProvider: TableViewFetchedResultsDelegateProvider<Thing, CellFactory>?
@@ -59,18 +59,22 @@ class FetchedTableViewController: UIViewController {
 
         // create delegate provider
         // by passing `frc` the provider automatically sets `frc.delegate = self.delegateProvider.delegate`
-        self.delegateProvider = TableViewFetchedResultsDelegateProvider(tableView: tableView, cellFactory: factory, controller: frc)
+        delegateProvider = TableViewFetchedResultsDelegateProvider(tableView: tableView, cellFactory: factory, controller: frc)
 
         // create data source provider
         // by passing `self.tableView`, the provider automatically sets `self.tableView.dataSource = self.dataSourceProvider.dataSource`
-        self.dataSourceProvider = TableViewFetchedResultsDataSourceProvider(fetchedResultsController: frc, cellFactory: factory, tableView: tableView)
+        dataSourceProvider = TableViewFetchedResultsDataSourceProvider(fetchedResultsController: frc, cellFactory: factory, tableView: tableView)
     }
 
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.dataSourceProvider?.performFetch()
+        do {
+            try dataSourceProvider?.fetchedResultsController.performFetch()
+        } catch {
+            print("Fetch error = \(error)")
+        }
     }
 
 
@@ -81,28 +85,38 @@ class FetchedTableViewController: UIViewController {
 
         let newThing = Thing.newThing(stack.context)
         stack.saveAndWait()
-        dataSourceProvider?.performFetch()
+
+        do {
+            try dataSourceProvider?.fetchedResultsController.performFetch()
+        } catch {
+            print("Fetch error = \(error)")
+        }
 
         if let indexPath = dataSourceProvider?.fetchedResultsController.indexPathForObject(newThing) {
             tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Middle)
         }
 
-        println("Added new thing: \(newThing)")
+        print("Added new thing: \(newThing)")
     }
 
 
     @IBAction func didTapDeleteButton(sender: UIBarButtonItem) {
-        if let indexPaths = tableView.indexPathsForSelectedRows() as? [NSIndexPath] {
+        if let indexPaths = tableView.indexPathsForSelectedRows {
 
-            println("Deleting things at indexPaths: \(indexPaths)")
+            print("Deleting things at indexPaths: \(indexPaths)")
 
             for i in indexPaths {
                 let thingToDelete = dataSourceProvider?.fetchedResultsController.objectAtIndexPath(i) as! Thing
                 stack.context.deleteObject(thingToDelete)
             }
-            
+
             stack.saveAndWait()
-            dataSourceProvider?.performFetch()
+
+            do {
+                try dataSourceProvider?.fetchedResultsController.performFetch()
+            } catch {
+                print("Fetch error = \(error)")
+            }
         }
 
     }
@@ -120,11 +134,11 @@ class FetchedTableViewController: UIViewController {
 extension UITableView {
 
     func deselectAllRows() {
-        if let indexPaths = indexPathsForSelectedRows() as? [NSIndexPath] {
+        if let indexPaths = indexPathsForSelectedRows {
             for i in indexPaths {
                 deselectRowAtIndexPath(i, animated: true)
             }
         }
     }
-
+    
 }

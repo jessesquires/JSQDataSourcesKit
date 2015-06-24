@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0610"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "88DB89D51A86D1A900DED153"
+               BlueprintIdentifier = "887863331B3699C800E2F51C"
                BuildableName = "ExampleTests.xctest"
                BlueprintName = "ExampleTests"
                ReferencedContainer = "container:Example.xcodeproj">
@@ -40,13 +40,14 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES"
       buildConfiguration = "Debug">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "88DB89D51A86D1A900DED153"
+               BlueprintIdentifier = "887863331B3699C800E2F51C"
                BuildableName = "ExampleTests.xctest"
                BlueprintName = "ExampleTests"
                ReferencedContainer = "container:Example.xcodeproj">
@@ -62,6 +63,8 @@
             ReferencedContainer = "container:Example.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <AdditionalOptions>
+      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -71,6 +74,7 @@
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">

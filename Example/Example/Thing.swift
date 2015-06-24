@@ -34,15 +34,15 @@ public class Thing: NSManagedObject {
         return Category(rawValue: category)!.color
     }
 
-    public convenience init(context: NSManagedObjectContext) {
+    public init(context: NSManagedObjectContext) {
         let entityDescription = NSEntityDescription.entityForName("Thing", inManagedObjectContext: context)!
-        self.init(entity: entityDescription, insertIntoManagedObjectContext: context)
+        super.init(entity: entityDescription, insertIntoManagedObjectContext: context)
     }
 
     public class func newThing(context: NSManagedObjectContext) -> Thing {
         let t = Thing(context: context)
         t.category = Category.random.rawValue
-        t.name = split(NSProcessInfo.processInfo().globallyUniqueString, isSeparator: { $0 == "-" }).first!
+        t.name = NSProcessInfo.processInfo().globallyUniqueString.componentsSeparatedByString("-").first!
         t.number = Int32(arc4random_uniform(10000))
         return t
     }
@@ -63,9 +63,9 @@ public enum Category: String {
 
     var color: UIColor {
         switch(self) {
-        case .Red: return UIColor.redColor()
-        case .Blue: return UIColor.blueColor()
-        case .Green: return UIColor.greenColor()
+        case .Red: return .redColor()
+        case .Blue: return .blueColor()
+        case .Green: return .greenColor()
         }
     }
 
