@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "88DB897B1A86D0C900DED153"
+               BlueprintIdentifier = "887DD0831B3BAC6C00FC4BF1"
                BuildableName = "JSQDataSourcesKit.framework"
                BlueprintName = "JSQDataSourcesKit"
                ReferencedContainer = "container:JSQDataSourcesKit.xcodeproj">
@@ -33,7 +33,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "88F8F0E21B3A6A2A008A3EAD"
+               BlueprintIdentifier = "887DD08D1B3BAC6C00FC4BF1"
                BuildableName = "JSQDataSourcesKitTests.xctest"
                BlueprintName = "JSQDataSourcesKitTests"
                ReferencedContainer = "container:JSQDataSourcesKit.xcodeproj">
@@ -43,7 +43,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "88DB897B1A86D0C900DED153"
+            BlueprintIdentifier = "887DD0831B3BAC6C00FC4BF1"
             BuildableName = "JSQDataSourcesKit.framework"
             BlueprintName = "JSQDataSourcesKit"
             ReferencedContainer = "container:JSQDataSourcesKit.xcodeproj">
@@ -65,7 +65,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "88DB897B1A86D0C900DED153"
+            BlueprintIdentifier = "887DD0831B3BAC6C00FC4BF1"
             BuildableName = "JSQDataSourcesKit.framework"
             BlueprintName = "JSQDataSourcesKit"
             ReferencedContainer = "container:JSQDataSourcesKit.xcodeproj">
@@ -83,7 +83,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "88DB897B1A86D0C900DED153"
+            BlueprintIdentifier = "887DD0831B3BAC6C00FC4BF1"
             BuildableName = "JSQDataSourcesKit.framework"
             BlueprintName = "JSQDataSourcesKit"
             ReferencedContainer = "container:JSQDataSourcesKit.xcodeproj">
