@@ -93,8 +93,8 @@ public final class CollectionViewFetchedResultsDelegateProvider <DataItem> {
                     changes[changeType] = [deleteIndexPath]
                 }
             case .Update:
-                if let i = indexPath {
-                    changes[changeType] = [i]
+                if let indexPath = indexPath {
+                    changes[changeType] = [indexPath]
                 }
             case .Move:
                 if let old = indexPath, new = newIndexPath {
@@ -124,14 +124,14 @@ public final class CollectionViewFetchedResultsDelegateProvider <DataItem> {
 
     private func applyObjectChanges() {
         for eachChange in objectChanges {
-            for (changeType, indexes): (NSFetchedResultsChangeType, [NSIndexPath]) in eachChange {
+            for (changeType, indexPaths): (NSFetchedResultsChangeType, [NSIndexPath]) in eachChange {
 
                 switch(changeType) {
-                case .Insert: collectionView?.insertItemsAtIndexPaths(indexes)
-                case .Delete: collectionView?.deleteItemsAtIndexPaths(indexes)
-                case .Update: collectionView?.reloadItemsAtIndexPaths(indexes)
+                case .Insert: collectionView?.insertItemsAtIndexPaths(indexPaths)
+                case .Delete: collectionView?.deleteItemsAtIndexPaths(indexPaths)
+                case .Update: collectionView?.reloadItemsAtIndexPaths(indexPaths)
                 case .Move:
-                    if let first = indexes.first, last = indexes.last {
+                    if let first = indexPaths.first, last = indexPaths.last {
                         collectionView?.moveItemAtIndexPath(first, toIndexPath: last)
                     }
                 }
@@ -141,9 +141,9 @@ public final class CollectionViewFetchedResultsDelegateProvider <DataItem> {
 
     private func applySectionChanges() {
         for eachChange in sectionChanges {
-            for (changeType, index): (NSFetchedResultsChangeType, SectionIndex) in eachChange {
+            for (changeType, sectionIndex): (NSFetchedResultsChangeType, SectionIndex) in eachChange {
 
-                let section = NSIndexSet(index: index)
+                let section = NSIndexSet(index: sectionIndex)
 
                 switch(changeType) {
                 case .Insert: collectionView?.insertSections(section)
@@ -278,16 +278,21 @@ That is, it cannot be assigned to `NSFetchedResultsController.delegate`
         willChangeContent(controller)
     }
 
-    @objc func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo,
-        atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    @objc func controller(controller: NSFetchedResultsController,
+        didChangeSection sectionInfo: NSFetchedResultsSectionInfo,
+        atIndex sectionIndex: Int,
+        forChangeType type: NSFetchedResultsChangeType) {
             didChangeSection(controller, sectionInfo, sectionIndex, type)
     }
 
-    @objc func controller(controller: NSFetchedResultsController, didChangeObject anObject: NSManagedObject, atIndexPath indexPath: NSIndexPath?,
-        forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    @objc func controller(controller: NSFetchedResultsController,
+        didChangeObject anObject: NSManagedObject,
+        atIndexPath indexPath: NSIndexPath?,
+        forChangeType type: NSFetchedResultsChangeType,
+        newIndexPath: NSIndexPath?) {
             didChangeObject(controller, anObject, indexPath, type, newIndexPath)
     }
-    
+
     @objc func controllerDidChangeContent(controller: NSFetchedResultsController) {
         didChangeContent(controller)
     }
