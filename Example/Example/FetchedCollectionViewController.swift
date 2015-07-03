@@ -45,6 +45,8 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Test", style: .Plain, target: self, action: Selector("didTapTest:"))
+
         // configure layout
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: 100, height: 100)
@@ -137,11 +139,7 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
         let newThing = Thing.newThing(stack.context)
         stack.saveAndWait()
 
-        do {
-            try dataSourceProvider?.fetchedResultsController.performFetch()
-        } catch {
-            print("Fetch error = \(error)")
-        }
+        fetch()
 
         if let indexPath = dataSourceProvider?.fetchedResultsController.indexPathForObject(newThing) {
             collectionView.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: .CenteredVertically)
@@ -163,18 +161,53 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
 
             stack.saveAndWait()
 
-            do {
-                try dataSourceProvider?.fetchedResultsController.performFetch()
-            } catch {
-                print("Fetch error = \(error)")
-            }
+            fetch()
         }
-
     }
 
 
     @IBAction func didTapHelpButton(sender: UIBarButtonItem) {
         UIAlertController.showHelpAlert(self)
+    }
+
+    // MARK: Testing
+    
+    var test = false
+    var thing: Thing?
+
+    func didTapTest(sender: UIBarButtonItem) {
+        if !test {
+            thing = Thing.newThing(stack.context)
+            thing?.category = Category.Red.rawValue
+
+            let blue = Thing.newThing(stack.context)
+            blue.category = Category.Blue.rawValue
+
+            let green = Thing.newThing(stack.context)
+            green.category = Category.Green.rawValue
+
+            stack.saveAndWait()
+
+            test = true
+            return
+        }
+
+        if let thing = thing {
+            thing.category = Category.Blue.rawValue
+            stack.saveAndWait()
+        }
+
+
+    }
+
+    // MARK: Private
+
+    private func fetch() {
+        do {
+            try dataSourceProvider?.fetchedResultsController.performFetch()
+        } catch {
+            print("Fetch error = \(error)")
+        }
     }
 
 }
