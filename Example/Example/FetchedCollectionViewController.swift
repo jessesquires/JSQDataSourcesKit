@@ -131,28 +131,39 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
         collectionView.deselectAllItems()
 
         let newThing = Thing.newThing(stack.context)
-        stack.saveAndWait()
+
+        do {
+            try stack.saveAndWait()
+        } catch {
+            fatalError("Could not save deletion due to: \(error)")
+        }
+
         dataSourceProvider?.performFetch()
 
         if let indexPath = dataSourceProvider?.fetchedResultsController.indexPathForObject(newThing) {
             collectionView.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: .CenteredVertically)
         }
 
-        println("Added new thing: \(newThing)")
+        print("Added new thing: \(newThing)")
     }
 
 
     @IBAction func didTapDeleteButton(sender: UIBarButtonItem) {
-        if let indexPaths = collectionView.indexPathsForSelectedItems() as? [NSIndexPath] {
+        if let indexPaths = collectionView.indexPathsForSelectedItems() {
 
-            println("Deleting things at indexPaths: \(indexPaths)")
+            print("Deleting things at indexPaths: \(indexPaths)")
 
             for i in indexPaths {
                 let thingToDelete = dataSourceProvider?.fetchedResultsController.objectAtIndexPath(i) as! Thing
                 stack.context.deleteObject(thingToDelete)
             }
 
-            stack.saveAndWait()
+            do {
+                try stack.saveAndWait()
+            } catch {
+                fatalError("Could not save deletion due to: \(error)")
+            }
+            
             dataSourceProvider?.performFetch()
         }
 
@@ -171,7 +182,7 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
 extension UICollectionView {
     
     func deselectAllItems() {
-        if let indexPaths = indexPathsForSelectedItems() as? [NSIndexPath] {
+        if let indexPaths = indexPathsForSelectedItems() {
             for i in indexPaths {
                 deselectItemAtIndexPath(i, animated: true)
             }

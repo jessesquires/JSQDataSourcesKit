@@ -30,35 +30,36 @@ public class CoreDataStack {
         let modelURL = NSBundle.mainBundle().URLForResource("Model", withExtension: "momd")!
         
         let model = NSManagedObjectModel(contentsOfURL: modelURL)!
-        
-        let documentsDirectoryURL = NSFileManager.defaultManager().URLForDirectory(.DocumentDirectory,
-            inDomain: .UserDomainMask, appropriateForURL: nil, create: true, error: nil)
-        
-        let storeURL = documentsDirectoryURL!.URLByAppendingPathComponent("Model.sqlite")
-        
-        persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
-        persistentStoreCoordinator.addPersistentStoreWithType(inMemory ? NSInMemoryStoreType : NSSQLiteStoreType,
-            configuration: nil, URL: inMemory ? nil : storeURL, options: nil, error: nil)
-        
-        context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
-        context.persistentStoreCoordinator = persistentStoreCoordinator
+
+        do {
+            let documentsDirectoryURL = try NSFileManager.defaultManager().URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)
+            let storeURL = documentsDirectoryURL.URLByAppendingPathComponent("Model.sqlite")
+
+            persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
+            try persistentStoreCoordinator.addPersistentStoreWithType(inMemory ? NSInMemoryStoreType : NSSQLiteStoreType, configuration: nil, URL: inMemory ? nil : storeURL, options: nil)
+
+            context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+            context.persistentStoreCoordinator = persistentStoreCoordinator
+
+        } catch {
+            fatalError("*** Error adding persistent store: \(error)")
+        }
+
+
     }
 
-    public func saveAndWait() -> Bool {
+    public func saveAndWait() throws {
         if !self.context.hasChanges {
-            return true
+            return
         }
 
-        var success = false
         self.context.performBlockAndWait { () -> Void in
-            var error: NSError?
-            success = self.context.save(&error)
-
-            if !success {
-                println("*** Error saving managed object context: \(error)")
+            do {
+                try self.context.save()
+            } catch {
+                print("*** Error saving managed object context: \(error)")
             }
         }
-        return success
     }
 
 }

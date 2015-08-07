@@ -41,7 +41,7 @@ private class FakeTableView: UITableView {
 
     var dequeueCellExpectation: XCTestExpectation?
 
-    override func dequeueReusableCellWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> AnyObject {
+    override func dequeueReusableCellWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         self.dequeueCellExpectation?.fulfill()
         return super.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
     }
