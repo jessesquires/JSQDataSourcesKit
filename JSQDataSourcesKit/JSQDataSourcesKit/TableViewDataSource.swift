@@ -40,21 +40,21 @@ public protocol TableViewCellFactoryType {
 
     ///  Creates and returns a new `Cell` instance, or dequeues an existing cell for reuse.
     ///
-    ///  :param: item      The model instance (data object) at `indexPath`.
-    ///  :param: tableView The table view requesting this information.
-    ///  :param: indexPath The index path that specifies the location of `cell` and `item`.
+    ///  - parameter item:      The model instance (data object) at `indexPath`.
+    ///  - parameter tableView: The table view requesting this information.
+    ///  - parameter indexPath: The index path that specifies the location of `cell` and `item`.
     ///
-    ///  :returns: An initialized or dequeued `UITableViewCell` of type `Cell`.
+    ///  - returns: An initialized or dequeued `UITableViewCell` of type `Cell`.
     func cellForItem(item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell
 
     ///  Configures and returns the specified cell.
     ///
-    ///  :param: cell      The cell to configure.
-    ///  :param: item      The model instance (data object) at `indexPath`.
-    ///  :param: tableView The table view requesting this information.
-    ///  :param: indexPath The index path that specifies the location of `cell` and `item`.
+    ///  - parameter cell:      The cell to configure.
+    ///  - parameter item:      The model instance (data object) at `indexPath`.
+    ///  - parameter tableView: The table view requesting this information.
+    ///  - parameter indexPath: The index path that specifies the location of `cell` and `item`.
     ///
-    ///  :returns: A configured `UITableViewCell` of type `Cell`.
+    ///  - returns: A configured `UITableViewCell` of type `Cell`.
     func configureCell(cell: Cell, forItem item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell
 }
 
@@ -73,12 +73,12 @@ public struct TableViewCellFactory <Cell: UITableViewCell, DataItem>: TableViewC
 
     ///  Configures the cell for the specified data item, table view and index path.
     ///
-    ///  :param: Cell        The cell to be configured at the index path.
-    ///  :param: DataItem    The data item at the index path.
-    ///  :param: UITableView The table view requesting this information.
-    ///  :param: NSIndexPath The index path at which the cell will be displayed.
+    ///  - parameter Cell:        The cell to be configured at the index path.
+    ///  - parameter DataItem:    The data item at the index path.
+    ///  - parameter UITableView: The table view requesting this information.
+    ///  - parameter NSIndexPath: The index path at which the cell will be displayed.
     ///
-    ///  :returns: The configured cell.
+    ///  - returns: The configured cell.
     public typealias ConfigurationHandler = (Cell, DataItem, UITableView, NSIndexPath) -> Cell
 
     // MARK: Properties
@@ -94,10 +94,10 @@ public struct TableViewCellFactory <Cell: UITableViewCell, DataItem>: TableViewC
 
     ///  Constructs a new table view cell factory.
     ///
-    ///  :param: reuseIdentifier  The reuse identifier with which the factory will dequeue cells.
-    ///  :param: cellConfigurator The closure with which the factory will configure cells.
+    ///  - parameter reuseIdentifier:  The reuse identifier with which the factory will dequeue cells.
+    ///  - parameter cellConfigurator: The closure with which the factory will configure cells.
     ///
-    ///  :returns: A new `TableViewCellFactory` instance.
+    ///  - returns: A new `TableViewCellFactory` instance.
     public init(reuseIdentifier: String, cellConfigurator: ConfigurationHandler) {
         self.reuseIdentifier = reuseIdentifier
         self.cellConfigurator = cellConfigurator
@@ -107,23 +107,23 @@ public struct TableViewCellFactory <Cell: UITableViewCell, DataItem>: TableViewC
 
     ///  Creates and returns a new `Cell` instance, or dequeues an existing cell for reuse.
     ///
-    ///  :param: item      The model instance (data object) at `indexPath`.
-    ///  :param: tableView The table view requesting this information.
-    ///  :param: indexPath The index path that specifies the location of `cell` and `item`.
+    ///  - parameter item:      The model instance (data object) at `indexPath`.
+    ///  - parameter tableView: The table view requesting this information.
+    ///  - parameter indexPath: The index path that specifies the location of `cell` and `item`.
     ///
-    ///  :returns: An initialized or dequeued `UITableViewCell` of type `Cell`.
+    ///  - returns: An initialized or dequeued `UITableViewCell` of type `Cell`.
     public func cellForItem(item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell {
         return tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! Cell
     }
 
     ///  Configures and returns the specified cell.
     ///
-    ///  :param: cell      The cell to configure.
-    ///  :param: item      The model instance (data object) at `indexPath`.
-    ///  :param: tableView The table view requesting this information.
-    ///  :param: indexPath The index path that specifies the location of `cell` and `item`.
+    ///  - parameter cell:      The cell to configure.
+    ///  - parameter item:      The model instance (data object) at `indexPath`.
+    ///  - parameter tableView: The table view requesting this information.
+    ///  - parameter indexPath: The index path that specifies the location of `cell` and `item`.
     ///
-    ///  :returns: A configured `UITableViewCell` of type `Cell`.
+    ///  - returns: A configured `UITableViewCell` of type `Cell`.
     public func configureCell(cell: Cell, forItem item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell {
         return cellConfigurator(cell, item, tableView, indexPath)
     }
@@ -182,11 +182,11 @@ public struct TableViewSection <DataItem>: TableViewSectionInfo {
 
     ///  Constructs a new table view section.
     ///
-    ///  :param: dataItems   The elements in the section.
-    ///  :param: headerTitle The section header title.
-    ///  :param: footerTitle The section footer title.
+    ///  - parameter dataItems:   The elements in the section.
+    ///  - parameter headerTitle: The section header title.
+    ///  - parameter footerTitle: The section footer title.
     ///
-    ///  :returns: A new `TableViewSection` instance.
+    ///  - returns: A new `TableViewSection` instance.
     public init(dataItems: [DataItem], headerTitle: String? = nil, footerTitle: String? = nil) {
         self.dataItems = dataItems
         self.headerTitle = headerTitle
@@ -240,11 +240,11 @@ public final class TableViewDataSourceProvider <DataItem, SectionInfo: TableView
 
     ///  Constructs a new data source provider for a table view.
     ///
-    ///  :param: sections    The sections to display in the table view.
-    ///  :param: cellFactory The cell factory from which the table view data source will dequeue cells.
-    ///  :param: tableView   The table view whose data source will be provided by this provider.
+    ///  - parameter sections:    The sections to display in the table view.
+    ///  - parameter cellFactory: The cell factory from which the table view data source will dequeue cells.
+    ///  - parameter tableView:   The table view whose data source will be provided by this provider.
     ///
-    ///  :returns: A new `TableViewDataSourceProvider` instance.
+    ///  - returns: A new `TableViewDataSourceProvider` instance.
     public init(sections: [SectionInfo], cellFactory: CellFactory, tableView: UITableView? = nil) {
         self.sections = sections
         self.cellFactory = cellFactory
@@ -315,11 +315,11 @@ public final class TableViewFetchedResultsDataSourceProvider <DataItem, CellFact
 
     ///  Constructs a new data source provider for the table view.
     ///
-    ///  :param: fetchedResultsController The fetched results controller that provides the data for the table view.
-    ///  :param: cellFactory              The cell factory from which the table view data source will dequeue cells.
-    ///  :param: tableView                The table view whose data source will be provided by this provider.
+    ///  - parameter fetchedResultsController: The fetched results controller that provides the data for the table view.
+    ///  - parameter cellFactory:              The cell factory from which the table view data source will dequeue cells.
+    ///  - parameter tableView:                The table view whose data source will be provided by this provider.
     ///
-    ///  :returns: A new `TableViewFetchedResultsDataSourceProvider` instance.
+    ///  - returns: A new `TableViewFetchedResultsDataSourceProvider` instance.
     public init(fetchedResultsController: NSFetchedResultsController, cellFactory: CellFactory, tableView: UITableView? = nil) {
         self.fetchedResultsController = fetchedResultsController
         self.cellFactory = cellFactory
@@ -331,12 +331,19 @@ public final class TableViewFetchedResultsDataSourceProvider <DataItem, CellFact
 
     ///  Executes the fetch request for the provider's `fetchedResultsController`.
     ///
-    ///  :returns: A tuple containing a `Bool` value that indicates if the fetch executed successfully and an `NSError?` if an error occured.
+    ///  - returns: A tuple containing a `Bool` value that indicates if the fetch executed successfully and an `NSError?` if an error occured.
     public func performFetch() -> (success: Bool, error: NSError?) {
         var error: NSError? = nil
-        let success = fetchedResultsController.performFetch(&error)
+        let success: Bool
+        do {
+            try fetchedResultsController.performFetch()
+            success = true
+        } catch let error1 as NSError {
+            error = error1
+            success = false
+        }
         if !success {
-            println("*** ERROR: \(toString(TableViewFetchedResultsDataSourceProvider.self))"
+            print("*** ERROR: \(String(TableViewFetchedResultsDataSourceProvider.self))"
                 + "\n\t [\(__LINE__)] \(__FUNCTION__) Could not perform fetch error: \(error)")
         }
         return (success, error)
@@ -349,7 +356,7 @@ public final class TableViewFetchedResultsDataSourceProvider <DataItem, CellFact
             self.fetchedResultsController.sections?.count ?? 0
         },
         numberOfRowsInSection: { [unowned self] (section) -> Int in
-            let sectionInfo = self.fetchedResultsController.sections?[section] as? NSFetchedResultsSectionInfo
+            let sectionInfo = self.fetchedResultsController.sections?[section]
             return sectionInfo?.numberOfObjects ?? 0
         },
         cellForRowAtIndexPath: { [unowned self] (tableView, indexPath) -> UITableViewCell in
@@ -358,7 +365,7 @@ public final class TableViewFetchedResultsDataSourceProvider <DataItem, CellFact
             return self.cellFactory.configureCell(cell, forItem: dataItem, inTableView: tableView, atIndexPath: indexPath)
         },
         titleForHeaderInSection: { [unowned self] (section) -> String? in
-            let sectionInfo = self.fetchedResultsController.sections?[section] as? NSFetchedResultsSectionInfo
+            let sectionInfo = self.fetchedResultsController.sections?[section]
             return sectionInfo?.name
         },
         titleForFooterInSection: { (section) -> String? in

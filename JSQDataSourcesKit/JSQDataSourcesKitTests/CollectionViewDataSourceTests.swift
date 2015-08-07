@@ -46,12 +46,12 @@ private class FakeCollectionView: UICollectionView {
 
     var dequeueSupplementaryViewExpectation: XCTestExpectation?
 
-    override func dequeueReusableCellWithReuseIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath!) -> AnyObject {
+    override func dequeueReusableCellWithReuseIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         dequeueCellExpectation?.fulfill()
         return super.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath)
     }
 
-    override func dequeueReusableSupplementaryViewOfKind(elementKind: String, withReuseIdentifier identifier: String, forIndexPath indexPath: NSIndexPath!) -> AnyObject {
+    override func dequeueReusableSupplementaryViewOfKind(elementKind: String, withReuseIdentifier identifier: String, forIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         dequeueSupplementaryViewExpectation?.fulfill()
         return super.dequeueReusableSupplementaryViewOfKind(elementKind, withReuseIdentifier: identifier, forIndexPath: indexPath)
     }
@@ -63,7 +63,7 @@ private let FakeSupplementaryViewKind = "FakeSupplementaryViewKind"
 
 private class FakeFlowLayout: UICollectionViewFlowLayout {
 
-    private override func layoutAttributesForSupplementaryViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes! {
+    private override func layoutAttributesForSupplementaryViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
         if elementKind == FakeSupplementaryViewKind {
             return UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: elementKind, withIndexPath: indexPath)
         }

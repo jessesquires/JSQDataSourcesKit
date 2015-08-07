@@ -85,7 +85,7 @@ public class TitledCollectionReusableView: UICollectionReusableView {
     /// Returns the default string used to identify instances of `TitledCollectionReusableView`.
     public class var identifier: String {
         get {
-            return toString(TitledCollectionReusableView.self)
+            return String(TitledCollectionReusableView.self)
         }
     }
 

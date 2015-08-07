@@ -80,28 +80,36 @@ class FetchedTableViewController: UIViewController {
         tableView.deselectAllRows()
 
         let newThing = Thing.newThing(stack.context)
-        stack.saveAndWait()
+        do {
+            try stack.saveAndWait()
+        } catch {
+            fatalError("Could not save deletion due to: \(error)")
+        }
         dataSourceProvider?.performFetch()
 
         if let indexPath = dataSourceProvider?.fetchedResultsController.indexPathForObject(newThing) {
             tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Middle)
         }
 
-        println("Added new thing: \(newThing)")
+        print("Added new thing: \(newThing)")
     }
 
 
     @IBAction func didTapDeleteButton(sender: UIBarButtonItem) {
-        if let indexPaths = tableView.indexPathsForSelectedRows() as? [NSIndexPath] {
+        if let indexPaths = tableView.indexPathsForSelectedRows {
 
-            println("Deleting things at indexPaths: \(indexPaths)")
+            print("Deleting things at indexPaths: \(indexPaths)")
 
             for i in indexPaths {
                 let thingToDelete = dataSourceProvider?.fetchedResultsController.objectAtIndexPath(i) as! Thing
                 stack.context.deleteObject(thingToDelete)
             }
             
-            stack.saveAndWait()
+            do {
+                try stack.saveAndWait()
+            } catch {
+                fatalError("Could not save deletion due to: \(error)")
+            }
             dataSourceProvider?.performFetch()
         }
 
@@ -120,7 +128,7 @@ class FetchedTableViewController: UIViewController {
 extension UITableView {
 
     func deselectAllRows() {
-        if let indexPaths = indexPathsForSelectedRows() as? [NSIndexPath] {
+        if let indexPaths = indexPathsForSelectedRows {
             for i in indexPaths {
                 deselectRowAtIndexPath(i, animated: true)
             }

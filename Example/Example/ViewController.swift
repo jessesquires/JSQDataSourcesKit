@@ -24,30 +24,38 @@ class ViewController: UITableViewController {
 
 
     @IBAction func didTapDeleteButton(sender: UIBarButtonItem) {
-        println("Deleting all things...")
+        print("Deleting all things...")
 
-        if let results = stack.context.executeFetchRequest(Thing.fetchRequest(), error: nil) {
-            for thing in results {
-                stack.context.deleteObject(thing as! Thing)
+        do {
+            if let results = try stack.context.executeFetchRequest(Thing.fetchRequest()) as? [Thing] {
+                for thing in results {
+                    stack.context.deleteObject(thing)
+                }
+
+                try stack.saveAndWait()
             }
-
-            assert(stack.saveAndWait())
+        } catch {
+            fatalError("Could not save deletion due to: \(error)")
         }
-
-        println("Done")
+        
+        print("Done")
     }
 
 
     @IBAction func didTapAddButton(sender: UIBarButtonItem) {
-        println("Adding some fake things...")
+        print("Adding some fake things...")
 
-        for i in 1...5 {
-            let t = Thing.newThing(stack.context)
+        for _ in 1...5 {
+            Thing.newThing(stack.context)
         }
 
-        assert(stack.saveAndWait())
+        do {
+            try stack.saveAndWait()
+        } catch {
+            fatalError("Could not save due to: \(error)")
+        }
 
-        println("Done")
+        print("Done")
     }
 
 }

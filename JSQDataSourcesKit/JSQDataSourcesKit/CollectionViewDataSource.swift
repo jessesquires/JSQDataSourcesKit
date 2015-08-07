@@ -40,21 +40,21 @@ public protocol CollectionViewCellFactoryType {
 
     ///  Creates and returns a new `Cell` instance, or dequeues an existing cell for reuse.
     ///
-    ///  :param: item           The model instance (data object) at `indexPath`.
-    ///  :param: collectionView The collection view requesting this information.
-    ///  :param: indexPath      The index path that specifies the location of `cell` and `item`.
+    ///  - parameter item:           The model instance (data object) at `indexPath`.
+    ///  - parameter collectionView: The collection view requesting this information.
+    ///  - parameter indexPath:      The index path that specifies the location of `cell` and `item`.
     ///
-    ///  :returns: An initialized or dequeued `UICollectionViewCell` of type `Cell`.
+    ///  - returns: An initialized or dequeued `UICollectionViewCell` of type `Cell`.
     func cellForItem(item: DataItem, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell
 
     ///  Configures and returns the specified cell.
     ///
-    ///  :param: cell           The cell to configure.
-    ///  :param: item           The model instance (data object) at `indexPath`.
-    ///  :param: collectionView The collection view requesting this information.
-    ///  :param: indexPath      The index path that specifies the location of `cell` and `item`.
+    ///  - parameter cell:           The cell to configure.
+    ///  - parameter item:           The model instance (data object) at `indexPath`.
+    ///  - parameter collectionView: The collection view requesting this information.
+    ///  - parameter indexPath:      The index path that specifies the location of `cell` and `item`.
     ///
-    ///  :returns: A configured `UICollectionViewCell` of type `Cell`.
+    ///  - returns: A configured `UICollectionViewCell` of type `Cell`.
     func configureCell(cell: Cell, forItem item: DataItem, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell
 }
 
@@ -73,12 +73,12 @@ public struct CollectionViewCellFactory <Cell: UICollectionViewCell, DataItem>: 
 
     ///  Configures the cell for the specified data item, collection view and index path.
     ///
-    ///  :param: Cell             The cell to be configured at the index path.
-    ///  :param: DataItem         The data item at the index path.
-    ///  :param: UICollectionView The collection view requesting this information.
-    ///  :param: NSIndexPath      The index path at which the cell will be displayed.
+    ///  - parameter Cell:             The cell to be configured at the index path.
+    ///  - parameter DataItem:         The data item at the index path.
+    ///  - parameter UICollectionView: The collection view requesting this information.
+    ///  - parameter NSIndexPath:      The index path at which the cell will be displayed.
     ///
-    ///  :returns: The configured cell.
+    ///  - returns: The configured cell.
     public typealias ConfigurationHandler = (Cell, DataItem, UICollectionView, NSIndexPath) -> Cell
 
     // MARK: Properties
@@ -94,10 +94,10 @@ public struct CollectionViewCellFactory <Cell: UICollectionViewCell, DataItem>: 
 
     ///  Constructs a new collection view cell factory.
     ///
-    ///  :param: reuseIdentifier  The reuse identifier with which the factory will dequeue cells.
-    ///  :param: cellConfigurator The closure with which the factory will configure cells.
+    ///  - parameter reuseIdentifier:  The reuse identifier with which the factory will dequeue cells.
+    ///  - parameter cellConfigurator: The closure with which the factory will configure cells.
     ///
-    ///  :returns: A new `CollectionViewCellFactory` instance.
+    ///  - returns: A new `CollectionViewCellFactory` instance.
     public init(reuseIdentifier: String, cellConfigurator: ConfigurationHandler) {
         self.reuseIdentifier = reuseIdentifier
         self.cellConfigurator = cellConfigurator
@@ -107,23 +107,23 @@ public struct CollectionViewCellFactory <Cell: UICollectionViewCell, DataItem>: 
 
     ///  Creates and returns a new `Cell` instance, or dequeues an existing cell for reuse.
     ///
-    ///  :param: item           The model instance (data object) at `indexPath`.
-    ///  :param: collectionView The collection view requesting this information.
-    ///  :param: indexPath      The index path that specifies the location of `cell` and `item`.
+    ///  - parameter item:           The model instance (data object) at `indexPath`.
+    ///  - parameter collectionView: The collection view requesting this information.
+    ///  - parameter indexPath:      The index path that specifies the location of `cell` and `item`.
     ///
-    ///  :returns: An initialized or dequeued `UICollectionViewCell` of type `Cell`.
+    ///  - returns: An initialized or dequeued `UICollectionViewCell` of type `Cell`.
     public func cellForItem(item: DataItem, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell {
         return collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! Cell
     }
 
     ///  Configures and returns the specified cell.
     ///
-    ///  :param: cell           The cell to configure.
-    ///  :param: item           The model instance (data object) at `indexPath`.
-    ///  :param: collectionView The collection view requesting this information.
-    ///  :param: indexPath      The index path that specifies the location of `cell` and `item`.
+    ///  - parameter cell:           The cell to configure.
+    ///  - parameter item:           The model instance (data object) at `indexPath`.
+    ///  - parameter collectionView: The collection view requesting this information.
+    ///  - parameter indexPath:      The index path that specifies the location of `cell` and `item`.
     ///
-    ///  :returns: A configured `UICollectionViewCell` of type `Cell`.
+    ///  - returns: A configured `UICollectionViewCell` of type `Cell`.
     public func configureCell(cell: Cell, forItem item: DataItem, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell {
         return cellConfigurator(cell, item, collectionView, indexPath)
     }
@@ -153,24 +153,24 @@ public protocol CollectionSupplementaryViewFactoryType {
 
     ///  Creates and returns a new `SupplementaryView` instance, or dequeues an existing view for reuse.
     ///
-    ///  :param: item           The model instance (data object) at `indexPath`.
-    ///  :param: kind           An identifier that describes the type of the supplementary view.
-    ///  :param: collectionView The collection view requesting this information.
-    ///  :param: indexPath      The index path that specifies the location of the new supplementary view.
+    ///  - parameter item:           The model instance (data object) at `indexPath`.
+    ///  - parameter kind:           An identifier that describes the type of the supplementary view.
+    ///  - parameter collectionView: The collection view requesting this information.
+    ///  - parameter indexPath:      The index path that specifies the location of the new supplementary view.
     ///
-    ///  :returns: An initialized or dequeued `UICollectionReusableView` of type `SupplementaryView`.
+    ///  - returns: An initialized or dequeued `UICollectionReusableView` of type `SupplementaryView`.
     func supplementaryViewForItem(item: DataItem, kind: SupplementaryViewKind,
                                   inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> SupplementaryView
 
     ///  Configures and returns the specified supplementary view.
     ///
-    ///  :param: view           The supplementary view to configure.
-    ///  :param: item           The model instance (data object) at `indexPath`.
-    ///  :param: kind           An identifier that describes the type of the supplementary view.
-    ///  :param: collectionView The collection view requesting this information.
-    ///  :param: indexPath      The index path that specifies the location of `view` and `item`.
+    ///  - parameter view:           The supplementary view to configure.
+    ///  - parameter item:           The model instance (data object) at `indexPath`.
+    ///  - parameter kind:           An identifier that describes the type of the supplementary view.
+    ///  - parameter collectionView: The collection view requesting this information.
+    ///  - parameter indexPath:      The index path that specifies the location of `view` and `item`.
     ///
-    ///  :returns: A configured `UICollectionReusableView` of type `SupplementaryView`.
+    ///  - returns: A configured `UICollectionReusableView` of type `SupplementaryView`.
     func configureSupplementaryView(view: SupplementaryView, forItem item: DataItem, kind: SupplementaryViewKind,
                                     inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> SupplementaryView
 }
@@ -190,13 +190,13 @@ public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectio
 
     ///  Configures the supplementary view for the specified data item, collection view, and index path.
     ///
-    ///  :param: SupplementaryView     The supplementary view to be configured at the index path.
-    ///  :param: DataItem              The data item at the index path.
-    ///  :param: SupplementaryViewKind An identifier that describes the type of the supplementary view.
-    ///  :param: UICollectionView      The collection view requesting this information.
-    ///  :param: NSIndexPath           The index path at which the supplementary view will be displayed.
+    ///  - parameter SupplementaryView:     The supplementary view to be configured at the index path.
+    ///  - parameter DataItem:              The data item at the index path.
+    ///  - parameter SupplementaryViewKind: An identifier that describes the type of the supplementary view.
+    ///  - parameter UICollectionView:      The collection view requesting this information.
+    ///  - parameter NSIndexPath:           The index path at which the supplementary view will be displayed.
     ///
-    ///  :returns: The configured supplementary view.
+    ///  - returns: The configured supplementary view.
     public typealias ConfigurationHandler = (SupplementaryView, DataItem, SupplementaryViewKind, UICollectionView, NSIndexPath) -> SupplementaryView
 
     // MARK: Properties
@@ -212,10 +212,10 @@ public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectio
 
     ///  Constructs a new supplementary view factory.
     ///
-    ///  :param: reuseIdentifier               The reuse identifier with which the factory will dequeue supplementary views.
-    ///  :param: supplementaryViewConfigurator The closure with which the factory will configure supplementary views.
+    ///  - parameter reuseIdentifier:               The reuse identifier with which the factory will dequeue supplementary views.
+    ///  - parameter supplementaryViewConfigurator: The closure with which the factory will configure supplementary views.
     ///
-    ///  :returns: A new `CollectionSupplementaryViewFactory` instance.
+    ///  - returns: A new `CollectionSupplementaryViewFactory` instance.
     public init(reuseIdentifier: String, supplementaryViewConfigurator: ConfigurationHandler) {
         self.reuseIdentifier = reuseIdentifier
         self.supplementaryViewConfigurator = supplementaryViewConfigurator
@@ -225,12 +225,12 @@ public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectio
 
     ///  Creates and returns a new `SupplementaryView` instance, or dequeues an existing view for reuse.
     ///
-    ///  :param: item           The model instance (data object) at `indexPath`.
-    ///  :param: kind           An identifier that describes the type of the supplementary view.
-    ///  :param: collectionView The collection view requesting this information.
-    ///  :param: indexPath      The index path that specifies the location of the new supplementary view.
+    ///  - parameter item:           The model instance (data object) at `indexPath`.
+    ///  - parameter kind:           An identifier that describes the type of the supplementary view.
+    ///  - parameter collectionView: The collection view requesting this information.
+    ///  - parameter indexPath:      The index path that specifies the location of the new supplementary view.
     ///
-    ///  :returns: An initialized or dequeued `UICollectionReusableView` of type `SupplementaryView`.
+    ///  - returns: An initialized or dequeued `UICollectionReusableView` of type `SupplementaryView`.
     public func supplementaryViewForItem(item: DataItem, kind: SupplementaryViewKind,
                                          inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> SupplementaryView {
         return collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: reuseIdentifier, forIndexPath: indexPath) as! SupplementaryView
@@ -238,13 +238,13 @@ public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectio
 
     ///  Configures and returns the specified supplementary view.
     ///
-    ///  :param: view           The supplementary view to configure.
-    ///  :param: item           The model instance (data object) at `indexPath`.
-    ///  :param: kind           An identifier that describes the type of the supplementary view.
-    ///  :param: collectionView The collection view requesting this information.
-    ///  :param: indexPath      The index path that specifies the location of `view` and `item`.
+    ///  - parameter view:           The supplementary view to configure.
+    ///  - parameter item:           The model instance (data object) at `indexPath`.
+    ///  - parameter kind:           An identifier that describes the type of the supplementary view.
+    ///  - parameter collectionView: The collection view requesting this information.
+    ///  - parameter indexPath:      The index path that specifies the location of `view` and `item`.
     ///
-    ///  :returns: A configured `UICollectionReusableView` of type `SupplementaryView`.
+    ///  - returns: A configured `UICollectionReusableView` of type `SupplementaryView`.
     public func configureSupplementaryView(view: SupplementaryView, forItem item: DataItem, kind: SupplementaryViewKind,
                                            inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> SupplementaryView {
         return supplementaryViewConfigurator(view, item, kind, collectionView, indexPath)
@@ -291,9 +291,9 @@ public struct CollectionViewSection <DataItem>: CollectionViewSectionInfo {
 
     ///  Constructs a new collection view section.
     ///
-    ///  :param: dataItems The elements in the section.
+    ///  - parameter dataItems: The elements in the section.
     ///
-    ///  :returns: A new `CollectionViewSection` instance.
+    ///  - returns: A new `CollectionViewSection` instance.
     public init(dataItems: [DataItem]) {
         self.dataItems = dataItems
     }
@@ -351,12 +351,12 @@ public final class CollectionViewDataSourceProvider <DataItem, SectionInfo: Coll
 
     ///  Constructs a new data source provider for a collection view.
     ///
-    ///  :param: sections                 The sections to display in the collection view.
-    ///  :param: cellFactory              The cell factory from which the collection view data source will dequeue cells.
-    ///  :param: supplementaryViewFactory The supplementary view factory from which the collection view data source will dequeue supplementary views.
-    ///  :param: collectionView           The collection view whose data source will be provided by this provider.
+    ///  - parameter sections:                 The sections to display in the collection view.
+    ///  - parameter cellFactory:              The cell factory from which the collection view data source will dequeue cells.
+    ///  - parameter supplementaryViewFactory: The supplementary view factory from which the collection view data source will dequeue supplementary views.
+    ///  - parameter collectionView:           The collection view whose data source will be provided by this provider.
     ///
-    ///  :returns: A new `CollectionViewDataSourceProvider` instance.
+    ///  - returns: A new `CollectionViewDataSourceProvider` instance.
     public init(sections: [SectionInfo], cellFactory: CellFactory, supplementaryViewFactory: SupplementaryViewFactory? = nil, collectionView: UICollectionView? = nil) {
         self.sections = sections
         self.cellFactory = cellFactory
@@ -443,12 +443,12 @@ public final class CollectionViewFetchedResultsDataSourceProvider <DataItem, Cel
 
     ///  Constructs a new data source provider for the collection view.
     ///
-    ///  :param: fetchedResultsController The fetched results controller that provides the data for the collection view.
-    ///  :param: cellFactory              The cell factory from which the collection view data source will dequeue cells.
-    ///  :param: supplementaryViewFactory The supplementary view factory from which the collection view data source will dequeue supplementary views.
-    ///  :param: collectionView           The collection view whose data source will be provided by this provider.
+    ///  - parameter fetchedResultsController: The fetched results controller that provides the data for the collection view.
+    ///  - parameter cellFactory:              The cell factory from which the collection view data source will dequeue cells.
+    ///  - parameter supplementaryViewFactory: The supplementary view factory from which the collection view data source will dequeue supplementary views.
+    ///  - parameter collectionView:           The collection view whose data source will be provided by this provider.
     ///
-    ///  :returns: A new `CollectionViewFetchedResultsDataSourceProvider` instance.
+    ///  - returns: A new `CollectionViewFetchedResultsDataSourceProvider` instance.
     public init(fetchedResultsController: NSFetchedResultsController, cellFactory: CellFactory, supplementaryViewFactory: SupplementaryViewFactory? = nil, collectionView: UICollectionView? = nil) {
         self.fetchedResultsController = fetchedResultsController
         self.cellFactory = cellFactory
@@ -461,12 +461,19 @@ public final class CollectionViewFetchedResultsDataSourceProvider <DataItem, Cel
 
     ///  Executes the fetch request for the provider's `fetchedResultsController`.
     ///
-    ///  :returns: A tuple containing a `Bool` value that indicates if the fetch executed successfully and an `NSError?` if an error occured.
+    ///  - returns: A tuple containing a `Bool` value that indicates if the fetch executed successfully and an `NSError?` if an error occured.
     public func performFetch() -> (success: Bool, error: NSError?) {
         var error: NSError? = nil
-        let success = fetchedResultsController.performFetch(&error)
+        let success: Bool
+        do {
+            try fetchedResultsController.performFetch()
+            success = true
+        } catch let error1 as NSError {
+            error = error1
+            success = false
+        }
         if !success {
-            println("*** ERROR: \(toString(CollectionViewFetchedResultsDataSourceProvider.self))"
+            print("*** ERROR: \(String(CollectionViewFetchedResultsDataSourceProvider.self))"
                 + "\n\t [\(__LINE__)] \(__FUNCTION__) Could not perform fetch error: \(error)")
         }
         return (success, error)
@@ -479,7 +486,7 @@ public final class CollectionViewFetchedResultsDataSourceProvider <DataItem, Cel
             self.fetchedResultsController.sections?.count ?? 0
         },
         numberOfItemsInSection: { [unowned self] (section) -> Int in
-            let sectionInfo = self.fetchedResultsController.sections?[section] as? NSFetchedResultsSectionInfo
+            let sectionInfo = self.fetchedResultsController.sections?[section]
             return sectionInfo?.numberOfObjects ?? 0
         },
         cellForItemAtIndexPath: { [unowned self] (collectionView, indexPath) -> UICollectionViewCell in
