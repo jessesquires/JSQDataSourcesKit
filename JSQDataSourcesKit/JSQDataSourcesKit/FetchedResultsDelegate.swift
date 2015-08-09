@@ -286,7 +286,7 @@ That is, it cannot be assigned to `NSFetchedResultsController.delegate`
     }
 
     @objc func controller(controller: NSFetchedResultsController,
-        didChangeObject anObject: NSManagedObject,
+        didChangeObject anObject: AnyObject,
         atIndexPath indexPath: NSIndexPath?,
         forChangeType type: NSFetchedResultsChangeType,
         newIndexPath: NSIndexPath?) {
