@@ -20,6 +20,9 @@
 		887FE5131BA4DB880018ACBC /* TableViewSectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887FE5121BA4DB880018ACBC /* TableViewSectionTests.swift */; settings = {ASSET_TAGS = (); }; };
 		887FE5151BA4DC2D0018ACBC /* TableViewFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887FE5141BA4DC2D0018ACBC /* TableViewFakes.swift */; settings = {ASSET_TAGS = (); }; };
 		887FE5181BA4DD290018ACBC /* TableViewDataSourceSubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887FE5171BA4DD290018ACBC /* TableViewDataSourceSubscriptTests.swift */; settings = {ASSET_TAGS = (); }; };
+		887FE51A1BA4DE470018ACBC /* CollectionViewFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887FE5191BA4DE470018ACBC /* CollectionViewFakes.swift */; settings = {ASSET_TAGS = (); }; };
+		887FE51C1BA4DEF20018ACBC /* CollectionViewSectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887FE51B1BA4DEF20018ACBC /* CollectionViewSectionTests.swift */; settings = {ASSET_TAGS = (); }; };
+		887FE51E1BA4DF630018ACBC /* CollectionViewDataSourceSubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887FE51D1BA4DF630018ACBC /* CollectionViewDataSourceSubscriptTests.swift */; settings = {ASSET_TAGS = (); }; };
 		88B017F21B3BADFD00C9B29A /* JSQDataSourcesKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 887DD0841B3BAC6C00FC4BF1 /* JSQDataSourcesKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -64,6 +67,9 @@
 		887FE5121BA4DB880018ACBC /* TableViewSectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSectionTests.swift; sourceTree = "<group>"; };
 		887FE5141BA4DC2D0018ACBC /* TableViewFakes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewFakes.swift; sourceTree = "<group>"; };
 		887FE5171BA4DD290018ACBC /* TableViewDataSourceSubscriptTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceSubscriptTests.swift; sourceTree = "<group>"; };
+		887FE5191BA4DE470018ACBC /* CollectionViewFakes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewFakes.swift; sourceTree = "<group>"; };
+		887FE51B1BA4DEF20018ACBC /* CollectionViewSectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewSectionTests.swift; sourceTree = "<group>"; };
+		887FE51D1BA4DF630018ACBC /* CollectionViewDataSourceSubscriptTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSourceSubscriptTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +126,9 @@
 		887DD0921B3BAC6C00FC4BF1 /* JSQDataSourcesKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				887FE51D1BA4DF630018ACBC /* CollectionViewDataSourceSubscriptTests.swift */,
 				887DD0AA1B3BACE200FC4BF1 /* CollectionViewDataSourceTests.swift */,
+				887FE51B1BA4DEF20018ACBC /* CollectionViewSectionTests.swift */,
 				887FE5161BA4DC320018ACBC /* Fakes */,
 				88B017F31B3BAE3200C9B29A /* Support */,
 				887FE5171BA4DD290018ACBC /* TableViewDataSourceSubscriptTests.swift */,
@@ -134,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				887FE5141BA4DC2D0018ACBC /* TableViewFakes.swift */,
+				887FE5191BA4DE470018ACBC /* CollectionViewFakes.swift */,
 			);
 			name = Fakes;
 			sourceTree = "<group>";
@@ -277,11 +286,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				887FE51C1BA4DEF20018ACBC /* CollectionViewSectionTests.swift in Sources */,
 				887FE5151BA4DC2D0018ACBC /* TableViewFakes.swift in Sources */,
 				887FE5131BA4DB880018ACBC /* TableViewSectionTests.swift in Sources */,
+				887FE51E1BA4DF630018ACBC /* CollectionViewDataSourceSubscriptTests.swift in Sources */,
 				887DD0AD1B3BACE200FC4BF1 /* TableViewDataSourceTests.swift in Sources */,
 				887FE5181BA4DD290018ACBC /* TableViewDataSourceSubscriptTests.swift in Sources */,
 				887DD0AC1B3BACE200FC4BF1 /* CollectionViewDataSourceTests.swift in Sources */,
+				887FE51A1BA4DE470018ACBC /* CollectionViewFakes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

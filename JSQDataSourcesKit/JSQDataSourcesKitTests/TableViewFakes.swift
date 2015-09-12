@@ -22,6 +22,7 @@ import XCTest
 
 import JSQDataSourcesKit
 
+
 // Fakes for testing
 
 struct FakeTableModel: Equatable {
