@@ -36,7 +36,7 @@ class TableViewDataSourceTests: XCTestCase {
         fakeTableView.registerClass(FakeTableCell.self, forCellReuseIdentifier: fakeReuseId)
     }
   
-    func test_ThatTableViewDataSourceReturnsExpectedData_ForSingleSection() {
+    func test_ThatTableViewDataSource_ReturnsExpectedData_ForSingleSection() {
 
         // GIVEN: a single TableViewSection with data items
         let expectedModel = FakeTableModel()
@@ -96,7 +96,7 @@ class TableViewDataSourceTests: XCTestCase {
         })
     }
 
-    func test_ThatTableViewDataSourceReturnsExpectedData_ForMultipleSections() {
+    func test_ThatTableViewDataSource_ReturnsExpectedData_ForMultipleSections() {
 
         // GIVEN: some table view sections
         let section0 = TableViewSection(dataItems: [FakeTableModel(), FakeTableModel(), FakeTableModel()], headerTitle: "Header", footerTitle: "Footer")

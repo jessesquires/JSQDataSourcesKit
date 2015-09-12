@@ -25,7 +25,7 @@ import JSQDataSourcesKit
 
 class TableViewSectionTests: XCTestCase {
 
-    func test_ThatTableViewSectionReturnsExpectedDataFromSubscript() {
+    func test_ThatTableViewSection_ReturnsExpectedDataFromSubscript() {
 
         // GIVEN: a model and a table view section
         let expectedModel = FakeTableModel()
@@ -38,7 +38,7 @@ class TableViewSectionTests: XCTestCase {
         XCTAssertEqual(item, expectedModel, "Model returned from subscript should equal expected model")
     }
 
-    func test_ThatTableViewSectionSetsExpectedDataAtSubscript() {
+    func test_ThatTableViewSection_SetsExpectedDataAtSubscript() {
 
         // GIVEN: a table view section
         var section = TableViewSection(dataItems: [FakeTableModel(), FakeTableModel(), FakeTableModel(), FakeTableModel()])
@@ -54,7 +54,7 @@ class TableViewSectionTests: XCTestCase {
         XCTAssertEqual(count, section.count, "Section count should remain unchanged")
     }
 
-    func test_ThatTableViewSectionReturnsExpectedCount() {
+    func test_ThatTableViewSection_ReturnsExpectedCount() {
 
         // GIVEN: items and a table view section
         let items = [FakeTableModel(), FakeTableModel(), FakeTableModel(), FakeTableModel()]

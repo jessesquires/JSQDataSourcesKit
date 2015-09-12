@@ -39,7 +39,7 @@ class CollectionViewDataSourceTests: XCTestCase {
         fakeCollectionView.registerClass(FakeCollectionSupplementaryView.self, forSupplementaryViewOfKind: FakeSupplementaryViewKind, withReuseIdentifier: fakeSupplementaryViewReuseId)
     }
 
-    func test_ThatCollectionViewDataSourceReturnsExpectedData_ForSingleSection() {
+    func test_ThatCollectionViewDataSource_ReturnsExpectedData_ForSingleSection() {
 
         // GIVEN: a single CollectionViewSection with data items
         let expectedModel = FakeCollectionModel()
@@ -93,7 +93,7 @@ class CollectionViewDataSourceTests: XCTestCase {
         })
     }
 
-    func test_ThatCollectionViewDataSourceReturnsExpectedData_ForMultipleSections() {
+    func test_ThatCollectionViewDataSource_ReturnsExpectedData_ForMultipleSections() {
 
         // GIVEN: some collection view sections
         let section0 = CollectionViewSection(dataItems: [FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel()])

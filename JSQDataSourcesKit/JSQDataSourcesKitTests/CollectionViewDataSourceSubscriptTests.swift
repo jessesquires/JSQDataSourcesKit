@@ -25,7 +25,7 @@ import JSQDataSourcesKit
 
 class CollectionViewDataSourceSubscriptTests: XCTestCase {
 
-    func test_ThatCollectionViewDataSourceProviderReturnsExpectedDataFromSubscript() {
+    func test_ThatCollectionViewDataSourceProvider_ReturnsExpectedDataFromSubscript() {
 
         // GIVEN: some collection view sections
         let section0 = CollectionViewSection(dataItems: [FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel()])
@@ -53,7 +53,7 @@ class CollectionViewDataSourceSubscriptTests: XCTestCase {
         XCTAssertEqual(section.dataItems, section1.dataItems, "Section returned from subscript should equal expected section")
     }
 
-    func test_ThatCollectionViewDataSourceProviderSetsExpectedDataAtSubscript() {
+    func test_ThatCollectionViewDataSourceProvider_SetsExpectedDataAtSubscript() {
 
         // GIVEN: some collection view sections
         let section0 = CollectionViewSection(dataItems: [FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel()])
