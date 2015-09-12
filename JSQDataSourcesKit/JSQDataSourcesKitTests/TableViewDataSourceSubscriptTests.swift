@@ -25,7 +25,7 @@ import JSQDataSourcesKit
 
 class TableViewDataSourceSubscriptTests: XCTestCase {
 
-    func test_ThatTableViewDataSourceProvider_ReturnsExpectedDataFromSubscript() {
+    func test_ThatTableViewDataSourceProvider_ReturnsExpectedDataFrom_IntSubscript() {
 
         // GIVEN: some table view sections
         let section0 = TableViewSection(dataItems: [FakeTableModel(), FakeTableModel(), FakeTableModel()], headerTitle: "Header", footerTitle: "Footer")
@@ -49,7 +49,7 @@ class TableViewDataSourceSubscriptTests: XCTestCase {
         XCTAssertTrue(section.footerTitle == section2.footerTitle, "Section returned from subscript should equal expected section")
     }
 
-    func test_ThatTableViewDataSourceProvider_SetsExpectedDataAtSubscript() {
+    func test_ThatTableViewDataSourceProvider_SetsExpectedDataAt_IntSubscript() {
 
         // GIVEN: some table view sections
         let section0 = TableViewSection(dataItems: [FakeTableModel(), FakeTableModel(), FakeTableModel()], headerTitle: "Header", footerTitle: "Footer")
@@ -76,5 +76,54 @@ class TableViewDataSourceSubscriptTests: XCTestCase {
 
         XCTAssertEqual(count, dataSourceProvider.sections.count, "Number of sections should remain unchanged")
     }
-    
+
+    func test_ThatTableViewDataSourceProvider_ReturnsExpectedDataFrom_IndexPathSubscript() {
+
+        // GIVEN: some table view sections
+        let section0 = TableViewSection(dataItems: [FakeTableModel(), FakeTableModel(), FakeTableModel()])
+        let section1 = TableViewSection(dataItems: [FakeTableModel()])
+
+        // GIVEN: a cell factory
+        let factory = TableViewCellFactory(reuseIdentifier: "cellid") { (cell: FakeTableCell, model: FakeTableModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
+            return cell
+        }
+
+        // GIVEN: a data source provider
+        let dataSourceProvider = TableViewDataSourceProvider(sections: [section0, section1], cellFactory: factory)
+
+        // WHEN: we ask for an item at a specific index path
+        let indexPath = NSIndexPath(forRow: 2, inSection: 0)
+        let item = dataSourceProvider[indexPath]
+
+        // THEN: we receive the expected item
+        XCTAssertEqual(item, section0[2], "Item returned from subscript should equal expected item")
+    }
+
+    func test_ThatTableViewDataSourceProvider_SetsExpectedDataAt_IndexPathSubscript() {
+
+        // GIVEN: some table view sections
+        let section0 = TableViewSection(dataItems: [FakeTableModel(), FakeTableModel(), FakeTableModel()])
+        let section1 = TableViewSection(dataItems: [FakeTableModel()])
+
+        // GIVEN: a cell factory
+        let factory = TableViewCellFactory(reuseIdentifier: "reuseId") { (cell: UITableViewCell, model: FakeTableModel, view: UITableView, index: NSIndexPath) -> UITableViewCell in
+            return cell
+        }
+
+        // GIVEN: a data source provider
+        let dataSourceProvider = TableViewDataSourceProvider(sections: [section0, section1], cellFactory: factory)
+
+        // WHEN: we set an item at a specific index path
+        let indexPath = NSIndexPath(forRow: 0, inSection: 1)
+        let expectedItem = FakeTableModel()
+
+        dataSourceProvider[indexPath] = expectedItem
+
+        // THEN: the item at the specified index path is replaced with the new item
+        XCTAssertEqual(dataSourceProvider[indexPath], expectedItem, "Item set at subscript should equal expected item")
+
+        XCTAssertEqual(2, dataSourceProvider.sections.count, "Number of sections should remain unchanged")
+        XCTAssertEqual(1, section1.count, "Number of items in section should remain unchanged")
+    }
+
 }

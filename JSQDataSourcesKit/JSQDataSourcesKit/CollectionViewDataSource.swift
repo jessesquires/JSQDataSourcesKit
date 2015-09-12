@@ -295,10 +295,10 @@ public protocol CollectionViewSectionInfo {
     /// The type of elements stored in the section.
     typealias DataItem
 
-    // MARK: Computed properties
+    // MARK: Properties
 
     /// Returns the elements in the collection view section.
-    var dataItems: [DataItem] { get }
+    var dataItems: [DataItem] { get set }
 }
 
 
@@ -414,7 +414,7 @@ public final class CollectionViewDataSourceProvider <DataItem, SectionInfo: Coll
         collectionView?.dataSource = dataSource
     }
 
-    // MARK: Subscript
+    // MARK: Subscripts
 
     public subscript (index: Int) -> SectionInfo {
         get {
@@ -422,6 +422,15 @@ public final class CollectionViewDataSourceProvider <DataItem, SectionInfo: Coll
         }
         set {
             sections[index] = newValue
+        }
+    }
+
+    public subscript (indexPath: NSIndexPath) -> DataItem {
+        get {
+            return sections[indexPath.section].dataItems[indexPath.item];
+        }
+        set {
+            sections[indexPath.section].dataItems[indexPath.item] = newValue;
         }
     }
 

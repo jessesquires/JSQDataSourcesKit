@@ -157,10 +157,10 @@ public protocol TableViewSectionInfo {
     /// The type of elements stored in the section.
     typealias DataItem
 
-    // MARK: Computed properties
+    // MARK: Properties
 
     /// Returns the elements in the table view section.
-    var dataItems: [DataItem] { get }
+    var dataItems: [DataItem] { get set }
 
     /// Returns the header title for the section.
     var headerTitle: String? { get }
@@ -282,7 +282,7 @@ public final class TableViewDataSourceProvider <DataItem, SectionInfo: TableView
         tableView?.dataSource = dataSource
     }
 
-    // MARK: Subscript
+    // MARK: Subscripts
 
     public subscript (index: Int) -> SectionInfo {
         get {
@@ -290,6 +290,15 @@ public final class TableViewDataSourceProvider <DataItem, SectionInfo: TableView
         }
         set {
             sections[index] = newValue
+        }
+    }
+
+    public subscript (indexPath: NSIndexPath) -> DataItem {
+        get {
+            return sections[indexPath.section].dataItems[indexPath.row]
+        }
+        set {
+            sections[indexPath.section].dataItems[indexPath.row] = newValue
         }
     }
 
