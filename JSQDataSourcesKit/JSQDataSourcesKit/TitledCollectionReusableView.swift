@@ -25,7 +25,7 @@ when using a `CollectionViewFetchedResultsDelegateProvider`.
 
 These views can be created via a `TitledCollectionReusableViewFactory`.
 */
-public class TitledCollectionReusableView: UICollectionReusableView {
+public final class TitledCollectionReusableView: UICollectionReusableView {
 
     // MARK: Outlets
 
