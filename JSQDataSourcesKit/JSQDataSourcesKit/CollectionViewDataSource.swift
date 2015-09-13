@@ -335,6 +335,17 @@ public struct CollectionViewSection <Item>: CollectionViewSectionInfo {
     - returns: A new `CollectionViewSection` instance.
     */
     public init(items: Item...) {
+        self.init(items)
+    }
+
+    /**
+    Constructs a new collection view section.
+
+    - parameter items: The elements in the section.
+
+    - returns: A new `CollectionViewSection` instance.
+    */
+    public init(_ items: [Item]) {
         self.items = items
     }
 

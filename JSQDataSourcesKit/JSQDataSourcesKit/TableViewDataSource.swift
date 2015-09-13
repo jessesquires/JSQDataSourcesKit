@@ -204,13 +204,26 @@ public struct TableViewSection <Item>: TableViewSectionInfo {
     /**
     Constructs a new table view section.
 
-    - parameter Items:       The elements in the section.
+    - parameter items:       The elements in the section.
     - parameter headerTitle: The section header title.
     - parameter footerTitle: The section footer title.
 
     - returns: A new `TableViewSection` instance.
     */
     public init(items: Item..., headerTitle: String? = nil, footerTitle: String? = nil) {
+        self.init(items, headerTitle: headerTitle, footerTitle: footerTitle)
+    }
+
+    /**
+    Constructs a new table view section.
+
+    - parameter items:       The elements in the section.
+    - parameter headerTitle: The section header title.
+    - parameter footerTitle: The section footer title.
+
+    - returns: A new `TableViewSection` instance.
+    */
+    public init(_ items: [Item], headerTitle: String? = nil, footerTitle: String? = nil) {
         self.items = items
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle

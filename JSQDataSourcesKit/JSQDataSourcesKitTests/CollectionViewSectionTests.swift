@@ -25,6 +25,21 @@ import JSQDataSourcesKit
 
 class CollectionViewSectionTests: XCTestCase {
 
+    func test_ThatCollectionViewSection_Initializes() {
+
+        // GIVEN: some items
+        let item1 = FakeCollectionModel()
+        let item2 = FakeCollectionModel()
+        let item3 = FakeCollectionModel()
+
+        // WHEN: we create sections with the different initializers
+        let sectionA = CollectionViewSection(items: item1, item2, item3)
+        let sectionB = CollectionViewSection([item1, item2, item3])
+
+        // THEN: the sections have the same items
+        XCTAssertEqual(sectionA.items, sectionB.items, "Section items should be equal")
+    }
+
     func test_ThatCollectionViewSection_ReturnsExpectedDataFromSubscript() {
 
         // GIVEN: a model and a collection view section

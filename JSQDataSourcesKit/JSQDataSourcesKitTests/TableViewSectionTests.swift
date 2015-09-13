@@ -25,6 +25,21 @@ import JSQDataSourcesKit
 
 class TableViewSectionTests: XCTestCase {
 
+    func test_ThatTableViewSection_Initializes() {
+
+        // GIVEN: some items
+        let item1 = FakeTableView()
+        let item2 = FakeTableView()
+        let item3 = FakeTableView()
+
+        // WHEN: we create sections with the different initializers
+        let sectionA = TableViewSection(items: item1, item2, item3)
+        let sectionB = TableViewSection([item1, item2, item3])
+
+        // THEN: the sections have the same items
+        XCTAssertEqual(sectionA.items, sectionB.items, "Section items should be equal")
+    }
+
     func test_ThatTableViewSection_ReturnsExpectedDataFromSubscript() {
 
         // GIVEN: a model and a table view section
