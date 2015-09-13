@@ -16,24 +16,20 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
+import CoreData
 import Foundation
 import UIKit
-import CoreData
+
 
 /**
 A `CollectionViewFetchedResultsDelegateProvider` is responsible for providing a delegate object
 for an instance of `NSFetchedResultsController` that manages data to display in a collection view.
 
-- Note: The delegate provider has the following type parameters:
-```swift
-CollectionViewFetchedResultsDelegateProvider<DataItem>
-```
+Here, the `Item` type parameter acts as a phatom type.
 
-Here, the `DataItem` type parameter acts as a phatom type.
-
-- Warning: This type should correpsond to the type of objects that the `NSFetchedResultsController` fetches.
+- Note: This type should correpsond to the type of objects that the `NSFetchedResultsController` fetches.
 */
-public final class CollectionViewFetchedResultsDelegateProvider <DataItem> {
+public final class CollectionViewFetchedResultsDelegateProvider <Item> {
 
     // MARK: Properties
 
@@ -160,14 +156,10 @@ public final class CollectionViewFetchedResultsDelegateProvider <DataItem> {
 /**
 A `TableViewFetchedResultsDelegateProvider` is responsible for providing a delegate object
 for an instance of `NSFetchedResultsController` that manages data to display in a table view.
-
-- Note: The delegate provider has the following type parameters:
-```swift
-<DataItem, CellFactory: TableViewCellFactoryType where CellFactory.DataItem == DataItem>
-```
 */
-public final class TableViewFetchedResultsDelegateProvider <DataItem, CellFactory: TableViewCellFactoryType
-                                                            where CellFactory.DataItem == DataItem> {
+public final class TableViewFetchedResultsDelegateProvider <Item,
+                                                            CellFactory: TableViewCellFactoryType
+                                                            where CellFactory.Item == Item> {
 
     // MARK: Properties
 
@@ -228,7 +220,7 @@ public final class TableViewFetchedResultsDelegateProvider <DataItem, CellFactor
                 if let i = indexPath,
                     cell = self.tableView?.cellForRowAtIndexPath(i) as? CellFactory.Cell,
                     view = self.tableView {
-                        self.cellFactory.configureCell(cell, forItem: anyObject as! DataItem, inTableView: view, atIndexPath: i)
+                        self.cellFactory.configureCell(cell, forItem: anyObject as! Item, inTableView: view, atIndexPath: i)
                 }
             case .Move:
                 if let deleteIndexPath = indexPath {
@@ -286,7 +278,7 @@ That is, it cannot be assigned to `NSFetchedResultsController.delegate`
     }
 
     @objc func controller(controller: NSFetchedResultsController,
-        didChangeObject anObject: NSManagedObject,
+        didChangeObject anObject: AnyObject,
         atIndexPath indexPath: NSIndexPath?,
         forChangeType type: NSFetchedResultsChangeType,
         newIndexPath: NSIndexPath?) {

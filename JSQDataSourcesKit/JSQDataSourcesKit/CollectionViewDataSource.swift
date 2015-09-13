@@ -16,24 +16,21 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
+import CoreData
 import Foundation
 import UIKit
-import CoreData
+
 
 /**
 An instance conforming to `CollectionViewCellFactoryType` is responsible for initializing
 and configuring collection view cells to be consumed by an instance of `CollectionViewDataSourceProvider`.
-
-The `CollectionViewCellFactoryType` protocol has two associated types, `DataItem` and `Cell`.
-These associated types describe the type of model instances backing the collection view
-and the type of cells in the collection view, respectively.
 */
 public protocol CollectionViewCellFactoryType {
 
     // MARK: Associated types
 
-    /// The type of elements backing the collection view.
-    typealias DataItem
+    /// The type of elements (model objects) backing the collection view.
+    typealias Item
 
     /// The type of `UICollectionViewCell` that the factory produces.
     typealias Cell: UICollectionViewCell
@@ -43,39 +40,33 @@ public protocol CollectionViewCellFactoryType {
     /**
     Creates and returns a new `Cell` instance, or dequeues an existing cell for reuse.
 
-    - parameter item:           The model instance (data object) at `indexPath`.
+    - parameter item:           The item (model object) at `indexPath`.
     - parameter collectionView: The collection view requesting this information.
     - parameter indexPath:      The index path that specifies the location of `cell` and `item`.
 
     - returns: An initialized or dequeued `UICollectionViewCell` of type `Cell`.
     */
-    func cellForItem(item: DataItem, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell
+    func cellForItem(item: Item, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell
 
     /**
     Configures and returns the specified cell.
 
     - parameter cell:           The cell to configure.
-    - parameter item:           The model instance (data object) at `indexPath`.
+    - parameter item:           The item (model object) at `indexPath`.
     - parameter collectionView: The collection view requesting this information.
     - parameter indexPath:      The index path that specifies the location of `cell` and `item`.
 
     - returns: A configured `UICollectionViewCell` of type `Cell`.
     */
-    func configureCell(cell: Cell, forItem item: DataItem, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell
+    func configureCell(cell: Cell, forItem item: Item, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell
 }
 
 
 /**
 A `CollectionViewCellFactory` is a concrete `CollectionViewCellFactoryType`.
-This factory is responsible for producing and configuring collection view cells for a specific data item.
-
-- Note: The factory has the following type parameters:
-
-```swift
-CollectionViewCellFactory<Cell: UICollectionViewCell, DataItem>
-```
+This factory is responsible for producing and configuring collection view cells for a specific item.
 */
-public struct CollectionViewCellFactory <Cell: UICollectionViewCell, DataItem>: CollectionViewCellFactoryType {
+public struct CollectionViewCellFactory <Cell: UICollectionViewCell, Item>: CollectionViewCellFactoryType {
 
     // MARK: Typealiases
 
@@ -83,20 +74,21 @@ public struct CollectionViewCellFactory <Cell: UICollectionViewCell, DataItem>: 
     Configures the cell for the specified data item, collection view and index path.
 
     - parameter Cell:             The cell to be configured at the index path.
-    - parameter DataItem:         The data item at the index path.
+    - parameter Item:             The item at the index path.
     - parameter UICollectionView: The collection view requesting this information.
     - parameter NSIndexPath:      The index path at which the cell will be displayed.
 
     - returns: The configured cell.
     */
-    public typealias ConfigurationHandler = (Cell, DataItem, UICollectionView, NSIndexPath) -> Cell
+    public typealias ConfigurationHandler = (Cell, Item, UICollectionView, NSIndexPath) -> Cell
 
     // MARK: Properties
 
     /**
     A unique identifier that describes the purpose of the cells that the factory produces.
     The factory dequeues cells from the collection view with this reuse identifier.
-    Clients are responsible for registering a cell for this identifier with the collection view.
+
+    - Note: Clients are responsible for registering a cell for this identifier with the collection view.
     */
     public let reuseIdentifier: String
 
@@ -122,13 +114,13 @@ public struct CollectionViewCellFactory <Cell: UICollectionViewCell, DataItem>: 
     /**
     Creates and returns a new `Cell` instance, or dequeues an existing cell for reuse.
 
-    - parameter item:           The model instance (data object) at `indexPath`.
+    - parameter item:           The item (model object) at `indexPath`.
     - parameter collectionView: The collection view requesting this information.
     - parameter indexPath:      The index path that specifies the location of `cell` and `item`.
 
     - returns: An initialized or dequeued `UICollectionViewCell` of type `Cell`.
     */
-    public func cellForItem(item: DataItem, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell {
+    public func cellForItem(item: Item, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell {
         return collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! Cell
     }
 
@@ -136,13 +128,13 @@ public struct CollectionViewCellFactory <Cell: UICollectionViewCell, DataItem>: 
     Configures and returns the specified cell.
 
     - parameter cell:           The cell to configure.
-    - parameter item:           The model instance (data object) at `indexPath`.
+    - parameter item:           The item (model object) at `indexPath`.
     - parameter collectionView: The collection view requesting this information.
     - parameter indexPath:      The index path that specifies the location of `cell` and `item`.
 
     - returns: A configured `UICollectionViewCell` of type `Cell`.
     */
-    public func configureCell(cell: Cell, forItem item: DataItem, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell {
+    public func configureCell(cell: Cell, forItem item: Item, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell {
         return cellConfigurator(cell, item, collectionView, indexPath)
     }
 }
@@ -155,17 +147,13 @@ public typealias SupplementaryViewKind = String
 /**
 An instance conforming to `CollectionSupplementaryViewFactoryType` is responsible for initializing
 and configuring collection view supplementary views to be consumed by an instance of `CollectionViewDataSourceProvider`.
-
-The `CollectionSupplementaryViewFactoryType` protocol has two associated types, `DataItem` and `SupplementaryView`.
-These associated types describe the type of model instances backing the collection view
-and the type of supplementary views in the collection view, respectively.
 */
 public protocol CollectionSupplementaryViewFactoryType {
 
     // MARK: Associated types
 
     /// The type of elements backing the collection view.
-    typealias DataItem
+    typealias Item
 
     /// The type of `UICollectionReusableView` that the factory produces.
     typealias SupplementaryView: UICollectionReusableView
@@ -175,14 +163,14 @@ public protocol CollectionSupplementaryViewFactoryType {
     /**
     Creates and returns a new `SupplementaryView` instance, or dequeues an existing view for reuse.
 
-    - parameter item:           The model instance (data object) at `indexPath`.
+    - parameter item:           The item (model object) at `indexPath`.
     - parameter kind:           An identifier that describes the type of the supplementary view.
     - parameter collectionView: The collection view requesting this information.
     - parameter indexPath:      The index path that specifies the location of the new supplementary view.
 
     - returns: An initialized or dequeued `UICollectionReusableView` of type `SupplementaryView`.
     */
-    func supplementaryViewForItem(item: DataItem, kind: SupplementaryViewKind,
+    func supplementaryViewForItem(item: Item, kind: SupplementaryViewKind,
         inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> SupplementaryView
 
     /**
@@ -196,21 +184,17 @@ public protocol CollectionSupplementaryViewFactoryType {
 
     - returns: A configured `UICollectionReusableView` of type `SupplementaryView`.
     */
-    func configureSupplementaryView(view: SupplementaryView, forItem item: DataItem, kind: SupplementaryViewKind,
+    func configureSupplementaryView(view: SupplementaryView, forItem item: Item, kind: SupplementaryViewKind,
         inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> SupplementaryView
 }
 
 
 /**
 A `CollectionSupplementaryViewFactory` is a concrete `CollectionSupplementaryViewFactoryType`.
-This factory is responsible for producing and configuring supplementary views for a collection view for a specific data item.
-
-- Note: The factory has the following type parameters:
-```swift
-CollectionSupplementaryViewFactory<SupplementaryView: UICollectionReusableView, DataItem>
+This factory is responsible for producing and configuring supplementary views for a collection view for a specific item.
 ```
 */
-public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectionReusableView, DataItem>: CollectionSupplementaryViewFactoryType {
+public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectionReusableView, Item>: CollectionSupplementaryViewFactoryType {
 
     // MARK: Typealiases
 
@@ -218,21 +202,22 @@ public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectio
     Configures the supplementary view for the specified data item, collection view, and index path.
 
     - parameter SupplementaryView:     The supplementary view to be configured at the index path.
-    - parameter DataItem:              The data item at the index path.
+    - parameter Item:                  The item at the index path.
     - parameter SupplementaryViewKind: An identifier that describes the type of the supplementary view.
     - parameter UICollectionView:      The collection view requesting this information.
     - parameter NSIndexPath:           The index path at which the supplementary view will be displayed.
 
     - returns: The configured supplementary view.
     */
-    public typealias ConfigurationHandler = (SupplementaryView, DataItem, SupplementaryViewKind, UICollectionView, NSIndexPath) -> SupplementaryView
+    public typealias ConfigurationHandler = (SupplementaryView, Item, SupplementaryViewKind, UICollectionView, NSIndexPath) -> SupplementaryView
 
     // MARK: Properties
 
     /**
     A unique identifier that describes the purpose of the supplementary views that the factory produces.
     The factory dequeues supplementary views from the collection view with this reuse identifier.
-    - Warning: Clients are responsible for registering a view for this identifier and a supplementary view kind with the collection view.
+
+    - Note: Clients are responsible for registering a view for this identifier and a supplementary view kind with the collection view.
     */
     public let reuseIdentifier: String
 
@@ -258,14 +243,14 @@ public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectio
     /**
     Creates and returns a new `SupplementaryView` instance, or dequeues an existing view for reuse.
 
-    - parameter item:           The model instance (data object) at `indexPath`.
+    - parameter item:           The item (model object) at `indexPath`.
     - parameter kind:           An identifier that describes the type of the supplementary view.
     - parameter collectionView: The collection view requesting this information.
     - parameter indexPath:      The index path that specifies the location of the new supplementary view.
 
     - returns: An initialized or dequeued `UICollectionReusableView` of type `SupplementaryView`.
     */
-    public func supplementaryViewForItem(item: DataItem, kind: SupplementaryViewKind,
+    public func supplementaryViewForItem(item: Item, kind: SupplementaryViewKind,
         inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> SupplementaryView {
             return collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: reuseIdentifier, forIndexPath: indexPath) as! SupplementaryView
     }
@@ -274,14 +259,14 @@ public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectio
     Configures and returns the specified supplementary view.
 
     - parameter view:           The supplementary view to configure.
-    - parameter item:           The model instance (data object) at `indexPath`.
+    - parameter item:           The item (model object) at `indexPath`.
     - parameter kind:           An identifier that describes the type of the supplementary view.
     - parameter collectionView: The collection view requesting this information.
     - parameter indexPath:      The index path that specifies the location of `view` and `item`.
 
     - returns: A configured `UICollectionReusableView` of type `SupplementaryView`.
     */
-    public func configureSupplementaryView(view: SupplementaryView, forItem item: DataItem, kind: SupplementaryViewKind,
+    public func configureSupplementaryView(view: SupplementaryView, forItem item: Item, kind: SupplementaryViewKind,
         inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> SupplementaryView {
             return supplementaryViewConfigurator(view, item, kind, collectionView, indexPath)
     }
@@ -293,12 +278,12 @@ public protocol CollectionViewSectionInfo {
     // MARK: Associated types
 
     /// The type of elements stored in the section.
-    typealias DataItem
+    typealias Item
 
-    // MARK: Computed properties
+    // MARK: Properties
 
-    /// Returns the elements in the collection view section.
-    var dataItems: [DataItem] { get }
+    /// The elements in the collection view section.
+    var items: [Item] { get set }
 }
 
 
@@ -306,22 +291,17 @@ public protocol CollectionViewSectionInfo {
 A `CollectionViewSection` is a concrete `CollectionViewSectionInfo`.
 A section instance is responsible for managing the elements in a section.
 Elements in the section may be accessed or replaced via its subscripting interface.
-
-- Note: The section has the following type parameters:
-```swift
-CollectionViewSection<DataItem>
-```
 */
-public struct CollectionViewSection <DataItem>: CollectionViewSectionInfo {
+public struct CollectionViewSection <Item>: CollectionViewSectionInfo {
 
     // MARK: Properties
 
     /// The elements in the collection view section.
-    public var dataItems: [DataItem]
+    public var items: [Item]
 
     /// Returns the number of elements in the section.
     public var count: Int {
-        return dataItems.count
+        return items.count
     }
 
     // MARK: Initialization
@@ -329,22 +309,38 @@ public struct CollectionViewSection <DataItem>: CollectionViewSectionInfo {
     /**
     Constructs a new collection view section.
 
-    - parameter dataItems: The elements in the section.
+    - parameter items: The elements in the section.
 
     - returns: A new `CollectionViewSection` instance.
     */
-    public init(dataItems: [DataItem]) {
-        self.dataItems = dataItems
+    public init(items: Item...) {
+        self.init(items)
+    }
+
+    /**
+    Constructs a new collection view section.
+
+    - parameter items: The elements in the section.
+
+    - returns: A new `CollectionViewSection` instance.
+    */
+    public init(_ items: [Item]) {
+        self.items = items
     }
 
     // MARK: Subscript
 
-    public subscript (index: Int) -> DataItem {
+    /**
+    - parameter index: The index of the item to return.
+
+    - returns: The item at `index`.
+    */
+    public subscript (index: Int) -> Item {
         get {
-            return dataItems[index]
+            return items[index]
         }
         set {
-            dataItems[index] = newValue
+            items[index] = newValue
         }
     }
 }
@@ -361,24 +357,15 @@ Sections may be accessed or replaced via the provider's subscripting interface.
     - Registering supplementary views with the collection view
     - Adding, removing, or reloading cells as the provider's `sections` are modified
     - Adding, removing, or reloading sections as the provider's `sections` are modified
-
-- Note: The data source provider has the following type parameters:
-```swift
-<DataItem, SectionInfo: CollectionViewSectionInfo, 
-           CellFactory: CollectionViewCellFactoryType,
-           SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
-        where
-            SectionInfo.DataItem == DataItem,
-            CellFactory.DataItem == DataItem,
-            SupplementaryViewFactory.DataItem == DataItem>
-```
 */
-public final class CollectionViewDataSourceProvider <DataItem, SectionInfo: CollectionViewSectionInfo,
-                                                    CellFactory: CollectionViewCellFactoryType, SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
+public final class CollectionViewDataSourceProvider <Item,
+                                                    SectionInfo: CollectionViewSectionInfo,
+                                                    CellFactory: CollectionViewCellFactoryType,
+                                                    SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
                                                     where
-                                                    SectionInfo.DataItem == DataItem,
-                                                    CellFactory.DataItem == DataItem,
-                                                    SupplementaryViewFactory.DataItem == DataItem> {
+                                                    SectionInfo.Item == Item,
+                                                    CellFactory.Item == Item,
+                                                    SupplementaryViewFactory.Item == Item> {
 
     // MARK: Properties
 
@@ -414,14 +401,33 @@ public final class CollectionViewDataSourceProvider <DataItem, SectionInfo: Coll
         collectionView?.dataSource = dataSource
     }
 
-    // MARK: Subscript
+    // MARK: Subscripts
 
+    /**
+    - parameter index: The index of the section to return.
+
+    - returns: The section at `index`.
+    */
     public subscript (index: Int) -> SectionInfo {
         get {
             return sections[index]
         }
         set {
             sections[index] = newValue
+        }
+    }
+
+    /**
+    - parameter indexPath: The index path of the item to return.
+
+    - returns: The item at `indexPath`.
+    */
+    public subscript (indexPath: NSIndexPath) -> Item {
+        get {
+            return sections[indexPath.section].items[indexPath.item];
+        }
+        set {
+            sections[indexPath.section].items[indexPath.item] = newValue;
         }
     }
 
@@ -432,18 +438,18 @@ public final class CollectionViewDataSourceProvider <DataItem, SectionInfo: Coll
             self.sections.count
         },
         numberOfItemsInSection: { [unowned self] (section) -> Int in
-            self.sections[section].dataItems.count
+            self.sections[section].items.count
         },
         cellForItemAtIndexPath: { [unowned self] (collectionView, indexPath) -> UICollectionViewCell in
-            let dataItem = self.sections[indexPath.section].dataItems[indexPath.row]
-            let cell = self.cellFactory.cellForItem(dataItem, inCollectionView: collectionView, atIndexPath: indexPath)
-            return self.cellFactory.configureCell(cell, forItem: dataItem, inCollectionView: collectionView, atIndexPath: indexPath)
+            let item = self.sections[indexPath.section].items[indexPath.row]
+            let cell = self.cellFactory.cellForItem(item, inCollectionView: collectionView, atIndexPath: indexPath)
+            return self.cellFactory.configureCell(cell, forItem: item, inCollectionView: collectionView, atIndexPath: indexPath)
         },
         supplementaryViewAtIndexPath: { [unowned self] (collectionView, kind, indexPath) -> UICollectionReusableView in
             if let factory = self.supplementaryViewFactory {
-                let dataItem = self.sections[indexPath.section].dataItems[indexPath.row]
-                let view = factory.supplementaryViewForItem(dataItem, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
-                return factory.configureSupplementaryView(view, forItem: dataItem, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
+                let item = self.sections[indexPath.section].items[indexPath.row]
+                let view = factory.supplementaryViewForItem(item, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
+                return factory.configureSupplementaryView(view, forItem: item, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
             }
 
             // we must not return nil here, per the `UICollectionViewDataSource` docs
@@ -460,22 +466,14 @@ that is backed by an `NSFetchedResultsController` instance.
 
 This provider owns a fetched results controller, a cell factory, and a supplementary view factory.
 
-- Warning: Clients are responsbile for registering cells and supplementary views with the collection view.
-
-- Note: The data source provider has the following type parameters:
-```swift
-<DataItem, CellFactory: CollectionViewCellFactoryType,
-           SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
-        where
-            CellFactory.DataItem == DataItem,
-            SupplementaryViewFactory.DataItem == DataItem>
-```
+- Note: Clients are responsbile for registering cells and supplementary views with the collection view.
 */
-public final class CollectionViewFetchedResultsDataSourceProvider <DataItem, CellFactory: CollectionViewCellFactoryType,
+public final class CollectionViewFetchedResultsDataSourceProvider <Item,
+                                                                    CellFactory: CollectionViewCellFactoryType,
                                                                     SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
                                                                     where
-                                                                    CellFactory.DataItem == DataItem,
-                                                                    SupplementaryViewFactory.DataItem == DataItem> {
+                                                                    CellFactory.Item == Item,
+                                                                    SupplementaryViewFactory.Item == Item> {
 
     // MARK: Properties
 
@@ -521,15 +519,15 @@ public final class CollectionViewFetchedResultsDataSourceProvider <DataItem, Cel
             return (self.fetchedResultsController.sections?[section])?.numberOfObjects ?? 0
         },
         cellForItemAtIndexPath: { [unowned self] (collectionView, indexPath) -> UICollectionViewCell in
-            let dataItem = self.fetchedResultsController.objectAtIndexPath(indexPath) as! DataItem
-            let cell = self.cellFactory.cellForItem(dataItem, inCollectionView: collectionView, atIndexPath: indexPath)
-            return self.cellFactory.configureCell(cell, forItem: dataItem, inCollectionView: collectionView, atIndexPath: indexPath)
+            let item = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Item
+            let cell = self.cellFactory.cellForItem(item, inCollectionView: collectionView, atIndexPath: indexPath)
+            return self.cellFactory.configureCell(cell, forItem: item, inCollectionView: collectionView, atIndexPath: indexPath)
         },
         supplementaryViewAtIndexPath: { [unowned self] (collectionView, kind, indexPath) -> UICollectionReusableView in
             if let factory = self.supplementaryViewFactory {
-                let dataItem = self.fetchedResultsController.objectAtIndexPath(indexPath) as! DataItem
-                let view = factory.supplementaryViewForItem(dataItem, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
-                return factory.configureSupplementaryView(view, forItem: dataItem, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
+                let item = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Item
+                let view = factory.supplementaryViewForItem(item, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
+                return factory.configureSupplementaryView(view, forItem: item, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
             }
             // we must not return nil here, per the `UICollectionViewDataSource` docs
             // however, this will never get called as it is the client's responsibilty
