@@ -262,9 +262,12 @@ Sections may be accessed or replaced via the provider's subscripting interface.
     CellFactory.Item == Item>
 ```
 */
-public final class TableViewDataSourceProvider <Item, SectionInfo: TableViewSectionInfo, CellFactory: TableViewCellFactoryType
+public final class TableViewDataSourceProvider <Item,
+                                                SectionInfo: TableViewSectionInfo,
+                                                CellFactory: TableViewCellFactoryType
                                                 where
-                                                SectionInfo.Item == Item, CellFactory.Item == Item> {
+                                                SectionInfo.Item == Item,
+                                                CellFactory.Item == Item> {
 
     // MARK: Properties
 
@@ -352,8 +355,10 @@ This provider owns a fetched results controller and a cell factory.
     where CellFactory.Item == Item>
 ```
 */
-public final class TableViewFetchedResultsDataSourceProvider <Item, CellFactory: TableViewCellFactoryType
-                                                                where CellFactory.Item == Item> {
+public final class TableViewFetchedResultsDataSourceProvider <Item,
+                                                              CellFactory: TableViewCellFactoryType
+                                                              where
+                                                              CellFactory.Item == Item> {
 
     // MARK: Properties
 

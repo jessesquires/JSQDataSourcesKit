@@ -385,8 +385,10 @@ Sections may be accessed or replaced via the provider's subscripting interface.
     SupplementaryViewFactory.Item == Item>
 ```
 */
-public final class CollectionViewDataSourceProvider <Item, SectionInfo: CollectionViewSectionInfo,
-                                                    CellFactory: CollectionViewCellFactoryType, SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
+public final class CollectionViewDataSourceProvider <Item,
+                                                    SectionInfo: CollectionViewSectionInfo,
+                                                    CellFactory: CollectionViewCellFactoryType,
+                                                    SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
                                                     where
                                                     SectionInfo.Item == Item,
                                                     CellFactory.Item == Item,
@@ -492,7 +494,8 @@ This provider owns a fetched results controller, a cell factory, and a supplemen
     SupplementaryViewFactory.Item == Item>
 ```
 */
-public final class CollectionViewFetchedResultsDataSourceProvider <Item, CellFactory: CollectionViewCellFactoryType,
+public final class CollectionViewFetchedResultsDataSourceProvider <Item,
+                                                                    CellFactory: CollectionViewCellFactoryType,
                                                                     SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
                                                                     where
                                                                     CellFactory.Item == Item,

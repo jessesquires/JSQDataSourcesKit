@@ -167,7 +167,8 @@ for an instance of `NSFetchedResultsController` that manages data to display in 
 <Item, CellFactory: TableViewCellFactoryType where CellFactory.Item == Item>
 ```
 */
-public final class TableViewFetchedResultsDelegateProvider <Item, CellFactory: TableViewCellFactoryType
+public final class TableViewFetchedResultsDelegateProvider <Item,
+                                                            CellFactory: TableViewCellFactoryType
                                                             where CellFactory.Item == Item> {
 
     // MARK: Properties
