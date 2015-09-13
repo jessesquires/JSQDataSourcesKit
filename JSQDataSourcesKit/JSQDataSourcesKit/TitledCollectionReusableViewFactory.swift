@@ -25,12 +25,6 @@ A `TitledCollectionReusableViewFactory` is specialized supplementary view factor
 that conforms to `CollectionSupplementaryViewFactoryType`.
 
 This factory is responsible for producing and configuring `TitledCollectionReusableView` instances.
-
-- Note: The factory has the following type parameters:
-
-```swift
-TitledCollectionReusableViewFactory<Item>
-```
 */
 public struct TitledCollectionReusableViewFactory <Item>: CollectionSupplementaryViewFactoryType {
 
@@ -42,7 +36,7 @@ public struct TitledCollectionReusableViewFactory <Item>: CollectionSupplementar
     - Warning: This closure is called each time the collection view requests updates for a section's supplementary views.
 
     - parameter TitledCollectionReusableView: The `TitledCollectionReusableView` to be configured at the index path.
-    - parameter Item:                         The data item at the index path.
+    - parameter Item:                         The item at the index path.
     - parameter SupplementaryViewKind:        An identifier that describes the type of the supplementary view.
     - parameter UICollectionView:             The collection view requesting this information.
     - parameter NSIndexPath:                  The index path at which the supplementary view will be displayed.

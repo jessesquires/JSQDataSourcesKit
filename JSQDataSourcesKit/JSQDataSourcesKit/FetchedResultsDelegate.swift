@@ -25,14 +25,9 @@ import UIKit
 A `CollectionViewFetchedResultsDelegateProvider` is responsible for providing a delegate object
 for an instance of `NSFetchedResultsController` that manages data to display in a collection view.
 
-- Note: The delegate provider has the following type parameters:
-```swift
-CollectionViewFetchedResultsDelegateProvider<Item>
-```
-
 Here, the `Item` type parameter acts as a phatom type.
 
-- Warning: This type should correpsond to the type of objects that the `NSFetchedResultsController` fetches.
+- Note: This type should correpsond to the type of objects that the `NSFetchedResultsController` fetches.
 */
 public final class CollectionViewFetchedResultsDelegateProvider <Item> {
 
@@ -161,11 +156,6 @@ public final class CollectionViewFetchedResultsDelegateProvider <Item> {
 /**
 A `TableViewFetchedResultsDelegateProvider` is responsible for providing a delegate object
 for an instance of `NSFetchedResultsController` that manages data to display in a table view.
-
-- Note: The delegate provider has the following type parameters:
-```swift
-<Item, CellFactory: TableViewCellFactoryType where CellFactory.Item == Item>
-```
 */
 public final class TableViewFetchedResultsDelegateProvider <Item,
                                                             CellFactory: TableViewCellFactoryType
