@@ -45,7 +45,7 @@ class CollectionViewDataSourceTests: XCTestCase {
         let expectedModel = FakeCollectionModel()
         let expectedIndexPath = NSIndexPath(forRow: 3, inSection: 0)
 
-        let section0 = CollectionViewSection(dataItems: [FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), expectedModel, FakeCollectionModel()])
+        let section0 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), expectedModel, FakeCollectionModel())
         let allSections = [section0]
 
         let cellFactoryExpectation = self.expectationWithDescription("\(__FUNCTION__)")
@@ -96,9 +96,9 @@ class CollectionViewDataSourceTests: XCTestCase {
     func test_ThatCollectionViewDataSource_ReturnsExpectedData_ForMultipleSections() {
 
         // GIVEN: some collection view sections
-        let section0 = CollectionViewSection(dataItems: [FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel()])
-        let section1 = CollectionViewSection(dataItems: [FakeCollectionModel(), FakeCollectionModel()])
-        let section2 = CollectionViewSection(dataItems: [FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel()])
+        let section0 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel())
+        let section1 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel())
+        let section2 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel())
         let allSections = [section0, section1, section2]
 
         var cellFactoryExpectation = self.expectationWithDescription("cell_factory_\(__FUNCTION__)")
@@ -143,7 +143,7 @@ class CollectionViewDataSourceTests: XCTestCase {
 
         for sectionIndex in 0..<dataSourceProvider.sections.count {
 
-            for rowIndex in 0..<dataSourceProvider[sectionIndex].dataItems.count {
+            for rowIndex in 0..<dataSourceProvider[sectionIndex].items.count {
 
                 let expectationName = "\(__FUNCTION__)_\(sectionIndex)_\(rowIndex)"
                 self.fakeCollectionView.dequeueCellExpectation = self.expectationWithDescription(self.dequeueCellExpectationName + expectationName)

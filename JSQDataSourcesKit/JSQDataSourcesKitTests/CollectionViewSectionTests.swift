@@ -29,7 +29,7 @@ class CollectionViewSectionTests: XCTestCase {
 
         // GIVEN: a model and a collection view section
         let expectedModel = FakeCollectionModel()
-        let section = CollectionViewSection(dataItems: [FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), expectedModel])
+        let section = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), expectedModel)
 
         // WHEN: we ask for an item at a specific index
         let item = section[3]
@@ -41,7 +41,7 @@ class CollectionViewSectionTests: XCTestCase {
     func test_ThatCollectionViewSection_SetsExpectedDataAtSubscript() {
 
         // GIVEN: a collection view section
-        var section = CollectionViewSection(dataItems: [FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel()])
+        var section = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel())
         let count = section.count
 
         // WHEN: we set an item at a specific index
@@ -57,15 +57,14 @@ class CollectionViewSectionTests: XCTestCase {
     func test_ThatCollectionViewSection_ReturnsExpectedCount() {
 
         // GIVEN: items and a collection view section
-        let items = [FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel()]
-        let section = CollectionViewSection(dataItems: items)
+        let section = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel())
 
         // WHEN: we ask the section for its count
         let count = section.count
 
         // THEN: we receive the expected count
-        XCTAssertEqual(count, items.count, "Count should equal expected count")
-        XCTAssertEqual(count, section.dataItems.count, "Count should equal expected count")
+        XCTAssertEqual(4, count, "Count should equal expected count")
+        XCTAssertEqual(4, section.items.count, "Count should equal expected count")
     }
     
 }

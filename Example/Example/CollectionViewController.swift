@@ -54,9 +54,9 @@ class CollectionViewController: UIViewController, UICollectionViewDelegateFlowLa
         collectionView.registerNib(TitledCollectionReusableView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: TitledCollectionReusableView.identifier)
 
         // create view models
-        let section0 = CollectionViewSection(dataItems: [ CViewModel(), CViewModel(), CViewModel()])
-        let section1 = CollectionViewSection(dataItems: [ CViewModel(), CViewModel(), CViewModel(), CViewModel(), CViewModel(), CViewModel() ])
-        let section2 = CollectionViewSection(dataItems: [ CViewModel() ])
+        let section0 = CollectionViewSection(items: CViewModel(), CViewModel(), CViewModel())
+        let section1 = CollectionViewSection(items: CViewModel(), CViewModel(), CViewModel(), CViewModel(), CViewModel(), CViewModel())
+        let section2 = CollectionViewSection(items: CViewModel())
         let allSections = [section0, section1, section2]
 
         // create cell factory

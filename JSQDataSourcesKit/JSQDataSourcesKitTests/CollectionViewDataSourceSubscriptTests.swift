@@ -28,9 +28,9 @@ class CollectionViewDataSourceSubscriptTests: XCTestCase {
     func test_ThatCollectionViewDataSourceProvider_ReturnsExpectedDataFrom_IntSubscript() {
 
         // GIVEN: some collection view sections
-        let section0 = CollectionViewSection(dataItems: [FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel()])
-        let section1 = CollectionViewSection(dataItems: [FakeCollectionModel(), FakeCollectionModel()])
-        let section2 = CollectionViewSection(dataItems: [FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel()])
+        let section0 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel())
+        let section1 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel())
+        let section2 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel())
         let allSections = [section0, section1, section2]
 
         // GIVEN: a cell factory
@@ -45,15 +45,15 @@ class CollectionViewDataSourceSubscriptTests: XCTestCase {
         let section = dataSourceProvider[1]
 
         // THEN: we receive the expected section
-        XCTAssertEqual(section.dataItems, section1.dataItems, "Section returned from subscript should equal expected section")
+        XCTAssertEqual(section.items, section1.items, "Section returned from subscript should equal expected section")
     }
 
     func test_ThatCollectionViewDataSourceProvider_SetsExpectedDataAt_IntSubscript() {
 
         // GIVEN: some collection view sections
-        let section0 = CollectionViewSection(dataItems: [FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel()])
-        let section1 = CollectionViewSection(dataItems: [FakeCollectionModel(), FakeCollectionModel()])
-        let section2 = CollectionViewSection(dataItems: [FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel()])
+        let section0 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel())
+        let section1 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel())
+        let section2 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel())
         let allSections = [section0, section1, section2]
 
         // GIVEN: a cell factory
@@ -67,19 +67,19 @@ class CollectionViewDataSourceSubscriptTests: XCTestCase {
 
         // WHEN: we set a section at a specific index
         let index = 0
-        let expectedSection = CollectionViewSection(dataItems: [FakeCollectionModel(), FakeCollectionModel()])
+        let expectedSection = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel())
         dataSourceProvider[index] = expectedSection
 
         // THEN: the section at the specified index is replaced with the new section
-        XCTAssertEqual(dataSourceProvider[index].dataItems, expectedSection.dataItems, "Section set at subscript should equal expected section")
+        XCTAssertEqual(dataSourceProvider[index].items, expectedSection.items, "Section set at subscript should equal expected section")
         XCTAssertEqual(count, dataSourceProvider.sections.count, "Number of sections should remain unchanged")
     }
 
     func test_ThatCollectionViewDataSourceProvider_ReturnsExpectedDataFrom_IndexPathSubscript() {
 
         // GIVEN: some collection view sections
-        let section0 = CollectionViewSection(dataItems: [FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel()])
-        let section1 = CollectionViewSection(dataItems: [FakeCollectionModel(), FakeCollectionModel()])
+        let section0 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel())
+        let section1 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel())
         let allSections = [section0, section1]
 
         // GIVEN: a cell factory
@@ -102,8 +102,8 @@ class CollectionViewDataSourceSubscriptTests: XCTestCase {
     func test_ThatCollectionViewDataSourceProvider_SetsExpectedDataAt_IndexPathSubscript() {
 
         // GIVEN: some collection view sections
-        let section0 = CollectionViewSection(dataItems: [FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel()])
-        let section1 = CollectionViewSection(dataItems: [FakeCollectionModel(), FakeCollectionModel()])
+        let section0 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel())
+        let section1 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel())
         let allSections = [section0, section1]
 
         // GIVEN: a cell factory
