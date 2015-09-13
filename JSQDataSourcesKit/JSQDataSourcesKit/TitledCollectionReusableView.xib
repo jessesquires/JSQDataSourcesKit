@@ -27,13 +27,13 @@
                 <constraint firstAttribute="bottom" secondItem="DyE-kD-CcR" secondAttribute="bottom" constant="8" id="tb0-CV-HzK"/>
             </constraints>
             <connections>
-                <outlet property="_bottomSpacing" destination="tb0-CV-HzK" id="bpF-wi-Pcc"/>
-                <outlet property="_label" destination="DyE-kD-CcR" id="ju0-a0-VSm"/>
-                <outlet property="_leadingSpacing" destination="1lX-se-MH3" id="kzl-9e-MMC"/>
-                <outlet property="_topSpacing" destination="WxF-za-dbi" id="Y3d-cW-QKb"/>
-                <outlet property="_trailingSpacing" destination="dcV-6d-Sqv" id="wzk-ee-Fgd"/>
+                <outlet property="bottomSpacing" destination="tb0-CV-HzK" id="Ofe-p0-Baz"/>
+                <outlet property="label" destination="DyE-kD-CcR" id="OT1-x8-QLl"/>
+                <outlet property="leadingSpacing" destination="1lX-se-MH3" id="iXP-4F-qms"/>
+                <outlet property="topSpacing" destination="WxF-za-dbi" id="6qy-1g-4cz"/>
+                <outlet property="trailingSpacing" destination="dcV-6d-Sqv" id="kCb-Nd-bwz"/>
             </connections>
-            <point key="canvasLocation" x="735" y="390"/>
+            <point key="canvasLocation" x="843" y="364"/>
         </collectionReusableView>
     </objects>
 </document>
