@@ -84,7 +84,7 @@ public struct CollectionViewCellFactory <Cell: UICollectionViewCell, Item>: Coll
     Configures the cell for the specified data item, collection view and index path.
 
     - parameter Cell:             The cell to be configured at the index path.
-    - parameter Item:         The data item at the index path.
+    - parameter Item:             The data item at the index path.
     - parameter UICollectionView: The collection view requesting this information.
     - parameter NSIndexPath:      The index path at which the cell will be displayed.
 
@@ -219,7 +219,7 @@ public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectio
     Configures the supplementary view for the specified data item, collection view, and index path.
 
     - parameter SupplementaryView:     The supplementary view to be configured at the index path.
-    - parameter Item:              The data item at the index path.
+    - parameter Item:                  The data item at the index path.
     - parameter SupplementaryViewKind: An identifier that describes the type of the supplementary view.
     - parameter UICollectionView:      The collection view requesting this information.
     - parameter NSIndexPath:           The index path at which the supplementary view will be displayed.

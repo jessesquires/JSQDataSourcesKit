@@ -83,7 +83,7 @@ public struct TableViewCellFactory <Cell: UITableViewCell, Item>: TableViewCellF
     Configures the cell for the specified data item, table view and index path.
 
     - parameter Cell:        The cell to be configured at the index path.
-    - parameter Item:    The data item at the index path.
+    - parameter Item:        The data item at the index path.
     - parameter UITableView: The table view requesting this information.
     - parameter NSIndexPath: The index path at which the cell will be displayed.
 
@@ -204,7 +204,7 @@ public struct TableViewSection <Item>: TableViewSectionInfo {
     /**
     Constructs a new table view section.
 
-    - parameter Items:   The elements in the section.
+    - parameter Items:       The elements in the section.
     - parameter headerTitle: The section header title.
     - parameter footerTitle: The section footer title.
 
