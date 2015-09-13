@@ -42,7 +42,7 @@ class TableViewDataSourceTests: XCTestCase {
         let expectedModel = FakeTableModel()
         let expectedIndexPath = NSIndexPath(forRow: 2, inSection: 0)
 
-        let section0 = TableViewSection(dataItems: [FakeTableModel(), FakeTableModel(), expectedModel, FakeTableModel(), FakeTableModel()], headerTitle: "Header", footerTitle: "Footer")
+        let section0 = TableViewSection(items: FakeTableModel(), FakeTableModel(), expectedModel, FakeTableModel(), FakeTableModel(), headerTitle: "Header", footerTitle: "Footer")
         let allSections = [section0]
 
         let factoryExpectation = self.expectationWithDescription("\(__FUNCTION__)")
@@ -99,10 +99,10 @@ class TableViewDataSourceTests: XCTestCase {
     func test_ThatTableViewDataSource_ReturnsExpectedData_ForMultipleSections() {
 
         // GIVEN: some table view sections
-        let section0 = TableViewSection(dataItems: [FakeTableModel(), FakeTableModel(), FakeTableModel()], headerTitle: "Header", footerTitle: "Footer")
-        let section1 = TableViewSection(dataItems: [FakeTableModel()], headerTitle: "Header Title")
-        let section2 = TableViewSection(dataItems: [FakeTableModel(), FakeTableModel()], footerTitle: "Footer")
-        let section3 = TableViewSection(dataItems: [FakeTableModel(), FakeTableModel(), FakeTableModel(), FakeTableModel(), FakeTableModel()])
+        let section0 = TableViewSection(items: FakeTableModel(), FakeTableModel(), FakeTableModel(), headerTitle: "Header", footerTitle: "Footer")
+        let section1 = TableViewSection(items: FakeTableModel(), headerTitle: "Header Title")
+        let section2 = TableViewSection(items: FakeTableModel(), FakeTableModel(), footerTitle: "Footer")
+        let section3 = TableViewSection(items: FakeTableModel(), FakeTableModel(), FakeTableModel(), FakeTableModel(), FakeTableModel())
         let allSections = [section0, section1, section2, section3]
 
         var factoryExpectation = self.expectationWithDescription("factory_\(__FUNCTION__)")
@@ -132,7 +132,7 @@ class TableViewDataSourceTests: XCTestCase {
 
         for sectionIndex in 0..<dataSourceProvider.sections.count {
 
-            for rowIndex in 0..<dataSourceProvider[sectionIndex].dataItems.count {
+            for rowIndex in 0..<dataSourceProvider[sectionIndex].items.count {
 
                 let expectationName = "\(__FUNCTION__)_\(sectionIndex)_\(rowIndex)"
                 self.fakeTableView.dequeueCellExpectation = self.expectationWithDescription(self.dequeueCellExpectationName + expectationName)

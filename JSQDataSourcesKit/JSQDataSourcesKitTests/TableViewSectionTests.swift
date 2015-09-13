@@ -29,7 +29,7 @@ class TableViewSectionTests: XCTestCase {
 
         // GIVEN: a model and a table view section
         let expectedModel = FakeTableModel()
-        let section = TableViewSection(dataItems: [FakeTableModel(), FakeTableModel(), expectedModel, FakeTableModel(), FakeTableModel()])
+        let section = TableViewSection(items: FakeTableModel(), FakeTableModel(), expectedModel, FakeTableModel(), FakeTableModel())
 
         // WHEN: we ask for an item at a specific index
         let item = section[2]
@@ -41,8 +41,8 @@ class TableViewSectionTests: XCTestCase {
     func test_ThatTableViewSection_SetsExpectedDataAtSubscript() {
 
         // GIVEN: a table view section
-        var section = TableViewSection(dataItems: [FakeTableModel(), FakeTableModel(), FakeTableModel(), FakeTableModel()])
-        let count = section.dataItems.count
+        var section = TableViewSection(items: FakeTableModel(), FakeTableModel(), FakeTableModel(), FakeTableModel())
+        let count = section.items.count
 
         // WHEN: we set an item at a specific index
         let index = 1
@@ -57,15 +57,14 @@ class TableViewSectionTests: XCTestCase {
     func test_ThatTableViewSection_ReturnsExpectedCount() {
 
         // GIVEN: items and a table view section
-        let items = [FakeTableModel(), FakeTableModel(), FakeTableModel(), FakeTableModel()]
-        let section = TableViewSection(dataItems: items)
+        let section = TableViewSection(items: FakeTableModel(), FakeTableModel(), FakeTableModel(), FakeTableModel())
 
         // WHEN: we ask the section for its count
         let count = section.count
 
         // THEN: we receive the expected count
-        XCTAssertEqual(count, items.count, "Count should equal expected count")
-        XCTAssertEqual(count, section.dataItems.count, "Count should equal expected count")
+        XCTAssertEqual(4, count, "Count should equal expected count")
+        XCTAssertEqual(4, section.items.count, "Count should equal expected count")
     }
     
 }

@@ -16,9 +16,10 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
+import CoreData
 import Foundation
 import UIKit
-import CoreData
+
 
 /**
 An instance conforming to `CollectionViewCellFactoryType` is responsible for initializing

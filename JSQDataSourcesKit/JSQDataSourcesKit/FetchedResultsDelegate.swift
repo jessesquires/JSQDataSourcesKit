@@ -16,9 +16,10 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
+import CoreData
 import Foundation
 import UIKit
-import CoreData
+
 
 /**
 A `CollectionViewFetchedResultsDelegateProvider` is responsible for providing a delegate object
@@ -167,7 +168,7 @@ for an instance of `NSFetchedResultsController` that manages data to display in 
 ```
 */
 public final class TableViewFetchedResultsDelegateProvider <DataItem, CellFactory: TableViewCellFactoryType
-                                                            where CellFactory.DataItem == DataItem> {
+                                                            where CellFactory.Item == DataItem> {
 
     // MARK: Properties
 

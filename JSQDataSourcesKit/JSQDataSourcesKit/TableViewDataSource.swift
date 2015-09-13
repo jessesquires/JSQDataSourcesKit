@@ -16,16 +16,16 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
+import CoreData
 import Foundation
 import UIKit
-import CoreData
 
 
 /**
 An instance conforming to `TableViewCellFactoryType` is responsible for initializing
 and configuring table view cells to be consumed by an instance of `TableViewDataSourceProvider`.
 
-The `TableViewCellFactoryType` protocol has two associated types, `DataItem` and `Cell`.
+The `TableViewCellFactoryType` protocol has two associated types, `Item` and `Cell`.
 These associated types describe the type of model instances backing the table view
 and the type of cells in the table view, respectively.
 */
@@ -34,7 +34,7 @@ public protocol TableViewCellFactoryType {
     // MARK: Associated types
 
     /// The type of elements backing the table view.
-    typealias DataItem
+    typealias Item
 
     /// The type of `UITableViewCell` that the factory produces.
     typealias Cell: UITableViewCell
@@ -50,7 +50,7 @@ public protocol TableViewCellFactoryType {
 
     - returns: An initialized or dequeued `UITableViewCell` of type `Cell`.
     */
-    func cellForItem(item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell
+    func cellForItem(item: Item, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell
 
     /**
     Configures and returns the specified cell.
@@ -62,7 +62,7 @@ public protocol TableViewCellFactoryType {
 
     - returns: A configured `UITableViewCell` of type `Cell`.
     */
-    func configureCell(cell: Cell, forItem item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell
+    func configureCell(cell: Cell, forItem item: Item, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell
 }
 
 
@@ -72,10 +72,10 @@ This factory is responsible for producing and configuring table view cells for a
 
 - Note: The factory has the following type parameters:
 ```swift
-TableViewCellFactory<Cell: UITableViewCell, DataItem>
+TableViewCellFactory<Cell: UITableViewCell, Item>
 ```
 */
-public struct TableViewCellFactory <Cell: UITableViewCell, DataItem>: TableViewCellFactoryType {
+public struct TableViewCellFactory <Cell: UITableViewCell, Item>: TableViewCellFactoryType {
 
     // MARK: Typealiases
 
@@ -83,13 +83,13 @@ public struct TableViewCellFactory <Cell: UITableViewCell, DataItem>: TableViewC
     Configures the cell for the specified data item, table view and index path.
 
     - parameter Cell:        The cell to be configured at the index path.
-    - parameter DataItem:    The data item at the index path.
+    - parameter Item:    The data item at the index path.
     - parameter UITableView: The table view requesting this information.
     - parameter NSIndexPath: The index path at which the cell will be displayed.
 
     - returns: The configured cell.
     */
-    public typealias ConfigurationHandler = (Cell, DataItem, UITableView, NSIndexPath) -> Cell
+    public typealias ConfigurationHandler = (Cell, Item, UITableView, NSIndexPath) -> Cell
 
     // MARK: Properties
 
@@ -129,7 +129,7 @@ public struct TableViewCellFactory <Cell: UITableViewCell, DataItem>: TableViewC
 
     - returns: An initialized or dequeued `UITableViewCell` of type `Cell`.
     */
-    public func cellForItem(item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell {
+    public func cellForItem(item: Item, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell {
         return tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! Cell
     }
 
@@ -143,7 +143,7 @@ public struct TableViewCellFactory <Cell: UITableViewCell, DataItem>: TableViewC
 
     - returns: A configured `UITableViewCell` of type `Cell`.
     */
-    public func configureCell(cell: Cell, forItem item: DataItem, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell {
+    public func configureCell(cell: Cell, forItem item: Item, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell {
         return cellConfigurator(cell, item, tableView, indexPath)
     }
 }
@@ -155,12 +155,12 @@ public protocol TableViewSectionInfo {
     // MARK: Associated types
 
     /// The type of elements stored in the section.
-    typealias DataItem
+    typealias Item
 
     // MARK: Properties
 
     /// Returns the elements in the table view section.
-    var dataItems: [DataItem] { get set }
+    var items: [Item] { get set }
 
     /// Returns the header title for the section.
     var headerTitle: String? { get }
@@ -178,15 +178,15 @@ Elements in the section may be accessed or replaced via its subscripting interfa
 
 - Note: The section has the following type parameters:
 ```swift
-TableViewSection<DataItem>
+TableViewSection<Item>
 ```
 */
-public struct TableViewSection <DataItem>: TableViewSectionInfo {
+public struct TableViewSection <Item>: TableViewSectionInfo {
 
     // MARK: Properties
 
     /// The elements in the collection view section.
-    public var dataItems: [DataItem]
+    public var items: [Item]
 
     /// The header title for the section.
     public let headerTitle: String?
@@ -196,7 +196,7 @@ public struct TableViewSection <DataItem>: TableViewSectionInfo {
 
     /// Returns the number of elements in the section.
     public var count: Int {
-        return dataItems.count
+        return items.count
     }
 
     // MARK: Initialization
@@ -204,26 +204,26 @@ public struct TableViewSection <DataItem>: TableViewSectionInfo {
     /**
     Constructs a new table view section.
 
-    - parameter dataItems:   The elements in the section.
+    - parameter Items:   The elements in the section.
     - parameter headerTitle: The section header title.
     - parameter footerTitle: The section footer title.
 
     - returns: A new `TableViewSection` instance.
     */
-    public init(dataItems: [DataItem], headerTitle: String? = nil, footerTitle: String? = nil) {
-        self.dataItems = dataItems
+    public init(items: Item..., headerTitle: String? = nil, footerTitle: String? = nil) {
+        self.items = items
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
     }
 
     // MARK: Subscript
 
-    public subscript (index: Int) -> DataItem {
+    public subscript (index: Int) -> Item {
         get {
-            return dataItems[index]
+            return items[index]
         }
         set {
-            dataItems[index] = newValue
+            items[index] = newValue
         }
     }
 }
@@ -242,16 +242,16 @@ Sections may be accessed or replaced via the provider's subscripting interface.
 - Note: The data source provider has the following type parameters:
 
 ```swift
-<DataItem, SectionInfo: TableViewSectionInfo, 
+<Item, SectionInfo: TableViewSectionInfo, 
            CellFactory: TableViewCellFactoryType
         where
-            SectionInfo.DataItem == DataItem,
-            CellFactory.DataItem == DataItem>
+            SectionInfo.Item == Item,
+            CellFactory.Item == Item>
 ```
 */
-public final class TableViewDataSourceProvider <DataItem, SectionInfo: TableViewSectionInfo, CellFactory: TableViewCellFactoryType
+public final class TableViewDataSourceProvider <Item, SectionInfo: TableViewSectionInfo, CellFactory: TableViewCellFactoryType
                                                 where
-                                                SectionInfo.DataItem == DataItem, CellFactory.DataItem == DataItem> {
+                                                SectionInfo.Item == Item, CellFactory.Item == Item> {
 
     // MARK: Properties
 
@@ -293,12 +293,12 @@ public final class TableViewDataSourceProvider <DataItem, SectionInfo: TableView
         }
     }
 
-    public subscript (indexPath: NSIndexPath) -> DataItem {
+    public subscript (indexPath: NSIndexPath) -> Item {
         get {
-            return sections[indexPath.section].dataItems[indexPath.row]
+            return sections[indexPath.section].items[indexPath.row]
         }
         set {
-            sections[indexPath.section].dataItems[indexPath.row] = newValue
+            sections[indexPath.section].items[indexPath.row] = newValue
         }
     }
 
@@ -309,12 +309,12 @@ public final class TableViewDataSourceProvider <DataItem, SectionInfo: TableView
             self.sections.count
         },
         numberOfRowsInSection: { [unowned self] (section) -> Int in
-            self.sections[section].dataItems.count
+            self.sections[section].items.count
         },
         cellForRowAtIndexPath: { [unowned self] (tableView, indexPath) -> UITableViewCell in
-            let dataItem = self.sections[indexPath.section].dataItems[indexPath.row]
-            let cell = self.cellFactory.cellForItem(dataItem, inTableView: tableView, atIndexPath: indexPath)
-            return self.cellFactory.configureCell(cell, forItem: dataItem, inTableView: tableView, atIndexPath: indexPath)
+            let item = self.sections[indexPath.section].items[indexPath.row]
+            let cell = self.cellFactory.cellForItem(item, inTableView: tableView, atIndexPath: indexPath)
+            return self.cellFactory.configureCell(cell, forItem: item, inTableView: tableView, atIndexPath: indexPath)
         },
         titleForHeaderInSection: { [unowned self] (section) -> String? in
             self.sections[section].headerTitle
@@ -335,12 +335,12 @@ This provider owns a fetched results controller and a cell factory.
 - Note: The data source provider has the following type parameters:
 
 ```swift
-<DataItem, CellFactory: TableViewCellFactoryType
-    where CellFactory.DataItem == DataItem>
+<Item, CellFactory: TableViewCellFactoryType
+    where CellFactory.Item == Item>
 ```
 */
-public final class TableViewFetchedResultsDataSourceProvider <DataItem, CellFactory: TableViewCellFactoryType
-                                                                where CellFactory.DataItem == DataItem> {
+public final class TableViewFetchedResultsDataSourceProvider <Item, CellFactory: TableViewCellFactoryType
+                                                                where CellFactory.Item == Item> {
 
     // MARK: Properties
 
@@ -381,9 +381,9 @@ public final class TableViewFetchedResultsDataSourceProvider <DataItem, CellFact
             return (self.fetchedResultsController.sections?[section])?.numberOfObjects ?? 0
         },
         cellForRowAtIndexPath: { [unowned self] (tableView, indexPath) -> UITableViewCell in
-            let dataItem = self.fetchedResultsController.objectAtIndexPath(indexPath) as! DataItem
-            let cell = self.cellFactory.cellForItem(dataItem, inTableView: tableView, atIndexPath: indexPath)
-            return self.cellFactory.configureCell(cell, forItem: dataItem, inTableView: tableView, atIndexPath: indexPath)
+            let item = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Item
+            let cell = self.cellFactory.cellForItem(item, inTableView: tableView, atIndexPath: indexPath)
+            return self.cellFactory.configureCell(cell, forItem: item, inTableView: tableView, atIndexPath: indexPath)
         },
         titleForHeaderInSection: { [unowned self] (section) -> String? in
             return (self.fetchedResultsController.sections?[section])?.name
