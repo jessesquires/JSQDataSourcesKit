@@ -29,10 +29,10 @@ This factory is responsible for producing and configuring `TitledCollectionReusa
 - Note: The factory has the following type parameters:
 
 ```swift
-TitledCollectionReusableViewFactory<DataItem>
+TitledCollectionReusableViewFactory<Item>
 ```
 */
-public struct TitledCollectionReusableViewFactory <DataItem>: CollectionSupplementaryViewFactoryType {
+public struct TitledCollectionReusableViewFactory <Item>: CollectionSupplementaryViewFactoryType {
 
     // MARK: Typealiases
 
@@ -42,14 +42,14 @@ public struct TitledCollectionReusableViewFactory <DataItem>: CollectionSuppleme
     - Warning: This closure is called each time the collection view requests updates for a section's supplementary views.
 
     - parameter TitledCollectionReusableView: The `TitledCollectionReusableView` to be configured at the index path.
-    - parameter DataItem:                     The data item at the index path.
+    - parameter Item:                     The data item at the index path.
     - parameter SupplementaryViewKind:        An identifier that describes the type of the supplementary view.
     - parameter UICollectionView:             The collection view requesting this information.
     - parameter NSIndexPath:                  The index path at which the supplementary view will be displayed.
 
     - returns: The configured `TitledCollectionReusableView` instance.
     */
-    public typealias DataConfigurationHandler = (TitledCollectionReusableView, DataItem, SupplementaryViewKind, UICollectionView, NSIndexPath) -> TitledCollectionReusableView
+    public typealias DataConfigurationHandler = (TitledCollectionReusableView, Item, SupplementaryViewKind, UICollectionView, NSIndexPath) -> TitledCollectionReusableView
 
     /**
     Configures the style attributes of the `TitledCollectionReusableView`.
@@ -84,7 +84,7 @@ public struct TitledCollectionReusableViewFactory <DataItem>: CollectionSuppleme
     // MARK: CollectionSupplementaryViewFactoryType
 
     /// :nodoc:
-    public func supplementaryViewForItem(item: DataItem, kind: SupplementaryViewKind,
+    public func supplementaryViewForItem(item: Item, kind: SupplementaryViewKind,
         inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> TitledCollectionReusableView {
             let view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: TitledCollectionReusableView.identifier, forIndexPath: indexPath) as! TitledCollectionReusableView
             styleConfigurator(view)
@@ -92,7 +92,7 @@ public struct TitledCollectionReusableViewFactory <DataItem>: CollectionSuppleme
     }
 
     /// :nodoc:
-    public func configureSupplementaryView(view: TitledCollectionReusableView, forItem item: DataItem, kind: SupplementaryViewKind,
+    public func configureSupplementaryView(view: TitledCollectionReusableView, forItem item: Item, kind: SupplementaryViewKind,
         inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> TitledCollectionReusableView {
             return dataConfigurator(view, item, kind, collectionView, indexPath)
     }
