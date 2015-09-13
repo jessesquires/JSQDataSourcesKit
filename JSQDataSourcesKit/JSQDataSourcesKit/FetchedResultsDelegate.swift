@@ -27,14 +27,14 @@ for an instance of `NSFetchedResultsController` that manages data to display in 
 
 - Note: The delegate provider has the following type parameters:
 ```swift
-CollectionViewFetchedResultsDelegateProvider<DataItem>
+CollectionViewFetchedResultsDelegateProvider<Item>
 ```
 
-Here, the `DataItem` type parameter acts as a phatom type.
+Here, the `Item` type parameter acts as a phatom type.
 
 - Warning: This type should correpsond to the type of objects that the `NSFetchedResultsController` fetches.
 */
-public final class CollectionViewFetchedResultsDelegateProvider <DataItem> {
+public final class CollectionViewFetchedResultsDelegateProvider <Item> {
 
     // MARK: Properties
 
@@ -164,11 +164,11 @@ for an instance of `NSFetchedResultsController` that manages data to display in 
 
 - Note: The delegate provider has the following type parameters:
 ```swift
-<DataItem, CellFactory: TableViewCellFactoryType where CellFactory.DataItem == DataItem>
+<Item, CellFactory: TableViewCellFactoryType where CellFactory.Item == Item>
 ```
 */
-public final class TableViewFetchedResultsDelegateProvider <DataItem, CellFactory: TableViewCellFactoryType
-                                                            where CellFactory.Item == DataItem> {
+public final class TableViewFetchedResultsDelegateProvider <Item, CellFactory: TableViewCellFactoryType
+                                                            where CellFactory.Item == Item> {
 
     // MARK: Properties
 
@@ -229,7 +229,7 @@ public final class TableViewFetchedResultsDelegateProvider <DataItem, CellFactor
                 if let i = indexPath,
                     cell = self.tableView?.cellForRowAtIndexPath(i) as? CellFactory.Cell,
                     view = self.tableView {
-                        self.cellFactory.configureCell(cell, forItem: anyObject as! DataItem, inTableView: view, atIndexPath: i)
+                        self.cellFactory.configureCell(cell, forItem: anyObject as! Item, inTableView: view, atIndexPath: i)
                 }
             case .Move:
                 if let deleteIndexPath = indexPath {
