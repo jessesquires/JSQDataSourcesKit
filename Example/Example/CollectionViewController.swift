@@ -50,8 +50,14 @@ class CollectionViewController: UIViewController, UICollectionViewDelegateFlowLa
         collectionView.delegate = self
 
         // register cells and supplementary views
-        collectionView.registerNib(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: collectionCellId)
-        collectionView.registerNib(TitledCollectionReusableView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: TitledCollectionReusableView.identifier)
+        collectionView.registerNib(
+            UINib(nibName: "CollectionViewCell", bundle: nil),
+            forCellWithReuseIdentifier: collectionCellId)
+
+        collectionView.registerNib(
+            TitledCollectionReusableView.nib,
+            forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+            withReuseIdentifier: TitledCollectionReusableView.identifier)
 
         // create view models
         let section0 = CollectionViewSection(items: CViewModel(), CViewModel(), CViewModel())
