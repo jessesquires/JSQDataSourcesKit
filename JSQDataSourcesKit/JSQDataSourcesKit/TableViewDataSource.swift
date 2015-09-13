@@ -243,10 +243,10 @@ Sections may be accessed or replaced via the provider's subscripting interface.
 
 ```swift
 <Item, SectionInfo: TableViewSectionInfo, 
-           CellFactory: TableViewCellFactoryType
-        where
-            SectionInfo.Item == Item,
-            CellFactory.Item == Item>
+    CellFactory: TableViewCellFactoryType
+    where
+    SectionInfo.Item == Item,
+    CellFactory.Item == Item>
 ```
 */
 public final class TableViewDataSourceProvider <Item, SectionInfo: TableViewSectionInfo, CellFactory: TableViewCellFactoryType

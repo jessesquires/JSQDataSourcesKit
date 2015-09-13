@@ -366,12 +366,12 @@ Sections may be accessed or replaced via the provider's subscripting interface.
 - Note: The data source provider has the following type parameters:
 ```swift
 <Item, SectionInfo: CollectionViewSectionInfo, 
-           CellFactory: CollectionViewCellFactoryType,
-           SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
-        where
-            SectionInfo.Item == Item,
-            CellFactory.Item == Item,
-            SupplementaryViewFactory.Item == Item>
+    CellFactory: CollectionViewCellFactoryType,
+    SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
+    where
+    SectionInfo.Item == Item,
+    CellFactory.Item == Item,
+    SupplementaryViewFactory.Item == Item>
 ```
 */
 public final class CollectionViewDataSourceProvider <Item, SectionInfo: CollectionViewSectionInfo,
@@ -475,10 +475,10 @@ This provider owns a fetched results controller, a cell factory, and a supplemen
 - Note: The data source provider has the following type parameters:
 ```swift
 <Item, CellFactory: CollectionViewCellFactoryType,
-           SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
-        where
-            CellFactory.Item == Item,
-            SupplementaryViewFactory.Item == Item>
+    SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
+    where
+    CellFactory.Item == Item,
+    SupplementaryViewFactory.Item == Item>
 ```
 */
 public final class CollectionViewFetchedResultsDataSourceProvider <Item, CellFactory: CollectionViewCellFactoryType,
