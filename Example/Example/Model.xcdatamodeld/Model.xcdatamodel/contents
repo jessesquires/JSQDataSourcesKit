@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7517.1" systemVersion="14C109" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8118.17" systemVersion="14D136" minimumToolsVersion="Xcode 4.3">
     <entity name="Thing" representedClassName="Example.Thing" syncable="YES">
         <attribute name="category" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="number" attributeType="Integer 32" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Thing" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Thing" positionX="-63" positionY="-18" width="128" height="88"/>
     </elements>
 </model>

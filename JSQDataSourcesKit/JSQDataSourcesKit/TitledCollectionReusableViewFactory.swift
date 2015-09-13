@@ -20,34 +20,44 @@ import Foundation
 import UIKit
 
 
-///  A `TitledCollectionReusableViewFactory` is specialized supplementary view factory that conforms to `CollectionSupplementaryViewFactoryType`.
-///  This factory is responsible for producing and configuring `TitledCollectionReusableView` instances.
-///  <br/><br/>
-///  **The factory has the following type parameters:**
-///  <br/>
-///  ````
-///  <DataItem>
-///  ````
-public struct TitledCollectionReusableViewFactory <DataItem>: CollectionSupplementaryViewFactoryType {
+/**
+A `TitledCollectionReusableViewFactory` is specialized supplementary view factory
+that conforms to `CollectionSupplementaryViewFactoryType`.
+
+This factory is responsible for producing and configuring `TitledCollectionReusableView` instances.
+
+- Note: The factory has the following type parameters:
+
+```swift
+TitledCollectionReusableViewFactory<Item>
+```
+*/
+public struct TitledCollectionReusableViewFactory <Item>: CollectionSupplementaryViewFactoryType {
 
     // MARK: Typealiases
 
-    ///  Configures the `TitledCollectionReusableView` for the specified data item, collection view, and index path.
-    ///  **This closure is called each time the collection view requests updates for a section's supplementary views.**
-    ///
-    ///  :param: TitledCollectionReusableView The `TitledCollectionReusableView` to be configured at the index path.
-    ///  :param: DataItem                     The data item at the index path.
-    ///  :param: SupplementaryViewKind        An identifier that describes the type of the supplementary view.
-    ///  :param: UICollectionView             The collection view requesting this information.
-    ///  :param: NSIndexPath                  The index path at which the supplementary view will be displayed.
-    ///
-    ///  :returns: The configured `TitledCollectionReusableView` instance.
-    public typealias DataConfigurationHandler = (TitledCollectionReusableView, DataItem, SupplementaryViewKind, UICollectionView, NSIndexPath) -> TitledCollectionReusableView
+    /**
+    Configures the `TitledCollectionReusableView` for the specified data item, collection view, and index path.
 
-    ///  Configures the style attributes of the `TitledCollectionReusableView`.
-    ///  **This closure is only called when a `TitledCollectionReusableView` is dequeued.**
-    ///
-    ///  :param: TitledCollectionReusableView The `TitledCollectionReusableView` to be configured at the index path.
+    - Warning: This closure is called each time the collection view requests updates for a section's supplementary views.
+
+    - parameter TitledCollectionReusableView: The `TitledCollectionReusableView` to be configured at the index path.
+    - parameter Item:                         The data item at the index path.
+    - parameter SupplementaryViewKind:        An identifier that describes the type of the supplementary view.
+    - parameter UICollectionView:             The collection view requesting this information.
+    - parameter NSIndexPath:                  The index path at which the supplementary view will be displayed.
+
+    - returns: The configured `TitledCollectionReusableView` instance.
+    */
+    public typealias DataConfigurationHandler = (TitledCollectionReusableView, Item, SupplementaryViewKind, UICollectionView, NSIndexPath) -> TitledCollectionReusableView
+
+    /**
+    Configures the style attributes of the `TitledCollectionReusableView`.
+
+    - Warning: This closure is only called when a `TitledCollectionReusableView` is dequeued.
+
+    - parameter TitledCollectionReusableView: The `TitledCollectionReusableView` to be configured at the index path.
+    */
     public typealias StyleConfigurationHandler = (TitledCollectionReusableView) -> Void
 
     // MARK: Private Properties
@@ -58,44 +68,31 @@ public struct TitledCollectionReusableViewFactory <DataItem>: CollectionSuppleme
 
     // MARK: Initialization
 
-    ///  Constructs a new `TitledCollectionReusableViewFactory`.
-    ///
-    ///  :param: dataConfigurator  The closure with which the factory will configure the `TitledCollectionReusableView` with the backing data item.
-    ///  :param: styleConfigurator The closure with which the factory will configure the style attributes of new `TitledCollectionReusableView`.
-    ///
-    ///  :returns: A new `TitledCollectionReusableViewFactory` instance.
+    /**
+    Constructs a new `TitledCollectionReusableViewFactory`.
+
+    - parameter dataConfigurator:  The closure with which the factory will configure the `TitledCollectionReusableView` with the backing data item.
+    - parameter styleConfigurator: The closure with which the factory will configure the style attributes of new `TitledCollectionReusableView`.
+
+    - returns: A new `TitledCollectionReusableViewFactory` instance.
+    */
     public init(dataConfigurator: DataConfigurationHandler, styleConfigurator: StyleConfigurationHandler) {
         self.dataConfigurator = dataConfigurator
         self.styleConfigurator = styleConfigurator
     }
 
-    // MARK: Methods
+    // MARK: CollectionSupplementaryViewFactoryType
 
-    ///  Creates and returns a new `TitledCollectionReusableView` instance, or dequeues an existing one for reuse.
-    ///
-    ///  :param: item           The model instance (data object) at `indexPath`.
-    ///  :param: kind           An identifier that describes the type of the `TitledCollectionReusableView`.
-    ///  :param: collectionView The collection view requesting this information.
-    ///  :param: indexPath      The index path that specifies the location of the new supplementary view.
-    ///
-    ///  :returns: An initialized or dequeued `TitledCollectionReusableView` instance.
-    public func supplementaryViewForItem(item: DataItem, kind: SupplementaryViewKind,
+    /// :nodoc:
+    public func supplementaryViewForItem(item: Item, kind: SupplementaryViewKind,
         inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> TitledCollectionReusableView {
             let view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: TitledCollectionReusableView.identifier, forIndexPath: indexPath) as! TitledCollectionReusableView
             styleConfigurator(view)
             return view
     }
 
-    ///  Configures and returns the specified `TitledCollectionReusableView` instance.
-    ///
-    ///  :param: view           The `TitledCollectionReusableView` to configure.
-    ///  :param: item           The model instance (data object) at `indexPath`.
-    ///  :param: kind           An identifier that describes the type of the `TitledCollectionReusableView`.
-    ///  :param: collectionView The collection view requesting this information.
-    ///  :param: indexPath      The index path that specifies the location of `view` and `item`.
-    ///
-    ///  :returns: A configured `TitledCollectionReusableView` instance.
-    public func configureSupplementaryView(view: TitledCollectionReusableView, forItem item: DataItem, kind: SupplementaryViewKind,
+    /// :nodoc:
+    public func configureSupplementaryView(view: TitledCollectionReusableView, forItem item: Item, kind: SupplementaryViewKind,
         inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> TitledCollectionReusableView {
             return dataConfigurator(view, item, kind, collectionView, indexPath)
     }

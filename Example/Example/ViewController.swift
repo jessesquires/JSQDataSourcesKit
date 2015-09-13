@@ -24,32 +24,34 @@ class ViewController: UITableViewController {
 
 
     @IBAction func didTapDeleteButton(sender: UIBarButtonItem) {
-        println("Deleting all things...")
+        print("Deleting all things...")
 
-        if let results = stack.context.executeFetchRequest(Thing.fetchRequest(), error: nil) {
+        do {
+            let results = try stack.context.executeFetchRequest(Thing.fetchRequest())
             for thing in results {
                 stack.context.deleteObject(thing as! Thing)
             }
 
             assert(stack.saveAndWait())
+        } catch {
+            print("Fetch error = \(error)")
         }
 
-        println("Done")
+        print("Done")
     }
 
 
     @IBAction func didTapAddButton(sender: UIBarButtonItem) {
-        println("Adding some fake things...")
+        print("Adding some fake things...")
 
-        for i in 1...5 {
-            let t = Thing.newThing(stack.context)
+        for _ in 1...5 {
+            Thing.newThing(stack.context)
         }
 
         assert(stack.saveAndWait())
 
-        println("Done")
+        print("Done")
     }
-
 }
 
 
@@ -60,7 +62,7 @@ extension UIAlertController {
     class func showHelpAlert(presenter: UIViewController) {
         let alert = UIAlertController(title: "Help",
             message: "Tap + to add a new item. The new item will be highlighted (selected) in gray."
-            + "\n\nSelect item(s), then tap the trashcan to delete them.",
+                + "\n\nSelect item(s), then tap the trashcan to delete them.",
             preferredStyle: .Alert)
 
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))

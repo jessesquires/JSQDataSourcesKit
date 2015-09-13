@@ -1,9 +1,9 @@
-# JSQDataSourcesKit 
+# JSQDataSourcesKit
 [![Build Status](https://secure.travis-ci.org/jessesquires/JSQDataSourcesKit.svg)](http://travis-ci.org/jessesquires/JSQDataSourcesKit) [![Version Status](http://img.shields.io/cocoapods/v/JSQDataSourcesKit.png)][docsLink] [![license MIT](http://img.shields.io/badge/license-MIT-orange.png)][mitLink] [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 *Type-safe, value-oriented data source objects that keep your view controllers light*
 
-A Swift framework of data source and delegate objects inspired by [Andy Matuschak's](https://github.com/andymatuschak) *type-safe, value-oriented collection view data source [gist](https://gist.github.com/andymatuschak/f1e1691fa1a327468f8e)*. 
+A Swift framework of data source and delegate objects inspired by [Andy Matuschak's](https://github.com/andymatuschak) *type-safe, value-oriented collection view data source [gist](https://gist.github.com/andymatuschak/f1e1691fa1a327468f8e)*.
 
 ## About
 
@@ -12,7 +12,7 @@ This framework reduces the boilerplate code regarding the `UITableView`, `UIColl
 ## Requirements
 
 * iOS 8
-* Swift 1.2
+* Swift 2.0
 
 ## Installation
 
@@ -22,7 +22,7 @@ This framework reduces the boilerplate code regarding the `UITableView`, `UIColl
 use_frameworks!
 
 # For latest release in cocoapods
-pod 'JSQDataSourcesKit'  
+pod 'JSQDataSourcesKit'
 
 # Feeling adventurous? Get the latest on develop
 pod 'JSQDataSourcesKit', :git => 'https://github.com/jessesquires/JSQDataSourcesKit.git', :branch => 'develop'
@@ -38,7 +38,7 @@ github "jessesquires/JSQDataSourcesKit"
 
 1. Clone this repo and add the `JSQDataSourcesKit.xcodeproj` to your project
 2. Select your project app target "Build Phases" tab
-3. Add the `JSQDataSourcesKit.framework` to the "Link Binary With Libraries"  
+3. Add the `JSQDataSourcesKit.framework` to the "Link Binary With Libraries"
 4. Create a new build phase of type "Copy Files" and set the "Destination" to "Frameworks"
 5. Add the `JSQDataSourcesKit.framework` and check "Code Sign On Copy"
 
@@ -79,7 +79,7 @@ let section1 = TableViewSection(dataItems: [ /* array of type T */ ])
 let allSections = [section0, section1]
 
 // create cell factory, it receives a cell identifier and configuration closure
-let factory = TableViewCellFactory(reuseIdentifier: "MyCellIdentifier") 
+let factory = TableViewCellFactory(reuseIdentifier: "MyCellIdentifier")
     { (cell: UITableViewCell, model: T, tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell in
       // configure the cell
       return cell
@@ -95,13 +95,13 @@ self.tableView.dataSource = self.dataSourceProvider.dataSource
 //
 // 1. registering cells with the table view (or collection view)
 //
-// 2. adding and removing cells as the data source is modified 
+// 2. adding and removing cells as the data source is modified
 //    (i.e. as self.dataSourceProvider.sections changes)
 ````
 
 ##### Demo Project
 
-The example app included exercises *all* functionality in this framework. Open `JSQDataSourcesKit.xcworkspace`, select the `Example` scheme, then build and run. 
+The example app included exercises *all* functionality in this framework. Open `JSQDataSourcesKit.xcworkspace`, select the `Example` scheme, then build and run.
 
 ## Unit tests
 
