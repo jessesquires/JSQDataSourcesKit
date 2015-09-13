@@ -331,8 +331,6 @@ public struct CollectionViewSection <Item>: CollectionViewSectionInfo {
     // MARK: Subscript
 
     /**
-    Subscript.
-
     - parameter index: The index of the item to return.
 
     - returns: The item at `index`.
@@ -405,6 +403,11 @@ public final class CollectionViewDataSourceProvider <Item,
 
     // MARK: Subscripts
 
+    /**
+    - parameter index: The index of the section to return.
+
+    - returns: The section at `index`.
+    */
     public subscript (index: Int) -> SectionInfo {
         get {
             return sections[index]
@@ -414,6 +417,11 @@ public final class CollectionViewDataSourceProvider <Item,
         }
     }
 
+    /**
+    - parameter indexPath: The index path of the item to return.
+
+    - returns: The item at `indexPath`.
+    */
     public subscript (indexPath: NSIndexPath) -> Item {
         get {
             return sections[indexPath.section].items[indexPath.item];
@@ -458,16 +466,7 @@ that is backed by an `NSFetchedResultsController` instance.
 
 This provider owns a fetched results controller, a cell factory, and a supplementary view factory.
 
-- Warning: Clients are responsbile for registering cells and supplementary views with the collection view.
-
-- Note: The data source provider has the following type parameters:
-```swift
-<Item, CellFactory: CollectionViewCellFactoryType,
-    SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
-    where
-    CellFactory.Item == Item,
-    SupplementaryViewFactory.Item == Item>
-```
+- Note: Clients are responsbile for registering cells and supplementary views with the collection view.
 */
 public final class CollectionViewFetchedResultsDataSourceProvider <Item,
                                                                     CellFactory: CollectionViewCellFactoryType,
