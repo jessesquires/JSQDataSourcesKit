@@ -4,4 +4,7 @@ language: objective-c
 
 script:
 - xcodebuild clean build test -workspace JSQDataSourcesKit.xcworkspace -scheme Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
-- xcodebuild clean build test -project JSQDataSourcesKit/JSQDataSourcesKit.xcodeproj -scheme JSQDataSourcesKit -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+- xcodebuild clean build test -project JSQDataSourcesKit/JSQDataSourcesKit.xcodeproj -scheme JSQDataSourcesKit -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
+
+after_success:
+- bash <(curl -s https://codecov.io/bash)
