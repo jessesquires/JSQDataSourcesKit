@@ -1,5 +1,5 @@
 # JSQDataSourcesKit
-[![Build Status](https://secure.travis-ci.org/jessesquires/JSQDataSourcesKit.svg)](http://travis-ci.org/jessesquires/JSQDataSourcesKit) [![Version Status](http://img.shields.io/cocoapods/v/JSQDataSourcesKit.png)][docsLink] [![license MIT](http://img.shields.io/badge/license-MIT-orange.png)][mitLink] [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Build Status](https://secure.travis-ci.org/jessesquires/JSQDataSourcesKit.svg)](http://travis-ci.org/jessesquires/JSQDataSourcesKit) [![Version Status](https://img.shields.io/cocoapods/v/JSQDataSourcesKit.svg)][podLink] [![license MIT](https://img.shields.io/cocoapods/l/JSQDataSourcesKit.svg)][mitLink] [![Platform](https://img.shields.io/cocoapods/p/JSQDataSourcesKit.svg)][docsLink] [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) 
 
 *Type-safe, value-oriented data source objects that keep your view controllers light*
 
@@ -129,5 +129,6 @@ Created and maintained by [**@jesse_squires**](https://twitter.com/jesse_squires
 
 *Please provide attribution, it is greatly appreciated.*
 
-[mitLink]:http://opensource.org/licenses/MIT
 [docsLink]:http://www.jessesquires.com/JSQDataSourcesKit
+[podLink]:https://cocoapods.org/pods/JSQDataSourcesKit
+[mitLink]:http://opensource.org/licenses/MIT
