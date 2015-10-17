@@ -33,14 +33,12 @@ Sections may be accessed or replaced via the provider's subscripting interface.
 - Adding, removing, or reloading cells as the provider's `sections` are modified
 - Adding, removing, or reloading sections as the provider's `sections` are modified
 */
-public final class CollectionViewDataSourceProvider <Item,
+public final class CollectionViewDataSourceProvider <
+    Item,
     SectionInfo: CollectionViewSectionInfo,
     CellFactory: CollectionViewCellFactoryType,
     SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
-    where
-    SectionInfo.Item == Item,
-    CellFactory.Item == Item,
-SupplementaryViewFactory.Item == Item> {
+    where SectionInfo.Item == Item, CellFactory.Item == Item, SupplementaryViewFactory.Item == Item> {
 
     // MARK: Properties
 
@@ -147,8 +145,7 @@ public final class CollectionViewFetchedResultsDataSourceProvider <
     Item,
     CellFactory: CollectionViewCellFactoryType,
     SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
-    where
-    CellFactory.Item == Item, SupplementaryViewFactory.Item == Item> {
+    where CellFactory.Item == Item, SupplementaryViewFactory.Item == Item> {
 
     // MARK: Properties
 

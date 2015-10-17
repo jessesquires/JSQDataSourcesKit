@@ -22,233 +22,20 @@ import UIKit
 
 
 /**
-An instance conforming to `TableViewCellFactoryType` is responsible for initializing
-and configuring table view cells to be consumed by an instance of `TableViewDataSourceProvider`.
-*/
-public protocol TableViewCellFactoryType {
-
-    // MARK: Associated types
-
-    /// The type of elements backing the table view.
-    typealias Item
-
-    /// The type of `UITableViewCell` that the factory produces.
-    typealias Cell: UITableViewCell
-
-    // MARK: Methods
-
-    /**
-    Creates and returns a new `Cell` instance, or dequeues an existing cell for reuse.
-
-    - parameter item:      The item (model object) at `indexPath`.
-    - parameter tableView: The table view requesting this information.
-    - parameter indexPath: The index path that specifies the location of `cell` and `item`.
-
-    - returns: An initialized or dequeued `UITableViewCell` of type `Cell`.
-    */
-    func cellForItem(item: Item, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell
-
-    /**
-    Configures and returns the specified cell.
-
-    - parameter cell:      The cell to configure.
-    - parameter item:      The item (model object) at `indexPath`.
-    - parameter tableView: The table view requesting this information.
-    - parameter indexPath: The index path that specifies the location of `cell` and `item`.
-
-    - returns: A configured `UITableViewCell` of type `Cell`.
-    */
-    func configureCell(cell: Cell, forItem item: Item, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell
-}
-
-
-/**
-A `TableViewCellFactory` is a concrete `TableViewCellFactoryType`.
-This factory is responsible for producing and configuring table view cells for a specific data item.
-*/
-public struct TableViewCellFactory <Cell: UITableViewCell, Item>: TableViewCellFactoryType {
-
-    // MARK: Typealiases
-
-    /**
-    Configures the cell for the specified data item, table view and index path.
-
-    - parameter Cell:        The cell to be configured at the index path.
-    - parameter Item:        The item at the index path.
-    - parameter UITableView: The table view requesting this information.
-    - parameter NSIndexPath: The index path at which the cell will be displayed.
-
-    - returns: The configured cell.
-    */
-    public typealias ConfigurationHandler = (Cell, Item, UITableView, NSIndexPath) -> Cell
-
-    // MARK: Properties
-
-    /**
-    A unique identifier that describes the purpose of the cells that the factory produces.
-    The factory dequeues cells from the table view with this reuse identifier.
-
-    - Note: Clients are responsible for registering a cell for this identifier with the table view.
-    */
-    public let reuseIdentifier: String
-
-    private let cellConfigurator: ConfigurationHandler
-
-    // MARK: Initialization
-
-    /**
-    Constructs a new table view cell factory.
-
-    - parameter reuseIdentifier:  The reuse identifier with which the factory will dequeue cells.
-    - parameter cellConfigurator: The closure with which the factory will configure cells.
-
-    - returns: A new `TableViewCellFactory` instance.
-    */
-    public init(reuseIdentifier: String, cellConfigurator: ConfigurationHandler) {
-        self.reuseIdentifier = reuseIdentifier
-        self.cellConfigurator = cellConfigurator
-    }
-
-    // MARK: Methods
-
-    /**
-    Creates and returns a new `Cell` instance, or dequeues an existing cell for reuse.
-
-    - parameter item:      The item (model object) at `indexPath`.
-    - parameter tableView: The table view requesting this information.
-    - parameter indexPath: The index path that specifies the location of `cell` and `item`.
-
-    - returns: An initialized or dequeued `UITableViewCell` of type `Cell`.
-    */
-    public func cellForItem(item: Item, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell {
-        return tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! Cell
-    }
-
-    /**
-    Configures and returns the specified cell.
-
-    - parameter cell:      The cell to configure.
-    - parameter item:      The item (model object) at `indexPath`.
-    - parameter tableView: The table view requesting this information.
-    - parameter indexPath: The index path that specifies the location of `cell` and `item`.
-
-    - returns: A configured `UITableViewCell` of type `Cell`.
-    */
-    public func configureCell(cell: Cell, forItem item: Item, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell {
-        return cellConfigurator(cell, item, tableView, indexPath)
-    }
-}
-
-
-/// An instance conforming to `TableViewSectionInfo` represents a section of items in a table view.
-public protocol TableViewSectionInfo {
-
-    // MARK: Associated types
-
-    /// The type of elements stored in the section.
-    typealias Item
-
-    // MARK: Properties
-
-    /// The elements in the table view section.
-    var items: [Item] { get set }
-
-    /// Returns the header title for the section.
-    var headerTitle: String? { get }
-
-    /// Returns the footer title for the section.
-    var footerTitle: String? { get }
-}
-
-
-/**
-A `TableViewSection` is a concrete `TableViewSectionInfo`.
-A section instance is responsible for managing the elements in a section.
-
-Elements in the section may be accessed or replaced via its subscripting interface.
-*/
-public struct TableViewSection <Item>: TableViewSectionInfo {
-
-    // MARK: Properties
-
-    /// The elements in the collection view section.
-    public var items: [Item]
-
-    /// The header title for the section.
-    public let headerTitle: String?
-
-    /// The footer title for the section.
-    public let footerTitle: String?
-
-    /// Returns the number of elements in the section.
-    public var count: Int {
-        return items.count
-    }
-
-    // MARK: Initialization
-
-    /**
-    Constructs a new table view section.
-
-    - parameter items:       The elements in the section.
-    - parameter headerTitle: The section header title.
-    - parameter footerTitle: The section footer title.
-
-    - returns: A new `TableViewSection` instance.
-    */
-    public init(items: Item..., headerTitle: String? = nil, footerTitle: String? = nil) {
-        self.init(items, headerTitle: headerTitle, footerTitle: footerTitle)
-    }
-
-    /**
-    Constructs a new table view section.
-
-    - parameter items:       The elements in the section.
-    - parameter headerTitle: The section header title.
-    - parameter footerTitle: The section footer title.
-
-    - returns: A new `TableViewSection` instance.
-    */
-    public init(_ items: [Item], headerTitle: String? = nil, footerTitle: String? = nil) {
-        self.items = items
-        self.headerTitle = headerTitle
-        self.footerTitle = footerTitle
-    }
-
-    // MARK: Subscript
-
-    /**
-    - parameter index: The index of the item to return.
-
-    - returns: The item at `index`.
-    */
-    public subscript (index: Int) -> Item {
-        get {
-            return items[index]
-        }
-        set {
-            items[index] = newValue
-        }
-    }
-}
-
-
-/**
 A `TableViewDataSourceProvider` is responsible for providing a data source object for a table view.
 An instance of `TableViewDataSourceProvider` owns an array of section instances and a cell factory.
 
 Sections may be accessed or replaced via the provider's subscripting interface.
 
 - Note: Clients are responsbile for:
-    - Registering cells with the table view
-    - Adding, removing, or reloading cells and sections as the provider's `sections` are modified.
+- Registering cells with the table view
+- Adding, removing, or reloading cells and sections as the provider's `sections` are modified.
 */
-public final class TableViewDataSourceProvider <Item,
-                                                SectionInfo: TableViewSectionInfo,
-                                                CellFactory: TableViewCellFactoryType
-                                                where
-                                                SectionInfo.Item == Item,
-                                                CellFactory.Item == Item> {
+public final class TableViewDataSourceProvider <
+    Item,
+    SectionInfo: TableViewSectionInfo,
+    CellFactory: TableViewCellFactoryType
+    where SectionInfo.Item == Item, CellFactory.Item == Item> {
 
     // MARK: Properties
 
@@ -340,9 +127,8 @@ This provider owns a fetched results controller and a cell factory.
 - Note: Clients are responsbile for registering cells with the table view.
 */
 public final class TableViewFetchedResultsDataSourceProvider <Item,
-                                                              CellFactory: TableViewCellFactoryType
-                                                              where
-                                                              CellFactory.Item == Item> {
+    CellFactory: TableViewCellFactoryType
+    where CellFactory.Item == Item> {
 
     // MARK: Properties
 
@@ -363,7 +149,7 @@ public final class TableViewFetchedResultsDataSourceProvider <Item,
     - parameter fetchedResultsController: The fetched results controller that provides the data for the table view.
     - parameter cellFactory:              The cell factory from which the table view data source will dequeue cells.
     - parameter tableView:                The table view whose data source will be provided by this provider.
-    
+
     - returns: A new `TableViewFetchedResultsDataSourceProvider` instance.
     */
     public init(fetchedResultsController: NSFetchedResultsController, cellFactory: CellFactory, tableView: UITableView? = nil) {
