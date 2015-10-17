@@ -160,9 +160,10 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
             }
 
             stack.saveAndWait()
-
-            fetch()
         }
+
+        fetch()
+        collectionView.reloadData()
     }
 
 
@@ -176,25 +177,20 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
     var thing: Thing?
 
     func didTapTest(sender: UIBarButtonItem) {
-        if !test {
-            thing = Thing.newThing(stack.context)
-            thing?.category = Category.Red.rawValue
 
-            let blue = Thing.newThing(stack.context)
-            blue.category = Category.Blue.rawValue
+        if let indexPaths = collectionView.indexPathsForSelectedItems() {
 
-            let green = Thing.newThing(stack.context)
-            green.category = Category.Green.rawValue
+            print("Deleting things at indexPaths: \(indexPaths)")
+
+            for i in indexPaths {
+                let thingToDelete = dataSourceProvider?.fetchedResultsController.objectAtIndexPath(i) as! Thing
+                thingToDelete.category = Category.Blue.rawValue
+
+            }
 
             stack.saveAndWait()
 
-            test = true
-            return
-        }
-
-        if let thing = thing {
-            thing.category = Category.Blue.rawValue
-            stack.saveAndWait()
+            fetch()
         }
 
 
