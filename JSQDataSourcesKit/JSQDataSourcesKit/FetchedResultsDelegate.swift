@@ -57,13 +57,12 @@ public final class CollectionViewFetchedResultsDelegateProvider <Item> {
 
     // MARK: Private
 
-    private typealias SectionIndex = Int
-    private typealias SectionChangesDictionary = [NSFetchedResultsChangeType : SectionIndex]
+    private typealias SectionChangeTuple = (changeType: NSFetchedResultsChangeType, sectionIndex: Int)
+    private var sectionChanges = [SectionChangeTuple]()
 
     private typealias ObjectIndexPaths = [NSIndexPath]
     private typealias ObjectChangesDictionary = [NSFetchedResultsChangeType : ObjectIndexPaths]
 
-    private var sectionChanges = [SectionChangesDictionary]()
 
     private var objectChanges = [ObjectChangesDictionary]()
 
@@ -73,8 +72,7 @@ public final class CollectionViewFetchedResultsDelegateProvider <Item> {
             self.objectChanges.removeAll()
         },
         didChangeSection: { [unowned self] (controller, sectionInfo, sectionIndex, changeType) -> Void in
-            let changes: SectionChangesDictionary = [changeType : sectionIndex]
-            self.sectionChanges.append(changes)
+            self.sectionChanges.append((changeType, sectionIndex))
         },
         didChangeObject: { [unowned self] (controller, anyObject, indexPath: NSIndexPath?, changeType, newIndexPath: NSIndexPath?) -> Void in
             var changes = ObjectChangesDictionary()
@@ -111,6 +109,9 @@ public final class CollectionViewFetchedResultsDelegateProvider <Item> {
                     if self.sectionChanges.count > 0 {
                         // if sections have changed, reload to update supplementary views
                         self.collectionView?.reloadData()
+
+
+
                     }
 
                     self.sectionChanges.removeAll()
@@ -136,17 +137,14 @@ public final class CollectionViewFetchedResultsDelegateProvider <Item> {
     }
 
     private func applySectionChanges() {
-        for eachChange in sectionChanges {
-            for (changeType, sectionIndex): (NSFetchedResultsChangeType, SectionIndex) in eachChange {
+        for (changeType, sectionIndex) in sectionChanges {
+            let section = NSIndexSet(index: sectionIndex)
 
-                let section = NSIndexSet(index: sectionIndex)
-
-                switch(changeType) {
-                case .Insert: collectionView?.insertSections(section)
-                case .Delete: collectionView?.deleteSections(section)
-                case .Update: collectionView?.reloadSections(section)
-                case .Move: break
-                }
+            switch(changeType) {
+            case .Insert: collectionView?.insertSections(section)
+            case .Delete: collectionView?.deleteSections(section)
+            case .Update: collectionView?.reloadSections(section)
+            case .Move: break
             }
         }
     }
@@ -157,9 +155,10 @@ public final class CollectionViewFetchedResultsDelegateProvider <Item> {
 A `TableViewFetchedResultsDelegateProvider` is responsible for providing a delegate object
 for an instance of `NSFetchedResultsController` that manages data to display in a table view.
 */
-public final class TableViewFetchedResultsDelegateProvider <Item,
-                                                            CellFactory: TableViewCellFactoryType
-                                                            where CellFactory.Item == Item> {
+public final class TableViewFetchedResultsDelegateProvider <
+    Item,
+    CellFactory: TableViewCellFactoryType
+where CellFactory.Item == Item> {
 
     // MARK: Properties
 
@@ -284,7 +283,7 @@ That is, it cannot be assigned to `NSFetchedResultsController.delegate`
         newIndexPath: NSIndexPath?) {
             didChangeObject(controller, anObject, indexPath, type, newIndexPath)
     }
-
+    
     @objc func controllerDidChangeContent(controller: NSFetchedResultsController) {
         didChangeContent(controller)
     }
