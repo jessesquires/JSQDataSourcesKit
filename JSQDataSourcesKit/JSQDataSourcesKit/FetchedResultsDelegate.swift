@@ -110,12 +110,12 @@ public final class CollectionViewFetchedResultsDelegateProvider <
         },
         didChangeContent: { [unowned self] (controller) in
 
-            self.collectionView?.performBatchUpdates({
-                self.applyObjectChanges()
-                self.applySectionChanges()
+            self.collectionView?.performBatchUpdates({ [weak self] in
+                self?.applyObjectChanges()
+                self?.applySectionChanges()
                 },
-                completion:{ finished in
-                    self.reloadSupplementaryViewsIfNeeded()
+                completion:{ [weak self] finished in
+                    self?.reloadSupplementaryViewsIfNeeded()
             })
         })
 
