@@ -19,7 +19,11 @@
 import Foundation
 import CoreData
 
-//  A quick and dirty core data stack, don't do this
+
+// A quick and dirty core data stack for testing
+// DO NOT DO THIS IN REAL LIFE
+// In fact, use https://github.com/jessesquires/JSQCoreDataKit
+
 
 public class CoreDataStack {
 

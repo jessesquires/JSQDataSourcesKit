@@ -73,7 +73,7 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
         // create supplementary view factories
         let headerFactory = TitledCollectionReusableViewFactory(
             dataConfigurator: { (header, item: Thing, kind, collectionView, indexPath) -> TitledCollectionReusableView in
-                header.label.text = "\(item.category) (header \(indexPath.section))"
+                header.label.text = "\(item.colorName) (header \(indexPath.section))"
                 header.label.textColor = item.displayColor
                 return header
             },
@@ -83,7 +83,7 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
 
         let footerFactory = TitledCollectionReusableViewFactory(
             dataConfigurator: { (footer, item: Thing, kind, collectionView, indexPath) -> TitledCollectionReusableView in
-                footer.label.text = "\(item.category) (footer \(indexPath.section))"
+                footer.label.text = "\(item.colorName) (footer \(indexPath.section))"
                 footer.label.textColor = item.displayColor
                 return footer
             },
@@ -96,7 +96,11 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
         let composedFactory = ComposedCollectionSupplementaryViewFactory(headerViewFactory: headerFactory, footerViewFactory: footerFactory)
 
         // create fetched results controller
-        let frc: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: Thing.fetchRequest(), managedObjectContext: stack.context, sectionNameKeyPath: "category", cacheName: nil)
+        let frc: NSFetchedResultsController = NSFetchedResultsController(
+            fetchRequest: Thing.fetchRequest(),
+            managedObjectContext: stack.context,
+            sectionNameKeyPath: "colorName",
+            cacheName: nil)
 
         // create delegate provider
         // by passing `frc` the provider automatically sets `frc.delegate = self.delegateProvider.delegate`
@@ -184,7 +188,7 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
 
             for i in indexPaths {
                 let thingToDelete = dataSourceProvider?.fetchedResultsController.objectAtIndexPath(i) as! Thing
-                thingToDelete.category = Category.Blue.rawValue
+                thingToDelete.color = .Blue
 
             }
 

@@ -20,18 +20,43 @@ import Foundation
 import CoreData
 import UIKit
 
+
+public enum Color: String {
+    case Red
+    case Blue
+    case Green
+
+    var displayColor: UIColor {
+        switch(self) {
+        case .Red: return .redColor()
+        case .Blue: return .blueColor()
+        case .Green: return .greenColor()
+        }
+    }
+}
+
+
 public class Thing: NSManagedObject {
 
-    @NSManaged public var category: String
     @NSManaged public var name: String
-    @NSManaged public var number: Int32
+
+    @NSManaged public var colorName: String
+
+    public var color: Color {
+        get {
+            return Color(rawValue: colorName)!
+        }
+        set {
+            colorName = newValue.rawValue
+        }
+    }
 
     public var displayName: String {
-        return "Thing(\(name), \(number))"
+        return "Thing\n\(name)"
     }
 
     public var displayColor: UIColor {
-        return Category(rawValue: category)!.color
+        return color.displayColor
     }
 
     public init(context: NSManagedObjectContext) {
@@ -45,38 +70,16 @@ public class Thing: NSManagedObject {
 
     public class func newThing(context: NSManagedObjectContext) -> Thing {
         let t = Thing(context: context)
-        t.category = Category.random.rawValue
-        t.name = NSProcessInfo.processInfo().globallyUniqueString.componentsSeparatedByString("-").first!
-        t.number = Int32(arc4random_uniform(10000))
+        let allColors = [Color.Red, Color.Blue, Color.Green]
+        t.color = allColors[Int(arc4random_uniform(UInt32(allColors.count)))]
+        t.name = NSUUID().UUIDString.componentsSeparatedByString("-").first!
         return t
     }
 
     public class func fetchRequest() -> NSFetchRequest {
         let request = NSFetchRequest(entityName: "Thing")
-        request.sortDescriptors = [NSSortDescriptor(key: "category", ascending: true), NSSortDescriptor(key: "number", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "colorName", ascending: true), NSSortDescriptor(key: "name", ascending: true)]
         return request
     }
 
-}
-
-
-public enum Category: String {
-    case Red = "Red"
-    case Blue = "Blue"
-    case Green = "Green"
-
-    var color: UIColor {
-        switch(self) {
-        case .Red: return .redColor()
-        case .Blue: return .blueColor()
-        case .Green: return .greenColor()
-        }
-    }
-
-    static var random: Category {
-        let i = Int(arc4random_uniform(UInt32(allCases.count))) % allCases.count
-        return allCases[i]
-    }
-
-    static let allCases: [Category] = [.Red, .Blue, .Green]
 }

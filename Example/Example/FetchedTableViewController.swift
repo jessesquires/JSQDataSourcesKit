@@ -55,7 +55,11 @@ class FetchedTableViewController: UIViewController {
         }
 
         // create fetched results controller
-        let frc: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: Thing.fetchRequest(), managedObjectContext: stack.context, sectionNameKeyPath: "category", cacheName: nil)
+        let frc: NSFetchedResultsController = NSFetchedResultsController(
+            fetchRequest: Thing.fetchRequest(),
+            managedObjectContext: stack.context,
+            sectionNameKeyPath: "colorName",
+            cacheName: nil)
 
         // create delegate provider
         // by passing `frc` the provider automatically sets `frc.delegate = self.delegateProvider.delegate`
