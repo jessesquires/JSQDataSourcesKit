@@ -20,6 +20,14 @@ import Foundation
 import CoreData
 
 
+let CellId = "cell"
+
+
+struct CellViewModel {
+    let text = "My Cell Title"
+}
+
+
 func addThingsInStack(stack: CoreDataStack, count: Int) {
     for _ in 0..<count {
         Thing.newThing(stack.context)

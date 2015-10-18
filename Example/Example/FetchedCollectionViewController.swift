@@ -58,12 +58,12 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
         collectionView.allowsMultipleSelection = true
 
         // register cells and supplementary views
-        collectionView.registerNib(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: collectionCellId)
+        collectionView.registerNib(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: CellId)
         collectionView.registerNib(TitledCollectionReusableView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: TitledCollectionReusableView.identifier)
         collectionView.registerNib(TitledCollectionReusableView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: TitledCollectionReusableView.identifier)
 
         // create cell factory
-        let cellFactory = CollectionViewCellFactory(reuseIdentifier: collectionCellId) { (cell: CollectionViewCell, model: Thing, collectionView: UICollectionView, indexPath: NSIndexPath) -> CollectionViewCell in
+        let cellFactory = CollectionViewCellFactory(reuseIdentifier: CellId) { (cell: CollectionViewCell, model: Thing, collectionView: UICollectionView, indexPath: NSIndexPath) -> CollectionViewCell in
             cell.label.text = model.displayName
             cell.label.textColor = UIColor.whiteColor()
             cell.backgroundColor = model.displayColor

@@ -39,7 +39,7 @@ class FetchedTableViewController: UITableViewController {
         super.viewDidLoad()
 
         // 1. create factory
-        let factory = TableViewCellFactory(reuseIdentifier: tableCellId) { (cell: UITableViewCell, model: Thing, tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell in
+        let factory = TableViewCellFactory(reuseIdentifier: CellId) { (cell: UITableViewCell, model: Thing, tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell in
             cell.textLabel?.text = model.displayName
             cell.textLabel?.textColor = model.displayColor
             cell.detailTextLabel?.text = "\(indexPath.section), \(indexPath.row)"
@@ -72,6 +72,7 @@ class FetchedTableViewController: UITableViewController {
         }
     }
 
+
     // MARK: Actions
 
     @IBAction func didTapAddButton(sender: UIBarButtonItem) {
@@ -88,21 +89,13 @@ class FetchedTableViewController: UITableViewController {
     }
 
     @IBAction func didTapDeleteButton(sender: UIBarButtonItem) {
-        if let indexPaths = tableView.indexPathsForSelectedRows {
-
-            for i in indexPaths {
-                let thingToDelete = dataSourceProvider?.fetchedResultsController.objectAtIndexPath(i) as! Thing
-                stack.context.deleteObject(thingToDelete)
-            }
-
-            stack.saveAndWait()
-
-            fetchData()
-        }
+        dataSourceProvider?.fetchedResultsController.deleteObjectsAtIndexPaths(tableView.indexPathsForSelectedRows)
+        stack.saveAndWait()
+        fetchData()
     }
 
     @IBAction func didTapHelpButton(sender: UIBarButtonItem) {
         UIAlertController.showHelpAlert(self)
     }
-
+    
 }

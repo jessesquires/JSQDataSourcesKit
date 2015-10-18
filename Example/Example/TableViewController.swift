@@ -23,22 +23,22 @@ import JSQDataSourcesKit
 
 class TableViewController: UITableViewController {
 
-    typealias Section = TableViewSection<TViewModel>
-    typealias CellFactory = TableViewCellFactory<UITableViewCell, TViewModel>
-    var dataSourceProvider: TableViewDataSourceProvider<TViewModel, Section, CellFactory>?
+    typealias Section = TableViewSection<CellViewModel>
+    typealias CellFactory = TableViewCellFactory<UITableViewCell, CellViewModel>
+    var dataSourceProvider: TableViewDataSourceProvider<CellViewModel, Section, CellFactory>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // 1. create view models
-        let section0 = TableViewSection(items: TViewModel(), TViewModel(), TViewModel(), headerTitle: "First")
-        let section1 = TableViewSection(items: TViewModel(), TViewModel(), TViewModel(), TViewModel(), headerTitle: "Second", footerTitle: "Only 2nd has a footer")
-        let section2 = TableViewSection(items: TViewModel(), TViewModel(), headerTitle: "Third")
+        let section0 = TableViewSection(items: CellViewModel(), CellViewModel(), CellViewModel(), headerTitle: "First")
+        let section1 = TableViewSection(items: CellViewModel(), CellViewModel(), CellViewModel(), CellViewModel(), headerTitle: "Second", footerTitle: "Only 2nd has a footer")
+        let section2 = TableViewSection(items: CellViewModel(), CellViewModel(), headerTitle: "Third")
         let allSections = [section0, section1, section2]
 
         // 2. create cell factory
-        let factory = TableViewCellFactory(reuseIdentifier: tableCellId) { (cell: UITableViewCell, model: TViewModel, tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell in
-            cell.textLabel?.text = model.title
+        let factory = TableViewCellFactory(reuseIdentifier: CellId) { (cell: UITableViewCell, model: CellViewModel, tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell in
+            cell.textLabel?.text = model.text
             cell.detailTextLabel?.text = "\(indexPath.section), \(indexPath.row)"
             return cell
         }

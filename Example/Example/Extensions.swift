@@ -17,6 +17,7 @@
 //
 
 
+import CoreData
 import Foundation
 import UIKit
 
@@ -36,6 +37,7 @@ extension UIAlertController {
 }
 
 
+
 extension UITableView {
 
     func deselectAllRows() {
@@ -45,6 +47,20 @@ extension UITableView {
             }
         }
     }
-
 }
 
+
+
+extension NSFetchedResultsController {
+
+    func deleteObjectsAtIndexPaths(indexPaths: [NSIndexPath]?) {
+        guard let indexPaths = indexPaths else {
+            return
+        }
+
+        for i in indexPaths {
+            let thingToDelete = objectAtIndexPath(i) as! Thing
+            managedObjectContext.deleteObject(thingToDelete)
+        }
+    }
+}

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		881F54171A995E640016AACE /* ViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 881F54161A995E640016AACE /* ViewModels.swift */; };
 		8851E2D81B36A1E000E875DC /* Thing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8851E2D51B36A12400E875DC /* Thing.swift */; };
 		887863371B3699C800E2F51C /* ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887863361B3699C800E2F51C /* ExampleTests.swift */; };
 		88B3233D1A86D5E3007FB904 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B3233C1A86D5E3007FB904 /* TableViewController.swift */; };
@@ -76,7 +75,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		881F54161A995E640016AACE /* ViewModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModels.swift; sourceTree = "<group>"; };
 		8851E2D51B36A12400E875DC /* Thing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thing.swift; sourceTree = "<group>"; };
 		887863341B3699C800E2F51C /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		887863361B3699C800E2F51C /* ExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleTests.swift; sourceTree = "<group>"; };
@@ -165,7 +163,6 @@
 				88BD674A1A995B2A00F93FA6 /* CoreDataStack.swift */,
 				88BD673D1A99572F00F93FA6 /* Model.xcdatamodeld */,
 				8851E2D51B36A12400E875DC /* Thing.swift */,
-				881F54161A995E640016AACE /* ViewModels.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -372,7 +369,6 @@
 				88B3233F1A86D5ED007FB904 /* CollectionViewController.swift in Sources */,
 				88BD67471A99597600F93FA6 /* FetchedTableViewController.swift in Sources */,
 				88D21DA31A9932BD00E736DC /* CollectionViewCell.swift in Sources */,
-				881F54171A995E640016AACE /* ViewModels.swift in Sources */,
 				88BD674B1A995B2A00F93FA6 /* CoreDataStack.swift in Sources */,
 				88BD673F1A99572F00F93FA6 /* Model.xcdatamodeld in Sources */,
 				8851E2D81B36A1E000E875DC /* Thing.swift in Sources */,
