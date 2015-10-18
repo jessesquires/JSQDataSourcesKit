@@ -65,12 +65,17 @@ public final class CollectionViewDataSourceProvider <
 
     - returns: A new `CollectionViewDataSourceProvider` instance.
     */
-    public init(sections: [SectionInfo], cellFactory: CellFactory, supplementaryViewFactory: SupplementaryViewFactory? = nil, collectionView: UICollectionView? = nil) {
-        self.sections = sections
-        self.cellFactory = cellFactory
-        self.supplementaryViewFactory = supplementaryViewFactory
+    public init(
+        sections: [SectionInfo],
+        cellFactory: CellFactory,
+        supplementaryViewFactory: SupplementaryViewFactory? = nil,
+        collectionView: UICollectionView? = nil) {
 
-        collectionView?.dataSource = dataSource
+            self.sections = sections
+            self.cellFactory = cellFactory
+            self.supplementaryViewFactory = supplementaryViewFactory
+
+            collectionView?.dataSource = dataSource
     }
 
 

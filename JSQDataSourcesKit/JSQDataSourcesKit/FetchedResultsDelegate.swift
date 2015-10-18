@@ -34,8 +34,6 @@ extension NSIndexPath: CustomDebugStringConvertible {
 A `CollectionViewFetchedResultsDelegateProvider` is responsible for providing a delegate object
 for an instance of `NSFetchedResultsController` that manages data to display in a collection view.
 
-Here, the `Item` type parameter acts as a phatom type.
-
 - note: This type should correpsond to the type of objects that the `NSFetchedResultsController` fetches.
 */
 public final class CollectionViewFetchedResultsDelegateProvider <
@@ -64,14 +62,18 @@ public final class CollectionViewFetchedResultsDelegateProvider <
     Constructs a new delegate provider for a fetched results controller.
 
     - parameter collectionView: The collection view to be updated when the fetched results change.
+    - parameter cellFactory:    The cell factory from which the fetched results controller delegate will configure cells.
     - parameter controller:     The fetched results controller whose delegate will be provided by this provider.
 
     - returns: A new `CollectionViewFetchedResultsDelegateProvider` instance.
     */
-    public init(collectionView: UICollectionView, cellFactory: CellFactory, controller: NSFetchedResultsController? = nil) {
-        self.collectionView = collectionView
-        self.cellFactory = cellFactory
-        controller?.delegate = delegate
+    public init(
+        collectionView: UICollectionView,
+        cellFactory: CellFactory,
+        controller: NSFetchedResultsController? = nil) {
+            self.collectionView = collectionView
+            self.cellFactory = cellFactory
+            controller?.delegate = delegate
     }
 
 
@@ -122,13 +124,7 @@ public final class CollectionViewFetchedResultsDelegateProvider <
                 self.applySectionChanges()
                 },
                 completion:{ (finished) -> Void in
-
-                    if self.sectionChanges.count > 0 {
-                        // print("SECTION CHANGE")
-                        // TODO: revisit, use supplementary view factory?
-                        // if sections have changed, reload to update supplementary views
-                        self.collectionView?.reloadData()
-                    }
+                    self.reloadSupplementaryViewsIfNeeded()
             })
         })
 
@@ -145,7 +141,7 @@ public final class CollectionViewFetchedResultsDelegateProvider <
                     item = updatedObjects[indexPath],
                     cell = collectionView?.cellForItemAtIndexPath(indexPath) as? CellFactory.Cell,
                     view = collectionView {
-                    cellFactory.configureCell(cell, forItem: item, inCollectionView: view, atIndexPath: indexPath)
+                        cellFactory.configureCell(cell, forItem: item, inCollectionView: view, atIndexPath: indexPath)
                 }
             case .Move:
                 if let deleteIndexPath = indexPaths.first {
@@ -157,7 +153,6 @@ public final class CollectionViewFetchedResultsDelegateProvider <
                 }
             }
         }
-
     }
 
     private func applySectionChanges() {
@@ -174,6 +169,12 @@ public final class CollectionViewFetchedResultsDelegateProvider <
             case .Move:
                 break
             }
+        }
+    }
+
+    private func reloadSupplementaryViewsIfNeeded() {
+        if sectionChanges.count > 0 {
+            collectionView?.reloadData()
         }
     }
 
