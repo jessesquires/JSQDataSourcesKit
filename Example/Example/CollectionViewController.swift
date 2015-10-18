@@ -17,16 +17,11 @@
 //
 
 import UIKit
+
 import JSQDataSourcesKit
 
-class CollectionViewController: UIViewController, UICollectionViewDelegateFlowLayout {
 
-    // MARK: outlets
-
-    @IBOutlet weak var collectionView: UICollectionView!
-
-
-    // MARK: properties
+class CollectionViewController: UICollectionViewController {
 
     typealias CellFactory = CollectionViewCellFactory<CollectionViewCell, CellViewModel>
     typealias HeaderViewFactory = TitledCollectionReusableViewFactory<CellViewModel>
@@ -35,58 +30,39 @@ class CollectionViewController: UIViewController, UICollectionViewDelegateFlowLa
     var dataSourceProvider: CollectionViewDataSourceProvider<CellViewModel, Section, CellFactory, HeaderViewFactory>?
 
 
-    // MARK: view lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureCollectionView(collectionView!)
 
-        // configure layout
-        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: 100, height: 100)
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        layout.minimumInteritemSpacing = 10
-        layout.minimumLineSpacing = 10
-        layout.headerReferenceSize = CGSize(width: collectionView.frame.size.width, height: 50)
-
-        collectionView.delegate = self
-
-        // register cells and supplementary views
-        collectionView.registerNib(
-            UINib(nibName: "CollectionViewCell", bundle: nil),
-            forCellWithReuseIdentifier: CellId)
-
-        collectionView.registerNib(
-            TitledCollectionReusableView.nib,
-            forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
-            withReuseIdentifier: TitledCollectionReusableView.identifier)
-
-        // create view models
+        // 1. create view models
         let section0 = CollectionViewSection(items: CellViewModel(), CellViewModel(), CellViewModel())
         let section1 = CollectionViewSection(items: CellViewModel(), CellViewModel(), CellViewModel(), CellViewModel(), CellViewModel(), CellViewModel())
         let section2 = CollectionViewSection(items: CellViewModel())
         let allSections = [section0, section1, section2]
 
-        // create cell factory
-        let cellFactory = CollectionViewCellFactory(reuseIdentifier: CellId) { (cell: CollectionViewCell, model: CellViewModel, collectionView: UICollectionView, indexPath: NSIndexPath) -> CollectionViewCell in
+        // 2. create cell factory
+        let cellFactory = CollectionViewCellFactory(reuseIdentifier: CellId) {
+            (cell: CollectionViewCell, model: CellViewModel, collectionView: UICollectionView, indexPath: NSIndexPath) -> CollectionViewCell in
             cell.label.text = model.text + "\n\(indexPath.section), \(indexPath.item)"
             return cell
         }
 
-        // create supplementary (header) view factory
+        // 3. create supplementary view factory
         let headerFactory = TitledCollectionReusableViewFactory(
             dataConfigurator: { (header, item: CellViewModel, kind, collectionView, indexPath) -> TitledCollectionReusableView in
                 header.label.text = "Section \(indexPath.section)"
                 return header
             },
             styleConfigurator: { (headerView) -> Void in
-                headerView.backgroundColor = UIColor.darkGrayColor()
-                headerView.label.textColor = UIColor.whiteColor()
+                headerView.backgroundColor = .darkGrayColor()
+                headerView.label.textColor = .whiteColor()
         })
 
-        // create data source provider
-        // by passing `self.collectionView`, the provider automatically sets `self.collectionView.dataSource = self.dataSourceProvider.dataSource`
-        self.dataSourceProvider = CollectionViewDataSourceProvider(sections: allSections, cellFactory: cellFactory, supplementaryViewFactory: headerFactory, collectionView: self.collectionView)
-
+        // 4. create data source provider
+        self.dataSourceProvider = CollectionViewDataSourceProvider(
+            sections: allSections,
+            cellFactory: cellFactory,
+            supplementaryViewFactory: headerFactory,
+            collectionView: collectionView)
     }
-
 }

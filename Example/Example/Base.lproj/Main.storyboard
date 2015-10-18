@@ -28,6 +28,32 @@
             </objects>
             <point key="canvasLocation" x="-233" y="657"/>
         </scene>
+        <!--Static collection view example-->
+        <scene sceneID="9gz-X6-g9M">
+            <objects>
+                <collectionViewController title="Static collection view example" hidesBottomBarWhenPushed="YES" id="eDa-Mk-VnF" customClass="CollectionViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="xZN-2N-jhU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xh2-FB-wlK">
+                            <size key="itemSize" width="100" height="100"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="eDa-Mk-VnF" id="xJv-RP-c3X"/>
+                            <outlet property="delegate" destination="eDa-Mk-VnF" id="7VW-cz-nei"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="75V-15-OiO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1944" y="300"/>
+        </scene>
         <!--JSQDataSourcesKit-->
         <scene sceneID="K0k-wR-VQU">
             <objects>
@@ -83,7 +109,7 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                         <connections>
-                                            <segue destination="Gg5-22-Qa3" kind="show" id="5dF-U1-YzJ"/>
+                                            <segue destination="eDa-Mk-VnF" kind="show" id="fRF-YS-hnA"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -167,10 +193,10 @@
             </objects>
             <point key="canvasLocation" x="498" y="657"/>
         </scene>
-        <!--Static table view-->
+        <!--Static table view example-->
         <scene sceneID="chy-31-THs">
             <objects>
-                <tableViewController title="Static table view" hidesBottomBarWhenPushed="YES" id="SBC-0h-4Uw" customClass="TableViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Static table view example" hidesBottomBarWhenPushed="YES" id="SBC-0h-4Uw" customClass="TableViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Ua5-Ad-gO6">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -215,48 +241,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q47-dN-3vz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1260" y="300"/>
-        </scene>
-        <!--Static collection view-->
-        <scene sceneID="7YX-UW-uC1">
-            <objects>
-                <viewController title="Static collection view" hidesBottomBarWhenPushed="YES" id="Gg5-22-Qa3" customClass="CollectionViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="bc5-gp-9tv"/>
-                        <viewControllerLayoutGuide type="bottom" id="rf4-AP-GPv"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="gxv-8y-8A6">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GDz-wB-5KC">
-                                <rect key="frame" x="4" y="0.0" width="592" height="600"/>
-                                <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="M7c-2p-dkq">
-                                    <size key="itemSize" width="100" height="100"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
-                        </subviews>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="GDz-wB-5KC" firstAttribute="top" secondItem="gxv-8y-8A6" secondAttribute="topMargin" id="0LY-yx-b3X"/>
-                            <constraint firstItem="GDz-wB-5KC" firstAttribute="leading" secondItem="gxv-8y-8A6" secondAttribute="leadingMargin" constant="-16" id="JY7-Y3-Zfl"/>
-                            <constraint firstItem="GDz-wB-5KC" firstAttribute="bottom" secondItem="gxv-8y-8A6" secondAttribute="bottomMargin" id="NKd-SX-v9w"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="GDz-wB-5KC" secondAttribute="trailing" constant="-16" id="nAc-a5-cDh"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="collectionView" destination="GDz-wB-5KC" id="ult-Tw-hSh"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yNx-FO-WiK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1944" y="300"/>
         </scene>
         <!--Fetched collection view example-->
         <scene sceneID="j9e-vv-cCa">

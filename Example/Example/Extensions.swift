@@ -37,7 +37,6 @@ extension UIAlertController {
 }
 
 
-
 extension UITableView {
 
     func deselectAllRows() {
@@ -49,6 +48,17 @@ extension UITableView {
     }
 }
 
+
+extension UICollectionView {
+
+    func deselectAllItems() {
+        if let indexPaths = indexPathsForSelectedItems() {
+            for i in indexPaths {
+                deselectItemAtIndexPath(i, animated: true)
+            }
+        }
+    }
+}
 
 
 extension NSFetchedResultsController {

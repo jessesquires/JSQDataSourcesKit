@@ -207,18 +207,3 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
     }
 
 }
-
-
-// MARK: extensions
-
-extension UICollectionView {
-    
-    func deselectAllItems() {
-        if let indexPaths = indexPathsForSelectedItems() {
-            for i in indexPaths {
-                deselectItemAtIndexPath(i, animated: true)
-            }
-        }
-    }
-    
-}
