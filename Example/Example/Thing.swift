@@ -82,7 +82,7 @@ public class Thing: NSManagedObject {
     // MARK: Methods
 
     func changeColorRandomly() {
-        color = randomColor()
+        color = randomColor(withoutColor: color)
     }
 
     func changeNameRandomly() {
@@ -99,25 +99,33 @@ public class Thing: NSManagedObject {
 
     public class func newThing(context: NSManagedObjectContext) -> Thing {
         let t = Thing(context: context)
-        t.color = randomColor()
+        t.color = randomColor(withoutColor: nil)
         t.name = randomName()
         return t
     }
 
     public class func fetchRequest() -> NSFetchRequest {
         let request = NSFetchRequest(entityName: "Thing")
-        request.sortDescriptors = [NSSortDescriptor(key: "colorName", ascending: true), NSSortDescriptor(key: "name", ascending: true)]
+        request.sortDescriptors = [
+            NSSortDescriptor(key: "colorName", ascending: true),
+            NSSortDescriptor(key: "name", ascending: true)
+        ]
         return request
     }
 }
 
 
-private func randomColor() -> Color {
-    let allColors = [Color.Red, Color.Blue, Color.Green]
-    return allColors[Int(arc4random_uniform(UInt32(allColors.count)))]
+private func randomColor(withoutColor color: Color?) -> Color {
+    var colorSet = Set(arrayLiteral: Color.Red, Color.Blue, Color.Green)
+    if let color = color {
+        colorSet.remove(color)
+    }
+    let colors = Array(colorSet)
+    return colors[Int(arc4random_uniform(UInt32(colors.count)))]
 }
 
 
 private func randomName() -> String {
     return NSUUID().UUIDString.componentsSeparatedByString("-").first!
 }
+
