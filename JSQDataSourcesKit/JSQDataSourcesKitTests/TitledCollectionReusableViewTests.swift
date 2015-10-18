@@ -68,6 +68,9 @@ class TitledCollectionReusableViewTests: XCTestCase {
         XCTAssertEqual(view.label.backgroundColor, .redColor())
     }
 
+
+    // MARK: Helpers
+
     func loadView() -> TitledCollectionReusableView {
         return (NSBundle(forClass: TitledCollectionReusableView.self).loadNibNamed(
             "TitledCollectionReusableView",
