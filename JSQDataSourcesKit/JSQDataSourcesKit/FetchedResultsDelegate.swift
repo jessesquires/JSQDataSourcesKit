@@ -21,6 +21,15 @@ import Foundation
 import UIKit
 
 
+extension NSIndexPath: CustomDebugStringConvertible {
+    override public var description: String {
+        get {
+            return "(\(section), \(item))"
+        }
+    }
+}
+
+
 /**
 A `CollectionViewFetchedResultsDelegateProvider` is responsible for providing a delegate object
 for an instance of `NSFetchedResultsController` that manages data to display in a collection view.
@@ -29,20 +38,26 @@ Here, the `Item` type parameter acts as a phatom type.
 
 - note: This type should correpsond to the type of objects that the `NSFetchedResultsController` fetches.
 */
-public final class CollectionViewFetchedResultsDelegateProvider <Item> {
+public final class CollectionViewFetchedResultsDelegateProvider <
+    Item,
+    CellFactory: CollectionViewCellFactoryType
+    where CellFactory.Item == Item> {
 
     // MARK: Properties
 
-    /** 
+    /**
     The collection view that displays the data from the `NSFetchedResultsController`
     for which this provider provides a delegate.
     */
     public weak var collectionView: UICollectionView?
 
+    /// Returns the cell factory for this delegate provider.
+    public let cellFactory: CellFactory
+
     /// Returns the delegate object for the fetched results controller
     public var delegate: NSFetchedResultsControllerDelegate { return bridgedDelegate }
 
-    
+
     // MARK: Initialization
 
     /**
@@ -53,9 +68,9 @@ public final class CollectionViewFetchedResultsDelegateProvider <Item> {
 
     - returns: A new `CollectionViewFetchedResultsDelegateProvider` instance.
     */
-    public init(collectionView: UICollectionView, controller: NSFetchedResultsController? = nil) {
+    public init(collectionView: UICollectionView, cellFactory: CellFactory, controller: NSFetchedResultsController? = nil) {
         self.collectionView = collectionView
-
+        self.cellFactory = cellFactory
         controller?.delegate = delegate
     }
 
@@ -68,11 +83,13 @@ public final class CollectionViewFetchedResultsDelegateProvider <Item> {
     private typealias ObjectChangeTuple = (changeType: NSFetchedResultsChangeType, indexPaths: [NSIndexPath])
     private var objectChanges = [ObjectChangeTuple]()
 
+    private var updatedObjects = [NSIndexPath: Item]()
 
     private lazy var bridgedDelegate: BridgedFetchedResultsDelegate = BridgedFetchedResultsDelegate(
         willChangeContent: { [unowned self] (controller) -> Void in
             self.sectionChanges.removeAll()
             self.objectChanges.removeAll()
+            self.updatedObjects.removeAll()
         },
         didChangeSection: { [unowned self] (controller, sectionInfo, sectionIndex, changeType) -> Void in
             self.sectionChanges.append((changeType, sectionIndex))
@@ -90,6 +107,7 @@ public final class CollectionViewFetchedResultsDelegateProvider <Item> {
             case .Update:
                 if let indexPath = indexPath {
                     self.objectChanges.append((changeType, [indexPath]))
+                    self.updatedObjects[indexPath] = anyObject as? Item
                 }
             case .Move:
                 if let old = indexPath, new = newIndexPath {
@@ -106,12 +124,11 @@ public final class CollectionViewFetchedResultsDelegateProvider <Item> {
                 completion:{ (finished) -> Void in
 
                     if self.sectionChanges.count > 0 {
+                        // print("SECTION CHANGE")
+                        // TODO: revisit, use supplementary view factory?
                         // if sections have changed, reload to update supplementary views
                         self.collectionView?.reloadData()
                     }
-
-                    self.sectionChanges.removeAll()
-                    self.objectChanges.removeAll()
             })
         })
 
@@ -119,15 +136,28 @@ public final class CollectionViewFetchedResultsDelegateProvider <Item> {
         for (changeType, indexPaths) in objectChanges {
 
             switch(changeType) {
-            case .Insert: collectionView?.insertItemsAtIndexPaths(indexPaths)
-            case .Delete: collectionView?.deleteItemsAtIndexPaths(indexPaths)
-            case .Update: collectionView?.reloadItemsAtIndexPaths(indexPaths)
+            case .Insert:
+                collectionView?.insertItemsAtIndexPaths(indexPaths)
+            case .Delete:
+                collectionView?.deleteItemsAtIndexPaths(indexPaths)
+            case .Update:
+                if let indexPath = indexPaths.first,
+                    item = updatedObjects[indexPath],
+                    cell = collectionView?.cellForItemAtIndexPath(indexPath) as? CellFactory.Cell,
+                    view = collectionView {
+                    cellFactory.configureCell(cell, forItem: item, inCollectionView: view, atIndexPath: indexPath)
+                }
             case .Move:
-                if let first = indexPaths.first, last = indexPaths.last {
-                    collectionView?.moveItemAtIndexPath(first, toIndexPath: last)
+                if let deleteIndexPath = indexPaths.first {
+                    self.collectionView?.deleteItemsAtIndexPaths([deleteIndexPath])
+                }
+
+                if let insertIndexPath = indexPaths.last {
+                    self.collectionView?.insertItemsAtIndexPaths([insertIndexPath])
                 }
             }
         }
+
     }
 
     private func applySectionChanges() {
@@ -135,10 +165,14 @@ public final class CollectionViewFetchedResultsDelegateProvider <Item> {
             let section = NSIndexSet(index: sectionIndex)
 
             switch(changeType) {
-            case .Insert: collectionView?.insertSections(section)
-            case .Delete: collectionView?.deleteSections(section)
-            case .Update: collectionView?.reloadSections(section)
-            case .Move: break
+            case .Insert:
+                collectionView?.insertSections(section)
+            case .Delete:
+                collectionView?.deleteSections(section)
+            case .Update:
+                collectionView?.reloadSections(section)
+            case .Move:
+                break
             }
         }
     }
@@ -157,7 +191,7 @@ public final class TableViewFetchedResultsDelegateProvider <
     // MARK: Properties
 
     /**
-    The table view that displays the data from the `NSFetchedResultsController` 
+    The table view that displays the data from the `NSFetchedResultsController`
     for which this provider provides a delegate.
     */
     public weak var tableView: UITableView?
@@ -183,7 +217,6 @@ public final class TableViewFetchedResultsDelegateProvider <
     public init(tableView: UITableView, cellFactory: CellFactory, controller: NSFetchedResultsController? = nil) {
         self.tableView = tableView
         self.cellFactory = cellFactory
-
         controller?.delegate = delegate
     }
 
@@ -215,10 +248,10 @@ public final class TableViewFetchedResultsDelegateProvider <
                     self.tableView?.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
                 }
             case .Update:
-                if let i = indexPath,
-                    cell = self.tableView?.cellForRowAtIndexPath(i) as? CellFactory.Cell,
+                if let indexPath = indexPath,
+                    cell = self.tableView?.cellForRowAtIndexPath(indexPath) as? CellFactory.Cell,
                     view = self.tableView {
-                        self.cellFactory.configureCell(cell, forItem: anyObject as! Item, inTableView: view, atIndexPath: i)
+                        self.cellFactory.configureCell(cell, forItem: anyObject as! Item, inTableView: view, atIndexPath: indexPath)
                 }
             case .Move:
                 if let deleteIndexPath = indexPath {

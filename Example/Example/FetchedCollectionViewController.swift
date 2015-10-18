@@ -32,7 +32,7 @@ class FetchedCollectionViewController: UICollectionViewController {
 
     var dataSourceProvider: CollectionViewFetchedResultsDataSourceProvider<Thing, ThingCellFactory, ThingSupplementaryViewFactory>?
 
-    var delegateProvider: CollectionViewFetchedResultsDelegateProvider<Thing>?
+    var delegateProvider: CollectionViewFetchedResultsDelegateProvider<Thing, ThingCellFactory>?
 
 
     // MARK: view lifecycle
@@ -83,7 +83,7 @@ class FetchedCollectionViewController: UICollectionViewController {
         let frc = thingFRCinContext(stack.context)
 
         // 4. create delegate provider
-        delegateProvider = CollectionViewFetchedResultsDelegateProvider(collectionView: collectionView!, controller: frc)
+        delegateProvider = CollectionViewFetchedResultsDelegateProvider(collectionView: collectionView!, cellFactory: cellFactory, controller: frc)
 
         // 5. create data source provider
         dataSourceProvider = CollectionViewFetchedResultsDataSourceProvider(
