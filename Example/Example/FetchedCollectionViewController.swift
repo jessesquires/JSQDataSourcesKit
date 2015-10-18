@@ -53,6 +53,8 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         layout.minimumInteritemSpacing = 10
         layout.minimumLineSpacing = 10
+        layout.headerReferenceSize = CGSize(width: collectionView.frame.size.width, height: 50)
+        layout.footerReferenceSize = CGSize(width: collectionView.frame.size.width, height: 25)
 
         collectionView.delegate = self
         collectionView.allowsMultipleSelection = true
@@ -103,14 +105,22 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
         delegateProvider = CollectionViewFetchedResultsDelegateProvider(collectionView: collectionView, controller: frc)
 
         // create data source provider
-        // by passing `self.collectionView`, the provider automatically sets `self.collectionView.dataSource = self.dataSourceProvider.dataSource`
-        dataSourceProvider = CollectionViewFetchedResultsDataSourceProvider(fetchedResultsController: frc, cellFactory: cellFactory, supplementaryViewFactory: composedFactory, collectionView: collectionView)
+        dataSourceProvider = CollectionViewFetchedResultsDataSourceProvider(
+            fetchedResultsController: frc,
+            cellFactory: cellFactory,
+            supplementaryViewFactory: composedFactory,
+            collectionView: collectionView)
     }
-
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        fetchData()
+    }
 
+
+    // MARK: Helpers
+
+    private func fetchData() {
         do {
             try dataSourceProvider?.fetchedResultsController.performFetch()
         } catch {
@@ -119,50 +129,26 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
     }
 
 
-    // MARK: collection view delegate flow layout
-
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width, height: 50)
-    }
-
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width, height: 25)
-    }
-
-
-    // MARK: actions
+    // MARK: Actions
 
     @IBAction func didTapAddButton(sender: UIBarButtonItem) {
-
         collectionView.deselectAllItems()
 
         let newThing = Thing.newThing(stack.context)
         stack.saveAndWait()
-
-        fetch()
+        fetchData()
 
         if let indexPath = dataSourceProvider?.fetchedResultsController.indexPathForObject(newThing) {
             collectionView.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: .CenteredVertically)
         }
-
-        print("Added new thing: \(newThing)")
     }
 
 
     @IBAction func didTapDeleteButton(sender: UIBarButtonItem) {
-        if let indexPaths = collectionView.indexPathsForSelectedItems() {
-
-            print("Deleting things at indexPaths: \(indexPaths)")
-
-            for i in indexPaths {
-                let thingToDelete = dataSourceProvider?.fetchedResultsController.objectAtIndexPath(i) as! Thing
-                stack.context.deleteObject(thingToDelete)
-            }
-
-            stack.saveAndWait()
-        }
-
-        fetch()
+        let indexPaths = collectionView.indexPathsForSelectedItems()
+        dataSourceProvider?.fetchedResultsController.deleteObjectsAtIndexPaths(indexPaths)
+        stack.saveAndWait()
+        fetchData()
         collectionView.reloadData()
     }
 
@@ -170,6 +156,7 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
     @IBAction func didTapHelpButton(sender: UIBarButtonItem) {
         UIAlertController.showHelpAlert(self)
     }
+
 
     // MARK: Testing
     
@@ -190,20 +177,10 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
 
             stack.saveAndWait()
 
-            fetch()
+            fetchData()
         }
 
 
-    }
-
-    // MARK: Private
-
-    private func fetch() {
-        do {
-            try dataSourceProvider?.fetchedResultsController.performFetch()
-        } catch {
-            print("Fetch error = \(error)")
-        }
     }
 
 }
