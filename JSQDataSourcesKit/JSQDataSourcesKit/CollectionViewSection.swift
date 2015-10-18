@@ -22,7 +22,8 @@ import Foundation
 /**
 A `CollectionViewSection` is a concrete `CollectionViewSectionInfo`.
 A section instance is responsible for managing the elements in a section.
-Elements in the section may be accessed or replaced via its subscripting interface.
+
+Elements in the section may be accessed or modified via its subscripting interface.
 */
 public struct CollectionViewSection <Item>: CollectionViewSectionInfo {
 
@@ -36,13 +37,13 @@ public struct CollectionViewSection <Item>: CollectionViewSectionInfo {
         return items.count
     }
 
+
     // MARK: Initialization
 
     /**
     Constructs a new collection view section.
 
     - parameter items: The elements in the section.
-
     - returns: A new `CollectionViewSection` instance.
     */
     public init(items: Item...) {
@@ -53,18 +54,17 @@ public struct CollectionViewSection <Item>: CollectionViewSectionInfo {
     Constructs a new collection view section.
 
     - parameter items: The elements in the section.
-
     - returns: A new `CollectionViewSection` instance.
     */
     public init(_ items: [Item]) {
         self.items = items
     }
 
-    // MARK: Subscript
+
+    // MARK: Subscripts
 
     /**
     - parameter index: The index of the item to return.
-
     - returns: The item at `index`.
     */
     public subscript (index: Int) -> Item {

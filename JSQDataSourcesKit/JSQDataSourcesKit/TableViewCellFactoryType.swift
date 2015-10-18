@@ -33,6 +33,7 @@ public protocol TableViewCellFactoryType {
     /// The type of `UITableViewCell` that the factory produces.
     typealias Cell: UITableViewCell
 
+    
     // MARK: Methods
 
     /**

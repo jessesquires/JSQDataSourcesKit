@@ -25,6 +25,7 @@ public protocol CollectionViewSectionInfo {
     /// The type of elements stored in the section.
     typealias Item
 
+    
     // MARK: Properties
 
     /// The elements in the collection view section.

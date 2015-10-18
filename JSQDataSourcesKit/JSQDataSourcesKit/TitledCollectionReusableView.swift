@@ -27,25 +27,24 @@ These views can be created via a `TitledCollectionReusableViewFactory`.
 */
 public final class TitledCollectionReusableView: UICollectionReusableView {
 
-    // MARK: Outlets
+    // MARK: Properties
 
-    ///  The label of the reusable view.
+    /// The label of the reusable view.
     @IBOutlet public private(set) weak var label: UILabel!
 
-    ///  The leading spacing constraint between the label and its superview.
+    /// The leading spacing constraint between the label and its superview.
     @IBOutlet public private(set) weak var leadingSpacing: NSLayoutConstraint!
 
-    ///  The top spacing constraint between the label and its superview.
+    /// The top spacing constraint between the label and its superview.
     @IBOutlet public private(set) weak var topSpacing: NSLayoutConstraint!
 
-    ///  The trailing constraint between the label and its superview.
+    /// The trailing constraint between the label and its superview.
     @IBOutlet public private(set) weak var trailingSpacing: NSLayoutConstraint!
 
-    ///  The bottom spacing constraint between the label and its superview.
+    /// The bottom spacing constraint between the label and its superview.
     @IBOutlet public private(set) weak var bottomSpacing: NSLayoutConstraint!
 
-    /// The view’s background color.
-    /// - Note: setting this property also sets the background color for `label`.
+    /// :nodoc:
     public override var backgroundColor: UIColor? {
         get {
             return super.backgroundColor
@@ -56,21 +55,25 @@ public final class TitledCollectionReusableView: UICollectionReusableView {
         }
     }
 
+
     // MARK: Class properties
 
-    ///  The default string used to identify instances of `TitledCollectionReusableView`.
+    /// The default string used to identify instances of `TitledCollectionReusableView`.
     public class var identifier: String {
         get {
             return String(TitledCollectionReusableView.self)
         }
     }
 
-    ///  The `UINib` object initialized for the view.
+    /// The `UINib` object initialized for the view.
     public class var nib: UINib {
         get {
-            return UINib(nibName: "TitledCollectionReusableView", bundle: NSBundle(forClass: TitledCollectionReusableView.self))
+            return UINib(
+                nibName: "TitledCollectionReusableView",
+                bundle: NSBundle(forClass: TitledCollectionReusableView.self))
         }
     }
+
 
     // MARK: Methods
 

@@ -37,6 +37,7 @@ public protocol CollectionSupplementaryViewFactoryType {
     /// The type of `UICollectionReusableView` that the factory produces.
     typealias SupplementaryView: UICollectionReusableView
 
+    
     // MARK: Methods
 
     /**

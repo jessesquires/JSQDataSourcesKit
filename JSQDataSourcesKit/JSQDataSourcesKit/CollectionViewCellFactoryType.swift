@@ -32,6 +32,7 @@ public protocol CollectionViewCellFactoryType {
     /// The type of `UICollectionViewCell` that the factory produces.
     typealias Cell: UICollectionViewCell
 
+    
     // MARK: Methods
 
     /**

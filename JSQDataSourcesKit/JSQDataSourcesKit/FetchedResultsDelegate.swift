@@ -27,18 +27,22 @@ for an instance of `NSFetchedResultsController` that manages data to display in 
 
 Here, the `Item` type parameter acts as a phatom type.
 
-- Note: This type should correpsond to the type of objects that the `NSFetchedResultsController` fetches.
+- note: This type should correpsond to the type of objects that the `NSFetchedResultsController` fetches.
 */
 public final class CollectionViewFetchedResultsDelegateProvider <Item> {
 
     // MARK: Properties
 
-    /// The collection view that displays the data from the `NSFetchedResultsController` for which this provider provides a delegate.
+    /** 
+    The collection view that displays the data from the `NSFetchedResultsController`
+    for which this provider provides a delegate.
+    */
     public weak var collectionView: UICollectionView?
 
-    /// Returns the object that is notified when the fetched results changed.
+    /// Returns the delegate object for the fetched results controller
     public var delegate: NSFetchedResultsControllerDelegate { return bridgedDelegate }
 
+    
     // MARK: Initialization
 
     /**
@@ -54,6 +58,7 @@ public final class CollectionViewFetchedResultsDelegateProvider <Item> {
 
         controller?.delegate = delegate
     }
+
 
     // MARK: Private
 
@@ -151,7 +156,10 @@ public final class TableViewFetchedResultsDelegateProvider <
 
     // MARK: Properties
 
-    /// The table view that displays the data from the `NSFetchedResultsController` for which this provider provides a delegate.
+    /**
+    The table view that displays the data from the `NSFetchedResultsController` 
+    for which this provider provides a delegate.
+    */
     public weak var tableView: UITableView?
 
     /// Returns the cell factory for this delegate provider.
@@ -159,6 +167,7 @@ public final class TableViewFetchedResultsDelegateProvider <
 
     /// Returns the object that is notified when the fetched results changed.
     public var delegate: NSFetchedResultsControllerDelegate { return bridgedDelegate }
+
 
     // MARK: Initialization
 
@@ -177,6 +186,7 @@ public final class TableViewFetchedResultsDelegateProvider <
 
         controller?.delegate = delegate
     }
+
 
     // MARK: Private
 

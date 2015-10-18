@@ -39,17 +39,19 @@ public struct CollectionViewCellFactory <Cell: UICollectionViewCell, Item>: Coll
     */
     public typealias ConfigurationHandler = (Cell, Item, UICollectionView, NSIndexPath) -> Cell
 
+
     // MARK: Properties
 
     /**
     A unique identifier that describes the purpose of the cells that the factory produces.
     The factory dequeues cells from the collection view with this reuse identifier.
 
-    - Note: Clients are responsible for registering a cell for this identifier with the collection view.
+    - note: Clients are responsible for registering a cell for this identifier with the collection view.
     */
     public let reuseIdentifier: String
 
     private let cellConfigurator: ConfigurationHandler
+
 
     // MARK: Initialization
 
@@ -66,32 +68,23 @@ public struct CollectionViewCellFactory <Cell: UICollectionViewCell, Item>: Coll
         self.cellConfigurator = cellConfigurator
     }
 
-    // MARK: Methods
 
-    /**
-    Creates and returns a new `Cell` instance, or dequeues an existing cell for reuse.
+    // MARK: CollectionViewCellFactoryType
 
-    - parameter item:           The item at `indexPath`.
-    - parameter collectionView: The collection view requesting this information.
-    - parameter indexPath:      The index path that specifies the location of `cell` and `item`.
-
-    - returns: An initialized or dequeued `UICollectionViewCell` of type `Cell`.
-    */
-    public func cellForItem(item: Item, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell {
-        return collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! Cell
+    /// :nodoc:
+    public func cellForItem(
+        item: Item,
+        inCollectionView collectionView: UICollectionView,
+        atIndexPath indexPath: NSIndexPath) -> Cell {
+            return collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! Cell
     }
 
-    /**
-    Configures and returns the specified cell.
-
-    - parameter cell:           The cell to configure.
-    - parameter item:           The item at `indexPath`.
-    - parameter collectionView: The collection view requesting this information.
-    - parameter indexPath:      The index path that specifies the location of `cell` and `item`.
-
-    - returns: A configured `UICollectionViewCell` of type `Cell`.
-    */
-    public func configureCell(cell: Cell, forItem item: Item, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> Cell {
-        return cellConfigurator(cell, item, collectionView, indexPath)
+    /// :nodoc:
+    public func configureCell(
+        cell: Cell,
+        forItem item: Item,
+        inCollectionView collectionView: UICollectionView,
+        atIndexPath indexPath: NSIndexPath) -> Cell {
+            return cellConfigurator(cell, item, collectionView, indexPath)
     }
 }

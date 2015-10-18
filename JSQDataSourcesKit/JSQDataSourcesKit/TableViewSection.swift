@@ -21,7 +21,7 @@
 A `TableViewSection` is a concrete `TableViewSectionInfo`.
 A section instance is responsible for managing the elements in a section.
 
-Elements in the section may be accessed or replaced via its subscripting interface.
+Elements in the section may be accessed or modified via its subscripting interface.
 */
 public struct TableViewSection <Item>: TableViewSectionInfo {
 
@@ -40,6 +40,7 @@ public struct TableViewSection <Item>: TableViewSectionInfo {
     public var count: Int {
         return items.count
     }
+
 
     // MARK: Initialization
 
@@ -71,11 +72,11 @@ public struct TableViewSection <Item>: TableViewSectionInfo {
         self.footerTitle = footerTitle
     }
 
-    // MARK: Subscript
+
+    // MARK: Subscripts
 
     /**
     - parameter index: The index of the item to return.
-
     - returns: The item at `index`.
     */
     public subscript (index: Int) -> Item {

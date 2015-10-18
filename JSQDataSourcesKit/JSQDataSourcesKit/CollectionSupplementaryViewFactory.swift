@@ -40,17 +40,19 @@ public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectio
     */
     public typealias ConfigurationHandler = (SupplementaryView, Item, SupplementaryViewKind, UICollectionView, NSIndexPath) -> SupplementaryView
 
+
     // MARK: Properties
 
     /**
     A unique identifier that describes the purpose of the supplementary views that the factory produces.
     The factory dequeues supplementary views from the collection view with this reuse identifier.
 
-    - Note: Clients are responsible for registering a view for this identifier and a supplementary view kind with the collection view.
+    - note: Clients are responsible for registering a view for this identifier and a supplementary view kind with the collection view.
     */
     public let reuseIdentifier: String
 
     private let supplementaryViewConfigurator: ConfigurationHandler
+
 
     // MARK: Initialization
 
@@ -67,36 +69,28 @@ public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectio
         self.supplementaryViewConfigurator = supplementaryViewConfigurator
     }
 
-    // MARK: Methods
 
-    /**
-    Creates and returns a new `SupplementaryView` instance, or dequeues an existing view for reuse.
+    // MARK: CollectionSupplementaryViewFactoryType
 
-    - parameter item:           The item at `indexPath`.
-    - parameter kind:           An identifier that describes the type of the supplementary view.
-    - parameter collectionView: The collection view requesting this information.
-    - parameter indexPath:      The index path that specifies the location of the new supplementary view.
-
-    - returns: An initialized or dequeued `UICollectionReusableView` of type `SupplementaryView`.
-    */
-    public func supplementaryViewForItem(item: Item, kind: SupplementaryViewKind,
-        inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> SupplementaryView {
-            return collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: reuseIdentifier, forIndexPath: indexPath) as! SupplementaryView
+    /// :nodoc:
+    public func supplementaryViewForItem(
+        item: Item,
+        kind: SupplementaryViewKind,
+        inCollectionView collectionView: UICollectionView,
+        atIndexPath indexPath: NSIndexPath) -> SupplementaryView {
+            return collectionView.dequeueReusableSupplementaryViewOfKind(
+                kind,
+                withReuseIdentifier: reuseIdentifier,
+                forIndexPath: indexPath) as! SupplementaryView
     }
 
-    /**
-    Configures and returns the specified supplementary view.
-
-    - parameter view:           The supplementary view to configure.
-    - parameter item:           The item at `indexPath`.
-    - parameter kind:           An identifier that describes the type of the supplementary view.
-    - parameter collectionView: The collection view requesting this information.
-    - parameter indexPath:      The index path that specifies the location of `view` and `item`.
-
-    - returns: A configured `UICollectionReusableView` of type `SupplementaryView`.
-    */
-    public func configureSupplementaryView(view: SupplementaryView, forItem item: Item, kind: SupplementaryViewKind,
-        inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> SupplementaryView {
+    /// :nodoc:
+    public func configureSupplementaryView(
+        view: SupplementaryView,
+        forItem item: Item,
+        kind: SupplementaryViewKind,
+        inCollectionView collectionView: UICollectionView,
+        atIndexPath indexPath: NSIndexPath) -> SupplementaryView {
             return supplementaryViewConfigurator(view, item, kind, collectionView, indexPath)
     }
 }

@@ -27,7 +27,7 @@ An instance of `TableViewDataSourceProvider` owns an array of section instances 
 
 Sections may be accessed or replaced via the provider's subscripting interface.
 
-- Note: Clients are responsbile for:
+- note: Clients are responsbile for:
 - Registering cells with the table view
 - Adding, removing, or reloading cells and sections as the provider's `sections` are modified.
 */
@@ -48,6 +48,7 @@ public final class TableViewDataSourceProvider <
     /// Returns the object that provides the data for the table view.
     public var dataSource: UITableViewDataSource { return bridgedDataSource }
 
+
     // MARK: Initialization
 
     /**
@@ -66,11 +67,11 @@ public final class TableViewDataSourceProvider <
         tableView?.dataSource = dataSource
     }
 
+
     // MARK: Subscripts
 
     /**
     - parameter index: The index of the section to return.
-
     - returns: The section at `index`.
     */
     public subscript (index: Int) -> SectionInfo {
@@ -84,7 +85,6 @@ public final class TableViewDataSourceProvider <
 
     /**
     - parameter indexPath: The index path of the item to return.
-
     - returns: The item at `indexPath`.
     */
     public subscript (indexPath: NSIndexPath) -> Item {
@@ -95,6 +95,7 @@ public final class TableViewDataSourceProvider <
             sections[indexPath.section].items[indexPath.row] = newValue
         }
     }
+
 
     // MARK: Private
 
@@ -124,7 +125,7 @@ that is backed by an `NSFetchedResultsController` instance.
 
 This provider owns a fetched results controller and a cell factory.
 
-- Note: Clients are responsbile for registering cells with the table view.
+- note: Clients are responsbile for registering cells with the table view.
 */
 public final class TableViewFetchedResultsDataSourceProvider <Item,
     CellFactory: TableViewCellFactoryType
@@ -140,6 +141,7 @@ public final class TableViewFetchedResultsDataSourceProvider <Item,
 
     /// Returns the object that provides the data for the table view.
     public var dataSource: UITableViewDataSource { return bridgedDataSource }
+
 
     // MARK: Initialization
 
@@ -158,6 +160,7 @@ public final class TableViewFetchedResultsDataSourceProvider <Item,
 
         tableView?.dataSource = dataSource
     }
+
 
     // MARK: Private
 

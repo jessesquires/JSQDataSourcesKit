@@ -27,7 +27,7 @@ An instance of `CollectionViewDataSourceProvider` owns an array of section insta
 
 Sections may be accessed or replaced via the provider's subscripting interface.
 
-- Warning: Clients are responsbile for:
+- note: Clients are responsbile for:
 - Registering cells with the collection view
 - Registering supplementary views with the collection view
 - Adding, removing, or reloading cells as the provider's `sections` are modified
@@ -54,6 +54,7 @@ public final class CollectionViewDataSourceProvider <
     /// Returns the object that provides the data for the collection view.
     public var dataSource: UICollectionViewDataSource { return bridgedDataSource }
 
+
     // MARK: Initialization
 
     /**
@@ -73,6 +74,7 @@ public final class CollectionViewDataSourceProvider <
 
         collectionView?.dataSource = dataSource
     }
+
 
     // MARK: Subscripts
 
@@ -103,6 +105,7 @@ public final class CollectionViewDataSourceProvider <
             sections[indexPath.section].items[indexPath.item] = newValue;
         }
     }
+
 
     // MARK: Private
 
@@ -139,7 +142,7 @@ that is backed by an `NSFetchedResultsController` instance.
 
 This provider owns a fetched results controller, a cell factory, and a supplementary view factory.
 
-- Note: Clients are responsbile for registering cells and supplementary views with the collection view.
+- note: Clients are responsbile for registering cells and supplementary views with the collection view.
 */
 public final class CollectionViewFetchedResultsDataSourceProvider <
     Item,
@@ -160,6 +163,7 @@ public final class CollectionViewFetchedResultsDataSourceProvider <
 
     /// Returns the object that provides the data for the collection view.
     public var dataSource: UICollectionViewDataSource { return bridgedDataSource }
+
 
     // MARK: Initialization
 
@@ -185,6 +189,7 @@ public final class CollectionViewFetchedResultsDataSourceProvider <
             collectionView?.dataSource = dataSource
     }
 
+    
     // MARK: Private
 
     private lazy var bridgedDataSource: BridgedCollectionViewDataSource = BridgedCollectionViewDataSource(
