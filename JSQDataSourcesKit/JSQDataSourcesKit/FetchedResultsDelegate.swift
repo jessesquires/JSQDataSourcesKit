@@ -21,15 +21,6 @@ import Foundation
 import UIKit
 
 
-extension NSIndexPath: CustomDebugStringConvertible {
-    override public var description: String {
-        get {
-            return "(\(section), \(item))"
-        }
-    }
-}
-
-
 /**
 A `CollectionViewFetchedResultsDelegateProvider` is responsible for providing a delegate object
 for an instance of `NSFetchedResultsController` that manages data to display in a collection view.
@@ -88,15 +79,15 @@ public final class CollectionViewFetchedResultsDelegateProvider <
     private var updatedObjects = [NSIndexPath: Item]()
 
     private lazy var bridgedDelegate: BridgedFetchedResultsDelegate = BridgedFetchedResultsDelegate(
-        willChangeContent: { [unowned self] (controller) -> Void in
+        willChangeContent: { [unowned self] (controller) in
             self.sectionChanges.removeAll()
             self.objectChanges.removeAll()
             self.updatedObjects.removeAll()
         },
-        didChangeSection: { [unowned self] (controller, sectionInfo, sectionIndex, changeType) -> Void in
+        didChangeSection: { [unowned self] (controller, sectionInfo, sectionIndex, changeType) in
             self.sectionChanges.append((changeType, sectionIndex))
         },
-        didChangeObject: { [unowned self] (controller, anyObject, indexPath: NSIndexPath?, changeType, newIndexPath: NSIndexPath?) -> Void in
+        didChangeObject: { [unowned self] (controller, anyObject, indexPath: NSIndexPath?, changeType, newIndexPath: NSIndexPath?) in
             switch changeType {
             case .Insert:
                 if let insertIndexPath = newIndexPath {
@@ -117,13 +108,13 @@ public final class CollectionViewFetchedResultsDelegateProvider <
                 }
             }
         },
-        didChangeContent: { [unowned self] (controller) -> Void in
+        didChangeContent: { [unowned self] (controller) in
 
-            self.collectionView?.performBatchUpdates({ () -> Void in
+            self.collectionView?.performBatchUpdates({
                 self.applyObjectChanges()
                 self.applySectionChanges()
                 },
-                completion:{ (finished) -> Void in
+                completion:{ finished in
                     self.reloadSupplementaryViewsIfNeeded()
             })
         })
