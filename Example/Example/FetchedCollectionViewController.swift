@@ -20,12 +20,7 @@ import UIKit
 import CoreData
 import JSQDataSourcesKit
 
-class FetchedCollectionViewController: UIViewController, UICollectionViewDelegateFlowLayout {
-
-    // MARK: outlets
-
-    @IBOutlet weak var collectionView: UICollectionView!
-
+class FetchedCollectionViewController: UICollectionViewController {
 
     // MARK: properties
 
@@ -45,34 +40,23 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureCollectionView(collectionView!)
+        collectionView!.allowsMultipleSelection = true
+        let layout = collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.footerReferenceSize = CGSize(width: collectionView!.frame.size.width, height: 25)
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Test", style: .Plain, target: self, action: Selector("didTapTest:"))
 
-        // configure layout
-        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: 100, height: 100)
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        layout.minimumInteritemSpacing = 10
-        layout.minimumLineSpacing = 10
-        layout.headerReferenceSize = CGSize(width: collectionView.frame.size.width, height: 50)
-        layout.footerReferenceSize = CGSize(width: collectionView.frame.size.width, height: 25)
-
-        collectionView.delegate = self
-        collectionView.allowsMultipleSelection = true
-
-        // register cells and supplementary views
-        collectionView.registerNib(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: CellId)
-        collectionView.registerNib(TitledCollectionReusableView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: TitledCollectionReusableView.identifier)
-        collectionView.registerNib(TitledCollectionReusableView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: TitledCollectionReusableView.identifier)
-
-        // create cell factory
-        let cellFactory = CollectionViewCellFactory(reuseIdentifier: CellId) { (cell: CollectionViewCell, model: Thing, collectionView: UICollectionView, indexPath: NSIndexPath) -> CollectionViewCell in
+        // 1. create cell factory
+        let cellFactory = CollectionViewCellFactory(reuseIdentifier: CellId) {
+            (cell: CollectionViewCell, model: Thing, collectionView: UICollectionView, indexPath: NSIndexPath) -> CollectionViewCell in
             cell.label.text = model.displayName
             cell.label.textColor = UIColor.whiteColor()
             cell.backgroundColor = model.displayColor
             return cell
         }
 
-        // create supplementary view factories
+        // 2. create supplementary view factory
         let headerFactory = TitledCollectionReusableViewFactory(
             dataConfigurator: { (header, item: Thing, kind, collectionView, indexPath) -> TitledCollectionReusableView in
                 header.label.text = "\(item.colorName) (header \(indexPath.section))"
@@ -80,7 +64,7 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
                 return header
             },
             styleConfigurator: { (header) -> Void in
-                header.backgroundColor = UIColor.darkGrayColor()
+                header.backgroundColor = .darkGrayColor()
         })
 
         let footerFactory = TitledCollectionReusableViewFactory(
@@ -90,21 +74,20 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
                 return footer
             },
             styleConfigurator: { (footer) -> Void in
-                footer.backgroundColor = UIColor.lightGrayColor()
-                footer.label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote)
+                footer.backgroundColor = .lightGrayColor()
+                footer.label.font = .preferredFontForTextStyle(UIFontTextStyleFootnote)
                 footer.label.textAlignment = .Center
         })
 
         let composedFactory = ComposedCollectionSupplementaryViewFactory(headerViewFactory: headerFactory, footerViewFactory: footerFactory)
 
-        // create fetched results controller
+        // 3. create fetched results controller
         let frc = thingFRCinContext(stack.context)
 
-        // create delegate provider
-        // by passing `frc` the provider automatically sets `frc.delegate = self.delegateProvider.delegate`
-        delegateProvider = CollectionViewFetchedResultsDelegateProvider(collectionView: collectionView, controller: frc)
+        // 4. create delegate provider
+        delegateProvider = CollectionViewFetchedResultsDelegateProvider(collectionView: collectionView!, controller: frc)
 
-        // create data source provider
+        // 5. create data source provider
         dataSourceProvider = CollectionViewFetchedResultsDataSourceProvider(
             fetchedResultsController: frc,
             cellFactory: cellFactory,
@@ -132,24 +115,24 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
     // MARK: Actions
 
     @IBAction func didTapAddButton(sender: UIBarButtonItem) {
-        collectionView.deselectAllItems()
+        collectionView!.deselectAllItems()
 
         let newThing = Thing.newThing(stack.context)
         stack.saveAndWait()
         fetchData()
 
         if let indexPath = dataSourceProvider?.fetchedResultsController.indexPathForObject(newThing) {
-            collectionView.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: .CenteredVertically)
+            collectionView!.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: .CenteredVertically)
         }
     }
 
 
     @IBAction func didTapDeleteButton(sender: UIBarButtonItem) {
-        let indexPaths = collectionView.indexPathsForSelectedItems()
+        let indexPaths = collectionView!.indexPathsForSelectedItems()
         dataSourceProvider?.fetchedResultsController.deleteObjectsAtIndexPaths(indexPaths)
         stack.saveAndWait()
         fetchData()
-        collectionView.reloadData()
+        collectionView!.reloadData()
     }
 
 
@@ -165,9 +148,7 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
 
     func didTapTest(sender: UIBarButtonItem) {
 
-        if let indexPaths = collectionView.indexPathsForSelectedItems() {
-
-            print("Deleting things at indexPaths: \(indexPaths)")
+        if let indexPaths = collectionView!.indexPathsForSelectedItems() {
 
             for i in indexPaths {
                 let thingToDelete = dataSourceProvider?.fetchedResultsController.objectAtIndexPath(i) as! Thing
@@ -176,11 +157,9 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
             }
 
             stack.saveAndWait()
-
             fetchData()
         }
-
-
     }
+    
 
 }

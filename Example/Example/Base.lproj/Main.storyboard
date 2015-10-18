@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -52,7 +51,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="75V-15-OiO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1944" y="300"/>
+            <point key="canvasLocation" x="1958" y="300"/>
         </scene>
         <!--JSQDataSourcesKit-->
         <scene sceneID="K0k-wR-VQU">
@@ -159,7 +158,7 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                         <connections>
-                                            <segue destination="gM7-lb-ytW" kind="show" id="iGq-oQ-mOP"/>
+                                            <segue destination="RSd-mT-AG9" kind="show" id="nV8-V3-1Va"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -242,67 +241,6 @@
             </objects>
             <point key="canvasLocation" x="1260" y="300"/>
         </scene>
-        <!--Fetched collection view example-->
-        <scene sceneID="j9e-vv-cCa">
-            <objects>
-                <viewController title="Fetched collection view example" id="gM7-lb-ytW" customClass="FetchedCollectionViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="kLe-z7-hDX"/>
-                        <viewControllerLayoutGuide type="bottom" id="XWV-Oh-zW8"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Dyu-MX-OdU">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sXw-00-jfj">
-                                <rect key="frame" x="4" y="0.0" width="592" height="600"/>
-                                <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qSe-NA-OtJ">
-                                    <size key="itemSize" width="100" height="100"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
-                        </subviews>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="sXw-00-jfj" secondAttribute="trailing" constant="-16" id="BTy-Rf-G39"/>
-                            <constraint firstItem="sXw-00-jfj" firstAttribute="top" secondItem="Dyu-MX-OdU" secondAttribute="topMargin" id="KuI-To-IgS"/>
-                            <constraint firstItem="sXw-00-jfj" firstAttribute="leading" secondItem="Dyu-MX-OdU" secondAttribute="leadingMargin" constant="-16" id="OxQ-2q-bgh"/>
-                            <constraint firstItem="sXw-00-jfj" firstAttribute="bottom" secondItem="Dyu-MX-OdU" secondAttribute="bottomMargin" id="zRz-QH-JkT"/>
-                        </constraints>
-                    </view>
-                    <toolbarItems>
-                        <barButtonItem systemItem="trash" id="5DB-4z-WM4">
-                            <connections>
-                                <action selector="didTapDeleteButton:" destination="gM7-lb-ytW" id="YhR-0X-eUu"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="LgC-Mj-oJb"/>
-                        <barButtonItem title="Help?" id="hMq-bh-My1">
-                            <connections>
-                                <action selector="didTapHelpButton:" destination="gM7-lb-ytW" id="KXn-dS-0qH"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="7Ap-id-Pof"/>
-                        <barButtonItem systemItem="add" id="1Wv-fY-B5K">
-                            <connections>
-                                <action selector="didTapAddButton:" destination="gM7-lb-ytW" id="oRM-QN-Y5k"/>
-                            </connections>
-                        </barButtonItem>
-                    </toolbarItems>
-                    <connections>
-                        <outlet property="collectionView" destination="sXw-00-jfj" id="rhe-QC-9Yf"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xvv-cf-eSr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1944" y="987"/>
-        </scene>
         <!--Fetched results table view-->
         <scene sceneID="yfm-9R-IRn">
             <objects>
@@ -370,6 +308,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cn0-cb-Vmk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1260" y="987"/>
+        </scene>
+        <!--Fetched results collection view-->
+        <scene sceneID="KX0-91-hWZ">
+            <objects>
+                <collectionViewController title="Fetched results collection view" id="RSd-mT-AG9" customClass="FetchedCollectionViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ran-YA-pts">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BnI-mI-eZP">
+                            <size key="itemSize" width="100" height="100"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="RSd-mT-AG9" id="DNb-uo-sDw"/>
+                            <outlet property="delegate" destination="RSd-mT-AG9" id="gsm-W3-o3f"/>
+                        </connections>
+                    </collectionView>
+                    <toolbarItems>
+                        <barButtonItem systemItem="trash" id="yN7-s2-SWK">
+                            <connections>
+                                <action selector="didTapDeleteButton:" destination="RSd-mT-AG9" id="qir-ND-I4g"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="svl-Ut-ASG"/>
+                        <barButtonItem title="Help?" id="TqY-PJ-foW">
+                            <connections>
+                                <action selector="didTapHelpButton:" destination="RSd-mT-AG9" id="q3K-Kv-Gog"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="WA0-2z-okI"/>
+                        <barButtonItem systemItem="add" id="bUI-IY-lU1">
+                            <connections>
+                                <action selector="didTapAddButton:" destination="RSd-mT-AG9" id="K2A-tZ-O7K"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dli-8X-awm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1958" y="987"/>
         </scene>
     </scenes>
 </document>
