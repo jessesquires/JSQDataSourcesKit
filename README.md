@@ -71,11 +71,11 @@ The following illustrates a simple example of how these components interact for 
 
 // register cells
 let nib = UINib(nibName: "MyCellNib", bundle: nil)
-self.tableView.registerNib(nib, forCellReuseIdentifier: "MyCellIdentifier")
+tableView.registerNib(nib, forCellReuseIdentifier: "MyCellIdentifier")
 
 // create sections with your model objects
-let section0 = TableViewSection(dataItems: [ /* array of type T */ ])
-let section1 = TableViewSection(dataItems: [ /* array of type T */ ])
+let section0 = TableViewSection(items: /* items of type T */)
+let section1 = TableViewSection(items: /* items of type T */)
 let allSections = [section0, section1]
 
 // create cell factory, it receives a cell identifier and configuration closure
@@ -86,17 +86,14 @@ let factory = TableViewCellFactory(reuseIdentifier: "MyCellIdentifier")
 }
 
 // create data source provider
-self.dataSourceProvider = TableViewDataSourceProvider(sections: allSections, cellFactory: factory)
+let dataSourceProvider = TableViewDataSourceProvider(sections: allSections, cellFactory: factory)
 
 // set the table view's data source
-self.tableView.dataSource = self.dataSourceProvider.dataSource
+tableView.dataSource = self.dataSourceProvider.dataSource
 
 // Clients are responsible for the following:
-//
-// 1. registering cells with the table view (or collection view)
-//
-// 2. adding and removing cells as the data source is modified
-//    (i.e. as self.dataSourceProvider.sections changes)
+//   - registering cells with the table view (or collection view)
+//   - adding and removing cells as the data source is modified
 ````
 
 ##### Demo Project
@@ -115,11 +112,10 @@ Please follow these sweet [contribution guidelines](https://github.com/jessesqui
 
 ## Credits
 
-Created and maintained by [**@jesse_squires**](https://twitter.com/jesse_squires)
+Created and maintained by [**@jesse_squires**](https://twitter.com/jesse_squires).
 
 * Inspired by **[andymatuschak](https://github.com/andymatuschak) /** [gist f1e1691fa1a327468f8e](https://gist.github.com/andymatuschak/f1e1691fa1a327468f8e)
 * Inspired by **[ashfurrow](https://github.com/ashfurrow) /** [UICollectionView-NSFetchedResultsController](https://github.com/ashfurrow/UICollectionView-NSFetchedResultsController)
-* Derived from my work on [RSTDataSourceKit](https://github.com/rosettastone/RSTDataSourceKit)
 
 ## License
 
