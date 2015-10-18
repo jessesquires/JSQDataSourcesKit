@@ -27,7 +27,7 @@ let CellId = "cell"
 
 
 struct CellViewModel {
-    let text = "My Cell Title"
+    let text = "My Title"
 }
 
 

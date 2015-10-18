@@ -31,7 +31,7 @@
         <scene sceneID="9gz-X6-g9M">
             <objects>
                 <collectionViewController title="Static collection view example" hidesBottomBarWhenPushed="YES" id="eDa-Mk-VnF" customClass="CollectionViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="xZN-2N-jhU">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="xZN-2N-jhU">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
@@ -303,7 +303,7 @@
         <scene sceneID="KX0-91-hWZ">
             <objects>
                 <collectionViewController title="Fetched results collection view" id="RSd-mT-AG9" customClass="FetchedCollectionViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ran-YA-pts">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="ran-YA-pts">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
