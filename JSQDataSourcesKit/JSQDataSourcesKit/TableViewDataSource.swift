@@ -23,9 +23,7 @@ import UIKit
 
 /**
 A `TableViewDataSourceProvider` is responsible for providing a data source object for a table view.
-An instance of `TableViewDataSourceProvider` owns an array of section instances and a cell factory.
-
-Sections may be accessed or replaced via the provider's subscripting interface.
+Sections may be accessed or modified via the provider's subscripting interface.
 
 - note: Clients are responsbile for:
 - Registering cells with the table view
@@ -123,11 +121,10 @@ public final class TableViewDataSourceProvider <
 A `TableViewFetchedResultsDataSourceProvider` is responsible for providing a data source object for a table view
 that is backed by an `NSFetchedResultsController` instance.
 
-This provider owns a fetched results controller and a cell factory.
-
 - note: Clients are responsbile for registering cells with the table view.
 */
-public final class TableViewFetchedResultsDataSourceProvider <Item,
+public final class TableViewFetchedResultsDataSourceProvider <
+    Item,
     CellFactory: TableViewCellFactoryType
     where CellFactory.Item == Item> {
 

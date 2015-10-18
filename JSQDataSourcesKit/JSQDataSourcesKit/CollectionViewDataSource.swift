@@ -23,9 +23,7 @@ import UIKit
 
 /**
 A `CollectionViewDataSourceProvider` is responsible for providing a data source object for a collection view.
-An instance of `CollectionViewDataSourceProvider` owns an array of section instances, a cell factory, and a supplementary view factory.
-
-Sections may be accessed or replaced via the provider's subscripting interface.
+Sections may be accessed or modified via the provider's subscripting interface.
 
 - note: Clients are responsbile for:
 - Registering cells with the collection view
@@ -130,8 +128,10 @@ public final class CollectionViewDataSourceProvider <
 
             // we must not return nil here, per the `UICollectionViewDataSource` docs
             // however, this will never get called as it is the client's responsibilty
-            // supplementary views are hidden by returning `CGSizeZero` from `collectionView(_:layout:referenceSizeForHeaderInSection:)`
-            return UICollectionReusableView()
+            // supplementary views are hidden by returning `CGSizeZero`
+            // from `collectionView(_:layout:referenceSizeForHeaderInSection:)`
+            fatalError("Attempt to dequeue unknown or invalid supplementary view <\(kind)> "
+                + "for collection view <\(collectionView)> at indexPath <\(indexPath)>")
         })
 }
 
@@ -139,8 +139,6 @@ public final class CollectionViewDataSourceProvider <
 /**
 A `CollectionViewFetchedResultsDataSourceProvider` is responsible for providing a data source object for a collection view
 that is backed by an `NSFetchedResultsController` instance.
-
-This provider owns a fetched results controller, a cell factory, and a supplementary view factory.
 
 - note: Clients are responsbile for registering cells and supplementary views with the collection view.
 */
@@ -189,7 +187,7 @@ public final class CollectionViewFetchedResultsDataSourceProvider <
             collectionView?.dataSource = dataSource
     }
 
-    
+
     // MARK: Private
 
     private lazy var bridgedDataSource: BridgedCollectionViewDataSource = BridgedCollectionViewDataSource(
@@ -210,10 +208,13 @@ public final class CollectionViewFetchedResultsDataSourceProvider <
                 let view = factory.supplementaryViewForItem(item, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
                 return factory.configureSupplementaryView(view, forItem: item, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
             }
+
             // we must not return nil here, per the `UICollectionViewDataSource` docs
             // however, this will never get called as it is the client's responsibilty
-            // supplementary views are hidden by returning `CGSizeZero` from `collectionView(_:layout:referenceSizeForHeaderInSection:)`
-            return UICollectionReusableView()
+            // supplementary views are hidden by returning `CGSizeZero`
+            // from `collectionView(_:layout:referenceSizeForHeaderInSection:)`
+            fatalError("Attempt to dequeue unknown or invalid supplementary view <\(kind)> "
+                + "for collection view <\(collectionView)> at indexPath <\(indexPath)>")
         })
 }
 
