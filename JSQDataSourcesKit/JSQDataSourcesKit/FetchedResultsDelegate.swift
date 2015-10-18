@@ -60,11 +60,9 @@ public final class CollectionViewFetchedResultsDelegateProvider <Item> {
     private typealias SectionChangeTuple = (changeType: NSFetchedResultsChangeType, sectionIndex: Int)
     private var sectionChanges = [SectionChangeTuple]()
 
-    private typealias ObjectIndexPaths = [NSIndexPath]
-    private typealias ObjectChangesDictionary = [NSFetchedResultsChangeType : ObjectIndexPaths]
+    private typealias ObjectChangeTuple = (changeType: NSFetchedResultsChangeType, indexPaths: [NSIndexPath])
+    private var objectChanges = [ObjectChangeTuple]()
 
-
-    private var objectChanges = [ObjectChangesDictionary]()
 
     private lazy var bridgedDelegate: BridgedFetchedResultsDelegate = BridgedFetchedResultsDelegate(
         willChangeContent: { [unowned self] (controller) -> Void in
@@ -75,28 +73,24 @@ public final class CollectionViewFetchedResultsDelegateProvider <Item> {
             self.sectionChanges.append((changeType, sectionIndex))
         },
         didChangeObject: { [unowned self] (controller, anyObject, indexPath: NSIndexPath?, changeType, newIndexPath: NSIndexPath?) -> Void in
-            var changes = ObjectChangesDictionary()
-
             switch changeType {
             case .Insert:
                 if let insertIndexPath = newIndexPath {
-                    changes[changeType] = [insertIndexPath]
+                    self.objectChanges.append((changeType, [insertIndexPath]))
                 }
             case .Delete:
                 if let deleteIndexPath = indexPath {
-                    changes[changeType] = [deleteIndexPath]
+                    self.objectChanges.append((changeType, [deleteIndexPath]))
                 }
             case .Update:
                 if let indexPath = indexPath {
-                    changes[changeType] = [indexPath]
+                    self.objectChanges.append((changeType, [indexPath]))
                 }
             case .Move:
                 if let old = indexPath, new = newIndexPath {
-                    changes[changeType] = [old, new]
+                    self.objectChanges.append((changeType, [old, new]))
                 }
             }
-
-            self.objectChanges.append(changes)
         },
         didChangeContent: { [unowned self] (controller) -> Void in
 
@@ -109,9 +103,6 @@ public final class CollectionViewFetchedResultsDelegateProvider <Item> {
                     if self.sectionChanges.count > 0 {
                         // if sections have changed, reload to update supplementary views
                         self.collectionView?.reloadData()
-
-
-
                     }
 
                     self.sectionChanges.removeAll()
@@ -120,17 +111,15 @@ public final class CollectionViewFetchedResultsDelegateProvider <Item> {
         })
 
     private func applyObjectChanges() {
-        for eachChange in objectChanges {
-            for (changeType, indexPaths): (NSFetchedResultsChangeType, [NSIndexPath]) in eachChange {
+        for (changeType, indexPaths) in objectChanges {
 
-                switch(changeType) {
-                case .Insert: collectionView?.insertItemsAtIndexPaths(indexPaths)
-                case .Delete: collectionView?.deleteItemsAtIndexPaths(indexPaths)
-                case .Update: collectionView?.reloadItemsAtIndexPaths(indexPaths)
-                case .Move:
-                    if let first = indexPaths.first, last = indexPaths.last {
-                        collectionView?.moveItemAtIndexPath(first, toIndexPath: last)
-                    }
+            switch(changeType) {
+            case .Insert: collectionView?.insertItemsAtIndexPaths(indexPaths)
+            case .Delete: collectionView?.deleteItemsAtIndexPaths(indexPaths)
+            case .Update: collectionView?.reloadItemsAtIndexPaths(indexPaths)
+            case .Move:
+                if let first = indexPaths.first, last = indexPaths.last {
+                    collectionView?.moveItemAtIndexPath(first, toIndexPath: last)
                 }
             }
         }
@@ -158,7 +147,7 @@ for an instance of `NSFetchedResultsController` that manages data to display in 
 public final class TableViewFetchedResultsDelegateProvider <
     Item,
     CellFactory: TableViewCellFactoryType
-where CellFactory.Item == Item> {
+    where CellFactory.Item == Item> {
 
     // MARK: Properties
 
