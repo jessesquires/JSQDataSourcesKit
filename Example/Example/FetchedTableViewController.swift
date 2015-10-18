@@ -75,7 +75,26 @@ class FetchedTableViewController: UITableViewController {
 
     // MARK: Actions
 
-    @IBAction func didTapAddButton(sender: UIBarButtonItem) {
+    @IBAction func didTapActionButton(sender: UIBarButtonItem) {
+        UIAlertController.showActionAlert(self,
+            addNewAction: {
+                self.addNewThing()
+            },
+            deleteAction: {
+                self.deleteSelected()
+            },
+            changeNameAction: {
+                self.changeNameSelected()
+            },
+            changeColorAction: {
+                self.changeColorSelected()
+            },
+            changeAllAction: {
+                self.changeAllSelected()
+        })
+    }
+
+    func addNewThing() {
         tableView.deselectAllRows()
 
         let newThing = Thing.newThing(stack.context)
@@ -88,14 +107,28 @@ class FetchedTableViewController: UITableViewController {
         }
     }
 
-    @IBAction func didTapDeleteButton(sender: UIBarButtonItem) {
-        dataSourceProvider?.fetchedResultsController.deleteObjectsAtIndexPaths(tableView.indexPathsForSelectedRows)
+    func deleteSelected() {
+        dataSourceProvider?.fetchedResultsController.deleteThingsAtIndexPaths(tableView.indexPathsForSelectedRows)
         stack.saveAndWait()
         fetchData()
     }
 
-    @IBAction func didTapHelpButton(sender: UIBarButtonItem) {
-        UIAlertController.showHelpAlert(self)
+    func changeNameSelected() {
+        dataSourceProvider?.fetchedResultsController.changeThingNamesAtIndexPaths(tableView.indexPathsForSelectedRows)
+        stack.saveAndWait()
+        fetchData()
+    }
+
+    func changeColorSelected() {
+        dataSourceProvider?.fetchedResultsController.changeThingColorsAtIndexPaths(tableView.indexPathsForSelectedRows)
+        stack.saveAndWait()
+        fetchData()
+    }
+
+    func changeAllSelected() {
+        dataSourceProvider?.fetchedResultsController.changeThingsAtIndexPaths(tableView.indexPathsForSelectedRows)
+        stack.saveAndWait()
+        fetchData()
     }
     
 }

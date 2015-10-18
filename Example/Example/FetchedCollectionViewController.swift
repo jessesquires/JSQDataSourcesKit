@@ -44,8 +44,6 @@ class FetchedCollectionViewController: UICollectionViewController {
         collectionView!.allowsMultipleSelection = true
         let layout = collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
         layout.footerReferenceSize = CGSize(width: collectionView!.frame.size.width, height: 25)
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Test", style: .Plain, target: self, action: Selector("didTapTest:"))
 
         // 1. create cell factory
         let cellFactory = CollectionViewCellFactory(reuseIdentifier: CellId) {
@@ -114,7 +112,26 @@ class FetchedCollectionViewController: UICollectionViewController {
 
     // MARK: Actions
 
-    @IBAction func didTapAddButton(sender: UIBarButtonItem) {
+    @IBAction func didTapActionButton(sender: UIBarButtonItem) {
+        UIAlertController.showActionAlert(self,
+            addNewAction: {
+                self.addNewThing()
+            },
+            deleteAction: {
+                self.deleteSelected()
+            },
+            changeNameAction: {
+                self.changeNameSelected()
+            },
+            changeColorAction: {
+                self.changeColorSelected()
+            },
+            changeAllAction: {
+                self.changeAllSelected()
+        })
+    }
+
+    func addNewThing() {
         collectionView!.deselectAllItems()
 
         let newThing = Thing.newThing(stack.context)
@@ -126,40 +143,32 @@ class FetchedCollectionViewController: UICollectionViewController {
         }
     }
 
-
-    @IBAction func didTapDeleteButton(sender: UIBarButtonItem) {
+    func deleteSelected() {
         let indexPaths = collectionView!.indexPathsForSelectedItems()
-        dataSourceProvider?.fetchedResultsController.deleteObjectsAtIndexPaths(indexPaths)
+        dataSourceProvider?.fetchedResultsController.deleteThingsAtIndexPaths(indexPaths)
         stack.saveAndWait()
         fetchData()
         collectionView!.reloadData()
     }
 
-
-    @IBAction func didTapHelpButton(sender: UIBarButtonItem) {
-        UIAlertController.showHelpAlert(self)
+    func changeNameSelected() {
+        let indexPaths = collectionView!.indexPathsForSelectedItems()
+        dataSourceProvider?.fetchedResultsController.changeThingNamesAtIndexPaths(indexPaths)
+        stack.saveAndWait()
+        fetchData()
     }
 
-
-    // MARK: Testing
-    
-    var test = false
-    var thing: Thing?
-
-    func didTapTest(sender: UIBarButtonItem) {
-
-        if let indexPaths = collectionView!.indexPathsForSelectedItems() {
-
-            for i in indexPaths {
-                let thingToDelete = dataSourceProvider?.fetchedResultsController.objectAtIndexPath(i) as! Thing
-                thingToDelete.color = .Blue
-
-            }
-
-            stack.saveAndWait()
-            fetchData()
-        }
+    func changeColorSelected() {
+        let indexPaths = collectionView!.indexPathsForSelectedItems()
+        dataSourceProvider?.fetchedResultsController.changeThingColorsAtIndexPaths(indexPaths)
+        stack.saveAndWait()
+        fetchData()
     }
-    
 
+    func changeAllSelected() {
+        let indexPaths = collectionView!.indexPathsForSelectedItems()
+        dataSourceProvider?.fetchedResultsController.changeThingsAtIndexPaths(indexPaths)
+        stack.saveAndWait()
+        fetchData()
+    }
 }

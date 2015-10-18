@@ -23,16 +23,38 @@ import UIKit
 
 
 extension UIAlertController {
+    class func showActionAlert(
+        presenter: UIViewController,
+        addNewAction: () -> Void,
+        deleteAction: () -> Void,
+        changeNameAction: () -> Void,
+        changeColorAction: () -> Void,
+        changeAllAction: () -> Void) {
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
 
-    class func showHelpAlert(presenter: UIViewController) {
-        let alert = UIAlertController(title: "Help",
-            message: "Tap + to add a new item. The new item will be highlighted (selected) in gray."
-                + "\n\nSelect item(s), then tap the trashcan to delete them.",
-            preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "Add new", style: .Default) { action in
+                addNewAction()
+                })
 
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Delete selected", style: .Default) { action in
+                deleteAction()
+                })
 
-        presenter.presentViewController(alert, animated: true, completion: nil)
+            alert.addAction(UIAlertAction(title: "Change name selected", style: .Default) { action in
+                changeNameAction()
+                })
+
+            alert.addAction(UIAlertAction(title: "Change color selected", style: .Default) { action in
+                changeColorAction()
+                })
+
+            alert.addAction(UIAlertAction(title: "Change all selected", style: .Default) { action in
+                changeAllAction()
+                })
+
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+
+            presenter.presentViewController(alert, animated: true, completion: nil)
     }
 }
 
@@ -63,7 +85,7 @@ extension UICollectionView {
 
 extension NSFetchedResultsController {
 
-    func deleteObjectsAtIndexPaths(indexPaths: [NSIndexPath]?) {
+    func deleteThingsAtIndexPaths(indexPaths: [NSIndexPath]?) {
         guard let indexPaths = indexPaths else {
             return
         }
@@ -71,6 +93,39 @@ extension NSFetchedResultsController {
         for i in indexPaths {
             let thingToDelete = objectAtIndexPath(i) as! Thing
             managedObjectContext.deleteObject(thingToDelete)
+        }
+    }
+
+    func changeThingNamesAtIndexPaths(indexPaths: [NSIndexPath]?) {
+        guard let indexPaths = indexPaths else {
+            return
+        }
+
+        for i in indexPaths {
+            let thingToChange = objectAtIndexPath(i) as! Thing
+            thingToChange.changeNameRandomly()
+        }
+    }
+
+    func changeThingColorsAtIndexPaths(indexPaths: [NSIndexPath]?) {
+        guard let indexPaths = indexPaths else {
+            return
+        }
+
+        for i in indexPaths {
+            let thingToChange = objectAtIndexPath(i) as! Thing
+            thingToChange.changeColorRandomly()
+        }
+    }
+
+    func changeThingsAtIndexPaths(indexPaths: [NSIndexPath]?) {
+        guard let indexPaths = indexPaths else {
+            return
+        }
+
+        for i in indexPaths {
+            let thingToChange = objectAtIndexPath(i) as! Thing
+            thingToChange.changeRandomly()
         }
     }
 }

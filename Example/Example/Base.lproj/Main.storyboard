@@ -77,7 +77,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -100,7 +100,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -127,7 +127,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -150,7 +150,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -200,7 +200,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="O66-du-Sj3" detailTextLabel="JNc-Jt-86h" style="IBUITableViewCellStyleValue1" id="RES-Fj-gri">
                                 <rect key="frame" x="0.0" y="114" width="600" height="44"/>
@@ -214,7 +214,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JNc-Jt-86h">
@@ -249,7 +249,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="rby-O5-pxX" detailTextLabel="vxU-8c-7oY" style="IBUITableViewCellStyleValue1" id="303-8L-lrN">
                                 <rect key="frame" x="0.0" y="114" width="600" height="44"/>
@@ -263,7 +263,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vxU-8c-7oY">
@@ -286,21 +286,11 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem systemItem="trash" id="sCQ-QM-8gz">
+                        <barButtonItem title="Tap action button for options" id="Qcf-Uh-cR5"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="FCt-r1-ARk"/>
+                        <barButtonItem systemItem="action" id="Iug-gZ-ZXb">
                             <connections>
-                                <action selector="didTapDeleteButton:" destination="690-Lb-wjK" id="MPx-NA-fMO"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="6rW-TO-EBA"/>
-                        <barButtonItem title="Help?" id="Fql-3n-iQI">
-                            <connections>
-                                <action selector="didTapHelpButton:" destination="690-Lb-wjK" id="ISh-Zi-cwO"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="KVM-cP-93d"/>
-                        <barButtonItem systemItem="add" id="tK7-Kk-IgM">
-                            <connections>
-                                <action selector="didTapAddButton:" destination="690-Lb-wjK" id="nO7-Wh-MPk"/>
+                                <action selector="didTapActionButton:" destination="690-Lb-wjK" id="cAu-KU-rT0"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
@@ -331,21 +321,11 @@
                         </connections>
                     </collectionView>
                     <toolbarItems>
-                        <barButtonItem systemItem="trash" id="yN7-s2-SWK">
-                            <connections>
-                                <action selector="didTapDeleteButton:" destination="RSd-mT-AG9" id="qir-ND-I4g"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem title="Tap action button for options" id="TqY-PJ-foW"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="svl-Ut-ASG"/>
-                        <barButtonItem title="Help?" id="TqY-PJ-foW">
+                        <barButtonItem systemItem="action" id="ZB2-0R-Uxm">
                             <connections>
-                                <action selector="didTapHelpButton:" destination="RSd-mT-AG9" id="q3K-Kv-Gog"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="WA0-2z-okI"/>
-                        <barButtonItem systemItem="add" id="bUI-IY-lU1">
-                            <connections>
-                                <action selector="didTapAddButton:" destination="RSd-mT-AG9" id="K2A-tZ-O7K"/>
+                                <action selector="didTapActionButton:" destination="RSd-mT-AG9" id="gSe-mY-WNw"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>

@@ -38,6 +38,8 @@ public enum Color: String {
 
 public class Thing: NSManagedObject {
 
+    // MARK: Properties
+
     @NSManaged public var name: String
 
     @NSManaged public var colorName: String
@@ -52,12 +54,20 @@ public class Thing: NSManagedObject {
     }
 
     public var displayName: String {
-        return "Thing\n\(name)"
+        return "Thing \(name)"
     }
 
     public var displayColor: UIColor {
         return color.displayColor
     }
+
+    public override var description: String {
+        get {
+            return "<Thing: \(name), \(color)>"
+        }
+    }
+
+    // MARK: Init
 
     public init(context: NSManagedObjectContext) {
         let entityDescription = NSEntityDescription.entityForName("Thing", inManagedObjectContext: context)!
@@ -68,11 +78,29 @@ public class Thing: NSManagedObject {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
     }
 
+
+    // MARK: Methods
+
+    func changeColorRandomly() {
+        color = randomColor()
+    }
+
+    func changeNameRandomly() {
+        name = randomName()
+    }
+
+    func changeRandomly() {
+        changeColorRandomly()
+        changeNameRandomly()
+    }
+
+
+    // MARK: Class
+
     public class func newThing(context: NSManagedObjectContext) -> Thing {
         let t = Thing(context: context)
-        let allColors = [Color.Red, Color.Blue, Color.Green]
-        t.color = allColors[Int(arc4random_uniform(UInt32(allColors.count)))]
-        t.name = NSUUID().UUIDString.componentsSeparatedByString("-").first!
+        t.color = randomColor()
+        t.name = randomName()
         return t
     }
 
@@ -81,11 +109,15 @@ public class Thing: NSManagedObject {
         request.sortDescriptors = [NSSortDescriptor(key: "colorName", ascending: true), NSSortDescriptor(key: "name", ascending: true)]
         return request
     }
+}
 
-    public override var description: String {
-        get {
-            return "<Thing: \(name), \(color)>"
-        }
-    }
 
+private func randomColor() -> Color {
+    let allColors = [Color.Red, Color.Blue, Color.Green]
+    return allColors[Int(arc4random_uniform(UInt32(allColors.count)))]
+}
+
+
+private func randomName() -> String {
+    return NSUUID().UUIDString.componentsSeparatedByString("-").first!
 }
