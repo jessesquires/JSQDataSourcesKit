@@ -82,4 +82,10 @@ public class Thing: NSManagedObject {
         return request
     }
 
+    public override var description: String {
+        get {
+            return "<Thing: \(name), \(color)>"
+        }
+    }
+
 }

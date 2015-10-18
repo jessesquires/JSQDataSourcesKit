@@ -18,62 +18,53 @@
 
 import UIKit
 import CoreData
+
 import JSQDataSourcesKit
 
-class FetchedTableViewController: UIViewController {
 
-    // MARK: outlets
+class FetchedTableViewController: UITableViewController {
 
-    @IBOutlet weak var tableView: UITableView!
-
-
-    // MARK: properties
+    // MARK: Properties
 
     let stack = CoreDataStack()
 
-    typealias CellFactory = TableViewCellFactory<TableViewCell, Thing>
-
+    typealias CellFactory = TableViewCellFactory<UITableViewCell, Thing>
     var dataSourceProvider: TableViewFetchedResultsDataSourceProvider<Thing, CellFactory>?
-
     var delegateProvider: TableViewFetchedResultsDelegateProvider<Thing, CellFactory>?
 
 
-    // MARK: view lifecycle
+    // MARK: View lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // register cells
-        tableView.registerNib(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: tableCellId)
-
-        // create factory
-        let factory = TableViewCellFactory(reuseIdentifier: tableCellId) { (cell: TableViewCell, model: Thing, tableView: UITableView, indexPath: NSIndexPath) -> TableViewCell in
+        // 1. create factory
+        let factory = TableViewCellFactory(reuseIdentifier: tableCellId) { (cell: UITableViewCell, model: Thing, tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell in
             cell.textLabel?.text = model.displayName
             cell.textLabel?.textColor = model.displayColor
             cell.detailTextLabel?.text = "\(indexPath.section), \(indexPath.row)"
             return cell
         }
 
-        // create fetched results controller
-        let frc: NSFetchedResultsController = NSFetchedResultsController(
-            fetchRequest: Thing.fetchRequest(),
-            managedObjectContext: stack.context,
-            sectionNameKeyPath: "colorName",
-            cacheName: nil)
+        // 2. create fetched results controller
+        let frc = thingFRCinContext(stack.context)
 
-        // create delegate provider
-        // by passing `frc` the provider automatically sets `frc.delegate = self.delegateProvider.delegate`
+        // 3. create delegate provider
         delegateProvider = TableViewFetchedResultsDelegateProvider(tableView: tableView, cellFactory: factory, controller: frc)
 
-        // create data source provider
-        // by passing `self.tableView`, the provider automatically sets `self.tableView.dataSource = self.dataSourceProvider.dataSource`
+        // 4. create data source provider
         dataSourceProvider = TableViewFetchedResultsDataSourceProvider(fetchedResultsController: frc, cellFactory: factory, tableView: tableView)
     }
 
-
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        fetchData()
+    }
 
+
+    // MARK: Helpers
+
+    func fetchData() {
         do {
             try dataSourceProvider?.fetchedResultsController.performFetch()
         } catch {
@@ -81,8 +72,7 @@ class FetchedTableViewController: UIViewController {
         }
     }
 
-
-    // MARK: actions
+    // MARK: Actions
 
     @IBAction func didTapAddButton(sender: UIBarButtonItem) {
         tableView.deselectAllRows()
@@ -90,24 +80,15 @@ class FetchedTableViewController: UIViewController {
         let newThing = Thing.newThing(stack.context)
         stack.saveAndWait()
 
-        do {
-            try dataSourceProvider?.fetchedResultsController.performFetch()
-        } catch {
-            print("Fetch error = \(error)")
-        }
+        fetchData()
 
         if let indexPath = dataSourceProvider?.fetchedResultsController.indexPathForObject(newThing) {
             tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Middle)
         }
-
-        print("Added new thing: \(newThing)")
     }
-
 
     @IBAction func didTapDeleteButton(sender: UIBarButtonItem) {
         if let indexPaths = tableView.indexPathsForSelectedRows {
-
-            print("Deleting things at indexPaths: \(indexPaths)")
 
             for i in indexPaths {
                 let thingToDelete = dataSourceProvider?.fetchedResultsController.objectAtIndexPath(i) as! Thing
@@ -116,33 +97,12 @@ class FetchedTableViewController: UIViewController {
 
             stack.saveAndWait()
 
-            do {
-                try dataSourceProvider?.fetchedResultsController.performFetch()
-            } catch {
-                print("Fetch error = \(error)")
-            }
+            fetchData()
         }
-
     }
-
 
     @IBAction func didTapHelpButton(sender: UIBarButtonItem) {
         UIAlertController.showHelpAlert(self)
     }
 
-}
-
-
-// MARK: extensions
-
-extension UITableView {
-
-    func deselectAllRows() {
-        if let indexPaths = indexPathsForSelectedRows {
-            for i in indexPaths {
-                deselectRowAtIndexPath(i, animated: true)
-            }
-        }
-    }
-    
 }

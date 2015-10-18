@@ -25,6 +25,6 @@ class CollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectedBackgroundView = UIView()
-        selectedBackgroundView?.backgroundColor = UIColor.lightGrayColor()
+        selectedBackgroundView?.backgroundColor = .lightGrayColor()
     }
 }

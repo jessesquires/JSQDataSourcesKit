@@ -46,6 +46,7 @@ class CollectionViewController: UIViewController, UICollectionViewDelegateFlowLa
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         layout.minimumInteritemSpacing = 10
         layout.minimumLineSpacing = 10
+        layout.headerReferenceSize = CGSize(width: collectionView.frame.size.width, height: 50)
 
         collectionView.delegate = self
 
@@ -86,13 +87,6 @@ class CollectionViewController: UIViewController, UICollectionViewDelegateFlowLa
         // by passing `self.collectionView`, the provider automatically sets `self.collectionView.dataSource = self.dataSourceProvider.dataSource`
         self.dataSourceProvider = CollectionViewDataSourceProvider(sections: allSections, cellFactory: cellFactory, supplementaryViewFactory: headerFactory, collectionView: self.collectionView)
 
-    }
-
-
-    // MARK: collection view delegate flow layout
-
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width, height: 50)
     }
 
 }

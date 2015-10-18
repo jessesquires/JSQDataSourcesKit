@@ -96,11 +96,7 @@ class FetchedCollectionViewController: UIViewController, UICollectionViewDelegat
         let composedFactory = ComposedCollectionSupplementaryViewFactory(headerViewFactory: headerFactory, footerViewFactory: footerFactory)
 
         // create fetched results controller
-        let frc: NSFetchedResultsController = NSFetchedResultsController(
-            fetchRequest: Thing.fetchRequest(),
-            managedObjectContext: stack.context,
-            sectionNameKeyPath: "colorName",
-            cacheName: nil)
+        let frc = thingFRCinContext(stack.context)
 
         // create delegate provider
         // by passing `frc` the provider automatically sets `frc.delegate = self.delegateProvider.delegate`
