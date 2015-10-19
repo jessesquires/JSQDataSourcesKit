@@ -36,7 +36,7 @@ public final class CollectionViewDataSourceProvider <
     SectionInfo: CollectionViewSectionInfo,
     CellFactory: CollectionViewCellFactoryType,
     SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
-    where SectionInfo.Item == Item, CellFactory.Item == Item, SupplementaryViewFactory.Item == Item> {
+    where SectionInfo.Item == Item, CellFactory.Item == Item, SupplementaryViewFactory.Item == Item>: CustomStringConvertible {
 
     // MARK: Properties
 
@@ -109,6 +109,16 @@ public final class CollectionViewDataSourceProvider <
     }
 
 
+    // MARK: CustomStringConvertible
+
+    /// :nodoc:
+    public var description: String {
+        get {
+            return "<\(CollectionViewDataSourceProvider.self): sections=\(sections)>"
+        }
+    }
+
+
     // MARK: Private
 
     private lazy var bridgedDataSource: BridgedCollectionViewDataSource = BridgedCollectionViewDataSource(
@@ -150,7 +160,7 @@ public final class CollectionViewFetchedResultsDataSourceProvider <
     Item,
     CellFactory: CollectionViewCellFactoryType,
     SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
-    where CellFactory.Item == Item, SupplementaryViewFactory.Item == Item> {
+    where CellFactory.Item == Item, SupplementaryViewFactory.Item == Item>: CustomStringConvertible {
 
     // MARK: Properties
 
@@ -189,6 +199,16 @@ public final class CollectionViewFetchedResultsDataSourceProvider <
             self.cellFactory = cellFactory
             self.supplementaryViewFactory = supplementaryViewFactory
             collectionView?.dataSource = dataSource
+    }
+
+
+    // MARK: CustomStringConvertible
+
+    /// :nodoc:
+    public var description: String {
+        get {
+            return "<\(CollectionViewFetchedResultsDataSourceProvider.self): fetchedResultsController=\(fetchedResultsController)>"
+        }
     }
 
 

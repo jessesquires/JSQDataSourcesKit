@@ -23,7 +23,7 @@ import UIKit
 A `CollectionViewCellFactory` is a concrete `CollectionViewCellFactoryType`.
 This factory is responsible for producing and configuring collection view cells for a specific item.
 */
-public struct CollectionViewCellFactory <Cell: UICollectionViewCell, Item>: CollectionViewCellFactoryType {
+public struct CollectionViewCellFactory <Cell: UICollectionViewCell, Item>: CollectionViewCellFactoryType, CustomStringConvertible {
 
     // MARK: Typealiases
 
@@ -86,5 +86,15 @@ public struct CollectionViewCellFactory <Cell: UICollectionViewCell, Item>: Coll
         inCollectionView collectionView: UICollectionView,
         atIndexPath indexPath: NSIndexPath) -> Cell {
             return cellConfigurator(cell, item, collectionView, indexPath)
+    }
+    
+
+    // MARK: CustomStringConvertible
+
+    /// :nodoc:
+    public var description: String {
+        get {
+            return "<\(CollectionViewCellFactory.self): \(reuseIdentifier)>"
+        }
     }
 }

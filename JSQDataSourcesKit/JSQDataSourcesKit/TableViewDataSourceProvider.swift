@@ -33,7 +33,7 @@ public final class TableViewDataSourceProvider <
     Item,
     SectionInfo: TableViewSectionInfo,
     CellFactory: TableViewCellFactoryType
-    where SectionInfo.Item == Item, CellFactory.Item == Item> {
+    where SectionInfo.Item == Item, CellFactory.Item == Item>: CustomStringConvertible {
 
     // MARK: Properties
 
@@ -94,6 +94,16 @@ public final class TableViewDataSourceProvider <
     }
 
 
+    // MARK: CustomStringConvertible
+
+    /// :nodoc:
+    public var description: String {
+        get {
+            return "<\(TableViewDataSourceProvider.self): sections=\(sections)>"
+        }
+    }
+
+
     // MARK: Private
 
     private lazy var bridgedDataSource: BridgedTableViewDataSource = BridgedTableViewDataSource(
@@ -125,7 +135,7 @@ that is backed by an `NSFetchedResultsController` instance.
 public final class TableViewFetchedResultsDataSourceProvider <
     Item,
     CellFactory: TableViewCellFactoryType
-    where CellFactory.Item == Item> {
+    where CellFactory.Item == Item>: CustomStringConvertible {
 
     // MARK: Properties
 
@@ -154,6 +164,16 @@ public final class TableViewFetchedResultsDataSourceProvider <
         self.fetchedResultsController = fetchedResultsController
         self.cellFactory = cellFactory
         tableView?.dataSource = dataSource
+    }
+
+
+    // MARK: CustomStringConvertible
+
+    /// :nodoc:
+    public var description: String {
+        get {
+            return "<\(TableViewFetchedResultsDataSourceProvider.self): fetchedResultsController=\(fetchedResultsController)>"
+        }
     }
 
 

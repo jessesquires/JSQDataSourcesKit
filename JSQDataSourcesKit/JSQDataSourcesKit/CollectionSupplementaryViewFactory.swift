@@ -23,7 +23,7 @@ import UIKit
 A `CollectionSupplementaryViewFactory` is a concrete `CollectionSupplementaryViewFactoryType`.
 This factory is responsible for producing and configuring supplementary views for a collection view for a specific item.
 */
-public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectionReusableView, Item>: CollectionSupplementaryViewFactoryType {
+public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectionReusableView, Item>: CollectionSupplementaryViewFactoryType, CustomStringConvertible {
 
     // MARK: Typealiases
 
@@ -92,5 +92,15 @@ public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectio
         inCollectionView collectionView: UICollectionView,
         atIndexPath indexPath: NSIndexPath) -> SupplementaryView {
             return supplementaryViewConfigurator(view, item, kind, collectionView, indexPath)
+    }
+
+
+    // MARK: CustomStringConvertible
+
+    /// :nodoc:
+    public var description: String {
+        get {
+            return "<\(CollectionSupplementaryViewFactory.self): \(reuseIdentifier)>"
+        }
     }
 }

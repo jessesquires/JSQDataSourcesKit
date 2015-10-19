@@ -23,7 +23,7 @@ import UIKit
 A `TableViewCellFactory` is a concrete `TableViewCellFactoryType`.
 This factory is responsible for producing and configuring table view cells for a specific item.
 */
-public struct TableViewCellFactory <Cell: UITableViewCell, Item>: TableViewCellFactoryType {
+public struct TableViewCellFactory <Cell: UITableViewCell, Item>: TableViewCellFactoryType, CustomStringConvertible {
 
     // MARK: Typealiases
 
@@ -86,5 +86,15 @@ public struct TableViewCellFactory <Cell: UITableViewCell, Item>: TableViewCellF
         inTableView tableView: UITableView,
         atIndexPath indexPath: NSIndexPath) -> Cell {
             return cellConfigurator(cell, item, tableView, indexPath)
+    }
+
+
+    // MARK: CustomStringConvertible
+
+    /// :nodoc:
+    public var description: String {
+        get {
+            return "<\(TableViewCellFactory.self): \(reuseIdentifier)>"
+        }
     }
 }

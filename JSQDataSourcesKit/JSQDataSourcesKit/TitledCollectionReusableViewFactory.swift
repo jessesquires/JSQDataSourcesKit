@@ -26,7 +26,7 @@ that conforms to `CollectionSupplementaryViewFactoryType`.
 
 This factory is responsible for producing and configuring `TitledCollectionReusableView` instances.
 */
-public struct TitledCollectionReusableViewFactory <Item>: CollectionSupplementaryViewFactoryType {
+public struct TitledCollectionReusableViewFactory <Item>: CollectionSupplementaryViewFactoryType, CustomStringConvertible {
 
     // MARK: Typealiases
 
@@ -98,5 +98,15 @@ public struct TitledCollectionReusableViewFactory <Item>: CollectionSupplementar
         inCollectionView collectionView: UICollectionView,
         atIndexPath indexPath: NSIndexPath) -> TitledCollectionReusableView {
             return dataConfigurator(view, item, kind, collectionView, indexPath)
+    }
+
+
+    // MARK: CustomStringConvertible
+
+    /// :nodoc:
+    public var description: String {
+        get {
+            return "<\(TitledCollectionReusableViewFactory.self)>"
+        }
     }
 }

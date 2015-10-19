@@ -30,7 +30,7 @@ The `Item` type should correspond to the type of objects that the `NSFetchedResu
 public final class CollectionViewFetchedResultsDelegateProvider <
     Item,
     CellFactory: CollectionViewCellFactoryType
-    where CellFactory.Item == Item> {
+    where CellFactory.Item == Item>: CustomStringConvertible {
 
     // MARK: Properties
 
@@ -65,6 +65,16 @@ public final class CollectionViewFetchedResultsDelegateProvider <
             self.collectionView = collectionView
             self.cellFactory = cellFactory
             controller?.delegate = delegate
+    }
+
+
+    // MARK: CustomStringConvertible
+
+    /// :nodoc:
+    public var description: String {
+        get {
+            return "<\(CollectionViewFetchedResultsDelegateProvider.self): collectionView=\(collectionView)>"
+        }
     }
 
 
@@ -180,7 +190,7 @@ The `Item` type should correspond to the type of objects that the `NSFetchedResu
 public final class TableViewFetchedResultsDelegateProvider <
     Item,
     CellFactory: TableViewCellFactoryType
-    where CellFactory.Item == Item> {
+    where CellFactory.Item == Item>: CustomStringConvertible {
 
     // MARK: Properties
 
@@ -212,6 +222,16 @@ public final class TableViewFetchedResultsDelegateProvider <
         self.tableView = tableView
         self.cellFactory = cellFactory
         controller?.delegate = delegate
+    }
+
+
+    // MARK: CustomStringConvertible
+
+    /// :nodoc:
+    public var description: String {
+        get {
+            return "<\(TableViewFetchedResultsDelegateProvider.self): tableView=\(tableView)>"
+        }
     }
 
 

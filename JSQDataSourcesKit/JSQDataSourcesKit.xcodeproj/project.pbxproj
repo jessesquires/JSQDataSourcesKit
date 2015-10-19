@@ -25,6 +25,7 @@
 		887FE51E1BA4DF630018ACBC /* CollectionViewDataSourceSubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887FE51D1BA4DF630018ACBC /* CollectionViewDataSourceSubscriptTests.swift */; settings = {ASSET_TAGS = (); }; };
 		887FE5201BA50EFD0018ACBC /* TitledCollectionReusableViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887FE51F1BA50EFD0018ACBC /* TitledCollectionReusableViewTests.swift */; settings = {ASSET_TAGS = (); }; };
 		889AC8461BD48860009603FB /* TitledCollectionReusableViewFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889AC8451BD48860009603FB /* TitledCollectionReusableViewFactoryTests.swift */; settings = {ASSET_TAGS = (); }; };
+		889AC8481BD4A753009603FB /* DescriptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889AC8471BD4A753009603FB /* DescriptionTests.swift */; settings = {ASSET_TAGS = (); }; };
 		88B017F21B3BADFD00C9B29A /* JSQDataSourcesKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 887DD0841B3BAC6C00FC4BF1 /* JSQDataSourcesKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		88DCD87C1BD4210C005F2768 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCD87B1BD4210C005F2768 /* TestHelpers.swift */; settings = {ASSET_TAGS = (); }; };
 		88EF47931BD2F5200029F3BB /* CollectionViewCellFactoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EF47921BD2F5200029F3BB /* CollectionViewCellFactoryType.swift */; settings = {ASSET_TAGS = (); }; };
@@ -85,6 +86,7 @@
 		887FE51D1BA4DF630018ACBC /* CollectionViewDataSourceSubscriptTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSourceSubscriptTests.swift; sourceTree = "<group>"; };
 		887FE51F1BA50EFD0018ACBC /* TitledCollectionReusableViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledCollectionReusableViewTests.swift; sourceTree = "<group>"; };
 		889AC8451BD48860009603FB /* TitledCollectionReusableViewFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledCollectionReusableViewFactoryTests.swift; sourceTree = "<group>"; };
+		889AC8471BD4A753009603FB /* DescriptionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTests.swift; sourceTree = "<group>"; };
 		88DCD87B1BD4210C005F2768 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		88EF47921BD2F5200029F3BB /* CollectionViewCellFactoryType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCellFactoryType.swift; sourceTree = "<group>"; };
 		88EF47951BD2F58E0029F3BB /* CollectionViewCellFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCellFactory.swift; sourceTree = "<group>"; };
@@ -166,13 +168,14 @@
 				887FE51D1BA4DF630018ACBC /* CollectionViewDataSourceSubscriptTests.swift */,
 				887DD0AA1B3BACE200FC4BF1 /* CollectionViewDataSourceTests.swift */,
 				887FE51B1BA4DEF20018ACBC /* CollectionViewSectionTests.swift */,
+				889AC8471BD4A753009603FB /* DescriptionTests.swift */,
 				887FE5161BA4DC320018ACBC /* Fakes */,
 				887DD0951B3BAC6C00FC4BF1 /* Info.plist */,
 				887FE5171BA4DD290018ACBC /* TableViewDataSourceSubscriptTests.swift */,
 				887DD0AB1B3BACE200FC4BF1 /* TableViewDataSourceTests.swift */,
 				887FE5121BA4DB880018ACBC /* TableViewSectionTests.swift */,
-				887FE51F1BA50EFD0018ACBC /* TitledCollectionReusableViewTests.swift */,
 				889AC8451BD48860009603FB /* TitledCollectionReusableViewFactoryTests.swift */,
+				887FE51F1BA50EFD0018ACBC /* TitledCollectionReusableViewTests.swift */,
 			);
 			path = JSQDataSourcesKitTests;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				889AC8481BD4A753009603FB /* DescriptionTests.swift in Sources */,
 				887FE51C1BA4DEF20018ACBC /* CollectionViewSectionTests.swift in Sources */,
 				88DCD87C1BD4210C005F2768 /* TestHelpers.swift in Sources */,
 				887FE5201BA50EFD0018ACBC /* TitledCollectionReusableViewTests.swift in Sources */,

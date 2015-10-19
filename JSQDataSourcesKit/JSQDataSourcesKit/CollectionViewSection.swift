@@ -23,7 +23,7 @@ import Foundation
 A `CollectionViewSection` is a concrete `CollectionViewSectionInfo`.
 A section instance is responsible for managing the elements in a section.
 */
-public struct CollectionViewSection <Item>: CollectionViewSectionInfo {
+public struct CollectionViewSection <Item>: CollectionViewSectionInfo, CustomStringConvertible {
 
     // MARK: Properties
 
@@ -71,6 +71,16 @@ public struct CollectionViewSection <Item>: CollectionViewSectionInfo {
         }
         set {
             items[index] = newValue
+        }
+    }
+
+
+    // MARK: CustomStringConvertible
+
+    /// :nodoc:
+    public var description: String {
+        get {
+            return "<\(CollectionViewSection.self): items=\(items)>"
         }
     }
 }

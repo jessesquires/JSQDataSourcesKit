@@ -34,8 +34,14 @@ typealias Section = CollectionViewSection<FakeCollectionModel>
 typealias Provider = CollectionViewDataSourceProvider<FakeCollectionModel, Section, CellFactory, SupplementaryViewFactory>
 
 
-struct FakeCollectionModel: Equatable {
+struct FakeCollectionModel: Equatable, CustomStringConvertible {
     let name = NSUUID().UUIDString
+
+    var description: String {
+        get {
+            return "<\(FakeCollectionModel.self): \(name)>"
+        }
+    }
 }
 
 

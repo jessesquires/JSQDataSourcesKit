@@ -25,8 +25,14 @@ import JSQDataSourcesKit
 
 // Fakes for testing
 
-struct FakeTableModel: Equatable {
+struct FakeTableModel: Equatable, CustomStringConvertible {
     let name = NSUUID().UUIDString
+
+    var description: String {
+        get {
+            return "<\(FakeTableModel.self): \(name)>"
+        }
+    }
 }
 
 
