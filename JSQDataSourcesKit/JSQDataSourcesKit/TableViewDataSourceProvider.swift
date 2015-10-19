@@ -61,7 +61,6 @@ public final class TableViewDataSourceProvider <
     public init(sections: [SectionInfo], cellFactory: CellFactory, tableView: UITableView? = nil) {
         self.sections = sections
         self.cellFactory = cellFactory
-
         tableView?.dataSource = dataSource
     }
 
@@ -154,7 +153,6 @@ public final class TableViewFetchedResultsDataSourceProvider <
     public init(fetchedResultsController: NSFetchedResultsController, cellFactory: CellFactory, tableView: UITableView? = nil) {
         self.fetchedResultsController = fetchedResultsController
         self.cellFactory = cellFactory
-
         tableView?.dataSource = dataSource
     }
 

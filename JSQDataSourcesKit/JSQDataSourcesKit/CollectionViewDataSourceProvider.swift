@@ -74,7 +74,6 @@ public final class CollectionViewDataSourceProvider <
             self.sections = sections
             self.cellFactory = cellFactory
             self.supplementaryViewFactory = supplementaryViewFactory
-
             collectionView?.dataSource = dataSource
     }
 
@@ -185,10 +184,10 @@ public final class CollectionViewFetchedResultsDataSourceProvider <
         cellFactory: CellFactory,
         supplementaryViewFactory: SupplementaryViewFactory? = nil,
         collectionView: UICollectionView? = nil) {
+            
             self.fetchedResultsController = fetchedResultsController
             self.cellFactory = cellFactory
             self.supplementaryViewFactory = supplementaryViewFactory
-
             collectionView?.dataSource = dataSource
     }
 
