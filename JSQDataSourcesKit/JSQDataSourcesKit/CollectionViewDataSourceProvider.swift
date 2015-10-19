@@ -25,7 +25,8 @@ import UIKit
 A `CollectionViewDataSourceProvider` is responsible for providing a data source object for a collection view.
 Sections may be accessed or modified via the provider's subscripting interface.
 
-**Clients are responsbile for:**
+**Clients are responsbile for the follwing:**
+
 - Registering cells with the collection view
 - Registering supplementary views with the collection view
 - Adding, removing, or reloading cells as the provider's `sections` are modified

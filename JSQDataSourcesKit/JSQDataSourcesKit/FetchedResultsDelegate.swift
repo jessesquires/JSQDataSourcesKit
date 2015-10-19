@@ -25,7 +25,7 @@ import UIKit
 A `CollectionViewFetchedResultsDelegateProvider` is responsible for providing a delegate object
 for an instance of `NSFetchedResultsController` that manages data to display in a collection view.
 
-- note: This type should correpsond to the type of objects that the `NSFetchedResultsController` fetches.
+The `Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
 */
 public final class CollectionViewFetchedResultsDelegateProvider <
     Item,
@@ -174,6 +174,8 @@ public final class CollectionViewFetchedResultsDelegateProvider <
 /**
 A `TableViewFetchedResultsDelegateProvider` is responsible for providing a delegate object
 for an instance of `NSFetchedResultsController` that manages data to display in a table view.
+
+The `Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
 */
 public final class TableViewFetchedResultsDelegateProvider <
     Item,
