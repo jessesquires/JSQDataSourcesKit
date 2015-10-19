@@ -33,7 +33,7 @@ class TableViewDataSourceTests: XCTestCase {
         super.setUp()
         fakeTableView.registerClass(FakeTableCell.self, forCellReuseIdentifier: fakeReuseId)
     }
-  
+
     func test_ThatTableViewDataSource_ReturnsExpectedData_ForSingleSection() {
 
         // GIVEN: a single TableViewSection with data items
@@ -47,16 +47,16 @@ class TableViewDataSourceTests: XCTestCase {
         fakeTableView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + "_\(__FUNCTION__)")
 
         // GIVEN: a cell factory
-        let factory = TableViewCellFactory(reuseIdentifier: fakeReuseId) { (cell: FakeTableCell, model: FakeTableModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
-            XCTAssertEqual(cell.reuseIdentifier!, self.fakeReuseId, "Dequeued cell should have expected identifier")
-            XCTAssertEqual(tableView, self.fakeTableView, "TableView should equal the tableView for the data source")
+        let factory = TableViewCellFactory(reuseIdentifier: fakeReuseId)
+            { (cell: FakeTableCell, model: FakeTableModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
+                XCTAssertEqual(cell.reuseIdentifier!, self.fakeReuseId, "Dequeued cell should have expected identifier")
 
-            XCTAssertEqual(model, expectedModel, "Model object should equal expected value")
-            XCTAssertEqual(indexPath, expectedIndexPath, "IndexPath should equal expected value")
+                XCTAssertEqual(model, expectedModel, "Model object should equal expected value")
+                XCTAssertEqual(tableView, self.fakeTableView, "TableView should equal the tableView for the data source")
+                XCTAssertEqual(indexPath, expectedIndexPath, "IndexPath should equal expected value")
 
-            factoryExpectation.fulfill()
-
-            return cell
+                factoryExpectation.fulfill()
+                return cell
         }
 
         // GIVEN: a data source provider
@@ -106,15 +106,14 @@ class TableViewDataSourceTests: XCTestCase {
         var factoryExpectation = expectationWithDescription("factory_\(__FUNCTION__)")
 
         // GIVEN: a cell factory
-        let factory = TableViewCellFactory(reuseIdentifier: fakeReuseId) { (cell: FakeTableCell, model: FakeTableModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
-            XCTAssertEqual(cell.reuseIdentifier!, self.fakeReuseId, "Dequeued cell should have expected identifier")
-            XCTAssertEqual(tableView, self.fakeTableView, "TableView should equal the tableView for the data source")
+        let factory = TableViewCellFactory(reuseIdentifier: fakeReuseId)
+            { (cell: FakeTableCell, model: FakeTableModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
+                XCTAssertEqual(cell.reuseIdentifier!, self.fakeReuseId, "Dequeued cell should have expected identifier")
+                XCTAssertEqual(model, allSections[indexPath.section][indexPath.row], "Model object should equal expected value")
+                XCTAssertEqual(tableView, self.fakeTableView, "TableView should equal the tableView for the data source")
 
-            XCTAssertEqual(model, allSections[indexPath.section][indexPath.row], "Model object should equal expected value")
-
-            factoryExpectation.fulfill()
-
-            return cell
+                factoryExpectation.fulfill()
+                return cell
         }
 
         // GIVEN: a data source provider
@@ -156,7 +155,7 @@ class TableViewDataSourceTests: XCTestCase {
                 waitForExpectationsWithTimeout(DefaultTimeout, handler: { (error) -> Void in
                     XCTAssertNil(error, "Expectations should not error")
                 })
-                
+
                 // reset expectation names for next loop, ignore last item
                 if !(sectionIndex == dataSourceProvider.sections.count - 1 && rowIndex == dataSourceProvider[sectionIndex].count - 1) {
                     factoryExpectation = expectationWithDescription("factory_" + expectationName)
