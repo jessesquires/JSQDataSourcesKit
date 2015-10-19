@@ -71,7 +71,7 @@ class CollectionViewDataSourceTests: XCTestCase {
         typealias CellFactory = CollectionViewCellFactory<FakeCollectionCell, FakeCollectionModel>
         typealias SupplementaryViewFactory = CollectionSupplementaryViewFactory<FakeCollectionSupplementaryView, FakeCollectionModel>
         typealias Section = CollectionViewSection<FakeCollectionModel>
-        typealias Provider = CollectionViewDataSourceProvider<FakeCollectionModel, Section, CellFactory, SupplementaryViewFactory>
+        typealias Provider = CollectionViewDataSourceProvider<Section, CellFactory, SupplementaryViewFactory>
 
         let dataSourceProvider: Provider = CollectionViewDataSourceProvider(sections: allSections, cellFactory: factory, collectionView: fakeCollectionView)
         let dataSource = dataSourceProvider.dataSource

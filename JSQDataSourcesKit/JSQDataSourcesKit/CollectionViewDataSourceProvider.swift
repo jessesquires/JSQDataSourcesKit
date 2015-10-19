@@ -32,12 +32,13 @@ A `CollectionViewDataSourceProvider` is responsible for providing a data source 
 - Adding, removing, or reloading sections as the provider's `sections` are modified
 */
 public final class CollectionViewDataSourceProvider <
-    Item,
     SectionInfo: CollectionViewSectionInfo,
     CellFactory: CollectionViewCellFactoryType,
     SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
-    where SectionInfo.Item == Item, CellFactory.Item == Item, SupplementaryViewFactory.Item == Item>: CustomStringConvertible {
+    where SectionInfo.Item == CellFactory.Item, CellFactory.Item == SupplementaryViewFactory.Item>: CustomStringConvertible {
 
+    public typealias Item = CellFactory.Item
+    
     // MARK: Properties
 
     /// The sections in the collection view.

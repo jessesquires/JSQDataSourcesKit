@@ -31,7 +31,7 @@ typealias SupplementaryViewFactory = CollectionSupplementaryViewFactory<FakeColl
 
 typealias Section = CollectionViewSection<FakeCollectionModel>
 
-typealias Provider = CollectionViewDataSourceProvider<FakeCollectionModel, Section, CellFactory, SupplementaryViewFactory>
+typealias Provider = CollectionViewDataSourceProvider<Section, CellFactory, SupplementaryViewFactory>
 
 
 struct FakeCollectionModel: Equatable, CustomStringConvertible {
