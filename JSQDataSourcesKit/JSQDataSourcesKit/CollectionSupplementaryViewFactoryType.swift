@@ -50,8 +50,7 @@ public protocol CollectionSupplementaryViewFactoryType {
 
     - returns: An initialized or dequeued `UICollectionReusableView` of type `SupplementaryView`.
     */
-    func supplementaryViewForItem(
-        item: Item,
+    func supplementaryViewForItem(item: Item,
         kind: SupplementaryViewKind,
         inCollectionView collectionView: UICollectionView,
         atIndexPath indexPath: NSIndexPath) -> SupplementaryView
@@ -67,8 +66,7 @@ public protocol CollectionSupplementaryViewFactoryType {
 
     - returns: A configured `UICollectionReusableView` of type `SupplementaryView`.
     */
-    func configureSupplementaryView(
-        view: SupplementaryView,
+    func configureSupplementaryView(view: SupplementaryView,
         forItem item: Item,
         kind: SupplementaryViewKind,
         inCollectionView collectionView: UICollectionView,
