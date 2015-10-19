@@ -22,8 +22,6 @@ import Foundation
 /**
 A `CollectionViewSection` is a concrete `CollectionViewSectionInfo`.
 A section instance is responsible for managing the elements in a section.
-
-Elements in the section may be accessed or modified via its subscripting interface.
 */
 public struct CollectionViewSection <Item>: CollectionViewSectionInfo {
 

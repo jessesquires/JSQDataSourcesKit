@@ -21,7 +21,7 @@ import UIKit
 
 
 /**
-A `TitledCollectionReusableViewFactory` is specialized supplementary view factory
+A `TitledCollectionReusableViewFactory` is a specialized supplementary view factory
 that conforms to `CollectionSupplementaryViewFactoryType`.
 
 This factory is responsible for producing and configuring `TitledCollectionReusableView` instances.

@@ -23,7 +23,6 @@ import UIKit
 
 /**
 A `CollectionViewDataSourceProvider` is responsible for providing a data source object for a collection view.
-Sections may be accessed or modified via the provider's subscripting interface.
 
 **Clients are responsbile for the follwing:**
 
