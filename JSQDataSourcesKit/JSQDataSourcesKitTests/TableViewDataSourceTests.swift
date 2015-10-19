@@ -25,14 +25,12 @@ import JSQDataSourcesKit
 
 class TableViewDataSourceTests: XCTestCase {
 
-    let fakeReuseId = "fakeCellId"
-    
+    private let fakeReuseId = "fakeCellId"
     private let fakeTableView = FakeTableView(frame: CGRect(x: 0, y: 0, width: 320, height: 600), style: .Plain)
-    let dequeueCellExpectationName = "tableview_dequeue_cell_expectation"
+    private let dequeueCellExpectationName = "tableview_dequeue_cell_expectation"
 
     override func setUp() {
         super.setUp()
-
         fakeTableView.registerClass(FakeTableCell.self, forCellReuseIdentifier: fakeReuseId)
     }
   

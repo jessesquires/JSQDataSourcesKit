@@ -25,12 +25,12 @@ import JSQDataSourcesKit
 
 class CollectionViewDataSourceTests: XCTestCase {
 
-    let fakeCellReuseId = "fakeCellId"
-    let fakeSupplementaryViewReuseId = "fakeSupplementaryId"
+    private let fakeCellReuseId = "fakeCellId"
+    private let fakeSupplementaryViewReuseId = "fakeSupplementaryId"
 
     private let fakeCollectionView = FakeCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 600), collectionViewLayout: FakeFlowLayout())
-    let dequeueCellExpectationName = "collectionview_dequeue_cell_expectation"
-    let dequeueSupplementaryViewExpectationName = "collectionview_dequeue_supplementaryview_expectation"
+    private let dequeueCellExpectationName = "collectionview_dequeue_cell_expectation"
+    private let dequeueSupplementaryViewExpectationName = "collectionview_dequeue_supplementaryview_expectation"
 
     override func setUp() {
         super.setUp()
@@ -121,17 +121,21 @@ class CollectionViewDataSourceTests: XCTestCase {
         let supplementaryViewFactory = CollectionSupplementaryViewFactory(reuseIdentifier: fakeSupplementaryViewReuseId)
             { (view: FakeCollectionSupplementaryView, model: FakeCollectionModel, kind: String, collectionView: UICollectionView, indexPath: NSIndexPath) -> FakeCollectionSupplementaryView in
                 XCTAssertEqual(view.reuseIdentifier!, self.fakeSupplementaryViewReuseId, "Dequeued supplementary view should have expected identifier")
+                XCTAssertEqual(model, allSections[indexPath.section][indexPath.item], "Model object should equal expected value")
+                XCTAssertEqual(kind, FakeSupplementaryViewKind, "View kind should have expected kind")
                 XCTAssertEqual(collectionView, self.fakeCollectionView, "CollectionView should equal the collectionView for the data source")
 
-                XCTAssertEqual(model, allSections[indexPath.section][indexPath.item], "Model object should equal expected value")
-
                 supplementaryFactoryExpectation.fulfill()
-
                 return view
         }
 
         // GIVEN: a data source provider
-        let dataSourceProvider = CollectionViewDataSourceProvider(sections: allSections, cellFactory: cellFactory, supplementaryViewFactory: supplementaryViewFactory, collectionView: fakeCollectionView)
+        let dataSourceProvider = CollectionViewDataSourceProvider(
+            sections: allSections,
+            cellFactory: cellFactory,
+            supplementaryViewFactory: supplementaryViewFactory,
+            collectionView: fakeCollectionView)
+        
         let dataSource = dataSourceProvider.dataSource
 
         // WHEN: we call the collection view data source methods
@@ -178,7 +182,6 @@ class CollectionViewDataSourceTests: XCTestCase {
                 }
             }
         }
-        
     }
     
 }
