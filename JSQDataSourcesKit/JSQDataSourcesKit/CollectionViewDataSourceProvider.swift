@@ -35,9 +35,10 @@ public final class CollectionViewDataSourceProvider <
     SectionInfo: CollectionViewSectionInfo,
     CellFactory: CollectionViewCellFactoryType,
     SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
-    where SectionInfo.Item == CellFactory.Item, CellFactory.Item == SupplementaryViewFactory.Item>: CustomStringConvertible {
+    where CellFactory.Item == SectionInfo.Item, SupplementaryViewFactory.Item == SectionInfo.Item>: CustomStringConvertible {
 
-    public typealias Item = CellFactory.Item
+    /// The type of elements for the data source provider.
+    public typealias Item = SectionInfo.Item
     
     // MARK: Properties
 
