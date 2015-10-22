@@ -25,8 +25,7 @@ class TableViewController: UITableViewController {
 
     typealias Section = TableViewSection<CellViewModel>
     typealias CellFactory = TableViewCellFactory<UITableViewCell, CellViewModel>
-    var dataSourceProvider: TableViewDataSourceProvider<CellViewModel, Section, CellFactory>?
-
+    var dataSourceProvider: TableViewDataSourceProvider<Section, CellFactory>?
     
     override func viewDidLoad() {
         super.viewDidLoad()

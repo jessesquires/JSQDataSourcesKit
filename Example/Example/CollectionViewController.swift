@@ -27,7 +27,7 @@ class CollectionViewController: UICollectionViewController {
     typealias HeaderViewFactory = TitledCollectionReusableViewFactory<CellViewModel>
     typealias Section = CollectionViewSection<CellViewModel>
 
-    var dataSourceProvider: CollectionViewDataSourceProvider<CellViewModel, Section, CellFactory, HeaderViewFactory>?
+    var dataSourceProvider: CollectionViewDataSourceProvider<Section, CellFactory, HeaderViewFactory>?
 
 
     override func viewDidLoad() {

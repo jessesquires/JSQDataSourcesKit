@@ -30,11 +30,13 @@ A `TableViewDataSourceProvider` is responsible for providing a data source objec
 - Adding, removing, or reloading cells and sections as the provider's `sections` are modified.
 */
 public final class TableViewDataSourceProvider <
-    Item,
     SectionInfo: TableViewSectionInfo,
     CellFactory: TableViewCellFactoryType
-    where SectionInfo.Item == Item, CellFactory.Item == Item>: CustomStringConvertible {
+    where CellFactory.Item == SectionInfo.Item>: CustomStringConvertible {
 
+    /// The type of elements for the data source provider.
+    public typealias Item = SectionInfo.Item
+    
     // MARK: Properties
 
     /// The sections in the table view
