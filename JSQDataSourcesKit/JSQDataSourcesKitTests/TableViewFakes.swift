@@ -25,23 +25,9 @@ import JSQDataSourcesKit
 
 // Fakes for testing
 
-struct FakeTableModel: Equatable, CustomStringConvertible {
-    let name = NSUUID().UUIDString
+class FakeTableCell: UITableViewCell {
 
-    var description: String {
-        get {
-            return "<\(FakeTableModel.self): \(name)>"
-        }
-    }
 }
-
-
-func ==(lhs: FakeTableModel, rhs: FakeTableModel) -> Bool {
-    return lhs.name == rhs.name
-}
-
-
-class FakeTableCell: UITableViewCell { }
 
 
 class FakeTableView: UITableView {

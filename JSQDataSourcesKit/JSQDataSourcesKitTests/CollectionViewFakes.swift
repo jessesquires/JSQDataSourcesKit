@@ -25,35 +25,20 @@ import JSQDataSourcesKit
 
 // Fakes for testing
 
-typealias CellFactory = CollectionViewCellFactory<FakeCollectionCell, FakeCollectionModel>
-
-typealias SupplementaryViewFactory = CollectionSupplementaryViewFactory<FakeCollectionSupplementaryView, FakeCollectionModel>
-
-typealias Section = CollectionViewSection<FakeCollectionModel>
-
+typealias CellFactory = CollectionViewCellFactory<FakeCollectionCell, FakeViewModel>
+typealias SupplementaryViewFactory = CollectionSupplementaryViewFactory<FakeCollectionSupplementaryView, FakeViewModel>
+typealias Section = CollectionViewSection<FakeViewModel>
 typealias Provider = CollectionViewDataSourceProvider<Section, CellFactory, SupplementaryViewFactory>
 
 
-struct FakeCollectionModel: Equatable, CustomStringConvertible {
-    let name = NSUUID().UUIDString
+class FakeCollectionCell: UICollectionViewCell {
 
-    var description: String {
-        get {
-            return "<\(FakeCollectionModel.self): \(name)>"
-        }
-    }
 }
 
 
-func ==(lhs: FakeCollectionModel, rhs: FakeCollectionModel) -> Bool {
-    return lhs.name == rhs.name
+class FakeCollectionSupplementaryView: UICollectionReusableView {
+
 }
-
-
-class FakeCollectionCell: UICollectionViewCell { }
-
-
-class FakeCollectionSupplementaryView: UICollectionReusableView { }
 
 
 class FakeCollectionView: UICollectionView {

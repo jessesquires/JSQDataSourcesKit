@@ -19,3 +19,17 @@
 import Foundation
 
 let DefaultTimeout = NSTimeInterval(5)
+
+struct FakeViewModel: Equatable, CustomStringConvertible {
+    let name = NSUUID().UUIDString
+
+    var description: String {
+        get {
+            return "<\(FakeViewModel.self): \(name)>"
+        }
+    }
+}
+
+func ==(lhs: FakeViewModel, rhs: FakeViewModel) -> Bool {
+    return lhs.name == rhs.name
+}

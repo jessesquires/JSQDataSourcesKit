@@ -37,10 +37,10 @@ class TableViewDataSourceTests: XCTestCase {
     func test_ThatTableViewDataSource_ReturnsExpectedData_ForSingleSection() {
 
         // GIVEN: a single TableViewSection with data items
-        let expectedModel = FakeTableModel()
+        let expectedModel = FakeViewModel()
         let expectedIndexPath = NSIndexPath(forRow: 2, inSection: 0)
 
-        let section0 = TableViewSection(items: FakeTableModel(), FakeTableModel(), expectedModel, FakeTableModel(), FakeTableModel(), headerTitle: "Header", footerTitle: "Footer")
+        let section0 = TableViewSection(items: FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel(), FakeViewModel(), headerTitle: "Header", footerTitle: "Footer")
         let allSections = [section0]
 
         let factoryExpectation = expectationWithDescription("\(__FUNCTION__)")
@@ -48,7 +48,7 @@ class TableViewDataSourceTests: XCTestCase {
 
         // GIVEN: a cell factory
         let factory = TableViewCellFactory(reuseIdentifier: fakeReuseId)
-            { (cell: FakeTableCell, model: FakeTableModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
+            { (cell: FakeTableCell, model: FakeViewModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
                 XCTAssertEqual(cell.reuseIdentifier!, self.fakeReuseId, "Dequeued cell should have expected identifier")
 
                 XCTAssertEqual(model, expectedModel, "Model object should equal expected value")
@@ -97,17 +97,17 @@ class TableViewDataSourceTests: XCTestCase {
     func test_ThatTableViewDataSource_ReturnsExpectedData_ForMultipleSections() {
 
         // GIVEN: some table view sections
-        let section0 = TableViewSection(items: FakeTableModel(), FakeTableModel(), FakeTableModel(), headerTitle: "Header", footerTitle: "Footer")
-        let section1 = TableViewSection(items: FakeTableModel(), headerTitle: "Header Title")
-        let section2 = TableViewSection(items: FakeTableModel(), FakeTableModel(), footerTitle: "Footer")
-        let section3 = TableViewSection(items: FakeTableModel(), FakeTableModel(), FakeTableModel(), FakeTableModel(), FakeTableModel())
+        let section0 = TableViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), headerTitle: "Header", footerTitle: "Footer")
+        let section1 = TableViewSection(items: FakeViewModel(), headerTitle: "Header Title")
+        let section2 = TableViewSection(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
+        let section3 = TableViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let allSections = [section0, section1, section2, section3]
 
         var factoryExpectation = expectationWithDescription("factory_\(__FUNCTION__)")
 
         // GIVEN: a cell factory
         let factory = TableViewCellFactory(reuseIdentifier: fakeReuseId)
-            { (cell: FakeTableCell, model: FakeTableModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
+            { (cell: FakeTableCell, model: FakeViewModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
                 XCTAssertEqual(cell.reuseIdentifier!, self.fakeReuseId, "Dequeued cell should have expected identifier")
                 XCTAssertEqual(model, allSections[indexPath.section][indexPath.row], "Model object should equal expected value")
                 XCTAssertEqual(tableView, self.fakeTableView, "TableView should equal the tableView for the data source")

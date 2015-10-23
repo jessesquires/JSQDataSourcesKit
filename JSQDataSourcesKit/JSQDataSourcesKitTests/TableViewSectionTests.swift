@@ -43,8 +43,8 @@ class TableViewSectionTests: XCTestCase {
     func test_ThatTableViewSection_ReturnsExpectedDataFromSubscript() {
 
         // GIVEN: a model and a table view section
-        let expectedModel = FakeTableModel()
-        let section = TableViewSection(items: FakeTableModel(), FakeTableModel(), expectedModel, FakeTableModel(), FakeTableModel())
+        let expectedModel = FakeViewModel()
+        let section = TableViewSection(items: FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel(), FakeViewModel())
 
         // WHEN: we ask for an item at a specific index
         let item = section[2]
@@ -56,12 +56,12 @@ class TableViewSectionTests: XCTestCase {
     func test_ThatTableViewSection_SetsExpectedDataAtSubscript() {
 
         // GIVEN: a table view section
-        var section = TableViewSection(items: FakeTableModel(), FakeTableModel(), FakeTableModel(), FakeTableModel())
+        var section = TableViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let count = section.items.count
 
         // WHEN: we set an item at a specific index
         let index = 1
-        let expectedModel = FakeTableModel()
+        let expectedModel = FakeViewModel()
         section[index] = expectedModel
 
         // THEN: the item at the specified index is replaced with the new item
@@ -72,7 +72,7 @@ class TableViewSectionTests: XCTestCase {
     func test_ThatTableViewSection_ReturnsExpectedCount() {
 
         // GIVEN: items and a table view section
-        let section = TableViewSection(items: FakeTableModel(), FakeTableModel(), FakeTableModel(), FakeTableModel())
+        let section = TableViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
 
         // WHEN: we ask the section for its count
         let count = section.count

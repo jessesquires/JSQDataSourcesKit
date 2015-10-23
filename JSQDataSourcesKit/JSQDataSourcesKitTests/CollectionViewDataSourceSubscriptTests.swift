@@ -28,13 +28,13 @@ class CollectionViewDataSourceSubscriptTests: XCTestCase {
     func test_ThatCollectionViewDataSourceProvider_ReturnsExpectedDataFrom_IntSubscript() {
 
         // GIVEN: some collection view sections
-        let section0 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel())
-        let section1 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel())
-        let section2 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel())
+        let section0 = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
+        let section1 = CollectionViewSection(items: FakeViewModel(), FakeViewModel())
+        let section2 = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let allSections = [section0, section1, section2]
 
         // GIVEN: a cell factory
-        let factory = CollectionViewCellFactory(reuseIdentifier: "cellId") { (cell: FakeCollectionCell, model: FakeCollectionModel, view: UICollectionView, index: NSIndexPath) -> FakeCollectionCell in
+        let factory = CollectionViewCellFactory(reuseIdentifier: "cellId") { (cell: FakeCollectionCell, model: FakeViewModel, view: UICollectionView, index: NSIndexPath) -> FakeCollectionCell in
             return cell
         }
 
@@ -51,13 +51,13 @@ class CollectionViewDataSourceSubscriptTests: XCTestCase {
     func test_ThatCollectionViewDataSourceProvider_SetsExpectedDataAt_IntSubscript() {
 
         // GIVEN: some collection view sections
-        let section0 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel())
-        let section1 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel())
-        let section2 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel())
+        let section0 = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
+        let section1 = CollectionViewSection(items: FakeViewModel(), FakeViewModel())
+        let section2 = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let allSections = [section0, section1, section2]
 
         // GIVEN: a cell factory
-        let factory = CollectionViewCellFactory(reuseIdentifier: "cellId") { (cell: FakeCollectionCell, model: FakeCollectionModel, view: UICollectionView, index: NSIndexPath) -> FakeCollectionCell in
+        let factory = CollectionViewCellFactory(reuseIdentifier: "cellId") { (cell: FakeCollectionCell, model: FakeViewModel, view: UICollectionView, index: NSIndexPath) -> FakeCollectionCell in
             return cell
         }
 
@@ -67,7 +67,7 @@ class CollectionViewDataSourceSubscriptTests: XCTestCase {
 
         // WHEN: we set a section at a specific index
         let index = 0
-        let expectedSection = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel())
+        let expectedSection = CollectionViewSection(items: FakeViewModel(), FakeViewModel())
         dataSourceProvider[index] = expectedSection
 
         // THEN: the section at the specified index is replaced with the new section
@@ -78,12 +78,12 @@ class CollectionViewDataSourceSubscriptTests: XCTestCase {
     func test_ThatCollectionViewDataSourceProvider_ReturnsExpectedDataFrom_IndexPathSubscript() {
 
         // GIVEN: some collection view sections
-        let section0 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel())
-        let section1 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel())
+        let section0 = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel())
+        let section1 = CollectionViewSection(items: FakeViewModel(), FakeViewModel())
         let allSections = [section0, section1]
 
         // GIVEN: a cell factory
-        let factory = CollectionViewCellFactory(reuseIdentifier: "cellId") { (cell: FakeCollectionCell, model: FakeCollectionModel, view: UICollectionView, index: NSIndexPath) -> FakeCollectionCell in
+        let factory = CollectionViewCellFactory(reuseIdentifier: "cellId") { (cell: FakeCollectionCell, model: FakeViewModel, view: UICollectionView, index: NSIndexPath) -> FakeCollectionCell in
             return cell
         }
 
@@ -102,12 +102,12 @@ class CollectionViewDataSourceSubscriptTests: XCTestCase {
     func test_ThatCollectionViewDataSourceProvider_SetsExpectedDataAt_IndexPathSubscript() {
 
         // GIVEN: some collection view sections
-        let section0 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel())
-        let section1 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel())
+        let section0 = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel())
+        let section1 = CollectionViewSection(items: FakeViewModel(), FakeViewModel())
         let allSections = [section0, section1]
 
         // GIVEN: a cell factory
-        let factory = CollectionViewCellFactory(reuseIdentifier: "cellId") { (cell: FakeCollectionCell, model: FakeCollectionModel, view: UICollectionView, index: NSIndexPath) -> FakeCollectionCell in
+        let factory = CollectionViewCellFactory(reuseIdentifier: "cellId") { (cell: FakeCollectionCell, model: FakeViewModel, view: UICollectionView, index: NSIndexPath) -> FakeCollectionCell in
             return cell
         }
 
@@ -116,7 +116,7 @@ class CollectionViewDataSourceSubscriptTests: XCTestCase {
 
         // WHEN: we set an item at a specific index path
         let indexPath = NSIndexPath(forItem: 2, inSection: 0)
-        let expectedItem = FakeCollectionModel()
+        let expectedItem = FakeViewModel()
 
         dataSourceProvider[indexPath] = expectedItem
 

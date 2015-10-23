@@ -46,16 +46,16 @@ class TitledCollectionReusableViewFactoryTests: XCTestCase {
     func test_ThatCollectionViewDataSource_ReturnsExpectedData_TitledCollectionReusableViewFactory() {
 
         // GIVEN: some collection view sections
-        let section0 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel())
-        let section1 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel())
-        let section2 = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel())
+        let section0 = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
+        let section1 = CollectionViewSection(items: FakeViewModel(), FakeViewModel())
+        let section2 = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let allSections = [section0, section1, section2]
 
         var cellFactoryExpectation = expectationWithDescription("cell_factory")
 
         // GIVEN: a cell factory
         let cellFactory = CollectionViewCellFactory(reuseIdentifier: fakeCellReuseId)
-            { (cell: FakeCollectionCell, model: FakeCollectionModel, view: UICollectionView, indexPath: NSIndexPath) -> FakeCollectionCell in
+            { (cell: FakeCollectionCell, model: FakeViewModel, view: UICollectionView, indexPath: NSIndexPath) -> FakeCollectionCell in
             cellFactoryExpectation.fulfill()
             return cell
         }
@@ -64,7 +64,7 @@ class TitledCollectionReusableViewFactoryTests: XCTestCase {
         var titledViewStyleConfigExpectation = expectationWithDescription("titledViewStyleConfigExpectation")
 
         let supplementaryViewFactory = TitledCollectionReusableViewFactory(dataConfigurator:
-            { (view, item: FakeCollectionModel, kind, collectionView, indexPath) -> TitledCollectionReusableView in
+            { (view, item: FakeViewModel, kind, collectionView, indexPath) -> TitledCollectionReusableView in
                 XCTAssertEqual(view.reuseIdentifier!, TitledCollectionReusableView.identifier, "Dequeued supplementary view should have expected identifier")
                 XCTAssertEqual(kind, FakeSupplementaryViewKind, "View kind should have expected kind")
                 XCTAssertEqual(item, allSections[indexPath.section][indexPath.item], "Model object should equal expected value")

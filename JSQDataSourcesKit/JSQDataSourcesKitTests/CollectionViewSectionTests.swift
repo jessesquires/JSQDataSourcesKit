@@ -28,9 +28,9 @@ class CollectionViewSectionTests: XCTestCase {
     func test_ThatCollectionViewSection_Initializes() {
 
         // GIVEN: some items
-        let item1 = FakeCollectionModel()
-        let item2 = FakeCollectionModel()
-        let item3 = FakeCollectionModel()
+        let item1 = FakeViewModel()
+        let item2 = FakeViewModel()
+        let item3 = FakeViewModel()
 
         // WHEN: we create sections with the different initializers
         let sectionA = CollectionViewSection(items: item1, item2, item3)
@@ -43,8 +43,8 @@ class CollectionViewSectionTests: XCTestCase {
     func test_ThatCollectionViewSection_ReturnsExpectedDataFromSubscript() {
 
         // GIVEN: a model and a collection view section
-        let expectedModel = FakeCollectionModel()
-        let section = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), expectedModel)
+        let expectedModel = FakeViewModel()
+        let section = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), expectedModel)
 
         // WHEN: we ask for an item at a specific index
         let item = section[3]
@@ -56,12 +56,12 @@ class CollectionViewSectionTests: XCTestCase {
     func test_ThatCollectionViewSection_SetsExpectedDataAtSubscript() {
 
         // GIVEN: a collection view section
-        var section = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel())
+        var section = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel())
         let count = section.count
 
         // WHEN: we set an item at a specific index
         let index = 1
-        let expectedModel = FakeCollectionModel()
+        let expectedModel = FakeViewModel()
         section[index] = expectedModel
 
         // THEN: the item at the specified index is replaced with the new item
@@ -72,7 +72,7 @@ class CollectionViewSectionTests: XCTestCase {
     func test_ThatCollectionViewSection_ReturnsExpectedCount() {
 
         // GIVEN: items and a collection view section
-        let section = CollectionViewSection(items: FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel(), FakeCollectionModel())
+        let section = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
 
         // WHEN: we ask the section for its count
         let count = section.count
