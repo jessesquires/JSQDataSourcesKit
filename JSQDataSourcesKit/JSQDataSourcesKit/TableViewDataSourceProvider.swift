@@ -22,21 +22,24 @@ import UIKit
 
 
 /**
-A `TableViewDataSourceProvider` is responsible for providing a data source object for a table view.
+ A `TableViewDataSourceProvider` is responsible for providing a data source object for a table view.
 
-**Clients are responsbile for the following:**
+ **Clients are responsbile for the following:**
 
-- Registering cells with the table view
-- Adding, removing, or reloading cells and sections as the provider's `sections` are modified.
-*/
+ - Registering cells with the table view
+ - Adding, removing, or reloading cells and sections as the provider's `sections` are modified.
+ */
 public final class TableViewDataSourceProvider <
     SectionInfo: TableViewSectionInfo,
     CellFactory: TableViewCellFactoryType
     where CellFactory.Item == SectionInfo.Item>: CustomStringConvertible {
 
+    // MARK: Typealiases
+
     /// The type of elements for the data source provider.
     public typealias Item = SectionInfo.Item
-    
+
+
     // MARK: Properties
 
     /// The sections in the table view
@@ -83,9 +86,9 @@ public final class TableViewDataSourceProvider <
     }
 
     /**
-    - parameter indexPath: The index path of the item to return.
-    - returns: The item at `indexPath`.
-    */
+     - parameter indexPath: The index path of the item to return.
+     - returns: The item at `indexPath`.
+     */
     public subscript (indexPath: NSIndexPath) -> Item {
         get {
             return sections[indexPath.section].items[indexPath.row]
@@ -129,15 +132,20 @@ public final class TableViewDataSourceProvider <
 }
 
 /**
-A `TableViewFetchedResultsDataSourceProvider` is responsible for providing a data source object for a table view
-that is backed by an `NSFetchedResultsController` instance.
+ A `TableViewFetchedResultsDataSourceProvider` is responsible for providing a data source object for a table view
+ that is backed by an `NSFetchedResultsController` instance.
 
-- note: Clients are responsbile for registering cells with the table view.
-*/
-public final class TableViewFetchedResultsDataSourceProvider <
-    Item,
-    CellFactory: TableViewCellFactoryType
-    where CellFactory.Item == Item>: CustomStringConvertible {
+ The `CellFactory.Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
+ 
+ - note: Clients are responsbile for registering cells with the table view.
+ */
+public final class TableViewFetchedResultsDataSourceProvider <CellFactory: TableViewCellFactoryType>: CustomStringConvertible {
+
+    // MARK: Typealiases
+
+    /// The type of elements for the data source provider.
+    public typealias Item = CellFactory.Item
+
 
     // MARK: Properties
 
@@ -249,7 +257,7 @@ That is, it cannot be assigned to `UITableView.dataSource`.
     @objc func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return titleForHeaderInSection(section)
     }
-
+    
     @objc func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return titleForFooterInSection(section)
     }

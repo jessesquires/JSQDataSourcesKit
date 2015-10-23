@@ -20,9 +20,9 @@ import Foundation
 
 
 /**
-A `CollectionViewSection` is a concrete `CollectionViewSectionInfo`.
-A section instance is responsible for managing the elements in a section.
-*/
+ A `CollectionViewSection` is a concrete `CollectionViewSectionInfo`.
+ A section instance is responsible for managing the elements in a section.
+ */
 public struct CollectionViewSection <Item>: CollectionViewSectionInfo, CustomStringConvertible {
 
     // MARK: Properties
@@ -49,11 +49,11 @@ public struct CollectionViewSection <Item>: CollectionViewSectionInfo, CustomStr
     }
 
     /**
-    Constructs a new collection view section.
+     Constructs a new collection view section.
 
-    - parameter items: The elements in the section.
-    - returns: A new `CollectionViewSection` instance.
-    */
+     - parameter items: The elements in the section.
+     - returns: A new `CollectionViewSection` instance.
+     */
     public init(_ items: [Item]) {
         self.items = items
     }

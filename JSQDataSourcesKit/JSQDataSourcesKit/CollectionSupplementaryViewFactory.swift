@@ -20,9 +20,9 @@ import UIKit
 
 
 /**
-A `CollectionSupplementaryViewFactory` is a concrete `CollectionSupplementaryViewFactoryType`.
-This factory is responsible for producing and configuring supplementary views for a collection view for a specific item.
-*/
+ A `CollectionSupplementaryViewFactory` is a concrete `CollectionSupplementaryViewFactoryType`.
+ This factory is responsible for producing and configuring supplementary views for a collection view for a specific item.
+ */
 public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectionReusableView, Item>: CollectionSupplementaryViewFactoryType, CustomStringConvertible {
 
     // MARK: Typealiases

@@ -20,9 +20,9 @@ import UIKit
 
 
 /**
-A `TableViewCellFactory` is a concrete `TableViewCellFactoryType`.
-This factory is responsible for producing and configuring table view cells for a specific item.
-*/
+ A `TableViewCellFactory` is a concrete `TableViewCellFactoryType`.
+ This factory is responsible for producing and configuring table view cells for a specific item.
+ */
 public struct TableViewCellFactory <Cell: UITableViewCell, Item>: TableViewCellFactoryType, CustomStringConvertible {
 
     // MARK: Typealiases

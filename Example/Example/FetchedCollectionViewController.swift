@@ -30,9 +30,8 @@ class FetchedCollectionViewController: UICollectionViewController {
     typealias ThingHeaderViewFactory = TitledCollectionReusableViewFactory<Thing>
     typealias ThingSupplementaryViewFactory = ComposedCollectionSupplementaryViewFactory<Thing>
 
-    var dataSourceProvider: CollectionViewFetchedResultsDataSourceProvider<Thing, ThingCellFactory, ThingSupplementaryViewFactory>?
-
-    var delegateProvider: CollectionViewFetchedResultsDelegateProvider<Thing, ThingCellFactory>?
+    var dataSourceProvider: CollectionViewFetchedResultsDataSourceProvider<ThingCellFactory, ThingSupplementaryViewFactory>?
+    var delegateProvider: CollectionViewFetchedResultsDelegateProvider<ThingCellFactory>?
 
 
     // MARK: view lifecycle

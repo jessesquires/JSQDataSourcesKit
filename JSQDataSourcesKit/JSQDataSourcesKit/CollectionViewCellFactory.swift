@@ -20,9 +20,9 @@ import UIKit
 
 
 /**
-A `CollectionViewCellFactory` is a concrete `CollectionViewCellFactoryType`.
-This factory is responsible for producing and configuring collection view cells for a specific item.
-*/
+ A `CollectionViewCellFactory` is a concrete `CollectionViewCellFactoryType`.
+ This factory is responsible for producing and configuring collection view cells for a specific item.
+ */
 public struct CollectionViewCellFactory <Cell: UICollectionViewCell, Item>: CollectionViewCellFactoryType, CustomStringConvertible {
 
     // MARK: Typealiases
@@ -87,7 +87,7 @@ public struct CollectionViewCellFactory <Cell: UICollectionViewCell, Item>: Coll
         atIndexPath indexPath: NSIndexPath) -> Cell {
             return cellConfigurator(cell, item, collectionView, indexPath)
     }
-    
+
 
     // MARK: CustomStringConvertible
 

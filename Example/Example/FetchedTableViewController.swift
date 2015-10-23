@@ -29,8 +29,8 @@ class FetchedTableViewController: UITableViewController {
     let stack = CoreDataStack()
 
     typealias CellFactory = TableViewCellFactory<UITableViewCell, Thing>
-    var dataSourceProvider: TableViewFetchedResultsDataSourceProvider<Thing, CellFactory>?
-    var delegateProvider: TableViewFetchedResultsDelegateProvider<Thing, CellFactory>?
+    var dataSourceProvider: TableViewFetchedResultsDataSourceProvider<CellFactory>?
+    var delegateProvider: TableViewFetchedResultsDelegateProvider<CellFactory>?
 
 
     // MARK: View lifecycle

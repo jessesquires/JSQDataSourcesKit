@@ -56,14 +56,14 @@ public struct TableViewSection <Item>: TableViewSectionInfo, CustomStringConvert
     }
 
     /**
-    Constructs a new table view section.
+     Constructs a new table view section.
 
-    - parameter items:       The elements in the section.
-    - parameter headerTitle: The section header title.
-    - parameter footerTitle: The section footer title.
+     - parameter items:       The elements in the section.
+     - parameter headerTitle: The section header title.
+     - parameter footerTitle: The section footer title.
 
-    - returns: A new `TableViewSection` instance.
-    */
+     - returns: A new `TableViewSection` instance.
+     */
     public init(_ items: [Item], headerTitle: String? = nil, footerTitle: String? = nil) {
         self.items = items
         self.headerTitle = headerTitle

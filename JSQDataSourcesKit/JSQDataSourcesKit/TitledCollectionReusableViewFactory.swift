@@ -21,11 +21,11 @@ import UIKit
 
 
 /**
-A `TitledCollectionReusableViewFactory` is a specialized supplementary view factory
-that conforms to `CollectionSupplementaryViewFactoryType`.
+ A `TitledCollectionReusableViewFactory` is a specialized supplementary view factory
+ that conforms to `CollectionSupplementaryViewFactoryType`.
 
-This factory is responsible for producing and configuring `TitledCollectionReusableView` instances.
-*/
+ This factory is responsible for producing and configuring `TitledCollectionReusableView` instances.
+ */
 public struct TitledCollectionReusableViewFactory <Item>: CollectionSupplementaryViewFactoryType, CustomStringConvertible {
 
     // MARK: Typealiases
@@ -44,10 +44,10 @@ public struct TitledCollectionReusableViewFactory <Item>: CollectionSupplementar
     public typealias DataConfigurationHandler = (TitledCollectionReusableView, Item, SupplementaryViewKind, UICollectionView, NSIndexPath) -> TitledCollectionReusableView
 
     /**
-    Configures the style attributes of the `TitledCollectionReusableView`.
+     Configures the style attributes of the `TitledCollectionReusableView`.
 
-    - parameter TitledCollectionReusableView: The `TitledCollectionReusableView` to be configured at the index path.
-    */
+     - parameter TitledCollectionReusableView: The `TitledCollectionReusableView` to be configured at the index path.
+     */
     public typealias StyleConfigurationHandler = (TitledCollectionReusableView) -> Void
 
 

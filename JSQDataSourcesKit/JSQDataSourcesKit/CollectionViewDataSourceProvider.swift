@@ -22,24 +22,27 @@ import UIKit
 
 
 /**
-A `CollectionViewDataSourceProvider` is responsible for providing a data source object for a collection view.
+ A `CollectionViewDataSourceProvider` is responsible for providing a data source object for a collection view.
 
-**Clients are responsbile for the follwing:**
+ **Clients are responsbile for the follwing:**
 
-- Registering cells with the collection view
-- Registering supplementary views with the collection view
-- Adding, removing, or reloading cells as the provider's `sections` are modified
-- Adding, removing, or reloading sections as the provider's `sections` are modified
-*/
+ - Registering cells with the collection view
+ - Registering supplementary views with the collection view
+ - Adding, removing, or reloading cells as the provider's `sections` are modified
+ - Adding, removing, or reloading sections as the provider's `sections` are modified
+ */
 public final class CollectionViewDataSourceProvider <
     SectionInfo: CollectionViewSectionInfo,
     CellFactory: CollectionViewCellFactoryType,
     SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
     where CellFactory.Item == SectionInfo.Item, SupplementaryViewFactory.Item == SectionInfo.Item>: CustomStringConvertible {
 
+    // MARK: Typealiases
+
     /// The type of elements for the data source provider.
     public typealias Item = SectionInfo.Item
-    
+
+
     // MARK: Properties
 
     /// The sections in the collection view.
@@ -72,7 +75,6 @@ public final class CollectionViewDataSourceProvider <
         cellFactory: CellFactory,
         supplementaryViewFactory: SupplementaryViewFactory? = nil,
         collectionView: UICollectionView? = nil) {
-
             self.sections = sections
             self.cellFactory = cellFactory
             self.supplementaryViewFactory = supplementaryViewFactory
@@ -97,10 +99,10 @@ public final class CollectionViewDataSourceProvider <
     }
 
     /**
-    - parameter indexPath: The index path of the item to return.
+     - parameter indexPath: The index path of the item to return.
 
-    - returns: The item at `indexPath`.
-    */
+     - returns: The item at `indexPath`.
+     */
     public subscript (indexPath: NSIndexPath) -> Item {
         get {
             return sections[indexPath.section].items[indexPath.item];
@@ -153,16 +155,23 @@ public final class CollectionViewDataSourceProvider <
 
 
 /**
-A `CollectionViewFetchedResultsDataSourceProvider` is responsible for providing a data source object for a collection view
-that is backed by an `NSFetchedResultsController` instance.
+ A `CollectionViewFetchedResultsDataSourceProvider` is responsible for providing a data source object
+ for a collection view that is backed by an `NSFetchedResultsController` instance.
 
-- note: Clients are responsbile for registering cells and supplementary views with the collection view.
-*/
+ The `CellFactory.Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
+
+ - note: Clients are responsbile for registering cells and supplementary views with the collection view.
+ */
 public final class CollectionViewFetchedResultsDataSourceProvider <
-    Item,
     CellFactory: CollectionViewCellFactoryType,
     SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
-    where CellFactory.Item == Item, SupplementaryViewFactory.Item == Item>: CustomStringConvertible {
+    where CellFactory.Item == SupplementaryViewFactory.Item>: CustomStringConvertible {
+
+    // MARK: Typealiases
+
+    /// The type of elements for the data source provider.
+    public typealias Item = CellFactory.Item
+
 
     // MARK: Properties
 
@@ -196,7 +205,6 @@ public final class CollectionViewFetchedResultsDataSourceProvider <
         cellFactory: CellFactory,
         supplementaryViewFactory: SupplementaryViewFactory? = nil,
         collectionView: UICollectionView? = nil) {
-            
             self.fetchedResultsController = fetchedResultsController
             self.cellFactory = cellFactory
             self.supplementaryViewFactory = supplementaryViewFactory

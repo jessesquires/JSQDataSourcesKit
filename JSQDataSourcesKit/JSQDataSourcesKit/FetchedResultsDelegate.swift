@@ -22,15 +22,18 @@ import UIKit
 
 
 /**
-A `CollectionViewFetchedResultsDelegateProvider` is responsible for providing a delegate object
-for an instance of `NSFetchedResultsController` that manages data to display in a collection view.
+ A `CollectionViewFetchedResultsDelegateProvider` is responsible for providing a delegate object
+ for an instance of `NSFetchedResultsController` that manages data to display in a collection view.
 
-The `Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
-*/
-public final class CollectionViewFetchedResultsDelegateProvider <
-    Item,
-    CellFactory: CollectionViewCellFactoryType
-    where CellFactory.Item == Item>: CustomStringConvertible {
+ The `CellFactory.Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
+ */
+public final class CollectionViewFetchedResultsDelegateProvider <CellFactory: CollectionViewCellFactoryType>: CustomStringConvertible {
+
+    // MARK: Typealiases
+
+    /// The type of elements for the delegate provider.
+    public typealias Item = CellFactory.Item
+
 
     // MARK: Properties
 
@@ -126,7 +129,7 @@ public final class CollectionViewFetchedResultsDelegateProvider <
                 },
                 completion:{ [weak self] finished in
                     self?.reloadSupplementaryViewsIfNeeded()
-            })
+                })
         })
 
     private func applyObjectChanges() {
@@ -182,15 +185,18 @@ public final class CollectionViewFetchedResultsDelegateProvider <
 }
 
 /**
-A `TableViewFetchedResultsDelegateProvider` is responsible for providing a delegate object
-for an instance of `NSFetchedResultsController` that manages data to display in a table view.
+ A `TableViewFetchedResultsDelegateProvider` is responsible for providing a delegate object
+ for an instance of `NSFetchedResultsController` that manages data to display in a table view.
 
-The `Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
-*/
-public final class TableViewFetchedResultsDelegateProvider <
-    Item,
-    CellFactory: TableViewCellFactoryType
-    where CellFactory.Item == Item>: CustomStringConvertible {
+ The `CellFactory.Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
+ */
+public final class TableViewFetchedResultsDelegateProvider <CellFactory: TableViewCellFactoryType>: CustomStringConvertible {
+
+    // MARK: Typealiases
+
+    /// The type of elements for the delegate provider.
+    public typealias Item = CellFactory.Item
+
 
     // MARK: Properties
 

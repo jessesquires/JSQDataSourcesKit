@@ -25,7 +25,7 @@ public protocol TableViewSectionInfo {
     /// The type of elements stored in the section.
     typealias Item
 
-    
+
     // MARK: Properties
 
     /// The elements in the table view section.

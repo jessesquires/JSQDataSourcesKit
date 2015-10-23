@@ -20,9 +20,9 @@ import UIKit
 
 
 /**
-An instance conforming to `TableViewCellFactoryType` is responsible for initializing
-and configuring table view cells to be consumed by an instance of `TableViewDataSourceProvider`.
-*/
+ An instance conforming to `TableViewCellFactoryType` is responsible for initializing
+ and configuring table view cells to be consumed by an instance of `TableViewDataSourceProvider`.
+ */
 public protocol TableViewCellFactoryType {
 
     // MARK: Associated types
@@ -33,7 +33,7 @@ public protocol TableViewCellFactoryType {
     /// The type of `UITableViewCell` that the factory produces.
     typealias Cell: UITableViewCell
 
-    
+
     // MARK: Methods
 
     /**
@@ -48,14 +48,14 @@ public protocol TableViewCellFactoryType {
     func cellForItem(item: Item, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell
 
     /**
-    Configures and returns the specified cell.
+     Configures and returns the specified cell.
 
-    - parameter cell:      The cell to configure.
-    - parameter item:      The item at `indexPath`.
-    - parameter tableView: The table view requesting this information.
-    - parameter indexPath: The index path that specifies the location of `cell` and `item`.
+     - parameter cell:      The cell to configure.
+     - parameter item:      The item at `indexPath`.
+     - parameter tableView: The table view requesting this information.
+     - parameter indexPath: The index path that specifies the location of `cell` and `item`.
 
-    - returns: A configured `UITableViewCell` of type `Cell`.
-    */
+     - returns: A configured `UITableViewCell` of type `Cell`.
+     */
     func configureCell(cell: Cell, forItem item: Item, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell
 }
