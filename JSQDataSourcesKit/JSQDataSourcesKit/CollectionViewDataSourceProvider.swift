@@ -205,6 +205,9 @@ public final class CollectionViewFetchedResultsDataSourceProvider <
         cellFactory: CellFactory,
         supplementaryViewFactory: SupplementaryViewFactory? = nil,
         collectionView: UICollectionView? = nil) {
+            assert(fetchedResultsController: fetchedResultsController,
+                fetchesObjectsOfClassName: String(reflecting: Item.self))
+
             self.fetchedResultsController = fetchedResultsController
             self.cellFactory = cellFactory
             self.supplementaryViewFactory = supplementaryViewFactory

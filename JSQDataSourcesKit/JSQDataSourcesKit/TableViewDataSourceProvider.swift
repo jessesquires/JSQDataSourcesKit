@@ -136,7 +136,7 @@ public final class TableViewDataSourceProvider <
  that is backed by an `NSFetchedResultsController` instance.
 
  The `CellFactory.Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
- 
+
  - note: Clients are responsbile for registering cells with the table view.
  */
 public final class TableViewFetchedResultsDataSourceProvider <CellFactory: TableViewCellFactoryType>: CustomStringConvertible {
@@ -171,6 +171,9 @@ public final class TableViewFetchedResultsDataSourceProvider <CellFactory: Table
     - returns: A new `TableViewFetchedResultsDataSourceProvider` instance.
     */
     public init(fetchedResultsController: NSFetchedResultsController, cellFactory: CellFactory, tableView: UITableView? = nil) {
+        assert(fetchedResultsController: fetchedResultsController,
+            fetchesObjectsOfClassName: String(reflecting: Item.self))
+
         self.fetchedResultsController = fetchedResultsController
         self.cellFactory = cellFactory
         tableView?.dataSource = dataSource

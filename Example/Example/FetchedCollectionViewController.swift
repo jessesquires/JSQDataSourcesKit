@@ -29,7 +29,7 @@ class FetchedCollectionViewController: UICollectionViewController {
     typealias ThingCellFactory = CollectionViewCellFactory<CollectionViewCell, Thing>
     typealias ThingSupplementaryViewFactory = ComposedCollectionSupplementaryViewFactory<Thing>
     var dataSourceProvider: CollectionViewFetchedResultsDataSourceProvider<ThingCellFactory, ThingSupplementaryViewFactory>?
-    
+
     var delegateProvider: CollectionViewFetchedResultsDelegateProvider<ThingCellFactory>?
 
 
@@ -84,7 +84,7 @@ class FetchedCollectionViewController: UICollectionViewController {
         delegateProvider = CollectionViewFetchedResultsDelegateProvider(
             collectionView: collectionView!,
             cellFactory: cellFactory,
-            controller: frc)
+            fetchedResultsController: frc)
 
         // 5. create data source provider
         dataSourceProvider = CollectionViewFetchedResultsDataSourceProvider(

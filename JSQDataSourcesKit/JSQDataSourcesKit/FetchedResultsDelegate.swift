@@ -55,19 +55,22 @@ public final class CollectionViewFetchedResultsDelegateProvider <CellFactory: Co
     /**
     Constructs a new delegate provider for a fetched results controller.
 
-    - parameter collectionView: The collection view to be updated when the fetched results change.
-    - parameter cellFactory:    The cell factory from which the fetched results controller delegate will configure cells.
-    - parameter controller:     The fetched results controller whose delegate will be provided by this provider.
+    - parameter collectionView:           The collection view to be updated when the fetched results change.
+    - parameter cellFactory:              The cell factory from which the fetched results controller delegate will configure cells.
+    - parameter fetchedResultsController: The fetched results controller whose delegate will be provided by this provider.
 
     - returns: A new `CollectionViewFetchedResultsDelegateProvider` instance.
     */
     public init(
         collectionView: UICollectionView,
         cellFactory: CellFactory,
-        controller: NSFetchedResultsController? = nil) {
+        fetchedResultsController: NSFetchedResultsController) {
+            assert(fetchedResultsController: fetchedResultsController,
+                fetchesObjectsOfClassName: String(reflecting: Item.self))
+
             self.collectionView = collectionView
             self.cellFactory = cellFactory
-            controller?.delegate = delegate
+            fetchedResultsController.delegate = delegate
     }
 
 
@@ -218,16 +221,19 @@ public final class TableViewFetchedResultsDelegateProvider <CellFactory: TableVi
     /**
     Constructs a new delegate provider for a fetched results controller.
 
-    - parameter tableView:   The table view to be updated when the fetched results change.
-    - parameter cellFactory: The cell factory from which the fetched results controller delegate will configure cells.
-    - parameter controller:  The fetched results controller whose delegate will be provided by this provider.
+    - parameter tableView:                The table view to be updated when the fetched results change.
+    - parameter cellFactory:              The cell factory from which the fetched results controller delegate will configure cells.
+    - parameter fetchedResultsController: The fetched results controller whose delegate will be provided by this provider.
 
     - returns: A new `TableViewFetchedResultsDelegateProvider` instance.
     */
-    public init(tableView: UITableView, cellFactory: CellFactory, controller: NSFetchedResultsController? = nil) {
+    public init(tableView: UITableView, cellFactory: CellFactory, fetchedResultsController: NSFetchedResultsController) {
+        assert(fetchedResultsController: fetchedResultsController,
+            fetchesObjectsOfClassName: String(reflecting: Item.self))
+
         self.tableView = tableView
         self.cellFactory = cellFactory
-        controller?.delegate = delegate
+        fetchedResultsController.delegate = delegate
     }
 
 

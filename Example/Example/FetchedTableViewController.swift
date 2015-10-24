@@ -50,10 +50,16 @@ class FetchedTableViewController: UITableViewController {
         let frc = thingFRCinContext(stack.context)
 
         // 3. create delegate provider
-        delegateProvider = TableViewFetchedResultsDelegateProvider(tableView: tableView, cellFactory: factory, controller: frc)
+        delegateProvider = TableViewFetchedResultsDelegateProvider(
+            tableView: tableView,
+            cellFactory: factory,
+            fetchedResultsController: frc)
 
         // 4. create data source provider
-        dataSourceProvider = TableViewFetchedResultsDataSourceProvider(fetchedResultsController: frc, cellFactory: factory, tableView: tableView)
+        dataSourceProvider = TableViewFetchedResultsDataSourceProvider(
+            fetchedResultsController: frc,
+            cellFactory: factory,
+            tableView: tableView)
     }
 
     override func viewWillAppear(animated: Bool) {
