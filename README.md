@@ -1,7 +1,7 @@
 # JSQDataSourcesKit
 [![Build Status](https://secure.travis-ci.org/jessesquires/JSQDataSourcesKit.svg)](http://travis-ci.org/jessesquires/JSQDataSourcesKit) [![Version Status](https://img.shields.io/cocoapods/v/JSQDataSourcesKit.svg)][podLink] [![license MIT](https://img.shields.io/cocoapods/l/JSQDataSourcesKit.svg)][mitLink] [![codecov.io](https://img.shields.io/codecov/c/github/jessesquires/JSQDataSourcesKit.svg)](http://codecov.io/github/jessesquires/JSQDataSourcesKit) [![Platform](https://img.shields.io/cocoapods/p/JSQDataSourcesKit.svg)][docsLink] [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) 
 
-*Type-safe, value-oriented data source objects that keep your view controllers light*
+*Type-safe, value-oriented, composable data source objects that keep your view controllers light*
 
 A Swift framework of data source and delegate objects inspired by [Andy Matuschak's](https://github.com/andymatuschak) *type-safe, value-oriented collection view data source [gist](https://gist.github.com/andymatuschak/f1e1691fa1a327468f8e)*.
 
@@ -12,7 +12,7 @@ This framework reduces the boilerplate code regarding the `UITableView`, `UIColl
 ## Requirements
 
 * iOS 8+
-* Swift 2.0
+* Swift 2.0+
 
 ## Installation
 
@@ -58,45 +58,40 @@ More information on the [gh-pages](https://github.com/jessesquires/JSQDataSource
 import JSQDataSourcesKit
 ````
 
-##### Design
+#### Design
 
 This framework is composed of different data source and delegate `Provider` classes. Instances of a `Provider` own a collection of model objects and a cell factory, and are responsible for *providing* a data source or delegate.
 
-##### Example
+#### Example
 
-The following illustrates a simple example of how these components interact for a table view. Other scenarios follow similarly, for example, a collection view.
+The following illustrates a simple example of how these components interact for a table view. Using a collection view follows similarly.
 
 ````swift
 // Given a view controller with a table view
 
-// register cells
+// 1. register cells
 let nib = UINib(nibName: "MyCellNib", bundle: nil)
 tableView.registerNib(nib, forCellReuseIdentifier: "MyCellIdentifier")
 
-// create sections with your model objects
+// 2. create sections with your model objects
 let section0 = TableViewSection(items: /* items of type T */)
 let section1 = TableViewSection(items: /* items of type T */)
 let allSections = [section0, section1]
 
-// create cell factory, it receives a cell identifier and configuration closure
-let factory = TableViewCellFactory(reuseIdentifier: "MyCellIdentifier")
-    { (cell: UITableViewCell, model: T, tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell in
+// 3. create cell factory
+let factory = TableViewCellFactory(reuseIdentifier: "MyCellIdentifier") { (cell, model, tableView, indexPath) -> UITableViewCell in
       // configure the cell
       return cell
 }
 
-// create data source provider
+// 4. create data source provider
 let dataSourceProvider = TableViewDataSourceProvider(sections: allSections, cellFactory: factory)
 
-// set the table view's data source
-tableView.dataSource = self.dataSourceProvider.dataSource
-
-// Clients are responsible for the following:
-//   - registering cells with the table view (or collection view)
-//   - adding and removing cells as the data source is modified
+// 5. set the table view's data source
+tableView.dataSource = dataSourceProvider.dataSource
 ````
 
-##### Demo Project
+#### Demo Project
 
 The example app included exercises *all* functionality in this framework. Open `JSQDataSourcesKit.xcworkspace`, select the `Example` scheme, then build and run.
 
