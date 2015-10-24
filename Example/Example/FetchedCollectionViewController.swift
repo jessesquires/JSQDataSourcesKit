@@ -27,10 +27,9 @@ class FetchedCollectionViewController: UICollectionViewController {
     let stack = CoreDataStack()
 
     typealias ThingCellFactory = CollectionViewCellFactory<CollectionViewCell, Thing>
-    typealias ThingHeaderViewFactory = TitledCollectionReusableViewFactory<Thing>
     typealias ThingSupplementaryViewFactory = ComposedCollectionSupplementaryViewFactory<Thing>
-
     var dataSourceProvider: CollectionViewFetchedResultsDataSourceProvider<ThingCellFactory, ThingSupplementaryViewFactory>?
+    
     var delegateProvider: CollectionViewFetchedResultsDelegateProvider<ThingCellFactory>?
 
 

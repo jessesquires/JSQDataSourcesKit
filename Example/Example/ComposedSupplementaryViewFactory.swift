@@ -20,46 +20,70 @@ import Foundation
 import UIKit
 import JSQDataSourcesKit
 
-/**
-*   Example of a composed factory for supplementary views.
-*   Used for headers and footers in `FetchedCollectionViewController` in the demo
+/*
+Example of a composed factory for supplementary views.
+Used for headers and footers in `FetchedCollectionViewController` in the demo
 */
 
-public struct ComposedCollectionSupplementaryViewFactory <DataItem>: CollectionSupplementaryViewFactoryType {
+public struct ComposedCollectionSupplementaryViewFactory <Item>: CollectionSupplementaryViewFactoryType {
 
-    public let headerViewFactory: TitledCollectionReusableViewFactory<DataItem>
+    public let headerViewFactory: TitledCollectionReusableViewFactory<Item>
 
-    public let footerViewFactory: TitledCollectionReusableViewFactory<DataItem>
+    public let footerViewFactory: TitledCollectionReusableViewFactory<Item>
 
-    public init(headerViewFactory: TitledCollectionReusableViewFactory<DataItem>, footerViewFactory: TitledCollectionReusableViewFactory<DataItem>) {
-        self.headerViewFactory = headerViewFactory
-        self.footerViewFactory = footerViewFactory
+    public init(
+        headerViewFactory: TitledCollectionReusableViewFactory<Item>,
+        footerViewFactory: TitledCollectionReusableViewFactory<Item>) {
+            self.headerViewFactory = headerViewFactory
+            self.footerViewFactory = footerViewFactory
     }
 
-    public func supplementaryViewForItem(item: DataItem, kind: SupplementaryViewKind,
-        inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> TitledCollectionReusableView {
+    public func supplementaryViewForItem(
+        item: Item,
+        kind: SupplementaryViewKind,
+        inCollectionView collectionView: UICollectionView,
+        atIndexPath indexPath: NSIndexPath) -> TitledCollectionReusableView {
 
             switch kind {
             case UICollectionElementKindSectionHeader:
-                return headerViewFactory.supplementaryViewForItem(item, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
+                return headerViewFactory.supplementaryViewForItem(item,
+                    kind: kind,
+                    inCollectionView: collectionView,
+                    atIndexPath: indexPath)
+
             case UICollectionElementKindSectionFooter:
-                return footerViewFactory.supplementaryViewForItem(item, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
+                return footerViewFactory.supplementaryViewForItem(item,
+                    kind: kind,
+                    inCollectionView: collectionView,
+                    atIndexPath: indexPath)
+
             default:
-                // this will never be called, but cannot return nil
-                return TitledCollectionReusableView()
+                fatalError("attempt to dequeue supplementary view with unknown kind: \(kind)")
             }
     }
 
-    public func configureSupplementaryView(view: TitledCollectionReusableView, forItem item: DataItem, kind: SupplementaryViewKind,
-        inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> TitledCollectionReusableView {
+    public func configureSupplementaryView(
+        view: TitledCollectionReusableView,
+        forItem item: Item,
+        kind: SupplementaryViewKind,
+        inCollectionView collectionView: UICollectionView,
+        atIndexPath indexPath: NSIndexPath) -> TitledCollectionReusableView {
 
             switch kind {
             case UICollectionElementKindSectionHeader:
-                return headerViewFactory.configureSupplementaryView(view, forItem: item, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
+                return headerViewFactory.configureSupplementaryView(view,
+                    forItem: item,
+                    kind: kind,
+                    inCollectionView: collectionView,
+                    atIndexPath: indexPath)
             case UICollectionElementKindSectionFooter:
-                return footerViewFactory.configureSupplementaryView(view, forItem: item, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
+                return footerViewFactory.configureSupplementaryView(view,
+                    forItem: item,
+                    kind: kind,
+                    inCollectionView: collectionView,
+                    atIndexPath: indexPath)
             default:
-                return view
+                fatalError("attempt to configure supplementary view with unknown kind: \(kind)")
             }
     }
 }
