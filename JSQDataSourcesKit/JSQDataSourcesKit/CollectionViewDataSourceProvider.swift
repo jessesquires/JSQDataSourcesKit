@@ -257,9 +257,9 @@ public final class CollectionViewFetchedResultsDataSourceProvider <
 
 
 /*
-This separate type is required for Objective-C interoperability (interacting with Cocoa).
-Because the DataSourceProvider is generic it cannot be bridged to Objective-C.
-That is, it cannot be assigned to `UICollectionView.dataSource`.
+Avoid making DataSourceProvider inherit from NSObject. 
+Keep classes pure Swift.
+Keep responsibilies focused.
 */
 @objc private final class BridgedCollectionViewDataSource: NSObject, UICollectionViewDataSource {
 
@@ -285,18 +285,22 @@ That is, it cannot be assigned to `UICollectionView.dataSource`.
     }
 
     @objc func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return numberOfSections()
+            return numberOfSections()
     }
 
     @objc func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return numberOfItemsInSection(section)
+            return numberOfItemsInSection(section)
     }
 
-    @objc func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return cellForItemAtIndexPath(collectionView, indexPath)
+    @objc func collectionView(
+        collectionView: UICollectionView,
+        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+            return cellForItemAtIndexPath(collectionView, indexPath)
     }
 
-    @objc func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: SupplementaryViewKind,
+    @objc func collectionView(
+        collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: SupplementaryViewKind,
         atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
             return supplementaryViewAtIndexPath(collectionView, kind, indexPath)
     }

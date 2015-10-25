@@ -214,9 +214,9 @@ public final class TableViewFetchedResultsDataSourceProvider <CellFactory: Table
 
 
 /*
-This separate type is required for Objective-C interoperability (interacting with Cocoa).
-Because the DataSourceProvider is generic it cannot be bridged to Objective-C.
-That is, it cannot be assigned to `UITableView.dataSource`.
+Avoid making DataSourceProvider inherit from NSObject.
+Keep classes pure Swift.
+Keep responsibilies focused.
 */
 @objc private final class BridgedTableViewDataSource: NSObject, UITableViewDataSource {
 

@@ -296,9 +296,9 @@ public final class TableViewFetchedResultsDelegateProvider <CellFactory: TableVi
 
 
 /*
-This separate type is required for Objective-C interoperability (interacting with Cocoa).
-Because the DelegateProvider is generic it cannot be bridged to Objective-C.
-That is, it cannot be assigned to `NSFetchedResultsController.delegate`
+Avoid making DelegateProvider inherit from NSObject.
+Keep classes pure Swift.
+Keep responsibilies focused.
 */
 @objc private final class BridgedFetchedResultsDelegate: NSObject, NSFetchedResultsControllerDelegate {
 
@@ -327,21 +327,23 @@ That is, it cannot be assigned to `NSFetchedResultsController.delegate`
         willChangeContent(controller)
     }
 
-    @objc func controller(controller: NSFetchedResultsController,
+    @objc func controller(
+        controller: NSFetchedResultsController,
         didChangeSection sectionInfo: NSFetchedResultsSectionInfo,
         atIndex sectionIndex: Int,
         forChangeType type: NSFetchedResultsChangeType) {
             didChangeSection(controller, sectionInfo, sectionIndex, type)
     }
 
-    @objc func controller(controller: NSFetchedResultsController,
+    @objc func controller(
+        controller: NSFetchedResultsController,
         didChangeObject anObject: AnyObject,
         atIndexPath indexPath: NSIndexPath?,
         forChangeType type: NSFetchedResultsChangeType,
         newIndexPath: NSIndexPath?) {
             didChangeObject(controller, anObject, indexPath, type, newIndexPath)
     }
-    
+
     @objc func controllerDidChangeContent(controller: NSFetchedResultsController) {
         didChangeContent(controller)
     }
