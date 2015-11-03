@@ -1,13 +1,13 @@
 # JSQDataSourcesKit
-[![Build Status](https://secure.travis-ci.org/jessesquires/JSQDataSourcesKit.svg)](http://travis-ci.org/jessesquires/JSQDataSourcesKit) [![Version Status](https://img.shields.io/cocoapods/v/JSQDataSourcesKit.svg)][podLink] [![license MIT](https://img.shields.io/cocoapods/l/JSQDataSourcesKit.svg)][mitLink] [![codecov.io](https://img.shields.io/codecov/c/github/jessesquires/JSQDataSourcesKit.svg)](http://codecov.io/github/jessesquires/JSQDataSourcesKit) [![Platform](https://img.shields.io/cocoapods/p/JSQDataSourcesKit.svg)][docsLink] [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) 
+[![Build Status](https://secure.travis-ci.org/jessesquires/JSQDataSourcesKit.svg)](http://travis-ci.org/jessesquires/JSQDataSourcesKit) [![Version Status](https://img.shields.io/cocoapods/v/JSQDataSourcesKit.svg)][podLink] [![license MIT](https://img.shields.io/cocoapods/l/JSQDataSourcesKit.svg)][mitLink] [![codecov.io](https://img.shields.io/codecov/c/github/jessesquires/JSQDataSourcesKit.svg)](http://codecov.io/github/jessesquires/JSQDataSourcesKit) [![Platform](https://img.shields.io/cocoapods/p/JSQDataSourcesKit.svg)][docsLink] [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 *Type-safe, value-oriented, composable data source objects that keep your view controllers light*
 
-A Swift framework of data source and delegate objects inspired by [Andy Matuschak's](https://github.com/andymatuschak) *type-safe, value-oriented collection view data source [gist](https://gist.github.com/andymatuschak/f1e1691fa1a327468f8e)*.
+A Swift library of data source and delegate objects inspired by [Andy Matuschak's](https://github.com/andymatuschak) *type-safe, value-oriented collection view data source [gist](https://gist.github.com/andymatuschak/f1e1691fa1a327468f8e)*.
 
 ## About
 
-This framework reduces the boilerplate code regarding the `UITableView`, `UICollectionView`, and `NSFetchedResultsController` data source objects, as well as the `NSFetchedResultsControllerDelegate` object. It helps [keep view controllers light](http://www.objc.io/issue-1/), while focusing on type-safety, [SOLID](http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)) design principles, and easy interoperability with Cocoa. Further, it brings a more focused and data-driven perspective to these data sources. If you want to change your view then you change your data and its structure, without needing to update any data source or delegate protocol methods.
+This library reduces the boilerplate code regarding the `UITableView`, `UICollectionView`, and `NSFetchedResultsController` data source objects, as well as the `NSFetchedResultsControllerDelegate` object. It helps [keep view controllers light](http://www.objc.io/issue-1/), while focusing on type-safety, [SOLID](http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)) design principles, and easy interoperability with Cocoa. Further, it brings a more focused and data-driven perspective to these data sources. If you want to change your view then you change your data and its structure, without needing to update any data source or delegate protocol methods.
 
 ## Requirements
 
@@ -60,7 +60,7 @@ import JSQDataSourcesKit
 
 #### Design
 
-This framework is composed of different data source and delegate `Provider` classes. Instances of a `Provider` own a collection of model objects and a cell factory, and are responsible for *providing* a data source or delegate.
+This library is composed of different data source and delegate `Provider` classes. Instances of a `Provider` own a collection of model objects and a cell factory, and are responsible for *providing* a data source or delegate.
 
 #### Example
 
@@ -93,7 +93,7 @@ tableView.dataSource = dataSourceProvider.dataSource
 
 #### Demo Project
 
-The example app included exercises *all* functionality in this framework. Open `JSQDataSourcesKit.xcworkspace`, select the `Example` scheme, then build and run.
+The example app included exercises *all* functionality in this library. Open `JSQDataSourcesKit.xcworkspace`, select the `Example` scheme, then build and run.
 
 ## Unit tests
 
