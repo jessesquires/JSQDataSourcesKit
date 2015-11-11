@@ -171,9 +171,7 @@ public final class CollectionViewFetchedResultsDelegateProvider <CellFactory: Co
                 collectionView?.insertSections(section)
             case .Delete:
                 collectionView?.deleteSections(section)
-            case .Update:
-                collectionView?.reloadSections(section)
-            case .Move:
+            default:
                 break
             }
         }
