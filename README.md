@@ -62,6 +62,8 @@ import JSQDataSourcesKit
 
 This library is composed of different data source and delegate `Provider` classes. Instances of a `Provider` own a collection of model objects and a cell factory, and are responsible for *providing* a data source or delegate.
 
+>**Read the [blog post](http://www.jessesquires.com/building-data-sources-in-swift/) for more details!** *(written after the 3.0 release)*
+
 #### Example
 
 The following illustrates a simple example of how these components interact for a table view. Using a collection view follows similarly.
