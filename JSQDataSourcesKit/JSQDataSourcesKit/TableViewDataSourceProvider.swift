@@ -31,7 +31,7 @@ import UIKit
 public final class TableViewDataSourceProvider <
     SectionInfo: TableViewSectionInfo,
     CellFactory: TableViewCellFactoryType
-where CellFactory.Item == SectionInfo.Item>: CustomStringConvertible {
+    where CellFactory.Item == SectionInfo.Item>: CustomStringConvertible {
 
     // MARK: Typealiases
 
