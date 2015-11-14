@@ -24,9 +24,9 @@ import UIKit
 /**
  A `TableViewDataSourceProvider` is responsible for providing a data source object for a table view.
 
- - warning: Clients are responsbile for the following:
- - Registering cells with the table view
- - Adding, removing, or reloading cells and sections as the provider's `sections` are modified.
+ - warning: **Clients are responsbile for the following:**
+    - Registering cells with the table view
+    - Adding, removing, or reloading cells and sections as the provider's `sections` are modified.
  */
 public final class TableViewDataSourceProvider <
     SectionInfo: TableViewSectionInfo,
