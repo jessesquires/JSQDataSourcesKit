@@ -24,12 +24,11 @@ import UIKit
 /**
  A `CollectionViewDataSourceProvider` is responsible for providing a data source object for a collection view.
 
- **Clients are responsbile for the follwing:**
-
- - Registering cells with the collection view
- - Registering supplementary views with the collection view
- - Adding, removing, or reloading cells as the provider's `sections` are modified
- - Adding, removing, or reloading sections as the provider's `sections` are modified
+ - warning: Clients are responsbile for the follwing:
+    - Registering cells with the collection view
+    - Registering supplementary views with the collection view
+    - Adding, removing, or reloading cells as the provider's `sections` are modified
+    - Adding, removing, or reloading sections as the provider's `sections` are modified
  */
 public final class CollectionViewDataSourceProvider <
     SectionInfo: CollectionViewSectionInfo,
@@ -158,8 +157,7 @@ public final class CollectionViewDataSourceProvider <
  A `CollectionViewFetchedResultsDataSourceProvider` is responsible for providing a data source object
  for a collection view that is backed by an `NSFetchedResultsController` instance.
 
- The `CellFactory.Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
-
+ - warning: The `CellFactory.Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
  - note: Clients are responsbile for registering cells and supplementary views with the collection view.
  */
 public final class CollectionViewFetchedResultsDataSourceProvider <

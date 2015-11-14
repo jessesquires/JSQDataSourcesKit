@@ -25,7 +25,7 @@ import UIKit
  A `CollectionViewFetchedResultsDelegateProvider` is responsible for providing a delegate object
  for an instance of `NSFetchedResultsController` that manages data to display in a collection view.
 
- The `CellFactory.Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
+ - warning: The `CellFactory.Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
  */
 public final class CollectionViewFetchedResultsDelegateProvider <CellFactory: CollectionViewCellFactoryType>: CustomStringConvertible {
 
@@ -189,7 +189,7 @@ public final class CollectionViewFetchedResultsDelegateProvider <CellFactory: Co
  A `TableViewFetchedResultsDelegateProvider` is responsible for providing a delegate object
  for an instance of `NSFetchedResultsController` that manages data to display in a table view.
 
- The `CellFactory.Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
+ - warning: The `CellFactory.Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
  */
 public final class TableViewFetchedResultsDelegateProvider <CellFactory: TableViewCellFactoryType>: CustomStringConvertible {
 
@@ -341,7 +341,7 @@ Keep responsibilies focused.
         newIndexPath: NSIndexPath?) {
             didChangeObject(controller, anObject, indexPath, type, newIndexPath)
     }
-
+    
     @objc func controllerDidChangeContent(controller: NSFetchedResultsController) {
         didChangeContent(controller)
     }

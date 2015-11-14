@@ -24,15 +24,14 @@ import UIKit
 /**
  A `TableViewDataSourceProvider` is responsible for providing a data source object for a table view.
 
- **Clients are responsbile for the following:**
-
+ - warning: Clients are responsbile for the following:
  - Registering cells with the table view
  - Adding, removing, or reloading cells and sections as the provider's `sections` are modified.
  */
 public final class TableViewDataSourceProvider <
     SectionInfo: TableViewSectionInfo,
     CellFactory: TableViewCellFactoryType
-    where CellFactory.Item == SectionInfo.Item>: CustomStringConvertible {
+where CellFactory.Item == SectionInfo.Item>: CustomStringConvertible {
 
     // MARK: Typealiases
 
@@ -135,8 +134,7 @@ public final class TableViewDataSourceProvider <
  A `TableViewFetchedResultsDataSourceProvider` is responsible for providing a data source object for a table view
  that is backed by an `NSFetchedResultsController` instance.
 
- The `CellFactory.Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
-
+ - warning: The `CellFactory.Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
  - note: Clients are responsbile for registering cells with the table view.
  */
 public final class TableViewFetchedResultsDataSourceProvider <CellFactory: TableViewCellFactoryType>: CustomStringConvertible {
