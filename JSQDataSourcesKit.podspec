@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
    s.name = 'JSQDataSourcesKit'
-   s.version = '3.0.0'
+   s.version = '3.0.1'
    s.license = 'MIT'
 
    s.summary = 'Type-safe, value-oriented, composable data source objects that keep your view controllers light'
@@ -15,6 +15,6 @@ Pod::Spec.new do |s|
    s.resources = 'JSQDataSourcesKit/JSQDataSourcesKit/*.xib'
 
    s.platform = :ios, '8.0'
-   s.frameworks = 'Foundation', 'UIKit', 'CoreData'
+   s.frameworks = 'CoreData'
    s.requires_arc = true
 end
