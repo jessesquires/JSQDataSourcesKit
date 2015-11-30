@@ -66,7 +66,7 @@ public final class CollectionViewFetchedResultsDelegateProvider <CellFactory: Co
         cellFactory: CellFactory,
         fetchedResultsController: NSFetchedResultsController) {
             assert(fetchedResultsController: fetchedResultsController,
-                fetchesObjectsOfClassName: String(reflecting: Item.self))
+                fetchesObjectsOfClass: Item.self as! AnyClass)
 
             self.collectionView = collectionView
             self.cellFactory = cellFactory
@@ -227,7 +227,7 @@ public final class TableViewFetchedResultsDelegateProvider <CellFactory: TableVi
     */
     public init(tableView: UITableView, cellFactory: CellFactory, fetchedResultsController: NSFetchedResultsController) {
         assert(fetchedResultsController: fetchedResultsController,
-            fetchesObjectsOfClassName: String(reflecting: Item.self))
+            fetchesObjectsOfClass: Item.self as! AnyClass)
 
         self.tableView = tableView
         self.cellFactory = cellFactory

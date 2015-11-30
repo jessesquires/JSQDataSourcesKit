@@ -170,7 +170,7 @@ public final class TableViewFetchedResultsDataSourceProvider <CellFactory: Table
     */
     public init(fetchedResultsController: NSFetchedResultsController, cellFactory: CellFactory, tableView: UITableView? = nil) {
         assert(fetchedResultsController: fetchedResultsController,
-            fetchesObjectsOfClassName: String(reflecting: Item.self))
+            fetchesObjectsOfClass: Item.self as! AnyClass)
 
         self.fetchedResultsController = fetchedResultsController
         self.cellFactory = cellFactory
