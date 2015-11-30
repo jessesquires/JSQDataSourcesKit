@@ -25,6 +25,7 @@ env:
 # - brew outdated xctool || brew upgrade xctool
 
 script:
+- pod spec lint
 - pod lib lint
 
 - xctool clean build test -workspace JSQDataSourcesKit.xcworkspace -scheme Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
