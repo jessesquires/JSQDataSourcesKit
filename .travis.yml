@@ -1,38 +1,65 @@
-osx_image: xcode7.1
-
 language: objective-c
+osx_image: xcode7.3
 
 env:
    global:
    - LANG=en_US.UTF-8
 
+   - PROJECT="JSQDataSourcesKit.xcodeproj"
+   - WORKSPACE="JSQDataSourcesKit.xcworkspace"
+
+   - IOS_SCHEME="JSQDataSourcesKit"
+   - TVOS_SCHEME="JSQDataSourcesKit-tvOS"
+   - WATCHOS_SCHEME="JSQDataSourcesKit-watchOS"
+
+   - IOS_SDK=iphonesimulator9.3
+   - TVOS_SDK=appletvsimulator9.2
+   - WATCHOS_SDK=watchsimulator2.2
+env:
+   global:
+   - LANG=en_US.UTF-8
+
    matrix:
-   - DESTINATION="OS=8.1,name=iPhone 4s" SDK=iphonesimulator9.1
-   - DESTINATION="OS=8.2,name=iPhone 5" SDK=iphonesimulator9.1
-   - DESTINATION="OS=8.3,name=iPhone 5s" SDK=iphonesimulator9.1
-   - DESTINATION="OS=8.4,name=iPhone 6" SDK=iphonesimulator9.1
-   - DESTINATION="OS=9.1,name=iPhone 6 Plus" SDK=iphonesimulator9.1
-   - DESTINATION="OS=9.1,name=iPhone 6s" SDK=iphonesimulator9.1
-   - DESTINATION="OS=9.1,name=iPhone 6s Plus" SDK=iphonesimulator9.1
+   - DESTINATION="OS=8.1,name=iPhone 4s"     SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES"  BUILD_EXAMPLE="YES" POD_LINT="YES"
+   - DESTINATION="OS=8.2,name=iPhone 5"      SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES"  BUILD_EXAMPLE="NO"  POD_LINT="NO"
+   - DESTINATION="OS=8.3,name=iPhone 5s"     SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES"  BUILD_EXAMPLE="NO"  POD_LINT="NO"
+   - DESTINATION="OS=8.4,name=iPhone 6"      SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES"  BUILD_EXAMPLE="YES" POD_LINT="NO"
 
-   - DESTINATION="OS=8.1,name=iPad 2" SDK=iphonesimulator9.1
-   - DESTINATION="OS=8.4,name=iPad Retina" SDK=iphonesimulator9.1
-   - DESTINATION="OS=9.1,name=iPad Air" SDK=iphonesimulator9.1
+   - DESTINATION="OS=9.0,name=iPhone 5s"      SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO"
+   - DESTINATION="OS=9.1,name=iPhone 6s"      SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO"
+   - DESTINATION="OS=9.2,name=iPhone 6 Plus"  SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO"
+   - DESTINATION="OS=9.3,name=iPhone 6s Plus" SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO"
 
-
-# before_install:
-# - brew update
-# - brew outdated xctool || brew upgrade xctool
+   - DESTINATION="OS=8.1,name=iPad 2"       SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO"
+   - DESTINATION="OS=8.4,name=iPad 2"       SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO"
+   - DESTINATION="OS=9.0,name=iPad Retina"  SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO"
+   - DESTINATION="OS=9.1,name=iPad Air"     SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO"
+   - DESTINATION="OS=9.2,name=iPad Air 2"   SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO"
+   - DESTINATION="OS=9.3,name=iPad Pro"     SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="NO"  POD_LINT="NO"
 
 script:
-- pod spec lint
-- pod lib lint
+- if [ $POD_LINT == "YES" ]; then
+      pod spec lint;
+      pod lib lint;
+  fi
 
-- xctool clean build test -workspace JSQDataSourcesKit.xcworkspace -scheme Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
 
-- xctool clean build test -workspace JSQDataSourcesKit.xcworkspace -scheme JSQDataSourcesKit -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO
+- if [ $BUILD_EXAMPLE == "YES" ]; then
+      xcodebuild clean build -workspace "$WORKSPACE" -scheme Example -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=NO | xcpretty -c;
+  fi
 
-- xcodebuild test -project JSQDataSourcesKit/JSQDataSourcesKit.xcodeproj -scheme JSQDataSourcesKit -sdk iphonesimulator
+
+- if [ $RUN_TESTS == "YES" ]; then
+      xcodebuild test -workspace "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO | xcpretty -c;
+  else
+      xcodebuild clean build -workspace "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO | xcpretty -c;
+  fi
+
+
+# Build for reporting test coverage
+- if [ $RUN_TESTS == "YES" ]; then
+      xcodebuild test -project JSQDataSourcesKit/JSQDataSourcesKit.xcodeproj -scheme JSQDataSourcesKit -sdk iphonesimulator;
+  fi
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
