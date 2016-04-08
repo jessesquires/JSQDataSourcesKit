@@ -54,11 +54,10 @@ func removeAllThingsInStack(stack: CoreDataStack) {
 
 
 func thingFRCinContext(context: NSManagedObjectContext) -> NSFetchedResultsController {
-    return NSFetchedResultsController(
-        fetchRequest: Thing.fetchRequest(),
-        managedObjectContext: context,
-        sectionNameKeyPath: "colorName",
-        cacheName: nil)
+    return NSFetchedResultsController(fetchRequest: Thing.fetchRequest(),
+                                      managedObjectContext: context,
+                                      sectionNameKeyPath: "colorName",
+                                      cacheName: nil)
 }
 
 
@@ -66,18 +65,15 @@ func configureCollectionView(collectionView: UICollectionView) {
     let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
     layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     layout.headerReferenceSize = CGSize(width: collectionView.frame.size.width, height: 50)
-    
-    collectionView.registerNib(
-        UINib(nibName: "CollectionViewCell", bundle: nil),
-        forCellWithReuseIdentifier: CellId)
 
-    collectionView.registerNib(
-        TitledCollectionReusableView.nib,
-        forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
-        withReuseIdentifier: TitledCollectionReusableView.identifier)
+    collectionView.registerNib(UINib(nibName: "CollectionViewCell", bundle: nil),
+                               forCellWithReuseIdentifier: CellId)
 
-    collectionView.registerNib(
-        TitledCollectionReusableView.nib,
-        forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
-        withReuseIdentifier: TitledCollectionReusableView.identifier)
+    collectionView.registerNib(TitledCollectionReusableView.nib,
+                               forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+                               withReuseIdentifier: TitledCollectionReusableView.identifier)
+
+    collectionView.registerNib(TitledCollectionReusableView.nib,
+                               forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
+                               withReuseIdentifier: TitledCollectionReusableView.identifier)
 }

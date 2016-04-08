@@ -43,8 +43,8 @@ class TableViewDataSourceTests: XCTestCase {
         let section0 = TableViewSection(items: FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel(), FakeViewModel(), headerTitle: "Header", footerTitle: "Footer")
         let allSections = [section0]
 
-        let factoryExpectation = expectationWithDescription("\(__FUNCTION__)")
-        fakeTableView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + "_\(__FUNCTION__)")
+        let factoryExpectation = expectationWithDescription(#function)
+        fakeTableView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + #function)
 
         // GIVEN: a cell factory
         let factory = TableViewCellFactory(reuseIdentifier: fakeReuseId)
@@ -103,7 +103,7 @@ class TableViewDataSourceTests: XCTestCase {
         let section3 = TableViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let allSections = [section0, section1, section2, section3]
 
-        var factoryExpectation = expectationWithDescription("factory_\(__FUNCTION__)")
+        var factoryExpectation = expectationWithDescription("factory_\(#function)")
 
         // GIVEN: a cell factory
         let factory = TableViewCellFactory(reuseIdentifier: fakeReuseId)
@@ -131,7 +131,7 @@ class TableViewDataSourceTests: XCTestCase {
 
             for rowIndex in 0..<dataSourceProvider[sectionIndex].items.count {
 
-                let expectationName = "\(__FUNCTION__)_\(sectionIndex)_\(rowIndex)"
+                let expectationName = "\(#function)_\(sectionIndex)_\(rowIndex)"
                 fakeTableView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + expectationName)
 
                 // WHEN: we call the table view data source methods

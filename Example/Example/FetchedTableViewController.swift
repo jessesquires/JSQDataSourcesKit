@@ -50,16 +50,14 @@ class FetchedTableViewController: UITableViewController {
         let frc = thingFRCinContext(stack.context)
 
         // 3. create delegate provider
-        delegateProvider = TableViewFetchedResultsDelegateProvider(
-            tableView: tableView,
-            cellFactory: factory,
-            fetchedResultsController: frc)
+        delegateProvider = TableViewFetchedResultsDelegateProvider(tableView: tableView,
+                                                                   cellFactory: factory,
+                                                                   fetchedResultsController: frc)
 
         // 4. create data source provider
-        dataSourceProvider = TableViewFetchedResultsDataSourceProvider(
-            fetchedResultsController: frc,
-            cellFactory: factory,
-            tableView: tableView)
+        dataSourceProvider = TableViewFetchedResultsDataSourceProvider(fetchedResultsController: frc,
+                                                                       cellFactory: factory,
+                                                                       tableView: tableView)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -82,20 +80,15 @@ class FetchedTableViewController: UITableViewController {
     // MARK: Actions
 
     @IBAction func didTapActionButton(sender: UIBarButtonItem) {
-        UIAlertController.showActionAlert(self,
-            addNewAction: {
-                self.addNewThing()
-            },
-            deleteAction: {
+        UIAlertController.showActionAlert(self, addNewAction: {
+            self.addNewThing()
+            }, deleteAction: {
                 self.deleteSelected()
-            },
-            changeNameAction: {
+            }, changeNameAction: {
                 self.changeNameSelected()
-            },
-            changeColorAction: {
+            }, changeColorAction: {
                 self.changeColorSelected()
-            },
-            changeAllAction: {
+            }, changeAllAction: {
                 self.changeAllSelected()
         })
     }

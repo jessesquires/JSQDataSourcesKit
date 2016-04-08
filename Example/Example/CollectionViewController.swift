@@ -59,10 +59,9 @@ class CollectionViewController: UICollectionViewController {
         })
 
         // 4. create data source provider
-        self.dataSourceProvider = CollectionViewDataSourceProvider(
-            sections: allSections,
-            cellFactory: cellFactory,
-            supplementaryViewFactory: headerFactory,
-            collectionView: collectionView)
+        self.dataSourceProvider = CollectionViewDataSourceProvider(sections: allSections,
+                                                                   cellFactory: cellFactory,
+                                                                   supplementaryViewFactory: headerFactory,
+                                                                   collectionView: collectionView)
     }
 }

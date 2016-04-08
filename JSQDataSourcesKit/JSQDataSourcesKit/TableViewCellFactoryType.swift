@@ -28,10 +28,10 @@ public protocol TableViewCellFactoryType {
     // MARK: Associated types
 
     /// The type of elements backing the table view.
-    typealias Item
+    associatedtype Item
 
     /// The type of `UITableViewCell` that the factory produces.
-    typealias Cell: UITableViewCell
+    associatedtype Cell: UITableViewCell
 
 
     // MARK: Methods

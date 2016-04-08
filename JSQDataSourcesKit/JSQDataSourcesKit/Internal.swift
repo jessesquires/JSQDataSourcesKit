@@ -21,9 +21,9 @@ import CoreData
 internal func assert(
     fetchedResultsController controller: NSFetchedResultsController,
     fetchesObjectsOfClass objectClass: AnyClass,
-    function: StaticString = __FUNCTION__,
-    file: StaticString = __FILE__,
-    line: UInt = __LINE__) {
+    function: StaticString = #function,
+    file: StaticString = #file,
+    line: UInt = #line) {
         let fetchedClass: AnyClass = NSClassFromString(controller.fetchRequest.entity!.managedObjectClassName)!
         let fullyQualifiedClass: AnyClass? = NSClassFromString(String(reflecting: objectClass))
 

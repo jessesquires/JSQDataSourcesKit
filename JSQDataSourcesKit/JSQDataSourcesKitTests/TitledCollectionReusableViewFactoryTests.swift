@@ -96,7 +96,7 @@ class TitledCollectionReusableViewFactoryTests: XCTestCase {
         for sectionIndex in 0..<dataSourceProvider.sections.count {
             for rowIndex in 0..<dataSourceProvider[sectionIndex].items.count {
 
-                let expectationName = "\(__FUNCTION__)_\(sectionIndex)_\(rowIndex)"
+                let expectationName = "\(#function)_\(sectionIndex)_\(rowIndex)"
                 fakeCollectionView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + expectationName)
                 fakeCollectionView.dequeueSupplementaryViewExpectation = expectationWithDescription(dequeueSupplementaryViewExpectationName + expectationName)
 

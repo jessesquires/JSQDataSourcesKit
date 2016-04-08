@@ -23,7 +23,7 @@ public protocol TableViewSectionInfo {
     // MARK: Associated types
 
     /// The type of elements stored in the section.
-    typealias Item
+    associatedtype Item
 
 
     // MARK: Properties

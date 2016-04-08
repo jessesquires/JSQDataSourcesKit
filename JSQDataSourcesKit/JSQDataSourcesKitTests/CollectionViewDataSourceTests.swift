@@ -52,8 +52,8 @@ class CollectionViewDataSourceTests: XCTestCase {
         let section0 = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel())
         let allSections = [section0]
 
-        let cellFactoryExpectation = expectationWithDescription("\(__FUNCTION__)")
-        fakeCollectionView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + "\(__FUNCTION__)")
+        let cellFactoryExpectation = expectationWithDescription(#function)
+        fakeCollectionView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + #function)
 
         // GIVEN: a cell factory
         let factory = CollectionViewCellFactory(reuseIdentifier: fakeCellReuseId)
@@ -104,7 +104,7 @@ class CollectionViewDataSourceTests: XCTestCase {
         let section2 = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let allSections = [section0, section1, section2]
 
-        var cellFactoryExpectation = expectationWithDescription("cell_factory_\(__FUNCTION__)")
+        var cellFactoryExpectation = expectationWithDescription("cell_factory_\(#function)")
 
         // GIVEN: a cell factory
         let cellFactory = CollectionViewCellFactory(reuseIdentifier: fakeCellReuseId)
@@ -117,7 +117,7 @@ class CollectionViewDataSourceTests: XCTestCase {
                 return cell
         }
 
-        var supplementaryFactoryExpectation = expectationWithDescription("supplementary_factory_\(__FUNCTION__)")
+        var supplementaryFactoryExpectation = expectationWithDescription("supplementary_factory_\(#function)")
 
         // GIVEN: a supplementary view factory
         let supplementaryViewFactory = CollectionSupplementaryViewFactory(reuseIdentifier: fakeSupplementaryViewReuseId)
@@ -150,7 +150,7 @@ class CollectionViewDataSourceTests: XCTestCase {
         for sectionIndex in 0..<dataSourceProvider.sections.count {
             for rowIndex in 0..<dataSourceProvider[sectionIndex].items.count {
 
-                let expectationName = "\(__FUNCTION__)_\(sectionIndex)_\(rowIndex)"
+                let expectationName = "\(#function)_\(sectionIndex)_\(rowIndex)"
                 fakeCollectionView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + expectationName)
                 fakeCollectionView.dequeueSupplementaryViewExpectation = expectationWithDescription(dequeueSupplementaryViewExpectationName + expectationName)
 

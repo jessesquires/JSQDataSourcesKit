@@ -26,7 +26,7 @@ import JSQDataSourcesKit
 class DescriptionTests: XCTestCase {
     
     func test_CollectionViewDataSource_Descriptions() {
-        print("\(__FUNCTION__)\n")
+        print("\(#function)\n")
         let fakeCollectionView = FakeCollectionView(frame: CGRect.zero, collectionViewLayout: FakeFlowLayout())
 
         let section = CollectionViewSection(items: FakeViewModel(), FakeViewModel())
@@ -61,7 +61,7 @@ class DescriptionTests: XCTestCase {
     }
 
     func test_TableViewDataSource_Descriptions() {
-        print("\(__FUNCTION__)\n")
+        print("\(#function)\n")
         let fakeTableView = FakeTableView(frame: CGRect.zero)
 
         let section = TableViewSection(items: FakeViewModel(), FakeViewModel())

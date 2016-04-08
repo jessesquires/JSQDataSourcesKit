@@ -32,10 +32,10 @@ public protocol CollectionSupplementaryViewFactoryType {
     // MARK: Associated types
 
     /// The type of elements backing the collection view.
-    typealias Item
+    associatedtype Item
 
     /// The type of `UICollectionReusableView` that the factory produces.
-    typealias SupplementaryView: UICollectionReusableView
+    associatedtype SupplementaryView: UICollectionReusableView
 
 
     // MARK: Methods

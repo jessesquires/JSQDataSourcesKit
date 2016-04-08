@@ -81,17 +81,15 @@ class FetchedCollectionViewController: UICollectionViewController {
         let frc = thingFRCinContext(stack.context)
 
         // 4. create delegate provider
-        delegateProvider = CollectionViewFetchedResultsDelegateProvider(
-            collectionView: collectionView!,
-            cellFactory: cellFactory,
-            fetchedResultsController: frc)
+        delegateProvider = CollectionViewFetchedResultsDelegateProvider(collectionView: collectionView!,
+                                                                        cellFactory: cellFactory,
+                                                                        fetchedResultsController: frc)
 
         // 5. create data source provider
-        dataSourceProvider = CollectionViewFetchedResultsDataSourceProvider(
-            fetchedResultsController: frc,
-            cellFactory: cellFactory,
-            supplementaryViewFactory: composedFactory,
-            collectionView: collectionView)
+        dataSourceProvider = CollectionViewFetchedResultsDataSourceProvider(fetchedResultsController: frc,
+                                                                            cellFactory: cellFactory,
+                                                                            supplementaryViewFactory: composedFactory,
+                                                                            collectionView: collectionView)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -114,20 +112,15 @@ class FetchedCollectionViewController: UICollectionViewController {
     // MARK: Actions
 
     @IBAction func didTapActionButton(sender: UIBarButtonItem) {
-        UIAlertController.showActionAlert(self,
-            addNewAction: {
-                self.addNewThing()
-            },
-            deleteAction: {
+        UIAlertController.showActionAlert(self, addNewAction: {
+            self.addNewThing()
+            }, deleteAction: {
                 self.deleteSelected()
-            },
-            changeNameAction: {
+            }, changeNameAction: {
                 self.changeNameSelected()
-            },
-            changeColorAction: {
+            }, changeColorAction: {
                 self.changeColorSelected()
-            },
-            changeAllAction: {
+            }, changeAllAction: {
                 self.changeAllSelected()
         })
     }

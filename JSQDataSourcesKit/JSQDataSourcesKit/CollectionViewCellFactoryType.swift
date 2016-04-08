@@ -27,10 +27,10 @@ public protocol CollectionViewCellFactoryType {
     // MARK: Associated types
 
     /// The type of elements backing the collection view.
-    typealias Item
+    associatedtype Item
 
     /// The type of `UICollectionViewCell` that the factory produces.
-    typealias Cell: UICollectionViewCell
+    associatedtype Cell: UICollectionViewCell
 
 
     // MARK: Methods

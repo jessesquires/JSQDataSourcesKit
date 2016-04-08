@@ -23,38 +23,37 @@ import UIKit
 
 
 extension UIAlertController {
-    class func showActionAlert(
-        presenter: UIViewController,
-        addNewAction: () -> Void,
-        deleteAction: () -> Void,
-        changeNameAction: () -> Void,
-        changeColorAction: () -> Void,
-        changeAllAction: () -> Void) {
-            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+    class func showActionAlert(presenter: UIViewController,
+                               addNewAction: () -> Void,
+                               deleteAction: () -> Void,
+                               changeNameAction: () -> Void,
+                               changeColorAction: () -> Void,
+                               changeAllAction: () -> Void) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
 
-            alert.addAction(UIAlertAction(title: "Add new", style: .Default) { action in
-                addNewAction()
-                })
+        alert.addAction(UIAlertAction(title: "Add new", style: .Default) { action in
+            addNewAction()
+            })
 
-            alert.addAction(UIAlertAction(title: "Delete selected", style: .Default) { action in
-                deleteAction()
-                })
+        alert.addAction(UIAlertAction(title: "Delete selected", style: .Default) { action in
+            deleteAction()
+            })
 
-            alert.addAction(UIAlertAction(title: "Change name selected", style: .Default) { action in
-                changeNameAction()
-                })
+        alert.addAction(UIAlertAction(title: "Change name selected", style: .Default) { action in
+            changeNameAction()
+            })
 
-            alert.addAction(UIAlertAction(title: "Change color selected", style: .Default) { action in
-                changeColorAction()
-                })
+        alert.addAction(UIAlertAction(title: "Change color selected", style: .Default) { action in
+            changeColorAction()
+            })
 
-            alert.addAction(UIAlertAction(title: "Change all selected", style: .Default) { action in
-                changeAllAction()
-                })
+        alert.addAction(UIAlertAction(title: "Change all selected", style: .Default) { action in
+            changeAllAction()
+            })
 
-            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
 
-            presenter.presentViewController(alert, animated: true, completion: nil)
+        presenter.presentViewController(alert, animated: true, completion: nil)
     }
 }
 
