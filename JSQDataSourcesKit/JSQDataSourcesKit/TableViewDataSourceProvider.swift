@@ -25,13 +25,13 @@ import UIKit
  A `TableViewDataSourceProvider` is responsible for providing a data source object for a table view.
 
  - warning: **Clients are responsbile for the following:**
-    - Registering cells with the table view
-    - Adding, removing, or reloading cells and sections as the provider's `sections` are modified.
+ - Registering cells with the table view
+ - Adding, removing, or reloading cells and sections as the provider's `sections` are modified.
  */
 public final class TableViewDataSourceProvider <
     SectionInfo: TableViewSectionInfo,
     CellFactory: TableViewCellFactoryType
-    where CellFactory.Item == SectionInfo.Item>: CustomStringConvertible {
+where CellFactory.Item == SectionInfo.Item>: CustomStringConvertible {
 
     // MARK: Typealiases
 
@@ -54,14 +54,14 @@ public final class TableViewDataSourceProvider <
     // MARK: Initialization
 
     /**
-    Constructs a new data source provider for a table view.
+     Constructs a new data source provider for a table view.
 
-    - parameter sections:    The sections to display in the table view.
-    - parameter cellFactory: The cell factory from which the table view data source will dequeue cells.
-    - parameter tableView:   The table view whose data source will be provided by this provider.
+     - parameter sections:    The sections to display in the table view.
+     - parameter cellFactory: The cell factory from which the table view data source will dequeue cells.
+     - parameter tableView:   The table view whose data source will be provided by this provider.
 
-    - returns: A new `TableViewDataSourceProvider` instance.
-    */
+     - returns: A new `TableViewDataSourceProvider` instance.
+     */
     public init(sections: [SectionInfo], cellFactory: CellFactory, tableView: UITableView? = nil) {
         self.sections = sections
         self.cellFactory = cellFactory
@@ -72,9 +72,9 @@ public final class TableViewDataSourceProvider <
     // MARK: Subscripts
 
     /**
-    - parameter index: The index of the section to return.
-    - returns: The section at `index`.
-    */
+     - parameter index: The index of the section to return.
+     - returns: The section at `index`.
+     */
     public subscript (index: Int) -> SectionInfo {
         get {
             return sections[index]
@@ -160,17 +160,17 @@ public final class TableViewFetchedResultsDataSourceProvider <CellFactory: Table
     // MARK: Initialization
 
     /**
-    Constructs a new data source provider for the table view.
+     Constructs a new data source provider for the table view.
 
-    - parameter fetchedResultsController: The fetched results controller that provides the data for the table view.
-    - parameter cellFactory:              The cell factory from which the table view data source will dequeue cells.
-    - parameter tableView:                The table view whose data source will be provided by this provider.
+     - parameter fetchedResultsController: The fetched results controller that provides the data for the table view.
+     - parameter cellFactory:              The cell factory from which the table view data source will dequeue cells.
+     - parameter tableView:                The table view whose data source will be provided by this provider.
 
-    - returns: A new `TableViewFetchedResultsDataSourceProvider` instance.
-    */
+     - returns: A new `TableViewFetchedResultsDataSourceProvider` instance.
+     */
     public init(fetchedResultsController: NSFetchedResultsController, cellFactory: CellFactory, tableView: UITableView? = nil) {
         assert(fetchedResultsController: fetchedResultsController,
-            fetchesObjectsOfClass: Item.self as! AnyClass)
+               fetchesObjectsOfClass: Item.self as! AnyClass)
 
         self.fetchedResultsController = fetchedResultsController
         self.cellFactory = cellFactory
@@ -212,10 +212,10 @@ public final class TableViewFetchedResultsDataSourceProvider <CellFactory: Table
 
 
 /*
-Avoid making DataSourceProvider inherit from NSObject.
-Keep classes pure Swift.
-Keep responsibilies focused.
-*/
+ Avoid making DataSourceProvider inherit from NSObject.
+ Keep classes pure Swift.
+ Keep responsibilies focused.
+ */
 @objc private final class BridgedTableViewDataSource: NSObject, UITableViewDataSource {
 
     typealias NumberOfSectionsHandler = () -> Int
@@ -231,16 +231,16 @@ Keep responsibilies focused.
     let titleForFooterInSection: TitleForFooterInSectionHandler
 
     init(numberOfSections: NumberOfSectionsHandler,
-        numberOfRowsInSection: NumberOfRowsInSectionHandler,
-        cellForRowAtIndexPath: CellForRowAtIndexPathHandler,
-        titleForHeaderInSection: TitleForHeaderInSectionHandler,
-        titleForFooterInSection: TitleForFooterInSectionHandler) {
+         numberOfRowsInSection: NumberOfRowsInSectionHandler,
+         cellForRowAtIndexPath: CellForRowAtIndexPathHandler,
+         titleForHeaderInSection: TitleForHeaderInSectionHandler,
+         titleForFooterInSection: TitleForFooterInSectionHandler) {
 
-            self.numberOfSections = numberOfSections
-            self.numberOfRowsInSection = numberOfRowsInSection
-            self.cellForRowAtIndexPath = cellForRowAtIndexPath
-            self.titleForHeaderInSection = titleForHeaderInSection
-            self.titleForFooterInSection = titleForFooterInSection
+        self.numberOfSections = numberOfSections
+        self.numberOfRowsInSection = numberOfRowsInSection
+        self.cellForRowAtIndexPath = cellForRowAtIndexPath
+        self.titleForHeaderInSection = titleForHeaderInSection
+        self.titleForFooterInSection = titleForFooterInSection
     }
 
     @objc func numberOfSectionsInTableView(tableView: UITableView) -> Int {

@@ -18,9 +18,9 @@
 
 
 /**
-A `TableViewSection` is a concrete `TableViewSectionInfo`.
-A section instance is responsible for managing the elements in a section.
-*/
+ A `TableViewSection` is a concrete `TableViewSectionInfo`.
+ A section instance is responsible for managing the elements in a section.
+ */
 public struct TableViewSection <Item>: TableViewSectionInfo, CustomStringConvertible {
 
     // MARK: Properties
@@ -43,14 +43,14 @@ public struct TableViewSection <Item>: TableViewSectionInfo, CustomStringConvert
     // MARK: Initialization
 
     /**
-    Constructs a new table view section.
+     Constructs a new table view section.
 
-    - parameter items:       The elements in the section.
-    - parameter headerTitle: The section header title.
-    - parameter footerTitle: The section footer title.
+     - parameter items:       The elements in the section.
+     - parameter headerTitle: The section header title.
+     - parameter footerTitle: The section footer title.
 
-    - returns: A new `TableViewSection` instance.
-    */
+     - returns: A new `TableViewSection` instance.
+     */
     public init(items: Item..., headerTitle: String? = nil, footerTitle: String? = nil) {
         self.init(items, headerTitle: headerTitle, footerTitle: footerTitle)
     }
@@ -74,9 +74,9 @@ public struct TableViewSection <Item>: TableViewSectionInfo, CustomStringConvert
     // MARK: Subscripts
 
     /**
-    - parameter index: The index of the item to return.
-    - returns: The item at `index`.
-    */
+     - parameter index: The index of the item to return.
+     - returns: The item at `index`.
+     */
     public subscript (index: Int) -> Item {
         get {
             return items[index]

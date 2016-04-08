@@ -37,14 +37,14 @@ public protocol TableViewCellFactoryType {
     // MARK: Methods
 
     /**
-    Creates and returns a new `Cell` instance, or dequeues an existing cell for reuse.
+     Creates and returns a new `Cell` instance, or dequeues an existing cell for reuse.
 
-    - parameter item:      The item at `indexPath`.
-    - parameter tableView: The table view requesting this information.
-    - parameter indexPath: The index path that specifies the location of `cell` and `item`.
+     - parameter item:      The item at `indexPath`.
+     - parameter tableView: The table view requesting this information.
+     - parameter indexPath: The index path that specifies the location of `cell` and `item`.
 
-    - returns: An initialized or dequeued `UITableViewCell` of type `Cell`.
-    */
+     - returns: An initialized or dequeued `UITableViewCell` of type `Cell`.
+     */
     func cellForItem(item: Item, inTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) -> Cell
 
     /**

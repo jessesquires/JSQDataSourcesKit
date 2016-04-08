@@ -39,11 +39,11 @@ public struct CollectionViewSection <Item>: CollectionViewSectionInfo, CustomStr
     // MARK: Initialization
 
     /**
-    Constructs a new collection view section.
+     Constructs a new collection view section.
 
-    - parameter items: The elements in the section.
-    - returns: A new `CollectionViewSection` instance.
-    */
+     - parameter items: The elements in the section.
+     - returns: A new `CollectionViewSection` instance.
+     */
     public init(items: Item...) {
         self.init(items)
     }
@@ -62,9 +62,9 @@ public struct CollectionViewSection <Item>: CollectionViewSectionInfo, CustomStr
     // MARK: Subscripts
 
     /**
-    - parameter index: The index of the item to return.
-    - returns: The item at `index`.
-    */
+     - parameter index: The index of the item to return.
+     - returns: The item at `index`.
+     */
     public subscript (index: Int) -> Item {
         get {
             return items[index]

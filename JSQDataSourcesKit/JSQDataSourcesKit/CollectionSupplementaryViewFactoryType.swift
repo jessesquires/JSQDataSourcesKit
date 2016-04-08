@@ -41,15 +41,15 @@ public protocol CollectionSupplementaryViewFactoryType {
     // MARK: Methods
 
     /**
-    Creates and returns a new `SupplementaryView` instance, or dequeues an existing view for reuse.
+     Creates and returns a new `SupplementaryView` instance, or dequeues an existing view for reuse.
 
-    - parameter item:           The item at `indexPath`.
-    - parameter kind:           An identifier that describes the type of the supplementary view.
-    - parameter collectionView: The collection view requesting this information.
-    - parameter indexPath:      The index path that specifies the location of the new supplementary view.
+     - parameter item:           The item at `indexPath`.
+     - parameter kind:           An identifier that describes the type of the supplementary view.
+     - parameter collectionView: The collection view requesting this information.
+     - parameter indexPath:      The index path that specifies the location of the new supplementary view.
 
-    - returns: An initialized or dequeued `UICollectionReusableView` of type `SupplementaryView`.
-    */
+     - returns: An initialized or dequeued `UICollectionReusableView` of type `SupplementaryView`.
+     */
     func supplementaryViewForItem(item: Item, kind: SupplementaryViewKind, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> SupplementaryView
 
     /**

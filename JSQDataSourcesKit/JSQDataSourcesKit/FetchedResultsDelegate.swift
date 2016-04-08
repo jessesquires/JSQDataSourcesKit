@@ -38,9 +38,9 @@ public final class CollectionViewFetchedResultsDelegateProvider <CellFactory: Co
     // MARK: Properties
 
     /**
-    The collection view that displays the data from the `NSFetchedResultsController`
-    for which this provider provides a delegate.
-    */
+     The collection view that displays the data from the `NSFetchedResultsController`
+     for which this provider provides a delegate.
+     */
     public weak var collectionView: UICollectionView?
 
     /// Returns the cell factory for this delegate provider.
@@ -53,24 +53,23 @@ public final class CollectionViewFetchedResultsDelegateProvider <CellFactory: Co
     // MARK: Initialization
 
     /**
-    Constructs a new delegate provider for a fetched results controller.
+     Constructs a new delegate provider for a fetched results controller.
 
-    - parameter collectionView:           The collection view to be updated when the fetched results change.
-    - parameter cellFactory:              The cell factory from which the fetched results controller delegate will configure cells.
-    - parameter fetchedResultsController: The fetched results controller whose delegate will be provided by this provider.
+     - parameter collectionView:           The collection view to be updated when the fetched results change.
+     - parameter cellFactory:              The cell factory from which the fetched results controller delegate will configure cells.
+     - parameter fetchedResultsController: The fetched results controller whose delegate will be provided by this provider.
 
-    - returns: A new `CollectionViewFetchedResultsDelegateProvider` instance.
-    */
-    public init(
-        collectionView: UICollectionView,
-        cellFactory: CellFactory,
-        fetchedResultsController: NSFetchedResultsController) {
-            assert(fetchedResultsController: fetchedResultsController,
-                fetchesObjectsOfClass: Item.self as! AnyClass)
+     - returns: A new `CollectionViewFetchedResultsDelegateProvider` instance.
+     */
+    public init(collectionView: UICollectionView,
+                cellFactory: CellFactory,
+                fetchedResultsController: NSFetchedResultsController) {
+        assert(fetchedResultsController: fetchedResultsController,
+               fetchesObjectsOfClass: Item.self as! AnyClass)
 
-            self.collectionView = collectionView
-            self.cellFactory = cellFactory
-            fetchedResultsController.delegate = delegate
+        self.collectionView = collectionView
+        self.cellFactory = cellFactory
+        fetchedResultsController.delegate = delegate
     }
 
 
@@ -148,7 +147,7 @@ public final class CollectionViewFetchedResultsDelegateProvider <CellFactory: Co
                     item = updatedObjects[indexPath],
                     cell = collectionView?.cellForItemAtIndexPath(indexPath) as? CellFactory.Cell,
                     view = collectionView {
-                        cellFactory.configureCell(cell, forItem: item, inCollectionView: view, atIndexPath: indexPath)
+                    cellFactory.configureCell(cell, forItem: item, inCollectionView: view, atIndexPath: indexPath)
                 }
             case .Move:
                 if let deleteIndexPath = indexPaths.first {
@@ -202,9 +201,9 @@ public final class TableViewFetchedResultsDelegateProvider <CellFactory: TableVi
     // MARK: Properties
 
     /**
-    The table view that displays the data from the `NSFetchedResultsController`
-    for which this provider provides a delegate.
-    */
+     The table view that displays the data from the `NSFetchedResultsController`
+     for which this provider provides a delegate.
+     */
     public weak var tableView: UITableView?
 
     /// Returns the cell factory for this delegate provider.
@@ -217,17 +216,17 @@ public final class TableViewFetchedResultsDelegateProvider <CellFactory: TableVi
     // MARK: Initialization
 
     /**
-    Constructs a new delegate provider for a fetched results controller.
+     Constructs a new delegate provider for a fetched results controller.
 
-    - parameter tableView:                The table view to be updated when the fetched results change.
-    - parameter cellFactory:              The cell factory from which the fetched results controller delegate will configure cells.
-    - parameter fetchedResultsController: The fetched results controller whose delegate will be provided by this provider.
+     - parameter tableView:                The table view to be updated when the fetched results change.
+     - parameter cellFactory:              The cell factory from which the fetched results controller delegate will configure cells.
+     - parameter fetchedResultsController: The fetched results controller whose delegate will be provided by this provider.
 
-    - returns: A new `TableViewFetchedResultsDelegateProvider` instance.
-    */
+     - returns: A new `TableViewFetchedResultsDelegateProvider` instance.
+     */
     public init(tableView: UITableView, cellFactory: CellFactory, fetchedResultsController: NSFetchedResultsController) {
         assert(fetchedResultsController: fetchedResultsController,
-            fetchesObjectsOfClass: Item.self as! AnyClass)
+               fetchesObjectsOfClass: Item.self as! AnyClass)
 
         self.tableView = tableView
         self.cellFactory = cellFactory
@@ -275,7 +274,7 @@ public final class TableViewFetchedResultsDelegateProvider <CellFactory: TableVi
                 if let indexPath = indexPath,
                     cell = self.tableView?.cellForRowAtIndexPath(indexPath) as? CellFactory.Cell,
                     view = self.tableView {
-                        self.cellFactory.configureCell(cell, forItem: anyObject as! Item, inTableView: view, atIndexPath: indexPath)
+                    self.cellFactory.configureCell(cell, forItem: anyObject as! Item, inTableView: view, atIndexPath: indexPath)
                 }
             case .Move:
                 if let deleteIndexPath = indexPath {
@@ -294,10 +293,10 @@ public final class TableViewFetchedResultsDelegateProvider <CellFactory: TableVi
 
 
 /*
-Avoid making DelegateProvider inherit from NSObject.
-Keep classes pure Swift.
-Keep responsibilies focused.
-*/
+ Avoid making DelegateProvider inherit from NSObject.
+ Keep classes pure Swift.
+ Keep responsibilies focused.
+ */
 @objc private final class BridgedFetchedResultsDelegate: NSObject, NSFetchedResultsControllerDelegate {
 
     typealias WillChangeContentHandler = (NSFetchedResultsController) -> Void
@@ -311,35 +310,33 @@ Keep responsibilies focused.
     let didChangeContent: DidChangeContentHandler
 
     init(willChangeContent: WillChangeContentHandler,
-        didChangeSection: DidChangeSectionHandler,
-        didChangeObject: DidChangeObjectHandler,
-        didChangeContent: DidChangeContentHandler) {
+         didChangeSection: DidChangeSectionHandler,
+         didChangeObject: DidChangeObjectHandler,
+         didChangeContent: DidChangeContentHandler) {
 
-            self.willChangeContent = willChangeContent
-            self.didChangeSection = didChangeSection
-            self.didChangeObject = didChangeObject
-            self.didChangeContent = didChangeContent
+        self.willChangeContent = willChangeContent
+        self.didChangeSection = didChangeSection
+        self.didChangeObject = didChangeObject
+        self.didChangeContent = didChangeContent
     }
 
     @objc func controllerWillChangeContent(controller: NSFetchedResultsController) {
         willChangeContent(controller)
     }
 
-    @objc func controller(
-        controller: NSFetchedResultsController,
-        didChangeSection sectionInfo: NSFetchedResultsSectionInfo,
-        atIndex sectionIndex: Int,
-        forChangeType type: NSFetchedResultsChangeType) {
-            didChangeSection(controller, sectionInfo, sectionIndex, type)
+    @objc func controller(controller: NSFetchedResultsController,
+                          didChangeSection sectionInfo: NSFetchedResultsSectionInfo,
+                                           atIndex sectionIndex: Int,
+                                                   forChangeType type: NSFetchedResultsChangeType) {
+        didChangeSection(controller, sectionInfo, sectionIndex, type)
     }
 
-    @objc func controller(
-        controller: NSFetchedResultsController,
-        didChangeObject anObject: AnyObject,
-        atIndexPath indexPath: NSIndexPath?,
-        forChangeType type: NSFetchedResultsChangeType,
-        newIndexPath: NSIndexPath?) {
-            didChangeObject(controller, anObject, indexPath, type, newIndexPath)
+    @objc func controller(controller: NSFetchedResultsController,
+                          didChangeObject anObject: AnyObject,
+                                          atIndexPath indexPath: NSIndexPath?,
+                                                      forChangeType type: NSFetchedResultsChangeType,
+                                                                    newIndexPath: NSIndexPath?) {
+        didChangeObject(controller, anObject, indexPath, type, newIndexPath)
     }
     
     @objc func controllerDidChangeContent(controller: NSFetchedResultsController) {
