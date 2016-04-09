@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
    s.name = 'JSQDataSourcesKit'
-   s.version = '3.0.1'
+   s.version = '4.0.0'
    s.license = 'MIT'
 
    s.summary = 'Type-safe, value-oriented, composable data source objects that keep your view controllers light'
@@ -12,7 +12,6 @@ Pod::Spec.new do |s|
 
    s.source = { :git => 'https://github.com/jessesquires/JSQDataSourcesKit.git', :tag => s.version }
    s.source_files = 'Source/*.swift'
-   s.resources = 'Source/*.xib'
 
    s.platform = :ios, '8.0'
    s.tvos.deployment_target = '9.0'

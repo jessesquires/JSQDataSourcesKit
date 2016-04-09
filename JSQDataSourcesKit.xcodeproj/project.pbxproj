@@ -437,7 +437,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hexedbits.JSQDataSourcesKit-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hexedbits.JSQDataSourcesKit;
 				PRODUCT_MODULE_NAME = JSQDataSourcesKit;
 				PRODUCT_NAME = JSQDataSourcesKit;
 				SDKROOT = appletvos;
@@ -458,7 +458,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.hexedbits.JSQDataSourcesKit-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hexedbits.JSQDataSourcesKit;
 				PRODUCT_MODULE_NAME = JSQDataSourcesKit;
 				PRODUCT_NAME = JSQDataSourcesKit;
 				SDKROOT = appletvos;
