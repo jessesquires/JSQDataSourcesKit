@@ -23,33 +23,35 @@ import XCTest
 import JSQDataSourcesKit
 
 
-class TitledCollectionReusableViewTests: XCTestCase {
+final class TitledCollectionReusableViewTests: XCTestCase {
 
-    func test_ThatViewLoadsFromNib() {
-        let nib = TitledCollectionReusableView.nib
-        XCTAssertNotNil(nib)
-
+    func test_ThatViewInitializesWithFrame() {
         let identifier = TitledCollectionReusableView.identifier
         XCTAssertEqual(identifier, String(TitledCollectionReusableView.self))
 
-        let views = NSBundle(forClass: TitledCollectionReusableView.self).loadNibNamed(
-            "TitledCollectionReusableView",
-            owner: nil,
-            options: nil) as! [UIView]
+        let view = TitledCollectionReusableView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
+        view.layoutIfNeeded()
 
-        XCTAssertTrue(views.first is TitledCollectionReusableView)
-
-        let titledView = views.first as! TitledCollectionReusableView
-        XCTAssertNotNil(titledView.label)
-        XCTAssertNotNil(titledView.topSpacing)
-        XCTAssertNotNil(titledView.bottomSpacing)
-        XCTAssertNotNil(titledView.leadingSpacing)
-        XCTAssertNotNil(titledView.trailingSpacing)
+        XCTAssertEqual(view.verticalInset, 8)
+        XCTAssertEqual(view.horizontalInset, 8)
+        XCTAssertEqual(view.label.frame, CGRect(x: 8, y: 8, width: 304, height: 84))
     }
 
-    func test_ThatViewPreparesForReuse() {
-        let view = loadView()
+    func test_ThatViewAdjustsLabelFrameForInsets() {
+        let identifier = TitledCollectionReusableView.identifier
+        XCTAssertEqual(identifier, String(TitledCollectionReusableView.self))
 
+        let view = TitledCollectionReusableView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
+        view.verticalInset = 10
+        view.horizontalInset = 4
+        view.layoutIfNeeded()
+
+        XCTAssertEqual(view.label.frame, CGRect(x: 4, y: 10, width: 312, height: 80))
+    }
+
+    func test_ThatViewPreparesForReuse_ForText() {
+        let view = TitledCollectionReusableView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
+        view.layoutIfNeeded()
         view.label.text = "title text"
 
         XCTAssertNotNil(view.label.text)
@@ -59,23 +61,24 @@ class TitledCollectionReusableViewTests: XCTestCase {
         XCTAssertNil(view.label.text)
     }
 
-    func test_ThatViewSetsBackgoundColor() {
-        let view = loadView()
+    func test_ThatViewPreparesForReuse_ForAttributedText() {
+        let view = TitledCollectionReusableView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
+        view.layoutIfNeeded()
+        view.label.attributedText = NSAttributedString(string:"title text")
 
+        XCTAssertNotNil(view.label.attributedText)
+
+        view.prepareForReuse()
+
+        XCTAssertNil(view.label.attributedText)
+    }
+
+    func test_ThatViewSetsBackgoundColor() {
+        let view = TitledCollectionReusableView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
+        view.layoutIfNeeded()
         view.backgroundColor = .redColor()
 
         XCTAssertEqual(view.label.backgroundColor, view.backgroundColor)
         XCTAssertEqual(view.label.backgroundColor, .redColor())
     }
-
-
-    // MARK: Helpers
-
-    func loadView() -> TitledCollectionReusableView {
-        return (NSBundle(forClass: TitledCollectionReusableView.self).loadNibNamed(
-            "TitledCollectionReusableView",
-            owner: nil,
-            options: nil) as! [UIView]).first as! TitledCollectionReusableView
-    }
-
 }

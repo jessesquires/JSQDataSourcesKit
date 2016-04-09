@@ -42,7 +42,6 @@
 		88DCAD741CB87CC000C018AF /* TableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD331CB87CB400C018AF /* TableViewSection.swift */; };
 		88DCAD751CB87CC000C018AF /* TableViewSectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD341CB87CB400C018AF /* TableViewSectionInfo.swift */; };
 		88DCAD761CB87CC000C018AF /* TitledCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD351CB87CB400C018AF /* TitledCollectionReusableView.swift */; };
-		88DCAD771CB87CC000C018AF /* TitledCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88DCAD361CB87CB400C018AF /* TitledCollectionReusableView.xib */; };
 		88DCAD781CB87CC000C018AF /* TitledCollectionReusableViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD371CB87CB400C018AF /* TitledCollectionReusableViewFactory.swift */; };
 		88DCAD791CB87CC900C018AF /* CollectionViewDataSourceSubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD391CB87CB400C018AF /* CollectionViewDataSourceSubscriptTests.swift */; };
 		88DCAD7A1CB87CC900C018AF /* CollectionViewDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD3A1CB87CB400C018AF /* CollectionViewDataSourceTests.swift */; };
@@ -103,7 +102,6 @@
 		88DCAD331CB87CB400C018AF /* TableViewSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSection.swift; sourceTree = "<group>"; };
 		88DCAD341CB87CB400C018AF /* TableViewSectionInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSectionInfo.swift; sourceTree = "<group>"; };
 		88DCAD351CB87CB400C018AF /* TitledCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledCollectionReusableView.swift; sourceTree = "<group>"; };
-		88DCAD361CB87CB400C018AF /* TitledCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitledCollectionReusableView.xib; sourceTree = "<group>"; };
 		88DCAD371CB87CB400C018AF /* TitledCollectionReusableViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledCollectionReusableViewFactory.swift; sourceTree = "<group>"; };
 		88DCAD391CB87CB400C018AF /* CollectionViewDataSourceSubscriptTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSourceSubscriptTests.swift; sourceTree = "<group>"; };
 		88DCAD3A1CB87CB400C018AF /* CollectionViewDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSourceTests.swift; sourceTree = "<group>"; };
@@ -185,7 +183,6 @@
 				88DCAD331CB87CB400C018AF /* TableViewSection.swift */,
 				88DCAD341CB87CB400C018AF /* TableViewSectionInfo.swift */,
 				88DCAD351CB87CB400C018AF /* TitledCollectionReusableView.swift */,
-				88DCAD361CB87CB400C018AF /* TitledCollectionReusableView.xib */,
 				88DCAD371CB87CB400C018AF /* TitledCollectionReusableViewFactory.swift */,
 			);
 			path = Source;
@@ -340,7 +337,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88DCAD771CB87CC000C018AF /* TitledCollectionReusableView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -633,6 +629,7 @@
 				881A92D21CB881270080BC5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		887DD07E1B3BAC6C00FC4BF1 /* Build configuration list for PBXProject "JSQDataSourcesKit" */ = {
 			isa = XCConfigurationList;

@@ -23,7 +23,7 @@ import XCTest
 import JSQDataSourcesKit
 
 
-class TableViewSectionTests: XCTestCase {
+final class TableViewSectionTests: XCTestCase {
 
     func test_ThatTableViewSection_Initializes() {
 

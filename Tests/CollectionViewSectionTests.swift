@@ -23,7 +23,7 @@ import XCTest
 import JSQDataSourcesKit
 
 
-class CollectionViewSectionTests: XCTestCase {
+final class CollectionViewSectionTests: XCTestCase {
 
     func test_ThatCollectionViewSection_Initializes() {
 

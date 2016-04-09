@@ -23,7 +23,7 @@ import XCTest
 import JSQDataSourcesKit
 
 
-class CollectionViewDataSourceTests: XCTestCase {
+final class CollectionViewDataSourceTests: XCTestCase {
 
     private let fakeCellReuseId = "fakeCellId"
     private let fakeSupplementaryViewReuseId = "fakeSupplementaryId"
@@ -36,11 +36,11 @@ class CollectionViewDataSourceTests: XCTestCase {
         super.setUp()
 
         fakeCollectionView.registerClass(FakeCollectionCell.self,
-            forCellWithReuseIdentifier: fakeCellReuseId)
+                                         forCellWithReuseIdentifier: fakeCellReuseId)
 
         fakeCollectionView.registerClass(FakeCollectionSupplementaryView.self,
-            forSupplementaryViewOfKind: FakeSupplementaryViewKind,
-            withReuseIdentifier: fakeSupplementaryViewReuseId)
+                                         forSupplementaryViewOfKind: FakeSupplementaryViewKind,
+                                         withReuseIdentifier: fakeSupplementaryViewReuseId)
     }
 
     func test_ThatCollectionViewDataSource_ReturnsExpectedData_ForSingleSection() {
@@ -57,14 +57,14 @@ class CollectionViewDataSourceTests: XCTestCase {
 
         // GIVEN: a cell factory
         let factory = CollectionViewCellFactory(reuseIdentifier: fakeCellReuseId)
-            { (cell: FakeCollectionCell, model: FakeViewModel, view: UICollectionView, indexPath: NSIndexPath) -> FakeCollectionCell in
-                XCTAssertEqual(cell.reuseIdentifier!, self.fakeCellReuseId, "Dequeued cell should have expected identifier")
-                XCTAssertEqual(model, expectedModel, "Model object should equal expected value")
-                XCTAssertEqual(view, self.fakeCollectionView, "CollectionView should equal the collectionView for the data source")
-                XCTAssertEqual(indexPath, expectedIndexPath, "IndexPath should equal expected value")
+        { (cell: FakeCollectionCell, model: FakeViewModel, view: UICollectionView, indexPath: NSIndexPath) -> FakeCollectionCell in
+            XCTAssertEqual(cell.reuseIdentifier!, self.fakeCellReuseId, "Dequeued cell should have expected identifier")
+            XCTAssertEqual(model, expectedModel, "Model object should equal expected value")
+            XCTAssertEqual(view, self.fakeCollectionView, "CollectionView should equal the collectionView for the data source")
+            XCTAssertEqual(indexPath, expectedIndexPath, "IndexPath should equal expected value")
 
-                cellFactoryExpectation.fulfill()
-                return cell
+            cellFactoryExpectation.fulfill()
+            return cell
         }
 
         // GIVEN: a data source provider
@@ -108,27 +108,27 @@ class CollectionViewDataSourceTests: XCTestCase {
 
         // GIVEN: a cell factory
         let cellFactory = CollectionViewCellFactory(reuseIdentifier: fakeCellReuseId)
-            { (cell: FakeCollectionCell, model: FakeViewModel, view: UICollectionView, indexPath: NSIndexPath) -> FakeCollectionCell in
-                XCTAssertEqual(cell.reuseIdentifier!, self.fakeCellReuseId, "Dequeued cell should have expected identifier")
-                XCTAssertEqual(model, allSections[indexPath.section][indexPath.item], "Model object should equal expected value")
-                XCTAssertEqual(view, self.fakeCollectionView, "CollectionView should equal the collectionView for the data source")
+        { (cell: FakeCollectionCell, model: FakeViewModel, view: UICollectionView, indexPath: NSIndexPath) -> FakeCollectionCell in
+            XCTAssertEqual(cell.reuseIdentifier!, self.fakeCellReuseId, "Dequeued cell should have expected identifier")
+            XCTAssertEqual(model, allSections[indexPath.section][indexPath.item], "Model object should equal expected value")
+            XCTAssertEqual(view, self.fakeCollectionView, "CollectionView should equal the collectionView for the data source")
 
-                cellFactoryExpectation.fulfill()
-                return cell
+            cellFactoryExpectation.fulfill()
+            return cell
         }
 
         var supplementaryFactoryExpectation = expectationWithDescription("supplementary_factory_\(#function)")
 
         // GIVEN: a supplementary view factory
         let supplementaryViewFactory = CollectionSupplementaryViewFactory(reuseIdentifier: fakeSupplementaryViewReuseId)
-            { (view: FakeCollectionSupplementaryView, model: FakeViewModel, kind: String, collectionView: UICollectionView, indexPath: NSIndexPath) -> FakeCollectionSupplementaryView in
-                XCTAssertEqual(view.reuseIdentifier!, self.fakeSupplementaryViewReuseId, "Dequeued supplementary view should have expected identifier")
-                XCTAssertEqual(model, allSections[indexPath.section][indexPath.item], "Model object should equal expected value")
-                XCTAssertEqual(kind, FakeSupplementaryViewKind, "View kind should have expected kind")
-                XCTAssertEqual(collectionView, self.fakeCollectionView, "CollectionView should equal the collectionView for the data source")
+        { (view: FakeCollectionSupplementaryView, model: FakeViewModel, kind: String, collectionView: UICollectionView, indexPath: NSIndexPath) -> FakeCollectionSupplementaryView in
+            XCTAssertEqual(view.reuseIdentifier!, self.fakeSupplementaryViewReuseId, "Dequeued supplementary view should have expected identifier")
+            XCTAssertEqual(model, allSections[indexPath.section][indexPath.item], "Model object should equal expected value")
+            XCTAssertEqual(kind, FakeSupplementaryViewKind, "View kind should have expected kind")
+            XCTAssertEqual(collectionView, self.fakeCollectionView, "CollectionView should equal the collectionView for the data source")
 
-                supplementaryFactoryExpectation.fulfill()
-                return view
+            supplementaryFactoryExpectation.fulfill()
+            return view
         }
 
         // GIVEN: a data source provider
@@ -171,7 +171,7 @@ class CollectionViewDataSourceTests: XCTestCase {
 
                 // THEN: the collectionView calls `dequeueReusableCellWithReuseIdentifier`
                 // THEN: the cell factory calls its `ConfigurationHandler`
-                
+
                 // THEN: the collectionView calls `dequeueReusableSupplementaryViewOfKind`
                 // THEN: the supplementary view factory calls its `ConfigurationHandler`
                 waitForExpectationsWithTimeout(DefaultTimeout, handler: { (error) -> Void in

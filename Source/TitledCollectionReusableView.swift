@@ -30,19 +30,21 @@ public final class TitledCollectionReusableView: UICollectionReusableView {
     // MARK: Properties
 
     /// The label of the reusable view.
-    @IBOutlet public private(set) weak var label: UILabel!
+    public private(set) var label: UILabel
 
-    /// The leading spacing constraint between the label and its superview.
-    @IBOutlet public private(set) weak var leadingSpacing: NSLayoutConstraint!
+    /// The vertical layout insets for the label. The default value is 8.
+    public var verticalInset = CGFloat(8) {
+        didSet {
+            setNeedsLayout()
+        }
+    }
 
-    /// The top spacing constraint between the label and its superview.
-    @IBOutlet public private(set) weak var topSpacing: NSLayoutConstraint!
-
-    /// The trailing constraint between the label and its superview.
-    @IBOutlet public private(set) weak var trailingSpacing: NSLayoutConstraint!
-
-    /// The bottom spacing constraint between the label and its superview.
-    @IBOutlet public private(set) weak var bottomSpacing: NSLayoutConstraint!
+    /// The horizontal layout insets for the label. The default value is 8.
+    public var horizontalInset = CGFloat(8) {
+        didSet {
+            setNeedsLayout()
+        }
+    }
 
     /// :nodoc:
     public override var backgroundColor: UIColor? {
@@ -51,7 +53,7 @@ public final class TitledCollectionReusableView: UICollectionReusableView {
         }
         set {
             super.backgroundColor = newValue
-            label?.backgroundColor = newValue
+            label.backgroundColor = newValue
         }
     }
 
@@ -65,22 +67,30 @@ public final class TitledCollectionReusableView: UICollectionReusableView {
         }
     }
 
-    /// The `UINib` object initialized for the view.
-    public class var nib: UINib {
-        get {
-            return UINib(
-                nibName: "TitledCollectionReusableView",
-                bundle: NSBundle(forClass: TitledCollectionReusableView.self))
-        }
+    /// :nodoc:
+    override public init(frame: CGRect) {
+        label = UILabel()
+        super.init(frame: frame)
+        addSubview(label)
     }
 
-
-    // MARK: Methods
+    /// :nodoc:
+    required public init?(coder aDecoder: NSCoder) {
+        label = UILabel()
+        super.init(coder: aDecoder)
+        addSubview(label)
+    }
 
     /// :nodoc:
     override public func prepareForReuse() {
         super.prepareForReuse()
-        label?.text = nil
-        label?.attributedText = nil
+        label.text = nil
+        label.attributedText = nil
+    }
+
+    /// :nodoc:
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        label.frame = CGRectInset(bounds, horizontalInset, verticalInset)
     }
 }

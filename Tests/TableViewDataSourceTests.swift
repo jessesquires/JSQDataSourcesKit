@@ -23,7 +23,7 @@ import XCTest
 import JSQDataSourcesKit
 
 
-class TableViewDataSourceTests: XCTestCase {
+final class TableViewDataSourceTests: XCTestCase {
 
     private let fakeReuseId = "fakeCellId"
     private let fakeTableView = FakeTableView(frame: CGRect(x: 0, y: 0, width: 320, height: 600), style: .Plain)
@@ -48,15 +48,15 @@ class TableViewDataSourceTests: XCTestCase {
 
         // GIVEN: a cell factory
         let factory = TableViewCellFactory(reuseIdentifier: fakeReuseId)
-            { (cell: FakeTableCell, model: FakeViewModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
-                XCTAssertEqual(cell.reuseIdentifier!, self.fakeReuseId, "Dequeued cell should have expected identifier")
+        { (cell: FakeTableCell, model: FakeViewModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
+            XCTAssertEqual(cell.reuseIdentifier!, self.fakeReuseId, "Dequeued cell should have expected identifier")
 
-                XCTAssertEqual(model, expectedModel, "Model object should equal expected value")
-                XCTAssertEqual(tableView, self.fakeTableView, "TableView should equal the tableView for the data source")
-                XCTAssertEqual(indexPath, expectedIndexPath, "IndexPath should equal expected value")
+            XCTAssertEqual(model, expectedModel, "Model object should equal expected value")
+            XCTAssertEqual(tableView, self.fakeTableView, "TableView should equal the tableView for the data source")
+            XCTAssertEqual(indexPath, expectedIndexPath, "IndexPath should equal expected value")
 
-                factoryExpectation.fulfill()
-                return cell
+            factoryExpectation.fulfill()
+            return cell
         }
 
         // GIVEN: a data source provider
@@ -107,13 +107,13 @@ class TableViewDataSourceTests: XCTestCase {
 
         // GIVEN: a cell factory
         let factory = TableViewCellFactory(reuseIdentifier: fakeReuseId)
-            { (cell: FakeTableCell, model: FakeViewModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
-                XCTAssertEqual(cell.reuseIdentifier!, self.fakeReuseId, "Dequeued cell should have expected identifier")
-                XCTAssertEqual(model, allSections[indexPath.section][indexPath.row], "Model object should equal expected value")
-                XCTAssertEqual(tableView, self.fakeTableView, "TableView should equal the tableView for the data source")
+        { (cell: FakeTableCell, model: FakeViewModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
+            XCTAssertEqual(cell.reuseIdentifier!, self.fakeReuseId, "Dequeued cell should have expected identifier")
+            XCTAssertEqual(model, allSections[indexPath.section][indexPath.row], "Model object should equal expected value")
+            XCTAssertEqual(tableView, self.fakeTableView, "TableView should equal the tableView for the data source")
 
-                factoryExpectation.fulfill()
-                return cell
+            factoryExpectation.fulfill()
+            return cell
         }
 
         // GIVEN: a data source provider

@@ -69,11 +69,11 @@ func configureCollectionView(collectionView: UICollectionView) {
     collectionView.registerNib(UINib(nibName: "CollectionViewCell", bundle: nil),
                                forCellWithReuseIdentifier: CellId)
 
-    collectionView.registerNib(TitledCollectionReusableView.nib,
-                               forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
-                               withReuseIdentifier: TitledCollectionReusableView.identifier)
+    collectionView.registerClass(TitledCollectionReusableView.self,
+                                 forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+                                 withReuseIdentifier: TitledCollectionReusableView.identifier)
 
-    collectionView.registerNib(TitledCollectionReusableView.nib,
-                               forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
-                               withReuseIdentifier: TitledCollectionReusableView.identifier)
+    collectionView.registerClass(TitledCollectionReusableView.self,
+                                 forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
+                                 withReuseIdentifier: TitledCollectionReusableView.identifier)
 }

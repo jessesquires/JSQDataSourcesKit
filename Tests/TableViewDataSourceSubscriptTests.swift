@@ -23,7 +23,7 @@ import XCTest
 import JSQDataSourcesKit
 
 
-class TableViewDataSourceSubscriptTests: XCTestCase {
+final class TableViewDataSourceSubscriptTests: XCTestCase {
 
     func test_ThatTableViewDataSourceProvider_ReturnsExpectedDataFrom_IntSubscript() {
 
@@ -125,5 +125,5 @@ class TableViewDataSourceSubscriptTests: XCTestCase {
         XCTAssertEqual(2, dataSourceProvider.sections.count, "Number of sections should remain unchanged")
         XCTAssertEqual(1, section1.count, "Number of items in section should remain unchanged")
     }
-
+    
 }

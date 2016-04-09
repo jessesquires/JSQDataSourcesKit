@@ -36,11 +36,11 @@ class TitledCollectionReusableViewFactoryTests: XCTestCase {
         super.setUp()
 
         fakeCollectionView.registerClass(FakeCollectionCell.self,
-            forCellWithReuseIdentifier: fakeCellReuseId)
+                                         forCellWithReuseIdentifier: fakeCellReuseId)
 
-        fakeCollectionView.registerNib(TitledCollectionReusableView.nib,
-            forSupplementaryViewOfKind: FakeSupplementaryViewKind,
-            withReuseIdentifier: TitledCollectionReusableView.identifier)
+        fakeCollectionView.registerClass(TitledCollectionReusableView.self,
+                                         forSupplementaryViewOfKind: FakeSupplementaryViewKind,
+                                         withReuseIdentifier: TitledCollectionReusableView.identifier)
     }
 
     func test_ThatCollectionViewDataSource_ReturnsExpectedData_TitledCollectionReusableViewFactory() {
@@ -55,7 +55,7 @@ class TitledCollectionReusableViewFactoryTests: XCTestCase {
 
         // GIVEN: a cell factory
         let cellFactory = CollectionViewCellFactory(reuseIdentifier: fakeCellReuseId)
-            { (cell: FakeCollectionCell, model: FakeViewModel, view: UICollectionView, indexPath: NSIndexPath) -> FakeCollectionCell in
+        { (cell: FakeCollectionCell, model: FakeViewModel, view: UICollectionView, indexPath: NSIndexPath) -> FakeCollectionCell in
             cellFactoryExpectation.fulfill()
             return cell
         }
@@ -73,16 +73,15 @@ class TitledCollectionReusableViewFactoryTests: XCTestCase {
                 titledViewDataConfigExpectation.fulfill()
                 return view
             },
-            styleConfigurator: { (view) in
-                titledViewStyleConfigExpectation.fulfill()
+                                                                           styleConfigurator: { (view) in
+                                                                            titledViewStyleConfigExpectation.fulfill()
         })
 
         // GIVEN: a data source provider
-        let dataSourceProvider = CollectionViewDataSourceProvider(
-            sections: allSections,
-            cellFactory: cellFactory,
-            supplementaryViewFactory: supplementaryViewFactory,
-            collectionView: fakeCollectionView)
+        let dataSourceProvider = CollectionViewDataSourceProvider(sections: allSections,
+                                                                  cellFactory: cellFactory,
+                                                                  supplementaryViewFactory: supplementaryViewFactory,
+                                                                  collectionView: fakeCollectionView)
 
         let dataSource = dataSourceProvider.dataSource
 
@@ -114,7 +113,7 @@ class TitledCollectionReusableViewFactoryTests: XCTestCase {
                 // THEN: we receive the expected return values for supplementary views
                 XCTAssertNotNil(supplementaryView, "Supplementary view should not be nil")
                 XCTAssertEqual(supplementaryView!.reuseIdentifier!, TitledCollectionReusableView.identifier,
-                    "Data source should return supplementary views with the expected identifier")
+                               "Data source should return supplementary views with the expected identifier")
 
                 // THEN: the collectionView calls `dequeueReusableCellWithReuseIdentifier`
                 // THEN: the cell factory calls its `ConfigurationHandler`
@@ -125,7 +124,7 @@ class TitledCollectionReusableViewFactoryTests: XCTestCase {
                 waitForExpectationsWithTimeout(DefaultTimeout, handler: { (error) -> Void in
                     XCTAssertNil(error, "Expections should not error")
                 })
-                
+
                 // reset expectation names for next loop, ignore last item
                 if !(sectionIndex == dataSourceProvider.sections.count - 1 && rowIndex == dataSourceProvider[sectionIndex].count - 1) {
                     cellFactoryExpectation = expectationWithDescription("cell_factory_" + expectationName)

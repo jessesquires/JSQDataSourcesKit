@@ -23,8 +23,8 @@ import XCTest
 import JSQDataSourcesKit
 
 
-class DescriptionTests: XCTestCase {
-    
+final class DescriptionTests: XCTestCase {
+
     func test_CollectionViewDataSource_Descriptions() {
         print("\(#function)\n")
         let fakeCollectionView = FakeCollectionView(frame: CGRect.zero, collectionViewLayout: FakeFlowLayout())
@@ -40,14 +40,14 @@ class DescriptionTests: XCTestCase {
 
         let supplementaryViewFactory = CollectionSupplementaryViewFactory(reuseIdentifier: "supplementaryId") {
             (view, model: FakeViewModel, kind, collectionView, indexPath) -> FakeCollectionSupplementaryView in
-                return view
+            return view
         }
         print(supplementaryViewFactory, "\n")
 
         let titledSupplementaryViewFactory = TitledCollectionReusableViewFactory(dataConfigurator: {
             (view, item: FakeViewModel, kind, cv, indexPath) -> TitledCollectionReusableView in
             return view
-            }) { (view) -> Void in
+        }) { (view) -> Void in
         }
         print(titledSupplementaryViewFactory, "\n")
 
@@ -77,7 +77,7 @@ class DescriptionTests: XCTestCase {
             sections: [section],
             cellFactory: cellFactory,
             tableView: fakeTableView)
-
+        
         print(dataSourceProvider, "\n")
     }
     
