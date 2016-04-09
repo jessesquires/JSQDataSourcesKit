@@ -29,7 +29,7 @@ import UIKit
  - Adding, removing, or reloading cells and sections as the provider's `sections` are modified.
  */
 public final class TableViewDataSourceProvider <
-    SectionInfo: TableViewSectionInfo,
+    SectionInfo: SectionInfoProtocol,
     CellFactory: TableViewCellFactoryType
 where CellFactory.Item == SectionInfo.Item>: CustomStringConvertible {
 

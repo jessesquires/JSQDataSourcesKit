@@ -36,11 +36,11 @@ final class TableViewDataSourceTests: XCTestCase {
 
     func test_ThatTableViewDataSource_ReturnsExpectedData_ForSingleSection() {
 
-        // GIVEN: a single TableViewSection with data items
+        // GIVEN: a single section with data items
         let expectedModel = FakeViewModel()
         let expectedIndexPath = NSIndexPath(forRow: 2, inSection: 0)
 
-        let section0 = TableViewSection(items: FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel(), FakeViewModel(), headerTitle: "Header", footerTitle: "Footer")
+        let section0 = Section(items: FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel(), FakeViewModel(), headerTitle: "Header", footerTitle: "Footer")
         let allSections = [section0]
 
         let factoryExpectation = expectationWithDescription(#function)
@@ -97,10 +97,10 @@ final class TableViewDataSourceTests: XCTestCase {
     func test_ThatTableViewDataSource_ReturnsExpectedData_ForMultipleSections() {
 
         // GIVEN: some table view sections
-        let section0 = TableViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), headerTitle: "Header", footerTitle: "Footer")
-        let section1 = TableViewSection(items: FakeViewModel(), headerTitle: "Header Title")
-        let section2 = TableViewSection(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
-        let section3 = TableViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
+        let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), headerTitle: "Header", footerTitle: "Footer")
+        let section1 = Section(items: FakeViewModel(), headerTitle: "Header Title")
+        let section2 = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
+        let section3 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let allSections = [section0, section1, section2, section3]
 
         var factoryExpectation = expectationWithDescription("factory_\(#function)")

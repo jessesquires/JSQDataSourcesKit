@@ -17,15 +17,38 @@
 //
 
 
-/**
- A `TableViewSection` is a concrete `TableViewSectionInfo`.
- A section instance is responsible for managing the elements in a section.
- */
-public struct TableViewSection <Item>: TableViewSectionInfo, CustomStringConvertible {
+/// An instance conforming to `SectionInfoProtocol` represents a section of items.
+public protocol SectionInfoProtocol {
+
+    // MARK: Associated types
+
+    /// The type of elements stored in the section.
+    associatedtype Item
+
 
     // MARK: Properties
 
-    /// The elements in the collection view section.
+    /// The elements in the section.
+    var items: [Item] { get set }
+
+    /// The header title for the section.
+    var headerTitle: String? { get }
+
+    /// The footer title for the section.
+    var footerTitle: String? { get }
+}
+
+
+
+/**
+ A `Section` is a concrete `SectionInfoProtocol` type.
+ A section instance is responsible for managing the elements in a section.
+ */
+public struct Section <Item>: SectionInfoProtocol, CustomStringConvertible {
+
+    // MARK: Properties
+
+    /// The elements in the section.
     public var items: [Item]
 
     /// The header title for the section.
@@ -34,7 +57,7 @@ public struct TableViewSection <Item>: TableViewSectionInfo, CustomStringConvert
     /// The footer title for the section.
     public let footerTitle: String?
 
-    /// Returns the number of elements in the section.
+    /// The number of elements in the section.
     public var count: Int {
         return items.count
     }
@@ -43,26 +66,26 @@ public struct TableViewSection <Item>: TableViewSectionInfo, CustomStringConvert
     // MARK: Initialization
 
     /**
-     Constructs a new table view section.
+     Constructs a new section.
 
      - parameter items:       The elements in the section.
      - parameter headerTitle: The section header title.
      - parameter footerTitle: The section footer title.
 
-     - returns: A new `TableViewSection` instance.
+     - returns: A new `Section` instance.
      */
     public init(items: Item..., headerTitle: String? = nil, footerTitle: String? = nil) {
         self.init(items, headerTitle: headerTitle, footerTitle: footerTitle)
     }
 
     /**
-     Constructs a new table view section.
+     Constructs a new section.
 
      - parameter items:       The elements in the section.
      - parameter headerTitle: The section header title.
      - parameter footerTitle: The section footer title.
 
-     - returns: A new `TableViewSection` instance.
+     - returns: A new `Section` instance.
      */
     public init(_ items: [Item], headerTitle: String? = nil, footerTitle: String? = nil) {
         self.items = items
@@ -92,7 +115,7 @@ public struct TableViewSection <Item>: TableViewSectionInfo, CustomStringConvert
     /// :nodoc:
     public var description: String {
         get {
-            return "<\(TableViewSection.self): items=\(items)>"
+            return "<\(Section.self): headerTitle=\(headerTitle); footerTitle=\(footerTitle); items=\(items)>"
         }
     }
 }

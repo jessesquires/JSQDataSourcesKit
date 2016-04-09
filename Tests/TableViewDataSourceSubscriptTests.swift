@@ -28,9 +28,9 @@ final class TableViewDataSourceSubscriptTests: XCTestCase {
     func test_ThatTableViewDataSourceProvider_ReturnsExpectedDataFrom_IntSubscript() {
 
         // GIVEN: some table view sections
-        let section0 = TableViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), headerTitle: "Header", footerTitle: "Footer")
-        let section1 = TableViewSection(items: FakeViewModel(), headerTitle: "Header Title")
-        let section2 = TableViewSection(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
+        let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), headerTitle: "Header", footerTitle: "Footer")
+        let section1 = Section(items: FakeViewModel(), headerTitle: "Header Title")
+        let section2 = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
 
         // GIVEN: a cell factory
         let factory = TableViewCellFactory(reuseIdentifier: "cellid") { (cell: FakeTableCell, model: FakeViewModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
@@ -52,8 +52,8 @@ final class TableViewDataSourceSubscriptTests: XCTestCase {
     func test_ThatTableViewDataSourceProvider_SetsExpectedDataAt_IntSubscript() {
 
         // GIVEN: some table view sections
-        let section0 = TableViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), headerTitle: "Header", footerTitle: "Footer")
-        let section1 = TableViewSection(items: FakeViewModel(), headerTitle: "Header Title")
+        let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), headerTitle: "Header", footerTitle: "Footer")
+        let section1 = Section(items: FakeViewModel(), headerTitle: "Header Title")
 
         // GIVEN: a cell factory
         let factory = TableViewCellFactory(reuseIdentifier: "reuseId") { (cell: UITableViewCell, model: FakeViewModel, view: UITableView, index: NSIndexPath) -> UITableViewCell in
@@ -66,7 +66,7 @@ final class TableViewDataSourceSubscriptTests: XCTestCase {
 
         // WHEN: we set a section at a specific index
         let index = 1
-        let expectedSection = TableViewSection(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
+        let expectedSection = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
         dataSourceProvider[index] = expectedSection
 
         // THEN: the section at the specified index is replaced with the new section
@@ -80,8 +80,8 @@ final class TableViewDataSourceSubscriptTests: XCTestCase {
     func test_ThatTableViewDataSourceProvider_ReturnsExpectedDataFrom_IndexPathSubscript() {
 
         // GIVEN: some table view sections
-        let section0 = TableViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel())
-        let section1 = TableViewSection(items: FakeViewModel())
+        let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel())
+        let section1 = Section(items: FakeViewModel())
 
         // GIVEN: a cell factory
         let factory = TableViewCellFactory(reuseIdentifier: "cellid") { (cell: FakeTableCell, model: FakeViewModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
@@ -102,8 +102,8 @@ final class TableViewDataSourceSubscriptTests: XCTestCase {
     func test_ThatTableViewDataSourceProvider_SetsExpectedDataAt_IndexPathSubscript() {
 
         // GIVEN: some table view sections
-        let section0 = TableViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel())
-        let section1 = TableViewSection(items: FakeViewModel())
+        let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel())
+        let section1 = Section(items: FakeViewModel())
 
         // GIVEN: a cell factory
         let factory = TableViewCellFactory(reuseIdentifier: "reuseId") { (cell: UITableViewCell, model: FakeViewModel, view: UITableView, index: NSIndexPath) -> UITableViewCell in

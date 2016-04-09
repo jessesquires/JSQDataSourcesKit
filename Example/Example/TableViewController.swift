@@ -23,17 +23,16 @@ import JSQDataSourcesKit
 
 class TableViewController: UITableViewController {
 
-    typealias Section = TableViewSection<CellViewModel>
     typealias CellFactory = TableViewCellFactory<UITableViewCell, CellViewModel>
-    var dataSourceProvider: TableViewDataSourceProvider<Section, CellFactory>?
+    var dataSourceProvider: TableViewDataSourceProvider<Section<CellViewModel>, CellFactory>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // 1. create view models
-        let section0 = TableViewSection(items: CellViewModel(), CellViewModel(), CellViewModel(), headerTitle: "First")
-        let section1 = TableViewSection(items: CellViewModel(), CellViewModel(), CellViewModel(), CellViewModel(), headerTitle: "Second", footerTitle: "Only 2nd has a footer")
-        let section2 = TableViewSection(items: CellViewModel(), CellViewModel(), headerTitle: "Third")
+        let section0 = Section(items: CellViewModel(), CellViewModel(), CellViewModel(), headerTitle: "First")
+        let section1 = Section(items: CellViewModel(), CellViewModel(), CellViewModel(), CellViewModel(), headerTitle: "Second", footerTitle: "Only 2nd has a footer")
+        let section2 = Section(items: CellViewModel(), CellViewModel(), headerTitle: "Third")
         let allSections = [section0, section1, section2]
 
         // 2. create cell factory

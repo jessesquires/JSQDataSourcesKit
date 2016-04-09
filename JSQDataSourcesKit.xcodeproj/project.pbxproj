@@ -21,7 +21,6 @@
 		881A92DF1CB881550080BC5C /* TableViewCellFactoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD311CB87CB400C018AF /* TableViewCellFactoryType.swift */; };
 		881A92E01CB881550080BC5C /* TableViewDataSourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD321CB87CB400C018AF /* TableViewDataSourceProvider.swift */; };
 		881A92E11CB881550080BC5C /* TableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD331CB87CB400C018AF /* TableViewSection.swift */; };
-		881A92E21CB881550080BC5C /* TableViewSectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD341CB87CB400C018AF /* TableViewSectionInfo.swift */; };
 		881A92E31CB881550080BC5C /* TitledCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD351CB87CB400C018AF /* TitledCollectionReusableView.swift */; };
 		881A92E51CB881550080BC5C /* TitledCollectionReusableViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD371CB87CB400C018AF /* TitledCollectionReusableViewFactory.swift */; };
 		887DD08F1B3BAC6C00FC4BF1 /* JSQDataSourcesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887DD0841B3BAC6C00FC4BF1 /* JSQDataSourcesKit.framework */; };
@@ -40,7 +39,6 @@
 		88DCAD721CB87CC000C018AF /* TableViewCellFactoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD311CB87CB400C018AF /* TableViewCellFactoryType.swift */; };
 		88DCAD731CB87CC000C018AF /* TableViewDataSourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD321CB87CB400C018AF /* TableViewDataSourceProvider.swift */; };
 		88DCAD741CB87CC000C018AF /* TableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD331CB87CB400C018AF /* TableViewSection.swift */; };
-		88DCAD751CB87CC000C018AF /* TableViewSectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD341CB87CB400C018AF /* TableViewSectionInfo.swift */; };
 		88DCAD761CB87CC000C018AF /* TitledCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD351CB87CB400C018AF /* TitledCollectionReusableView.swift */; };
 		88DCAD781CB87CC000C018AF /* TitledCollectionReusableViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD371CB87CB400C018AF /* TitledCollectionReusableViewFactory.swift */; };
 		88DCAD791CB87CC900C018AF /* CollectionViewDataSourceSubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD391CB87CB400C018AF /* CollectionViewDataSourceSubscriptTests.swift */; };
@@ -100,7 +98,6 @@
 		88DCAD311CB87CB400C018AF /* TableViewCellFactoryType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellFactoryType.swift; sourceTree = "<group>"; };
 		88DCAD321CB87CB400C018AF /* TableViewDataSourceProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceProvider.swift; sourceTree = "<group>"; };
 		88DCAD331CB87CB400C018AF /* TableViewSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSection.swift; sourceTree = "<group>"; };
-		88DCAD341CB87CB400C018AF /* TableViewSectionInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSectionInfo.swift; sourceTree = "<group>"; };
 		88DCAD351CB87CB400C018AF /* TitledCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledCollectionReusableView.swift; sourceTree = "<group>"; };
 		88DCAD371CB87CB400C018AF /* TitledCollectionReusableViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledCollectionReusableViewFactory.swift; sourceTree = "<group>"; };
 		88DCAD391CB87CB400C018AF /* CollectionViewDataSourceSubscriptTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSourceSubscriptTests.swift; sourceTree = "<group>"; };
@@ -181,7 +178,6 @@
 				88DCAD311CB87CB400C018AF /* TableViewCellFactoryType.swift */,
 				88DCAD321CB87CB400C018AF /* TableViewDataSourceProvider.swift */,
 				88DCAD331CB87CB400C018AF /* TableViewSection.swift */,
-				88DCAD341CB87CB400C018AF /* TableViewSectionInfo.swift */,
 				88DCAD351CB87CB400C018AF /* TitledCollectionReusableView.swift */,
 				88DCAD371CB87CB400C018AF /* TitledCollectionReusableViewFactory.swift */,
 			);
@@ -357,7 +353,6 @@
 				881A92D91CB881550080BC5C /* CollectionViewSection.swift in Sources */,
 				881A92D81CB881550080BC5C /* CollectionViewDataSourceProvider.swift in Sources */,
 				881A92E11CB881550080BC5C /* TableViewSection.swift in Sources */,
-				881A92E21CB881550080BC5C /* TableViewSectionInfo.swift in Sources */,
 				881A92DA1CB881550080BC5C /* CollectionViewSectionInfo.swift in Sources */,
 				881A92DF1CB881550080BC5C /* TableViewCellFactoryType.swift in Sources */,
 				881A92D61CB881550080BC5C /* CollectionViewCellFactory.swift in Sources */,
@@ -382,7 +377,6 @@
 				88DCAD6B1CB87CC000C018AF /* CollectionViewSection.swift in Sources */,
 				88DCAD6D1CB87CC000C018AF /* FetchedResultsDelegate.swift in Sources */,
 				88DCAD721CB87CC000C018AF /* TableViewCellFactoryType.swift in Sources */,
-				88DCAD751CB87CC000C018AF /* TableViewSectionInfo.swift in Sources */,
 				88DCAD6A1CB87CC000C018AF /* CollectionViewDataSourceProvider.swift in Sources */,
 				88DCAD761CB87CC000C018AF /* TitledCollectionReusableView.swift in Sources */,
 				88DCAD6C1CB87CC000C018AF /* CollectionViewSectionInfo.swift in Sources */,
