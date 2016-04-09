@@ -248,9 +248,9 @@
 			productReference = 881A92CC1CB881270080BC5C /* JSQDataSourcesKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		887DD0831B3BAC6C00FC4BF1 /* JSQDataSourcesKit */ = {
+		887DD0831B3BAC6C00FC4BF1 /* JSQDataSourcesKit-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 887DD0981B3BAC6C00FC4BF1 /* Build configuration list for PBXNativeTarget "JSQDataSourcesKit" */;
+			buildConfigurationList = 887DD0981B3BAC6C00FC4BF1 /* Build configuration list for PBXNativeTarget "JSQDataSourcesKit-iOS" */;
 			buildPhases = (
 				887DD07F1B3BAC6C00FC4BF1 /* Sources */,
 				887DD0801B3BAC6C00FC4BF1 /* Frameworks */,
@@ -261,7 +261,7 @@
 			);
 			dependencies = (
 			);
-			name = JSQDataSourcesKit;
+			name = "JSQDataSourcesKit-iOS";
 			productName = JSQDataSourcesKit;
 			productReference = 887DD0841B3BAC6C00FC4BF1 /* JSQDataSourcesKit.framework */;
 			productType = "com.apple.product-type.framework";
@@ -318,7 +318,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				887DD0831B3BAC6C00FC4BF1 /* JSQDataSourcesKit */,
+				887DD0831B3BAC6C00FC4BF1 /* JSQDataSourcesKit-iOS */,
 				881A92CB1CB881270080BC5C /* JSQDataSourcesKit-tvOS */,
 				887DD08D1B3BAC6C00FC4BF1 /* JSQDataSourcesKitTests */,
 			);
@@ -420,7 +420,7 @@
 /* Begin PBXTargetDependency section */
 		887DD0911B3BAC6C00FC4BF1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 887DD0831B3BAC6C00FC4BF1 /* JSQDataSourcesKit */;
+			target = 887DD0831B3BAC6C00FC4BF1 /* JSQDataSourcesKit-iOS */;
 			targetProxy = 887DD0901B3BAC6C00FC4BF1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -438,7 +438,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hexedbits.JSQDataSourcesKit;
-				PRODUCT_MODULE_NAME = JSQDataSourcesKit;
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME)";
 				PRODUCT_NAME = JSQDataSourcesKit;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
@@ -459,7 +459,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hexedbits.JSQDataSourcesKit;
-				PRODUCT_MODULE_NAME = JSQDataSourcesKit;
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME)";
 				PRODUCT_NAME = JSQDataSourcesKit;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
@@ -570,7 +570,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hexedbits.JSQDataSourcesKit;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME)";
+				PRODUCT_NAME = JSQDataSourcesKit;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -589,7 +590,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hexedbits.JSQDataSourcesKit;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME)";
+				PRODUCT_NAME = JSQDataSourcesKit;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -640,7 +642,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		887DD0981B3BAC6C00FC4BF1 /* Build configuration list for PBXNativeTarget "JSQDataSourcesKit" */ = {
+		887DD0981B3BAC6C00FC4BF1 /* Build configuration list for PBXNativeTarget "JSQDataSourcesKit-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				887DD0991B3BAC6C00FC4BF1 /* Debug */,

@@ -7,7 +7,7 @@ env:
 
    - PROJECT="JSQDataSourcesKit.xcodeproj"
 
-   - IOS_SCHEME="JSQDataSourcesKit"
+   - IOS_SCHEME="JSQDataSourcesKit-iOS"
    - TVOS_SCHEME="JSQDataSourcesKit-tvOS"
    - WATCHOS_SCHEME="JSQDataSourcesKit-watchOS"
 
@@ -60,7 +60,7 @@ script:
 
 # Build for reporting test coverage
 - if [ $RUN_TESTS == "YES" ]; then
-      xcodebuild test -project JSQDataSourcesKit.xcodeproj -scheme JSQDataSourcesKit -sdk iphonesimulator;
+      xcodebuild test -project JSQDataSourcesKit.xcodeproj -scheme JSQDataSourcesKit-iOS -sdk iphonesimulator;
   fi
 
 after_success:

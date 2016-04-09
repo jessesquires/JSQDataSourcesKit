@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "887DD0831B3BAC6C00FC4BF1"
-               BuildableName = "JSQDataSourcesKit.framework"
-               BlueprintName = "JSQDataSourcesKit"
+               BuildableName = "JSQDataSourcesKit-iOS.framework"
+               BlueprintName = "JSQDataSourcesKit-iOS"
                ReferencedContainer = "container:../JSQDataSourcesKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
