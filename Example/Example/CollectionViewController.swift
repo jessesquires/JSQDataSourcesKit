@@ -21,14 +21,13 @@ import UIKit
 import JSQDataSourcesKit
 
 
-class CollectionViewController: UICollectionViewController {
+class CollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     typealias CellFactory = CollectionViewCellFactory<CollectionViewCell, CellViewModel>
     typealias HeaderViewFactory = TitledCollectionReusableViewFactory<CellViewModel>
     typealias Section = CollectionViewSection<CellViewModel>
 
     var dataSourceProvider: CollectionViewDataSourceProvider<Section, CellFactory, HeaderViewFactory>?
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +48,7 @@ class CollectionViewController: UICollectionViewController {
 
         // 3. create supplementary view factory
         let headerFactory = TitledCollectionReusableViewFactory(
-            dataConfigurator: { (header, item: CellViewModel, kind, collectionView, indexPath) -> TitledCollectionReusableView in
+            dataConfigurator: { (header, item: CellViewModel?, kind, collectionView, indexPath) -> TitledCollectionReusableView in
                 header.label.text = "Section \(indexPath.section)"
                 return header
             },
@@ -64,4 +63,9 @@ class CollectionViewController: UICollectionViewController {
                                                                    supplementaryViewFactory: headerFactory,
                                                                    collectionView: collectionView)
     }
+
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.size.width, height: 50)
+    }
+
 }

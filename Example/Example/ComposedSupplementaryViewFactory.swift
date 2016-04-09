@@ -38,23 +38,23 @@ public struct ComposedCollectionSupplementaryViewFactory <Item>: CollectionSuppl
         self.footerViewFactory = footerViewFactory
     }
 
-    public func supplementaryViewForItem(item: Item,
-                                         kind: SupplementaryViewKind,
-                                         inCollectionView collectionView: UICollectionView,
-                                                          atIndexPath indexPath: NSIndexPath) -> TitledCollectionReusableView {
+    public func supplementaryViewFor(item item: Item?,
+                                          kind: SupplementaryViewKind,
+                                          collectionView: UICollectionView,
+                                          indexPath: NSIndexPath) -> TitledCollectionReusableView {
 
         switch kind {
         case UICollectionElementKindSectionHeader:
-            return headerViewFactory.supplementaryViewForItem(item,
-                                                              kind: kind,
-                                                              inCollectionView: collectionView,
-                                                              atIndexPath: indexPath)
+            return headerViewFactory.supplementaryViewFor(item: item,
+                                                          kind: kind,
+                                                          collectionView: collectionView,
+                                                          indexPath: indexPath)
 
         case UICollectionElementKindSectionFooter:
-            return footerViewFactory.supplementaryViewForItem(item,
-                                                              kind: kind,
-                                                              inCollectionView: collectionView,
-                                                              atIndexPath: indexPath)
+            return footerViewFactory.supplementaryViewFor(item: item,
+                                                          kind: kind,
+                                                          collectionView: collectionView,
+                                                          indexPath: indexPath)
 
         default:
             fatalError("attempt to dequeue supplementary view with unknown kind: \(kind)")
@@ -62,24 +62,24 @@ public struct ComposedCollectionSupplementaryViewFactory <Item>: CollectionSuppl
     }
 
     public func configureSupplementaryView(view: TitledCollectionReusableView,
-                                           forItem item: Item,
-                                                   kind: SupplementaryViewKind,
-                                                   inCollectionView collectionView: UICollectionView,
-                                                                    atIndexPath indexPath: NSIndexPath) -> TitledCollectionReusableView {
+                                           item: Item?,
+                                           kind: SupplementaryViewKind,
+                                           collectionView: UICollectionView,
+                                           indexPath: NSIndexPath) -> TitledCollectionReusableView {
 
         switch kind {
         case UICollectionElementKindSectionHeader:
             return headerViewFactory.configureSupplementaryView(view,
-                                                                forItem: item,
+                                                                item: item,
                                                                 kind: kind,
-                                                                inCollectionView: collectionView,
-                                                                atIndexPath: indexPath)
+                                                                collectionView: collectionView,
+                                                                indexPath: indexPath)
         case UICollectionElementKindSectionFooter:
             return footerViewFactory.configureSupplementaryView(view,
-                                                                forItem: item,
+                                                                item: item,
                                                                 kind: kind,
-                                                                inCollectionView: collectionView,
-                                                                atIndexPath: indexPath)
+                                                                collectionView: collectionView,
+                                                                indexPath: indexPath)
         default:
             fatalError("attempt to configure supplementary view with unknown kind: \(kind)")
         }

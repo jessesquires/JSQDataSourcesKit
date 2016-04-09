@@ -137,9 +137,16 @@ where CellFactory.Item == SectionInfo.Item, SupplementaryViewFactory.Item == Sec
         },
         supplementaryViewAtIndexPath: { [unowned self] (collectionView, kind, indexPath) -> UICollectionReusableView in
             if let factory = self.supplementaryViewFactory {
-                let item = self.sections[indexPath.section].items[indexPath.row]
-                let view = factory.supplementaryViewForItem(item, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
-                return factory.configureSupplementaryView(view, forItem: item, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
+
+                var item: Item?
+                if indexPath.section < self.sections.count {
+                    if indexPath.item < self.sections[indexPath.section].items.count {
+                        item = self.sections[indexPath.section].items[indexPath.item]
+                    }
+                }
+
+                let view = factory.supplementaryViewFor(item: item, kind: kind, collectionView: collectionView, indexPath: indexPath)
+                return factory.configureSupplementaryView(view, item: item, kind: kind, collectionView: collectionView, indexPath: indexPath)
             }
 
             // we must not return nil here, per the `UICollectionViewDataSource` docs
@@ -237,9 +244,16 @@ where CellFactory.Item == SupplementaryViewFactory.Item>: CustomStringConvertibl
         },
         supplementaryViewAtIndexPath: { [unowned self] (collectionView, kind, indexPath) -> UICollectionReusableView in
             if let factory = self.supplementaryViewFactory {
-                let item = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Item
-                let view = factory.supplementaryViewForItem(item, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
-                return factory.configureSupplementaryView(view, forItem: item, kind: kind, inCollectionView: collectionView, atIndexPath: indexPath)
+
+                var item: Item?
+                if indexPath.section < self.fetchedResultsController.sections?.count {
+                    if indexPath.item < self.fetchedResultsController.sections?[indexPath.section].numberOfObjects {
+                        item = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Item
+                    }
+                }
+
+                let view = factory.supplementaryViewFor(item: item, kind: kind, collectionView: collectionView, indexPath: indexPath)
+                return factory.configureSupplementaryView(view, item: item, kind: kind, collectionView: collectionView, indexPath: indexPath)
             }
 
             // we must not return nil here, per the `UICollectionViewDataSource` docs

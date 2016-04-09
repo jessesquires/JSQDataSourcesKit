@@ -121,7 +121,7 @@ final class CollectionViewDataSourceTests: XCTestCase {
 
         // GIVEN: a supplementary view factory
         let supplementaryViewFactory = CollectionSupplementaryViewFactory(reuseIdentifier: fakeSupplementaryViewReuseId)
-        { (view: FakeCollectionSupplementaryView, model: FakeViewModel, kind: String, collectionView: UICollectionView, indexPath: NSIndexPath) -> FakeCollectionSupplementaryView in
+        { (view: FakeCollectionSupplementaryView, model: FakeViewModel?, kind: String, collectionView: UICollectionView, indexPath: NSIndexPath) -> FakeCollectionSupplementaryView in
             XCTAssertEqual(view.reuseIdentifier!, self.fakeSupplementaryViewReuseId, "Dequeued supplementary view should have expected identifier")
             XCTAssertEqual(model, allSections[indexPath.section][indexPath.item], "Model object should equal expected value")
             XCTAssertEqual(kind, FakeSupplementaryViewKind, "View kind should have expected kind")

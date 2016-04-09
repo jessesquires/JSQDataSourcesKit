@@ -39,13 +39,13 @@ final class DescriptionTests: XCTestCase {
         print(cellFactory, "\n")
 
         let supplementaryViewFactory = CollectionSupplementaryViewFactory(reuseIdentifier: "supplementaryId") {
-            (view, model: FakeViewModel, kind, collectionView, indexPath) -> FakeCollectionSupplementaryView in
+            (view, model: FakeViewModel?, kind, collectionView, indexPath) -> FakeCollectionSupplementaryView in
             return view
         }
         print(supplementaryViewFactory, "\n")
 
         let titledSupplementaryViewFactory = TitledCollectionReusableViewFactory(dataConfigurator: {
-            (view, item: FakeViewModel, kind, cv, indexPath) -> TitledCollectionReusableView in
+            (view, item: FakeViewModel?, kind, cv, indexPath) -> TitledCollectionReusableView in
             return view
         }) { (view) -> Void in
         }

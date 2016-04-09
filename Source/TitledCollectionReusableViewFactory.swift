@@ -34,14 +34,14 @@ public struct TitledCollectionReusableViewFactory <Item>: CollectionSupplementar
      Configures the `TitledCollectionReusableView` for the specified data item, collection view, and index path.
 
      - parameter TitledCollectionReusableView: The `TitledCollectionReusableView` to be configured at the index path.
-     - parameter Item:                         The item at the index path.
+     - parameter Item:                         The item at the index path, or `nil`.
      - parameter SupplementaryViewKind:        An identifier that describes the type of the supplementary view.
      - parameter UICollectionView:             The collection view requesting this information.
      - parameter NSIndexPath:                  The index path at which the supplementary view will be displayed.
 
      - returns: The configured `TitledCollectionReusableView` instance.
      */
-    public typealias DataConfigurationHandler = (TitledCollectionReusableView, Item, SupplementaryViewKind, UICollectionView, NSIndexPath) -> TitledCollectionReusableView
+    public typealias DataConfigurationHandler = (TitledCollectionReusableView, Item?, SupplementaryViewKind, UICollectionView, NSIndexPath) -> TitledCollectionReusableView
 
     /**
      Configures the style attributes of the `TitledCollectionReusableView`.
@@ -77,10 +77,10 @@ public struct TitledCollectionReusableViewFactory <Item>: CollectionSupplementar
     // MARK: CollectionSupplementaryViewFactoryType
 
     /// :nodoc:
-    public func supplementaryViewForItem(item: Item,
-                                         kind: SupplementaryViewKind,
-                                         inCollectionView collectionView: UICollectionView,
-                                                          atIndexPath indexPath: NSIndexPath) -> TitledCollectionReusableView {
+    public func supplementaryViewFor(item item: Item?,
+                                          kind: SupplementaryViewKind,
+                                          collectionView: UICollectionView,
+                                          indexPath: NSIndexPath) -> TitledCollectionReusableView {
         let view = collectionView.dequeueReusableSupplementaryViewOfKind(kind,
                                                                          withReuseIdentifier: TitledCollectionReusableView.identifier,
                                                                          forIndexPath: indexPath) as! TitledCollectionReusableView
@@ -90,10 +90,10 @@ public struct TitledCollectionReusableViewFactory <Item>: CollectionSupplementar
 
     /// :nodoc:
     public func configureSupplementaryView(view: TitledCollectionReusableView,
-                                           forItem item: Item,
-                                                   kind: SupplementaryViewKind,
-                                                   inCollectionView collectionView: UICollectionView,
-                                                                    atIndexPath indexPath: NSIndexPath) -> TitledCollectionReusableView {
+                                           item: Item?,
+                                           kind: SupplementaryViewKind,
+                                           collectionView: UICollectionView,
+                                           indexPath: NSIndexPath) -> TitledCollectionReusableView {
         return dataConfigurator(view, item, kind, collectionView, indexPath)
     }
 

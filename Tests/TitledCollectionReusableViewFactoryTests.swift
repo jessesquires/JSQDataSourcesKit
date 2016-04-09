@@ -64,7 +64,7 @@ class TitledCollectionReusableViewFactoryTests: XCTestCase {
         var titledViewStyleConfigExpectation = expectationWithDescription("titledViewStyleConfigExpectation")
 
         let supplementaryViewFactory = TitledCollectionReusableViewFactory(dataConfigurator:
-            { (view, item: FakeViewModel, kind, collectionView, indexPath) -> TitledCollectionReusableView in
+            { (view, item: FakeViewModel?, kind, collectionView, indexPath) -> TitledCollectionReusableView in
                 XCTAssertEqual(view.reuseIdentifier!, TitledCollectionReusableView.identifier, "Dequeued supplementary view should have expected identifier")
                 XCTAssertEqual(kind, FakeSupplementaryViewKind, "View kind should have expected kind")
                 XCTAssertEqual(item, allSections[indexPath.section][indexPath.item], "Model object should equal expected value")

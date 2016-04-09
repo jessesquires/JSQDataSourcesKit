@@ -31,14 +31,14 @@ public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectio
      Configures the supplementary view for the specified data item, collection view, and index path.
 
      - parameter SupplementaryView:     The supplementary view to be configured at the index path.
-     - parameter Item:                  The item at the index path.
+     - parameter Item:                  The item at the index path, or `nil`.
      - parameter SupplementaryViewKind: An identifier that describes the type of the supplementary view.
      - parameter UICollectionView:      The collection view requesting this information.
      - parameter NSIndexPath:           The index path at which the supplementary view will be displayed.
 
      - returns: The configured supplementary view.
      */
-    public typealias ConfigurationHandler = (SupplementaryView, Item, SupplementaryViewKind, UICollectionView, NSIndexPath) -> SupplementaryView
+    public typealias ConfigurationHandler = (SupplementaryView, Item?, SupplementaryViewKind, UICollectionView, NSIndexPath) -> SupplementaryView
 
 
     // MARK: Properties
@@ -73,10 +73,10 @@ public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectio
     // MARK: CollectionSupplementaryViewFactoryType
 
     /// :nodoc:
-    public func supplementaryViewForItem(item: Item,
-                                         kind: SupplementaryViewKind,
-                                         inCollectionView collectionView: UICollectionView,
-                                                          atIndexPath indexPath: NSIndexPath) -> SupplementaryView {
+    public func supplementaryViewFor(item item: Item?,
+                                          kind: SupplementaryViewKind,
+                                          collectionView: UICollectionView,
+                                          indexPath: NSIndexPath) -> SupplementaryView {
         return collectionView.dequeueReusableSupplementaryViewOfKind(kind,
                                                                      withReuseIdentifier: reuseIdentifier,
                                                                      forIndexPath: indexPath) as! SupplementaryView
@@ -84,16 +84,16 @@ public struct CollectionSupplementaryViewFactory <SupplementaryView: UICollectio
 
     /// :nodoc:
     public func configureSupplementaryView(view: SupplementaryView,
-                                           forItem item: Item,
-                                                   kind: SupplementaryViewKind,
-                                                   inCollectionView collectionView: UICollectionView,
-                                                                    atIndexPath indexPath: NSIndexPath) -> SupplementaryView {
+                                           item: Item?,
+                                           kind: SupplementaryViewKind,
+                                           collectionView: UICollectionView,
+                                           indexPath: NSIndexPath) -> SupplementaryView {
         return supplementaryViewConfigurator(view, item, kind, collectionView, indexPath)
     }
-    
-    
+
+
     // MARK: CustomStringConvertible
-    
+
     /// :nodoc:
     public var description: String {
         get {

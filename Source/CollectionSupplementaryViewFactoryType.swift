@@ -43,25 +43,32 @@ public protocol CollectionSupplementaryViewFactoryType {
     /**
      Creates and returns a new `SupplementaryView` instance, or dequeues an existing view for reuse.
 
-     - parameter item:           The item at `indexPath`.
+     - parameter item:           The item at `indexPath`, or `nil`.
      - parameter kind:           An identifier that describes the type of the supplementary view.
      - parameter collectionView: The collection view requesting this information.
      - parameter indexPath:      The index path that specifies the location of the new supplementary view.
 
      - returns: An initialized or dequeued `UICollectionReusableView` of type `SupplementaryView`.
      */
-    func supplementaryViewForItem(item: Item, kind: SupplementaryViewKind, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> SupplementaryView
+    func supplementaryViewFor(item item: Item?,
+                                   kind: SupplementaryViewKind,
+                                   collectionView: UICollectionView,
+                                   indexPath: NSIndexPath) -> SupplementaryView
 
     /**
      Configures and returns the specified supplementary view.
 
      - parameter view:           The supplementary view to configure.
-     - parameter item:           The item at `indexPath`.
+     - parameter item:           The item at `indexPath`, or `nil`.
      - parameter kind:           An identifier that describes the type of the supplementary view.
      - parameter collectionView: The collection view requesting this information.
      - parameter indexPath:      The index path that specifies the location of `view` and `item`.
 
      - returns: A configured `UICollectionReusableView` of type `SupplementaryView`.
      */
-    func configureSupplementaryView(view: SupplementaryView, forItem item: Item, kind: SupplementaryViewKind, inCollectionView collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> SupplementaryView
+    func configureSupplementaryView(view: SupplementaryView,
+                                    item: Item?,
+                                    kind: SupplementaryViewKind,
+                                    collectionView: UICollectionView,
+                                    indexPath: NSIndexPath) -> SupplementaryView
 }
