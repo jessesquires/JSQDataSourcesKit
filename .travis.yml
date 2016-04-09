@@ -6,7 +6,6 @@ env:
    - LANG=en_US.UTF-8
 
    - PROJECT="JSQDataSourcesKit.xcodeproj"
-   - WORKSPACE="JSQDataSourcesKit.xcworkspace"
 
    - IOS_SCHEME="JSQDataSourcesKit"
    - TVOS_SCHEME="JSQDataSourcesKit-tvOS"
@@ -45,20 +44,20 @@ script:
 
 
 - if [ $BUILD_EXAMPLE == "YES" ]; then
-      xcodebuild clean build -workspace "$WORKSPACE" -scheme Example -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=NO | xcpretty -c;
+      xcodebuild clean build -project Example/Example.xcodeproj -scheme Example -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=NO | xcpretty -c;
   fi
 
 
 - if [ $RUN_TESTS == "YES" ]; then
-      xcodebuild test -workspace "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO | xcpretty -c;
+      xcodebuild test -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO | xcpretty -c;
   else
-      xcodebuild clean build -workspace "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO | xcpretty -c;
+      xcodebuild clean build -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO | xcpretty -c;
   fi
 
 
 # Build for reporting test coverage
 - if [ $RUN_TESTS == "YES" ]; then
-      xcodebuild test -project JSQDataSourcesKit/JSQDataSourcesKit.xcodeproj -scheme JSQDataSourcesKit -sdk iphonesimulator;
+      xcodebuild test -project JSQDataSourcesKit.xcodeproj -scheme JSQDataSourcesKit -sdk iphonesimulator;
   fi
 
 after_success:

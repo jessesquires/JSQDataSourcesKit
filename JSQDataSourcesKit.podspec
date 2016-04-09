@@ -5,14 +5,14 @@ Pod::Spec.new do |s|
 
    s.summary = 'Type-safe, value-oriented, composable data source objects that keep your view controllers light'
    s.homepage = 'https://github.com/jessesquires/JSQDataSourcesKit'
-   s.documentation_url = 'http://jessesquires.com/JSQDataSourcesKit'
+   s.documentation_url = 'http://jessesquires.com/JSQDataSourcesKit/'
 
    s.social_media_url = 'https://twitter.com/jesse_squires'
-   s.authors = { 'Jesse Squires' => 'jesse.squires.developer@gmail.com' }
+   s.author = 'Jesse Squires'
 
    s.source = { :git => 'https://github.com/jessesquires/JSQDataSourcesKit.git', :tag => s.version }
-   s.source_files = 'JSQDataSourcesKit/JSQDataSourcesKit/*.swift'
-   s.resources = 'JSQDataSourcesKit/JSQDataSourcesKit/*.xib'
+   s.source_files = 'Source/*.swift'
+   s.resources = 'Source/*.xib'
 
    s.platform = :ios, '8.0'
    s.frameworks = 'CoreData'

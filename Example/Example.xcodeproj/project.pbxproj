@@ -23,10 +23,10 @@
 		88DB89CC1A86D1A900DED153 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88DB89CA1A86D1A900DED153 /* Main.storyboard */; };
 		88DB89CE1A86D1A900DED153 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88DB89CD1A86D1A900DED153 /* Images.xcassets */; };
 		88DB89D11A86D1A900DED153 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88DB89CF1A86D1A900DED153 /* LaunchScreen.xib */; };
-		88DB89F61A86D21B00DED153 /* JSQDataSourcesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88DB89EC1A86D1BC00DED153 /* JSQDataSourcesKit.framework */; };
-		88DB89F71A86D21B00DED153 /* JSQDataSourcesKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 88DB89EC1A86D1BC00DED153 /* JSQDataSourcesKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		88EF47AB1BD31FFA0029F3BB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EF47AA1BD31FFA0029F3BB /* Extensions.swift */; settings = {ASSET_TAGS = (); }; };
-		88EF47AE1BD320500029F3BB /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EF47AD1BD320500029F3BB /* Helpers.swift */; settings = {ASSET_TAGS = (); }; };
+		88DCAD911CB87E6700C018AF /* JSQDataSourcesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88DCAD8E1CB87DD900C018AF /* JSQDataSourcesKit.framework */; };
+		88DCAD921CB87E6700C018AF /* JSQDataSourcesKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 88DCAD8E1CB87DD900C018AF /* JSQDataSourcesKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		88EF47AB1BD31FFA0029F3BB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EF47AA1BD31FFA0029F3BB /* Extensions.swift */; };
+		88EF47AE1BD320500029F3BB /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EF47AD1BD320500029F3BB /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,23 +37,23 @@
 			remoteGlobalIDString = 88DB89C01A86D1A900DED153;
 			remoteInfo = Example;
 		};
-		88DB89EB1A86D1BC00DED153 /* PBXContainerItemProxy */ = {
+		88DCAD8D1CB87DD900C018AF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 88DB89E61A86D1BC00DED153 /* JSQDataSourcesKit.xcodeproj */;
+			containerPortal = 88DCAD881CB87DD900C018AF /* JSQDataSourcesKit.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 88DB897C1A86D0C900DED153;
+			remoteGlobalIDString = 887DD0841B3BAC6C00FC4BF1;
 			remoteInfo = JSQDataSourcesKit;
 		};
-		88DB89ED1A86D1BC00DED153 /* PBXContainerItemProxy */ = {
+		88DCAD8F1CB87DD900C018AF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 88DB89E61A86D1BC00DED153 /* JSQDataSourcesKit.xcodeproj */;
+			containerPortal = 88DCAD881CB87DD900C018AF /* JSQDataSourcesKit.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 88DB89871A86D0C900DED153;
+			remoteGlobalIDString = 887DD08E1B3BAC6C00FC4BF1;
 			remoteInfo = JSQDataSourcesKitTests;
 		};
-		88DB89F81A86D21B00DED153 /* PBXContainerItemProxy */ = {
+		88DCAD931CB87E6700C018AF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 88DB89E61A86D1BC00DED153 /* JSQDataSourcesKit.xcodeproj */;
+			containerPortal = 88DCAD881CB87DD900C018AF /* JSQDataSourcesKit.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 887DD0831B3BAC6C00FC4BF1;
 			remoteInfo = JSQDataSourcesKit;
@@ -67,7 +67,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				88DB89F71A86D21B00DED153 /* JSQDataSourcesKit.framework in Embed Frameworks */,
+				88DCAD921CB87E6700C018AF /* JSQDataSourcesKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,7 +95,7 @@
 		88DB89CB1A86D1A900DED153 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		88DB89CD1A86D1A900DED153 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		88DB89D01A86D1A900DED153 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		88DB89E61A86D1BC00DED153 /* JSQDataSourcesKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JSQDataSourcesKit.xcodeproj; path = ../JSQDataSourcesKit/JSQDataSourcesKit.xcodeproj; sourceTree = "<group>"; };
+		88DCAD881CB87DD900C018AF /* JSQDataSourcesKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JSQDataSourcesKit.xcodeproj; path = ../JSQDataSourcesKit.xcodeproj; sourceTree = "<group>"; };
 		88EF47AA1BD31FFA0029F3BB /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		88EF47AD1BD320500029F3BB /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,7 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88DB89F61A86D21B00DED153 /* JSQDataSourcesKit.framework in Frameworks */,
+				88DCAD911CB87E6700C018AF /* JSQDataSourcesKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,17 +123,9 @@
 			isa = PBXGroup;
 			children = (
 				887863361B3699C800E2F51C /* ExampleTests.swift */,
-				8878633E1B3699E000E2F51C /* Supporting Files */,
-			);
-			path = ExampleTests;
-			sourceTree = "<group>";
-		};
-		8878633E1B3699E000E2F51C /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
 				887863381B3699C800E2F51C /* Info.plist */,
 			);
-			name = "Supporting Files";
+			path = ExampleTests;
 			sourceTree = "<group>";
 		};
 		88BD67421A99579400F93FA6 /* CollectionView */ = {
@@ -174,6 +166,7 @@
 				88EF47AA1BD31FFA0029F3BB /* Extensions.swift */,
 				88EF47AD1BD320500029F3BB /* Helpers.swift */,
 				88DB89CD1A86D1A900DED153 /* Images.xcassets */,
+				88DB89C51A86D1A900DED153 /* Info.plist */,
 				88DB89CF1A86D1A900DED153 /* LaunchScreen.xib */,
 				88DB89CA1A86D1A900DED153 /* Main.storyboard */,
 				88DB89C81A86D1A900DED153 /* ViewController.swift */,
@@ -187,7 +180,7 @@
 				88DB89C31A86D1A900DED153 /* Example */,
 				887863351B3699C800E2F51C /* ExampleTests */,
 				88DB89C21A86D1A900DED153 /* Products */,
-				88DB89E61A86D1BC00DED153 /* JSQDataSourcesKit.xcodeproj */,
+				88DCAD881CB87DD900C018AF /* JSQDataSourcesKit.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -207,24 +200,15 @@
 				88BD67421A99579400F93FA6 /* CollectionView */,
 				88BD67441A99579A00F93FA6 /* Model */,
 				88BD67431A99579700F93FA6 /* TableView */,
-				88DB89C41A86D1A900DED153 /* Supporting Files */,
 			);
 			path = Example;
 			sourceTree = "<group>";
 		};
-		88DB89C41A86D1A900DED153 /* Supporting Files */ = {
+		88DCAD891CB87DD900C018AF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				88DB89C51A86D1A900DED153 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		88DB89E71A86D1BC00DED153 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				88DB89EC1A86D1BC00DED153 /* JSQDataSourcesKit.framework */,
-				88DB89EE1A86D1BC00DED153 /* JSQDataSourcesKitTests.xctest */,
+				88DCAD8E1CB87DD900C018AF /* JSQDataSourcesKit.framework */,
+				88DCAD901CB87DD900C018AF /* JSQDataSourcesKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -262,7 +246,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				88DB89F91A86D21B00DED153 /* PBXTargetDependency */,
+				88DCAD941CB87E6700C018AF /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = Example;
@@ -301,8 +285,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 88DB89E71A86D1BC00DED153 /* Products */;
-					ProjectRef = 88DB89E61A86D1BC00DED153 /* JSQDataSourcesKit.xcodeproj */;
+					ProductGroup = 88DCAD891CB87DD900C018AF /* Products */;
+					ProjectRef = 88DCAD881CB87DD900C018AF /* JSQDataSourcesKit.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -314,18 +298,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		88DB89EC1A86D1BC00DED153 /* JSQDataSourcesKit.framework */ = {
+		88DCAD8E1CB87DD900C018AF /* JSQDataSourcesKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = JSQDataSourcesKit.framework;
-			remoteRef = 88DB89EB1A86D1BC00DED153 /* PBXContainerItemProxy */;
+			remoteRef = 88DCAD8D1CB87DD900C018AF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		88DB89EE1A86D1BC00DED153 /* JSQDataSourcesKitTests.xctest */ = {
+		88DCAD901CB87DD900C018AF /* JSQDataSourcesKitTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = JSQDataSourcesKitTests.xctest;
-			remoteRef = 88DB89ED1A86D1BC00DED153 /* PBXContainerItemProxy */;
+			remoteRef = 88DCAD8F1CB87DD900C018AF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -388,10 +372,10 @@
 			target = 88DB89C01A86D1A900DED153 /* Example */;
 			targetProxy = 887863391B3699C800E2F51C /* PBXContainerItemProxy */;
 		};
-		88DB89F91A86D21B00DED153 /* PBXTargetDependency */ = {
+		88DCAD941CB87E6700C018AF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = JSQDataSourcesKit;
-			targetProxy = 88DB89F81A86D21B00DED153 /* PBXContainerItemProxy */;
+			targetProxy = 88DCAD931CB87E6700C018AF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -532,6 +516,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -545,6 +530,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

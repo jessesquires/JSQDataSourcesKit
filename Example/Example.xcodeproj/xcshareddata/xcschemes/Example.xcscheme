@@ -14,6 +14,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "887DD0831B3BAC6C00FC4BF1"
+               BuildableName = "JSQDataSourcesKit.framework"
+               BlueprintName = "JSQDataSourcesKit"
+               ReferencedContainer = "container:../JSQDataSourcesKit.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "88DB89C01A86D1A900DED153"
                BuildableName = "DataSources.app"
                BlueprintName = "Example"
