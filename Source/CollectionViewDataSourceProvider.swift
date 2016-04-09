@@ -31,7 +31,7 @@ import UIKit
  - Adding, removing, or reloading sections as the provider's `sections` are modified
  */
 public final class CollectionViewDataSourceProvider <
-    SectionInfo: CollectionViewSectionInfo,
+    SectionInfo: SectionInfoProtocol,
     CellFactory: CollectionViewCellFactoryType,
     SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
 where CellFactory.Item == SectionInfo.Item, SupplementaryViewFactory.Item == SectionInfo.Item>: CustomStringConvertible {

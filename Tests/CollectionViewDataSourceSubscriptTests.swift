@@ -28,9 +28,9 @@ final class CollectionViewDataSourceSubscriptTests: XCTestCase {
     func test_ThatCollectionViewDataSourceProvider_ReturnsExpectedDataFrom_IntSubscript() {
 
         // GIVEN: some collection view sections
-        let section0 = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
-        let section1 = CollectionViewSection(items: FakeViewModel(), FakeViewModel())
-        let section2 = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
+        let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
+        let section1 = Section(items: FakeViewModel(), FakeViewModel())
+        let section2 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let allSections = [section0, section1, section2]
 
         // GIVEN: a cell factory
@@ -51,9 +51,9 @@ final class CollectionViewDataSourceSubscriptTests: XCTestCase {
     func test_ThatCollectionViewDataSourceProvider_SetsExpectedDataAt_IntSubscript() {
 
         // GIVEN: some collection view sections
-        let section0 = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
-        let section1 = CollectionViewSection(items: FakeViewModel(), FakeViewModel())
-        let section2 = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
+        let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
+        let section1 = Section(items: FakeViewModel(), FakeViewModel())
+        let section2 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let allSections = [section0, section1, section2]
 
         // GIVEN: a cell factory
@@ -67,7 +67,7 @@ final class CollectionViewDataSourceSubscriptTests: XCTestCase {
 
         // WHEN: we set a section at a specific index
         let index = 0
-        let expectedSection = CollectionViewSection(items: FakeViewModel(), FakeViewModel())
+        let expectedSection = Section(items: FakeViewModel(), FakeViewModel())
         dataSourceProvider[index] = expectedSection
 
         // THEN: the section at the specified index is replaced with the new section
@@ -78,8 +78,8 @@ final class CollectionViewDataSourceSubscriptTests: XCTestCase {
     func test_ThatCollectionViewDataSourceProvider_ReturnsExpectedDataFrom_IndexPathSubscript() {
 
         // GIVEN: some collection view sections
-        let section0 = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel())
-        let section1 = CollectionViewSection(items: FakeViewModel(), FakeViewModel())
+        let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel())
+        let section1 = Section(items: FakeViewModel(), FakeViewModel())
         let allSections = [section0, section1]
 
         // GIVEN: a cell factory
@@ -102,8 +102,8 @@ final class CollectionViewDataSourceSubscriptTests: XCTestCase {
     func test_ThatCollectionViewDataSourceProvider_SetsExpectedDataAt_IndexPathSubscript() {
 
         // GIVEN: some collection view sections
-        let section0 = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel())
-        let section1 = CollectionViewSection(items: FakeViewModel(), FakeViewModel())
+        let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel())
+        let section1 = Section(items: FakeViewModel(), FakeViewModel())
         let allSections = [section0, section1]
 
         // GIVEN: a cell factory

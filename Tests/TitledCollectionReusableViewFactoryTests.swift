@@ -46,9 +46,9 @@ class TitledCollectionReusableViewFactoryTests: XCTestCase {
     func test_ThatCollectionViewDataSource_ReturnsExpectedData_TitledCollectionReusableViewFactory() {
 
         // GIVEN: some collection view sections
-        let section0 = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
-        let section1 = CollectionViewSection(items: FakeViewModel(), FakeViewModel())
-        let section2 = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
+        let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
+        let section1 = Section(items: FakeViewModel(), FakeViewModel())
+        let section2 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let allSections = [section0, section1, section2]
 
         var cellFactoryExpectation = expectationWithDescription("cell_factory")

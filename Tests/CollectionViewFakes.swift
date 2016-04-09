@@ -27,8 +27,7 @@ import JSQDataSourcesKit
 
 typealias CellFactory = CollectionViewCellFactory<FakeCollectionCell, FakeViewModel>
 typealias SupplementaryViewFactory = CollectionSupplementaryViewFactory<FakeCollectionSupplementaryView, FakeViewModel>
-typealias CollectionSection = CollectionViewSection<FakeViewModel>
-typealias Provider = CollectionViewDataSourceProvider<CollectionSection, CellFactory, SupplementaryViewFactory>
+typealias Provider = CollectionViewDataSourceProvider<Section<FakeViewModel>, CellFactory, SupplementaryViewFactory>
 
 
 class FakeCollectionCell: UICollectionViewCell {

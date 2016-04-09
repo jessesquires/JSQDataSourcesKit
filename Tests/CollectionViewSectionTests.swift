@@ -25,7 +25,7 @@ import JSQDataSourcesKit
 
 final class CollectionViewSectionTests: XCTestCase {
 
-    func test_ThatCollectionViewSection_Initializes() {
+    func test_ThatSection_Initializes() {
 
         // GIVEN: some items
         let item1 = FakeViewModel()
@@ -33,18 +33,18 @@ final class CollectionViewSectionTests: XCTestCase {
         let item3 = FakeViewModel()
 
         // WHEN: we create sections with the different initializers
-        let sectionA = CollectionViewSection(items: item1, item2, item3)
-        let sectionB = CollectionViewSection([item1, item2, item3])
+        let sectionA = Section(items: item1, item2, item3)
+        let sectionB = Section([item1, item2, item3])
 
         // THEN: the sections have the same items
         XCTAssertEqual(sectionA.items, sectionB.items, "Section items should be equal")
     }
 
-    func test_ThatCollectionViewSection_ReturnsExpectedDataFromSubscript() {
+    func test_ThatSection_ReturnsExpectedDataFromSubscript() {
 
         // GIVEN: a model and a collection view section
         let expectedModel = FakeViewModel()
-        let section = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), expectedModel)
+        let section = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), expectedModel)
 
         // WHEN: we ask for an item at a specific index
         let item = section[3]
@@ -53,10 +53,10 @@ final class CollectionViewSectionTests: XCTestCase {
         XCTAssertEqual(item, expectedModel, "Model returned from subscript should equal expected model")
     }
 
-    func test_ThatCollectionViewSection_SetsExpectedDataAtSubscript() {
+    func test_ThatSection_SetsExpectedDataAtSubscript() {
 
         // GIVEN: a collection view section
-        var section = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel())
+        var section = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel())
         let count = section.count
 
         // WHEN: we set an item at a specific index
@@ -69,10 +69,10 @@ final class CollectionViewSectionTests: XCTestCase {
         XCTAssertEqual(count, section.count, "Section count should remain unchanged")
     }
 
-    func test_ThatCollectionViewSection_ReturnsExpectedCount() {
+    func test_ThatSection_ReturnsExpectedCount() {
 
         // GIVEN: items and a collection view section
-        let section = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
+        let section = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
 
         // WHEN: we ask the section for its count
         let count = section.count

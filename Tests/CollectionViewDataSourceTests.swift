@@ -45,11 +45,11 @@ final class CollectionViewDataSourceTests: XCTestCase {
 
     func test_ThatCollectionViewDataSource_ReturnsExpectedData_ForSingleSection() {
 
-        // GIVEN: a single CollectionViewSection with data items
+        // GIVEN: a single section with data items
         let expectedModel = FakeViewModel()
         let expectedIndexPath = NSIndexPath(forRow: 3, inSection: 0)
 
-        let section0 = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel())
+        let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel())
         let allSections = [section0]
 
         let cellFactoryExpectation = expectationWithDescription(#function)
@@ -70,8 +70,7 @@ final class CollectionViewDataSourceTests: XCTestCase {
         // GIVEN: a data source provider
         typealias CellFactory = CollectionViewCellFactory<FakeCollectionCell, FakeViewModel>
         typealias SupplementaryViewFactory = CollectionSupplementaryViewFactory<FakeCollectionSupplementaryView, FakeViewModel>
-        typealias Section = CollectionViewSection<FakeViewModel>
-        typealias Provider = CollectionViewDataSourceProvider<Section, CellFactory, SupplementaryViewFactory>
+        typealias Provider = CollectionViewDataSourceProvider<Section<FakeViewModel>, CellFactory, SupplementaryViewFactory>
 
         let dataSourceProvider: Provider = CollectionViewDataSourceProvider(sections: allSections, cellFactory: factory, collectionView: fakeCollectionView)
         let dataSource = dataSourceProvider.dataSource
@@ -99,9 +98,9 @@ final class CollectionViewDataSourceTests: XCTestCase {
     func test_ThatCollectionViewDataSource_ReturnsExpectedData_ForMultipleSections() {
 
         // GIVEN: some collection view sections
-        let section0 = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
-        let section1 = CollectionViewSection(items: FakeViewModel(), FakeViewModel())
-        let section2 = CollectionViewSection(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
+        let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
+        let section1 = Section(items: FakeViewModel(), FakeViewModel())
+        let section2 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let allSections = [section0, section1, section2]
 
         var cellFactoryExpectation = expectationWithDescription("cell_factory_\(#function)")

@@ -12,8 +12,6 @@
 		881A92D61CB881550080BC5C /* CollectionViewCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD271CB87CB400C018AF /* CollectionViewCellFactory.swift */; };
 		881A92D71CB881550080BC5C /* CollectionViewCellFactoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD281CB87CB400C018AF /* CollectionViewCellFactoryType.swift */; };
 		881A92D81CB881550080BC5C /* CollectionViewDataSourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD291CB87CB400C018AF /* CollectionViewDataSourceProvider.swift */; };
-		881A92D91CB881550080BC5C /* CollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD2A1CB87CB400C018AF /* CollectionViewSection.swift */; };
-		881A92DA1CB881550080BC5C /* CollectionViewSectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD2B1CB87CB400C018AF /* CollectionViewSectionInfo.swift */; };
 		881A92DB1CB881550080BC5C /* FetchedResultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD2C1CB87CB400C018AF /* FetchedResultsDelegate.swift */; };
 		881A92DC1CB881550080BC5C /* Internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD2E1CB87CB400C018AF /* Internal.swift */; };
 		881A92DD1CB881550080BC5C /* JSQDataSourcesKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 88DCAD2F1CB87CB400C018AF /* JSQDataSourcesKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,8 +28,6 @@
 		88DCAD681CB87CC000C018AF /* CollectionViewCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD271CB87CB400C018AF /* CollectionViewCellFactory.swift */; };
 		88DCAD691CB87CC000C018AF /* CollectionViewCellFactoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD281CB87CB400C018AF /* CollectionViewCellFactoryType.swift */; };
 		88DCAD6A1CB87CC000C018AF /* CollectionViewDataSourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD291CB87CB400C018AF /* CollectionViewDataSourceProvider.swift */; };
-		88DCAD6B1CB87CC000C018AF /* CollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD2A1CB87CB400C018AF /* CollectionViewSection.swift */; };
-		88DCAD6C1CB87CC000C018AF /* CollectionViewSectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD2B1CB87CB400C018AF /* CollectionViewSectionInfo.swift */; };
 		88DCAD6D1CB87CC000C018AF /* FetchedResultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD2C1CB87CB400C018AF /* FetchedResultsDelegate.swift */; };
 		88DCAD6F1CB87CC000C018AF /* Internal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD2E1CB87CB400C018AF /* Internal.swift */; };
 		88DCAD701CB87CC000C018AF /* JSQDataSourcesKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 88DCAD2F1CB87CB400C018AF /* JSQDataSourcesKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -88,8 +84,6 @@
 		88DCAD271CB87CB400C018AF /* CollectionViewCellFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCellFactory.swift; sourceTree = "<group>"; };
 		88DCAD281CB87CB400C018AF /* CollectionViewCellFactoryType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCellFactoryType.swift; sourceTree = "<group>"; };
 		88DCAD291CB87CB400C018AF /* CollectionViewDataSourceProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSourceProvider.swift; sourceTree = "<group>"; };
-		88DCAD2A1CB87CB400C018AF /* CollectionViewSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewSection.swift; sourceTree = "<group>"; };
-		88DCAD2B1CB87CB400C018AF /* CollectionViewSectionInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewSectionInfo.swift; sourceTree = "<group>"; };
 		88DCAD2C1CB87CB400C018AF /* FetchedResultsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsDelegate.swift; sourceTree = "<group>"; };
 		88DCAD2D1CB87CB400C018AF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88DCAD2E1CB87CB400C018AF /* Internal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Internal.swift; sourceTree = "<group>"; };
@@ -168,8 +162,6 @@
 				88DCAD271CB87CB400C018AF /* CollectionViewCellFactory.swift */,
 				88DCAD281CB87CB400C018AF /* CollectionViewCellFactoryType.swift */,
 				88DCAD291CB87CB400C018AF /* CollectionViewDataSourceProvider.swift */,
-				88DCAD2A1CB87CB400C018AF /* CollectionViewSection.swift */,
-				88DCAD2B1CB87CB400C018AF /* CollectionViewSectionInfo.swift */,
 				88DCAD2C1CB87CB400C018AF /* FetchedResultsDelegate.swift */,
 				88DCAD2D1CB87CB400C018AF /* Info.plist */,
 				88DCAD2E1CB87CB400C018AF /* Internal.swift */,
@@ -350,10 +342,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				881A92D91CB881550080BC5C /* CollectionViewSection.swift in Sources */,
 				881A92D81CB881550080BC5C /* CollectionViewDataSourceProvider.swift in Sources */,
 				881A92E11CB881550080BC5C /* Section.swift in Sources */,
-				881A92DA1CB881550080BC5C /* CollectionViewSectionInfo.swift in Sources */,
 				881A92DF1CB881550080BC5C /* TableViewCellFactoryType.swift in Sources */,
 				881A92D61CB881550080BC5C /* CollectionViewCellFactory.swift in Sources */,
 				881A92E31CB881550080BC5C /* TitledCollectionReusableView.swift in Sources */,
@@ -374,12 +364,10 @@
 			files = (
 				88DCAD6F1CB87CC000C018AF /* Internal.swift in Sources */,
 				88DCAD731CB87CC000C018AF /* TableViewDataSourceProvider.swift in Sources */,
-				88DCAD6B1CB87CC000C018AF /* CollectionViewSection.swift in Sources */,
 				88DCAD6D1CB87CC000C018AF /* FetchedResultsDelegate.swift in Sources */,
 				88DCAD721CB87CC000C018AF /* TableViewCellFactoryType.swift in Sources */,
 				88DCAD6A1CB87CC000C018AF /* CollectionViewDataSourceProvider.swift in Sources */,
 				88DCAD761CB87CC000C018AF /* TitledCollectionReusableView.swift in Sources */,
-				88DCAD6C1CB87CC000C018AF /* CollectionViewSectionInfo.swift in Sources */,
 				88DCAD691CB87CC000C018AF /* CollectionViewCellFactoryType.swift in Sources */,
 				88DCAD671CB87CC000C018AF /* CollectionSupplementaryViewFactoryType.swift in Sources */,
 				88DCAD711CB87CC000C018AF /* TableViewCellFactory.swift in Sources */,

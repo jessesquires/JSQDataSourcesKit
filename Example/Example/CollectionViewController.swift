@@ -25,18 +25,17 @@ class CollectionViewController: UICollectionViewController, UICollectionViewDele
 
     typealias CellFactory = CollectionViewCellFactory<CollectionViewCell, CellViewModel>
     typealias HeaderViewFactory = TitledCollectionReusableViewFactory<CellViewModel>
-    typealias Section = CollectionViewSection<CellViewModel>
 
-    var dataSourceProvider: CollectionViewDataSourceProvider<Section, CellFactory, HeaderViewFactory>?
+    var dataSourceProvider: CollectionViewDataSourceProvider<Section<CellViewModel>, CellFactory, HeaderViewFactory>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView(collectionView!)
 
         // 1. create view models
-        let section0 = CollectionViewSection(items: CellViewModel(), CellViewModel(), CellViewModel())
-        let section1 = CollectionViewSection(items: CellViewModel(), CellViewModel(), CellViewModel(), CellViewModel(), CellViewModel(), CellViewModel())
-        let section2 = CollectionViewSection(items: CellViewModel())
+        let section0 = Section(items: CellViewModel(), CellViewModel(), CellViewModel())
+        let section1 = Section(items: CellViewModel(), CellViewModel(), CellViewModel(), CellViewModel(), CellViewModel(), CellViewModel())
+        let section2 = Section(items: CellViewModel())
         let allSections = [section0, section1, section2]
 
         // 2. create cell factory
