@@ -32,8 +32,7 @@ final class DescriptionTests: XCTestCase {
         let section = Section(items: FakeViewModel(), FakeViewModel())
         print(section, "\n")
 
-        let cellFactory = CollectionViewCellFactory(reuseIdentifier: "cellId") {
-            (cell, model: FakeViewModel, view, indexPath) -> FakeCollectionCell in
+        let cellFactory = CellFactory(reuseIdentifier: "cellId") { (cell, model: FakeViewModel, view, indexPath) -> FakeCollectionCell in
             return cell
         }
         print(cellFactory, "\n")

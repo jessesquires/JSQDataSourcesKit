@@ -56,11 +56,10 @@ final class CollectionViewDataSourceTests: XCTestCase {
         fakeCollectionView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + #function)
 
         // GIVEN: a cell factory
-        let factory = CollectionViewCellFactory(reuseIdentifier: fakeCellReuseId)
-        { (cell: FakeCollectionCell, model: FakeViewModel, view: UICollectionView, indexPath: NSIndexPath) -> FakeCollectionCell in
+        let cellFactory = CellFactory(reuseIdentifier: fakeCellReuseId) { (cell, model: FakeViewModel, collectionView, indexPath) -> FakeCollectionCell in
             XCTAssertEqual(cell.reuseIdentifier!, self.fakeCellReuseId, "Dequeued cell should have expected identifier")
             XCTAssertEqual(model, expectedModel, "Model object should equal expected value")
-            XCTAssertEqual(view, self.fakeCollectionView, "CollectionView should equal the collectionView for the data source")
+            XCTAssertEqual(collectionView, self.fakeCollectionView, "CollectionView should equal the collectionView for the data source")
             XCTAssertEqual(indexPath, expectedIndexPath, "IndexPath should equal expected value")
 
             cellFactoryExpectation.fulfill()
@@ -68,11 +67,10 @@ final class CollectionViewDataSourceTests: XCTestCase {
         }
 
         // GIVEN: a data source provider
-        typealias CellFactory = CollectionViewCellFactory<FakeCollectionCell, FakeViewModel>
         typealias SupplementaryViewFactory = CollectionSupplementaryViewFactory<FakeCollectionSupplementaryView, FakeViewModel>
-        typealias Provider = CollectionViewDataSourceProvider<Section<FakeViewModel>, CellFactory, SupplementaryViewFactory>
+        typealias Provider = CollectionViewDataSourceProvider<Section<FakeViewModel>, CellFactory<FakeViewModel, FakeCollectionCell>, SupplementaryViewFactory>
 
-        let dataSourceProvider: Provider = CollectionViewDataSourceProvider(sections: allSections, cellFactory: factory, collectionView: fakeCollectionView)
+        let dataSourceProvider: Provider = CollectionViewDataSourceProvider(sections: allSections, cellFactory: cellFactory, collectionView: fakeCollectionView)
         let dataSource = dataSourceProvider.dataSource
 
         // WHEN: we call the collection view data source methods
@@ -106,11 +104,10 @@ final class CollectionViewDataSourceTests: XCTestCase {
         var cellFactoryExpectation = expectationWithDescription("cell_factory_\(#function)")
 
         // GIVEN: a cell factory
-        let cellFactory = CollectionViewCellFactory(reuseIdentifier: fakeCellReuseId)
-        { (cell: FakeCollectionCell, model: FakeViewModel, view: UICollectionView, indexPath: NSIndexPath) -> FakeCollectionCell in
+        let cellFactory = CellFactory(reuseIdentifier: fakeCellReuseId) { (cell, model: FakeViewModel, collectionView, indexPath) -> FakeCollectionCell in
             XCTAssertEqual(cell.reuseIdentifier!, self.fakeCellReuseId, "Dequeued cell should have expected identifier")
             XCTAssertEqual(model, allSections[indexPath.section][indexPath.item], "Model object should equal expected value")
-            XCTAssertEqual(view, self.fakeCollectionView, "CollectionView should equal the collectionView for the data source")
+            XCTAssertEqual(collectionView, self.fakeCollectionView, "CollectionView should equal the collectionView for the data source")
 
             cellFactoryExpectation.fulfill()
             return cell

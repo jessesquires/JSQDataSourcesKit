@@ -27,7 +27,7 @@ import UIKit
 
  - warning: The `CellFactory.Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
  */
-public final class CollectionViewFetchedResultsDelegateProvider <CellFactory: CollectionViewCellFactoryType>: CustomStringConvertible {
+public final class CollectionViewFetchedResultsDelegateProvider <CellFactory: CellFactoryProtocol where CellFactory.Cell: UICollectionViewCell>: CustomStringConvertible {
 
     // MARK: Typealiases
 
@@ -146,8 +146,8 @@ public final class CollectionViewFetchedResultsDelegateProvider <CellFactory: Co
                 if let indexPath = indexPaths.first,
                     item = updatedObjects[indexPath],
                     cell = collectionView?.cellForItemAtIndexPath(indexPath) as? CellFactory.Cell,
-                    view = collectionView {
-                    cellFactory.configureCell(cell, forItem: item, inCollectionView: view, atIndexPath: indexPath)
+                    collectionView = collectionView {
+                    cellFactory.configure(cell: cell, item: item, parentView: collectionView, indexPath: indexPath)
                 }
             case .Move:
                 if let deleteIndexPath = indexPaths.first {

@@ -23,10 +23,10 @@ import JSQDataSourcesKit
 
 class CollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    typealias CellFactory = CollectionViewCellFactory<CollectionViewCell, CellViewModel>
+    typealias CollectionCellFactory = CellFactory<CellViewModel, CollectionViewCell>
     typealias HeaderViewFactory = TitledCollectionReusableViewFactory<CellViewModel>
 
-    var dataSourceProvider: CollectionViewDataSourceProvider<Section<CellViewModel>, CellFactory, HeaderViewFactory>?
+    var dataSourceProvider: CollectionViewDataSourceProvider<Section<CellViewModel>, CollectionCellFactory, HeaderViewFactory>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +39,7 @@ class CollectionViewController: UICollectionViewController, UICollectionViewDele
         let allSections = [section0, section1, section2]
 
         // 2. create cell factory
-        let cellFactory = CollectionViewCellFactory(reuseIdentifier: CellId) {
-            (cell: CollectionViewCell, model: CellViewModel, collectionView: UICollectionView, indexPath: NSIndexPath) -> CollectionViewCell in
+        let cellFactory = CellFactory(reuseIdentifier: CellId) { (cell, model: CellViewModel, collectionView, indexPath) -> CollectionViewCell in
             cell.label.text = model.text + "\n\(indexPath.section), \(indexPath.item)"
             return cell
         }

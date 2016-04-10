@@ -54,8 +54,7 @@ class TitledCollectionReusableViewFactoryTests: XCTestCase {
         var cellFactoryExpectation = expectationWithDescription("cell_factory")
 
         // GIVEN: a cell factory
-        let cellFactory = CollectionViewCellFactory(reuseIdentifier: fakeCellReuseId)
-        { (cell: FakeCollectionCell, model: FakeViewModel, view: UICollectionView, indexPath: NSIndexPath) -> FakeCollectionCell in
+        let cellFactory = CellFactory(reuseIdentifier: fakeCellReuseId) { (cell, model: FakeViewModel, collectionView, indexPath) -> FakeCollectionCell in
             cellFactoryExpectation.fulfill()
             return cell
         }

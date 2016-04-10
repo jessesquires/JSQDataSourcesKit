@@ -26,7 +26,7 @@ class FetchedCollectionViewController: UICollectionViewController {
 
     let stack = CoreDataStack()
 
-    typealias ThingCellFactory = CollectionViewCellFactory<CollectionViewCell, Thing>
+    typealias ThingCellFactory = CellFactory<Thing, CollectionViewCell>
     typealias ThingSupplementaryViewFactory = ComposedCollectionSupplementaryViewFactory<Thing>
     var dataSourceProvider: CollectionViewFetchedResultsDataSourceProvider<ThingCellFactory, ThingSupplementaryViewFactory>?
 
@@ -44,8 +44,7 @@ class FetchedCollectionViewController: UICollectionViewController {
         layout.footerReferenceSize = CGSize(width: collectionView!.frame.size.width, height: 25)
 
         // 1. create cell factory
-        let cellFactory = CollectionViewCellFactory(reuseIdentifier: CellId) {
-            (cell: CollectionViewCell, model: Thing, collectionView: UICollectionView, indexPath: NSIndexPath) -> CollectionViewCell in
+        let cellFactory = CellFactory(reuseIdentifier: CellId) { (cell, model: Thing, collectionView, indexPath) -> CollectionViewCell in
             cell.label.text = model.displayName
             cell.label.textColor = UIColor.whiteColor()
             cell.backgroundColor = model.displayColor
