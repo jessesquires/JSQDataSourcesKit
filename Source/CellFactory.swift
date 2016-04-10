@@ -19,24 +19,46 @@
 import Foundation
 import UIKit
 
+// MARK: CellParentViewProtocol
 
+/**
+ This protocol unifies `UICollectionView` and `UITableView` by providing a common dequeue method for cells.
+ It describes a view that is the "parent" view for a cell.
+ For `UICollectionViewCell`, this would be `UICollectionView`.
+ For `UITableViewCell`, this would be `UITableView`.
+ */
 public protocol CellParentViewProtocol {
+    /// The type of cell for this parent view.
     associatedtype CellType: UIView
 
+    /**
+     Returns a reusable cell object located by its identifier.
+
+     - parameter identifier: The reuse identifier for the specified cell.
+     - parameter indexPath:  The index path specifying the location of the cell.
+
+     - returns: A valid `CellType` reusable view.
+     */
     func dequeueReusableCellFor(identifier identifier: String, indexPath: NSIndexPath) -> CellType
 }
 
+
 extension UICollectionView: CellParentViewProtocol {
+    /// :nodoc:
     public typealias CellType = UICollectionViewCell
 
+    /// :nodoc:
     public func dequeueReusableCellFor(identifier identifier: String, indexPath: NSIndexPath) -> CellType {
         return dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath)
     }
 }
 
+
 extension UITableView: CellParentViewProtocol {
+    /// :nodoc:
     public typealias CellType = UITableViewCell
 
+    /// :nodoc:
     public func dequeueReusableCellFor(identifier identifier: String, indexPath: NSIndexPath) -> CellType {
         return dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
     }
