@@ -91,7 +91,7 @@ extension UITableViewCell: ReusableViewProtocol {
 
 
 
-// MARK: CellFactoryProtocol
+// MARK: CellFactory
 
 /**
  An instance conforming to `CellFactoryProtocol` is responsible for initializing
@@ -146,14 +146,44 @@ public extension CellFactoryProtocol {
     }
 }
 
-
+/**
+ A `CellFactory` is a concrete `CellFactoryProtocol` type.
+ This factory is responsible for producing and configuring cells for a specific item.
+ Cells can be for either collection views or table views.
+ */
 public struct CellFactory<Item, Cell: ReusableViewProtocol>: CellFactoryProtocol  {
 
+    /**
+     Configures the cell for the specified item, parent view and index path.
+
+     - parameter cell:       The cell to be configured at the index path.
+     - parameter item:       The item at `indexPath`.
+     - parameter parentView: The collection view or table view requesting this information.
+     - parameter indexPath:  The index path at which the cell will be displayed.
+
+     - returns: The configured cell.
+     */
     public typealias CellConfigurator = (cell: Cell, item: Item, parentView: Cell.ParentView, indexPath: NSIndexPath) -> Cell
 
+    /**
+     A unique identifier that describes the purpose of the cells that the factory produces.
+     The factory dequeues cells from the collection view or table view with this reuse identifier.
+
+     - note: Clients are responsible for registering a cell for this identifier with the collection view or table view.
+     */
     public let reuseIdentifier: String
+
+    /// A closure used to configure the cells.
     public let cellConfigurator: CellConfigurator
 
+    /**
+     Constructs a new cell factory.
+
+     - parameter reuseIdentifier:  The reuse identifier with which the factory will dequeue cells.
+     - parameter cellConfigurator: The closure with which the factory will configure cells.
+
+     - returns: A new `CellFactory` instance.
+     */
     public init(reuseIdentifier: String, cellConfigurator: CellConfigurator) {
         self.reuseIdentifier = reuseIdentifier
         self.cellConfigurator = cellConfigurator
