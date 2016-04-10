@@ -44,16 +44,20 @@ public protocol CellParentViewProtocol {
 }
 
 extension UICollectionView: CellParentViewProtocol {
+    /// :nodoc:
     public typealias CellType = UICollectionViewCell
 
+    /// :nodoc:
     public func dequeueReusableCellFor(identifier identifier: String, indexPath: NSIndexPath) -> CellType {
         return dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath)
     }
 }
 
 extension UITableView: CellParentViewProtocol {
+    /// :nodoc:
     public typealias CellType = UITableViewCell
 
+    /// :nodoc:
     public func dequeueReusableCellFor(identifier identifier: String, indexPath: NSIndexPath) -> CellType {
         return dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
     }
@@ -82,10 +86,12 @@ public protocol ReusableViewProtocol {
 }
 
 extension UICollectionReusableView: ReusableViewProtocol {
+    /// :nodoc:
     public typealias ParentView = UICollectionView
 }
 
 extension UITableViewCell: ReusableViewProtocol {
+    /// :nodoc:
     public typealias ParentView = UITableView
 }
 
