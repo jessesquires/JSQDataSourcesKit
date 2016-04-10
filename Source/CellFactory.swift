@@ -19,6 +19,7 @@
 import Foundation
 import UIKit
 
+
 // MARK: CellParentViewProtocol
 
 /**
@@ -42,23 +43,17 @@ public protocol CellParentViewProtocol {
     func dequeueReusableCellFor(identifier identifier: String, indexPath: NSIndexPath) -> CellType
 }
 
-
 extension UICollectionView: CellParentViewProtocol {
-    /// :nodoc:
     public typealias CellType = UICollectionViewCell
 
-    /// :nodoc:
     public func dequeueReusableCellFor(identifier identifier: String, indexPath: NSIndexPath) -> CellType {
         return dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath)
     }
 }
 
-
 extension UITableView: CellParentViewProtocol {
-    /// :nodoc:
     public typealias CellType = UITableViewCell
 
-    /// :nodoc:
     public func dequeueReusableCellFor(identifier identifier: String, indexPath: NSIndexPath) -> CellType {
         return dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
     }
@@ -66,12 +61,23 @@ extension UITableView: CellParentViewProtocol {
 
 
 
+// MARK: ReusableViewProtocol
 
+/**
+ This protocol unifies `UICollectionViewCell` and `UITableViewCell` by providing a common interface for cells.
+ */
 public protocol ReusableViewProtocol {
+
+    /**
+     The "parent" view of the cell. 
+     For `UICollectionViewCell` this is `UICollectionView`. For `UITableViewCell` this is `UITableView`.
+     */
     associatedtype ParentView: UIView, CellParentViewProtocol
 
+    /// A string that identifies the purpose of the view.
     var reuseIdentifier: String? { get }
 
+    /// Performs any clean up necessary to prepare the view for use again.
     func prepareForReuse()
 }
 
