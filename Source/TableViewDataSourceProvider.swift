@@ -28,10 +28,8 @@ import UIKit
  - Registering cells with the table view
  - Adding, removing, or reloading cells and sections as the provider's `sections` are modified.
  */
-public final class TableViewDataSourceProvider <
-    SectionInfo: SectionInfoProtocol,
-    CellFactory: TableViewCellFactoryType
-where CellFactory.Item == SectionInfo.Item>: CustomStringConvertible {
+public final class TableViewDataSourceProvider<SectionInfo: SectionInfoProtocol, CellFactory: CellFactoryProtocol
+where CellFactory.Item == SectionInfo.Item, CellFactory.Cell: UITableViewCell>: CustomStringConvertible {
 
     // MARK: Typealiases
 
@@ -119,8 +117,7 @@ where CellFactory.Item == SectionInfo.Item>: CustomStringConvertible {
         },
         cellForRowAtIndexPath: { [unowned self] (tableView, indexPath) -> UITableViewCell in
             let item = self.sections[indexPath.section].items[indexPath.row]
-            let cell = self.cellFactory.cellForItem(item, inTableView: tableView, atIndexPath: indexPath)
-            return self.cellFactory.configureCell(cell, forItem: item, inTableView: tableView, atIndexPath: indexPath)
+            return self.cellFactory.cellFor(item: item, parentView: tableView, indexPath: indexPath)
         },
         titleForHeaderInSection: { [unowned self] (section) -> String? in
             self.sections[section].headerTitle
@@ -137,7 +134,7 @@ where CellFactory.Item == SectionInfo.Item>: CustomStringConvertible {
  - warning: The `CellFactory.Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
  - note: Clients are responsbile for registering cells with the table view.
  */
-public final class TableViewFetchedResultsDataSourceProvider <CellFactory: TableViewCellFactoryType>: CustomStringConvertible {
+public final class TableViewFetchedResultsDataSourceProvider <CellFactory: CellFactoryProtocol where CellFactory.Cell: UITableViewCell>: CustomStringConvertible {
 
     // MARK: Typealiases
 
@@ -199,8 +196,7 @@ public final class TableViewFetchedResultsDataSourceProvider <CellFactory: Table
         },
         cellForRowAtIndexPath: { [unowned self] (tableView, indexPath) -> UITableViewCell in
             let item = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Item
-            let cell = self.cellFactory.cellForItem(item, inTableView: tableView, atIndexPath: indexPath)
-            return self.cellFactory.configureCell(cell, forItem: item, inTableView: tableView, atIndexPath: indexPath)
+            return self.cellFactory.cellFor(item: item, parentView: tableView, indexPath: indexPath)
         },
         titleForHeaderInSection: { [unowned self] (section) -> String? in
             return (self.fetchedResultsController.sections?[section])?.name

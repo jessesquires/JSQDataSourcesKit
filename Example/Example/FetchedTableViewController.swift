@@ -28,9 +28,9 @@ class FetchedTableViewController: UITableViewController {
 
     let stack = CoreDataStack()
 
-    typealias CellFactory = TableViewCellFactory<UITableViewCell, Thing>
-    var dataSourceProvider: TableViewFetchedResultsDataSourceProvider<CellFactory>?
-    var delegateProvider: TableViewFetchedResultsDelegateProvider<CellFactory>?
+    typealias TableCellFactory = CellFactory<Thing, UITableViewCell>
+    var dataSourceProvider: TableViewFetchedResultsDataSourceProvider<TableCellFactory>?
+    var delegateProvider: TableViewFetchedResultsDelegateProvider<TableCellFactory>?
 
 
     // MARK: View lifecycle
@@ -39,7 +39,7 @@ class FetchedTableViewController: UITableViewController {
         super.viewDidLoad()
 
         // 1. create factory
-        let factory = TableViewCellFactory(reuseIdentifier: CellId) { (cell: UITableViewCell, model: Thing, tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell in
+        let factory = CellFactory(reuseIdentifier: CellId) { (cell, model: Thing, tableView, indexPath) -> UITableViewCell in
             cell.textLabel?.text = model.displayName
             cell.textLabel?.textColor = model.displayColor
             cell.detailTextLabel?.text = "\(indexPath.section), \(indexPath.row)"

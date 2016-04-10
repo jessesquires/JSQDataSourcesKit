@@ -23,8 +23,8 @@ import JSQDataSourcesKit
 
 class TableViewController: UITableViewController {
 
-    typealias CellFactory = TableViewCellFactory<UITableViewCell, CellViewModel>
-    var dataSourceProvider: TableViewDataSourceProvider<Section<CellViewModel>, CellFactory>?
+    typealias TableCellFactory = CellFactory<CellViewModel, UITableViewCell>
+    var dataSourceProvider: TableViewDataSourceProvider<Section<CellViewModel>, TableCellFactory>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +36,7 @@ class TableViewController: UITableViewController {
         let allSections = [section0, section1, section2]
 
         // 2. create cell factory
-        let factory = TableViewCellFactory(reuseIdentifier: CellId) {
-            (cell: UITableViewCell, model: CellViewModel, tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell in
+        let factory = CellFactory(reuseIdentifier: CellId) { (cell, model: CellViewModel, tableView, indexPath) -> UITableViewCell in
             cell.textLabel?.text = model.text
             cell.detailTextLabel?.text = "\(indexPath.section), \(indexPath.row)"
             return cell

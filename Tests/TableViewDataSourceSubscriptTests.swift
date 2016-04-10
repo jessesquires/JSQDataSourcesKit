@@ -33,7 +33,7 @@ final class TableViewDataSourceSubscriptTests: XCTestCase {
         let section2 = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
 
         // GIVEN: a cell factory
-        let factory = TableViewCellFactory(reuseIdentifier: "cellid") { (cell: FakeTableCell, model: FakeViewModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
+        let factory = CellFactory(reuseIdentifier: "cellid") { (cell, model: FakeViewModel, tableView, indexPath) -> FakeTableCell in
             return cell
         }
 
@@ -56,7 +56,7 @@ final class TableViewDataSourceSubscriptTests: XCTestCase {
         let section1 = Section(items: FakeViewModel(), headerTitle: "Header Title")
 
         // GIVEN: a cell factory
-        let factory = TableViewCellFactory(reuseIdentifier: "reuseId") { (cell: UITableViewCell, model: FakeViewModel, view: UITableView, index: NSIndexPath) -> UITableViewCell in
+        let factory = CellFactory(reuseIdentifier: "cellid") { (cell, model: FakeViewModel, tableView, indexPath) -> FakeTableCell in
             return cell
         }
 
@@ -84,7 +84,7 @@ final class TableViewDataSourceSubscriptTests: XCTestCase {
         let section1 = Section(items: FakeViewModel())
 
         // GIVEN: a cell factory
-        let factory = TableViewCellFactory(reuseIdentifier: "cellid") { (cell: FakeTableCell, model: FakeViewModel, tableView: UITableView, indexPath: NSIndexPath) -> FakeTableCell in
+        let factory = CellFactory(reuseIdentifier: "cellid") { (cell, model: FakeViewModel, tableView, indexPath) -> FakeTableCell in
             return cell
         }
 
@@ -106,7 +106,7 @@ final class TableViewDataSourceSubscriptTests: XCTestCase {
         let section1 = Section(items: FakeViewModel())
 
         // GIVEN: a cell factory
-        let factory = TableViewCellFactory(reuseIdentifier: "reuseId") { (cell: UITableViewCell, model: FakeViewModel, view: UITableView, index: NSIndexPath) -> UITableViewCell in
+        let factory = CellFactory(reuseIdentifier: "cellid") { (cell, model: FakeViewModel, tableView, indexPath) -> FakeTableCell in
             return cell
         }
 

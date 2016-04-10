@@ -190,7 +190,7 @@ public final class CollectionViewFetchedResultsDelegateProvider <CellFactory: Co
 
  - warning: The `CellFactory.Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
  */
-public final class TableViewFetchedResultsDelegateProvider <CellFactory: TableViewCellFactoryType>: CustomStringConvertible {
+public final class TableViewFetchedResultsDelegateProvider <CellFactory: CellFactoryProtocol where CellFactory.Cell: UITableViewCell>: CustomStringConvertible {
 
     // MARK: Typealiases
 
@@ -273,8 +273,8 @@ public final class TableViewFetchedResultsDelegateProvider <CellFactory: TableVi
             case .Update:
                 if let indexPath = indexPath,
                     cell = self.tableView?.cellForRowAtIndexPath(indexPath) as? CellFactory.Cell,
-                    view = self.tableView {
-                    self.cellFactory.configureCell(cell, forItem: anyObject as! Item, inTableView: view, atIndexPath: indexPath)
+                    tableView = self.tableView {
+                    self.cellFactory.configure(cell: cell, item: anyObject as! Item, parentView: tableView, indexPath: indexPath)
                 }
             case .Move:
                 if let deleteIndexPath = indexPath {
