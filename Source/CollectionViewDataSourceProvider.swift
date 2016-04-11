@@ -121,39 +121,45 @@ where CellFactory.Item == SectionInfo.Item, SupplementaryViewFactory.Item == Sec
 
     // MARK: Private
 
-    private lazy var bridgedDataSource: BridgedCollectionViewDataSource = BridgedCollectionViewDataSource(
-        numberOfSections: { [unowned self] () -> Int in
-            self.sections.count
-        },
-        numberOfItemsInSection: { [unowned self] (section) -> Int in
-            self.sections[section].items.count
-        },
-        cellForItemAtIndexPath: { [unowned self] (collectionView, indexPath) -> UICollectionViewCell in
+    private lazy var bridgedDataSource: BridgedDataSource = {
+        let dataSource = BridgedDataSource(
+            numberOfSections: { [unowned self] () -> Int in
+                return self.sections.count
+            },
+            numberOfItemsInSection: { [unowned self] (section) -> Int in
+                return self.sections[section].items.count
+            })
+
+        dataSource.collectionCellForItemAtIndexPath = { [unowned self] (collectionView, indexPath) -> UICollectionViewCell in
             let item = self.sections[indexPath.section].items[indexPath.row]
             return self.cellFactory.cellFor(item: item, parentView: collectionView, indexPath: indexPath)
-        },
-        supplementaryViewAtIndexPath: { [unowned self] (collectionView, kind, indexPath) -> UICollectionReusableView in
-            if let factory = self.supplementaryViewFactory {
+        }
 
-                var item: Item?
-                if indexPath.section < self.sections.count {
-                    if indexPath.item < self.sections[indexPath.section].items.count {
-                        item = self.sections[indexPath.section].items[indexPath.item]
-                    }
+        dataSource.collectionSupplementaryViewAtIndexPath = { [unowned self] (collectionView, kind, indexPath) -> UICollectionReusableView in
+            let factory = self.supplementaryViewFactory!
+            var item: Item?
+            if indexPath.section < self.sections.count {
+                if indexPath.item < self.sections[indexPath.section].items.count {
+                    item = self.sections[indexPath.section].items[indexPath.item]
                 }
-
-                let view = factory.supplementaryViewFor(item: item, kind: kind, collectionView: collectionView, indexPath: indexPath)
-                return factory.configureSupplementaryView(view, item: item, kind: kind, collectionView: collectionView, indexPath: indexPath)
             }
 
-            // we must not return nil here, per the `UICollectionViewDataSource` docs
-            // however, this will never get called as it is the client's responsibilty
-            // supplementary views are hidden by returning `CGSizeZero`
-            // from `collectionView(_:layout:referenceSizeForHeaderInSection:)`
-            fatalError("Attempt to dequeue unknown or invalid supplementary view <\(kind)> "
-                + "for collection view <\(collectionView)> at indexPath <\(indexPath)>")
-        })
+            let view = factory.supplementaryViewFor(item: item, kind: kind, collectionView: collectionView, indexPath: indexPath)
+            return factory.configureSupplementaryView(view, item: item, kind: kind, collectionView: collectionView, indexPath: indexPath)
+        }
+
+        return dataSource
+    }()
 }
+
+
+
+// TODO:
+// - have 1 generic dataSourceProvider
+// - use extensions to provide the dataSources, based on the cell factory
+extension CollectionViewDataSourceProvider where CellFactory.Cell: UICollectionViewCell {
+}
+
 
 
 /**
@@ -203,8 +209,7 @@ where CellFactory.Item == SupplementaryViewFactory.Item, CellFactory.Cell: UICol
                 cellFactory: CellFactory,
                 supplementaryViewFactory: SupplementaryViewFactory? = nil,
                 collectionView: UICollectionView? = nil) {
-        assert(fetchedResultsController: fetchedResultsController,
-               fetchesObjectsOfClass: Item.self as! AnyClass)
+        assert(fetchedResultsController: fetchedResultsController, fetchesObjectsOfClass: Item.self as! AnyClass)
 
         self.fetchedResultsController = fetchedResultsController
         self.cellFactory = cellFactory
@@ -225,86 +230,33 @@ where CellFactory.Item == SupplementaryViewFactory.Item, CellFactory.Cell: UICol
 
     // MARK: Private
 
-    private lazy var bridgedDataSource: BridgedCollectionViewDataSource = BridgedCollectionViewDataSource(
-        numberOfSections: { [unowned self] () -> Int in
-            self.fetchedResultsController.sections?.count ?? 0
-        },
-        numberOfItemsInSection: { [unowned self] (section) -> Int in
-            return (self.fetchedResultsController.sections?[section])?.numberOfObjects ?? 0
-        },
-        cellForItemAtIndexPath: { [unowned self] (collectionView, indexPath) -> UICollectionViewCell in
+    private lazy var bridgedDataSource: BridgedDataSource = {
+        let dataSource = BridgedDataSource(
+            numberOfSections: { [unowned self] () -> Int in
+                return self.fetchedResultsController.sections?.count ?? 0
+            },
+            numberOfItemsInSection: { [unowned self] (section) -> Int in
+                return (self.fetchedResultsController.sections?[section])?.numberOfObjects ?? 0
+            })
+
+        dataSource.collectionCellForItemAtIndexPath = { [unowned self] (collectionView, indexPath) -> UICollectionViewCell in
             let item = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Item
             return self.cellFactory.cellFor(item: item, parentView: collectionView, indexPath: indexPath)
-        },
-        supplementaryViewAtIndexPath: { [unowned self] (collectionView, kind, indexPath) -> UICollectionReusableView in
-            if let factory = self.supplementaryViewFactory {
+        }
 
-                var item: Item?
-                if indexPath.section < self.fetchedResultsController.sections?.count {
-                    if indexPath.item < self.fetchedResultsController.sections?[indexPath.section].numberOfObjects {
-                        item = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Item
-                    }
+        dataSource.collectionSupplementaryViewAtIndexPath = { [unowned self] (collectionView, kind, indexPath) -> UICollectionReusableView in
+            let factory = self.supplementaryViewFactory!
+            var item: Item?
+            if indexPath.section < self.fetchedResultsController.sections?.count {
+                if indexPath.item < self.fetchedResultsController.sections?[indexPath.section].numberOfObjects {
+                    item = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Item
                 }
-
-                let view = factory.supplementaryViewFor(item: item, kind: kind, collectionView: collectionView, indexPath: indexPath)
-                return factory.configureSupplementaryView(view, item: item, kind: kind, collectionView: collectionView, indexPath: indexPath)
             }
 
-            // we must not return nil here, per the `UICollectionViewDataSource` docs
-            // however, this will never get called as it is the client's responsibilty
-            // supplementary views are hidden by returning `CGSizeZero`
-            // from `collectionView(_:layout:referenceSizeForHeaderInSection:)`
-            fatalError("Attempt to dequeue unknown or invalid supplementary view <\(kind)> "
-                + "for collection view <\(collectionView)> at indexPath <\(indexPath)>")
-        })
-}
-
-
-/*
- Avoid making DataSourceProvider inherit from NSObject.
- Keep classes pure Swift.
- Keep responsibilies focused.
- */
-@objc private final class BridgedCollectionViewDataSource: NSObject, UICollectionViewDataSource {
-
-    typealias NumberOfSectionsHandler = () -> Int
-    typealias NumberOfItemsInSectionHandler = (Int) -> Int
-    typealias CellForItemAtIndexPathHandler = (UICollectionView, NSIndexPath) -> UICollectionViewCell
-    typealias SupplementaryViewAtIndexPathHandler = (UICollectionView, String, NSIndexPath) -> UICollectionReusableView
-
-    let numberOfSections: NumberOfSectionsHandler
-    let numberOfItemsInSection: NumberOfItemsInSectionHandler
-    let cellForItemAtIndexPath: CellForItemAtIndexPathHandler
-    let supplementaryViewAtIndexPath: SupplementaryViewAtIndexPathHandler
-
-    init(numberOfSections: NumberOfSectionsHandler,
-         numberOfItemsInSection: NumberOfItemsInSectionHandler,
-         cellForItemAtIndexPath: CellForItemAtIndexPathHandler,
-         supplementaryViewAtIndexPath: SupplementaryViewAtIndexPathHandler) {
-
-        self.numberOfSections = numberOfSections
-        self.numberOfItemsInSection = numberOfItemsInSection
-        self.cellForItemAtIndexPath = cellForItemAtIndexPath
-        self.supplementaryViewAtIndexPath = supplementaryViewAtIndexPath
-    }
-
-    @objc func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return numberOfSections()
-    }
-
-    @objc func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return numberOfItemsInSection(section)
-    }
-
-    @objc func collectionView(
-        collectionView: UICollectionView,
-        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return cellForItemAtIndexPath(collectionView, indexPath)
-    }
-
-    @objc func collectionView(collectionView: UICollectionView,
-                              viewForSupplementaryElementOfKind kind: SupplementaryViewKind,
-                                                                atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        return supplementaryViewAtIndexPath(collectionView, kind, indexPath)
-    }
+            let view = factory.supplementaryViewFor(item: item, kind: kind, collectionView: collectionView, indexPath: indexPath)
+            return factory.configureSupplementaryView(view, item: item, kind: kind, collectionView: collectionView, indexPath: indexPath)
+        }
+        
+        return dataSource
+    }()
 }
