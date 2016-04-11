@@ -25,21 +25,25 @@ import JSQDataSourcesKit
 
 final class SectionTests: XCTestCase {
 
-    // TODO: test header and footer titles
-
     func test_ThatSection_Initializes() {
 
         // GIVEN: some items
-        let item1 = FakeTableView()
-        let item2 = FakeTableView()
-        let item3 = FakeTableView()
+        let item1 = FakeViewModel()
+        let item2 = FakeViewModel()
+        let item3 = FakeViewModel()
 
         // WHEN: we create sections with the different initializers
-        let sectionA = Section(items: item1, item2, item3)
-        let sectionB = Section([item1, item2, item3])
+        let sectionA = Section(items: item1, item2, item3, headerTitle: "Header")
+        let sectionB = Section([item1, item2, item3], footerTitle: "Footer")
 
         // THEN: the sections have the same items
         XCTAssertEqual(sectionA.items, sectionB.items, "Section items should be equal")
+
+        XCTAssertEqual(sectionA.headerTitle, "Header")
+        XCTAssertNil(sectionA.footerTitle)
+
+        XCTAssertEqual(sectionB.footerTitle, "Footer")
+        XCTAssertNil(sectionB.headerTitle)
     }
 
     func test_ThatSection_ReturnsExpectedDataFromSubscript() {
@@ -83,5 +87,4 @@ final class SectionTests: XCTestCase {
         XCTAssertEqual(4, count, "Count should equal expected count")
         XCTAssertEqual(4, section.items.count, "Count should equal expected count")
     }
-    
 }
