@@ -108,24 +108,32 @@ where CellFactory.Item == SectionInfo.Item, CellFactory.Cell: UITableViewCell>: 
 
     // MARK: Private
 
-    private lazy var bridgedDataSource: BridgedTableViewDataSource = BridgedTableViewDataSource(
-        numberOfSections: { [unowned self] () -> Int in
-            self.sections.count
-        },
-        numberOfRowsInSection: { [unowned self] (section) -> Int in
-            self.sections[section].items.count
-        },
-        cellForRowAtIndexPath: { [unowned self] (tableView, indexPath) -> UITableViewCell in
+    private lazy var bridgedDataSource: BridgedDataSource = {
+        let dataSource = BridgedDataSource(
+            numberOfSections: { [unowned self] () -> Int in
+                return self.sections.count
+            },
+            numberOfItemsInSection: { [unowned self] (section) -> Int in
+                return self.sections[section].items.count
+            })
+
+        dataSource.tableCellForRowAtIndexPath = { [unowned self] (tableView, indexPath) -> UITableViewCell in
             let item = self.sections[indexPath.section].items[indexPath.row]
             return self.cellFactory.cellFor(item: item, parentView: tableView, indexPath: indexPath)
-        },
-        titleForHeaderInSection: { [unowned self] (section) -> String? in
-            self.sections[section].headerTitle
-        },
-        titleForFooterInSection: { [unowned self] (section) -> String? in
-            self.sections[section].footerTitle
-        })
+        }
+
+        dataSource.tableTitleForHeaderInSection = { [unowned self] (section) -> String? in
+            return self.sections[section].headerTitle
+        }
+
+        dataSource.tableTitleForFooterInSection = { [unowned self] (section) -> String? in
+            return self.sections[section].footerTitle
+        }
+
+        return dataSource
+    }()
 }
+
 
 /**
  A `TableViewFetchedResultsDataSourceProvider` is responsible for providing a data source object for a table view
@@ -187,75 +195,24 @@ public final class TableViewFetchedResultsDataSourceProvider <CellFactory: CellF
 
     // MARK: Private
 
-    private lazy var bridgedDataSource: BridgedTableViewDataSource = BridgedTableViewDataSource(
-        numberOfSections: { [unowned self] () -> Int in
-            self.fetchedResultsController.sections?.count ?? 0
-        },
-        numberOfRowsInSection: { [unowned self] (section) -> Int in
-            return (self.fetchedResultsController.sections?[section])?.numberOfObjects ?? 0
-        },
-        cellForRowAtIndexPath: { [unowned self] (tableView, indexPath) -> UITableViewCell in
+    private lazy var bridgedDataSource: BridgedDataSource = {
+        let dataSource = BridgedDataSource(
+            numberOfSections: { [unowned self] () -> Int in
+                return self.fetchedResultsController.sections?.count ?? 0
+            },
+            numberOfItemsInSection: { [unowned self] (section) -> Int in
+                return (self.fetchedResultsController.sections?[section])?.numberOfObjects ?? 0
+            })
+
+        dataSource.tableCellForRowAtIndexPath = { [unowned self] (tableView, indexPath) -> UITableViewCell in
             let item = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Item
             return self.cellFactory.cellFor(item: item, parentView: tableView, indexPath: indexPath)
-        },
-        titleForHeaderInSection: { [unowned self] (section) -> String? in
+        }
+
+        dataSource.tableTitleForHeaderInSection = { [unowned self] (section) -> String? in
             return (self.fetchedResultsController.sections?[section])?.name
-        },
-        titleForFooterInSection: { (section) -> String? in
-            return nil
-    })
-}
-
-
-/*
- Avoid making DataSourceProvider inherit from NSObject.
- Keep classes pure Swift.
- Keep responsibilies focused.
- */
-@objc private final class BridgedTableViewDataSource: NSObject, UITableViewDataSource {
-
-    typealias NumberOfSectionsHandler = () -> Int
-    typealias NumberOfRowsInSectionHandler = (Int) -> Int
-    typealias CellForRowAtIndexPathHandler = (UITableView, NSIndexPath) -> UITableViewCell
-    typealias TitleForHeaderInSectionHandler = (Int) -> String?
-    typealias TitleForFooterInSectionHandler = (Int) -> String?
-
-    let numberOfSections: NumberOfSectionsHandler
-    let numberOfRowsInSection: NumberOfRowsInSectionHandler
-    let cellForRowAtIndexPath: CellForRowAtIndexPathHandler
-    let titleForHeaderInSection: TitleForHeaderInSectionHandler
-    let titleForFooterInSection: TitleForFooterInSectionHandler
-
-    init(numberOfSections: NumberOfSectionsHandler,
-         numberOfRowsInSection: NumberOfRowsInSectionHandler,
-         cellForRowAtIndexPath: CellForRowAtIndexPathHandler,
-         titleForHeaderInSection: TitleForHeaderInSectionHandler,
-         titleForFooterInSection: TitleForFooterInSectionHandler) {
-
-        self.numberOfSections = numberOfSections
-        self.numberOfRowsInSection = numberOfRowsInSection
-        self.cellForRowAtIndexPath = cellForRowAtIndexPath
-        self.titleForHeaderInSection = titleForHeaderInSection
-        self.titleForFooterInSection = titleForFooterInSection
-    }
-
-    @objc func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return numberOfSections()
-    }
-
-    @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numberOfRowsInSection(section)
-    }
-
-    @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return cellForRowAtIndexPath(tableView, indexPath)
-    }
-
-    @objc func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return titleForHeaderInSection(section)
-    }
-    
-    @objc func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return titleForFooterInSection(section)
-    }
+        }
+        
+        return dataSource
+    }()
 }
