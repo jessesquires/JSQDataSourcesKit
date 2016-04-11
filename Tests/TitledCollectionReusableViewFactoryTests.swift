@@ -120,7 +120,7 @@ class TitledCollectionReusableViewFactoryTests: XCTestCase {
                 // THEN: the collectionView calls `dequeueReusableSupplementaryViewOfKind`
                 // THEN: the supplementary view factory calls its `dataConfigurator`
                 // THEN: the supplementary view factory calls its `styleConfigurator`
-                waitForExpectationsWithTimeout(DefaultTimeout, handler: { (error) -> Void in
+                waitForExpectationsWithTimeout(defaultTimeout, handler: { (error) -> Void in
                     XCTAssertNil(error, "Expections should not error")
                 })
 

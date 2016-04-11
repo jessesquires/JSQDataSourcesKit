@@ -88,7 +88,7 @@ final class TableViewDataSourceTests: XCTestCase {
 
         // THEN: the tableView calls `dequeueReusableCellWithIdentifier`
         // THEN: the cell factory calls its `ConfigurationHandler`
-        waitForExpectationsWithTimeout(DefaultTimeout, handler: { (error) -> Void in
+        waitForExpectationsWithTimeout(defaultTimeout, handler: { (error) -> Void in
             XCTAssertNil(error, "Expectations should not error")
         })
     }
@@ -150,7 +150,7 @@ final class TableViewDataSourceTests: XCTestCase {
 
                 // THEN: the tableView calls `dequeueReusableCellWithIdentifier`
                 // THEN: the cell factory calls its `ConfigurationHandler`
-                waitForExpectationsWithTimeout(DefaultTimeout, handler: { (error) -> Void in
+                waitForExpectationsWithTimeout(defaultTimeout, handler: { (error) -> Void in
                     XCTAssertNil(error, "Expectations should not error")
                 })
 

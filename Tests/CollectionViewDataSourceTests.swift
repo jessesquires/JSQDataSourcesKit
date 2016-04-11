@@ -88,7 +88,7 @@ final class CollectionViewDataSourceTests: XCTestCase {
 
         // THEN: the collectionView calls `dequeueReusableCellWithReuseIdentifier`
         // THEN: the cell factory calls its `ConfigurationHandler`
-        waitForExpectationsWithTimeout(DefaultTimeout, handler: { (error) -> Void in
+        waitForExpectationsWithTimeout(defaultTimeout, handler: { (error) -> Void in
             XCTAssertNil(error, "Expectation should not error")
         })
     }
@@ -170,7 +170,7 @@ final class CollectionViewDataSourceTests: XCTestCase {
 
                 // THEN: the collectionView calls `dequeueReusableSupplementaryViewOfKind`
                 // THEN: the supplementary view factory calls its `ConfigurationHandler`
-                waitForExpectationsWithTimeout(DefaultTimeout, handler: { (error) -> Void in
+                waitForExpectationsWithTimeout(defaultTimeout, handler: { (error) -> Void in
                     XCTAssertNil(error, "Expections should not error")
                 })
 
