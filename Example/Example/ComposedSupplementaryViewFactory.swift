@@ -24,16 +24,14 @@ import JSQDataSourcesKit
  Example of a composed factory for supplementary views.
  Used for headers and footers in `FetchedCollectionViewController` in the demo
  */
-
 public struct ComposedCollectionSupplementaryViewFactory <Item>: SupplementaryViewFactoryProtocol {
 
     public let headerViewFactory: TitledCollectionReusableViewFactory<Item>
 
     public let footerViewFactory: TitledCollectionReusableViewFactory<Item>
 
-    public init(
-        headerViewFactory: TitledCollectionReusableViewFactory<Item>,
-        footerViewFactory: TitledCollectionReusableViewFactory<Item>) {
+    public init(headerViewFactory: TitledCollectionReusableViewFactory<Item>,
+                footerViewFactory: TitledCollectionReusableViewFactory<Item>) {
         self.headerViewFactory = headerViewFactory
         self.footerViewFactory = footerViewFactory
     }
@@ -42,7 +40,11 @@ public struct ComposedCollectionSupplementaryViewFactory <Item>: SupplementaryVi
         return TitledCollectionReusableView.identifier
     }
 
-    public func configure(view view: TitledCollectionReusableView, item: Item?, kind: String, parentView: UICollectionView, indexPath: NSIndexPath) -> TitledCollectionReusableView {
+    public func configure(view view: TitledCollectionReusableView,
+                               item: Item?,
+                               kind: String,
+                               parentView: UICollectionView,
+                               indexPath: NSIndexPath) -> TitledCollectionReusableView {
         switch kind {
         case UICollectionElementKindSectionHeader:
             return headerViewFactory.configure(view: view, item: item, kind: kind, parentView: parentView, indexPath: indexPath)
