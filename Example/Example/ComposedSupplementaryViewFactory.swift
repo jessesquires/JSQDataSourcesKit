@@ -25,7 +25,7 @@ import JSQDataSourcesKit
  Used for headers and footers in `FetchedCollectionViewController` in the demo
  */
 
-public struct ComposedCollectionSupplementaryViewFactory <Item>: CollectionSupplementaryViewFactoryType {
+public struct ComposedCollectionSupplementaryViewFactory <Item>: SupplementaryViewFactoryProtocol {
 
     public let headerViewFactory: TitledCollectionReusableViewFactory<Item>
 
@@ -38,50 +38,18 @@ public struct ComposedCollectionSupplementaryViewFactory <Item>: CollectionSuppl
         self.footerViewFactory = footerViewFactory
     }
 
-    public func supplementaryViewFor(item item: Item?,
-                                          kind: SupplementaryViewKind,
-                                          collectionView: UICollectionView,
-                                          indexPath: NSIndexPath) -> TitledCollectionReusableView {
-
-        switch kind {
-        case UICollectionElementKindSectionHeader:
-            return headerViewFactory.supplementaryViewFor(item: item,
-                                                          kind: kind,
-                                                          collectionView: collectionView,
-                                                          indexPath: indexPath)
-
-        case UICollectionElementKindSectionFooter:
-            return footerViewFactory.supplementaryViewFor(item: item,
-                                                          kind: kind,
-                                                          collectionView: collectionView,
-                                                          indexPath: indexPath)
-
-        default:
-            fatalError("attempt to dequeue supplementary view with unknown kind: \(kind)")
-        }
+    public func reuseIdentiferFor(item item: Item?, kind: String, indexPath: NSIndexPath) -> String {
+        return TitledCollectionReusableView.identifier
     }
 
-    public func configureSupplementaryView(view: TitledCollectionReusableView,
-                                           item: Item?,
-                                           kind: SupplementaryViewKind,
-                                           collectionView: UICollectionView,
-                                           indexPath: NSIndexPath) -> TitledCollectionReusableView {
-
+    public func configure(view view: TitledCollectionReusableView, item: Item?, kind: String, parentView: UICollectionView, indexPath: NSIndexPath) -> TitledCollectionReusableView {
         switch kind {
         case UICollectionElementKindSectionHeader:
-            return headerViewFactory.configureSupplementaryView(view,
-                                                                item: item,
-                                                                kind: kind,
-                                                                collectionView: collectionView,
-                                                                indexPath: indexPath)
+            return headerViewFactory.configure(view: view, item: item, kind: kind, parentView: parentView, indexPath: indexPath)
         case UICollectionElementKindSectionFooter:
-            return footerViewFactory.configureSupplementaryView(view,
-                                                                item: item,
-                                                                kind: kind,
-                                                                collectionView: collectionView,
-                                                                indexPath: indexPath)
+            return footerViewFactory.configure(view: view, item: item, kind: kind, parentView: parentView, indexPath: indexPath)
         default:
-            fatalError("attempt to configure supplementary view with unknown kind: \(kind)")
+            fatalError("attempt to dequeue supplementary view with unknown kind: \(kind)")
         }
     }
 }
