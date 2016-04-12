@@ -57,8 +57,8 @@ class FakeTableView: UITableView {
 // MARK: collection view
 
 typealias CollectionCellFactory = CellFactory<FakeViewModel, FakeCollectionCell>
-typealias SupplementaryViewFactory = CollectionSupplementaryViewFactory<FakeCollectionSupplementaryView, FakeViewModel>
-typealias Provider = CollectionViewDataSourceProvider<Section<FakeViewModel>, CollectionCellFactory, SupplementaryViewFactory>
+typealias CollectionSupplementaryViewFactory = SupplementaryViewFactory<FakeViewModel, FakeCollectionSupplementaryView>
+typealias Provider = CollectionViewDataSourceProvider<Section<FakeViewModel>, CollectionCellFactory, CollectionSupplementaryViewFactory>
 
 
 class FakeCollectionCell: UICollectionViewCell { }

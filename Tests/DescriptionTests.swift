@@ -37,7 +37,7 @@ final class DescriptionTests: XCTestCase {
         }
         print(cellFactory, "\n")
 
-        let supplementaryViewFactory = CollectionSupplementaryViewFactory(reuseIdentifier: "supplementaryId") {
+        let supplementaryViewFactory = CollectionSupplementaryViewFactory(reuseIdentifier: "supplementaryId", kind: "kind") {
             (view, model: FakeViewModel?, kind, collectionView, indexPath) -> FakeCollectionSupplementaryView in
             return view
         }

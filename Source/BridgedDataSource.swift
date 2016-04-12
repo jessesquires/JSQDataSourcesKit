@@ -70,7 +70,7 @@ extension BridgedDataSource: UICollectionViewDataSource {
     }
 
     @objc func collectionView(collectionView: UICollectionView,
-                              viewForSupplementaryElementOfKind kind: SupplementaryViewKind,
+                              viewForSupplementaryElementOfKind kind: String,
                                                                 atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         return collectionSupplementaryViewAtIndexPath!(collectionView, kind, indexPath)
     }

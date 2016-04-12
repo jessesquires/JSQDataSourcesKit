@@ -37,7 +37,7 @@ public protocol SupplementaryViewFactoryProtocol {
 
      - returns: An identifier for a reusable supplementary view.
      */
-    func reuseIdentiferFor(item item: Item, kind: String, indexPath: NSIndexPath) -> String
+    func reuseIdentiferFor(item item: Item?, kind: String, indexPath: NSIndexPath) -> String
 
     /**
      Configures and returns the specified supplementary view.
@@ -50,7 +50,7 @@ public protocol SupplementaryViewFactoryProtocol {
 
      - returns: A configured supplementary view of type `View`.
      */
-    func configure(view view: View, item: Item, kind: String, parentView: View.ParentView, indexPath: NSIndexPath) -> View
+    func configure(view view: View, item: Item?, kind: String, parentView: View.ParentView, indexPath: NSIndexPath) -> View
 }
 
 public extension SupplementaryViewFactoryProtocol where View: UICollectionReusableView {
@@ -65,7 +65,7 @@ public extension SupplementaryViewFactoryProtocol where View: UICollectionReusab
 
      - returns: An initialized or dequeued, and fully configured view of type `View`.
      */
-    public func supplementaryViewFor(item item: Item, kind: String, parentView: View.ParentView, indexPath: NSIndexPath) -> View {
+    public func supplementaryViewFor(item item: Item?, kind: String, parentView: View.ParentView, indexPath: NSIndexPath) -> View {
         let reuseIdentifier = reuseIdentiferFor(item: item, kind: kind, indexPath: indexPath)
         let view = parentView.dequeueReusableSupplementaryViewFor(kind: kind, identifier: reuseIdentifier, indexPath: indexPath) as! View
         return configure(view: view, item: item, kind: kind, parentView: parentView, indexPath: indexPath)
@@ -90,7 +90,7 @@ public struct SupplementaryViewFactory<Item, View: ReusableViewProtocol>: Supple
 
      - returns: The configured view.
      */
-    public typealias ViewConfigurator = (view: View, item: Item, kind: String, parentView: View.ParentView, indexPath: NSIndexPath) -> View
+    public typealias ViewConfigurator = (view: View, item: Item?, kind: String, parentView: View.ParentView, indexPath: NSIndexPath) -> View
 
     /**
      A unique identifier that describes the purpose of the views that the factory produces.
@@ -122,12 +122,12 @@ public struct SupplementaryViewFactory<Item, View: ReusableViewProtocol>: Supple
     }
 
     /// :nodoc:
-    public func reuseIdentiferFor(item item: Item, kind: String, indexPath: NSIndexPath) -> String {
+    public func reuseIdentiferFor(item item: Item?, kind: String, indexPath: NSIndexPath) -> String {
         return reuseIdentifier
     }
 
     /// :nodoc:
-    public func configure(view view: View, item: Item, kind: String, parentView: View.ParentView, indexPath: NSIndexPath) -> View {
+    public func configure(view view: View, item: Item?, kind: String, parentView: View.ParentView, indexPath: NSIndexPath) -> View {
         return viewConfigurator(view: view, item: item, kind: kind, parentView: parentView, indexPath: indexPath)
     }
 }

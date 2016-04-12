@@ -31,8 +31,12 @@ import UIKit
  - Adding, removing, or reloading sections as the provider's `sections` are modified
  */
 public final class CollectionViewDataSourceProvider <
-    SectionInfo: SectionInfoProtocol, CellFactory: CellFactoryProtocol, SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
-where CellFactory.Item == SectionInfo.Item, SupplementaryViewFactory.Item == SectionInfo.Item, CellFactory.Cell: UICollectionViewCell>: CustomStringConvertible {
+    SectionInfo: SectionInfoProtocol, CellFactory: CellFactoryProtocol, SupplementaryViewFactory: SupplementaryViewFactoryProtocol
+    where
+    CellFactory.Item == SectionInfo.Item,
+    SupplementaryViewFactory.Item == SectionInfo.Item,
+    CellFactory.Cell: UICollectionViewCell,
+    SupplementaryViewFactory.View: UICollectionReusableView>: CustomStringConvertible {
 
     // MARK: Typealiases
 
@@ -143,9 +147,7 @@ where CellFactory.Item == SectionInfo.Item, SupplementaryViewFactory.Item == Sec
                     item = self.sections[indexPath.section].items[indexPath.item]
                 }
             }
-
-            let view = factory.supplementaryViewFor(item: item, kind: kind, collectionView: collectionView, indexPath: indexPath)
-            return factory.configureSupplementaryView(view, item: item, kind: kind, collectionView: collectionView, indexPath: indexPath)
+            return factory.supplementaryViewFor(item: item, kind: kind, parentView: collectionView, indexPath: indexPath)
         }
 
         return dataSource
@@ -169,8 +171,12 @@ extension CollectionViewDataSourceProvider where CellFactory.Cell: UICollectionV
  - warning: The `CellFactory.Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
  - note: Clients are responsbile for registering cells and supplementary views with the collection view.
  */
-public final class CollectionViewFetchedResultsDataSourceProvider <CellFactory: CellFactoryProtocol,SupplementaryViewFactory: CollectionSupplementaryViewFactoryType
-where CellFactory.Item == SupplementaryViewFactory.Item, CellFactory.Cell: UICollectionViewCell>: CustomStringConvertible {
+public final class CollectionViewFetchedResultsDataSourceProvider <
+    CellFactory: CellFactoryProtocol, SupplementaryViewFactory: SupplementaryViewFactoryProtocol
+    where
+    CellFactory.Item == SupplementaryViewFactory.Item,
+    CellFactory.Cell: UICollectionViewCell,
+    SupplementaryViewFactory.View: UICollectionReusableView>: CustomStringConvertible {
 
     // MARK: Typealiases
 
@@ -252,11 +258,9 @@ where CellFactory.Item == SupplementaryViewFactory.Item, CellFactory.Cell: UICol
                     item = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Item
                 }
             }
-
-            let view = factory.supplementaryViewFor(item: item, kind: kind, collectionView: collectionView, indexPath: indexPath)
-            return factory.configureSupplementaryView(view, item: item, kind: kind, collectionView: collectionView, indexPath: indexPath)
+            return factory.supplementaryViewFor(item: item, kind: kind, parentView: collectionView, indexPath: indexPath)
         }
-        
+
         return dataSource
     }()
 }

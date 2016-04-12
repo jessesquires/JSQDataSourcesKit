@@ -67,8 +67,8 @@ final class CollectionViewDataSourceTests: XCTestCase {
         }
 
         // GIVEN: a data source provider
-        typealias SupplementaryViewFactory = CollectionSupplementaryViewFactory<FakeCollectionSupplementaryView, FakeViewModel>
-        typealias Provider = CollectionViewDataSourceProvider<Section<FakeViewModel>, CellFactory<FakeViewModel, FakeCollectionCell>, SupplementaryViewFactory>
+        typealias Factory = SupplementaryViewFactory<FakeViewModel, FakeCollectionSupplementaryView>
+        typealias Provider = CollectionViewDataSourceProvider<Section<FakeViewModel>, CellFactory<FakeViewModel, FakeCollectionCell>, Factory>
 
         let dataSourceProvider: Provider = CollectionViewDataSourceProvider(sections: allSections, cellFactory: cellFactory, collectionView: fakeCollectionView)
         let dataSource = dataSourceProvider.dataSource
@@ -116,8 +116,8 @@ final class CollectionViewDataSourceTests: XCTestCase {
         var supplementaryFactoryExpectation = expectationWithDescription("supplementary_factory_\(#function)")
 
         // GIVEN: a supplementary view factory
-        let supplementaryViewFactory = CollectionSupplementaryViewFactory(reuseIdentifier: fakeSupplementaryViewReuseId)
-        { (view: FakeCollectionSupplementaryView, model: FakeViewModel?, kind: String, collectionView: UICollectionView, indexPath: NSIndexPath) -> FakeCollectionSupplementaryView in
+        let supplementaryViewFactory = SupplementaryViewFactory(reuseIdentifier: fakeSupplementaryViewReuseId, kind: self.fakeSupplementaryViewReuseId)
+        { (view, model: FakeViewModel?, kind, collectionView, indexPath) -> FakeCollectionSupplementaryView in
             XCTAssertEqual(view.reuseIdentifier!, self.fakeSupplementaryViewReuseId, "Dequeued supplementary view should have expected identifier")
             XCTAssertEqual(model, allSections[indexPath.section][indexPath.item], "Model object should equal expected value")
             XCTAssertEqual(kind, FakeSupplementaryViewKind, "View kind should have expected kind")
