@@ -29,27 +29,44 @@ import UIKit
  For `UITableViewCell`, this would be `UITableView`.
  */
 public protocol CellParentViewProtocol {
+
     /// The type of cell for this parent view.
     associatedtype CellType: UIView
 
     /**
-     Returns a reusable cell object located by its identifier.
+     Returns a reusable cell located by its identifier.
 
      - parameter identifier: The reuse identifier for the specified cell.
      - parameter indexPath:  The index path specifying the location of the cell.
 
-     - returns: A valid `CellType` reusable view.
+     - returns: A valid `CellType` reusable cell.
      */
     func dequeueReusableCellFor(identifier identifier: String, indexPath: NSIndexPath) -> CellType
+
+    /**
+     Returns a reusable supplementary view located by its identifier and kind.
+
+     - parameter kind:       The kind of supplementary view to retrieve.
+     - parameter identifier: The reuse identifier for the specified view.
+     - parameter indexPath:  The index path specifying the location of the supplementary view in the collection view.
+
+     - returns: A valid `CellType` reusable view.
+     */
+    func dequeueReusableSupplementaryViewFor(kind kind: String, identifier: String, indexPath: NSIndexPath) -> CellType?
 }
 
 extension UICollectionView: CellParentViewProtocol {
     /// :nodoc:
-    public typealias CellType = UICollectionViewCell
+    public typealias CellType = UICollectionReusableView
 
     /// :nodoc:
     public func dequeueReusableCellFor(identifier identifier: String, indexPath: NSIndexPath) -> CellType {
         return dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath)
+    }
+
+    /// :nodoc:
+    public func dequeueReusableSupplementaryViewFor(kind kind: String, identifier: String, indexPath: NSIndexPath) -> CellType? {
+        return dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: identifier, forIndexPath: indexPath)
     }
 }
 
@@ -61,6 +78,11 @@ extension UITableView: CellParentViewProtocol {
     public func dequeueReusableCellFor(identifier identifier: String, indexPath: NSIndexPath) -> CellType {
         return dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
     }
+
+    /// :nodoc:
+    public func dequeueReusableSupplementaryViewFor(kind kind: String, identifier: String, indexPath: NSIndexPath) -> CellType? {
+        return nil
+    }
 }
 
 
@@ -68,13 +90,14 @@ extension UITableView: CellParentViewProtocol {
 // MARK: ReusableViewProtocol
 
 /**
- This protocol unifies `UICollectionViewCell` and `UITableViewCell` by providing a common interface for cells.
+ This protocol unifies `UICollectionViewCell`, `UICollectionReusableView`, and `UITableViewCell` by providing a common interface for cells.
  */
 public protocol ReusableViewProtocol {
 
     /**
      The "parent" view of the cell. 
-     For `UICollectionViewCell` this is `UICollectionView`. For `UITableViewCell` this is `UITableView`.
+     For `UICollectionViewCell` or `UICollectionReusableView` this is `UICollectionView`. 
+     For `UITableViewCell` this is `UITableView`.
      */
     associatedtype ParentView: UIView, CellParentViewProtocol
 
@@ -108,7 +131,7 @@ public protocol CellFactoryProtocol {
     /// The type of elements backing the collection view or table view.
     associatedtype Item
 
-    /// The type of cells that the factory produces
+    /// The type of cells that the factory produces.
     associatedtype Cell: ReusableViewProtocol
 
     /**
@@ -160,7 +183,7 @@ public extension CellFactoryProtocol {
 public struct CellFactory<Item, Cell: ReusableViewProtocol>: CellFactoryProtocol  {
 
     /**
-     Configures the cell for the specified item, parent view and index path.
+     Configures the cell for the specified item, parent view, and index path.
 
      - parameter cell:       The cell to be configured at the index path.
      - parameter item:       The item at `indexPath`.
@@ -203,5 +226,15 @@ public struct CellFactory<Item, Cell: ReusableViewProtocol>: CellFactoryProtocol
     /// :nodoc:
     public func configure(cell cell: Cell, item: Item, parentView: Cell.ParentView, indexPath: NSIndexPath) -> Cell {
         return cellConfigurator(cell: cell, item: item, parentView: parentView, indexPath: indexPath)
+    }
+}
+
+extension CellFactory: CustomStringConvertible {
+
+    /// :nodoc:
+    public var description: String {
+        get {
+            return "<\(CellFactory.self): \(reuseIdentifier)>"
+        }
     }
 }
