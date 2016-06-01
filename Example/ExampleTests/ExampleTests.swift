@@ -18,8 +18,9 @@
 
 import UIKit
 import XCTest
+@testable import Example
 
-class ExampleTests: XCTestCase {
+final class ExampleTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
