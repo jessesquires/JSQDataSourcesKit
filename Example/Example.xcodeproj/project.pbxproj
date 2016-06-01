@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8851E2D81B36A1E000E875DC /* Thing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8851E2D51B36A12400E875DC /* Thing.swift */; };
-		886EC7841CFF2C8400BDE6FA /* ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886EC7831CFF2C8400BDE6FA /* ExampleUITests.swift */; };
-		887863371B3699C800E2F51C /* ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887863361B3699C800E2F51C /* ExampleTests.swift */; };
+		886EC7921CFF2D4900BDE6FA /* ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886EC7901CFF2D4900BDE6FA /* ExampleTests.swift */; };
+		886EC7971CFF2DD200BDE6FA /* ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886EC7951CFF2DD200BDE6FA /* ExampleUITests.swift */; };
 		88B3233D1A86D5E3007FB904 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B3233C1A86D5E3007FB904 /* TableViewController.swift */; };
 		88B3233F1A86D5ED007FB904 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B3233E1A86D5ED007FB904 /* CollectionViewController.swift */; };
 		88BD673F1A99572F00F93FA6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 88BD673D1A99572F00F93FA6 /* Model.xcdatamodeld */; };
@@ -92,11 +92,11 @@
 /* Begin PBXFileReference section */
 		8851E2D51B36A12400E875DC /* Thing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thing.swift; sourceTree = "<group>"; };
 		886EC7811CFF2C8400BDE6FA /* ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		886EC7831CFF2C8400BDE6FA /* ExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleUITests.swift; sourceTree = "<group>"; };
-		886EC7851CFF2C8400BDE6FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		886EC7901CFF2D4900BDE6FA /* ExampleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleTests.swift; sourceTree = "<group>"; };
+		886EC7911CFF2D4900BDE6FA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		886EC7951CFF2DD200BDE6FA /* ExampleUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleUITests.swift; sourceTree = "<group>"; };
+		886EC7961CFF2DD200BDE6FA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		887863341B3699C800E2F51C /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		887863361B3699C800E2F51C /* ExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleTests.swift; sourceTree = "<group>"; };
-		887863381B3699C800E2F51C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88B3233C1A86D5E3007FB904 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		88B3233E1A86D5ED007FB904 /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		88BD673E1A99572F00F93FA6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -144,22 +144,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		886EC7821CFF2C8400BDE6FA /* ExampleUITests */ = {
+		886EC78F1CFF2D4900BDE6FA /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				886EC7831CFF2C8400BDE6FA /* ExampleUITests.swift */,
-				886EC7851CFF2C8400BDE6FA /* Info.plist */,
+				886EC7901CFF2D4900BDE6FA /* ExampleTests.swift */,
+				886EC7911CFF2D4900BDE6FA /* Info.plist */,
 			);
-			path = ExampleUITests;
-			sourceTree = "<group>";
+			path = Tests;
+			sourceTree = SOURCE_ROOT;
 		};
-		887863351B3699C800E2F51C /* ExampleTests */ = {
+		886EC7941CFF2DD200BDE6FA /* UITests */ = {
 			isa = PBXGroup;
 			children = (
-				887863361B3699C800E2F51C /* ExampleTests.swift */,
-				887863381B3699C800E2F51C /* Info.plist */,
+				886EC7951CFF2DD200BDE6FA /* ExampleUITests.swift */,
+				886EC7961CFF2DD200BDE6FA /* Info.plist */,
 			);
-			path = ExampleTests;
+			path = UITests;
 			sourceTree = "<group>";
 		};
 		88BD67421A99579400F93FA6 /* CollectionView */ = {
@@ -212,8 +212,8 @@
 			isa = PBXGroup;
 			children = (
 				88DB89C31A86D1A900DED153 /* Example */,
-				887863351B3699C800E2F51C /* ExampleTests */,
-				886EC7821CFF2C8400BDE6FA /* ExampleUITests */,
+				886EC78F1CFF2D4900BDE6FA /* Tests */,
+				886EC7941CFF2DD200BDE6FA /* UITests */,
 				88DB89C21A86D1A900DED153 /* Products */,
 				88DCAD881CB87DD900C018AF /* JSQDataSourcesKit.xcodeproj */,
 			);
@@ -414,7 +414,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				886EC7841CFF2C8400BDE6FA /* ExampleUITests.swift in Sources */,
+				886EC7971CFF2DD200BDE6FA /* ExampleUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,7 +422,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				887863371B3699C800E2F51C /* ExampleTests.swift in Sources */,
+				886EC7921CFF2D4900BDE6FA /* ExampleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,7 +492,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = ExampleUITests/Info.plist;
+				INFOPLIST_FILE = UITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hexedbits.ExampleUITests;
@@ -508,7 +508,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = ExampleUITests/Info.plist;
+				INFOPLIST_FILE = UITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hexedbits.ExampleUITests;
@@ -523,7 +523,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = ExampleTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hexedbits.ExampleTests;
@@ -539,7 +539,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = ExampleTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hexedbits.ExampleTests;
