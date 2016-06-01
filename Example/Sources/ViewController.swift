@@ -30,5 +30,3 @@ class ViewController: UITableViewController {
         addThingsInStack(stack, count: 5)
     }
 }
-
-

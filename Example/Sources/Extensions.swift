@@ -29,7 +29,7 @@ extension UIAlertController {
                                changeNameAction: () -> Void,
                                changeColorAction: () -> Void,
                                changeAllAction: () -> Void) {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let alert = UIAlertController(title: "You must select items first", message: nil, preferredStyle: .ActionSheet)
 
         alert.addAction(UIAlertAction(title: "Add new", style: .Default) { action in
             addNewAction()
