@@ -48,6 +48,7 @@ class FetchedCollectionViewController: UICollectionViewController {
             cell.label.text = model.displayName
             cell.label.textColor = UIColor.whiteColor()
             cell.backgroundColor = model.displayColor
+            cell.accessibilityIdentifier = "\(indexPath.section), \(indexPath.item)"
             return cell
         }
 

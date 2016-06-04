@@ -46,7 +46,7 @@ final class StaticViewsUITests: XCTestCase {
         // THEN: the number of cells loaded matches the number of cells expected
         let countTableCells = countElements(ofType: .Cell,
                                             inView: table,
-                                            byUniqueIdentifier: { $0.staticTexts.elementBoundByIndex(1).label })
+                                            byUniqueIdentifier: { $0.identifier })
         
         XCTAssertEqual(countTableCells, numberOfCellsInStaticTableView,
                        "Number of cells loaded should be the same as the number of cells expected")
@@ -62,7 +62,7 @@ final class StaticViewsUITests: XCTestCase {
         // THEN: the number of cells loaded matches the number of cells expected
         let countCollectionViewCells = countElements(ofType: .Cell,
                                                      inView: collectionView,
-                                                     byUniqueIdentifier: { $0.staticTexts.element.label })
+                                                     byUniqueIdentifier: { $0.identifier })
         
         XCTAssertEqual(countCollectionViewCells, numberOfCellsInStaticCollectionView,
                        "Number of cells loaded should be the same as the number of cells expected")
