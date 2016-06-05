@@ -5,8 +5,6 @@ coverage:
   precision: 2
   round: nearest
   range: "60...100"
-  ignore:
-  - Tests/*
 
 status:
   project:
@@ -23,7 +21,12 @@ status:
         branches:
         - master
         - develop
-        
+
+flags:
+  default:
+    ignore: 
+      - Tests/.*
+      
 comment:
   layout: "header, diff, changes, sunburst, uncovered"
   branches: 
