@@ -21,8 +21,10 @@ import XCTest
 final class StaticViewsUITests: XCTestCase {
     
     private let numberOfCellsInStaticTableView: Int = 9
-    
     private let numberOfCellsInStaticCollectionView: Int = 10
+    
+    private let staticTableViewMenuItem = XCUIApplication().tables.element.cells.elementBoundByIndex(0)
+    private let staticCollectionViewMenuItem = XCUIApplication().tables.element.cells.elementBoundByIndex(1)
         
     internal override func setUp() {
         super.setUp()
@@ -40,8 +42,8 @@ final class StaticViewsUITests: XCTestCase {
         // GIVEN: a table currently presenting on the screen
         let table = XCUIApplication().tables.element
         
-        // WHEN: we choose to present the static table view (by tapping the first cell in the initial view)
-        table.cells.elementBoundByIndex(0).tap()
+        // WHEN: we choose to present the static table view
+        staticTableViewMenuItem.tap()
         
         // THEN: the number of cells loaded matches the number of cells expected
         let countTableCells = countElements(ofType: .Cell,
@@ -56,8 +58,8 @@ final class StaticViewsUITests: XCTestCase {
         // GIVEN: a collection view currently presenting on the screen
         let collectionView = XCUIApplication().collectionViews.element
         
-        // WHEN: we choose to present the static collection view (by tapping the second cell in the initial view) and scroll it
-        XCUIApplication().tables.element.cells.elementBoundByIndex(1).tap()
+        // WHEN: we choose to present the static collection view
+        staticCollectionViewMenuItem.tap()
         
         // THEN: the number of cells loaded matches the number of cells expected
         let countCollectionViewCells = countElements(ofType: .Cell,

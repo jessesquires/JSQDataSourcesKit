@@ -21,17 +21,29 @@ import XCTest
 extension XCTestCase {
     
     /**
+     Returns to the previous screen in navigation stack if Back button is availible
+     */
+    internal func returnBackIfPossible() {
+        
+        let backButton = XCUIApplication().navigationBars.buttons.matchingIdentifier("Back").elementBoundByIndex(0)
+        
+        if backButton.exists && backButton.hittable {
+            backButton.tap()
+        }
+    }
+    
+    /**
      Scrolls down the current view halfscreen.
      */
     internal func scrollHalfScreenDown() {
-        scrollScreenVerticallyWithOffset(-1 * XCUIApplication().windows.elementBoundByIndex(0).frame.height / 2)
+        scrollScreenVerticallyWithOffset(-0.8 * XCUIApplication().windows.elementBoundByIndex(0).frame.height / 2)
     }
     
     /**
      Scrolls down the current view halfscreen.
      */
     internal func scrollHalfScreenUp() {
-        scrollScreenVerticallyWithOffset(XCUIApplication().windows.elementBoundByIndex(0).frame.height / 2)
+        scrollScreenVerticallyWithOffset(0.8 * XCUIApplication().windows.elementBoundByIndex(0).frame.height / 2)
     }
     
     /**
@@ -89,15 +101,13 @@ extension XCTestCase {
         // Repeat until scrolling makes no changes.
         repeat {
             
-            setOfVisibleElementsIdentifiersBeforeScroll = setOfVisibleElementsIdentifiersAfterScroll
-            
-            setOfVisibleElementsIdentifiersAfterScroll.removeAll()
+            setOfVisibleElementsIdentifiersAfterScroll = setOfVisibleElementsIdentifiersBeforeScroll
             
             let currentlyVisibleElements = view.descendantsMatchingType(type).allElementsBoundByIndex.filter{ $0.hittable }
             
-            setOfVisibleElementsIdentifiersAfterScroll = Set(currentlyVisibleElements.map { identifier($0) })
+            setOfVisibleElementsIdentifiersBeforeScroll = Set(currentlyVisibleElements.map { identifier($0) })
             
-            accumulator = accumulator.union(setOfVisibleElementsIdentifiersAfterScroll)
+            accumulator = accumulator.union(setOfVisibleElementsIdentifiersBeforeScroll)
             
             scrollHalfScreenDown()
             
@@ -105,5 +115,22 @@ extension XCTestCase {
         
         
         return accumulator.count
+    }
+    
+    ///  Sends a tap event to hittable elements of specified type.
+    internal func tapOn(numberOfElementsToTapOn: Int, hittableElementsOfType type: XCUIElementType, inView view: XCUIElement) {
+        
+        let hittableElements = view.descendantsMatchingType(type).allElementsBoundByIndex.filter { $0.hittable }
+        
+        if hittableElements.count < numberOfElementsToTapOn {
+            return
+        }
+        
+        var numberOfElementsTapped = 0
+        for element in hittableElements where numberOfElementsTapped < numberOfElementsToTapOn {
+            element.tap()
+            numberOfElementsTapped += 1
+        }
+        
     }
 }
