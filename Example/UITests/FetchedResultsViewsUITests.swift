@@ -45,6 +45,8 @@ final class FetchedResultsViewsUITests: XCTestCase {
         
         // Delete everything from Core Data after each test.
         XCUIApplication().toolbars.buttons["Delete"].tap()
+        
+        super.tearDown()
     }
     
     internal func test_ThatAddButton_CausesAddingCellToFetchedResultsViews() {
