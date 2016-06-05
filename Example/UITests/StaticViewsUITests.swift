@@ -49,7 +49,7 @@ final class StaticViewsUITests: XCTestCase {
                                             byUniqueIdentifier: { $0.identifier })
         
         XCTAssertEqual(countTableCells, numberOfCellsInStaticTableView,
-                       "Number of cells loaded should be the same as the number of cells expected")
+                       "The number of cells loaded should be the same as the number of cells expected")
     }
     
     internal func test_ThatStaticCollectionView_loadsItsCells() {
@@ -65,6 +65,6 @@ final class StaticViewsUITests: XCTestCase {
                                                      byUniqueIdentifier: { $0.identifier })
         
         XCTAssertEqual(countCollectionViewCells, numberOfCellsInStaticCollectionView,
-                       "Number of cells loaded should be the same as the number of cells expected")
+                       "The number of cells loaded should be the same as the number of cells expected")
     }
 }

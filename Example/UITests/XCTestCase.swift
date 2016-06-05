@@ -1,9 +1,19 @@
 //
-//  XCTestCase.swift
-//  Example
+//  Created by Jesse Squires
+//  http://www.jessesquires.com
 //
-//  Created by Сергей on 04.06.16.
-//  Copyright © 2016 Hexed Bits. All rights reserved.
+//
+//  Documentation
+//  http://jessesquires.com/JSQDataSourcesKit
+//
+//
+//  GitHub
+//  https://github.com/jessesquires/JSQDataSourcesKit
+//
+//
+//  License
+//  Copyright © 2015 Jesse Squires
+//  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
 import XCTest
@@ -69,7 +79,7 @@ extension XCTestCase {
      */
     internal func countElements(ofType type: XCUIElementType,
                                        inView view: XCUIElement,
-                                              byUniqueIdentifier indentifier: (XCUIElement) -> String) -> Int {
+                                              byUniqueIdentifier identifier: (XCUIElement) -> String) -> Int {
         
         var accumulator = Set<String>()
 
@@ -85,9 +95,7 @@ extension XCTestCase {
             
             let currentlyVisibleElements = view.descendantsMatchingType(type).allElementsBoundByIndex.filter{ $0.hittable }
             
-            for cellIndex in 0 ..< currentlyVisibleElements.count {
-                setOfVisibleElementsIdentifiersAfterScroll.insert(indentifier(currentlyVisibleElements[cellIndex]))
-            }
+            setOfVisibleElementsIdentifiersAfterScroll = Set(currentlyVisibleElements.map { identifier($0) })
             
             accumulator = accumulator.union(setOfVisibleElementsIdentifiersAfterScroll)
             
