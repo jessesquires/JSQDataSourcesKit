@@ -41,6 +41,7 @@ class CollectionViewController: UICollectionViewController, UICollectionViewDele
         // 2. create cell factory
         let cellFactory = CellFactory(reuseIdentifier: CellId) { (cell, model: CellViewModel, collectionView, indexPath) -> CollectionViewCell in
             cell.label.text = model.text + "\n\(indexPath.section), \(indexPath.item)"
+            cell.accessibilityIdentifier = "\(indexPath.section), \(indexPath.item)"
             return cell
         }
 

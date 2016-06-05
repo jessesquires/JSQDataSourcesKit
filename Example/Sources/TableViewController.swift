@@ -39,6 +39,7 @@ class TableViewController: UITableViewController {
         let factory = CellFactory(reuseIdentifier: CellId) { (cell, model: CellViewModel, tableView, indexPath) -> UITableViewCell in
             cell.textLabel?.text = model.text
             cell.detailTextLabel?.text = "\(indexPath.section), \(indexPath.row)"
+            cell.accessibilityIdentifier = "\(indexPath.section), \(indexPath.row)"
             return cell
         }
 

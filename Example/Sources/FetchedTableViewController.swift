@@ -43,6 +43,7 @@ class FetchedTableViewController: UITableViewController {
             cell.textLabel?.text = model.displayName
             cell.textLabel?.textColor = model.displayColor
             cell.detailTextLabel?.text = "\(indexPath.section), \(indexPath.row)"
+            cell.accessibilityIdentifier = "\(cell.textLabel?.text!)"
             return cell
         }
 

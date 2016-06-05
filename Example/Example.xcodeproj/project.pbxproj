@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		876B25551D02662B00E8B477 /* XCTestCaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B25511D02661100E8B477 /* XCTestCaseExtensions.swift */; };
+		876B25571D03770600E8B477 /* FetchedResultsViewsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B25561D03770600E8B477 /* FetchedResultsViewsUITests.swift */; };
 		886EC7921CFF2D4900BDE6FA /* ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886EC7901CFF2D4900BDE6FA /* ExampleTests.swift */; };
-		886EC7971CFF2DD200BDE6FA /* ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886EC7951CFF2DD200BDE6FA /* ExampleUITests.swift */; };
+		886EC7971CFF2DD200BDE6FA /* StaticViewsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886EC7951CFF2DD200BDE6FA /* StaticViewsUITests.swift */; };
 		886EC7AF1CFF2E5F00BDE6FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886EC79A1CFF2E5E00BDE6FA /* AppDelegate.swift */; };
 		886EC7B01CFF2E5F00BDE6FA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886EC79B1CFF2E5E00BDE6FA /* LaunchScreen.xib */; };
 		886EC7B11CFF2E5F00BDE6FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 886EC79D1CFF2E5E00BDE6FA /* Main.storyboard */; };
@@ -90,10 +92,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		876B25511D02661100E8B477 /* XCTestCaseExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestCaseExtensions.swift; sourceTree = "<group>"; };
+		876B25561D03770600E8B477 /* FetchedResultsViewsUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsViewsUITests.swift; sourceTree = "<group>"; };
 		886EC7811CFF2C8400BDE6FA /* ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		886EC7901CFF2D4900BDE6FA /* ExampleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleTests.swift; sourceTree = "<group>"; };
 		886EC7911CFF2D4900BDE6FA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		886EC7951CFF2DD200BDE6FA /* ExampleUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleUITests.swift; sourceTree = "<group>"; };
+		886EC7951CFF2DD200BDE6FA /* StaticViewsUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticViewsUITests.swift; sourceTree = "<group>"; };
 		886EC7961CFF2DD200BDE6FA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		886EC79A1CFF2E5E00BDE6FA /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		886EC79C1CFF2E5E00BDE6FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -156,7 +160,9 @@
 		886EC7941CFF2DD200BDE6FA /* UITests */ = {
 			isa = PBXGroup;
 			children = (
-				886EC7951CFF2DD200BDE6FA /* ExampleUITests.swift */,
+				886EC7951CFF2DD200BDE6FA /* StaticViewsUITests.swift */,
+				876B25561D03770600E8B477 /* FetchedResultsViewsUITests.swift */,
+				876B25511D02661100E8B477 /* XCTestCaseExtensions.swift */,
 				886EC7961CFF2DD200BDE6FA /* Info.plist */,
 			);
 			path = UITests;
@@ -382,7 +388,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				886EC7971CFF2DD200BDE6FA /* ExampleUITests.swift in Sources */,
+				876B25551D02662B00E8B477 /* XCTestCaseExtensions.swift in Sources */,
+				876B25571D03770600E8B477 /* FetchedResultsViewsUITests.swift in Sources */,
+				886EC7971CFF2DD200BDE6FA /* StaticViewsUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -636,6 +644,7 @@
 				886EC7891CFF2C8400BDE6FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8878633B1B3699C800E2F51C /* Build configuration list for PBXNativeTarget "ExampleTests" */ = {
 			isa = XCConfigurationList;
