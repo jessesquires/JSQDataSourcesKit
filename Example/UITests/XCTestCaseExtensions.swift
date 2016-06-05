@@ -23,7 +23,7 @@ extension XCTestCase {
     /**
      Returns to the previous screen in navigation stack if Back button is availible
      */
-    internal func returnBackIfPossible() {
+    func returnBackIfPossible() {
         
         let backButton = XCUIApplication().navigationBars.buttons.matchingIdentifier("Back").elementBoundByIndex(0)
         
@@ -35,14 +35,14 @@ extension XCTestCase {
     /**
      Scrolls down the current view halfscreen.
      */
-    internal func scrollHalfScreenDown() {
+    func scrollHalfScreenDown() {
         scrollScreenVerticallyWithOffset(-0.8 * XCUIApplication().windows.elementBoundByIndex(0).frame.height / 2)
     }
     
     /**
      Scrolls down the current view halfscreen.
      */
-    internal func scrollHalfScreenUp() {
+    func scrollHalfScreenUp() {
         scrollScreenVerticallyWithOffset(0.8 * XCUIApplication().windows.elementBoundByIndex(0).frame.height / 2)
     }
     
@@ -51,7 +51,7 @@ extension XCTestCase {
      
      - parameter offset: Number of points that a view should be scrolled by.
      */
-    internal func scrollScreenVerticallyWithOffset(offset: CGFloat) {
+    func scrollScreenVerticallyWithOffset(offset: CGFloat) {
         let mainWindow = XCUIApplication().windows.elementBoundByIndex(0)
         
         // `start` is exactly the center of the main window
@@ -67,7 +67,7 @@ extension XCTestCase {
      
      - warning: Will not work if In-Call status bar is presented.
      */
-    internal func scrollOnStatusBarTap() {
+    func scrollOnStatusBarTap() {
         XCUIApplication().statusBars.element.tap()
     }
     
@@ -89,7 +89,7 @@ extension XCTestCase {
      
      - returns: The number of presented unique elements.
      */
-    internal func countElements(ofType type: XCUIElementType,
+    func countElements(ofType type: XCUIElementType,
                                        inView view: XCUIElement,
                                               byUniqueIdentifier identifier: (XCUIElement) -> String) -> Int {
         
@@ -118,7 +118,7 @@ extension XCTestCase {
     }
     
     ///  Sends a tap event to hittable elements of specified type.
-    internal func tapOn(numberOfElementsToTapOn: Int, hittableElementsOfType type: XCUIElementType, inView view: XCUIElement) {
+    func tapOn(numberOfElementsToTapOn: Int, hittableElementsOfType type: XCUIElementType, inView view: XCUIElement) {
         
         let hittableElements = view.descendantsMatchingType(type).allElementsBoundByIndex.filter { $0.hittable }
         

@@ -26,7 +26,7 @@ final class StaticViewsUITests: XCTestCase {
     private let staticTableViewMenuItem = XCUIApplication().tables.element.cells.elementBoundByIndex(0)
     private let staticCollectionViewMenuItem = XCUIApplication().tables.element.cells.elementBoundByIndex(1)
         
-    internal override func setUp() {
+    override func setUp() {
         super.setUp()
 
         // In UI tests it is usually best to stop immediately when a failure occurs.
@@ -36,8 +36,7 @@ final class StaticViewsUITests: XCTestCase {
         XCUIApplication().launch()
     }
     
-    // MARK: - Test methods
-    internal func test_ThatStaticTableView_LoadsItsCells() {
+    func test_ThatStaticTableView_LoadsItsCells() {
         
         // GIVEN: a table currently presenting on the screen
         let table = XCUIApplication().tables.element
@@ -54,7 +53,7 @@ final class StaticViewsUITests: XCTestCase {
                        "The number of cells loaded should be the same as the number of cells expected")
     }
     
-    internal func test_ThatStaticCollectionView_loadsItsCells() {
+    func test_ThatStaticCollectionView_loadsItsCells() {
         // GIVEN: a collection view currently presenting on the screen
         let collectionView = XCUIApplication().collectionViews.element
         

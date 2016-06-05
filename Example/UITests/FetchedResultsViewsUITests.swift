@@ -25,7 +25,7 @@ final class FetchedResultsViewsUITests: XCTestCase {
     private let fetchedResultsTableViewMenuItem = XCUIApplication().tables.element.cells.elementBoundByIndex(2)
     private let fetchedResultsCollectionViewMenuItem = XCUIApplication().tables.element.cells.elementBoundByIndex(3)
     
-    internal override func setUp() {
+    override func setUp() {
         super.setUp()
         
         // In UI tests it is usually best to stop immediately when a failure occurs.
@@ -38,7 +38,7 @@ final class FetchedResultsViewsUITests: XCTestCase {
         XCUIApplication().toolbars.buttons["Delete"].tap()
     }
     
-    internal override func tearDown() {
+    override func tearDown() {
         
         // Return to the initial screen after each test.
         returnBackIfPossible()
@@ -49,7 +49,7 @@ final class FetchedResultsViewsUITests: XCTestCase {
         super.tearDown()
     }
     
-    internal func test_ThatAddButton_CausesAddingCellToFetchedResultsViews() {
+    func test_ThatAddButton_CausesAddingCellToFetchedResultsViews() {
         
         let app = XCUIApplication()
         
@@ -107,9 +107,7 @@ final class FetchedResultsViewsUITests: XCTestCase {
         }
     }
     
-    
-    
-    internal func test_ThatDeleteButton_CausesRemovingCellsFromFetchedResultsViews() {
+    func test_ThatDeleteButton_CausesRemovingCellsFromFetchedResultsViews() {
         
         let app = XCUIApplication()
         
@@ -153,7 +151,7 @@ final class FetchedResultsViewsUITests: XCTestCase {
         XCTAssertEqual(collectionView.cells.count, 0, "\"Delete\" button should cause removing all the cells")
     }
     
-    internal func test_ThatActionButton_AddNewOption_AddsCell() {
+    func test_ThatActionButton_AddNewOption_AddsCell() {
         
         let app = XCUIApplication()
         
@@ -203,7 +201,7 @@ final class FetchedResultsViewsUITests: XCTestCase {
         XCTAssertEqual(numberOfCellsAfterInTable, numberOfCellsBeforeInTable + 1, "\"Add new\" should add one new cell")
     }
     
-    internal func test_ThatActionButton_DeleteSelectedOption_RemovesSelectedCells() {
+    func test_ThatActionButton_DeleteSelectedOption_RemovesSelectedCells() {
         
         let numberOfCellsToDelete = 3
         
