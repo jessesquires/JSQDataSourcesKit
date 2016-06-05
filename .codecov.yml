@@ -16,7 +16,6 @@ coverage:
         branches:
           - master
           - develop
-
     patch:
       default:
         target: auto
