@@ -119,48 +119,56 @@ extension UITableViewCell: ReusableViewProtocol {
 }
 
 
+public enum ReusableViewType {
+    case cell
+    case supplementaryView(kind: String)
+}
 
-// MARK: CellFactory
+
+
+// MARK: ReusableViewFactory
 
 /**
- An instance conforming to `CellFactoryProtocol` is responsible for initializing
- and configuring reusable cells to be displayed in either a `UICollectionView` or a `UITableView`.
+ An instance conforming to `ReusableViewFactoryProtocol` is responsible for initializing
+ and configuring reusable views to be displayed in either a `UICollectionView` or a `UITableView`.
  */
-public protocol CellFactoryProtocol {
+public protocol ReusableViewFactoryProtocol {
 
     /// The type of elements backing the collection view or table view.
     associatedtype Item
 
-    /// The type of cells that the factory produces.
-    associatedtype Cell: ReusableViewProtocol
+    /// The type of views that the factory produces.
+    associatedtype View: ReusableViewProtocol
 
     /**
-     Provides a cell reuse identifer for the given item and indexPath.
+     Provides a view reuse identifer for the given item, type, and indexPath.
 
      - parameter item:      The item at `indexPath`.
-     - parameter indexPath: The index path that specifies the location of the cell.
+     - parameter type:      The type of reusable view.
+     - parameter indexPath: The index path that specifies the location of the view.
 
-     - returns: An identifier for a reusable cell.
+     - returns: An identifier for a reusable view.
      */
-    func reuseIdentiferFor(item item: Item, indexPath: NSIndexPath) -> String
+    func reuseIdentiferFor(item item: Item?, type: ReusableViewType, indexPath: NSIndexPath) -> String
 
     /**
-     Configures and returns the specified cell.
+     Configures and returns the specified view.
 
-     - parameter cell:       The cell to configure.
+     - parameter view:       The view to configure.
      - parameter item:       The item at `indexPath`.
+     - parameter type:       The type of reusable view.
      - parameter parentView: The collection view or table view requesting this information.
-     - parameter indexPath:  The index path that specifies the location of `cell` and `item`.
+     - parameter indexPath:  The index path that specifies the location of `view` and `item`.
 
-     - returns: A configured cell of type `Cell`.
+     - returns: A configured view of type `View`.
      */
-    func configure(cell cell: Cell, item: Item, parentView: Cell.ParentView, indexPath: NSIndexPath) -> Cell
+    func configure(view view: View, item: Item?, type: ReusableViewType, parentView: View.ParentView, indexPath: NSIndexPath) -> View
 }
 
-public extension CellFactoryProtocol {
+public extension ReusableViewFactoryProtocol where View: UITableViewCell {
 
     /**
-     Creates a new `Cell` instance, or dequeues an existing cell for reuse, then configures and returns it.
+     Creates a new `View` instance, or dequeues an existing cell for reuse, then configures and returns it.
 
      - parameter item:       The item at `indexPath`.
      - parameter parentView: The collection view or table view requesting this information.
@@ -168,19 +176,48 @@ public extension CellFactoryProtocol {
 
      - returns: An initialized or dequeued, and fully configured cell of type `Cell`.
      */
-    public func cellFor(item item: Item, parentView: Cell.ParentView, indexPath: NSIndexPath) -> Cell {
-        let reuseIdentifier = reuseIdentiferFor(item: item, indexPath: indexPath)
-        let cell = parentView.dequeueReusableCellFor(identifier: reuseIdentifier, indexPath: indexPath) as! Cell
-        return configure(cell: cell, item: item, parentView: parentView, indexPath: indexPath)
+    public func tableCellFor(item item: Item, parentView: View.ParentView, indexPath: NSIndexPath) -> View {
+        let reuseIdentifier = reuseIdentiferFor(item: item, type: .cell, indexPath: indexPath)
+        let cell = parentView.dequeueReusableCellFor(identifier: reuseIdentifier, indexPath: indexPath) as! View
+        return configure(view: cell, item: item, type: .cell, parentView: parentView, indexPath: indexPath)
     }
 }
 
+public extension ReusableViewFactoryProtocol where View: UICollectionViewCell {
+
+    /**
+     Creates a new `View` instance, or dequeues an existing cell for reuse, then configures and returns it.
+
+     - parameter item:       The item at `indexPath`.
+     - parameter parentView: The collection view or table view requesting this information.
+     - parameter indexPath:  The index path that specifies the location of `cell` and `item`.
+
+     - returns: An initialized or dequeued, and fully configured cell of type `Cell`.
+     */
+    public func collectionCellFor(item item: Item, parentView: View.ParentView, indexPath: NSIndexPath) -> View {
+        let reuseIdentifier = reuseIdentiferFor(item: item, type: .cell, indexPath: indexPath)
+        let cell = parentView.dequeueReusableCellFor(identifier: reuseIdentifier, indexPath: indexPath) as! View
+        return configure(view: cell, item: item, type: .cell, parentView: parentView, indexPath: indexPath)
+    }
+
+}
+
+public extension ReusableViewFactoryProtocol where View: UICollectionReusableView {
+
+    public func supplementaryViewFor(item item: Item?, kind: String, parentView: View.ParentView, indexPath: NSIndexPath) -> View {
+        let reuseIdentifier = reuseIdentiferFor(item: item, type: .supplementaryView(kind: kind), indexPath: indexPath)
+        let view = parentView.dequeueReusableSupplementaryViewFor(kind: kind, identifier: reuseIdentifier, indexPath: indexPath) as! View
+        return configure(view: view, item: item, type: .supplementaryView(kind: kind), parentView: parentView, indexPath: indexPath)
+    }
+}
+
+
 /**
- A `CellFactory` is a concrete `CellFactoryProtocol` type.
+ A `CellFactory` is a concrete `ReusableViewFactoryProtocol` type.
  This factory is responsible for producing and configuring cells for a specific item.
  Cells can be for either collection views or table views.
  */
-public struct CellFactory<Item, Cell: ReusableViewProtocol>: CellFactoryProtocol  {
+public struct CellFactory<Item, Cell: ReusableViewProtocol>: ReusableViewFactoryProtocol  {
 
     /**
      Configures the cell for the specified item, parent view, and index path.
@@ -192,7 +229,7 @@ public struct CellFactory<Item, Cell: ReusableViewProtocol>: CellFactoryProtocol
 
      - returns: The configured cell.
      */
-    public typealias CellConfigurator = (cell: Cell, item: Item, parentView: Cell.ParentView, indexPath: NSIndexPath) -> Cell
+    public typealias ViewConfigurator = (cell: Cell, item: Item, type: ReusableViewType, parentView: Cell.ParentView, indexPath: NSIndexPath) -> Cell
 
     /**
      A unique identifier that describes the purpose of the cells that the factory produces.
@@ -202,30 +239,31 @@ public struct CellFactory<Item, Cell: ReusableViewProtocol>: CellFactoryProtocol
      */
     public let reuseIdentifier: String
 
-    /// A closure used to configure the cells.
-    public let cellConfigurator: CellConfigurator
+    /// A closure used to configure the views.
+    public let viewConfigurator: ViewConfigurator
 
     /**
      Constructs a new cell factory.
 
      - parameter reuseIdentifier:  The reuse identifier with which the factory will dequeue cells.
-     - parameter cellConfigurator: The closure with which the factory will configure cells.
+     - parameter viewConfigurator: The closure with which the factory will configure cells.
 
      - returns: A new `CellFactory` instance.
      */
-    public init(reuseIdentifier: String, cellConfigurator: CellConfigurator) {
+    public init(reuseIdentifier: String, viewConfigurator: ViewConfigurator) {
         self.reuseIdentifier = reuseIdentifier
-        self.cellConfigurator = cellConfigurator
+        self.viewConfigurator = viewConfigurator
     }
 
     /// :nodoc:
-    public func reuseIdentiferFor(item item: Item, indexPath: NSIndexPath) -> String {
+    public func reuseIdentiferFor(item item: Item?, type: ReusableViewType, indexPath: NSIndexPath) -> String {
         return reuseIdentifier
     }
 
     /// :nodoc:
-    public func configure(cell cell: Cell, item: Item, parentView: Cell.ParentView, indexPath: NSIndexPath) -> Cell {
-        return cellConfigurator(cell: cell, item: item, parentView: parentView, indexPath: indexPath)
+    public func configure(view view: Cell, item: Item?, type: ReusableViewType, parentView: Cell.ParentView, indexPath: NSIndexPath) -> Cell {
+        // TODO: don't !
+        return viewConfigurator(cell: view, item: item!, type: type, parentView: parentView, indexPath: indexPath)
     }
 }
 

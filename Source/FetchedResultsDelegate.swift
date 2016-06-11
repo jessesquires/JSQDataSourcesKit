@@ -27,7 +27,7 @@ import UIKit
 
  - warning: The `CellFactory.Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
  */
-public final class CollectionViewFetchedResultsDelegateProvider <CellFactory: CellFactoryProtocol where CellFactory.Cell: UICollectionViewCell>: CustomStringConvertible {
+public final class CollectionViewFetchedResultsDelegateProvider <CellFactory: ReusableViewFactoryProtocol where CellFactory.View: UICollectionViewCell>: CustomStringConvertible {
 
     // MARK: Typealiases
 
@@ -145,9 +145,9 @@ public final class CollectionViewFetchedResultsDelegateProvider <CellFactory: Ce
             case .Update:
                 if let indexPath = indexPaths.first,
                     item = updatedObjects[indexPath],
-                    cell = collectionView?.cellForItemAtIndexPath(indexPath) as? CellFactory.Cell,
+                    cell = collectionView?.cellForItemAtIndexPath(indexPath) as? CellFactory.View,
                     collectionView = collectionView {
-                    cellFactory.configure(cell: cell, item: item, parentView: collectionView, indexPath: indexPath)
+                    cellFactory.configure(view: cell, item: item, type: .cell, parentView: collectionView, indexPath: indexPath)
                 }
             case .Move:
                 if let deleteIndexPath = indexPaths.first {
@@ -190,7 +190,7 @@ public final class CollectionViewFetchedResultsDelegateProvider <CellFactory: Ce
 
  - warning: The `CellFactory.Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
  */
-public final class TableViewFetchedResultsDelegateProvider <CellFactory: CellFactoryProtocol where CellFactory.Cell: UITableViewCell>: CustomStringConvertible {
+public final class TableViewFetchedResultsDelegateProvider <CellFactory: ReusableViewFactoryProtocol where CellFactory.View: UITableViewCell>: CustomStringConvertible {
 
     // MARK: Typealiases
 
@@ -272,9 +272,9 @@ public final class TableViewFetchedResultsDelegateProvider <CellFactory: CellFac
                 }
             case .Update:
                 if let indexPath = indexPath,
-                    cell = self.tableView?.cellForRowAtIndexPath(indexPath) as? CellFactory.Cell,
+                    cell = self.tableView?.cellForRowAtIndexPath(indexPath) as? CellFactory.View,
                     tableView = self.tableView {
-                    self.cellFactory.configure(cell: cell, item: anyObject as! Item, parentView: tableView, indexPath: indexPath)
+                    self.cellFactory.configure(view: cell, item: anyObject as? Item, type: .cell, parentView: tableView, indexPath: indexPath)
                 }
             case .Move:
                 if let deleteIndexPath = indexPath {

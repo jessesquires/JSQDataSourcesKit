@@ -31,11 +31,11 @@ import UIKit
  - Adding, removing, or reloading sections as the provider's `sections` are modified
  */
 public final class CollectionViewDataSourceProvider <
-    SectionInfo: SectionInfoProtocol, CellFactory: CellFactoryProtocol, SupplementaryViewFactory: SupplementaryViewFactoryProtocol
+    SectionInfo: SectionInfoProtocol, CellFactory: ReusableViewFactoryProtocol, SupplementaryViewFactory: SupplementaryViewFactoryProtocol
     where
     CellFactory.Item == SectionInfo.Item,
     SupplementaryViewFactory.Item == SectionInfo.Item,
-    CellFactory.Cell: UICollectionViewCell,
+    CellFactory.View: UICollectionViewCell,
     SupplementaryViewFactory.View: UICollectionReusableView>: CustomStringConvertible {
 
     // MARK: Typealiases
@@ -136,7 +136,7 @@ public final class CollectionViewDataSourceProvider <
 
         dataSource.collectionCellForItemAtIndexPath = { [unowned self] (collectionView, indexPath) -> UICollectionViewCell in
             let item = self.sections[indexPath.section].items[indexPath.row]
-            return self.cellFactory.cellFor(item: item, parentView: collectionView, indexPath: indexPath)
+            return self.cellFactory.collectionCellFor(item: item, parentView: collectionView, indexPath: indexPath)
         }
 
         dataSource.collectionSupplementaryViewAtIndexPath = { [unowned self] (collectionView, kind, indexPath) -> UICollectionReusableView in
@@ -156,13 +156,6 @@ public final class CollectionViewDataSourceProvider <
 
 
 
-// TODO:
-// - have 1 generic dataSourceProvider
-// - use extensions to provide the dataSources, based on the cell factory
-extension CollectionViewDataSourceProvider where CellFactory.Cell: UICollectionViewCell {
-}
-
-
 
 /**
  A `CollectionViewFetchedResultsDataSourceProvider` is responsible for providing a data source object
@@ -172,10 +165,10 @@ extension CollectionViewDataSourceProvider where CellFactory.Cell: UICollectionV
  - note: Clients are responsbile for registering cells and supplementary views with the collection view.
  */
 public final class CollectionViewFetchedResultsDataSourceProvider <
-    CellFactory: CellFactoryProtocol, SupplementaryViewFactory: SupplementaryViewFactoryProtocol
+    CellFactory: ReusableViewFactoryProtocol, SupplementaryViewFactory: SupplementaryViewFactoryProtocol
     where
     CellFactory.Item == SupplementaryViewFactory.Item,
-    CellFactory.Cell: UICollectionViewCell,
+    CellFactory.View: UICollectionViewCell,
     SupplementaryViewFactory.View: UICollectionReusableView>: CustomStringConvertible {
 
     // MARK: Typealiases
@@ -247,7 +240,7 @@ public final class CollectionViewFetchedResultsDataSourceProvider <
 
         dataSource.collectionCellForItemAtIndexPath = { [unowned self] (collectionView, indexPath) -> UICollectionViewCell in
             let item = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Item
-            return self.cellFactory.cellFor(item: item, parentView: collectionView, indexPath: indexPath)
+            return self.cellFactory.collectionCellFor(item: item, parentView: collectionView, indexPath: indexPath)
         }
 
         dataSource.collectionSupplementaryViewAtIndexPath = { [unowned self] (collectionView, kind, indexPath) -> UICollectionReusableView in
