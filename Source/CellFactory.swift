@@ -213,11 +213,11 @@ public extension ReusableViewFactoryProtocol where View: UICollectionReusableVie
 
 
 /**
- A `CellFactory` is a concrete `ReusableViewFactoryProtocol` type.
- This factory is responsible for producing and configuring cells for a specific item.
+ A `ViewFactory` is a concrete `ReusableViewFactoryProtocol` type.
+ This factory is responsible for producing and configuring reusable views for a specific item.
  Cells can be for either collection views or table views.
  */
-public struct CellFactory<Item, Cell: ReusableViewProtocol>: ReusableViewFactoryProtocol  {
+public struct ViewFactory<Item, Cell: ReusableViewProtocol>: ReusableViewFactoryProtocol  {
 
     /**
      Configures the cell for the specified item, parent view, and index path.
@@ -267,12 +267,12 @@ public struct CellFactory<Item, Cell: ReusableViewProtocol>: ReusableViewFactory
     }
 }
 
-extension CellFactory: CustomStringConvertible {
+extension ViewFactory: CustomStringConvertible {
 
     /// :nodoc:
     public var description: String {
         get {
-            return "<\(CellFactory.self): \(reuseIdentifier)>"
+            return "\(ViewFactory.self)(\(reuseIdentifier))>"
         }
     }
 }

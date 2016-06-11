@@ -34,7 +34,7 @@ final class CollectionViewDataSourceSubscriptTests: XCTestCase {
         let allSections = [section0, section1, section2]
 
         // GIVEN: a cell factory
-        let factory = CellFactory(reuseIdentifier: "cellId") { (cell, model: FakeViewModel, type, collectionView, indexPath) -> FakeCollectionCell in
+        let factory = ViewFactory(reuseIdentifier: "cellId") { (cell, model: FakeViewModel, type, collectionView, indexPath) -> FakeCollectionCell in
             return cell
         }
 
@@ -57,7 +57,7 @@ final class CollectionViewDataSourceSubscriptTests: XCTestCase {
         let allSections = [section0, section1, section2]
 
         // GIVEN: a cell factory
-        let factory = CellFactory(reuseIdentifier: "cellId") { (cell, model: FakeViewModel, type, collectionView, indexPath) -> FakeCollectionCell in
+        let factory = ViewFactory(reuseIdentifier: "cellId") { (cell, model: FakeViewModel, type, collectionView, indexPath) -> FakeCollectionCell in
             return cell
         }
 
@@ -83,7 +83,7 @@ final class CollectionViewDataSourceSubscriptTests: XCTestCase {
         let allSections = [section0, section1]
 
         // GIVEN: a cell factory
-        let factory = CellFactory(reuseIdentifier: "cellId") { (cell, model: FakeViewModel, type, collectionView, indexPath) -> FakeCollectionCell in
+        let factory = ViewFactory(reuseIdentifier: "cellId") { (cell, model: FakeViewModel, type, collectionView, indexPath) -> FakeCollectionCell in
             return cell
         }
 
@@ -107,7 +107,7 @@ final class CollectionViewDataSourceSubscriptTests: XCTestCase {
         let allSections = [section0, section1]
 
         // GIVEN: a cell factory
-        let factory = CellFactory(reuseIdentifier: "cellId") { (cell, model: FakeViewModel, type, collectionView, indexPath) -> FakeCollectionCell in
+        let factory = ViewFactory(reuseIdentifier: "cellId") { (cell, model: FakeViewModel, type, collectionView, indexPath) -> FakeCollectionCell in
             return cell
         }
 
