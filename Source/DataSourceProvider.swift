@@ -20,6 +20,8 @@ import Foundation
 import UIKit
 
 
+// TODO: Make TitledCollectionReusableViewFactory the default supplementary view factory!
+
 public final class DataSourceProvider<Section: SectionInfoProtocol, CellFactory: ReusableViewFactoryProtocol, SupplementaryFactory: ReusableViewFactoryProtocol
     where
     CellFactory.Item == Section.Item,
