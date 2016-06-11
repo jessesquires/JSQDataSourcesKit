@@ -59,7 +59,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
-                            <tableViewSection headerTitle="Basic data sources (static)" footerTitle="" id="Dck-ui-Het">
+                            <tableViewSection headerTitle="Basic (static)" footerTitle="" id="Dck-ui-Het">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="1hM-aR-DRM" style="IBUITableViewCellStyleDefault" id="ksE-8j-kdf">
                                         <rect key="frame" x="0.0" y="114" width="600" height="60"/>
@@ -103,7 +103,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Fetched results controller data sources" footerTitle="" id="vME-8p-ZPm">
+                            <tableViewSection headerTitle="Fetched results controller" footerTitle="" id="vME-8p-ZPm">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="bWd-M3-quA" style="IBUITableViewCellStyleDefault" id="30a-ER-GLa">
                                         <rect key="frame" x="0.0" y="277" width="600" height="60"/>

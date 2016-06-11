@@ -146,8 +146,8 @@
 			children = (
 				88C99A761CBB302600A9804A /* BridgedDataSource.swift */,
 				88CFFD991CB977A100C4E9DD /* CellFactory.swift */,
-				88B80CD71CBBF62A00EDF9D5 /* DataSourceProvider.swift */,
 				88DCAD291CB87CB400C018AF /* CollectionViewDataSourceProvider.swift */,
+				88B80CD71CBBF62A00EDF9D5 /* DataSourceProvider.swift */,
 				88DCAD2C1CB87CB400C018AF /* FetchedResultsDelegate.swift */,
 				88DCAD2D1CB87CB400C018AF /* Info.plist */,
 				88DCAD2E1CB87CB400C018AF /* Internal.swift */,

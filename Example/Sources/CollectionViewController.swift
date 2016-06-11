@@ -23,10 +23,10 @@ import JSQDataSourcesKit
 
 class CollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    typealias CollectionCellFactory = CellFactory<CellViewModel, CollectionViewCell>
+    typealias CollectionCellFactory = ViewFactory<CellViewModel, CollectionViewCell>
     typealias HeaderViewFactory = TitledCollectionReusableViewFactory<CellViewModel>
 
-    var dataSourceProvider: CollectionViewDataSourceProvider<Section<CellViewModel>, CollectionCellFactory, HeaderViewFactory>?
+    var dataSourceProvider: DataSourceProvider<Section<CellViewModel>, CollectionCellFactory, HeaderViewFactory>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +39,8 @@ class CollectionViewController: UICollectionViewController, UICollectionViewDele
         let allSections = [section0, section1, section2]
 
         // 2. create cell factory
-        let cellFactory = CellFactory(reuseIdentifier: CellId) { (cell, model: CellViewModel, collectionView, indexPath) -> CollectionViewCell in
-            cell.label.text = model.text + "\n\(indexPath.section), \(indexPath.item)"
+        let cellFactory = ViewFactory(reuseIdentifier: CellId) { (cell, model: CellViewModel?, type, collectionView, indexPath) -> CollectionViewCell in
+            cell.label.text = model!.text + "\n\(indexPath.section), \(indexPath.item)"
             cell.accessibilityIdentifier = "\(indexPath.section), \(indexPath.item)"
             return cell
         }
@@ -57,14 +57,14 @@ class CollectionViewController: UICollectionViewController, UICollectionViewDele
         })
 
         // 4. create data source provider
-        self.dataSourceProvider = CollectionViewDataSourceProvider(sections: allSections,
-                                                                   cellFactory: cellFactory,
-                                                                   supplementaryViewFactory: headerFactory,
-                                                                   collectionView: collectionView)
+        self.dataSourceProvider = DataSourceProvider(sections: allSections,
+                                                     cellFactory: cellFactory,
+                                                     supplementaryFactory: headerFactory)
+        collectionView?.dataSource = self.dataSourceProvider?.collectionViewDataSource
     }
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.size.width, height: 50)
     }
-
+    
 }

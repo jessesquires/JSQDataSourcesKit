@@ -26,7 +26,7 @@ class FetchedCollectionViewController: UICollectionViewController {
 
     let stack = CoreDataStack()
 
-    typealias ThingCellFactory = CellFactory<Thing, CollectionViewCell>
+    typealias ThingCellFactory = ViewFactory<Thing, CollectionViewCell>
     typealias ThingSupplementaryViewFactory = ComposedCollectionSupplementaryViewFactory<Thing>
     var dataSourceProvider: CollectionViewFetchedResultsDataSourceProvider<ThingCellFactory, ThingSupplementaryViewFactory>?
 
@@ -44,10 +44,10 @@ class FetchedCollectionViewController: UICollectionViewController {
         layout.footerReferenceSize = CGSize(width: collectionView!.frame.size.width, height: 25)
 
         // 1. create cell factory
-        let cellFactory = CellFactory(reuseIdentifier: CellId) { (cell, model: Thing, collectionView, indexPath) -> CollectionViewCell in
-            cell.label.text = model.displayName
+        let cellFactory = ViewFactory(reuseIdentifier: CellId) { (cell, model: Thing?, type, collectionView, indexPath) -> CollectionViewCell in
+            cell.label.text = model!.displayName
             cell.label.textColor = UIColor.whiteColor()
-            cell.backgroundColor = model.displayColor
+            cell.backgroundColor = model!.displayColor
             cell.accessibilityIdentifier = "\(cell.label.text)"
             return cell
         }
@@ -55,7 +55,7 @@ class FetchedCollectionViewController: UICollectionViewController {
         // 2. create supplementary view factory
         let headerFactory = TitledCollectionReusableViewFactory(
             dataConfigurator: { (header, item: Thing?, kind, collectionView, indexPath) -> TitledCollectionReusableView in
-                header.label.text = "\(item?.colorName) (header \(indexPath.section))"
+                header.label.text = "\(item!.colorName) header (\(indexPath.section))"
                 header.label.textColor = item?.displayColor
                 return header
             },
@@ -65,7 +65,7 @@ class FetchedCollectionViewController: UICollectionViewController {
 
         let footerFactory = TitledCollectionReusableViewFactory(
             dataConfigurator: { (footer, item: Thing?, kind, collectionView, indexPath) -> TitledCollectionReusableView in
-                footer.label.text = "\(item?.colorName) (footer \(indexPath.section))"
+                footer.label.text = "\(item!.colorName) footer (\(indexPath.section))"
                 footer.label.textColor = item?.displayColor
                 return footer
             },

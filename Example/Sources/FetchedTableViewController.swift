@@ -28,7 +28,7 @@ class FetchedTableViewController: UITableViewController {
 
     let stack = CoreDataStack()
 
-    typealias TableCellFactory = CellFactory<Thing, UITableViewCell>
+    typealias TableCellFactory = ViewFactory<Thing, UITableViewCell>
     var dataSourceProvider: TableViewFetchedResultsDataSourceProvider<TableCellFactory>?
     var delegateProvider: TableViewFetchedResultsDelegateProvider<TableCellFactory>?
 
@@ -39,9 +39,9 @@ class FetchedTableViewController: UITableViewController {
         super.viewDidLoad()
 
         // 1. create factory
-        let factory = CellFactory(reuseIdentifier: CellId) { (cell, model: Thing, tableView, indexPath) -> UITableViewCell in
-            cell.textLabel?.text = model.displayName
-            cell.textLabel?.textColor = model.displayColor
+        let factory = ViewFactory(reuseIdentifier: CellId) { (cell, model: Thing?, type, tableView, indexPath) -> UITableViewCell in
+            cell.textLabel?.text = model!.displayName
+            cell.textLabel?.textColor = model!.displayColor
             cell.detailTextLabel?.text = "\(indexPath.section), \(indexPath.row)"
             cell.accessibilityIdentifier = "\(cell.textLabel?.text!)"
             return cell

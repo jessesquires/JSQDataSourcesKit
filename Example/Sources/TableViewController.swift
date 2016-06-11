@@ -23,8 +23,8 @@ import JSQDataSourcesKit
 
 class TableViewController: UITableViewController {
 
-    typealias TableCellFactory = CellFactory<CellViewModel, UITableViewCell>
-    var dataSourceProvider: TableViewDataSourceProvider<Section<CellViewModel>, TableCellFactory>?
+    typealias TableCellFactory = ViewFactory<CellViewModel, UITableViewCell>
+    var dataSourceProvider: DataSourceProvider<Section<CellViewModel>, TableCellFactory, TableCellFactory>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,15 +36,17 @@ class TableViewController: UITableViewController {
         let allSections = [section0, section1, section2]
 
         // 2. create cell factory
-        let factory = CellFactory(reuseIdentifier: CellId) { (cell, model: CellViewModel, tableView, indexPath) -> UITableViewCell in
-            cell.textLabel?.text = model.text
+        let factory = ViewFactory(reuseIdentifier: CellId) { (cell, model: CellViewModel?, type, tableView, indexPath) -> UITableViewCell in
+            cell.textLabel?.text = model!.text
             cell.detailTextLabel?.text = "\(indexPath.section), \(indexPath.row)"
             cell.accessibilityIdentifier = "\(indexPath.section), \(indexPath.row)"
             return cell
         }
 
         // 3. create data source provider
-        dataSourceProvider = TableViewDataSourceProvider(sections: allSections, cellFactory: factory, tableView: tableView)
+        dataSourceProvider = DataSourceProvider(sections: allSections, cellFactory: factory, supplementaryFactory: factory)
+
+        tableView.dataSource = dataSourceProvider?.tableViewDataSource
     }
     
 }

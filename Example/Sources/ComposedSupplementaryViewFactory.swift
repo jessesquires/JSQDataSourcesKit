@@ -24,7 +24,7 @@ import JSQDataSourcesKit
  Example of a composed factory for supplementary views.
  Used for headers and footers in `FetchedCollectionViewController` in the demo
  */
-public struct ComposedCollectionSupplementaryViewFactory <Item>: SupplementaryViewFactoryProtocol {
+public struct ComposedCollectionSupplementaryViewFactory <Item>: ReusableViewFactoryProtocol {
 
     public let headerViewFactory: TitledCollectionReusableViewFactory<Item>
 
@@ -36,22 +36,22 @@ public struct ComposedCollectionSupplementaryViewFactory <Item>: SupplementaryVi
         self.footerViewFactory = footerViewFactory
     }
 
-    public func reuseIdentiferFor(item item: Item?, kind: String, indexPath: NSIndexPath) -> String {
+    public func reuseIdentiferFor(item item: Item?, type: ReusableViewType, indexPath: NSIndexPath) -> String {
         return TitledCollectionReusableView.identifier
     }
 
     public func configure(view view: TitledCollectionReusableView,
                                item: Item?,
-                               kind: String,
+                               type: ReusableViewType,
                                parentView: UICollectionView,
                                indexPath: NSIndexPath) -> TitledCollectionReusableView {
-        switch kind {
-        case UICollectionElementKindSectionHeader:
-            return headerViewFactory.configure(view: view, item: item, kind: kind, parentView: parentView, indexPath: indexPath)
-        case UICollectionElementKindSectionFooter:
-            return footerViewFactory.configure(view: view, item: item, kind: kind, parentView: parentView, indexPath: indexPath)
+        switch type {
+        case .supplementaryView(kind: UICollectionElementKindSectionHeader):
+            return headerViewFactory.configure(view: view, item: item, type: type, parentView: parentView, indexPath: indexPath)
+        case .supplementaryView(kind: UICollectionElementKindSectionFooter):
+            return footerViewFactory.configure(view: view, item: item, type: type, parentView: parentView, indexPath: indexPath)
         default:
-            fatalError("attempt to dequeue supplementary view with unknown kind: \(kind)")
+            fatalError("attempt to dequeue supplementary view with unknown kind: \(type)")
         }
     }
 }
