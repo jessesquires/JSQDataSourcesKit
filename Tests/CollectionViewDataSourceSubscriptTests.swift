@@ -39,7 +39,7 @@ final class CollectionViewDataSourceSubscriptTests: XCTestCase {
         }
 
         // GIVEN: a data source provider
-        let dataSourceProvider: Provider = CollectionViewDataSourceProvider(sections: allSections, cellFactory: factory)
+        let dataSourceProvider = DataSourceProvider(sections: allSections, cellFactory: factory, supplementaryFactory: factory)
 
         // WHEN: we ask for a section at a specific index
         let section = dataSourceProvider[1]
@@ -62,7 +62,7 @@ final class CollectionViewDataSourceSubscriptTests: XCTestCase {
         }
 
         // GIVEN: a data source provider
-        let dataSourceProvider: Provider = CollectionViewDataSourceProvider(sections: allSections, cellFactory: factory)
+        let dataSourceProvider = DataSourceProvider(sections: allSections, cellFactory: factory, supplementaryFactory: factory)
         let count = dataSourceProvider.sections.count
 
         // WHEN: we set a section at a specific index
@@ -88,7 +88,7 @@ final class CollectionViewDataSourceSubscriptTests: XCTestCase {
         }
 
         // GIVEN: a data source provider
-        let dataSourceProvider: Provider = CollectionViewDataSourceProvider(sections: allSections, cellFactory: factory)
+        let dataSourceProvider = DataSourceProvider(sections: allSections, cellFactory: factory, supplementaryFactory: factory)
 
         // WHEN: we ask for an item at a specific index path
         let item1 = dataSourceProvider[NSIndexPath(forItem: 2, inSection: 0)]
@@ -112,7 +112,7 @@ final class CollectionViewDataSourceSubscriptTests: XCTestCase {
         }
 
         // GIVEN: a data source provider
-        let dataSourceProvider: Provider = CollectionViewDataSourceProvider(sections: allSections, cellFactory: factory)
+        let dataSourceProvider = DataSourceProvider(sections: allSections, cellFactory: factory, supplementaryFactory: factory)
 
         // WHEN: we set an item at a specific index path
         let indexPath = NSIndexPath(forItem: 2, inSection: 0)

@@ -67,11 +67,10 @@ final class CollectionViewDataSourceTests: XCTestCase {
         }
 
         // GIVEN: a data source provider
-        typealias Factory = SupplementaryViewFactory<FakeViewModel, FakeCollectionSupplementaryView>
-        typealias Provider = CollectionViewDataSourceProvider<Section<FakeViewModel>, ViewFactory<FakeViewModel, FakeCollectionCell>, Factory>
+        let dataSourceProvider = DataSourceProvider(sections: allSections, cellFactory: cellFactory, supplementaryFactory: cellFactory)
+        let dataSource = dataSourceProvider.collectionViewDataSource
 
-        let dataSourceProvider: Provider = CollectionViewDataSourceProvider(sections: allSections, cellFactory: cellFactory, collectionView: fakeCollectionView)
-        let dataSource = dataSourceProvider.dataSource
+        fakeCollectionView.dataSource = dataSource
 
         // WHEN: we call the collection view data source methods
         let numSections = dataSource.numberOfSectionsInCollectionView?(fakeCollectionView)
@@ -116,11 +115,11 @@ final class CollectionViewDataSourceTests: XCTestCase {
         var supplementaryFactoryExpectation = expectationWithDescription("supplementary_factory_\(#function)")
 
         // GIVEN: a supplementary view factory
-        let supplementaryViewFactory = SupplementaryViewFactory(reuseIdentifier: fakeSupplementaryViewReuseId, kind: self.fakeSupplementaryViewReuseId)
-        { (view, model: FakeViewModel?, kind, collectionView, indexPath) -> FakeCollectionSupplementaryView in
+        let supplementaryViewFactory = ViewFactory(reuseIdentifier: fakeSupplementaryViewReuseId, type: .supplementaryView(kind: self.fakeSupplementaryViewReuseId))
+        { (view, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionSupplementaryView in
             XCTAssertEqual(view.reuseIdentifier!, self.fakeSupplementaryViewReuseId, "Dequeued supplementary view should have expected identifier")
             XCTAssertEqual(model, allSections[indexPath.section][indexPath.item], "Model object should equal expected value")
-            XCTAssertEqual(kind, FakeSupplementaryViewKind, "View kind should have expected kind")
+            XCTAssertEqual(type, ReusableViewType.supplementaryView(kind: FakeSupplementaryViewKind), "View type should have expected type")
             XCTAssertEqual(collectionView, self.fakeCollectionView, "CollectionView should equal the collectionView for the data source")
 
             supplementaryFactoryExpectation.fulfill()
@@ -128,13 +127,13 @@ final class CollectionViewDataSourceTests: XCTestCase {
         }
 
         // GIVEN: a data source provider
-        let dataSourceProvider = CollectionViewDataSourceProvider(
-            sections: allSections,
-            cellFactory: cellFactory,
-            supplementaryViewFactory: supplementaryViewFactory,
-            collectionView: fakeCollectionView)
+        let dataSourceProvider = DataSourceProvider(sections: allSections,
+                                                    cellFactory: cellFactory,
+                                                    supplementaryFactory: supplementaryViewFactory)
 
-        let dataSource = dataSourceProvider.dataSource
+        let dataSource = dataSourceProvider.collectionViewDataSource
+
+        fakeCollectionView.dataSource = dataSource
 
         // WHEN: we call the collection view data source methods
         let numSections = dataSource.numberOfSectionsInCollectionView?(fakeCollectionView)

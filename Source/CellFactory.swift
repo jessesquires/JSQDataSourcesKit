@@ -125,6 +125,20 @@ public enum ReusableViewType {
 }
 
 
+extension ReusableViewType: Equatable { }
+
+public func ==(lhs: ReusableViewType, rhs: ReusableViewType) -> Bool {
+    switch (lhs, rhs) {
+    case (.cell, .cell):
+        return true
+    case (.supplementaryView(let kind1), .supplementaryView(let kind2)):
+        return kind1 == kind2
+    default:
+        return false
+    }
+}
+
+
 
 // MARK: ReusableViewFactory
 

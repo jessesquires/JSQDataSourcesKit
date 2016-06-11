@@ -21,12 +21,11 @@ import UIKit
 
 
 /**
- A `TitledCollectionReusableViewFactory` is a specialized supplementary view factory
- that conforms to `SupplementaryViewFactoryProtocol`.
+ A `TitledCollectionReusableViewFactory` is a specialized supplementary view factory that conforms to `ReusableViewFactoryProtocol`.
 
  This factory is responsible for producing and configuring `TitledCollectionReusableView` instances.
  */
-public struct TitledCollectionReusableViewFactory <Item>: SupplementaryViewFactoryProtocol, CustomStringConvertible {
+public struct TitledCollectionReusableViewFactory <Item>: ReusableViewFactoryProtocol {
 
     // MARK: Typealiases
 
@@ -41,7 +40,7 @@ public struct TitledCollectionReusableViewFactory <Item>: SupplementaryViewFacto
 
      - returns: The configured `TitledCollectionReusableView` instance.
      */
-    public typealias DataConfigurationHandler = (TitledCollectionReusableView, Item?, String, UICollectionView, NSIndexPath) -> TitledCollectionReusableView
+    public typealias DataConfigurationHandler = (TitledCollectionReusableView, Item?, ReusableViewType, UICollectionView, NSIndexPath) -> TitledCollectionReusableView
 
     /**
      Configures the style attributes of the `TitledCollectionReusableView`.
@@ -74,27 +73,17 @@ public struct TitledCollectionReusableViewFactory <Item>: SupplementaryViewFacto
     }
 
 
-    // MARK: SupplementaryViewFactoryProtocol
+    // MARK: ReusableViewFactoryProtocol
 
     /// :nodoc:
-    public func reuseIdentiferFor(item item: Item?, kind: String, indexPath: NSIndexPath) -> String {
+    public func reuseIdentiferFor(item item: Item?, type: ReusableViewType, indexPath: NSIndexPath) -> String {
         return TitledCollectionReusableView.identifier
     }
 
     /// :nodoc:
-    public func configure(view view: TitledCollectionReusableView, item: Item?, kind: String, parentView: UICollectionView, indexPath: NSIndexPath) -> TitledCollectionReusableView {
+    public func configure(view view: TitledCollectionReusableView, item: Item?, type: ReusableViewType, parentView: UICollectionView, indexPath: NSIndexPath) -> TitledCollectionReusableView {
         styleConfigurator(view)
-        dataConfigurator(view, item, kind, parentView, indexPath)
+        dataConfigurator(view, item, type, parentView, indexPath)
         return view
-    }
-
-
-    // MARK: CustomStringConvertible
-
-    /// :nodoc:
-    public var description: String {
-        get {
-            return "<\(TitledCollectionReusableViewFactory.self)>"
-        }
     }
 }

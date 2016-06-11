@@ -19,8 +19,6 @@
 		88B017F21B3BADFD00C9B29A /* JSQDataSourcesKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 887DD0841B3BAC6C00FC4BF1 /* JSQDataSourcesKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		88B80CD81CBBF62A00EDF9D5 /* DataSourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B80CD71CBBF62A00EDF9D5 /* DataSourceProvider.swift */; };
 		88B80CD91CBBF62A00EDF9D5 /* DataSourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B80CD71CBBF62A00EDF9D5 /* DataSourceProvider.swift */; };
-		88B80CDE1CBC7F6B00EDF9D5 /* SupplementaryViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B80CDD1CBC7F6B00EDF9D5 /* SupplementaryViewFactory.swift */; };
-		88B80CDF1CBC7F6B00EDF9D5 /* SupplementaryViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B80CDD1CBC7F6B00EDF9D5 /* SupplementaryViewFactory.swift */; };
 		88C99A771CBB302600A9804A /* BridgedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C99A761CBB302600A9804A /* BridgedDataSource.swift */; };
 		88C99A781CBB303000A9804A /* CellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CFFD991CB977A100C4E9DD /* CellFactory.swift */; };
 		88C99A791CBB303000A9804A /* BridgedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C99A761CBB302600A9804A /* BridgedDataSource.swift */; };
@@ -74,7 +72,6 @@
 		887DD0841B3BAC6C00FC4BF1 /* JSQDataSourcesKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSQDataSourcesKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		887DD08E1B3BAC6C00FC4BF1 /* JSQDataSourcesKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JSQDataSourcesKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		88B80CD71CBBF62A00EDF9D5 /* DataSourceProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceProvider.swift; sourceTree = "<group>"; };
-		88B80CDD1CBC7F6B00EDF9D5 /* SupplementaryViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupplementaryViewFactory.swift; sourceTree = "<group>"; };
 		88C99A761CBB302600A9804A /* BridgedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgedDataSource.swift; sourceTree = "<group>"; };
 		88C99A7A1CBB628A00A9804A /* BridgedDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgedDataSourceTests.swift; sourceTree = "<group>"; };
 		88CFFD991CB977A100C4E9DD /* CellFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellFactory.swift; sourceTree = "<group>"; };
@@ -156,7 +153,6 @@
 				88DCAD2E1CB87CB400C018AF /* Internal.swift */,
 				88DCAD2F1CB87CB400C018AF /* JSQDataSourcesKit.h */,
 				88DCAD331CB87CB400C018AF /* Section.swift */,
-				88B80CDD1CBC7F6B00EDF9D5 /* SupplementaryViewFactory.swift */,
 				88DCAD321CB87CB400C018AF /* TableViewDataSourceProvider.swift */,
 				88DCAD351CB87CB400C018AF /* TitledCollectionReusableView.swift */,
 				88DCAD371CB87CB400C018AF /* TitledCollectionReusableViewFactory.swift */,
@@ -335,7 +331,6 @@
 				88C99A781CBB303000A9804A /* CellFactory.swift in Sources */,
 				88C99A791CBB303000A9804A /* BridgedDataSource.swift in Sources */,
 				881A92E01CB881550080BC5C /* TableViewDataSourceProvider.swift in Sources */,
-				88B80CDF1CBC7F6B00EDF9D5 /* SupplementaryViewFactory.swift in Sources */,
 				881A92E51CB881550080BC5C /* TitledCollectionReusableViewFactory.swift in Sources */,
 				88B80CD91CBBF62A00EDF9D5 /* DataSourceProvider.swift in Sources */,
 				881A92DB1CB881550080BC5C /* FetchedResultsDelegate.swift in Sources */,
@@ -353,7 +348,6 @@
 				88DCAD6A1CB87CC000C018AF /* CollectionViewDataSourceProvider.swift in Sources */,
 				88C99A771CBB302600A9804A /* BridgedDataSource.swift in Sources */,
 				88DCAD761CB87CC000C018AF /* TitledCollectionReusableView.swift in Sources */,
-				88B80CDE1CBC7F6B00EDF9D5 /* SupplementaryViewFactory.swift in Sources */,
 				88DCAD741CB87CC000C018AF /* Section.swift in Sources */,
 				88B80CD81CBBF62A00EDF9D5 /* DataSourceProvider.swift in Sources */,
 				88DCAD781CB87CC000C018AF /* TitledCollectionReusableViewFactory.swift in Sources */,

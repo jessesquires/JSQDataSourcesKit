@@ -27,7 +27,6 @@ final class DescriptionTests: XCTestCase {
 
     func test_CollectionViewDataSource_Descriptions() {
         print("\(#function)\n")
-        let fakeCollectionView = FakeCollectionView(frame: CGRect.zero, collectionViewLayout: FakeFlowLayout())
 
         let section = Section(items: FakeViewModel(), FakeViewModel())
         print(section, "\n")
@@ -37,7 +36,7 @@ final class DescriptionTests: XCTestCase {
         }
         print(cellFactory, "\n")
 
-        let supplementaryViewFactory = CollectionSupplementaryViewFactory(reuseIdentifier: "supplementaryId", kind: "kind") {
+        let supplementaryViewFactory = ViewFactory(reuseIdentifier: "supplementaryId", type: .supplementaryView(kind: "kind")) {
             (view, model: FakeViewModel?, kind, collectionView, indexPath) -> FakeCollectionSupplementaryView in
             return view
         }
@@ -50,11 +49,7 @@ final class DescriptionTests: XCTestCase {
         }
         print(titledSupplementaryViewFactory, "\n")
 
-        let dataSourceProvider = CollectionViewDataSourceProvider(
-            sections: [section],
-            cellFactory: cellFactory,
-            supplementaryViewFactory: supplementaryViewFactory,
-            collectionView: fakeCollectionView)
+        let dataSourceProvider = DataSourceProvider(sections: [section], cellFactory: cellFactory,supplementaryFactory: supplementaryViewFactory)
 
         print(dataSourceProvider, "\n")
     }

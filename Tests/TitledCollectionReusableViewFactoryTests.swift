@@ -63,9 +63,9 @@ class TitledCollectionReusableViewFactoryTests: XCTestCase {
         var titledViewStyleConfigExpectation = expectationWithDescription("titledViewStyleConfigExpectation")
 
         let supplementaryViewFactory = TitledCollectionReusableViewFactory(dataConfigurator:
-            { (view, item: FakeViewModel?, kind, collectionView, indexPath) -> TitledCollectionReusableView in
+            { (view, item: FakeViewModel?, type, collectionView, indexPath) -> TitledCollectionReusableView in
                 XCTAssertEqual(view.reuseIdentifier!, TitledCollectionReusableView.identifier, "Dequeued supplementary view should have expected identifier")
-                XCTAssertEqual(kind, FakeSupplementaryViewKind, "View kind should have expected kind")
+                XCTAssertEqual(type, ReusableViewType.supplementaryView(kind: FakeSupplementaryViewKind), "View type should have expected type")
                 XCTAssertEqual(item, allSections[indexPath.section][indexPath.item], "Model object should equal expected value")
                 XCTAssertEqual(collectionView, self.fakeCollectionView, "CollectionView should equal the collectionView for the data source")
 
@@ -77,12 +77,13 @@ class TitledCollectionReusableViewFactoryTests: XCTestCase {
         })
 
         // GIVEN: a data source provider
-        let dataSourceProvider = CollectionViewDataSourceProvider(sections: allSections,
-                                                                  cellFactory: cellFactory,
-                                                                  supplementaryViewFactory: supplementaryViewFactory,
-                                                                  collectionView: fakeCollectionView)
+        let dataSourceProvider = DataSourceProvider(sections: allSections,
+                                                    cellFactory: cellFactory,
+                                                    supplementaryFactory: supplementaryViewFactory)
 
-        let dataSource = dataSourceProvider.dataSource
+        let dataSource = dataSourceProvider.collectionViewDataSource
+
+        fakeCollectionView.dataSource = dataSource
 
         // WHEN: we call the collection view data source methods
         let numSections = dataSource.numberOfSectionsInCollectionView?(fakeCollectionView)
