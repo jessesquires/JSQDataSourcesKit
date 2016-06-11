@@ -33,7 +33,7 @@ final class TableViewDataSourceSubscriptTests: XCTestCase {
         let section2 = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
 
         // GIVEN: a cell factory
-        let factory = ViewFactory(reuseIdentifier: "cellid") { (cell, model: FakeViewModel, type, tableView, indexPath) -> FakeTableCell in
+        let factory = ViewFactory(reuseIdentifier: "cellid") { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
             return cell
         }
 
@@ -56,7 +56,7 @@ final class TableViewDataSourceSubscriptTests: XCTestCase {
         let section1 = Section(items: FakeViewModel(), headerTitle: "Header Title")
 
         // GIVEN: a cell factory
-        let factory = ViewFactory(reuseIdentifier: "cellid") { (cell, model: FakeViewModel, type, tableView, indexPath) -> FakeTableCell in
+        let factory = ViewFactory(reuseIdentifier: "cellid") { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
             return cell
         }
 
@@ -84,7 +84,7 @@ final class TableViewDataSourceSubscriptTests: XCTestCase {
         let section1 = Section(items: FakeViewModel())
 
         // GIVEN: a cell factory
-        let factory = ViewFactory(reuseIdentifier: "cellid") { (cell, model: FakeViewModel, type, tableView, indexPath) -> FakeTableCell in
+        let factory = ViewFactory(reuseIdentifier: "cellid") { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
             return cell
         }
 
@@ -106,7 +106,7 @@ final class TableViewDataSourceSubscriptTests: XCTestCase {
         let section1 = Section(items: FakeViewModel())
 
         // GIVEN: a cell factory
-        let factory = ViewFactory(reuseIdentifier: "cellid") { (cell, model: FakeViewModel, type, tableView, indexPath) -> FakeTableCell in
+        let factory = ViewFactory(reuseIdentifier: "cellid") { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
             return cell
         }
 

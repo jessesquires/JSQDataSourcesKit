@@ -47,7 +47,7 @@ final class TableViewDataSourceTests: XCTestCase {
         fakeTableView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + #function)
 
         // GIVEN: a cell factory
-        let factory = ViewFactory(reuseIdentifier: fakeReuseId) { (cell, model: FakeViewModel, type, tableView, indexPath) -> FakeTableCell in
+        let factory = ViewFactory(reuseIdentifier: fakeReuseId) { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
             XCTAssertEqual(cell.reuseIdentifier!, self.fakeReuseId, "Dequeued cell should have expected identifier")
 
             XCTAssertEqual(model, expectedModel, "Model object should equal expected value")
@@ -105,7 +105,7 @@ final class TableViewDataSourceTests: XCTestCase {
         var factoryExpectation = expectationWithDescription("factory_\(#function)")
 
         // GIVEN: a cell factory
-        let factory = ViewFactory(reuseIdentifier: fakeReuseId) { (cell, model: FakeViewModel, type, tableView, indexPath) -> FakeTableCell in
+        let factory = ViewFactory(reuseIdentifier: fakeReuseId) { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
             XCTAssertEqual(cell.reuseIdentifier!, self.fakeReuseId, "Dequeued cell should have expected identifier")
             XCTAssertEqual(model, allSections[indexPath.section][indexPath.row], "Model object should equal expected value")
             XCTAssertEqual(tableView, self.fakeTableView, "TableView should equal the tableView for the data source")

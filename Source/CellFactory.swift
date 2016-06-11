@@ -229,7 +229,7 @@ public struct ViewFactory<Item, Cell: ReusableViewProtocol>: ReusableViewFactory
 
      - returns: The configured cell.
      */
-    public typealias ViewConfigurator = (cell: Cell, item: Item, type: ReusableViewType, parentView: Cell.ParentView, indexPath: NSIndexPath) -> Cell
+    public typealias ViewConfigurator = (cell: Cell, item: Item?, type: ReusableViewType, parentView: Cell.ParentView, indexPath: NSIndexPath) -> Cell
 
     /**
      A unique identifier that describes the purpose of the cells that the factory produces.
@@ -239,6 +239,9 @@ public struct ViewFactory<Item, Cell: ReusableViewProtocol>: ReusableViewFactory
      */
     public let reuseIdentifier: String
 
+    /// The type of the reusable view.
+    public let type: ReusableViewType
+
     /// A closure used to configure the views.
     public let viewConfigurator: ViewConfigurator
 
@@ -246,12 +249,14 @@ public struct ViewFactory<Item, Cell: ReusableViewProtocol>: ReusableViewFactory
      Constructs a new cell factory.
 
      - parameter reuseIdentifier:  The reuse identifier with which the factory will dequeue cells.
+     - parameter type:             The type of the reusable view.
      - parameter viewConfigurator: The closure with which the factory will configure cells.
 
      - returns: A new `CellFactory` instance.
      */
-    public init(reuseIdentifier: String, viewConfigurator: ViewConfigurator) {
+    public init(reuseIdentifier: String, type: ReusableViewType = .cell, viewConfigurator: ViewConfigurator) {
         self.reuseIdentifier = reuseIdentifier
+        self.type = type
         self.viewConfigurator = viewConfigurator
     }
 
@@ -262,17 +267,6 @@ public struct ViewFactory<Item, Cell: ReusableViewProtocol>: ReusableViewFactory
 
     /// :nodoc:
     public func configure(view view: Cell, item: Item?, type: ReusableViewType, parentView: Cell.ParentView, indexPath: NSIndexPath) -> Cell {
-        // TODO: don't !
-        return viewConfigurator(cell: view, item: item!, type: type, parentView: parentView, indexPath: indexPath)
-    }
-}
-
-extension ViewFactory: CustomStringConvertible {
-
-    /// :nodoc:
-    public var description: String {
-        get {
-            return "\(ViewFactory.self)(\(reuseIdentifier))>"
-        }
+        return viewConfigurator(cell: view, item: item, type: type, parentView: parentView, indexPath: indexPath)
     }
 }
