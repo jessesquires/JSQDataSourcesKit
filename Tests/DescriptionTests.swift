@@ -61,7 +61,6 @@ final class DescriptionTests: XCTestCase {
 
     func test_TableViewDataSource_Descriptions() {
         print("\(#function)\n")
-        let fakeTableView = FakeTableView(frame: CGRect.zero)
 
         let section = Section(items: FakeViewModel(), FakeViewModel())
         print(section, "\n")
@@ -71,10 +70,10 @@ final class DescriptionTests: XCTestCase {
         }
         print(cellFactory, "\n")
 
-        let dataSourceProvider = TableViewDataSourceProvider(
+        let dataSourceProvider = DataSourceProvider(
             sections: [section],
             cellFactory: cellFactory,
-            tableView: fakeTableView)
+            supplementaryFactory: cellFactory)
         
         print(dataSourceProvider, "\n")
     }

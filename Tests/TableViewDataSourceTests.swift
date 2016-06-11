@@ -59,8 +59,10 @@ final class TableViewDataSourceTests: XCTestCase {
         }
 
         // GIVEN: a data source provider
-        let dataSourceProvider = TableViewDataSourceProvider(sections: allSections, cellFactory: factory, tableView: fakeTableView)
-        let dataSource = dataSourceProvider.dataSource
+        let dataSourceProvider = DataSourceProvider(sections: allSections, cellFactory: factory, supplementaryFactory: factory)
+        let dataSource = dataSourceProvider.tableViewDataSource
+
+        fakeTableView.dataSource = dataSource
 
         // WHEN: we call the table view data source methods
         let numSections = dataSource.numberOfSectionsInTableView?(fakeTableView)
@@ -115,8 +117,10 @@ final class TableViewDataSourceTests: XCTestCase {
         }
 
         // GIVEN: a data source provider
-        let dataSourceProvider = TableViewDataSourceProvider(sections: allSections, cellFactory: factory, tableView: fakeTableView)
-        let dataSource = dataSourceProvider.dataSource
+        let dataSourceProvider = DataSourceProvider(sections: allSections, cellFactory: factory, supplementaryFactory: factory)
+        let dataSource = dataSourceProvider.tableViewDataSource
+
+        fakeTableView.dataSource = dataSource
 
         // WHEN: we call the table view data source methods
         let numSections = dataSource.numberOfSectionsInTableView?(fakeTableView)

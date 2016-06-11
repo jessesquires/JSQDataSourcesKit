@@ -38,7 +38,7 @@ final class TableViewDataSourceSubscriptTests: XCTestCase {
         }
 
         // GIVEN: a data source provider
-        let dataSourceProvider = TableViewDataSourceProvider(sections: [section0, section1, section2], cellFactory: factory)
+        let dataSourceProvider = DataSourceProvider(sections: [section0, section1, section2], cellFactory: factory, supplementaryFactory: factory)
 
         // WHEN: we ask for a section at a specific index
         let section = dataSourceProvider[2]
@@ -61,7 +61,7 @@ final class TableViewDataSourceSubscriptTests: XCTestCase {
         }
 
         // GIVEN: a data source provider
-        let dataSourceProvider = TableViewDataSourceProvider(sections: [section0, section1], cellFactory: factory)
+        let dataSourceProvider = DataSourceProvider(sections: [section0, section1], cellFactory: factory, supplementaryFactory: factory)
         let count = dataSourceProvider.sections.count
 
         // WHEN: we set a section at a specific index
@@ -89,7 +89,7 @@ final class TableViewDataSourceSubscriptTests: XCTestCase {
         }
 
         // GIVEN: a data source provider
-        let dataSourceProvider = TableViewDataSourceProvider(sections: [section0, section1], cellFactory: factory)
+        let dataSourceProvider = DataSourceProvider(sections: [section0, section1], cellFactory: factory, supplementaryFactory: factory)
 
         // WHEN: we ask for an item at a specific index path
         let indexPath = NSIndexPath(forRow: 2, inSection: 0)
@@ -111,7 +111,7 @@ final class TableViewDataSourceSubscriptTests: XCTestCase {
         }
 
         // GIVEN: a data source provider
-        let dataSourceProvider = TableViewDataSourceProvider(sections: [section0, section1], cellFactory: factory)
+        let dataSourceProvider = DataSourceProvider(sections: [section0, section1], cellFactory: factory, supplementaryFactory: factory)
 
         // WHEN: we set an item at a specific index path
         let indexPath = NSIndexPath(forRow: 0, inSection: 1)
