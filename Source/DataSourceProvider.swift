@@ -20,12 +20,9 @@ import Foundation
 import UIKit
 
 
-// TODO: Make TitledCollectionReusableViewFactory the default supplementary view factory!
-
 public final class DataSourceProvider<Section: SectionInfoProtocol, CellFactory: ReusableViewFactoryProtocol, SupplementaryFactory: ReusableViewFactoryProtocol
     where
-    CellFactory.Item == Section.Item,
-SupplementaryFactory.Item == Section.Item>: CustomStringConvertible {
+    CellFactory.Item == Section.Item, SupplementaryFactory.Item == Section.Item> {
 
     public var sections: [Section]
 
@@ -58,14 +55,14 @@ SupplementaryFactory.Item == Section.Item>: CustomStringConvertible {
             sections[indexPath.section].items[indexPath.item] = newValue
         }
     }
+}
 
 
-    // MARK: CustomStringConvertible
-
+extension DataSourceProvider: CustomStringConvertible {
     /// :nodoc:
     public var description: String {
         get {
-            return "<\(DataSourceProvider.self): sections=\(sections)>"
+            return "\(DataSourceProvider.self)(sections=\(sections))"
         }
     }
 }
