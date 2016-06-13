@@ -31,6 +31,8 @@ final class DescriptionTests: XCTestCase {
         let section = Section(items: FakeViewModel(), FakeViewModel())
         print(section, "\n")
 
+        let dataSource = DataSource([section])
+
         let cellFactory = ViewFactory(reuseIdentifier: "cellId") { (cell, model: FakeViewModel?, type, view, indexPath) -> FakeCollectionCell in
             return cell
         }
@@ -49,7 +51,7 @@ final class DescriptionTests: XCTestCase {
         }
         print(titledSupplementaryViewFactory, "\n")
 
-        let dataSourceProvider = DataSourceProvider(sections: [section], cellFactory: cellFactory,supplementaryFactory: supplementaryViewFactory)
+        let dataSourceProvider = DataSourceProvider(dataSource: dataSource, cellFactory: cellFactory,supplementaryFactory: supplementaryViewFactory)
 
         print(dataSourceProvider, "\n")
     }
@@ -60,15 +62,16 @@ final class DescriptionTests: XCTestCase {
         let section = Section(items: FakeViewModel(), FakeViewModel())
         print(section, "\n")
 
+        let dataSource = DataSource([section])
+
         let cellFactory = ViewFactory(reuseIdentifier: "cellId") { (cell, model: FakeViewModel?, type, view, indexPath) -> FakeTableCell in
             return cell
         }
         print(cellFactory, "\n")
 
-        let dataSourceProvider = DataSourceProvider(
-            sections: [section],
-            cellFactory: cellFactory,
-            supplementaryFactory: cellFactory)
+        let dataSourceProvider = DataSourceProvider(dataSource: dataSource,
+                                                    cellFactory: cellFactory,
+                                                    supplementaryFactory: cellFactory)
         
         print(dataSourceProvider, "\n")
     }

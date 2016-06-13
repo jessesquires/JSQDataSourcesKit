@@ -26,7 +26,7 @@ class CollectionViewController: UICollectionViewController, UICollectionViewDele
     typealias CollectionCellFactory = ViewFactory<CellViewModel, CollectionViewCell>
     typealias HeaderViewFactory = TitledCollectionReusableViewFactory<CellViewModel>
 
-    var dataSourceProvider: DataSourceProvider<Section<CellViewModel>, CollectionCellFactory, HeaderViewFactory>?
+    var dataSourceProvider: DataSourceProvider<DataSource<Section<CellViewModel>>, CollectionCellFactory, HeaderViewFactory>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +36,7 @@ class CollectionViewController: UICollectionViewController, UICollectionViewDele
         let section0 = Section(items: CellViewModel(), CellViewModel(), CellViewModel())
         let section1 = Section(items: CellViewModel(), CellViewModel(), CellViewModel(), CellViewModel(), CellViewModel(), CellViewModel())
         let section2 = Section(items: CellViewModel())
-        let allSections = [section0, section1, section2]
+        let dataSource = DataSource([section0, section1, section2])
 
         // 2. create cell factory
         let cellFactory = ViewFactory(reuseIdentifier: CellId) { (cell, model: CellViewModel?, type, collectionView, indexPath) -> CollectionViewCell in
@@ -57,7 +57,7 @@ class CollectionViewController: UICollectionViewController, UICollectionViewDele
         })
 
         // 4. create data source provider
-        self.dataSourceProvider = DataSourceProvider(sections: allSections,
+        self.dataSourceProvider = DataSourceProvider(dataSource: dataSource,
                                                      cellFactory: cellFactory,
                                                      supplementaryFactory: headerFactory)
         collectionView?.dataSource = self.dataSourceProvider?.collectionViewDataSource

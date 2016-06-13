@@ -28,9 +28,11 @@ class FetchedCollectionViewController: UICollectionViewController {
 
     typealias ThingCellFactory = ViewFactory<Thing, CollectionViewCell>
     typealias ThingSupplementaryViewFactory = ComposedCollectionSupplementaryViewFactory<Thing>
-    var dataSourceProvider: CollectionViewFetchedResultsDataSourceProvider<ThingCellFactory, ThingSupplementaryViewFactory>?
+    var dataSourceProvider: DataSourceProvider<FetchedResultsController<Thing>, ThingCellFactory, ThingSupplementaryViewFactory>?
 
     var delegateProvider: CollectionViewFetchedResultsDelegateProvider<ThingCellFactory>?
+
+    var frc: FetchedResultsController<Thing>!
 
 
     // MARK: view lifecycle
@@ -78,18 +80,19 @@ class FetchedCollectionViewController: UICollectionViewController {
         let composedFactory = ComposedCollectionSupplementaryViewFactory(headerViewFactory: headerFactory, footerViewFactory: footerFactory)
 
         // 3. create fetched results controller
-        let frc = thingFRCinContext(stack.context)
-
+        frc = FetchedResultsController<Thing>(fetchRequest: Thing.fetchRequest(),
+                                             managedObjectContext: stack.context,
+                                             sectionNameKeyPath: "colorName",
+                                             cacheName: nil)
         // 4. create delegate provider
         delegateProvider = CollectionViewFetchedResultsDelegateProvider(collectionView: collectionView!,
                                                                         cellFactory: cellFactory,
                                                                         fetchedResultsController: frc)
 
         // 5. create data source provider
-        dataSourceProvider = CollectionViewFetchedResultsDataSourceProvider(fetchedResultsController: frc,
-                                                                            cellFactory: cellFactory,
-                                                                            supplementaryViewFactory: composedFactory,
-                                                                            collectionView: collectionView)
+        dataSourceProvider = DataSourceProvider(dataSource: frc, cellFactory: cellFactory, supplementaryFactory: composedFactory)
+
+        collectionView?.dataSource = dataSourceProvider?.collectionViewDataSource
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -102,7 +105,7 @@ class FetchedCollectionViewController: UICollectionViewController {
 
     private func fetchData() {
         do {
-            try dataSourceProvider?.fetchedResultsController.performFetch()
+            try frc.performFetch()
         } catch {
             print("Fetch error = \(error)")
         }
@@ -132,14 +135,14 @@ class FetchedCollectionViewController: UICollectionViewController {
         stack.saveAndWait()
         fetchData()
 
-        if let indexPath = dataSourceProvider?.fetchedResultsController.indexPathForObject(newThing) {
+        if let indexPath = frc.indexPathForObject(newThing) {
             collectionView!.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: .CenteredVertically)
         }
     }
 
     func deleteSelected() {
         let indexPaths = collectionView!.indexPathsForSelectedItems()
-        dataSourceProvider?.fetchedResultsController.deleteThingsAtIndexPaths(indexPaths)
+        frc.deleteThingsAtIndexPaths(indexPaths)
         stack.saveAndWait()
         fetchData()
         collectionView!.reloadData()
@@ -147,21 +150,21 @@ class FetchedCollectionViewController: UICollectionViewController {
 
     func changeNameSelected() {
         let indexPaths = collectionView!.indexPathsForSelectedItems()
-        dataSourceProvider?.fetchedResultsController.changeThingNamesAtIndexPaths(indexPaths)
+        frc.changeThingNamesAtIndexPaths(indexPaths)
         stack.saveAndWait()
         fetchData()
     }
 
     func changeColorSelected() {
         let indexPaths = collectionView!.indexPathsForSelectedItems()
-        dataSourceProvider?.fetchedResultsController.changeThingColorsAtIndexPaths(indexPaths)
+        frc.changeThingColorsAtIndexPaths(indexPaths)
         stack.saveAndWait()
         fetchData()
     }
 
     func changeAllSelected() {
         let indexPaths = collectionView!.indexPathsForSelectedItems()
-        dataSourceProvider?.fetchedResultsController.changeThingsAtIndexPaths(indexPaths)
+        frc.changeThingsAtIndexPaths(indexPaths)
         stack.saveAndWait()
         fetchData()
     }
