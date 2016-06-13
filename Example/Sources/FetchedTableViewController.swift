@@ -29,8 +29,11 @@ class FetchedTableViewController: UITableViewController {
     let stack = CoreDataStack()
 
     typealias TableCellFactory = ViewFactory<Thing, UITableViewCell>
-    var dataSourceProvider: TableViewFetchedResultsDataSourceProvider<TableCellFactory>?
+    var dataSourceProvider: DataSourceProvider<FetchedResultsController<Thing>, TableCellFactory, TableCellFactory>?
+
     var delegateProvider: TableViewFetchedResultsDelegateProvider<TableCellFactory>?
+
+    var frc: FetchedResultsController<Thing>!
 
 
     // MARK: View lifecycle
@@ -48,7 +51,7 @@ class FetchedTableViewController: UITableViewController {
         }
 
         // 2. create fetched results controller
-        let frc = thingFRCinContext(stack.context)
+        frc = fetchedResultsController(inContext: stack.context)
 
         // 3. create delegate provider
         delegateProvider = TableViewFetchedResultsDelegateProvider(tableView: tableView,
@@ -56,9 +59,9 @@ class FetchedTableViewController: UITableViewController {
                                                                    fetchedResultsController: frc)
 
         // 4. create data source provider
-        dataSourceProvider = TableViewFetchedResultsDataSourceProvider(fetchedResultsController: frc,
-                                                                       cellFactory: factory,
-                                                                       tableView: tableView)
+        dataSourceProvider = DataSourceProvider(dataSource: frc, cellFactory: factory, supplementaryFactory: factory)
+
+        tableView.dataSource = dataSourceProvider?.tableViewDataSource
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -71,7 +74,7 @@ class FetchedTableViewController: UITableViewController {
 
     func fetchData() {
         do {
-            try dataSourceProvider?.fetchedResultsController.performFetch()
+            try frc.performFetch()
         } catch {
             print("Fetch error = \(error)")
         }
@@ -102,31 +105,31 @@ class FetchedTableViewController: UITableViewController {
 
         fetchData()
 
-        if let indexPath = dataSourceProvider?.fetchedResultsController.indexPathForObject(newThing) {
+        if let indexPath = frc.indexPathForObject(newThing) {
             tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Middle)
         }
     }
 
     func deleteSelected() {
-        dataSourceProvider?.fetchedResultsController.deleteThingsAtIndexPaths(tableView.indexPathsForSelectedRows)
+        frc.deleteThingsAtIndexPaths(tableView.indexPathsForSelectedRows)
         stack.saveAndWait()
         fetchData()
     }
 
     func changeNameSelected() {
-        dataSourceProvider?.fetchedResultsController.changeThingNamesAtIndexPaths(tableView.indexPathsForSelectedRows)
+        frc.changeThingNamesAtIndexPaths(tableView.indexPathsForSelectedRows)
         stack.saveAndWait()
         fetchData()
     }
 
     func changeColorSelected() {
-        dataSourceProvider?.fetchedResultsController.changeThingColorsAtIndexPaths(tableView.indexPathsForSelectedRows)
+        frc.changeThingColorsAtIndexPaths(tableView.indexPathsForSelectedRows)
         stack.saveAndWait()
         fetchData()
     }
 
     func changeAllSelected() {
-        dataSourceProvider?.fetchedResultsController.changeThingsAtIndexPaths(tableView.indexPathsForSelectedRows)
+        frc.changeThingsAtIndexPaths(tableView.indexPathsForSelectedRows)
         stack.saveAndWait()
         fetchData()
     }

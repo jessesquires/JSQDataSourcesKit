@@ -80,10 +80,8 @@ class FetchedCollectionViewController: UICollectionViewController {
         let composedFactory = ComposedCollectionSupplementaryViewFactory(headerViewFactory: headerFactory, footerViewFactory: footerFactory)
 
         // 3. create fetched results controller
-        frc = FetchedResultsController<Thing>(fetchRequest: Thing.fetchRequest(),
-                                             managedObjectContext: stack.context,
-                                             sectionNameKeyPath: "colorName",
-                                             cacheName: nil)
+        frc = fetchedResultsController(inContext: stack.context)
+
         // 4. create delegate provider
         delegateProvider = CollectionViewFetchedResultsDelegateProvider(collectionView: collectionView!,
                                                                         cellFactory: cellFactory,

@@ -53,11 +53,11 @@ func removeAllThingsInStack(stack: CoreDataStack) {
 }
 
 
-func thingFRCinContext(context: NSManagedObjectContext) -> NSFetchedResultsController {
-    return NSFetchedResultsController(fetchRequest: Thing.fetchRequest(),
-                                      managedObjectContext: context,
-                                      sectionNameKeyPath: "colorName",
-                                      cacheName: nil)
+func fetchedResultsController(inContext context: NSManagedObjectContext) -> FetchedResultsController<Thing> {
+    return FetchedResultsController<Thing>(fetchRequest: Thing.fetchRequest(),
+                                           managedObjectContext: context,
+                                           sectionNameKeyPath: "colorName",
+                                           cacheName: nil)
 }
 
 
