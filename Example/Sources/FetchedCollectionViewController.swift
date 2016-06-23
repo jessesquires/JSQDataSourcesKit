@@ -28,9 +28,9 @@ class FetchedCollectionViewController: UICollectionViewController {
 
     typealias ThingCellFactory = ViewFactory<Thing, CollectionViewCell>
     typealias ThingSupplementaryViewFactory = ComposedCollectionSupplementaryViewFactory<Thing>
-    var dataSourceProvider: DataSourceProvider<FetchedResultsController<Thing>, ThingCellFactory, ThingSupplementaryViewFactory>?
+    var dataSourceProvider: DataSourceProvider<FetchedResultsController<Thing>, ThingCellFactory, ThingSupplementaryViewFactory>!
 
-    var delegateProvider: CollectionViewFetchedResultsDelegateProvider<ThingCellFactory>?
+    var delegateProvider: FetchedResultsDelegateProvider<ThingCellFactory>!
 
     var frc: FetchedResultsController<Thing>!
 
@@ -83,9 +83,8 @@ class FetchedCollectionViewController: UICollectionViewController {
         frc = fetchedResultsController(inContext: stack.context)
 
         // 4. create delegate provider
-        delegateProvider = CollectionViewFetchedResultsDelegateProvider(collectionView: collectionView!,
-                                                                        cellFactory: cellFactory,
-                                                                        fetchedResultsController: frc)
+        delegateProvider = FetchedResultsDelegateProvider(cellFactory: cellFactory, collectionView: collectionView!)
+        frc.delegate = delegateProvider.collectionFetchedDelegate
 
         // 5. create data source provider
         dataSourceProvider = DataSourceProvider(dataSource: frc, cellFactory: cellFactory, supplementaryFactory: composedFactory)

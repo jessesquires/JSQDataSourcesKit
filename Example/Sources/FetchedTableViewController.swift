@@ -29,9 +29,9 @@ class FetchedTableViewController: UITableViewController {
     let stack = CoreDataStack()
 
     typealias TableCellFactory = ViewFactory<Thing, UITableViewCell>
-    var dataSourceProvider: DataSourceProvider<FetchedResultsController<Thing>, TableCellFactory, TableCellFactory>?
+    var dataSourceProvider: DataSourceProvider<FetchedResultsController<Thing>, TableCellFactory, TableCellFactory>!
 
-    var delegateProvider: TableViewFetchedResultsDelegateProvider<TableCellFactory>?
+    var delegateProvider: FetchedResultsDelegateProvider<TableCellFactory>!
 
     var frc: FetchedResultsController<Thing>!
 
@@ -54,9 +54,8 @@ class FetchedTableViewController: UITableViewController {
         frc = fetchedResultsController(inContext: stack.context)
 
         // 3. create delegate provider
-        delegateProvider = TableViewFetchedResultsDelegateProvider(tableView: tableView,
-                                                                   cellFactory: factory,
-                                                                   fetchedResultsController: frc)
+        delegateProvider = FetchedResultsDelegateProvider(cellFactory: factory, tableView: tableView)
+        frc.delegate = delegateProvider.tableFetchedDelegate
 
         // 4. create data source provider
         dataSourceProvider = DataSourceProvider(dataSource: frc, cellFactory: factory, supplementaryFactory: factory)

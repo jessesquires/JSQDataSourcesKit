@@ -21,118 +21,95 @@ import Foundation
 import UIKit
 
 
-/**
- A `CollectionViewFetchedResultsDelegateProvider` is responsible for providing a delegate object
- for an instance of `NSFetchedResultsController` that manages data to display in a collection view.
+public final class FetchedResultsDelegateProvider<CellFactory: ReusableViewFactoryProtocol> {
 
- - warning: The `CellFactory.Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
- */
-public final class CollectionViewFetchedResultsDelegateProvider <CellFactory: ReusableViewFactoryProtocol where CellFactory.View: UICollectionViewCell>: CustomStringConvertible {
-
-    // MARK: Typealiases
-
-    /// The type of elements for the delegate provider.
     public typealias Item = CellFactory.Item
 
+    public typealias ParentView = CellFactory.View.ParentView
 
-    // MARK: Properties
+    public weak var cellParentView: ParentView?
 
-    /**
-     The collection view that displays the data from the `NSFetchedResultsController`
-     for which this provider provides a delegate.
-     */
-    public weak var collectionView: UICollectionView?
-
-    /// Returns the cell factory for this delegate provider.
     public let cellFactory: CellFactory
 
-    /// Returns the delegate object for the fetched results controller
-    public var delegate: NSFetchedResultsControllerDelegate { return bridgedDelegate }
+    private var bridgedDelegate: BridgedFetchedResultsDelegate?
 
-
-    // MARK: Initialization
-
-    /**
-     Constructs a new delegate provider for a fetched results controller.
-
-     - parameter collectionView:           The collection view to be updated when the fetched results change.
-     - parameter cellFactory:              The cell factory from which the fetched results controller delegate will configure cells.
-     - parameter fetchedResultsController: The fetched results controller whose delegate will be provided by this provider.
-
-     - returns: A new `CollectionViewFetchedResultsDelegateProvider` instance.
-     */
-    public init(collectionView: UICollectionView,
-                cellFactory: CellFactory,
-                fetchedResultsController: NSFetchedResultsController) {
-        assert(fetchedResultsController: fetchedResultsController,
-               fetchesObjectsOfClass: Item.self as! AnyClass)
-
-        self.collectionView = collectionView
+    private init(cellFactory: CellFactory, cellParentView: ParentView) {
         self.cellFactory = cellFactory
-        fetchedResultsController.delegate = delegate
+        self.cellParentView = cellParentView
     }
 
 
-    // MARK: CustomStringConvertible
-
-    /// :nodoc:
-    public var description: String {
-        get {
-            return "<\(CollectionViewFetchedResultsDelegateProvider.self): collectionView=\(collectionView)>"
-        }
-    }
-
-
-    // MARK: Private
+    // MARK: Private, collection view properties
 
     private typealias SectionChangeTuple = (changeType: NSFetchedResultsChangeType, sectionIndex: Int)
-    private var sectionChanges = [SectionChangeTuple]()
+    private lazy var sectionChanges = [SectionChangeTuple]()
 
     private typealias ObjectChangeTuple = (changeType: NSFetchedResultsChangeType, indexPaths: [NSIndexPath])
-    private var objectChanges = [ObjectChangeTuple]()
+    private lazy var objectChanges = [ObjectChangeTuple]()
 
-    private var updatedObjects = [NSIndexPath: Item]()
+    private lazy var updatedObjects = [NSIndexPath: Item]()
+}
 
-    private lazy var bridgedDelegate: BridgedFetchedResultsDelegate = BridgedFetchedResultsDelegate(
-        willChangeContent: { [unowned self] (controller) in
-            self.sectionChanges.removeAll()
-            self.objectChanges.removeAll()
-            self.updatedObjects.removeAll()
-        },
-        didChangeSection: { [unowned self] (controller, sectionInfo, sectionIndex, changeType) in
-            self.sectionChanges.append((changeType, sectionIndex))
-        },
-        didChangeObject: { [unowned self] (controller, anyObject, indexPath: NSIndexPath?, changeType, newIndexPath: NSIndexPath?) in
-            switch changeType {
-            case .Insert:
-                if let insertIndexPath = newIndexPath {
-                    self.objectChanges.append((changeType, [insertIndexPath]))
-                }
-            case .Delete:
-                if let deleteIndexPath = indexPath {
-                    self.objectChanges.append((changeType, [deleteIndexPath]))
-                }
-            case .Update:
-                if let indexPath = indexPath {
-                    self.objectChanges.append((changeType, [indexPath]))
-                    self.updatedObjects[indexPath] = anyObject as? Item
-                }
-            case .Move:
-                if let old = indexPath, new = newIndexPath {
-                    self.objectChanges.append((changeType, [old, new]))
-                }
-            }
-        },
-        didChangeContent: { [unowned self] (controller) in
 
-            self.collectionView?.performBatchUpdates({ [weak self] in
-                self?.applyObjectChanges()
-                self?.applySectionChanges()
-                },
-                completion:{ [weak self] finished in
-                    self?.reloadSupplementaryViewsIfNeeded()
-                })
-        })
+extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UICollectionView {
+
+    public convenience init(cellFactory: CellFactory, collectionView: UICollectionView) {
+        self.init(cellFactory: cellFactory, cellParentView: collectionView)
+    }
+
+    public var collectionFetchedDelegate: NSFetchedResultsControllerDelegate {
+        if bridgedDelegate == nil {
+            bridgedDelegate = bridgedCollectionFetchedResultsDelegate()
+        }
+        return bridgedDelegate!
+    }
+
+    private weak var collectionView: UICollectionView? { return cellParentView }
+
+    private func bridgedCollectionFetchedResultsDelegate() -> BridgedFetchedResultsDelegate {
+        let delegate = BridgedFetchedResultsDelegate(
+            willChangeContent: { [unowned self] (controller) in
+                self.sectionChanges.removeAll()
+                self.objectChanges.removeAll()
+                self.updatedObjects.removeAll()
+            },
+            didChangeSection: { [unowned self] (controller, sectionInfo, sectionIndex, changeType) in
+                self.sectionChanges.append((changeType, sectionIndex))
+            },
+            didChangeObject: { [unowned self] (controller, anyObject, indexPath: NSIndexPath?, changeType, newIndexPath: NSIndexPath?) in
+                switch changeType {
+                case .Insert:
+                    if let insertIndexPath = newIndexPath {
+                        self.objectChanges.append((changeType, [insertIndexPath]))
+                    }
+                case .Delete:
+                    if let deleteIndexPath = indexPath {
+                        self.objectChanges.append((changeType, [deleteIndexPath]))
+                    }
+                case .Update:
+                    if let indexPath = indexPath {
+                        self.objectChanges.append((changeType, [indexPath]))
+                        self.updatedObjects[indexPath] = anyObject as? Item
+                    }
+                case .Move:
+                    if let old = indexPath, new = newIndexPath {
+                        self.objectChanges.append((changeType, [old, new]))
+                    }
+                }
+            },
+            didChangeContent: { [unowned self] (controller) in
+
+                self.collectionView?.performBatchUpdates({ [weak self] in
+                    self?.applyObjectChanges()
+                    self?.applySectionChanges()
+                    },
+                    completion:{ [weak self] finished in
+                        self?.reloadSupplementaryViewsIfNeeded()
+                    })
+            })
+
+        return delegate
+    }
 
     private func applyObjectChanges() {
         for (changeType, indexPaths) in objectChanges {
@@ -181,114 +158,71 @@ public final class CollectionViewFetchedResultsDelegateProvider <CellFactory: Re
             collectionView?.reloadData()
         }
     }
-
 }
 
-/**
- A `TableViewFetchedResultsDelegateProvider` is responsible for providing a delegate object
- for an instance of `NSFetchedResultsController` that manages data to display in a table view.
 
- - warning: The `CellFactory.Item` type should correspond to the type of objects that the `NSFetchedResultsController` fetches.
- */
-public final class TableViewFetchedResultsDelegateProvider <CellFactory: ReusableViewFactoryProtocol where CellFactory.View: UITableViewCell>: CustomStringConvertible {
+extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UITableView {
 
-    // MARK: Typealiases
-
-    /// The type of elements for the delegate provider.
-    public typealias Item = CellFactory.Item
-
-
-    // MARK: Properties
-
-    /**
-     The table view that displays the data from the `NSFetchedResultsController`
-     for which this provider provides a delegate.
-     */
-    public weak var tableView: UITableView?
-
-    /// Returns the cell factory for this delegate provider.
-    public let cellFactory: CellFactory
-
-    /// Returns the object that is notified when the fetched results changed.
-    public var delegate: NSFetchedResultsControllerDelegate { return bridgedDelegate }
-
-
-    // MARK: Initialization
-
-    /**
-     Constructs a new delegate provider for a fetched results controller.
-
-     - parameter tableView:                The table view to be updated when the fetched results change.
-     - parameter cellFactory:              The cell factory from which the fetched results controller delegate will configure cells.
-     - parameter fetchedResultsController: The fetched results controller whose delegate will be provided by this provider.
-
-     - returns: A new `TableViewFetchedResultsDelegateProvider` instance.
-     */
-    public init(tableView: UITableView, cellFactory: CellFactory, fetchedResultsController: NSFetchedResultsController) {
-        assert(fetchedResultsController: fetchedResultsController,
-               fetchesObjectsOfClass: Item.self as! AnyClass)
-
-        self.tableView = tableView
-        self.cellFactory = cellFactory
-        fetchedResultsController.delegate = delegate
+    public convenience init(cellFactory: CellFactory, tableView: UITableView) {
+        self.init(cellFactory: cellFactory, cellParentView: tableView)
     }
 
-
-    // MARK: CustomStringConvertible
-
-    /// :nodoc:
-    public var description: String {
-        get {
-            return "<\(TableViewFetchedResultsDelegateProvider.self): tableView=\(tableView)>"
+    public var tableFetchedDelegate: NSFetchedResultsControllerDelegate {
+        if bridgedDelegate == nil {
+            bridgedDelegate = bridgedTableFetchedResultsDelegate()
         }
+        return bridgedDelegate!
     }
 
+    private weak var tableView: UITableView? { return cellParentView }
 
-    // MARK: Private
+    private func bridgedTableFetchedResultsDelegate() -> BridgedFetchedResultsDelegate {
+        let delegate = BridgedFetchedResultsDelegate(
+            willChangeContent: { [unowned self] (controller) in
+                self.tableView?.beginUpdates()
+            },
+            didChangeSection: { [unowned self] (controller, sectionInfo, sectionIndex, changeType) in
+                switch changeType {
+                case .Insert:
+                    self.tableView?.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+                case .Delete:
+                    self.tableView?.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+                default:
+                    break
+                }
+            },
+            didChangeObject: { [unowned self] (controller, anyObject, indexPath, changeType, newIndexPath) in
+                switch changeType {
+                case .Insert:
+                    if let insertIndexPath = newIndexPath {
+                        self.tableView?.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
+                    }
+                case .Delete:
+                    if let deleteIndexPath = indexPath {
+                        self.tableView?.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
+                    }
+                case .Update:
+                    if let indexPath = indexPath,
+                        cell = self.tableView?.cellForRowAtIndexPath(indexPath) as? CellFactory.View,
+                        tableView = self.tableView {
+                        self.cellFactory.configure(view: cell, item: anyObject as? Item, type: .cell, parentView: tableView, indexPath: indexPath)
+                    }
+                case .Move:
+                    if let deleteIndexPath = indexPath {
+                        self.tableView?.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
+                    }
 
-    private lazy var bridgedDelegate: BridgedFetchedResultsDelegate = BridgedFetchedResultsDelegate(
-        willChangeContent: { [unowned self] (controller) in
-            self.tableView?.beginUpdates()
-        },
-        didChangeSection: { [unowned self] (controller, sectionInfo, sectionIndex, changeType) in
-            switch changeType {
-            case .Insert:
-                self.tableView?.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-            case .Delete:
-                self.tableView?.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-            default:
-                break
-            }
-        },
-        didChangeObject: { [unowned self] (controller, anyObject, indexPath, changeType, newIndexPath) in
-            switch changeType {
-            case .Insert:
-                if let insertIndexPath = newIndexPath {
-                    self.tableView?.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
+                    if let insertIndexPath = newIndexPath {
+                        self.tableView?.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
+                    }
                 }
-            case .Delete:
-                if let deleteIndexPath = indexPath {
-                    self.tableView?.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
-                }
-            case .Update:
-                if let indexPath = indexPath,
-                    cell = self.tableView?.cellForRowAtIndexPath(indexPath) as? CellFactory.View,
-                    tableView = self.tableView {
-                    self.cellFactory.configure(view: cell, item: anyObject as? Item, type: .cell, parentView: tableView, indexPath: indexPath)
-                }
-            case .Move:
-                if let deleteIndexPath = indexPath {
-                    self.tableView?.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
-                }
+            },
+            didChangeContent: { [unowned self] (controller) in
+                self.tableView?.endUpdates()
+            })
 
-                if let insertIndexPath = newIndexPath {
-                    self.tableView?.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
-                }
-            }
-        },
-        didChangeContent: { [unowned self] (controller) in
-            self.tableView?.endUpdates()
-        })
+        return delegate
+    }
 }
 
 
