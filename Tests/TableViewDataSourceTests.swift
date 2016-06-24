@@ -23,16 +23,9 @@ import XCTest
 import JSQDataSourcesKit
 
 
-final class TableViewDataSourceTests: XCTestCase {
+final class TableViewDataSourceTests: TestCase {
 
-    private let fakeReuseId = "fakeCellId"
-    private let fakeTableView = FakeTableView(frame: CGRect(x: 0, y: 0, width: 320, height: 600), style: .Plain)
     private let dequeueCellExpectationName = "tableview_dequeue_cell_expectation"
-
-    override func setUp() {
-        super.setUp()
-        fakeTableView.registerClass(FakeTableCell.self, forCellReuseIdentifier: fakeReuseId)
-    }
 
     func test_ThatTableViewDataSource_ReturnsExpectedData_ForSingleSection() {
 
@@ -40,18 +33,20 @@ final class TableViewDataSourceTests: XCTestCase {
         let expectedModel = FakeViewModel()
         let expectedIndexPath = NSIndexPath(forRow: 2, inSection: 0)
 
-        let section0 = Section(items: FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel(), FakeViewModel(), headerTitle: "Header", footerTitle: "Footer")
+        let section0 = Section(items: FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel(), FakeViewModel(),
+                               headerTitle: "Header",
+                               footerTitle: "Footer")
         let dataSource = DataSource([section0])
 
         let factoryExpectation = expectationWithDescription(#function)
-        fakeTableView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + #function)
+        tableView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + #function)
 
         // GIVEN: a cell factory
-        let factory = ViewFactory(reuseIdentifier: fakeReuseId) { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
-            XCTAssertEqual(cell.reuseIdentifier!, self.fakeReuseId, "Dequeued cell should have expected identifier")
+        let factory = ViewFactory(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
+            XCTAssertEqual(cell.reuseIdentifier!, self.cellReuseId, "Dequeued cell should have expected identifier")
 
             XCTAssertEqual(model, expectedModel, "Model object should equal expected value")
-            XCTAssertEqual(tableView, self.fakeTableView, "TableView should equal the tableView for the data source")
+            XCTAssertEqual(tableView, self.tableView, "TableView should equal the tableView for the data source")
             XCTAssertEqual(indexPath, expectedIndexPath, "IndexPath should equal expected value")
 
             factoryExpectation.fulfill()
@@ -62,14 +57,14 @@ final class TableViewDataSourceTests: XCTestCase {
         let dataSourceProvider = DataSourceProvider(dataSource: dataSource, cellFactory: factory, supplementaryFactory: factory)
         let tableViewDataSource = dataSourceProvider.tableViewDataSource
 
-        fakeTableView.dataSource = tableViewDataSource
+        tableView.dataSource = tableViewDataSource
 
         // WHEN: we call the table view data source methods
-        let numSections = tableViewDataSource.numberOfSectionsInTableView?(fakeTableView)
-        let numRows = tableViewDataSource.tableView(fakeTableView, numberOfRowsInSection: 0)
-        let cell = tableViewDataSource.tableView(fakeTableView, cellForRowAtIndexPath: expectedIndexPath)
-        let header = tableViewDataSource.tableView?(fakeTableView, titleForHeaderInSection: 0)
-        let footer = tableViewDataSource.tableView?(fakeTableView, titleForFooterInSection: 0)
+        let numSections = tableViewDataSource.numberOfSectionsInTableView?(tableView)
+        let numRows = tableViewDataSource.tableView(tableView, numberOfRowsInSection: 0)
+        let cell = tableViewDataSource.tableView(tableView, cellForRowAtIndexPath: expectedIndexPath)
+        let header = tableViewDataSource.tableView?(tableView, titleForHeaderInSection: 0)
+        let footer = tableViewDataSource.tableView?(tableView, titleForFooterInSection: 0)
 
         // THEN: we receive the expected return values
         XCTAssertNotNil(numSections, "Number of sections should not be nil")
@@ -78,7 +73,7 @@ final class TableViewDataSourceTests: XCTestCase {
         XCTAssertEqual(numRows, section0.count, "Data source should return expected number of rows for section 0")
 
         XCTAssertNotNil(cell.reuseIdentifier, "Cell reuse identifier should not be nil")
-        XCTAssertEqual(cell.reuseIdentifier!, fakeReuseId, "Data source should return cells with the expected identifier")
+        XCTAssertEqual(cell.reuseIdentifier!, cellReuseId, "Data source should return cells with the expected identifier")
 
         XCTAssertNotNil(header, "Header should not be nil")
         XCTAssertNotNil(section0.headerTitle, "Section 0 header title should not be nil")
@@ -107,10 +102,10 @@ final class TableViewDataSourceTests: XCTestCase {
         var factoryExpectation = expectationWithDescription("factory_\(#function)")
 
         // GIVEN: a cell factory
-        let factory = ViewFactory(reuseIdentifier: fakeReuseId) { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
-            XCTAssertEqual(cell.reuseIdentifier!, self.fakeReuseId, "Dequeued cell should have expected identifier")
+        let factory = ViewFactory(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
+            XCTAssertEqual(cell.reuseIdentifier!, self.cellReuseId, "Dequeued cell should have expected identifier")
             XCTAssertEqual(model, dataSource[indexPath.section][indexPath.row], "Model object should equal expected value")
-            XCTAssertEqual(tableView, self.fakeTableView, "TableView should equal the tableView for the data source")
+            XCTAssertEqual(tableView, self.tableView, "TableView should equal the tableView for the data source")
 
             factoryExpectation.fulfill()
             return cell
@@ -120,10 +115,10 @@ final class TableViewDataSourceTests: XCTestCase {
         let dataSourceProvider = DataSourceProvider(dataSource: dataSource, cellFactory: factory, supplementaryFactory: factory)
         let tableViewDataSource = dataSourceProvider.tableViewDataSource
 
-        fakeTableView.dataSource = tableViewDataSource
+        tableView.dataSource = tableViewDataSource
 
         // WHEN: we call the table view data source methods
-        let numSections = tableViewDataSource.numberOfSectionsInTableView?(fakeTableView)
+        let numSections = tableViewDataSource.numberOfSectionsInTableView?(tableView)
 
         // THEN: we receive the expected return values
         XCTAssertNotNil(numSections, "Number of sections should not be nil")
@@ -134,20 +129,20 @@ final class TableViewDataSourceTests: XCTestCase {
             for rowIndex in 0..<dataSourceProvider.dataSource[sectionIndex].items.count {
 
                 let expectationName = "\(#function)_\(sectionIndex)_\(rowIndex)"
-                fakeTableView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + expectationName)
+                tableView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + expectationName)
 
                 // WHEN: we call the table view data source methods
-                let numRows = tableViewDataSource.tableView(fakeTableView, numberOfRowsInSection: sectionIndex)
-                let header = tableViewDataSource.tableView?(fakeTableView, titleForHeaderInSection: sectionIndex)
-                let footer = tableViewDataSource.tableView?(fakeTableView, titleForFooterInSection: sectionIndex)
+                let numRows = tableViewDataSource.tableView(tableView, numberOfRowsInSection: sectionIndex)
+                let header = tableViewDataSource.tableView?(tableView, titleForHeaderInSection: sectionIndex)
+                let footer = tableViewDataSource.tableView?(tableView, titleForFooterInSection: sectionIndex)
 
-                let cell = tableViewDataSource.tableView(fakeTableView, cellForRowAtIndexPath: NSIndexPath(forRow: rowIndex, inSection: sectionIndex))
+                let cell = tableViewDataSource.tableView(tableView, cellForRowAtIndexPath: NSIndexPath(forRow: rowIndex, inSection: sectionIndex))
 
                 // THEN: we receive the expected return values
                 XCTAssertEqual(numRows, dataSourceProvider.dataSource[sectionIndex].count, "Data source should return expected number of rows for section \(sectionIndex)")
 
                 XCTAssertNotNil(cell.reuseIdentifier, "Cell reuse identifier should not be nil")
-                XCTAssertEqual(cell.reuseIdentifier!, fakeReuseId, "Data source should return cells with the expected identifier")
+                XCTAssertEqual(cell.reuseIdentifier!, cellReuseId, "Data source should return cells with the expected identifier")
 
                 XCTAssertTrue(header == dataSourceProvider.dataSource[sectionIndex].headerTitle, "Data source should return expected header title for section \(sectionIndex)")
                 XCTAssertTrue(footer == dataSourceProvider.dataSource[sectionIndex].footerTitle, "Data source should return expected footer title for section \(sectionIndex)")

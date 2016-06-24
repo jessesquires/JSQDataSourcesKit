@@ -23,10 +23,119 @@ import XCTest
 @testable import JSQDataSourcesKit
 
 
-final class BridgedDataSourceTests: XCTestCase {
+final class BridgedDataSourceTests: TestCase {
 
-    func testExample() {
-        // TODO:
+    func test_thatBridgedDataSource_implements_collectionViewDataSource() {
+        // GIVEN: a data source
+        let dataSource = BridgedDataSource(
+            numberOfSections: { () -> Int in
+                return 5
+            },
+            numberOfItemsInSection: { (section) -> Int in
+                return 3
+        })
+
+        dataSource.collectionCellForItemAtIndexPath = { (UICollectionView, NSIndexPath) -> UICollectionViewCell in
+            return UICollectionViewCell()
+        }
+
+        dataSource.collectionSupplementaryViewAtIndexPath = { (UICollectionView, String, NSIndexPath) -> UICollectionReusableView in
+            return UICollectionReusableView()
+        }
+
+        // WHEN: we query the collectionViewDataSource methods
+        // THEN: we receive the expected data
+        let sections = dataSource.numberOfSectionsInCollectionView(collectionView)
+        XCTAssertEqual(sections, 5)
+
+        for s in 0..<sections {
+            let items = dataSource.collectionView(collectionView, numberOfItemsInSection: s)
+            XCTAssertEqual(items, 3)
+        }
+
+        let indexPath = NSIndexPath(forItem: 0, inSection: 0);
+        let cell = dataSource.collectionView(collectionView, cellForItemAtIndexPath: indexPath)
+        XCTAssertNotNil(cell)
+
+        let view = dataSource.collectionView(collectionView, viewForSupplementaryElementOfKind: fakeSupplementaryViewKind, atIndexPath: indexPath)
+        XCTAssertNotNil(view)
     }
 
+    func test_thatBridgedDataSource_implements_tableViewDataSource() {
+        // GIVEN: a data source
+        let dataSource = BridgedDataSource(
+            numberOfSections: { () -> Int in
+                return 5
+            },
+            numberOfItemsInSection: { (section) -> Int in
+                return 3
+        })
+
+        dataSource.tableCellForRowAtIndexPath = { (UITableView, NSIndexPath) -> UITableViewCell in
+            return UITableViewCell()
+        }
+
+        dataSource.tableTitleForHeaderInSection = { (Int) -> String? in
+            return "header"
+        }
+
+        dataSource.tableTitleForFooterInSection = { (Int) -> String? in
+            return "footer"
+        }
+
+        // WHEN: we query the tableViewDataSource methods
+        // THEN: we receive the expected data
+        let sections = dataSource.numberOfSectionsInTableView(tableView)
+        XCTAssertEqual(sections, 5)
+
+        for s in 0..<sections {
+            let items = dataSource.tableView(tableView, numberOfRowsInSection: s)
+            XCTAssertEqual(items, 3)
+        }
+
+        let indexPath = NSIndexPath(forItem: 0, inSection: 0);
+        let cell = dataSource.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        XCTAssertNotNil(cell)
+
+        let header = dataSource.tableView(tableView, titleForHeaderInSection: 1)
+        XCTAssertEqual(header, "header")
+
+        let footer = dataSource.tableView(tableView, titleForFooterInSection: 2)
+        XCTAssertEqual(footer, "footer")
+    }
+
+    func test_thatBridgedDataSource_implements_tableViewDataSource_withoutSectionHeadersFooters() {
+        // GIVEN: a data source
+        let dataSource = BridgedDataSource(
+            numberOfSections: { () -> Int in
+                return 5
+            },
+            numberOfItemsInSection: { (section) -> Int in
+                return 3
+        })
+
+        dataSource.tableCellForRowAtIndexPath = { (UITableView, NSIndexPath) -> UITableViewCell in
+            return UITableViewCell()
+        }
+
+        // WHEN: we query the tableViewDataSource methods
+        // THEN: we receive the expected data
+        let sections = dataSource.numberOfSectionsInTableView(tableView)
+        XCTAssertEqual(sections, 5)
+
+        for s in 0..<sections {
+            let items = dataSource.tableView(tableView, numberOfRowsInSection: s)
+            XCTAssertEqual(items, 3)
+        }
+
+        let indexPath = NSIndexPath(forItem: 0, inSection: 0);
+        let cell = dataSource.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        XCTAssertNotNil(cell)
+
+        let header = dataSource.tableView(tableView, titleForHeaderInSection: 1)
+        XCTAssertNil(header)
+
+        let footer = dataSource.tableView(tableView, titleForFooterInSection: 2)
+        XCTAssertNil(footer)
+    }
 }

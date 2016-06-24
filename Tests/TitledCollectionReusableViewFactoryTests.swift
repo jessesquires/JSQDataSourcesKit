@@ -23,24 +23,16 @@ import XCTest
 import JSQDataSourcesKit
 
 
-class TitledCollectionReusableViewFactoryTests: XCTestCase {
+class TitledCollectionReusableViewFactoryTests: TestCase {
 
-    private let fakeCellReuseId = "fakeCellId"
-    private let fakeSupplementaryViewReuseId = "fakeSupplementaryId"
-
-    private let fakeCollectionView = FakeCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 600), collectionViewLayout: FakeFlowLayout())
     private let dequeueCellExpectationName = "collectionview_dequeue_cell_expectation"
     private let dequeueSupplementaryViewExpectationName = "collectionview_dequeue_supplementaryview_expectation"
 
     override func setUp() {
         super.setUp()
-
-        fakeCollectionView.registerClass(FakeCollectionCell.self,
-                                         forCellWithReuseIdentifier: fakeCellReuseId)
-
-        fakeCollectionView.registerClass(TitledCollectionReusableView.self,
-                                         forSupplementaryViewOfKind: FakeSupplementaryViewKind,
-                                         withReuseIdentifier: TitledCollectionReusableView.identifier)
+        collectionView.registerClass(TitledCollectionReusableView.self,
+                                     forSupplementaryViewOfKind: fakeSupplementaryViewKind,
+                                     withReuseIdentifier: TitledCollectionReusableView.identifier)
     }
 
     func test_ThatCollectionViewDataSource_ReturnsExpectedData_TitledCollectionReusableViewFactory() {
@@ -54,7 +46,7 @@ class TitledCollectionReusableViewFactoryTests: XCTestCase {
         var cellFactoryExpectation = expectationWithDescription("cell_factory")
 
         // GIVEN: a cell factory
-        let cellFactory = ViewFactory(reuseIdentifier: fakeCellReuseId) { (cell, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionCell in
+        let cellFactory = ViewFactory(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionCell in
             cellFactoryExpectation.fulfill()
             return cell
         }
@@ -65,9 +57,9 @@ class TitledCollectionReusableViewFactoryTests: XCTestCase {
         let supplementaryViewFactory = TitledCollectionReusableViewFactory(dataConfigurator:
             { (view, item: FakeViewModel?, type, collectionView, indexPath) -> TitledCollectionReusableView in
                 XCTAssertEqual(view.reuseIdentifier!, TitledCollectionReusableView.identifier, "Dequeued supplementary view should have expected identifier")
-                XCTAssertEqual(type, ReusableViewType.supplementaryView(kind: FakeSupplementaryViewKind), "View type should have expected type")
+                XCTAssertEqual(type, ReusableViewType.supplementaryView(kind: fakeSupplementaryViewKind), "View type should have expected type")
                 XCTAssertEqual(item, dataSource[indexPath.section][indexPath.item], "Model object should equal expected value")
-                XCTAssertEqual(collectionView, self.fakeCollectionView, "CollectionView should equal the collectionView for the data source")
+                XCTAssertEqual(collectionView, self.collectionView, "CollectionView should equal the collectionView for the data source")
 
                 titledViewDataConfigExpectation.fulfill()
                 return view
@@ -83,10 +75,10 @@ class TitledCollectionReusableViewFactoryTests: XCTestCase {
 
         let collectionViewDataSource = dataSourceProvider.collectionViewDataSource
 
-        fakeCollectionView.dataSource = collectionViewDataSource
+        collectionView.dataSource = collectionViewDataSource
 
         // WHEN: we call the collection view data source methods
-        let numSections = collectionViewDataSource.numberOfSectionsInCollectionView?(fakeCollectionView)
+        let numSections = collectionViewDataSource.numberOfSectionsInCollectionView?(collectionView)
 
         // THEN: we receive the expected return values
         XCTAssertNotNil(numSections, "Number of sections should not be nil")
@@ -96,19 +88,19 @@ class TitledCollectionReusableViewFactoryTests: XCTestCase {
             for rowIndex in 0..<dataSource[sectionIndex].items.count {
 
                 let expectationName = "\(#function)_\(sectionIndex)_\(rowIndex)"
-                fakeCollectionView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + expectationName)
-                fakeCollectionView.dequeueSupplementaryViewExpectation = expectationWithDescription(dequeueSupplementaryViewExpectationName + expectationName)
+                collectionView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + expectationName)
+                collectionView.dequeueSupplementaryViewExpectation = expectationWithDescription(dequeueSupplementaryViewExpectationName + expectationName)
 
                 let indexPath = NSIndexPath(forItem: rowIndex, inSection: sectionIndex)
 
                 // WHEN: we call the collection view data source methods
-                let numRows = collectionViewDataSource.collectionView(fakeCollectionView, numberOfItemsInSection: sectionIndex)
-                let cell = collectionViewDataSource.collectionView(fakeCollectionView, cellForItemAtIndexPath: indexPath)
-                let supplementaryView = collectionViewDataSource.collectionView?(fakeCollectionView, viewForSupplementaryElementOfKind: FakeSupplementaryViewKind, atIndexPath: indexPath)
+                let numRows = collectionViewDataSource.collectionView(collectionView, numberOfItemsInSection: sectionIndex)
+                let cell = collectionViewDataSource.collectionView(collectionView, cellForItemAtIndexPath: indexPath)
+                let supplementaryView = collectionViewDataSource.collectionView?(collectionView, viewForSupplementaryElementOfKind: fakeSupplementaryViewKind, atIndexPath: indexPath)
 
                 // THEN: we receive the expected return values for cells
                 XCTAssertEqual(numRows, dataSource[sectionIndex].count, "Data source should return expected number of rows for section \(sectionIndex)")
-                XCTAssertEqual(cell.reuseIdentifier!, fakeCellReuseId, "Data source should return cells with the expected identifier")
+                XCTAssertEqual(cell.reuseIdentifier!, cellReuseId, "Data source should return cells with the expected identifier")
 
                 // THEN: we receive the expected return values for supplementary views
                 XCTAssertNotNil(supplementaryView, "Supplementary view should not be nil")

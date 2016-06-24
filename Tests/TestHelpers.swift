@@ -20,10 +20,11 @@ import Foundation
 import UIKit
 import XCTest
 
-import JSQDataSourcesKit
-
 
 let defaultTimeout = NSTimeInterval(5)
+
+
+// MARK: model
 
 struct FakeViewModel: Equatable, CustomStringConvertible {
     let name = NSUUID().UUIDString
@@ -47,7 +48,8 @@ class FakeTableCell: UITableViewCell { }
 class FakeTableView: UITableView {
     var dequeueCellExpectation: XCTestExpectation?
 
-    override func dequeueReusableCellWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func dequeueReusableCellWithIdentifier(identifier: String,
+                                                    forIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         dequeueCellExpectation?.fulfill()
         return super.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
     }
@@ -60,33 +62,35 @@ class FakeCollectionCell: UICollectionViewCell { }
 
 class FakeCollectionSupplementaryView: UICollectionReusableView { }
 
+let fakeSupplementaryViewKind = "FakeSupplementaryViewKind"
+
 class FakeCollectionView: UICollectionView {
 
     var dequeueCellExpectation: XCTestExpectation?
 
     var dequeueSupplementaryViewExpectation: XCTestExpectation?
 
-    override func dequeueReusableCellWithReuseIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func dequeueReusableCellWithReuseIdentifier(identifier: String,
+                                                         forIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         dequeueCellExpectation?.fulfill()
         return super.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath)
     }
 
-    override func dequeueReusableSupplementaryViewOfKind(elementKind: String, withReuseIdentifier identifier: String, forIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    override func dequeueReusableSupplementaryViewOfKind(elementKind: String,
+                                                         withReuseIdentifier identifier: String,
+                                                                             forIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         dequeueSupplementaryViewExpectation?.fulfill()
         return super.dequeueReusableSupplementaryViewOfKind(elementKind, withReuseIdentifier: identifier, forIndexPath: indexPath)
     }
 }
 
-
-let FakeSupplementaryViewKind = "FakeSupplementaryViewKind"
-
 class FakeFlowLayout: UICollectionViewFlowLayout {
 
-    override func layoutAttributesForSupplementaryViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
-        if elementKind == FakeSupplementaryViewKind {
+    override func layoutAttributesForSupplementaryViewOfKind(elementKind: String,
+                                                             atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
+        if elementKind == fakeSupplementaryViewKind {
             return UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: elementKind, withIndexPath: indexPath)
         }
-
         return super.layoutAttributesForSupplementaryViewOfKind(elementKind, atIndexPath: indexPath)
     }
 }
