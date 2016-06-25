@@ -36,31 +36,31 @@ final class DataSourceTests: XCTestCase {
 
         // THEN: it returns the expected data from the protocol methods
         XCTAssertEqual(dataSource.numberOfSections(), 3)
-        XCTAssertEqual(dataSource.numberOfItemsIn(section: 0), 2)
-        XCTAssertEqual(dataSource.numberOfItemsIn(section: 1), 2)
-        XCTAssertEqual(dataSource.numberOfItemsIn(section: 2), 3)
-        XCTAssertEqual(dataSource.numberOfItemsIn(section: 3), 0)
+        XCTAssertEqual(dataSource.numberOfItems(inSection: 0), 2)
+        XCTAssertEqual(dataSource.numberOfItems(inSection: 1), 2)
+        XCTAssertEqual(dataSource.numberOfItems(inSection: 2), 3)
+        XCTAssertEqual(dataSource.numberOfItems(inSection: 3), 0)
 
-        XCTAssertEqual(dataSource.itemsIn(section: 0)!, sectionA.items)
-        XCTAssertEqual(dataSource.itemsIn(section: 1)!, sectionB.items)
-        XCTAssertEqual(dataSource.itemsIn(section: 2)!, sectionC.items)
-        XCTAssertNil(dataSource.itemsIn(section: 3))
+        XCTAssertEqual(dataSource.items(inSection: 0)!, sectionA.items)
+        XCTAssertEqual(dataSource.items(inSection: 1)!, sectionB.items)
+        XCTAssertEqual(dataSource.items(inSection: 2)!, sectionC.items)
+        XCTAssertNil(dataSource.items(inSection: 3))
 
-        XCTAssertEqual(dataSource.itemAt(section: 0, row: 0), sectionA[0])
-        XCTAssertEqual(dataSource.itemAt(section: 0, row: 1), sectionA[1])
-        XCTAssertNil(dataSource.itemAt(section: 0, row: 2))
+        XCTAssertEqual(dataSource.item(atRow:0, inSection: 0), sectionA[0])
+        XCTAssertEqual(dataSource.item(atRow: 1, inSection: 0), sectionA[1])
+        XCTAssertNil(dataSource.item(atRow: 2, inSection: 0))
 
-        XCTAssertEqual(dataSource.headerTitleIn(section: 0), sectionA.headerTitle)
-        XCTAssertNil(dataSource.footerTitleIn(section: 0))
+        XCTAssertEqual(dataSource.headerTitle(inSection: 0), sectionA.headerTitle)
+        XCTAssertNil(dataSource.footerTitle(inSection: 0))
 
-        XCTAssertNil(dataSource.headerTitleIn(section: 1))
-        XCTAssertEqual(dataSource.footerTitleIn(section: 1), sectionB.footerTitle)
+        XCTAssertNil(dataSource.headerTitle(inSection: 1))
+        XCTAssertEqual(dataSource.footerTitle(inSection: 1), sectionB.footerTitle)
 
-        XCTAssertNil(dataSource.headerTitleIn(section: 2))
-        XCTAssertNil(dataSource.footerTitleIn(section: 2))
+        XCTAssertNil(dataSource.headerTitle(inSection: 2))
+        XCTAssertNil(dataSource.footerTitle(inSection: 2))
 
-        XCTAssertNil(dataSource.headerTitleIn(section: 4))
-        XCTAssertNil(dataSource.footerTitleIn(section: 4))
+        XCTAssertNil(dataSource.headerTitle(inSection: 4))
+        XCTAssertNil(dataSource.footerTitle(inSection: 4))
     }
 
     func test_thatFetchedResultsController_implements_dataSourceProtocol() {

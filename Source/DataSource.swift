@@ -38,43 +38,60 @@ public protocol DataSourceProtocol {
 
      - returns: The number of items in the specified section.
      */
-    func numberOfItemsIn(section section: Int) -> Int
+    func numberOfItems(inSection section: Int) -> Int
 
     /**
      - parameter section: A section in the data source.
 
      - returns: The items in the specified section.
      */
-    func itemsIn(section section: Int) -> [Item]?
+    func items(inSection section: Int) -> [Item]?
 
     /**
-     - parameter section: A section in the data source.
      - parameter row:     A row in the data source.
+     - parameter section: A section in the data source.
 
      - returns: The item specified by the section and row, or `nil`.
      */
-    func itemAt(section section: Int, row: Int) -> Item?
-
-    /**
-     - parameter indexPath: An index path specifying a row and section in the data source.
-
-     - returns: The item specified by indexPath, or `nil`.
-     */
-    func itemAt(indexPath indexPath: NSIndexPath) -> Item?
+    func item(atRow row: Int, inSection section: Int) -> Item?
 
     /**
      - parameter section: A section in the data source.
 
      - returns: The header title for the specified section.
      */
-    func headerTitleIn(section section: Int) -> String?
+    func headerTitle(inSection section: Int) -> String?
 
     /**
      - parameter section: A section in the data source.
 
      - returns: The footer title for the specified section.
      */
-    func footerTitleIn(section section: Int) -> String?
+    func footerTitle(inSection section: Int) -> String?
+}
+
+
+extension DataSourceProtocol {
+    /**
+     - parameter indexPath: An index path specifying a row and section in the data source.
+
+     - returns: The item specified by indexPath, or `nil`.
+     */
+    func item(atIndexPath indexPath: NSIndexPath) -> Item? {
+        return item(atRow: indexPath.row, inSection: indexPath.section)
+    }
+}
+
+
+extension DataSourceProtocol where Self: NSFetchedResultsController {
+    /**
+     - parameter indexPath: An index path specifying a row and section in the data source.
+
+     - returns: The item specified by indexPath, or `nil`.
+     */
+    public func item(atIndexPath indexPath: NSIndexPath) -> Item? {
+        return (objectAtIndexPath(indexPath) as! Item)
+    }
 }
 
 
@@ -93,32 +110,28 @@ public struct DataSource<S: SectionInfoProtocol>: DataSourceProtocol {
         return sections.count
     }
 
-    public func numberOfItemsIn(section section: Int) -> Int {
+    public func numberOfItems(inSection section: Int) -> Int {
         guard section < sections.count else { return 0 }
         return sections[section].items.count
     }
 
-    public func itemsIn(section section: Int) -> [S.Item]? {
+    public func items(inSection section: Int) -> [S.Item]? {
         guard section < sections.count else { return nil }
         return sections[section].items
     }
 
-    public func itemAt(section section: Int, row: Int) -> S.Item? {
-        guard let items = itemsIn(section: section) else { return nil }
+    public func item(atRow row: Int, inSection section: Int) -> S.Item? {
+        guard let items = items(inSection: section) else { return nil }
         guard row < items.count else { return nil }
         return items[row]
     }
 
-    public func itemAt(indexPath indexPath: NSIndexPath) -> S.Item? {
-        return itemAt(section: indexPath.section, row: indexPath.row)
-    }
-
-    public func headerTitleIn(section section: Int) -> String? {
+    public func headerTitle(inSection section: Int) -> String? {
         guard section < sections.count else { return nil }
         return sections[section].headerTitle
     }
 
-    public func footerTitleIn(section section: Int) -> String? {
+    public func footerTitle(inSection section: Int) -> String? {
         guard section < sections.count else { return nil }
         return sections[section].footerTitle
     }
@@ -169,27 +182,23 @@ extension FetchedResultsController: DataSourceProtocol {
         return sections?.count ?? 0
     }
 
-    public func numberOfItemsIn(section section: Int) -> Int {
+    public func numberOfItems(inSection section: Int) -> Int {
         return sections?[section].numberOfObjects ?? 0
     }
 
-    public func itemsIn(section section: Int) -> [Item]? {
+    public func items(inSection section: Int) -> [Item]? {
         return (sections?[section].objects as! [Item])
     }
 
-    public func itemAt(section section: Int, row: Int) -> Item? {
-        return itemAt(indexPath: NSIndexPath(forRow: row, inSection: section))
+    public func item(atRow row: Int, inSection section: Int) -> Item? {
+        return item(atIndexPath: NSIndexPath(forRow: row, inSection: section))
     }
 
-    public func itemAt(indexPath indexPath: NSIndexPath) -> Item? {
-        return (objectAtIndexPath(indexPath) as! Item)
-    }
-
-    public func headerTitleIn(section section: Int) -> String? {
+    public func headerTitle(inSection section: Int) -> String? {
         return sections?[section].name
     }
 
-    public func footerTitleIn(section section: Int) -> String? {
+    public func footerTitle(inSection section: Int) -> String? {
         return nil
     }
 }

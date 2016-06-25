@@ -65,20 +65,20 @@ public extension DataSourceProvider where CellFactory.View: UITableViewCell {
                 return self.dataSource.numberOfSections()
             },
             numberOfItemsInSection: { [unowned self] (section) -> Int in
-                return self.dataSource.numberOfItemsIn(section: section)
+                return self.dataSource.numberOfItems(inSection: section)
             })
 
         dataSource.tableCellForRowAtIndexPath = { [unowned self] (tableView, indexPath) -> UITableViewCell in
-            let item = self.dataSource.itemAt(indexPath: indexPath)!
+            let item = self.dataSource.item(atIndexPath: indexPath)!
             return self.cellFactory.tableCellFor(item: item, parentView: tableView, indexPath: indexPath)
         }
 
         dataSource.tableTitleForHeaderInSection = { [unowned self] (section) -> String? in
-            return self.dataSource.headerTitleIn(section: section)
+            return self.dataSource.headerTitle(inSection: section)
         }
 
         dataSource.tableTitleForFooterInSection = { [unowned self] (section) -> String? in
-            return self.dataSource.footerTitleIn(section: section)
+            return self.dataSource.footerTitle(inSection: section)
         }
 
         return dataSource
@@ -102,19 +102,19 @@ public extension DataSourceProvider where CellFactory.View: UICollectionViewCell
                 return self.dataSource.numberOfSections()
             },
             numberOfItemsInSection: { [unowned self] (section) -> Int in
-                return self.dataSource.numberOfItemsIn(section: section)
+                return self.dataSource.numberOfItems(inSection: section)
             })
 
         dataSource.collectionCellForItemAtIndexPath = { [unowned self] (collectionView, indexPath) -> UICollectionViewCell in
-            let item = self.dataSource.itemAt(indexPath: indexPath)!
+            let item = self.dataSource.item(atIndexPath: indexPath)!
             return self.cellFactory.collectionCellFor(item: item, parentView: collectionView, indexPath: indexPath)
         }
 
         dataSource.collectionSupplementaryViewAtIndexPath = { [unowned self] (collectionView, kind, indexPath) -> UICollectionReusableView in
             var item: SupplementaryFactory.Item?
             if indexPath.section < self.dataSource.numberOfSections() {
-                if indexPath.item < self.dataSource.numberOfItemsIn(section: indexPath.section) {
-                    item = self.dataSource.itemAt(indexPath: indexPath)
+                if indexPath.item < self.dataSource.numberOfItems(inSection: indexPath.section) {
+                    item = self.dataSource.item(atIndexPath: indexPath)
                 }
             }
             return self.supplementaryFactory.supplementaryViewFor(item: item, kind: kind, parentView: collectionView, indexPath: indexPath)
