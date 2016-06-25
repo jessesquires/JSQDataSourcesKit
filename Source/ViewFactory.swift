@@ -118,15 +118,22 @@ extension UITableViewCell: ReusableViewProtocol {
     public typealias ParentView = UITableView
 }
 
-
+/**
+ Specifies the type of reusable view.
+ */
 public enum ReusableViewType {
+
+    /// A collection or table view cell.
     case cell
+
+    /// A supplementary view and its associated kind identifer.
     case supplementaryView(kind: String)
 }
 
 
 extension ReusableViewType: Equatable { }
 
+/// :nodoc:
 public func ==(lhs: ReusableViewType, rhs: ReusableViewType) -> Bool {
     switch (lhs, rhs) {
     case (.cell, .cell):
@@ -179,49 +186,61 @@ public protocol ReusableViewFactoryProtocol {
     func configure(view view: View, item: Item?, type: ReusableViewType, parentView: View.ParentView, indexPath: NSIndexPath) -> View
 }
 
+
 public extension ReusableViewFactoryProtocol where View: UITableViewCell {
 
     /**
      Creates a new `View` instance, or dequeues an existing cell for reuse, then configures and returns it.
 
      - parameter item:       The item at `indexPath`.
-     - parameter parentView: The collection view or table view requesting this information.
-     - parameter indexPath:  The index path that specifies the location of `cell` and `item`.
+     - parameter tableView: The table view requesting this information.
+     - parameter indexPath:  The index path that specifies the location of the cell and item.
 
-     - returns: An initialized or dequeued, and fully configured cell of type `Cell`.
+     - returns: An initialized or dequeued, and fully configured table cell.
      */
-    public func tableCellFor(item item: Item, parentView: View.ParentView, indexPath: NSIndexPath) -> View {
+    public func tableCellFor(item item: Item, tableView: UITableView, indexPath: NSIndexPath) -> View {
         let reuseIdentifier = reuseIdentiferFor(item: item, type: .cell, indexPath: indexPath)
-        let cell = parentView.dequeueReusableCellFor(identifier: reuseIdentifier, indexPath: indexPath) as! View
-        return configure(view: cell, item: item, type: .cell, parentView: parentView, indexPath: indexPath)
+        let cell = tableView.dequeueReusableCellFor(identifier: reuseIdentifier, indexPath: indexPath) as! View
+        return configure(view: cell, item: item, type: .cell, parentView: tableView, indexPath: indexPath)
     }
 }
+
 
 public extension ReusableViewFactoryProtocol where View: UICollectionViewCell {
 
     /**
      Creates a new `View` instance, or dequeues an existing cell for reuse, then configures and returns it.
 
-     - parameter item:       The item at `indexPath`.
-     - parameter parentView: The collection view or table view requesting this information.
-     - parameter indexPath:  The index path that specifies the location of `cell` and `item`.
+     - parameter item:           The item at `indexPath`.
+     - parameter collectionView: The collection view requesting this information.
+     - parameter indexPath:      The index path that specifies the location of the cell and item.
 
-     - returns: An initialized or dequeued, and fully configured cell of type `Cell`.
+     - returns: An initialized or dequeued, and fully configured collection cell.
      */
-    public func collectionCellFor(item item: Item, parentView: View.ParentView, indexPath: NSIndexPath) -> View {
+    public func collectionCellFor(item item: Item, collectionView: UICollectionView, indexPath: NSIndexPath) -> View {
         let reuseIdentifier = reuseIdentiferFor(item: item, type: .cell, indexPath: indexPath)
-        let cell = parentView.dequeueReusableCellFor(identifier: reuseIdentifier, indexPath: indexPath) as! View
-        return configure(view: cell, item: item, type: .cell, parentView: parentView, indexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellFor(identifier: reuseIdentifier, indexPath: indexPath) as! View
+        return configure(view: cell, item: item, type: .cell, parentView: collectionView, indexPath: indexPath)
     }
-
 }
+
 
 public extension ReusableViewFactoryProtocol where View: UICollectionReusableView {
 
-    public func supplementaryViewFor(item item: Item?, kind: String, parentView: View.ParentView, indexPath: NSIndexPath) -> View {
+    /**
+     Creates a new `View` instance, or dequeues an existing view for reuse, then configures and returns it.
+
+     - parameter item:           The item at `indexPath`.
+     - parameter kind:           The kind of supplementary view to retrieve.
+     - parameter collectionView: The collection view requesting this information.
+     - parameter indexPath:      The index path that specifies the location of the view and item.
+
+     - returns: An initialized or dequeued, and fully configured supplementary view.
+     */
+    public func supplementaryViewFor(item item: Item?, kind: String, collectionView: UICollectionView, indexPath: NSIndexPath) -> View {
         let reuseIdentifier = reuseIdentiferFor(item: item, type: .supplementaryView(kind: kind), indexPath: indexPath)
-        let view = parentView.dequeueReusableSupplementaryViewFor(kind: kind, identifier: reuseIdentifier, indexPath: indexPath) as! View
-        return configure(view: view, item: item, type: .supplementaryView(kind: kind), parentView: parentView, indexPath: indexPath)
+        let view = collectionView.dequeueReusableSupplementaryViewFor(kind: kind, identifier: reuseIdentifier, indexPath: indexPath) as! View
+        return configure(view: view, item: item, type: .supplementaryView(kind: kind), parentView: collectionView, indexPath: indexPath)
     }
 }
 

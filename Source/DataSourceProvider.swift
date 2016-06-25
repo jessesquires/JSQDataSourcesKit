@@ -40,16 +40,6 @@ CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSource.Ite
 }
 
 
-extension DataSourceProvider: CustomStringConvertible {
-    /// :nodoc:
-    public var description: String {
-        get {
-            return "\(DataSourceProvider.self)(\(dataSource))"
-        }
-    }
-}
-
-
 public extension DataSourceProvider where CellFactory.View: UITableViewCell {
 
     public var tableViewDataSource: UITableViewDataSource {
@@ -70,7 +60,7 @@ public extension DataSourceProvider where CellFactory.View: UITableViewCell {
 
         dataSource.tableCellForRowAtIndexPath = { [unowned self] (tableView, indexPath) -> UITableViewCell in
             let item = self.dataSource.item(atIndexPath: indexPath)!
-            return self.cellFactory.tableCellFor(item: item, parentView: tableView, indexPath: indexPath)
+            return self.cellFactory.tableCellFor(item: item, tableView: tableView, indexPath: indexPath)
         }
 
         dataSource.tableTitleForHeaderInSection = { [unowned self] (section) -> String? in
@@ -107,7 +97,7 @@ public extension DataSourceProvider where CellFactory.View: UICollectionViewCell
 
         dataSource.collectionCellForItemAtIndexPath = { [unowned self] (collectionView, indexPath) -> UICollectionViewCell in
             let item = self.dataSource.item(atIndexPath: indexPath)!
-            return self.cellFactory.collectionCellFor(item: item, parentView: collectionView, indexPath: indexPath)
+            return self.cellFactory.collectionCellFor(item: item, collectionView: collectionView, indexPath: indexPath)
         }
 
         dataSource.collectionSupplementaryViewAtIndexPath = { [unowned self] (collectionView, kind, indexPath) -> UICollectionReusableView in
@@ -117,7 +107,7 @@ public extension DataSourceProvider where CellFactory.View: UICollectionViewCell
                     item = self.dataSource.item(atIndexPath: indexPath)
                 }
             }
-            return self.supplementaryFactory.supplementaryViewFor(item: item, kind: kind, parentView: collectionView, indexPath: indexPath)
+            return self.supplementaryFactory.supplementaryViewFor(item: item, kind: kind, collectionView: collectionView, indexPath: indexPath)
         }
         
         return dataSource
