@@ -19,22 +19,61 @@
 import Foundation
 import CoreData
 
-
+/**
+ An instance conforming to `DataSourceProtocol` represents a data source of items to be displayed 
+ in either a collection view or table view.
+ */
 public protocol DataSourceProtocol {
+
+    /// The type of items in the data source.
     associatedtype Item
 
+    /**
+     - returns: The number of sections.
+     */
     func numberOfSections() -> Int
 
+    /**
+     - parameter section: A section in the data source.
+
+     - returns: The number of items in the specified section.
+     */
     func numberOfItemsIn(section section: Int) -> Int
 
+    /**
+     - parameter section: A section in the data source.
+
+     - returns: The items in the specified section.
+     */
     func itemsIn(section section: Int) -> [Item]?
 
+    /**
+     - parameter section: A section in the data source.
+     - parameter row:     A row in the data source.
+
+     - returns: The item specified by the section and row, or `nil`.
+     */
     func itemAt(section section: Int, row: Int) -> Item?
 
+    /**
+     - parameter indexPath: An index path specifying a row and section in the data source.
+
+     - returns: The item specified by indexPath, or `nil`.
+     */
     func itemAt(indexPath indexPath: NSIndexPath) -> Item?
 
+    /**
+     - parameter section: A section in the data source.
+
+     - returns: The header title for the specified section.
+     */
     func headerTitleIn(section section: Int) -> String?
 
+    /**
+     - parameter section: A section in the data source.
+
+     - returns: The footer title for the specified section.
+     */
     func footerTitleIn(section section: Int) -> String?
 }
 
