@@ -46,20 +46,28 @@ public struct DataSource<S: SectionInfoProtocol>: DataSourceProtocol {
         self.sections = sections
     }
 
+    public init(sections: S...) {
+        self.sections = sections
+    }
+
     public func numberOfSections() -> Int {
         return sections.count
     }
 
     public func numberOfItemsIn(section section: Int) -> Int {
+        guard section < sections.count else { return 0 }
         return sections[section].items.count
     }
 
     public func itemsIn(section section: Int) -> [S.Item]? {
+        guard section < sections.count else { return nil }
         return sections[section].items
     }
 
     public func itemAt(section section: Int, row: Int) -> S.Item? {
-        return sections[section].items[row]
+        guard let items = itemsIn(section: section) else { return nil }
+        guard row < items.count else { return nil }
+        return items[row]
     }
 
     public func itemAt(indexPath indexPath: NSIndexPath) -> S.Item? {
@@ -67,10 +75,12 @@ public struct DataSource<S: SectionInfoProtocol>: DataSourceProtocol {
     }
 
     public func headerTitleIn(section section: Int) -> String? {
+        guard section < sections.count else { return nil }
         return sections[section].headerTitle
     }
 
     public func footerTitleIn(section section: Int) -> String? {
+        guard section < sections.count else { return nil }
         return sections[section].footerTitle
     }
 

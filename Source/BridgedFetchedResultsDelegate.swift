@@ -21,11 +21,10 @@ import Foundation
 
 
 /*
- Avoid making DelegateProvider inherit from NSObject.
- Keep classes pure Swift.
- Keep responsibilies focused.
+ This class is responsible for implementing the `NSFetchedResultsControllerDelegate` protocol.
+ It avoids making `FetchedResultsDelegateProvider` inherit from `NSObject`, and keeps classes small and focused.
  */
-@objc internal final class BridgedFetchedResultsDelegate: NSObject, NSFetchedResultsControllerDelegate {
+@objc internal final class BridgedFetchedResultsDelegate: NSObject {
 
     typealias WillChangeContentHandler = (NSFetchedResultsController) -> Void
     typealias DidChangeSectionHandler = (NSFetchedResultsController, NSFetchedResultsSectionInfo, Int, NSFetchedResultsChangeType) -> Void
@@ -47,6 +46,10 @@ import Foundation
         self.didChangeObject = didChangeObject
         self.didChangeContent = didChangeContent
     }
+}
+
+
+extension BridgedFetchedResultsDelegate: NSFetchedResultsControllerDelegate {
 
     @objc func controllerWillChangeContent(controller: NSFetchedResultsController) {
         willChangeContent(controller)

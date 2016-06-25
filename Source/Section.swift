@@ -39,7 +39,6 @@ public protocol SectionInfoProtocol {
 }
 
 
-
 /**
  A `Section` is a concrete `SectionInfoProtocol` type.
  A section instance is responsible for managing the elements in a section.

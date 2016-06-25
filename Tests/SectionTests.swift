@@ -25,7 +25,7 @@ import JSQDataSourcesKit
 
 final class SectionTests: XCTestCase {
 
-    func test_ThatSection_Initializes() {
+    func test_thatSection_initializes() {
         // GIVEN: some items
         let item1 = FakeViewModel()
         let item2 = FakeViewModel()
@@ -38,14 +38,16 @@ final class SectionTests: XCTestCase {
         // THEN: the sections have the same items
         XCTAssertEqual(sectionA.items, sectionB.items, "Section items should be equal")
 
+        XCTAssertEqual(sectionA.count, 3)
         XCTAssertEqual(sectionA.headerTitle, "Header")
         XCTAssertNil(sectionA.footerTitle)
 
+        XCTAssertEqual(sectionB.count, 3)
         XCTAssertEqual(sectionB.footerTitle, "Footer")
         XCTAssertNil(sectionB.headerTitle)
     }
 
-    func test_ThatSection_ReturnsExpectedDataFromSubscript() {
+    func test_thatSection_returnsExpectedDataFromSubscript() {
         // GIVEN: a model and section
         let expectedModel = FakeViewModel()
         let section = Section(items: FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel(), FakeViewModel())
@@ -57,7 +59,7 @@ final class SectionTests: XCTestCase {
         XCTAssertEqual(item, expectedModel, "Model returned from subscript should equal expected model")
     }
 
-    func test_ThatSection_SetsExpectedDataAtSubscript() {
+    func test_thatSection_setsExpectedDataAtSubscript() {
         // GIVEN: a section
         var section = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let count = section.items.count
@@ -72,7 +74,7 @@ final class SectionTests: XCTestCase {
         XCTAssertEqual(count, section.count, "Section count should remain unchanged")
     }
 
-    func test_ThatSection_ReturnsExpectedCount() {
+    func test_thatSection_returnsExpectedCount() {
         // GIVEN: items and a section
         let section = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
 
