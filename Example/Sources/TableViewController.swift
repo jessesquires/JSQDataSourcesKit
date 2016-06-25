@@ -21,7 +21,7 @@ import UIKit
 import JSQDataSourcesKit
 
 
-class TableViewController: UITableViewController {
+final class TableViewController: UITableViewController {
 
     typealias TableCellFactory = ViewFactory<CellViewModel, UITableViewCell>
     var dataSourceProvider: DataSourceProvider<DataSource<Section<CellViewModel>>, TableCellFactory, TableCellFactory>?
@@ -33,7 +33,7 @@ class TableViewController: UITableViewController {
         let section0 = Section(items: CellViewModel(), CellViewModel(), CellViewModel(), headerTitle: "First")
         let section1 = Section(items: CellViewModel(), CellViewModel(), CellViewModel(), CellViewModel(), headerTitle: "Second", footerTitle: "Only 2nd has a footer")
         let section2 = Section(items: CellViewModel(), CellViewModel(), headerTitle: "Third")
-        let dataSource = DataSource([section0, section1, section2])
+        let dataSource = DataSource(sections: section0, section1, section2)
 
         // 2. create cell factory
         let factory = ViewFactory(reuseIdentifier: CellId) { (cell, model: CellViewModel?, type, tableView, indexPath) -> UITableViewCell in
@@ -46,6 +46,7 @@ class TableViewController: UITableViewController {
         // 3. create data source provider
         dataSourceProvider = DataSourceProvider(dataSource: dataSource, cellFactory: factory, supplementaryFactory: factory)
 
+        // 4. set data source
         tableView.dataSource = dataSourceProvider?.tableViewDataSource
     }
     

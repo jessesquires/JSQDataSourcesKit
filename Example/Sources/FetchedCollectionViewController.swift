@@ -84,11 +84,14 @@ class FetchedCollectionViewController: UICollectionViewController {
 
         // 4. create delegate provider
         delegateProvider = FetchedResultsDelegateProvider(cellFactory: cellFactory, collectionView: collectionView!)
+
+        // 5. set delegate
         frc.delegate = delegateProvider.collectionFetchedDelegate
 
-        // 5. create data source provider
+        // 6. create data source provider
         dataSourceProvider = DataSourceProvider(dataSource: frc, cellFactory: cellFactory, supplementaryFactory: composedFactory)
 
+        // 7. set data source
         collectionView?.dataSource = dataSourceProvider?.collectionViewDataSource
     }
 

@@ -18,7 +18,7 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+final class ViewController: UITableViewController {
 
     let stack = CoreDataStack()
 
