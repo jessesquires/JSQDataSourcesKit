@@ -24,6 +24,8 @@ public final class DataSourceProvider<DataSource: DataSourceProtocol, CellFactor
     where
 CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSource.Item> {
 
+    // MARK: Properties
+
     /// The data source.
     public var dataSource: DataSource
 
@@ -34,6 +36,9 @@ CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSource.Ite
     public let supplementaryFactory: SupplementaryFactory
 
     private var bridgedDataSource: BridgedDataSource?
+
+
+    // MARK: Initialization
 
     /**
      Initializes a new data source provider.
@@ -53,6 +58,8 @@ CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSource.Ite
 
 
 public extension DataSourceProvider where CellFactory.View: UITableViewCell {
+
+    // MARK: UITableViewDataSource
 
     /// Returns the `UITableViewDataSource` object.
     public var tableViewDataSource: UITableViewDataSource {
@@ -90,6 +97,8 @@ public extension DataSourceProvider where CellFactory.View: UITableViewCell {
 
 
 public extension DataSourceProvider where CellFactory.View: UICollectionViewCell, SupplementaryFactory.View: UICollectionReusableView {
+
+    // MARK: UICollectionViewDataSource
 
     /// Returns the `UICollectionViewDataSource` object.
     public var collectionViewDataSource: UICollectionViewDataSource {
