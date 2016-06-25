@@ -30,8 +30,13 @@ import UIKit
  */
 public protocol CellParentViewProtocol {
 
+    // MARK: Associated types
+
     /// The type of cell for this parent view.
     associatedtype CellType: UIView
+
+
+    // MARK: Methods
 
     /**
      Returns a reusable cell located by its identifier.
@@ -55,6 +60,7 @@ public protocol CellParentViewProtocol {
     func dequeueReusableSupplementaryViewFor(kind kind: String, identifier: String, indexPath: NSIndexPath) -> CellType?
 }
 
+// MARK: - CellParentViewProtocol
 extension UICollectionView: CellParentViewProtocol {
     /// :nodoc:
     public typealias CellType = UICollectionReusableView

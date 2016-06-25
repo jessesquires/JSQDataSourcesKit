@@ -24,8 +24,13 @@ import UIKit
 /// A `FetchedResultsDelegateProvider` is responsible for providing a delegate object for an instance of `NSFetchedResultsController`.
 public final class FetchedResultsDelegateProvider<CellFactory: ReusableViewFactoryProtocol> {
 
+    // MARK: Type aliases
+
     /// The parent view of cell's that the cell factory produces.
     public typealias ParentView = CellFactory.View.ParentView
+
+
+    // MARK: Properties
 
     /// The table view or collection view displaying data for the fetched results controller.
     public weak var cellParentView: ParentView?
@@ -59,6 +64,8 @@ public final class FetchedResultsDelegateProvider<CellFactory: ReusableViewFacto
 
 
 extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UICollectionView {
+
+    // MARK: Collection views
 
     /**
      Initializes a new fetched results delegate provider for collection views.
@@ -179,6 +186,8 @@ extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UI
 
 extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UITableView {
 
+    // MARK: Table views
+    
     /**
      Initializes a new fetched results delegate provider for table views.
 
