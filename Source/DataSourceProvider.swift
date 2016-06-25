@@ -19,19 +19,31 @@
 import Foundation
 import UIKit
 
-
+/// A `DataSourceProvider` is responsible for providing a data source object for a table view or collection view.
 public final class DataSourceProvider<DataSource: DataSourceProtocol, CellFactory: ReusableViewFactoryProtocol, SupplementaryFactory: ReusableViewFactoryProtocol
     where
 CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSource.Item> {
 
+    /// The data source.
     public var dataSource: DataSource
 
+    /// The cell factory.
     public let cellFactory: CellFactory
 
+    /// The supplementary view factory.
     public let supplementaryFactory: SupplementaryFactory
 
     private var bridgedDataSource: BridgedDataSource?
 
+    /**
+     Initializes a new data source provider.
+
+     - parameter dataSource:           The data source.
+     - parameter cellFactory:          The cell factory.
+     - parameter supplementaryFactory: The supplementary view factory.
+
+     - returns: A new `DataSourceProvider` instance.
+     */
     public init(dataSource: DataSource, cellFactory: CellFactory, supplementaryFactory: SupplementaryFactory) {
         self.dataSource = dataSource
         self.cellFactory = cellFactory
@@ -42,6 +54,7 @@ CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSource.Ite
 
 public extension DataSourceProvider where CellFactory.View: UITableViewCell {
 
+    /// Returns the `UITableViewDataSource` object.
     public var tableViewDataSource: UITableViewDataSource {
         if bridgedDataSource == nil {
             bridgedDataSource = tableViewBridgedDataSource()
@@ -78,6 +91,7 @@ public extension DataSourceProvider where CellFactory.View: UITableViewCell {
 
 public extension DataSourceProvider where CellFactory.View: UICollectionViewCell, SupplementaryFactory.View: UICollectionReusableView {
 
+    /// Returns the `UICollectionViewDataSource` object.
     public var collectionViewDataSource: UICollectionViewDataSource {
         if bridgedDataSource == nil {
             bridgedDataSource = collectionViewBridgedDataSource()

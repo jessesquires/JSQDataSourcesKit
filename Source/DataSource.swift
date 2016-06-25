@@ -163,7 +163,6 @@ public struct DataSource<S: SectionInfoProtocol>: DataSourceProtocol {
 
     /**
      - parameter index: The index of a section.
-
      - returns: The section at `index`.
      */
     public subscript (index: Int) -> S {
@@ -177,7 +176,6 @@ public struct DataSource<S: SectionInfoProtocol>: DataSourceProtocol {
 
     /**
      - parameter indexPath: The index path of an item.
-
      - returns: The item at `indexPath`.
      */
     public subscript (indexPath: NSIndexPath) -> S.Item {
@@ -215,7 +213,6 @@ public class FetchedResultsController<T: NSManagedObject>: NSFetchedResultsContr
 
     /**
      - parameter indexPath: The index path of an object.
-
      - returns: The object at `indexPath`.
      */
     public subscript (indexPath: NSIndexPath) -> T {

@@ -31,6 +31,9 @@ public final class FetchedResultsDelegateProvider<CellFactory: ReusableViewFacto
 
     public let cellFactory: CellFactory
 
+
+    // MARK: private
+
     private var bridgedDelegate: BridgedFetchedResultsDelegate?
 
     private init(cellFactory: CellFactory, cellParentView: ParentView) {
