@@ -104,6 +104,12 @@ public class FetchedResultsController<T: NSManagedObject>: NSFetchedResultsContr
                    sectionNameKeyPath: sectionNameKeyPath,
                    cacheName: name)
     }
+
+    public subscript (indexPath: NSIndexPath) -> T {
+        get {
+            return objectAtIndexPath(indexPath) as! T
+        }
+    }
 }
 
 
