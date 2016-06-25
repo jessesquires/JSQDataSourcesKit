@@ -20,19 +20,22 @@ import CoreData
 import Foundation
 import UIKit
 
-
+/// A `FetchedResultsDelegateProvider` is responsible for providing a delegate object for an instance of `NSFetchedResultsController`.
 public final class FetchedResultsDelegateProvider<CellFactory: ReusableViewFactoryProtocol> {
 
-    public typealias Item = CellFactory.Item
-
+    /// The parent view of cell's that the cell factory produces.
     public typealias ParentView = CellFactory.View.ParentView
 
+    /// The table view or collection view displaying data for the fetched results controller.
     public weak var cellParentView: ParentView?
 
+    /// The cell factory used to configure cells.
     public let cellFactory: CellFactory
 
 
     // MARK: private
+
+    private typealias Item = CellFactory.Item
 
     private var bridgedDelegate: BridgedFetchedResultsDelegate?
 
@@ -60,6 +63,7 @@ extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UI
         self.init(cellFactory: cellFactory, cellParentView: collectionView)
     }
 
+    /// Returns the `NSFetchedResultsControllerDelegate` object for a collection view.
     public var collectionFetchedDelegate: NSFetchedResultsControllerDelegate {
         if bridgedDelegate == nil {
             bridgedDelegate = bridgedCollectionFetchedResultsDelegate()
@@ -170,6 +174,7 @@ extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UI
         self.init(cellFactory: cellFactory, cellParentView: tableView)
     }
 
+    /// Returns the `NSFetchedResultsControllerDelegate` object for a table view.
     public var tableFetchedDelegate: NSFetchedResultsControllerDelegate {
         if bridgedDelegate == nil {
             bridgedDelegate = bridgedTableFetchedResultsDelegate()
