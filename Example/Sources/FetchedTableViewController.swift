@@ -57,7 +57,7 @@ class FetchedTableViewController: UITableViewController {
         delegateProvider = FetchedResultsDelegateProvider(cellFactory: factory, tableView: tableView)
 
         // 4. set delegate
-        frc.delegate = delegateProvider.tableFetchedDelegate
+        frc.delegate = delegateProvider.tableDelegate
 
         // 5. create data source provider
         dataSourceProvider = DataSourceProvider(dataSource: frc, cellFactory: factory, supplementaryFactory: factory)

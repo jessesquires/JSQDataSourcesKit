@@ -20,6 +20,7 @@ import CoreData
 import Foundation
 import UIKit
 
+
 /// A `FetchedResultsDelegateProvider` is responsible for providing a delegate object for an instance of `NSFetchedResultsController`.
 public final class FetchedResultsDelegateProvider<CellFactory: ReusableViewFactoryProtocol> {
 
@@ -59,12 +60,20 @@ public final class FetchedResultsDelegateProvider<CellFactory: ReusableViewFacto
 
 extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UICollectionView {
 
+    /**
+     Initializes a new fetched results delegate provider for collection views.
+
+     - parameter cellFactory:    The cell factory with which the fetched results controller delegate will configure cells.
+     - parameter collectionView: The collection view to be updated when the fetched results change.
+
+     - returns: A new `FetchedResultsDelegateProvider` instance.
+     */
     public convenience init(cellFactory: CellFactory, collectionView: UICollectionView) {
         self.init(cellFactory: cellFactory, cellParentView: collectionView)
     }
 
     /// Returns the `NSFetchedResultsControllerDelegate` object for a collection view.
-    public var collectionFetchedDelegate: NSFetchedResultsControllerDelegate {
+    public var collectionDelegate: NSFetchedResultsControllerDelegate {
         if bridgedDelegate == nil {
             bridgedDelegate = bridgedCollectionFetchedResultsDelegate()
         }
@@ -170,12 +179,20 @@ extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UI
 
 extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UITableView {
 
+    /**
+     Initializes a new fetched results delegate provider for table views.
+
+     - parameter cellFactory: The cell factory with which the fetched results controller delegate will configure cells.
+     - parameter tableView:   The table view to be updated when the fetched results change.
+
+     - returns: A new `FetchedResultsDelegateProvider` instance.
+     */
     public convenience init(cellFactory: CellFactory, tableView: UITableView) {
         self.init(cellFactory: cellFactory, cellParentView: tableView)
     }
 
     /// Returns the `NSFetchedResultsControllerDelegate` object for a table view.
-    public var tableFetchedDelegate: NSFetchedResultsControllerDelegate {
+    public var tableDelegate: NSFetchedResultsControllerDelegate {
         if bridgedDelegate == nil {
             bridgedDelegate = bridgedTableFetchedResultsDelegate()
         }
