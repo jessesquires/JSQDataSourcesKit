@@ -20,7 +20,7 @@ import Foundation
 import CoreData
 
 /**
- An instance conforming to `DataSourceProtocol` represents a data source of items to be displayed 
+ An instance conforming to `DataSourceProtocol` represents a data source of items to be displayed
  in either a collection view or table view.
  */
 public protocol DataSourceProtocol {
@@ -94,48 +94,78 @@ extension DataSourceProtocol where Self: NSFetchedResultsController {
     }
 }
 
-
+/**
+ A instance of `DataSource` is a concrete `DataSourceProtocol`.
+ It is a collection of section-based data.
+ */
 public struct DataSource<S: SectionInfoProtocol>: DataSourceProtocol {
+
+    /// The sections in the data source.
     public var sections: [S]
 
+    /**
+     Constructs a new `DataSource`.
+
+     - parameter sections: The sections for the data source.
+
+     - returns: A new `DataSource` instance.
+     */
     public init(_ sections: [S]) {
         self.sections = sections
     }
 
+    /**
+     Constructs a new `DataSource`.
+
+     - parameter sections: The sections for the data source.
+
+     - returns: A new `DataSource` instance.
+     */
     public init(sections: S...) {
         self.sections = sections
     }
 
+    /// :nodoc:
     public func numberOfSections() -> Int {
         return sections.count
     }
 
+    /// :nodoc:
     public func numberOfItems(inSection section: Int) -> Int {
         guard section < sections.count else { return 0 }
         return sections[section].items.count
     }
 
+    /// :nodoc:
     public func items(inSection section: Int) -> [S.Item]? {
         guard section < sections.count else { return nil }
         return sections[section].items
     }
 
+    /// :nodoc:
     public func item(atRow row: Int, inSection section: Int) -> S.Item? {
         guard let items = items(inSection: section) else { return nil }
         guard row < items.count else { return nil }
         return items[row]
     }
 
+    /// :nodoc:
     public func headerTitle(inSection section: Int) -> String? {
         guard section < sections.count else { return nil }
         return sections[section].headerTitle
     }
 
+    /// :nodoc:
     public func footerTitle(inSection section: Int) -> String? {
         guard section < sections.count else { return nil }
         return sections[section].footerTitle
     }
 
+    /**
+     - parameter index: The index of a section.
+
+     - returns: The section at `index`.
+     */
     public subscript (index: Int) -> S {
         get {
             return sections[index]
@@ -145,6 +175,11 @@ public struct DataSource<S: SectionInfoProtocol>: DataSourceProtocol {
         }
     }
 
+    /**
+     - parameter indexPath: The index path of an item.
+
+     - returns: The item at `indexPath`.
+     */
     public subscript (indexPath: NSIndexPath) -> S.Item {
         get {
             return sections[indexPath.section].items[indexPath.row]
@@ -155,18 +190,34 @@ public struct DataSource<S: SectionInfoProtocol>: DataSourceProtocol {
     }
 }
 
-
+/// A generic `NSFetchedResultsController`.
 public class FetchedResultsController<T: NSManagedObject>: NSFetchedResultsController {
+
+    /**
+     Returns a fetch request controller initialized using the given arguments.
+
+     - parameter fetchRequest:       The fetch request used to get the objects.
+     - parameter context:            The managed object against which `fetchRequest` is executed.
+     - parameter sectionNameKeyPath: A key path on result objects that returns the section name.
+     - parameter name:               The name of the cache file the receiver should use.
+
+     - returns: An initialized fetch request controller.
+     */
     public override init(fetchRequest: NSFetchRequest,
-                  managedObjectContext context: NSManagedObjectContext,
-                                       sectionNameKeyPath: String?,
-                                       cacheName name: String?) {
+                         managedObjectContext context: NSManagedObjectContext,
+                                              sectionNameKeyPath: String?,
+                                              cacheName name: String?) {
         super.init(fetchRequest: fetchRequest,
                    managedObjectContext: context,
                    sectionNameKeyPath: sectionNameKeyPath,
                    cacheName: name)
     }
 
+    /**
+     - parameter indexPath: The index path of an object.
+
+     - returns: The object at `indexPath`.
+     */
     public subscript (indexPath: NSIndexPath) -> T {
         get {
             return objectAtIndexPath(indexPath) as! T
@@ -176,28 +227,35 @@ public class FetchedResultsController<T: NSManagedObject>: NSFetchedResultsContr
 
 
 extension FetchedResultsController: DataSourceProtocol {
+    /// :nodoc:
     public typealias Item = T
 
+    /// :nodoc:
     public func numberOfSections() -> Int {
         return sections?.count ?? 0
     }
 
+    /// :nodoc:
     public func numberOfItems(inSection section: Int) -> Int {
         return sections?[section].numberOfObjects ?? 0
     }
 
+    /// :nodoc:
     public func items(inSection section: Int) -> [Item]? {
         return (sections?[section].objects as! [Item])
     }
 
+    /// :nodoc:
     public func item(atRow row: Int, inSection section: Int) -> Item? {
         return item(atIndexPath: NSIndexPath(forRow: row, inSection: section))
     }
 
+    /// :nodoc:
     public func headerTitle(inSection section: Int) -> String? {
         return sections?[section].name
     }
 
+    /// :nodoc:
     public func footerTitle(inSection section: Int) -> String? {
         return nil
     }
