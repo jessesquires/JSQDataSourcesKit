@@ -105,8 +105,13 @@ extension DataSourceProtocol where Self: NSFetchedResultsController {
  */
 public struct DataSource<S: SectionInfoProtocol>: DataSourceProtocol {
 
+    // MARK: Properties
+
     /// The sections in the data source.
     public var sections: [S]
+
+
+    // MARK: Initialization
 
     /**
      Constructs a new `DataSource`.
@@ -165,6 +170,9 @@ public struct DataSource<S: SectionInfoProtocol>: DataSourceProtocol {
         guard section < sections.count else { return nil }
         return sections[section].footerTitle
     }
+
+
+    // MARK: Subscripts
 
     /**
      - parameter index: The index of a section.
