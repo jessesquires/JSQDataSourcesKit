@@ -32,9 +32,8 @@ internal typealias TableTitleForFooterInSectionHandler = (Int) -> String?
 
 
 /*
- Avoid making DataSourceProvider inherit from NSObject.
- Keep classes pure Swift.
- Keep responsibilies focused.
+ This class is responsible for implementing the `UICollectionViewDataSource` and `UITableViewDataSource` protocols.
+ It avoids making `DataSourceProvider` inherit from `NSObject`, and keeps classes small and focused.
  */
 @objc internal final class BridgedDataSource: NSObject {
 

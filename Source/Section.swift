@@ -44,7 +44,7 @@ public protocol SectionInfoProtocol {
  A `Section` is a concrete `SectionInfoProtocol` type.
  A section instance is responsible for managing the elements in a section.
  */
-public struct Section<Item>: SectionInfoProtocol, CustomStringConvertible {
+public struct Section<Item>: SectionInfoProtocol {
 
     // MARK: Properties
 
@@ -106,16 +106,6 @@ public struct Section<Item>: SectionInfoProtocol, CustomStringConvertible {
         }
         set {
             items[index] = newValue
-        }
-    }
-
-
-    // MARK: CustomStringConvertible
-
-    /// :nodoc:
-    public var description: String {
-        get {
-            return "<\(Section.self): headerTitle=\(headerTitle); footerTitle=\(footerTitle); items=\(items)>"
         }
     }
 }

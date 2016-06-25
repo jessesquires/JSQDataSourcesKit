@@ -23,10 +23,9 @@ import XCTest
 import JSQDataSourcesKit
 
 
-final class CollectionViewDataSourceSubscriptTests: XCTestCase {
+final class DataSourceProviderSubscriptTests: XCTestCase {
 
-    func test_ThatCollectionViewDataSourceProvider_ReturnsExpectedDataFrom_IntSubscript() {
-
+    func test_dataSourceProvider_returnsExpectedDataFrom_intSubscript() {
         // GIVEN: some collection view sections
         let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let section1 = Section(items: FakeViewModel(), FakeViewModel())
@@ -48,8 +47,7 @@ final class CollectionViewDataSourceSubscriptTests: XCTestCase {
         XCTAssertEqual(section.items, section1.items, "Section returned from subscript should equal expected section")
     }
 
-    func test_ThatCollectionViewDataSourceProvider_SetsExpectedDataAt_IntSubscript() {
-
+    func test_dataSourceProvider_SetsExpectedDataAt_intSubscript() {
         // GIVEN: some collection view sections
         let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let section1 = Section(items: FakeViewModel(), FakeViewModel())
@@ -75,8 +73,7 @@ final class CollectionViewDataSourceSubscriptTests: XCTestCase {
         XCTAssertEqual(count, dataSourceProvider.dataSource.sections.count, "Number of sections should remain unchanged")
     }
 
-    func test_ThatCollectionViewDataSourceProvider_ReturnsExpectedDataFrom_IndexPathSubscript() {
-
+    func test_dataSourceProvider_returnsExpectedDataFrom_indexPathSubscript() {
         // GIVEN: some collection view sections
         let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel())
         let section1 = Section(items: FakeViewModel(), FakeViewModel())
@@ -99,8 +96,7 @@ final class CollectionViewDataSourceSubscriptTests: XCTestCase {
         XCTAssertEqual(item2, section1[0], "Item returned from subscript should equal expected item")
     }
 
-    func test_ThatCollectionViewDataSourceProvider_SetsExpectedDataAt_IndexPathSubscript() {
-
+    func test_dataSourceProvider_SetsExpectedDataAt_indexPathSubscript() {
         // GIVEN: some collection view sections
         let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel())
         let section1 = Section(items: FakeViewModel(), FakeViewModel())
@@ -125,5 +121,4 @@ final class CollectionViewDataSourceSubscriptTests: XCTestCase {
         XCTAssertEqual(2, dataSourceProvider.dataSource.sections.count, "Number of sections should remain unchanged")
         XCTAssertEqual(3, section0.count, "Number of items in section should remain unchanged")
     }
-    
 }

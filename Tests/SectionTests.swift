@@ -26,7 +26,6 @@ import JSQDataSourcesKit
 final class SectionTests: XCTestCase {
 
     func test_ThatSection_Initializes() {
-
         // GIVEN: some items
         let item1 = FakeViewModel()
         let item2 = FakeViewModel()
@@ -47,7 +46,6 @@ final class SectionTests: XCTestCase {
     }
 
     func test_ThatSection_ReturnsExpectedDataFromSubscript() {
-
         // GIVEN: a model and section
         let expectedModel = FakeViewModel()
         let section = Section(items: FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel(), FakeViewModel())
@@ -60,7 +58,6 @@ final class SectionTests: XCTestCase {
     }
 
     func test_ThatSection_SetsExpectedDataAtSubscript() {
-
         // GIVEN: a section
         var section = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let count = section.items.count
@@ -76,7 +73,6 @@ final class SectionTests: XCTestCase {
     }
 
     func test_ThatSection_ReturnsExpectedCount() {
-
         // GIVEN: items and a section
         let section = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
 

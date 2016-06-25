@@ -23,13 +23,15 @@ import XCTest
 import JSQDataSourcesKit
 
 
-final class CollectionViewDataSourceTests: TestCase {
+final class DataSourceProviderTests: TestCase {
 
-    private let dequeueCellExpectationName = "collectionview_dequeue_cell_expectation"
-    private let dequeueSupplementaryViewExpectationName = "collectionview_dequeue_supplementaryview_expectation"
+    private let dequeueCellExpectationName = "dequeue_cell_expectation"
+    private let dequeueSupplementaryViewExpectationName = "dequeue_supplementaryview_expectation"
 
-    func test_ThatCollectionViewDataSource_ReturnsExpectedData_ForSingleSection() {
+    
+    // MARK: CollectionView
 
+    func test_thatDataSourceProvider_forCollectionView_returnsExpectedData_forSingleSection() {
         // GIVEN: a single section with data items
         let expectedModel = FakeViewModel()
         let expectedIndexPath = NSIndexPath(forRow: 3, inSection: 0)
@@ -77,8 +79,7 @@ final class CollectionViewDataSourceTests: TestCase {
         })
     }
 
-    func test_ThatCollectionViewDataSource_ReturnsExpectedData_ForMultipleSections() {
-
+    func test_thatDataSourceProvider_forCollectionView_returnsExpectedData_forMultipleSections() {
         // GIVEN: some collection view sections
         let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let section1 = Section(items: FakeViewModel(), FakeViewModel())
@@ -162,6 +163,141 @@ final class CollectionViewDataSourceTests: TestCase {
                 if !(sectionIndex == dataSource.sections.count - 1 && rowIndex == dataSource[sectionIndex].count - 1) {
                     cellFactoryExpectation = expectationWithDescription("cell_factory_" + expectationName)
                     supplementaryFactoryExpectation = expectationWithDescription("supplementary_factory_" + expectationName)
+                }
+            }
+        }
+    }
+
+
+    // MARK: TableView
+
+    func test_thatDataSourceProvider_forTableView_returnsExpectedData_forSingleSection() {
+        // GIVEN: a single section with data items
+        let expectedModel = FakeViewModel()
+        let expectedIndexPath = NSIndexPath(forRow: 2, inSection: 0)
+
+        let section0 = Section(items: FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel(), FakeViewModel(),
+                               headerTitle: "Header",
+                               footerTitle: "Footer")
+        let dataSource = DataSource([section0])
+
+        let factoryExpectation = expectationWithDescription(#function)
+        tableView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + #function)
+
+        // GIVEN: a cell factory
+        let factory = ViewFactory(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
+            XCTAssertEqual(cell.reuseIdentifier!, self.cellReuseId, "Dequeued cell should have expected identifier")
+
+            XCTAssertEqual(model, expectedModel, "Model object should equal expected value")
+            XCTAssertEqual(tableView, self.tableView, "TableView should equal the tableView for the data source")
+            XCTAssertEqual(indexPath, expectedIndexPath, "IndexPath should equal expected value")
+
+            factoryExpectation.fulfill()
+            return cell
+        }
+
+        // GIVEN: a data source provider
+        let dataSourceProvider = DataSourceProvider(dataSource: dataSource, cellFactory: factory, supplementaryFactory: factory)
+        let tableViewDataSource = dataSourceProvider.tableViewDataSource
+
+        tableView.dataSource = tableViewDataSource
+
+        // WHEN: we call the table view data source methods
+        let numSections = tableViewDataSource.numberOfSectionsInTableView?(tableView)
+        let numRows = tableViewDataSource.tableView(tableView, numberOfRowsInSection: 0)
+        let cell = tableViewDataSource.tableView(tableView, cellForRowAtIndexPath: expectedIndexPath)
+        let header = tableViewDataSource.tableView?(tableView, titleForHeaderInSection: 0)
+        let footer = tableViewDataSource.tableView?(tableView, titleForFooterInSection: 0)
+
+        // THEN: we receive the expected return values
+        XCTAssertNotNil(numSections, "Number of sections should not be nil")
+        XCTAssertEqual(numSections!, dataSourceProvider.dataSource.sections.count, "Data source should return expected number of sections")
+
+        XCTAssertEqual(numRows, section0.count, "Data source should return expected number of rows for section 0")
+
+        XCTAssertNotNil(cell.reuseIdentifier, "Cell reuse identifier should not be nil")
+        XCTAssertEqual(cell.reuseIdentifier!, cellReuseId, "Data source should return cells with the expected identifier")
+
+        XCTAssertNotNil(header, "Header should not be nil")
+        XCTAssertNotNil(section0.headerTitle, "Section 0 header title should not be nil")
+        XCTAssertEqual(header!, section0.headerTitle!, "Data source should return expected header title")
+
+        XCTAssertNotNil(footer, "Footer should not be nil")
+        XCTAssertNotNil(section0.footerTitle, "Section 0 footer title should not be nil")
+        XCTAssertEqual(footer!, section0.footerTitle!, "Data source should return expected footer title")
+
+        // THEN: the tableView calls `dequeueReusableCellWithIdentifier`
+        // THEN: the cell factory calls its `ConfigurationHandler`
+        waitForExpectationsWithTimeout(defaultTimeout, handler: { (error) -> Void in
+            XCTAssertNil(error, "Expectations should not error")
+        })
+    }
+
+    func test_thatDataSourceProvider_forTableView_returnsExpectedData_forMultipleSections() {
+        // GIVEN: some table view sections
+        let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), headerTitle: "Header", footerTitle: "Footer")
+        let section1 = Section(items: FakeViewModel(), headerTitle: "Header Title")
+        let section2 = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
+        let section3 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
+        let dataSource = DataSource([section0, section1, section2, section3])
+
+        var factoryExpectation = expectationWithDescription("factory_\(#function)")
+
+        // GIVEN: a cell factory
+        let factory = ViewFactory(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
+            XCTAssertEqual(cell.reuseIdentifier!, self.cellReuseId, "Dequeued cell should have expected identifier")
+            XCTAssertEqual(model, dataSource[indexPath.section][indexPath.row], "Model object should equal expected value")
+            XCTAssertEqual(tableView, self.tableView, "TableView should equal the tableView for the data source")
+
+            factoryExpectation.fulfill()
+            return cell
+        }
+
+        // GIVEN: a data source provider
+        let dataSourceProvider = DataSourceProvider(dataSource: dataSource, cellFactory: factory, supplementaryFactory: factory)
+        let tableViewDataSource = dataSourceProvider.tableViewDataSource
+
+        tableView.dataSource = tableViewDataSource
+
+        // WHEN: we call the table view data source methods
+        let numSections = tableViewDataSource.numberOfSectionsInTableView?(tableView)
+
+        // THEN: we receive the expected return values
+        XCTAssertNotNil(numSections, "Number of sections should not be nil")
+        XCTAssertEqual(numSections!, dataSourceProvider.dataSource.sections.count, "Data source should return expected number of sections")
+
+        for sectionIndex in 0..<dataSourceProvider.dataSource.sections.count {
+
+            for rowIndex in 0..<dataSourceProvider.dataSource[sectionIndex].items.count {
+
+                let expectationName = "\(#function)_\(sectionIndex)_\(rowIndex)"
+                tableView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + expectationName)
+
+                // WHEN: we call the table view data source methods
+                let numRows = tableViewDataSource.tableView(tableView, numberOfRowsInSection: sectionIndex)
+                let header = tableViewDataSource.tableView?(tableView, titleForHeaderInSection: sectionIndex)
+                let footer = tableViewDataSource.tableView?(tableView, titleForFooterInSection: sectionIndex)
+
+                let cell = tableViewDataSource.tableView(tableView, cellForRowAtIndexPath: NSIndexPath(forRow: rowIndex, inSection: sectionIndex))
+
+                // THEN: we receive the expected return values
+                XCTAssertEqual(numRows, dataSourceProvider.dataSource[sectionIndex].count, "Data source should return expected number of rows for section \(sectionIndex)")
+
+                XCTAssertNotNil(cell.reuseIdentifier, "Cell reuse identifier should not be nil")
+                XCTAssertEqual(cell.reuseIdentifier!, cellReuseId, "Data source should return cells with the expected identifier")
+
+                XCTAssertTrue(header == dataSourceProvider.dataSource[sectionIndex].headerTitle, "Data source should return expected header title for section \(sectionIndex)")
+                XCTAssertTrue(footer == dataSourceProvider.dataSource[sectionIndex].footerTitle, "Data source should return expected footer title for section \(sectionIndex)")
+
+                // THEN: the tableView calls `dequeueReusableCellWithIdentifier`
+                // THEN: the cell factory calls its `ConfigurationHandler`
+                waitForExpectationsWithTimeout(defaultTimeout, handler: { (error) -> Void in
+                    XCTAssertNil(error, "Expectations should not error")
+                })
+
+                // reset expectation names for next loop, ignore last item
+                if !(sectionIndex == dataSourceProvider.dataSource.sections.count - 1 && rowIndex == dataSourceProvider.dataSource[sectionIndex].count - 1) {
+                    factoryExpectation = expectationWithDescription("factory_" + expectationName)
                 }
             }
         }

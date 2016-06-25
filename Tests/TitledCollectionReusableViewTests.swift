@@ -25,7 +25,7 @@ import JSQDataSourcesKit
 
 final class TitledCollectionReusableViewTests: XCTestCase {
 
-    func test_ThatViewInitializesWithFrame() {
+    func test_thatView_initializesWithFrame() {
         let identifier = TitledCollectionReusableView.identifier
         XCTAssertEqual(identifier, String(TitledCollectionReusableView.self))
 
@@ -37,7 +37,7 @@ final class TitledCollectionReusableViewTests: XCTestCase {
         XCTAssertEqual(view.label.frame, CGRect(x: 8, y: 8, width: 304, height: 84))
     }
 
-    func test_ThatViewAdjustsLabelFrameForInsets() {
+    func test_thatView_adjustsLabelFrameForInsets() {
         let identifier = TitledCollectionReusableView.identifier
         XCTAssertEqual(identifier, String(TitledCollectionReusableView.self))
 
@@ -49,7 +49,7 @@ final class TitledCollectionReusableViewTests: XCTestCase {
         XCTAssertEqual(view.label.frame, CGRect(x: 4, y: 10, width: 312, height: 80))
     }
 
-    func test_ThatViewPreparesForReuse_ForText() {
+    func test_thatView_preparesForReuse_ForText() {
         let view = TitledCollectionReusableView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
         view.layoutIfNeeded()
         view.label.text = "title text"
@@ -61,7 +61,7 @@ final class TitledCollectionReusableViewTests: XCTestCase {
         XCTAssertNil(view.label.text)
     }
 
-    func test_ThatViewPreparesForReuse_ForAttributedText() {
+    func test_thatView_preparesForReuse_ForAttributedText() {
         let view = TitledCollectionReusableView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
         view.layoutIfNeeded()
         view.label.attributedText = NSAttributedString(string:"title text")
@@ -73,7 +73,7 @@ final class TitledCollectionReusableViewTests: XCTestCase {
         XCTAssertNil(view.label.attributedText)
     }
 
-    func test_ThatViewSetsBackgoundColor() {
+    func test_thatView_setsBackgoundColor() {
         let view = TitledCollectionReusableView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
         view.layoutIfNeeded()
         view.backgroundColor = .redColor()

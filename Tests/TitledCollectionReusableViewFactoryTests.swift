@@ -35,8 +35,7 @@ class TitledCollectionReusableViewFactoryTests: TestCase {
                                      withReuseIdentifier: TitledCollectionReusableView.identifier)
     }
 
-    func test_ThatCollectionViewDataSource_ReturnsExpectedData_TitledCollectionReusableViewFactory() {
-
+    func test_dataSource_returnsExpectedData_withTitledCollectionReusableViewFactory() {
         // GIVEN: some collection view sections
         let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let section1 = Section(items: FakeViewModel(), FakeViewModel())
