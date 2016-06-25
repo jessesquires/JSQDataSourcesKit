@@ -25,9 +25,14 @@ import CoreData
  */
 public protocol DataSourceProtocol {
 
+    // MARK: Associated types
+
     /// The type of items in the data source.
     associatedtype Item
 
+
+    // MARK: Methods
+    
     /**
      - returns: The number of sections.
      */

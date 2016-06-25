@@ -60,7 +60,6 @@ public protocol CellParentViewProtocol {
     func dequeueReusableSupplementaryViewFor(kind kind: String, identifier: String, indexPath: NSIndexPath) -> CellType?
 }
 
-// MARK: - CellParentViewProtocol
 extension UICollectionView: CellParentViewProtocol {
     /// :nodoc:
     public typealias CellType = UICollectionReusableView
@@ -100,6 +99,8 @@ extension UITableView: CellParentViewProtocol {
  */
 public protocol ReusableViewProtocol {
 
+    // MARK: Associated types
+
     /**
      The "parent" view of the cell. 
      For `UICollectionViewCell` or `UICollectionReusableView` this is `UICollectionView`. 
@@ -107,8 +108,14 @@ public protocol ReusableViewProtocol {
      */
     associatedtype ParentView: UIView, CellParentViewProtocol
 
+
+    // MARK: Properties
+
     /// A string that identifies the purpose of the view.
     var reuseIdentifier: String? { get }
+
+
+    // MARK: Methods
 
     /// Performs any clean up necessary to prepare the view for use again.
     func prepareForReuse()
@@ -161,11 +168,16 @@ public func ==(lhs: ReusableViewType, rhs: ReusableViewType) -> Bool {
  */
 public protocol ReusableViewFactoryProtocol {
 
+    // MARK: Associated types
+
     /// The type of elements backing the collection view or table view.
     associatedtype Item
 
     /// The type of views that the factory produces.
     associatedtype View: ReusableViewProtocol
+
+
+    // MARK: Methods
 
     /**
      Provides a view reuse identifer for the given item, type, and indexPath.
@@ -195,6 +207,8 @@ public protocol ReusableViewFactoryProtocol {
 
 public extension ReusableViewFactoryProtocol where View: UITableViewCell {
 
+    // MARK: Table cells
+
     /**
      Creates a new `View` instance, or dequeues an existing cell for reuse, then configures and returns it.
 
@@ -214,6 +228,8 @@ public extension ReusableViewFactoryProtocol where View: UITableViewCell {
 
 public extension ReusableViewFactoryProtocol where View: UICollectionViewCell {
 
+    // MARK: Collection cells
+
     /**
      Creates a new `View` instance, or dequeues an existing cell for reuse, then configures and returns it.
 
@@ -232,6 +248,8 @@ public extension ReusableViewFactoryProtocol where View: UICollectionViewCell {
 
 
 public extension ReusableViewFactoryProtocol where View: UICollectionReusableView {
+
+    // MARK: Supplementary views
 
     /**
      Creates a new `View` instance, or dequeues an existing view for reuse, then configures and returns it.
@@ -258,6 +276,8 @@ public extension ReusableViewFactoryProtocol where View: UICollectionReusableVie
  */
 public struct ViewFactory<Item, Cell: ReusableViewProtocol>: ReusableViewFactoryProtocol  {
 
+    // MARK: Type aliases
+
     /**
      Configures the cell for the specified item, parent view, and index path.
 
@@ -269,6 +289,9 @@ public struct ViewFactory<Item, Cell: ReusableViewProtocol>: ReusableViewFactory
      - returns: The configured cell.
      */
     public typealias ViewConfigurator = (cell: Cell, item: Item?, type: ReusableViewType, parentView: Cell.ParentView, indexPath: NSIndexPath) -> Cell
+
+
+    // MARK: Properties
 
     /**
      A unique identifier that describes the purpose of the cells that the factory produces.
@@ -283,6 +306,9 @@ public struct ViewFactory<Item, Cell: ReusableViewProtocol>: ReusableViewFactory
 
     /// A closure used to configure the views.
     public let viewConfigurator: ViewConfigurator
+
+    
+    // MARK: Initialization
 
     /**
      Constructs a new cell factory.
