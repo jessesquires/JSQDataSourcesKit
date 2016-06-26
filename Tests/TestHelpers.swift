@@ -16,9 +16,11 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
+import CoreData
 import Foundation
 import UIKit
 import XCTest
+import ExampleModel
 
 
 let defaultTimeout = NSTimeInterval(5)
@@ -38,6 +40,20 @@ struct FakeViewModel: Equatable, CustomStringConvertible {
 
 func ==(lhs: FakeViewModel, rhs: FakeViewModel) -> Bool {
     return lhs.name == rhs.name
+}
+
+func generateThings(context: NSManagedObjectContext, color: Color) -> [Thing] {
+    var all = [Thing]()
+    for _ in 0..<3 {
+        let thing = Thing.newThing(context)
+        thing.color = color
+        all.append(thing)
+    }
+
+    all.sortInPlace { (t1, t2) -> Bool in
+        return t1.name <= t2.name
+    }
+    return all
 }
 
 

@@ -22,6 +22,7 @@
 		888799491D0E2D1700BBCCBC /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888799481D0E2D1700BBCCBC /* DataSource.swift */; };
 		88AD28B31D1F99CE000492FC /* ExampleModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88AD28B01D1F99B3000492FC /* ExampleModel.framework */; };
 		88AD28B41D1F99D5000492FC /* ExampleModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 88AD28B01D1F99B3000492FC /* ExampleModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		88AD28B61D1FA44A000492FC /* FetchedResultsDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AD28B51D1FA44A000492FC /* FetchedResultsDelegateTests.swift */; };
 		88B017F21B3BADFD00C9B29A /* JSQDataSourcesKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 887DD0841B3BAC6C00FC4BF1 /* JSQDataSourcesKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		88B80CD81CBBF62A00EDF9D5 /* DataSourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B80CD71CBBF62A00EDF9D5 /* DataSourceProvider.swift */; };
 		88B80CD91CBBF62A00EDF9D5 /* DataSourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B80CD71CBBF62A00EDF9D5 /* DataSourceProvider.swift */; };
@@ -92,6 +93,7 @@
 		887DD08E1B3BAC6C00FC4BF1 /* JSQDataSourcesKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JSQDataSourcesKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		888799481D0E2D1700BBCCBC /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		88AD28AA1D1F99B3000492FC /* ExampleModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ExampleModel.xcodeproj; path = Example/ExampleModel/ExampleModel.xcodeproj; sourceTree = SOURCE_ROOT; };
+		88AD28B51D1FA44A000492FC /* FetchedResultsDelegateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsDelegateTests.swift; sourceTree = "<group>"; };
 		88B80CD71CBBF62A00EDF9D5 /* DataSourceProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceProvider.swift; sourceTree = "<group>"; };
 		88C99A761CBB302600A9804A /* BridgedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgedDataSource.swift; sourceTree = "<group>"; };
 		88C99A7A1CBB628A00A9804A /* BridgedDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgedDataSourceTests.swift; sourceTree = "<group>"; };
@@ -193,12 +195,13 @@
 				88DCAD391CB87CB400C018AF /* DataSourceProviderSubscriptTests.swift */,
 				88DCAD3A1CB87CB400C018AF /* DataSourceProviderTests.swift */,
 				882CA45E1D1EE1EA006112B9 /* DataSourceTests.swift */,
-				88DCAD3E1CB87CB400C018AF /* Info.plist */,
+				88AD28B51D1FA44A000492FC /* FetchedResultsDelegateTests.swift */,
 				88DCAD421CB87CB400C018AF /* SectionTests.swift */,
 				882CA4571D1D82E1006112B9 /* TestCase.swift */,
 				88DCAD3B1CB87CB400C018AF /* TestHelpers.swift */,
 				88DCAD441CB87CB400C018AF /* TitledCollectionReusableViewFactoryTests.swift */,
 				88DCAD451CB87CB400C018AF /* TitledCollectionReusableViewTests.swift */,
+				88DCAD3E1CB87CB400C018AF /* Info.plist */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				882CA45F1D1EE1EA006112B9 /* DataSourceTests.swift in Sources */,
 				88DCAD841CB87CC900C018AF /* TitledCollectionReusableViewFactoryTests.swift in Sources */,
 				882CA4581D1D82E1006112B9 /* TestCase.swift in Sources */,
+				88AD28B61D1FA44A000492FC /* FetchedResultsDelegateTests.swift in Sources */,
 				88DCAD791CB87CC900C018AF /* DataSourceProviderSubscriptTests.swift in Sources */,
 				88DCAD821CB87CC900C018AF /* SectionTests.swift in Sources */,
 				88DCAD7A1CB87CC900C018AF /* DataSourceProviderTests.swift in Sources */,

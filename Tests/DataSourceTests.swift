@@ -219,21 +219,4 @@ final class DataSourceTests: XCTestCase {
         // THEN: the item is replaced
         XCTAssertEqual(dataSource[ip], item)
     }
-
-
-    // MARK: Helpers
-
-    func generateThings(context: NSManagedObjectContext, color: Color) -> [Thing] {
-        var all = [Thing]()
-        for _ in 0..<3 {
-            let thing = Thing.newThing(context)
-            thing.color = color
-            all.append(thing)
-        }
-
-        all.sortInPlace { (t1, t2) -> Bool in
-            return t1.name <= t2.name
-        }
-        return all
-    }
 }
