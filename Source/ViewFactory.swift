@@ -332,6 +332,7 @@ public struct ViewFactory<Item, Cell: ReusableViewProtocol>: ReusableViewFactory
 
     /// :nodoc:
     public func configure(view view: Cell, item: Item?, type: ReusableViewType, parentView: Cell.ParentView, indexPath: NSIndexPath) -> Cell {
+        assert(self.type == type)
         return viewConfigurator(cell: view, item: item, type: type, parentView: parentView, indexPath: indexPath)
     }
 }

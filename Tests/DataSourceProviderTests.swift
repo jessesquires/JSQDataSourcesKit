@@ -116,7 +116,7 @@ final class DataSourceProviderTests: TestCase {
         var supplementaryFactoryExpectation = expectationWithDescription("supplementary_factory_\(#function)")
 
         // GIVEN: a supplementary view factory
-        let supplementaryViewFactory = ViewFactory(reuseIdentifier: supplementaryViewReuseId, type: .supplementaryView(kind: self.supplementaryViewReuseId))
+        let supplementaryViewFactory = ViewFactory(reuseIdentifier: supplementaryViewReuseId, type: .supplementaryView(kind: fakeSupplementaryViewKind))
         { (view, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionSupplementaryView in
             XCTAssertEqual(view.reuseIdentifier!, self.supplementaryViewReuseId, "Dequeued supplementary view should have expected identifier")
             XCTAssertEqual(model, dataSource[indexPath.section][indexPath.item], "Model object should equal expected value")
