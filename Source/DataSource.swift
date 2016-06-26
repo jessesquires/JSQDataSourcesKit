@@ -95,6 +95,9 @@ extension DataSourceProtocol where Self: NSFetchedResultsController {
      - returns: The item specified by indexPath, or `nil`.
      */
     public func item(atIndexPath indexPath: NSIndexPath) -> Item? {
+        guard indexPath.section < numberOfSections() else { return nil }
+        guard let objects = sections?[indexPath.section].objects else { return nil }
+        guard indexPath.item < objects.count else { return nil }
         return (objectAtIndexPath(indexPath) as! Item)
     }
 }
@@ -247,11 +250,13 @@ extension FetchedResultsController: DataSourceProtocol {
 
     /// :nodoc:
     public func numberOfItems(inSection section: Int) -> Int {
+        guard section < numberOfSections() else { return 0 }
         return sections?[section].numberOfObjects ?? 0
     }
 
     /// :nodoc:
     public func items(inSection section: Int) -> [Item]? {
+        guard section < numberOfSections() else { return nil }
         return (sections?[section].objects as! [Item])
     }
 
@@ -262,6 +267,7 @@ extension FetchedResultsController: DataSourceProtocol {
 
     /// :nodoc:
     public func headerTitle(inSection section: Int) -> String? {
+        guard section < numberOfSections() else { return nil }
         return sections?[section].name
     }
 

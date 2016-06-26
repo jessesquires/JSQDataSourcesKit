@@ -28,6 +28,21 @@ final class DataSourceProviderTests: TestCase {
     private let dequeueCellExpectationName = "dequeue_cell_expectation"
     private let dequeueSupplementaryViewExpectationName = "dequeue_supplementaryview_expectation"
 
+
+    func test_reusableViewType_equality() {
+        let c1 = ReusableViewType.cell
+        let c2 = ReusableViewType.cell
+        XCTAssertEqual(c1, c2)
+
+        let s1 = ReusableViewType.supplementaryView(kind: "same")
+        let s2 = ReusableViewType.supplementaryView(kind: "same")
+        XCTAssertEqual(s1, s2)
+
+        let s3 = ReusableViewType.supplementaryView(kind: "different")
+        XCTAssertNotEqual(s1, s3)
+        XCTAssertNotEqual(c1, s1)
+    }
+
     
     // MARK: CollectionView
 

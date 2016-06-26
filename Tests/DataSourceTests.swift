@@ -19,6 +19,8 @@
 import Foundation
 import UIKit
 import XCTest
+import CoreData
+import ExampleModel
 
 import JSQDataSourcesKit
 
@@ -63,8 +65,95 @@ final class DataSourceTests: XCTestCase {
         XCTAssertNil(dataSource.footerTitle(inSection: 4))
     }
 
-    func test_thatFetchedResultsController_implements_dataSourceProtocol() {
-        // TODO:
+    func test_thatFetchedResultsController_implements_dataSourceProtocol_withObjectsInCoreData() {
+        // GIVEN: a core data stack and objects in a context
+        let context = CoreDataStack(inMemory: true).context
+        let blueThings = generateThings(context, color: .Blue)
+        let greenThings = generateThings(context, color: .Green)
+        let redThings = generateThings(context, color: .Red)
+
+        // GIVEN: a fetched results controller
+        let frc = FetchedResultsController<Thing>(fetchRequest: Thing.fetchRequest(),
+                                                  managedObjectContext: context,
+                                                  sectionNameKeyPath: "colorName",
+                                                  cacheName: nil)
+
+        // WHEN: we fech data
+        _ = try? frc.performFetch()
+
+        // THEN: it returns the expected data from the protocol methods
+        XCTAssertEqual(frc.numberOfSections(), 3)
+        XCTAssertEqual(frc.numberOfItems(inSection: 0), 3)
+        XCTAssertEqual(frc.numberOfItems(inSection: 1), 3)
+        XCTAssertEqual(frc.numberOfItems(inSection: 2), 3)
+
+        XCTAssertEqual(frc.items(inSection: 0)!, blueThings)
+        XCTAssertEqual(frc.items(inSection: 1)!, greenThings)
+        XCTAssertEqual(frc.items(inSection: 2)!, redThings)
+
+        XCTAssertEqual(frc.item(atRow: 0, inSection: 0), blueThings[0])
+        XCTAssertEqual(frc.item(atRow: 1, inSection: 1), greenThings[1])
+        XCTAssertEqual(frc.item(atRow: 2, inSection: 2), redThings[2])
+
+        XCTAssertEqual(frc.headerTitle(inSection: 0), "Blue")
+        XCTAssertEqual(frc.headerTitle(inSection: 1), "Green")
+        XCTAssertEqual(frc.headerTitle(inSection: 2), "Red")
+
+        XCTAssertNil(frc.footerTitle(inSection: 0))
+        XCTAssertNil(frc.footerTitle(inSection: 1))
+        XCTAssertNil(frc.footerTitle(inSection: 2))
+    }
+
+    func test_thatFetchedResultsController_implements_dataSourceProtocol_withNoData() {
+        // GIVEN: a core data stack and objects in a context
+        let context = CoreDataStack(inMemory: true).context
+
+        // GIVEN: a fetched results controller
+        let frc = FetchedResultsController<Thing>(fetchRequest: Thing.fetchRequest(),
+                                                  managedObjectContext: context,
+                                                  sectionNameKeyPath: "colorName",
+                                                  cacheName: nil)
+
+        // WHEN: we fech data
+        _ = try? frc.performFetch()
+
+        // THEN: it returns the expected data from the protocol methods
+        XCTAssertEqual(frc.numberOfSections(), 0)
+        XCTAssertEqual(frc.numberOfItems(inSection: 0), 0)
+        XCTAssertEqual(frc.numberOfItems(inSection: 5), 0)
+
+        XCTAssertNil(frc.items(inSection: 0))
+        XCTAssertNil(frc.items(inSection: 4))
+
+        XCTAssertNil(frc.item(atRow: 0, inSection: 0))
+        XCTAssertNil(frc.item(atRow: 6, inSection: 7))
+
+        XCTAssertNil(frc.headerTitle(inSection: 0))
+        XCTAssertNil(frc.headerTitle(inSection: 10))
+
+        XCTAssertNil(frc.footerTitle(inSection: 0))
+        XCTAssertNil(frc.footerTitle(inSection: 4))
+    }
+
+    func test_thatFetchedResultsController_returnsExpectedData_fromIndexPathSubscript() {
+        // GIVEN: a core data stack and objects in a context
+        let context = CoreDataStack(inMemory: true).context
+        let blueThings = generateThings(context, color: .Blue)
+        let greenThings = generateThings(context, color: .Green)
+        let redThings = generateThings(context, color: .Red)
+
+        // GIVEN: a fetched results controller
+        let frc = FetchedResultsController<Thing>(fetchRequest: Thing.fetchRequest(),
+                                                  managedObjectContext: context,
+                                                  sectionNameKeyPath: "colorName",
+                                                  cacheName: nil)
+        _ = try? frc.performFetch()
+
+        // WHEN: we ask for an object
+        // THEN: we receive the exepected data
+        XCTAssertEqual(frc[NSIndexPath(forItem: 1, inSection: 0)], blueThings[1])
+        XCTAssertEqual(frc[NSIndexPath(forItem: 2, inSection: 1)], greenThings[2])
+        XCTAssertEqual(frc[NSIndexPath(forItem: 0, inSection: 2)], redThings[0])
     }
 
     func test_thatDataSource_returnsExpectedData_fromIntSubscript() {
@@ -129,5 +218,22 @@ final class DataSourceTests: XCTestCase {
 
         // THEN: the item is replaced
         XCTAssertEqual(dataSource[ip], item)
+    }
+
+
+    // MARK: Helpers
+
+    func generateThings(context: NSManagedObjectContext, color: Color) -> [Thing] {
+        var all = [Thing]()
+        for _ in 0..<3 {
+            let thing = Thing.newThing(context)
+            thing.color = color
+            all.append(thing)
+        }
+
+        all.sortInPlace { (t1, t2) -> Bool in
+            return t1.name <= t2.name
+        }
+        return all
     }
 }

@@ -20,6 +20,8 @@
 		882CA45F1D1EE1EA006112B9 /* DataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882CA45E1D1EE1EA006112B9 /* DataSourceTests.swift */; };
 		887DD08F1B3BAC6C00FC4BF1 /* JSQDataSourcesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887DD0841B3BAC6C00FC4BF1 /* JSQDataSourcesKit.framework */; };
 		888799491D0E2D1700BBCCBC /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888799481D0E2D1700BBCCBC /* DataSource.swift */; };
+		88AD28B31D1F99CE000492FC /* ExampleModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88AD28B01D1F99B3000492FC /* ExampleModel.framework */; };
+		88AD28B41D1F99D5000492FC /* ExampleModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 88AD28B01D1F99B3000492FC /* ExampleModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		88B017F21B3BADFD00C9B29A /* JSQDataSourcesKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 887DD0841B3BAC6C00FC4BF1 /* JSQDataSourcesKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		88B80CD81CBBF62A00EDF9D5 /* DataSourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B80CD71CBBF62A00EDF9D5 /* DataSourceProvider.swift */; };
 		88B80CD91CBBF62A00EDF9D5 /* DataSourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B80CD71CBBF62A00EDF9D5 /* DataSourceProvider.swift */; };
@@ -49,6 +51,20 @@
 			remoteGlobalIDString = 887DD0831B3BAC6C00FC4BF1;
 			remoteInfo = JSQDataSourcesKit;
 		};
+		88AD28AF1D1F99B3000492FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 88AD28AA1D1F99B3000492FC /* ExampleModel.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 88AD28701D1F9621000492FC;
+			remoteInfo = ExampleModel;
+		};
+		88AD28B11D1F99B3000492FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 88AD28AA1D1F99B3000492FC /* ExampleModel.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 88AD287A1D1F9621000492FC;
+			remoteInfo = ExampleModelTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -58,6 +74,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				88AD28B41D1F99D5000492FC /* ExampleModel.framework in Embed Frameworks */,
 				88B017F21B3BADFD00C9B29A /* JSQDataSourcesKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -74,6 +91,7 @@
 		887DD0841B3BAC6C00FC4BF1 /* JSQDataSourcesKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSQDataSourcesKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		887DD08E1B3BAC6C00FC4BF1 /* JSQDataSourcesKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JSQDataSourcesKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		888799481D0E2D1700BBCCBC /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		88AD28AA1D1F99B3000492FC /* ExampleModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ExampleModel.xcodeproj; path = Example/ExampleModel/ExampleModel.xcodeproj; sourceTree = SOURCE_ROOT; };
 		88B80CD71CBBF62A00EDF9D5 /* DataSourceProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceProvider.swift; sourceTree = "<group>"; };
 		88C99A761CBB302600A9804A /* BridgedDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgedDataSource.swift; sourceTree = "<group>"; };
 		88C99A7A1CBB628A00A9804A /* BridgedDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgedDataSourceTests.swift; sourceTree = "<group>"; };
@@ -112,6 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88AD28B31D1F99CE000492FC /* ExampleModel.framework in Frameworks */,
 				887DD08F1B3BAC6C00FC4BF1 /* JSQDataSourcesKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,6 +157,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		88AD28AB1D1F99B3000492FC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				88AD28B01D1F99B3000492FC /* ExampleModel.framework */,
+				88AD28B21D1F99B3000492FC /* ExampleModelTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		88DCAD241CB87CB400C018AF /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +187,7 @@
 		88DCAD381CB87CB400C018AF /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				88AD28AA1D1F99B3000492FC /* ExampleModel.xcodeproj */,
 				88C99A7A1CBB628A00A9804A /* BridgedDataSourceTests.swift */,
 				882CA4591D1D957A006112B9 /* BridgedFetchedResultsDelegateTests.swift */,
 				88DCAD391CB87CB400C018AF /* DataSourceProviderSubscriptTests.swift */,
@@ -282,6 +311,12 @@
 			mainGroup = 887DD07A1B3BAC6C00FC4BF1;
 			productRefGroup = 887DD0851B3BAC6C00FC4BF1 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 88AD28AB1D1F99B3000492FC /* Products */;
+					ProjectRef = 88AD28AA1D1F99B3000492FC /* ExampleModel.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				887DD0831B3BAC6C00FC4BF1 /* JSQDataSourcesKit-iOS */,
@@ -290,6 +325,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		88AD28B01D1F99B3000492FC /* ExampleModel.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ExampleModel.framework;
+			remoteRef = 88AD28AF1D1F99B3000492FC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		88AD28B21D1F99B3000492FC /* ExampleModelTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ExampleModelTests.xctest;
+			remoteRef = 88AD28B11D1F99B3000492FC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		881A92CA1CB881270080BC5C /* Resources */ = {
