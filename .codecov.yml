@@ -7,6 +7,7 @@ coverage:
   range: "60...100"
   ignore:
     - Tests/*
+    - Example/*
 
   status:
     project:
