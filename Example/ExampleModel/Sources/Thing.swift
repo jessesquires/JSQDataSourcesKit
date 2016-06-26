@@ -81,15 +81,15 @@ public class Thing: NSManagedObject {
 
     // MARK: Methods
 
-    func changeColorRandomly() {
+    public func changeColorRandomly() {
         color = randomColor(withoutColor: color)
     }
 
-    func changeNameRandomly() {
+    public func changeNameRandomly() {
         name = randomName()
     }
 
-    func changeRandomly() {
+    public func changeRandomly() {
         changeColorRandomly()
         changeNameRandomly()
     }
@@ -128,4 +128,3 @@ private func randomColor(withoutColor color: Color?) -> Color {
 private func randomName() -> String {
     return NSUUID().UUIDString.componentsSeparatedByString("-").first!
 }
-

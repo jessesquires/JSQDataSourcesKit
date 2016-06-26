@@ -20,6 +20,7 @@
 import CoreData
 import Foundation
 import UIKit
+import ExampleModel
 
 
 extension UIAlertController {

@@ -17,6 +17,8 @@
 //
 
 import UIKit
+import ExampleModel
+
 
 final class ViewController: UITableViewController {
 

@@ -19,7 +19,7 @@
 import Foundation
 import CoreData
 import UIKit
-
+import ExampleModel
 import JSQDataSourcesKit
 
 

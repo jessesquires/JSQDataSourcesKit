@@ -31,7 +31,7 @@ public class CoreDataStack {
     public let persistentStoreCoordinator: NSPersistentStoreCoordinator
 
     public init(inMemory: Bool = false) {
-        let modelURL = NSBundle.mainBundle().URLForResource("Model", withExtension: "momd")!
+        let modelURL = NSBundle(forClass: CoreDataStack.self).URLForResource("Model", withExtension: "momd")!
 
         let model = NSManagedObjectModel(contentsOfURL: modelURL)!
         let documentsDirectoryURL = try! NSFileManager.defaultManager().URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)

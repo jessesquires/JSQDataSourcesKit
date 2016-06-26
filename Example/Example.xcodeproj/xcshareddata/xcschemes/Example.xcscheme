@@ -9,8 +9,8 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
@@ -18,6 +18,20 @@
                BuildableName = "JSQDataSourcesKit.framework"
                BlueprintName = "JSQDataSourcesKit-iOS"
                ReferencedContainer = "container:../JSQDataSourcesKit.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "88AD286F1D1F9621000492FC"
+               BuildableName = "ExampleModel.framework"
+               BlueprintName = "ExampleModel"
+               ReferencedContainer = "container:ExampleModel/ExampleModel.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
