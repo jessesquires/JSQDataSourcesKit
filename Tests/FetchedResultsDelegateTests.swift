@@ -83,4 +83,68 @@ final class FetchedResultsDelegateTests: TestCase {
         XCTAssertEqual(tableView.numberOfRowsInSection(1), 7)
     }
 
+    func test_fetchedResultsDelegate_integration_withCollectionView() {
+        // GIVEN: a core data stack and objects in a context
+        let stack = CoreDataStack(inMemory: true)
+        let context = stack.context
+        let blueThings = generateThings(context, color: .Blue)
+        let greenThings = generateThings(context, color: .Green)
+        let redThings = generateThings(context, color: .Red)
+        stack.saveAndWait()
+
+        // GIVEN: a fetched results controller
+        let frc = FetchedResultsController<Thing>(fetchRequest: Thing.fetchRequest(),
+                                                  managedObjectContext: context,
+                                                  sectionNameKeyPath: "colorName",
+                                                  cacheName: nil)
+
+        // GIVEN: a cell factory
+        let factory = ViewFactory(reuseIdentifier: cellReuseId) { (cell, model: Thing?, type, tableView, indexPath) -> FakeCollectionCell in
+            return cell
+        }
+
+        // GIVEN: a supplementary factory
+        let supplementaryFactory = ViewFactory(reuseIdentifier: supplementaryViewReuseId, type: .supplementaryView(kind: fakeSupplementaryViewKind))
+        { (view, model: Thing?, type, collectionView, indexPath) -> FakeCollectionSupplementaryView in
+            return view
+        }
+
+        // GIVEN: a data source provider
+        let dataSourceProvider = DataSourceProvider(dataSource: frc, cellFactory: factory, supplementaryFactory: supplementaryFactory)
+        let collectionViewDataSource = dataSourceProvider.collectionViewDataSource
+        collectionView.dataSource = collectionViewDataSource
+
+        let delegateProvider = FetchedResultsDelegateProvider(cellFactory: factory, collectionView: collectionView)
+        frc.delegate = delegateProvider.collectionDelegate
+
+        // WHEN: we fech data
+        _ = try? frc.performFetch()
+
+        // THEN: the table view reports the expected state
+        XCTAssertEqual(collectionView.numberOfSections(), 3)
+
+        XCTAssertEqual(collectionView.numberOfItemsInSection(0), blueThings.count)
+        XCTAssertEqual(collectionView.numberOfItemsInSection(1), greenThings.count)
+        XCTAssertEqual(collectionView.numberOfItemsInSection(2), redThings.count)
+
+        collectionView.layoutSubviews()
+
+        // WHEN: we modify data, and re-fetch
+        for obj in greenThings {
+            context.deleteObject(obj)
+        }
+        generateThings(context, color: .Red)
+        blueThings[0].color = .Red
+        redThings[0].changeNameRandomly()
+
+        stack.saveAndWait()
+        _ = try? frc.performFetch()
+
+        // THEN: the table view reports the expected state
+        XCTAssertEqual(collectionView.numberOfSections(), 2)
+
+        XCTAssertEqual(collectionView.numberOfItemsInSection(0), 2)
+        XCTAssertEqual(collectionView.numberOfItemsInSection(1), 7)
+    }
+
 }
