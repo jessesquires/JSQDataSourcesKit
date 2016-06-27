@@ -57,27 +57,21 @@ class FetchedCollectionViewController: UICollectionViewController {
         }
 
         // 2. create supplementary view factory
-        let headerFactory = TitledSupplementaryViewFactory(
-            dataConfigurator: { (header, item: Thing?, kind, collectionView, indexPath) -> TitledSupplementaryView in
-                header.label.text = "\(item!.colorName) header (\(indexPath.section))"
-                header.label.textColor = item?.displayColor
-                return header
-            },
-            styleConfigurator: { (header) -> Void in
-                header.backgroundColor = .darkGrayColor()
-        })
+        let headerFactory = TitledSupplementaryViewFactory { (header, item: Thing?, kind, collectionView, indexPath) -> TitledSupplementaryView in
+            header.label.text = "\(item!.colorName) header (\(indexPath.section))"
+            header.label.textColor = item?.displayColor
+            header.backgroundColor = .darkGrayColor()
+            return header
+        }
 
-        let footerFactory = TitledSupplementaryViewFactory(
-            dataConfigurator: { (footer, item: Thing?, kind, collectionView, indexPath) -> TitledSupplementaryView in
-                footer.label.text = "\(item!.colorName) footer (\(indexPath.section))"
-                footer.label.textColor = item?.displayColor
-                return footer
-            },
-            styleConfigurator: { (footer) -> Void in
-                footer.backgroundColor = .lightGrayColor()
-                footer.label.font = .preferredFontForTextStyle(UIFontTextStyleFootnote)
-                footer.label.textAlignment = .Center
-        })
+        let footerFactory = TitledSupplementaryViewFactory { (footer, item: Thing?, kind, collectionView, indexPath) -> TitledSupplementaryView in
+            footer.label.text = "\(item!.colorName) footer (\(indexPath.section))"
+            footer.label.textColor = item?.displayColor
+            footer.backgroundColor = .lightGrayColor()
+            footer.label.font = .preferredFontForTextStyle(UIFontTextStyleFootnote)
+            footer.label.textAlignment = .Center
+            return footer
+        }
 
         let composedFactory = ComposedCollectionSupplementaryViewFactory(headerViewFactory: headerFactory, footerViewFactory: footerFactory)
 

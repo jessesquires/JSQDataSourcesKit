@@ -47,15 +47,12 @@ final class CollectionViewController: UICollectionViewController, UICollectionVi
         }
 
         // 3. create supplementary view factory
-        let headerFactory = TitledSupplementaryViewFactory(
-            dataConfigurator: { (header, item: CellViewModel?, kind, collectionView, indexPath) -> TitledSupplementaryView in
-                header.label.text = "Section \(indexPath.section)"
-                return header
-            },
-            styleConfigurator: { (headerView) -> Void in
-                headerView.backgroundColor = .darkGrayColor()
-                headerView.label.textColor = .whiteColor()
-        })
+        let headerFactory = TitledSupplementaryViewFactory { (header, item: CellViewModel?, kind, collectionView, indexPath) -> TitledSupplementaryView in
+            header.label.text = "Section \(indexPath.section)"
+            header.backgroundColor = .darkGrayColor()
+            header.label.textColor = .whiteColor()
+            return header
+        }
 
         // 4. create data source provider
         self.dataSourceProvider = DataSourceProvider(dataSource: dataSource,

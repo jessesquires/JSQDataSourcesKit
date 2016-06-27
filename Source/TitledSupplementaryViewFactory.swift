@@ -40,25 +40,16 @@ public struct TitledSupplementaryViewFactory <Item>: ReusableViewFactoryProtocol
 
      - returns: The configured `TitledSupplementaryView` instance.
      */
-    public typealias DataConfigurationHandler = (view: TitledSupplementaryView,
+    public typealias ConfigurationHandler = (view: TitledSupplementaryView,
         item: Item?,
         type: ReusableViewType,
         collectionView: UICollectionView,
         indexPath: NSIndexPath) -> TitledSupplementaryView
 
-    /**
-     Configures the style attributes of the `TitledSupplementaryView`.
-
-     - parameter TitledSupplementaryView: The `TitledSupplementaryView` to be configured at the index path.
-     */
-    public typealias StyleConfigurationHandler = (TitledSupplementaryView) -> Void
-
 
     // MARK: Private Properties
 
-    private let dataConfigurator: DataConfigurationHandler
-
-    private let styleConfigurator: StyleConfigurationHandler
+    private let configurator: ConfigurationHandler
 
 
     // MARK: Initialization
@@ -66,14 +57,12 @@ public struct TitledSupplementaryViewFactory <Item>: ReusableViewFactoryProtocol
     /**
      Constructs a new `TitledSupplementaryView`.
 
-     - parameter dataConfigurator:  The closure with which the factory will configure the `TitledSupplementaryView` with the backing data item.
-     - parameter styleConfigurator: The closure with which the factory will configure the style attributes of new `TitledSupplementaryView`.
+     - parameter configurator: The closure with which the factory will configure the `TitledSupplementaryView` with the backing data item.
 
      - returns: A new `TitledSupplementaryView` instance.
      */
-    public init(dataConfigurator: DataConfigurationHandler, styleConfigurator: StyleConfigurationHandler) {
-        self.dataConfigurator = dataConfigurator
-        self.styleConfigurator = styleConfigurator
+    public init(configurator: ConfigurationHandler) {
+        self.configurator = configurator
     }
 
 
@@ -85,9 +74,12 @@ public struct TitledSupplementaryViewFactory <Item>: ReusableViewFactoryProtocol
     }
 
     /// :nodoc:
-    public func configure(view view: TitledSupplementaryView, item: Item?, type: ReusableViewType, parentView: UICollectionView, indexPath: NSIndexPath) -> TitledSupplementaryView {
-        styleConfigurator(view)
-        dataConfigurator(view: view, item: item, type: type, collectionView: parentView, indexPath: indexPath)
+    public func configure(view view: TitledSupplementaryView,
+                               item: Item?,
+                               type: ReusableViewType,
+                               parentView: UICollectionView,
+                               indexPath: NSIndexPath) -> TitledSupplementaryView {
+        configurator(view: view, item: item, type: type, collectionView: parentView, indexPath: indexPath)
         return view
     }
 }

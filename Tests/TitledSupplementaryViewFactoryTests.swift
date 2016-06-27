@@ -51,20 +51,16 @@ class TitledSupplementaryViewFactoryTests: TestCase {
         }
 
         var titledViewDataConfigExpectation = expectationWithDescription("titledViewDataConfigExpectation")
-        var titledViewStyleConfigExpectation = expectationWithDescription("titledViewStyleConfigExpectation")
 
-        let supplementaryViewFactory = TitledSupplementaryViewFactory(dataConfigurator:
-            { (view, item: FakeViewModel?, type, collectionView, indexPath) -> TitledSupplementaryView in
-                XCTAssertEqual(view.reuseIdentifier!, TitledSupplementaryView.identifier, "Dequeued supplementary view should have expected identifier")
-                XCTAssertEqual(type, ReusableViewType.supplementaryView(kind: fakeSupplementaryViewKind), "View type should have expected type")
-                XCTAssertEqual(item, dataSource[indexPath.section][indexPath.item], "Model object should equal expected value")
-                XCTAssertEqual(collectionView, self.collectionView, "CollectionView should equal the collectionView for the data source")
+        let supplementaryViewFactory = TitledSupplementaryViewFactory { (view, item: FakeViewModel?, type, collectionView, indexPath) -> TitledSupplementaryView in
+            XCTAssertEqual(view.reuseIdentifier!, TitledSupplementaryView.identifier, "Dequeued supplementary view should have expected identifier")
+            XCTAssertEqual(type, ReusableViewType.supplementaryView(kind: fakeSupplementaryViewKind), "View type should have expected type")
+            XCTAssertEqual(item, dataSource[indexPath.section][indexPath.item], "Model object should equal expected value")
+            XCTAssertEqual(collectionView, self.collectionView, "CollectionView should equal the collectionView for the data source")
 
-                titledViewDataConfigExpectation.fulfill()
-                return view
-            }, styleConfigurator: { (view) in
-                titledViewStyleConfigExpectation.fulfill()
-        })
+            titledViewDataConfigExpectation.fulfill()
+            return view
+        }
 
         // GIVEN: a data source provider
         let dataSourceProvider = DataSourceProvider(dataSource: dataSource,
@@ -119,7 +115,6 @@ class TitledSupplementaryViewFactoryTests: TestCase {
                 if !(sectionIndex == dataSource.sections.count - 1 && rowIndex == dataSource[sectionIndex].count - 1) {
                     cellFactoryExpectation = expectationWithDescription("cell_factory_" + expectationName)
                     titledViewDataConfigExpectation = expectationWithDescription("titledViewDataConfigExpectation_" + expectationName)
-                    titledViewStyleConfigExpectation = expectationWithDescription("titledViewStyleConfigExpectation_")
                 }
             }
         }
