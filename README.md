@@ -1,7 +1,7 @@
 # JSQDataSourcesKit
 [![Build Status](https://secure.travis-ci.org/jessesquires/JSQDataSourcesKit.svg)](http://travis-ci.org/jessesquires/JSQDataSourcesKit) [![Version Status](https://img.shields.io/cocoapods/v/JSQDataSourcesKit.svg)][podLink] [![license MIT](https://img.shields.io/cocoapods/l/JSQDataSourcesKit.svg)][mitLink] [![codecov](https://codecov.io/gh/jessesquires/JSQDataSourcesKit/branch/develop/graph/badge.svg)](https://codecov.io/gh/jessesquires/JSQDataSourcesKit) [![Platform](https://img.shields.io/cocoapods/p/JSQDataSourcesKit.svg)][docsLink] [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-*Type-safe, value-oriented, composable data source objects that keep your view controllers light*
+*Protocol-oriented, type-safe data source objects that keep your view controllers light*
 
 A Swift library of data source and delegate objects inspired by [Andy Matuschak's](https://github.com/andymatuschak) *type-safe, value-oriented collection view data source [gist](https://gist.github.com/andymatuschak/f1e1691fa1a327468f8e)*.
 
@@ -12,7 +12,7 @@ This library reduces the boilerplate code regarding the `UITableView`, `UICollec
 ## Requirements
 
 * iOS 8+
-* Swift 2.0+
+* Swift 2.2+
 
 ## Installation
 
@@ -48,20 +48,22 @@ import JSQDataSourcesKit
 
 #### Design
 
-This library is composed of different data source and delegate `Provider` classes. Instances of a `Provider` own a collection of model objects and a cell factory, and are responsible for *providing* a data source or delegate.
+This library has four primary components:
 
->**Read the [blog post](http://www.jessesquires.com/building-data-sources-in-swift/) for more details!** *(written after the 3.0 release)*
+1. `Section` — represents a section of data
+2. `DataSource` — represents a collection of `Section`s
+3. `ReusableViewFactory` — responsible for dequeuing and configuring cells (for `UITableView` or `UICollectionView`)
+4. `DataSourceProvider` — owns a data source and cell factory, and provides a `UICollectionViewDataSource` or `UITableViewDataSource` object.
 
 #### Example
 
-The following illustrates a simple example of how these components interact for a table view. Using a collection view follows similarly.
+The following illustrates a simple example of how these components interact for a collection view.
 
 ````swift
 // Given a view controller with a table view
 
 // 1. register cells
-let nib = UINib(nibName: "MyCellNib", bundle: nil)
-tableView.registerNib(nib, forCellReuseIdentifier: "MyCellIdentifier")
+collectionView.registerClass(MyCellClass.self, forCellWithReuseIdentifier: "CellId")
 
 // 2. create sections with your model objects
 let section0 = TableViewSection(items: /* items of type T */)
