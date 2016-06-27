@@ -10,8 +10,8 @@
 		881A92DB1CB881550080BC5C /* FetchedResultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD2C1CB87CB400C018AF /* FetchedResultsDelegate.swift */; };
 		881A92DD1CB881550080BC5C /* JSQDataSourcesKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 88DCAD2F1CB87CB400C018AF /* JSQDataSourcesKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		881A92E11CB881550080BC5C /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD331CB87CB400C018AF /* Section.swift */; };
-		881A92E31CB881550080BC5C /* TitledCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD351CB87CB400C018AF /* TitledCollectionReusableView.swift */; };
-		881A92E51CB881550080BC5C /* TitledCollectionReusableViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD371CB87CB400C018AF /* TitledCollectionReusableViewFactory.swift */; };
+		881A92E31CB881550080BC5C /* TitledSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD351CB87CB400C018AF /* TitledSupplementaryView.swift */; };
+		881A92E51CB881550080BC5C /* TitledSupplementaryViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD371CB87CB400C018AF /* TitledSupplementaryViewFactory.swift */; };
 		882CA4541D1D7D48006112B9 /* BridgedFetchedResultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882CA4531D1D7D48006112B9 /* BridgedFetchedResultsDelegate.swift */; };
 		882CA4551D1D7DE1006112B9 /* BridgedFetchedResultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882CA4531D1D7D48006112B9 /* BridgedFetchedResultsDelegate.swift */; };
 		882CA4561D1D7DE1006112B9 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888799481D0E2D1700BBCCBC /* DataSource.swift */; };
@@ -34,14 +34,14 @@
 		88DCAD6D1CB87CC000C018AF /* FetchedResultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD2C1CB87CB400C018AF /* FetchedResultsDelegate.swift */; };
 		88DCAD701CB87CC000C018AF /* JSQDataSourcesKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 88DCAD2F1CB87CB400C018AF /* JSQDataSourcesKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		88DCAD741CB87CC000C018AF /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD331CB87CB400C018AF /* Section.swift */; };
-		88DCAD761CB87CC000C018AF /* TitledCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD351CB87CB400C018AF /* TitledCollectionReusableView.swift */; };
-		88DCAD781CB87CC000C018AF /* TitledCollectionReusableViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD371CB87CB400C018AF /* TitledCollectionReusableViewFactory.swift */; };
+		88DCAD761CB87CC000C018AF /* TitledSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD351CB87CB400C018AF /* TitledSupplementaryView.swift */; };
+		88DCAD781CB87CC000C018AF /* TitledSupplementaryViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD371CB87CB400C018AF /* TitledSupplementaryViewFactory.swift */; };
 		88DCAD791CB87CC900C018AF /* DataSourceProviderSubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD391CB87CB400C018AF /* DataSourceProviderSubscriptTests.swift */; };
 		88DCAD7A1CB87CC900C018AF /* DataSourceProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD3A1CB87CB400C018AF /* DataSourceProviderTests.swift */; };
 		88DCAD7B1CB87CC900C018AF /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD3B1CB87CB400C018AF /* TestHelpers.swift */; };
 		88DCAD821CB87CC900C018AF /* SectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD421CB87CB400C018AF /* SectionTests.swift */; };
-		88DCAD841CB87CC900C018AF /* TitledCollectionReusableViewFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD441CB87CB400C018AF /* TitledCollectionReusableViewFactoryTests.swift */; };
-		88DCAD851CB87CC900C018AF /* TitledCollectionReusableViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD451CB87CB400C018AF /* TitledCollectionReusableViewTests.swift */; };
+		88DCAD841CB87CC900C018AF /* TitledSupplementaryViewFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD441CB87CB400C018AF /* TitledSupplementaryViewFactoryTests.swift */; };
+		88DCAD851CB87CC900C018AF /* TitledSupplementaryViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD451CB87CB400C018AF /* TitledSupplementaryViewTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,15 +102,15 @@
 		88DCAD2D1CB87CB400C018AF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88DCAD2F1CB87CB400C018AF /* JSQDataSourcesKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQDataSourcesKit.h; sourceTree = "<group>"; };
 		88DCAD331CB87CB400C018AF /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
-		88DCAD351CB87CB400C018AF /* TitledCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledCollectionReusableView.swift; sourceTree = "<group>"; };
-		88DCAD371CB87CB400C018AF /* TitledCollectionReusableViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledCollectionReusableViewFactory.swift; sourceTree = "<group>"; };
+		88DCAD351CB87CB400C018AF /* TitledSupplementaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledSupplementaryView.swift; sourceTree = "<group>"; };
+		88DCAD371CB87CB400C018AF /* TitledSupplementaryViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledSupplementaryViewFactory.swift; sourceTree = "<group>"; };
 		88DCAD391CB87CB400C018AF /* DataSourceProviderSubscriptTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceProviderSubscriptTests.swift; sourceTree = "<group>"; };
 		88DCAD3A1CB87CB400C018AF /* DataSourceProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceProviderTests.swift; sourceTree = "<group>"; };
 		88DCAD3B1CB87CB400C018AF /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		88DCAD3E1CB87CB400C018AF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88DCAD421CB87CB400C018AF /* SectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionTests.swift; sourceTree = "<group>"; };
-		88DCAD441CB87CB400C018AF /* TitledCollectionReusableViewFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledCollectionReusableViewFactoryTests.swift; sourceTree = "<group>"; };
-		88DCAD451CB87CB400C018AF /* TitledCollectionReusableViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledCollectionReusableViewTests.swift; sourceTree = "<group>"; };
+		88DCAD441CB87CB400C018AF /* TitledSupplementaryViewFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledSupplementaryViewFactoryTests.swift; sourceTree = "<group>"; };
+		88DCAD451CB87CB400C018AF /* TitledSupplementaryViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledSupplementaryViewTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,8 +179,8 @@
 				88DCAD2D1CB87CB400C018AF /* Info.plist */,
 				88DCAD2F1CB87CB400C018AF /* JSQDataSourcesKit.h */,
 				88DCAD331CB87CB400C018AF /* Section.swift */,
-				88DCAD351CB87CB400C018AF /* TitledCollectionReusableView.swift */,
-				88DCAD371CB87CB400C018AF /* TitledCollectionReusableViewFactory.swift */,
+				88DCAD351CB87CB400C018AF /* TitledSupplementaryView.swift */,
+				88DCAD371CB87CB400C018AF /* TitledSupplementaryViewFactory.swift */,
 				88CFFD991CB977A100C4E9DD /* ViewFactory.swift */,
 			);
 			path = Source;
@@ -199,8 +199,8 @@
 				88DCAD421CB87CB400C018AF /* SectionTests.swift */,
 				882CA4571D1D82E1006112B9 /* TestCase.swift */,
 				88DCAD3B1CB87CB400C018AF /* TestHelpers.swift */,
-				88DCAD441CB87CB400C018AF /* TitledCollectionReusableViewFactoryTests.swift */,
-				88DCAD451CB87CB400C018AF /* TitledCollectionReusableViewTests.swift */,
+				88DCAD441CB87CB400C018AF /* TitledSupplementaryViewFactoryTests.swift */,
+				88DCAD451CB87CB400C018AF /* TitledSupplementaryViewTests.swift */,
 				88DCAD3E1CB87CB400C018AF /* Info.plist */,
 			);
 			path = Tests;
@@ -376,10 +376,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				881A92E11CB881550080BC5C /* Section.swift in Sources */,
-				881A92E31CB881550080BC5C /* TitledCollectionReusableView.swift in Sources */,
+				881A92E31CB881550080BC5C /* TitledSupplementaryView.swift in Sources */,
 				88C99A781CBB303000A9804A /* ViewFactory.swift in Sources */,
 				88C99A791CBB303000A9804A /* BridgedDataSource.swift in Sources */,
-				881A92E51CB881550080BC5C /* TitledCollectionReusableViewFactory.swift in Sources */,
+				881A92E51CB881550080BC5C /* TitledSupplementaryViewFactory.swift in Sources */,
 				88B80CD91CBBF62A00EDF9D5 /* DataSourceProvider.swift in Sources */,
 				882CA4551D1D7DE1006112B9 /* BridgedFetchedResultsDelegate.swift in Sources */,
 				882CA4561D1D7DE1006112B9 /* DataSource.swift in Sources */,
@@ -395,11 +395,11 @@
 				88DCAD6D1CB87CC000C018AF /* FetchedResultsDelegate.swift in Sources */,
 				88CFFD9A1CB977A100C4E9DD /* ViewFactory.swift in Sources */,
 				88C99A771CBB302600A9804A /* BridgedDataSource.swift in Sources */,
-				88DCAD761CB87CC000C018AF /* TitledCollectionReusableView.swift in Sources */,
+				88DCAD761CB87CC000C018AF /* TitledSupplementaryView.swift in Sources */,
 				88DCAD741CB87CC000C018AF /* Section.swift in Sources */,
 				88B80CD81CBBF62A00EDF9D5 /* DataSourceProvider.swift in Sources */,
 				888799491D0E2D1700BBCCBC /* DataSource.swift in Sources */,
-				88DCAD781CB87CC000C018AF /* TitledCollectionReusableViewFactory.swift in Sources */,
+				88DCAD781CB87CC000C018AF /* TitledSupplementaryViewFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,10 +407,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88DCAD851CB87CC900C018AF /* TitledCollectionReusableViewTests.swift in Sources */,
+				88DCAD851CB87CC900C018AF /* TitledSupplementaryViewTests.swift in Sources */,
 				88C99A7B1CBB628A00A9804A /* BridgedDataSourceTests.swift in Sources */,
 				882CA45F1D1EE1EA006112B9 /* DataSourceTests.swift in Sources */,
-				88DCAD841CB87CC900C018AF /* TitledCollectionReusableViewFactoryTests.swift in Sources */,
+				88DCAD841CB87CC900C018AF /* TitledSupplementaryViewFactoryTests.swift in Sources */,
 				882CA4581D1D82E1006112B9 /* TestCase.swift in Sources */,
 				88AD28B61D1FA44A000492FC /* FetchedResultsDelegateTests.swift in Sources */,
 				88DCAD791CB87CC900C018AF /* DataSourceProviderSubscriptTests.swift in Sources */,

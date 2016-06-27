@@ -26,25 +26,25 @@ import JSQDataSourcesKit
  */
 public struct ComposedCollectionSupplementaryViewFactory <Item>: ReusableViewFactoryProtocol {
 
-    public let headerViewFactory: TitledCollectionReusableViewFactory<Item>
+    public let headerViewFactory: TitledSupplementaryViewFactory<Item>
 
-    public let footerViewFactory: TitledCollectionReusableViewFactory<Item>
+    public let footerViewFactory: TitledSupplementaryViewFactory<Item>
 
-    public init(headerViewFactory: TitledCollectionReusableViewFactory<Item>,
-                footerViewFactory: TitledCollectionReusableViewFactory<Item>) {
+    public init(headerViewFactory: TitledSupplementaryViewFactory<Item>,
+                footerViewFactory: TitledSupplementaryViewFactory<Item>) {
         self.headerViewFactory = headerViewFactory
         self.footerViewFactory = footerViewFactory
     }
 
     public func reuseIdentiferFor(item item: Item?, type: ReusableViewType, indexPath: NSIndexPath) -> String {
-        return TitledCollectionReusableView.identifier
+        return TitledSupplementaryView.identifier
     }
 
-    public func configure(view view: TitledCollectionReusableView,
+    public func configure(view view: TitledSupplementaryView,
                                item: Item?,
                                type: ReusableViewType,
                                parentView: UICollectionView,
-                               indexPath: NSIndexPath) -> TitledCollectionReusableView {
+                               indexPath: NSIndexPath) -> TitledSupplementaryView {
         switch type {
         case .supplementaryView(kind: UICollectionElementKindSectionHeader):
             return headerViewFactory.configure(view: view, item: item, type: type, parentView: parentView, indexPath: indexPath)

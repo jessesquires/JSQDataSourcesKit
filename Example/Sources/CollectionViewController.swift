@@ -25,7 +25,7 @@ final class CollectionViewController: UICollectionViewController, UICollectionVi
 
     typealias Source = DataSource< Section<CellViewModel> >
     typealias CollectionCellFactory = ViewFactory<CellViewModel, CollectionViewCell>
-    typealias HeaderViewFactory = TitledCollectionReusableViewFactory<CellViewModel>
+    typealias HeaderViewFactory = TitledSupplementaryViewFactory<CellViewModel>
 
     var dataSourceProvider: DataSourceProvider<Source, CollectionCellFactory, HeaderViewFactory>?
 
@@ -47,8 +47,8 @@ final class CollectionViewController: UICollectionViewController, UICollectionVi
         }
 
         // 3. create supplementary view factory
-        let headerFactory = TitledCollectionReusableViewFactory(
-            dataConfigurator: { (header, item: CellViewModel?, kind, collectionView, indexPath) -> TitledCollectionReusableView in
+        let headerFactory = TitledSupplementaryViewFactory(
+            dataConfigurator: { (header, item: CellViewModel?, kind, collectionView, indexPath) -> TitledSupplementaryView in
                 header.label.text = "Section \(indexPath.section)"
                 return header
             },

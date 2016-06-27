@@ -19,13 +19,12 @@
 import UIKit
 
 /**
- A `TitledCollectionReusableView` is a `UICollectionReusableView` subclass with a single `UILabel`
- intended for use as an analog to a `UITableView` header title (via `tableView(_:titleForHeaderInSection:)`)
- when using a `CollectionViewFetchedResultsDelegateProvider`.
+ A `TitledSupplementaryView` is a `UICollectionReusableView` subclass with a single `UILabel`
+ intended for use as an analog to a `UITableView` header title (via `tableView(_:titleForHeaderInSection:)`).
 
- These views can be created via a `TitledCollectionReusableViewFactory`.
+ These views can be used with `TitledSupplementaryViewFactory`.
  */
-public final class TitledCollectionReusableView: UICollectionReusableView {
+public final class TitledSupplementaryView: UICollectionReusableView {
 
     // MARK: Properties
 
@@ -60,10 +59,10 @@ public final class TitledCollectionReusableView: UICollectionReusableView {
 
     // MARK: Class properties
 
-    /// The default string used to identify instances of `TitledCollectionReusableView`.
+    /// The default string used to identify instances of `TitledSupplementaryView`.
     public class var identifier: String {
         get {
-            return String(TitledCollectionReusableView.self)
+            return String(TitledSupplementaryView.self)
         }
     }
 

@@ -283,6 +283,7 @@ public struct ViewFactory<Item, Cell: ReusableViewProtocol>: ReusableViewFactory
 
      - parameter cell:       The cell to be configured at the index path.
      - parameter item:       The item at `indexPath`.
+     - parameter type:       The type of reusable view.
      - parameter parentView: The collection view or table view requesting this information.
      - parameter indexPath:  The index path at which the cell will be displayed.
 

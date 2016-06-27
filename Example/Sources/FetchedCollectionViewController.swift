@@ -57,8 +57,8 @@ class FetchedCollectionViewController: UICollectionViewController {
         }
 
         // 2. create supplementary view factory
-        let headerFactory = TitledCollectionReusableViewFactory(
-            dataConfigurator: { (header, item: Thing?, kind, collectionView, indexPath) -> TitledCollectionReusableView in
+        let headerFactory = TitledSupplementaryViewFactory(
+            dataConfigurator: { (header, item: Thing?, kind, collectionView, indexPath) -> TitledSupplementaryView in
                 header.label.text = "\(item!.colorName) header (\(indexPath.section))"
                 header.label.textColor = item?.displayColor
                 return header
@@ -67,8 +67,8 @@ class FetchedCollectionViewController: UICollectionViewController {
                 header.backgroundColor = .darkGrayColor()
         })
 
-        let footerFactory = TitledCollectionReusableViewFactory(
-            dataConfigurator: { (footer, item: Thing?, kind, collectionView, indexPath) -> TitledCollectionReusableView in
+        let footerFactory = TitledSupplementaryViewFactory(
+            dataConfigurator: { (footer, item: Thing?, kind, collectionView, indexPath) -> TitledSupplementaryView in
                 footer.label.text = "\(item!.colorName) footer (\(indexPath.section))"
                 footer.label.textColor = item?.displayColor
                 return footer

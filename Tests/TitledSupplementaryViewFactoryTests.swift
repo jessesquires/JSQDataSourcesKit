@@ -23,19 +23,19 @@ import XCTest
 import JSQDataSourcesKit
 
 
-class TitledCollectionReusableViewFactoryTests: TestCase {
+class TitledSupplementaryViewFactoryTests: TestCase {
 
     private let dequeueCellExpectationName = "collectionview_dequeue_cell_expectation"
     private let dequeueSupplementaryViewExpectationName = "collectionview_dequeue_supplementaryview_expectation"
 
     override func setUp() {
         super.setUp()
-        collectionView.registerClass(TitledCollectionReusableView.self,
+        collectionView.registerClass(TitledSupplementaryView.self,
                                      forSupplementaryViewOfKind: fakeSupplementaryViewKind,
-                                     withReuseIdentifier: TitledCollectionReusableView.identifier)
+                                     withReuseIdentifier: TitledSupplementaryView.identifier)
     }
 
-    func test_dataSource_returnsExpectedData_withTitledCollectionReusableViewFactory() {
+    func test_dataSource_returnsExpectedData_withTitledSupplementaryView() {
         // GIVEN: some collection view sections
         let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let section1 = Section(items: FakeViewModel(), FakeViewModel())
@@ -53,18 +53,17 @@ class TitledCollectionReusableViewFactoryTests: TestCase {
         var titledViewDataConfigExpectation = expectationWithDescription("titledViewDataConfigExpectation")
         var titledViewStyleConfigExpectation = expectationWithDescription("titledViewStyleConfigExpectation")
 
-        let supplementaryViewFactory = TitledCollectionReusableViewFactory(dataConfigurator:
-            { (view, item: FakeViewModel?, type, collectionView, indexPath) -> TitledCollectionReusableView in
-                XCTAssertEqual(view.reuseIdentifier!, TitledCollectionReusableView.identifier, "Dequeued supplementary view should have expected identifier")
+        let supplementaryViewFactory = TitledSupplementaryViewFactory(dataConfigurator:
+            { (view, item: FakeViewModel?, type, collectionView, indexPath) -> TitledSupplementaryView in
+                XCTAssertEqual(view.reuseIdentifier!, TitledSupplementaryView.identifier, "Dequeued supplementary view should have expected identifier")
                 XCTAssertEqual(type, ReusableViewType.supplementaryView(kind: fakeSupplementaryViewKind), "View type should have expected type")
                 XCTAssertEqual(item, dataSource[indexPath.section][indexPath.item], "Model object should equal expected value")
                 XCTAssertEqual(collectionView, self.collectionView, "CollectionView should equal the collectionView for the data source")
 
                 titledViewDataConfigExpectation.fulfill()
                 return view
-            },
-                                                                           styleConfigurator: { (view) in
-                                                                            titledViewStyleConfigExpectation.fulfill()
+            }, styleConfigurator: { (view) in
+                titledViewStyleConfigExpectation.fulfill()
         })
 
         // GIVEN: a data source provider
@@ -103,7 +102,7 @@ class TitledCollectionReusableViewFactoryTests: TestCase {
 
                 // THEN: we receive the expected return values for supplementary views
                 XCTAssertNotNil(supplementaryView, "Supplementary view should not be nil")
-                XCTAssertEqual(supplementaryView!.reuseIdentifier!, TitledCollectionReusableView.identifier,
+                XCTAssertEqual(supplementaryView!.reuseIdentifier!, TitledSupplementaryView.identifier,
                                "Data source should return supplementary views with the expected identifier")
 
                 // THEN: the collectionView calls `dequeueReusableCellWithReuseIdentifier`

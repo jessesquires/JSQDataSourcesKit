@@ -23,13 +23,13 @@ import XCTest
 import JSQDataSourcesKit
 
 
-final class TitledCollectionReusableViewTests: XCTestCase {
+final class TitledSupplementaryViewTests: XCTestCase {
 
     func test_thatView_initializesWithFrame() {
-        let identifier = TitledCollectionReusableView.identifier
-        XCTAssertEqual(identifier, String(TitledCollectionReusableView.self))
+        let identifier = TitledSupplementaryView.identifier
+        XCTAssertEqual(identifier, String(TitledSupplementaryView.self))
 
-        let view = TitledCollectionReusableView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
+        let view = TitledSupplementaryView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
         view.layoutIfNeeded()
 
         XCTAssertEqual(view.verticalInset, 8)
@@ -38,10 +38,10 @@ final class TitledCollectionReusableViewTests: XCTestCase {
     }
 
     func test_thatView_adjustsLabelFrameForInsets() {
-        let identifier = TitledCollectionReusableView.identifier
-        XCTAssertEqual(identifier, String(TitledCollectionReusableView.self))
+        let identifier = TitledSupplementaryView.identifier
+        XCTAssertEqual(identifier, String(TitledSupplementaryView.self))
 
-        let view = TitledCollectionReusableView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
+        let view = TitledSupplementaryView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
         view.verticalInset = 10
         view.horizontalInset = 4
         view.layoutIfNeeded()
@@ -50,7 +50,7 @@ final class TitledCollectionReusableViewTests: XCTestCase {
     }
 
     func test_thatView_preparesForReuse_ForText() {
-        let view = TitledCollectionReusableView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
+        let view = TitledSupplementaryView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
         view.layoutIfNeeded()
         view.label.text = "title text"
 
@@ -62,7 +62,7 @@ final class TitledCollectionReusableViewTests: XCTestCase {
     }
 
     func test_thatView_preparesForReuse_ForAttributedText() {
-        let view = TitledCollectionReusableView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
+        let view = TitledSupplementaryView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
         view.layoutIfNeeded()
         view.label.attributedText = NSAttributedString(string:"title text")
 
@@ -74,7 +74,7 @@ final class TitledCollectionReusableViewTests: XCTestCase {
     }
 
     func test_thatView_setsBackgoundColor() {
-        let view = TitledCollectionReusableView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
+        let view = TitledSupplementaryView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
         view.layoutIfNeeded()
         view.backgroundColor = .redColor()
 
