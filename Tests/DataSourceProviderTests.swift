@@ -43,7 +43,7 @@ final class DataSourceProviderTests: TestCase {
         XCTAssertNotEqual(c1, s1)
     }
 
-    
+
     // MARK: CollectionView
 
     func test_thatDataSourceProvider_forCollectionView_returnsExpectedData_forSingleSection() {
@@ -123,7 +123,7 @@ final class DataSourceProviderTests: TestCase {
         collectionView.dataSource = collectionViewDataSource
 
         collectionView.layoutSubviews()
-        
+
         // WHEN: we call the collection view data source methods
         let numSections = collectionViewDataSource.numberOfSectionsInCollectionView?(collectionView)
         let numRows = collectionViewDataSource.collectionView(collectionView, numberOfItemsInSection: 0)
@@ -354,13 +354,13 @@ final class DataSourceProviderTests: TestCase {
 
                 XCTAssertTrue(header == dataSourceProvider.dataSource[sectionIndex].headerTitle, "Data source should return expected header title for section \(sectionIndex)")
                 XCTAssertTrue(footer == dataSourceProvider.dataSource[sectionIndex].footerTitle, "Data source should return expected footer title for section \(sectionIndex)")
-
+                
                 // THEN: the tableView calls `dequeueReusableCellWithIdentifier`
                 // THEN: the cell factory calls its `ConfigurationHandler`
                 waitForExpectationsWithTimeout(defaultTimeout, handler: { (error) -> Void in
                     XCTAssertNil(error, "Expectations should not error")
                 })
-
+                
                 // reset expectation names for next loop, ignore last item
                 if !(sectionIndex == dataSourceProvider.dataSource.sections.count - 1 && rowIndex == dataSourceProvider.dataSource[sectionIndex].count - 1) {
                     factoryExpectation = expectationWithDescription("factory_" + expectationName)
