@@ -51,7 +51,7 @@ import JSQDataSourcesKit
 This library has four primary components:
 
 1. `Section` — represents a section of data
-2. `DataSource` — represents a collection of `Section`s
+2. `DataSource` — represents a collection of `Section` types
 3. `ReusableViewFactory` — responsible for dequeuing and configuring cells (for `UITableView` or `UICollectionView`)
 4. `DataSourceProvider` — owns a data source and cell factory, and provides a `UICollectionViewDataSource` or `UITableViewDataSource` object.
 
@@ -60,38 +60,43 @@ This library has four primary components:
 The following illustrates a simple example of how these components interact for a collection view.
 
 ````swift
-// Given a view controller with a table view
+// Given a view controller with a collection view
+                                 
+// 1. create Sections and a DataSource with your model objects
+let section0 = Section(items: ...)
+let section1 = Section(items: ...)
+let section2 = Section(items: ...)
+let dataSource = DataSource(sections: section0, section1, section2)
 
-// 1. register cells
-collectionView.registerClass(MyCellClass.self, forCellWithReuseIdentifier: "CellId")
+// 2. create cell factory
+let cellFactory = ViewFactory(reuseIdentifier: "CellId") { (cell, model?, type, collectionView, indexPath) -> MyCellClass in
+    // configure the cell with the model
+    return cell
+}
 
-// 2. create sections with your model objects
-let section0 = TableViewSection(items: /* items of type T */)
-let section1 = TableViewSection(items: /* items of type T */)
-let allSections = [section0, section1]
-
-// 3. create cell factory
-let factory = TableViewCellFactory(reuseIdentifier: "MyCellIdentifier") { (cell, model, tableView, indexPath) -> UITableViewCell in
-      // configure the cell
-      return cell
+// 3. create supplementary view factory
+let type = ReusableViewType.supplementaryView(kind: UICollectionElementKindSectionHeader)
+let headerFactory = ViewFactory(reuseIdentifier: "HeaderId", type: type) { (view, model?, type, collectionView, indexPath) -> MyHeaderView in
+    // configure header view
+    return view
 }
 
 // 4. create data source provider
-let dataSourceProvider = TableViewDataSourceProvider(sections: allSections, cellFactory: factory)
+let dataSourceProvider =  DataSourceProvider(dataSource: dataSource,
+                                             cellFactory: cellFactory,
+                                             supplementaryFactory: headerFactory)
 
-// 5. set the table view's data source
-tableView.dataSource = dataSourceProvider.dataSource
+// 5. set the collection view's data source
+collectionView.dataSource = dataSourceProvider.collectionViewDataSource
 ````
 
 #### Demo Project
 
-The example app included exercises *all* functionality in this library. Open `JSQDataSourcesKit.xcworkspace`, select the `Example` scheme, then build and run.
+The [example project](https://github.com/jessesquires/JSQDataSourcesKit/tree/develop/Example) included exercises *all* functionality in this library.
 
 ## Unit tests
 
-There's a suite of unit tests for the `JSQDataSourcesKit.framework`. To run them, open `JSQDataSourcesKit.xcworkspace`, select the `JSQDataSourcesKit` scheme, then &#x2318;-u.
-
-These tests are well commented and serve as further documentation for how to use this library.
+There's a suite of unit tests for `JSQDataSourcesKit`. Run them in the usual way from Xcode. These tests are well commented and serve as further documentation for how to use this library.
 
 ## Contribute
 
