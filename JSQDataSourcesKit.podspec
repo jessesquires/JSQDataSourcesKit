@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
    s.version = '4.0.0'
    s.license = 'MIT'
 
-   s.summary = 'Type-safe, value-oriented, composable data source objects that keep your view controllers light'
+   s.summary = 'Protocol-oriented, type-safe data source objects that keep your view controllers light'
    s.homepage = 'https://github.com/jessesquires/JSQDataSourcesKit'
    s.documentation_url = 'http://jessesquires.com/JSQDataSourcesKit/'
 
