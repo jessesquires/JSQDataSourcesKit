@@ -130,7 +130,10 @@ public extension DataSourceProvider where CellFactory.View: UICollectionViewCell
                     item = self.dataSource.item(atIndexPath: indexPath)
                 }
             }
-            return self.supplementaryFactory.supplementaryViewFor(item: item, kind: kind, collectionView: collectionView, indexPath: indexPath)
+            return self.supplementaryFactory.supplementaryViewFor(item: item,
+                                                                  kind: kind,
+                                                                  collectionView: collectionView,
+                                                                  indexPath: indexPath)
         }
         
         return dataSource

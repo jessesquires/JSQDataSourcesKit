@@ -94,6 +94,57 @@ final class DataSourceProviderTests: TestCase {
         })
     }
 
+    func test_thatDataSourceProvider_forCollectionView_returnsExpectedData_forSingleSection_withoutItems() {
+        // GIVEN: a single section with no items
+        let items = [FakeViewModel]()
+        let dataSource = DataSource(sections: Section(items))
+        XCTAssertEqual(dataSource.sections.count, 1)
+
+        // GIVEN: a cell factory
+        let cellFactory = ViewFactory(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionCell in
+            return cell
+        }
+
+        let supplementaryFactoryExpectation = expectationWithDescription("supplementary_factory_\(#function)")
+
+        // GIVEN: a supplementary view factory
+        let supplementaryViewFactory = ViewFactory(reuseIdentifier: supplementaryViewReuseId,
+                                                   type: .supplementaryView(kind: fakeSupplementaryViewKind))
+        { (view, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionSupplementaryView in
+            supplementaryFactoryExpectation.fulfill()
+            return view
+        }
+
+        // GIVEN: a data source provider
+        let dataSourceProvider = DataSourceProvider(dataSource: dataSource,
+                                                    cellFactory: cellFactory,
+                                                    supplementaryFactory: supplementaryViewFactory)
+        let collectionViewDataSource = dataSourceProvider.collectionViewDataSource
+        collectionView.dataSource = collectionViewDataSource
+
+        collectionView.layoutSubviews()
+        
+        // WHEN: we call the collection view data source methods
+        let numSections = collectionViewDataSource.numberOfSectionsInCollectionView?(collectionView)
+        let numRows = collectionViewDataSource.collectionView(collectionView, numberOfItemsInSection: 0)
+        let supplementaryView = collectionViewDataSource.collectionView?(collectionView,
+                                                                         viewForSupplementaryElementOfKind: fakeSupplementaryViewKind,
+                                                                         atIndexPath: NSIndexPath(forItem: 0, inSection: 0))
+
+        // THEN: we receive the expected return values
+        XCTAssertEqual(numSections!, 1, "Data source should return 1 section")
+        XCTAssertEqual(numRows, 0, "Data source should return 0 rows for section 0")
+
+        XCTAssertNotNil(supplementaryView, "Supplementary view should not be nil")
+        XCTAssertEqual(supplementaryView!.reuseIdentifier!, supplementaryViewReuseId, "Data source should return supplementary views with the expected identifier")
+
+        // THEN: the collectionView calls `dequeueReusableSupplementaryViewOfKind`
+        // THEN: the supplementary view factory calls its `ConfigurationHandler`
+        waitForExpectationsWithTimeout(defaultTimeout, handler: { (error) -> Void in
+            XCTAssertNil(error, "Expectation should not error")
+        })
+    }
+
     func test_thatDataSourceProvider_forCollectionView_returnsExpectedData_forMultipleSections() {
         // GIVEN: some collection view sections
         let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
