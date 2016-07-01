@@ -40,11 +40,7 @@ public struct TitledSupplementaryViewFactory <Item>: ReusableViewFactoryProtocol
 
      - returns: The configured `TitledSupplementaryView` instance.
      */
-    public typealias ConfigurationHandler = (view: TitledSupplementaryView,
-        item: Item?,
-        type: ReusableViewType,
-        collectionView: UICollectionView,
-        indexPath: NSIndexPath) -> TitledSupplementaryView
+    public typealias ConfigurationHandler = (view: TitledSupplementaryView, item: Item?, type: ReusableViewType, collectionView: UICollectionView, indexPath: NSIndexPath) -> TitledSupplementaryView
 
 
     // MARK: Private Properties
