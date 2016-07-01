@@ -4,6 +4,87 @@ The changelog for `JSQDataSourcesKit`. Also see the [releases](https://github.co
 
 --------------------------------------
 
+4.0.0
+-----
+
+This release closes the [4.0.0 milestone](https://github.com/jessesquires/JSQDataSourcesKit/issues?utf8=✓&q=milestone%3A4.0.0+).
+
+This release is essentially a complete re-write of the library. If you are currently using this, migration to `4.0` will be pretty involved, but it will be worth it. The result is a *dramatically simpler* API.
+
+As always, see the [updated documentation for details](http://www.jessesquires.com/JSQDataSourcesKit/index.html).
+
+## New 🎉 
+
+- tvOS support
+- Swift Package Manager support
+
+## Bug fixes 🐛 
+
+- Fixed crash when dequeuing a supplementary view for an empty collection view section (#38). You can now have supplementary views for empty sections.
+
+## ⚠️  Breaking changes ⚠️ 
+
+### Swift
+
+- Updated to Swift 2.2. 
+- **Swift 2.2. and above is now required.**
+
+### Major API changes
+
+This release includes a complete revamp of the API (#48). It is now much cleaner, simpler, and easier to use. It has also been updated to be more *Swifty* according to the latest Swift API Guidelines.
+
+This library was originally written *before* **protocol extensions** were introduced in Swift. The reimagining of this library and it's APIs are now heavily based on protocol extensions. 
+
+##### New `DataSource`
+
+- There's a new `DataSourceProtocol` and concrete `DataSource` model. This represents (and owns) your sections.
+- There's a new `FetchedResultsController<T>`, which is a generic `NSFetchedResultsController` that conforms to `DataSourceProtocol`.
+
+##### DataSourceProvider objects
+
+All of the `*DataSourceProvider` classes have been unified into a single class, `DataSourceProvider`. This new class is initialized with a `DataSourceProtocol` and replaces all of the following:
+
+- Removed `TableViewDataSourceProvider`
+- Removed `TableViewFetchedResultsDataSourceProvider`
+- Removed `CollectionViewDataSourceProvider`
+- Removed `CollectionViewFetchedResultsDataSourceProvider`
+
+##### Section objects
+
+The section objects are now unified into a single `Section` object and `SectionInfoProtocol` protocol, instead of having table-specific and collection-specific models. The new `Section` and `SectionInfoProtocol` replace the following:
+
+- Removed `CollectionViewSectionInfo` 
+- Removed `CollectionViewSection`
+- Removed `TableViewSectionInfo`
+- Removed `TableViewSection`
+
+##### Cell factory objects
+
+The cell factories have been unified into a single `ViewFactory` object and `ReusableViewFactoryProtocol` protocol, which replace the following:
+
+- Removed `CollectionViewCellFactoryType`
+- Removed `CollectionViewCellFactory`
+- Removed `TableViewCellFactoryType`
+- Removed `TableViewCellFactory` 
+- Removed `CollectionSupplementaryViewFactoryType`
+- Removed `SupplementaryViewFactory` 
+
+##### FetchedResultsDelegateProviers
+
+The `*FetchedResultsDelegateProvider` classes have been unified into a single class, `FetchedResultsDelegateProvider`, which replaces the following:
+
+- Remove `CollectionViewFetchedResultsDelegateProvider`
+- Remove `TableViewFetchedResultsDelegateProvider`
+
+##### `TitledCollectionReusableView` changes:
+
+* Renamed to `TitledSupplementaryView`
+* `TitledCollectionReusableViewFactory` was replaced by `TitledSupplementaryViewFactory`
+* No longer uses a `xib`, but programmatic layout
+* `TitledCollectionReusableView.xib` was **removed**
+* `TitledCollectionReusableView.nib` was **removed**
+* The `leadingSpacing`, `topSpacing`, `trailingSpacing` and `bottomSpacing` constraint properties have been **removed** and replaced with `verticalInset` and `horizontalInset` properties
+
 3.0.1
 -----
 
