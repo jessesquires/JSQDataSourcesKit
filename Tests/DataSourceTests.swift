@@ -73,7 +73,7 @@ final class DataSourceTests: XCTestCase {
         let redThings = generateThings(context, color: .Red)
 
         // GIVEN: a fetched results controller
-        let frc = FetchedResultsController<Thing>(fetchRequest: Thing.fetchRequest(),
+        let frc = FetchedResultsController<Thing>(fetchRequest: Thing.newFetchRequest(),
                                                   managedObjectContext: context,
                                                   sectionNameKeyPath: "colorName",
                                                   cacheName: nil)
@@ -109,7 +109,7 @@ final class DataSourceTests: XCTestCase {
         let context = CoreDataStack(inMemory: true).context
 
         // GIVEN: a fetched results controller
-        let frc = FetchedResultsController<Thing>(fetchRequest: Thing.fetchRequest(),
+        let frc = FetchedResultsController<Thing>(fetchRequest: Thing.newFetchRequest(),
                                                   managedObjectContext: context,
                                                   sectionNameKeyPath: "colorName",
                                                   cacheName: nil)
@@ -143,7 +143,7 @@ final class DataSourceTests: XCTestCase {
         let redThings = generateThings(context, color: .Red)
 
         // GIVEN: a fetched results controller
-        let frc = FetchedResultsController<Thing>(fetchRequest: Thing.fetchRequest(),
+        let frc = FetchedResultsController<Thing>(fetchRequest: Thing.newFetchRequest(),
                                                   managedObjectContext: context,
                                                   sectionNameKeyPath: "colorName",
                                                   cacheName: nil)

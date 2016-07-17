@@ -23,8 +23,8 @@ final class StaticViewsUITests: XCTestCase {
     private let numberOfCellsInStaticTableView: Int = 9
     private let numberOfCellsInStaticCollectionView: Int = 10
     
-    private let staticTableViewMenuItem = XCUIApplication().tables.element.cells.elementBoundByIndex(0)
-    private let staticCollectionViewMenuItem = XCUIApplication().tables.element.cells.elementBoundByIndex(1)
+    private let staticTableViewMenuItem = XCUIApplication().tables.element.cells.element(boundBy: 0)
+    private let staticCollectionViewMenuItem = XCUIApplication().tables.element.cells.element(boundBy: 1)
         
     override func setUp() {
         super.setUp()

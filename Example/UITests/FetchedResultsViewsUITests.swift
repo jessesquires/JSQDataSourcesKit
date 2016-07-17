@@ -22,8 +22,8 @@ final class FetchedResultsViewsUITests: XCTestCase {
     
     private let numberOfItemsAdded = 5
     
-    private let fetchedResultsTableViewMenuItem = XCUIApplication().tables.element.cells.elementBoundByIndex(2)
-    private let fetchedResultsCollectionViewMenuItem = XCUIApplication().tables.element.cells.elementBoundByIndex(3)
+    private let fetchedResultsTableViewMenuItem = XCUIApplication().tables.element.cells.element(boundBy: 2)
+    private let fetchedResultsCollectionViewMenuItem = XCUIApplication().tables.element.cells.element(boundBy: 3)
     
     override func setUp() {
         super.setUp()

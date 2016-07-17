@@ -41,7 +41,7 @@ func addThingsInStack(stack: CoreDataStack, count: Int) {
 
 func removeAllThingsInStack(stack: CoreDataStack) {
     do {
-        let results = try stack.context.executeFetchRequest(Thing.fetchRequest())
+        let results = try stack.context.executeFetchRequest(Thing.newFetchRequest())
         for thing in results {
             stack.context.deleteObject(thing as! Thing)
         }
@@ -54,7 +54,7 @@ func removeAllThingsInStack(stack: CoreDataStack) {
 
 
 func fetchedResultsController(inContext context: NSManagedObjectContext) -> FetchedResultsController<Thing> {
-    return FetchedResultsController<Thing>(fetchRequest: Thing.fetchRequest(),
+    return FetchedResultsController<Thing>(fetchRequest: Thing.newFetchRequest(),
                                            managedObjectContext: context,
                                            sectionNameKeyPath: "colorName",
                                            cacheName: nil)

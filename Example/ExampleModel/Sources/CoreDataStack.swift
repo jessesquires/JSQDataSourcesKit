@@ -47,11 +47,10 @@ public class CoreDataStack {
     public func saveAndWait() -> Bool {
         var success = true
 
-        if !context.hasChanges {
-            return success
-        }
-
         context.performBlockAndWait {
+            if !self.context.hasChanges {
+                success = true
+            }
             do {
                 try self.context.save()
             } catch {
@@ -59,7 +58,6 @@ public class CoreDataStack {
                 success = false
             }
         }
-        
         return success
     }
     

@@ -37,7 +37,7 @@ final class FetchedResultsDelegateTests: TestCase {
         stack.saveAndWait()
 
         // GIVEN: a fetched results controller
-        let frc = FetchedResultsController<Thing>(fetchRequest: Thing.fetchRequest(),
+        let frc = FetchedResultsController<Thing>(fetchRequest: Thing.newFetchRequest(),
                                                   managedObjectContext: context,
                                                   sectionNameKeyPath: "colorName",
                                                   cacheName: nil)
@@ -93,7 +93,7 @@ final class FetchedResultsDelegateTests: TestCase {
         stack.saveAndWait()
 
         // GIVEN: a fetched results controller
-        let frc = FetchedResultsController<Thing>(fetchRequest: Thing.fetchRequest(),
+        let frc = FetchedResultsController<Thing>(fetchRequest: Thing.newFetchRequest(),
                                                   managedObjectContext: context,
                                                   sectionNameKeyPath: "colorName",
                                                   cacheName: nil)
