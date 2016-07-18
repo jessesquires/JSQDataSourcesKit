@@ -40,7 +40,7 @@ public struct TitledSupplementaryViewFactory <Item>: ReusableViewFactoryProtocol
 
      - returns: The configured `TitledSupplementaryView` instance.
      */
-    public typealias ConfigurationHandler = (view: TitledSupplementaryView, item: Item?, type: ReusableViewType, collectionView: UICollectionView, indexPath: NSIndexPath) -> TitledSupplementaryView
+    public typealias ConfigurationHandler = (view: TitledSupplementaryView, item: Item?, type: ReusableViewType, collectionView: UICollectionView, indexPath: IndexPath) -> TitledSupplementaryView
 
 
     // MARK: Private Properties
@@ -65,17 +65,16 @@ public struct TitledSupplementaryViewFactory <Item>: ReusableViewFactoryProtocol
     // MARK: ReusableViewFactoryProtocol
 
     /// :nodoc:
-    public func reuseIdentiferFor(item item: Item?, type: ReusableViewType, indexPath: NSIndexPath) -> String {
+    public func reuseIdentiferFor(item: Item?, type: ReusableViewType, indexPath: IndexPath) -> String {
         return TitledSupplementaryView.identifier
     }
 
     /// :nodoc:
-    public func configure(view view: TitledSupplementaryView,
+    public func configure(view: TitledSupplementaryView,
                                item: Item?,
                                type: ReusableViewType,
                                parentView: UICollectionView,
-                               indexPath: NSIndexPath) -> TitledSupplementaryView {
-        configurator(view: view, item: item, type: type, collectionView: parentView, indexPath: indexPath)
-        return view
+                               indexPath: IndexPath) -> TitledSupplementaryView {
+        return configurator(view: view, item: item, type: type, collectionView: parentView, indexPath: indexPath)
     }
 }

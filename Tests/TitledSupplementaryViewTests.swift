@@ -64,7 +64,7 @@ final class TitledSupplementaryViewTests: XCTestCase {
     func test_thatView_preparesForReuse_ForAttributedText() {
         let view = TitledSupplementaryView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
         view.layoutIfNeeded()
-        view.label.attributedText = NSAttributedString(string:"title text")
+        view.label.attributedText = AttributedString(string:"title text")
 
         XCTAssertNotNil(view.label.attributedText)
 
@@ -76,9 +76,9 @@ final class TitledSupplementaryViewTests: XCTestCase {
     func test_thatView_setsBackgoundColor() {
         let view = TitledSupplementaryView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
         view.layoutIfNeeded()
-        view.backgroundColor = .redColor()
+        view.backgroundColor = .red()
 
         XCTAssertEqual(view.label.backgroundColor, view.backgroundColor)
-        XCTAssertEqual(view.label.backgroundColor, .redColor())
+        XCTAssertEqual(view.label.backgroundColor, .red())
     }
 }

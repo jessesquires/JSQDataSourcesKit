@@ -36,15 +36,15 @@ public struct ComposedCollectionSupplementaryViewFactory <Item>: ReusableViewFac
         self.footerViewFactory = footerViewFactory
     }
 
-    public func reuseIdentiferFor(item item: Item?, type: ReusableViewType, indexPath: NSIndexPath) -> String {
+    public func reuseIdentiferFor(item: Item?, type: ReusableViewType, indexPath: IndexPath) -> String {
         return TitledSupplementaryView.identifier
     }
 
-    public func configure(view view: TitledSupplementaryView,
+    public func configure(view: TitledSupplementaryView,
                                item: Item?,
                                type: ReusableViewType,
                                parentView: UICollectionView,
-                               indexPath: NSIndexPath) -> TitledSupplementaryView {
+                               indexPath: IndexPath) -> TitledSupplementaryView {
         switch type {
         case .supplementaryView(kind: UICollectionElementKindSectionHeader):
             return headerViewFactory.configure(view: view, item: item, type: type, parentView: parentView, indexPath: indexPath)

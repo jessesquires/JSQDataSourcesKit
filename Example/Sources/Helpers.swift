@@ -31,7 +31,7 @@ struct CellViewModel {
 }
 
 
-func addThingsInStack(stack: CoreDataStack, count: Int) {
+func addThingsInStack(_ stack: CoreDataStack, count: Int) {
     for _ in 0..<count {
         Thing.newThing(stack.context)
     }
@@ -39,11 +39,11 @@ func addThingsInStack(stack: CoreDataStack, count: Int) {
 }
 
 
-func removeAllThingsInStack(stack: CoreDataStack) {
+func removeAllThingsInStack(_ stack: CoreDataStack) {
     do {
-        let results = try stack.context.executeFetchRequest(Thing.newFetchRequest())
+        let results = try stack.context.fetch(Thing.newFetchRequest())
         for thing in results {
-            stack.context.deleteObject(thing as! Thing)
+            stack.context.delete(thing)
         }
 
         assert(stack.saveAndWait())
@@ -61,19 +61,19 @@ func fetchedResultsController(inContext context: NSManagedObjectContext) -> Fetc
 }
 
 
-func configureCollectionView(collectionView: UICollectionView) {
+func configureCollectionView(_ collectionView: UICollectionView) {
     let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
     layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     layout.headerReferenceSize = CGSize(width: collectionView.frame.size.width, height: 50)
 
-    collectionView.registerNib(UINib(nibName: "CollectionViewCell", bundle: nil),
-                               forCellWithReuseIdentifier: CellId)
+    collectionView.register(UINib(nibName: "CollectionViewCell", bundle: nil),
+                            forCellWithReuseIdentifier: CellId)
 
-    collectionView.registerClass(TitledSupplementaryView.self,
-                                 forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
-                                 withReuseIdentifier: TitledSupplementaryView.identifier)
+    collectionView.register(TitledSupplementaryView.self,
+                            forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+                            withReuseIdentifier: TitledSupplementaryView.identifier)
 
-    collectionView.registerClass(TitledSupplementaryView.self,
-                                 forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
-                                 withReuseIdentifier: TitledSupplementaryView.identifier)
+    collectionView.register(TitledSupplementaryView.self,
+                            forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
+                            withReuseIdentifier: TitledSupplementaryView.identifier)
 }

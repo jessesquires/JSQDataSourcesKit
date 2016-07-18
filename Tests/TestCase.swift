@@ -24,20 +24,20 @@ class TestCase: XCTestCase {
 
     let supplementaryViewReuseId = "fakeSupplementaryId"
     let collectionView = FakeCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 600),
-                                                    collectionViewLayout: FakeFlowLayout())
+                                            collectionViewLayout: FakeFlowLayout())
 
-    let tableView = FakeTableView(frame: CGRect(x: 0, y: 0, width: 320, height: 600), style: .Plain)
+    let tableView = FakeTableView(frame: CGRect(x: 0, y: 0, width: 320, height: 600), style: .plain)
 
     override func setUp() {
         super.setUp()
 
-        collectionView.registerClass(FakeCollectionCell.self,
-                                     forCellWithReuseIdentifier: cellReuseId)
+        collectionView.register(FakeCollectionCell.self,
+                                forCellWithReuseIdentifier: cellReuseId)
 
-        collectionView.registerClass(FakeCollectionSupplementaryView.self,
-                                     forSupplementaryViewOfKind: fakeSupplementaryViewKind,
-                                     withReuseIdentifier: supplementaryViewReuseId)
+        collectionView.register(FakeCollectionSupplementaryView.self,
+                                forSupplementaryViewOfKind: fakeSupplementaryViewKind,
+                                withReuseIdentifier: supplementaryViewReuseId)
 
-        tableView.registerClass(FakeTableCell.self, forCellReuseIdentifier: cellReuseId)
+        tableView.register(FakeTableCell.self, forCellReuseIdentifier: cellReuseId)
     }
 }

@@ -23,13 +23,13 @@ import XCTest
 import ExampleModel
 
 
-let defaultTimeout = NSTimeInterval(5)
+let defaultTimeout = TimeInterval(5)
 
 
 // MARK: model
 
 struct FakeViewModel: Equatable, CustomStringConvertible {
-    let name = NSUUID().UUIDString
+    let name = UUID().uuidString
 
     var description: String {
         get {
@@ -42,7 +42,8 @@ func ==(lhs: FakeViewModel, rhs: FakeViewModel) -> Bool {
     return lhs.name == rhs.name
 }
 
-func generateThings(context: NSManagedObjectContext, color: Color) -> [Thing] {
+@discardableResult
+func generateThings(_ context: NSManagedObjectContext, color: Color) -> [Thing] {
     var all = [Thing]()
     for _ in 0..<3 {
         let thing = Thing.newThing(context)
@@ -50,9 +51,9 @@ func generateThings(context: NSManagedObjectContext, color: Color) -> [Thing] {
         all.append(thing)
     }
 
-    all.sortInPlace { (t1, t2) -> Bool in
+    all.sort(isOrderedBefore: { (t1, t2) -> Bool in
         return t1.name <= t2.name
-    }
+    })
     return all
 }
 
@@ -64,10 +65,10 @@ class FakeTableCell: UITableViewCell { }
 class FakeTableView: UITableView {
     var dequeueCellExpectation: XCTestExpectation?
 
-    override func dequeueReusableCellWithIdentifier(identifier: String,
-                                                    forIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func dequeueReusableCell(withIdentifier identifier: String,
+                                      for indexPath: IndexPath) -> UITableViewCell {
         dequeueCellExpectation?.fulfill()
-        return super.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
+        return super.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
     }
 }
 
@@ -86,27 +87,27 @@ class FakeCollectionView: UICollectionView {
 
     var dequeueSupplementaryViewExpectation: XCTestExpectation?
 
-    override func dequeueReusableCellWithReuseIdentifier(identifier: String,
-                                                         forIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func dequeueReusableCell(withReuseIdentifier identifier: String,
+                                      for indexPath: IndexPath) -> UICollectionViewCell {
         dequeueCellExpectation?.fulfill()
-        return super.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath)
+        return super.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
     }
 
-    override func dequeueReusableSupplementaryViewOfKind(elementKind: String,
-                                                         withReuseIdentifier identifier: String,
-                                                                             forIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    override func dequeueReusableSupplementaryView(ofKind elementKind: String,
+                                                   withReuseIdentifier identifier: String,
+                                                   for indexPath: IndexPath) -> UICollectionReusableView {
         dequeueSupplementaryViewExpectation?.fulfill()
-        return super.dequeueReusableSupplementaryViewOfKind(elementKind, withReuseIdentifier: identifier, forIndexPath: indexPath)
+        return super.dequeueReusableSupplementaryView(ofKind: elementKind, withReuseIdentifier: identifier, for: indexPath)
     }
 }
 
 class FakeFlowLayout: UICollectionViewFlowLayout {
 
-    override func layoutAttributesForSupplementaryViewOfKind(elementKind: String,
-                                                             atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
+    override func layoutAttributesForSupplementaryView(ofKind elementKind: String,
+                                                       at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         if elementKind == fakeSupplementaryViewKind {
-            return UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: elementKind, withIndexPath: indexPath)
+            return UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: elementKind, with: indexPath)
         }
-        return super.layoutAttributesForSupplementaryViewOfKind(elementKind, atIndexPath: indexPath)
+        return super.layoutAttributesForSupplementaryView(ofKind: elementKind, at: indexPath)
     }
 }
