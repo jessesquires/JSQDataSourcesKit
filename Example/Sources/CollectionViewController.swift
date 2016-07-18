@@ -49,8 +49,8 @@ final class CollectionViewController: UICollectionViewController, UICollectionVi
         // 3. create supplementary view factory
         let headerFactory = TitledSupplementaryViewFactory { (header, item: CellViewModel?, kind, collectionView, indexPath) -> TitledSupplementaryView in
             header.label.text = "Section \(indexPath.section)"
-            header.backgroundColor = .darkGrayColor()
-            header.label.textColor = .whiteColor()
+            header.backgroundColor = .darkGray()
+            header.label.textColor = .white()
             return header
         }
 
@@ -63,7 +63,7 @@ final class CollectionViewController: UICollectionViewController, UICollectionVi
         collectionView?.dataSource = self.dataSourceProvider?.collectionViewDataSource
     }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.size.width, height: 50)
     }
 }

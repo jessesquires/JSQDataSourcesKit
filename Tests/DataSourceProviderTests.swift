@@ -49,13 +49,13 @@ final class DataSourceProviderTests: TestCase {
     func test_thatDataSourceProvider_forCollectionView_returnsExpectedData_forSingleSection() {
         // GIVEN: a single section with data items
         let expectedModel = FakeViewModel()
-        let expectedIndexPath = NSIndexPath(forRow: 3, inSection: 0)
+        let expectedIndexPath = IndexPath(row: 3, section: 0)
 
         let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel())
         let dataSource = DataSource([section0])
 
-        let cellFactoryExpectation = expectationWithDescription(#function)
-        collectionView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + #function)
+        let cellFactoryExpectation = expectation(withDescription: #function)
+        collectionView.dequeueCellExpectation = expectation(withDescription: dequeueCellExpectationName + #function)
 
         // GIVEN: a cell factory
         let cellFactory = ViewFactory(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionCell in
@@ -75,9 +75,9 @@ final class DataSourceProviderTests: TestCase {
         collectionView.dataSource = collectionViewDataSource
 
         // WHEN: we call the collection view data source methods
-        let numSections = collectionViewDataSource.numberOfSectionsInCollectionView?(collectionView)
+        let numSections = collectionViewDataSource.numberOfSections?(in: collectionView)
         let numRows = collectionViewDataSource.collectionView(collectionView, numberOfItemsInSection: 0)
-        let cell = collectionViewDataSource.collectionView(collectionView, cellForItemAtIndexPath: expectedIndexPath)
+        let cell = collectionViewDataSource.collectionView(collectionView, cellForItemAt: expectedIndexPath)
 
         // THEN: we receive the expected return values
         XCTAssertNotNil(numSections, "Number of sections should not be nil")
@@ -89,7 +89,7 @@ final class DataSourceProviderTests: TestCase {
 
         // THEN: the collectionView calls `dequeueReusableCellWithReuseIdentifier`
         // THEN: the cell factory calls its `ConfigurationHandler`
-        waitForExpectationsWithTimeout(defaultTimeout, handler: { (error) -> Void in
+        waitForExpectations(withTimeout: defaultTimeout, handler: { (error) -> Void in
             XCTAssertNil(error, "Expectation should not error")
         })
     }
@@ -105,7 +105,7 @@ final class DataSourceProviderTests: TestCase {
             return cell
         }
 
-        let supplementaryFactoryExpectation = expectationWithDescription("supplementary_factory_\(#function)")
+        let supplementaryFactoryExpectation = expectation(withDescription: "supplementary_factory_\(#function)")
 
         // GIVEN: a supplementary view factory
         let supplementaryViewFactory = ViewFactory(reuseIdentifier: supplementaryViewReuseId,
@@ -125,11 +125,11 @@ final class DataSourceProviderTests: TestCase {
         collectionView.layoutSubviews()
 
         // WHEN: we call the collection view data source methods
-        let numSections = collectionViewDataSource.numberOfSectionsInCollectionView?(collectionView)
+        let numSections = collectionViewDataSource.numberOfSections?(in: collectionView)
         let numRows = collectionViewDataSource.collectionView(collectionView, numberOfItemsInSection: 0)
         let supplementaryView = collectionViewDataSource.collectionView?(collectionView,
                                                                          viewForSupplementaryElementOfKind: fakeSupplementaryViewKind,
-                                                                         atIndexPath: NSIndexPath(forItem: 0, inSection: 0))
+                                                                         at: IndexPath(item: 0, section: 0))
 
         // THEN: we receive the expected return values
         XCTAssertEqual(numSections!, 1, "Data source should return 1 section")
@@ -140,7 +140,7 @@ final class DataSourceProviderTests: TestCase {
 
         // THEN: the collectionView calls `dequeueReusableSupplementaryViewOfKind`
         // THEN: the supplementary view factory calls its `ConfigurationHandler`
-        waitForExpectationsWithTimeout(defaultTimeout, handler: { (error) -> Void in
+        waitForExpectations(withTimeout: defaultTimeout, handler: { (error) -> Void in
             XCTAssertNil(error, "Expectation should not error")
         })
     }
@@ -152,25 +152,25 @@ final class DataSourceProviderTests: TestCase {
         let section2 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let dataSource = DataSource([section0, section1, section2])
 
-        var cellFactoryExpectation = expectationWithDescription("cell_factory_\(#function)")
+        var cellFactoryExpectation = expectation(withDescription: "cell_factory_\(#function)")
 
         // GIVEN: a cell factory
         let cellFactory = ViewFactory(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionCell in
             XCTAssertEqual(cell.reuseIdentifier!, self.cellReuseId, "Dequeued cell should have expected identifier")
-            XCTAssertEqual(model, dataSource[indexPath.section][indexPath.item], "Model object should equal expected value")
+            XCTAssertEqual(model, dataSource[indexPath.section][indexPath.row], "Model object should equal expected value")
             XCTAssertEqual(collectionView, self.collectionView, "CollectionView should equal the collectionView for the data source")
 
             cellFactoryExpectation.fulfill()
             return cell
         }
 
-        var supplementaryFactoryExpectation = expectationWithDescription("supplementary_factory_\(#function)")
+        var supplementaryFactoryExpectation = expectation(withDescription: "supplementary_factory_\(#function)")
 
         // GIVEN: a supplementary view factory
         let supplementaryViewFactory = ViewFactory(reuseIdentifier: supplementaryViewReuseId, type: .supplementaryView(kind: fakeSupplementaryViewKind))
         { (view, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionSupplementaryView in
             XCTAssertEqual(view.reuseIdentifier!, self.supplementaryViewReuseId, "Dequeued supplementary view should have expected identifier")
-            XCTAssertEqual(model, dataSource[indexPath.section][indexPath.item], "Model object should equal expected value")
+            XCTAssertEqual(model, dataSource[indexPath.section][indexPath.row], "Model object should equal expected value")
             XCTAssertEqual(type, ReusableViewType.supplementaryView(kind: fakeSupplementaryViewKind), "View type should have expected type")
             XCTAssertEqual(collectionView, self.collectionView, "CollectionView should equal the collectionView for the data source")
 
@@ -188,7 +188,7 @@ final class DataSourceProviderTests: TestCase {
         collectionView.dataSource = collectionViewDataSource
 
         // WHEN: we call the collection view data source methods
-        let numSections = collectionViewDataSource.numberOfSectionsInCollectionView?(collectionView)
+        let numSections = collectionViewDataSource.numberOfSections?(in: collectionView)
 
         // THEN: we receive the expected return values
         XCTAssertNotNil(numSections, "Number of sections should not be nil")
@@ -198,15 +198,15 @@ final class DataSourceProviderTests: TestCase {
             for rowIndex in 0..<dataSource[sectionIndex].items.count {
 
                 let expectationName = "\(#function)_\(sectionIndex)_\(rowIndex)"
-                collectionView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + expectationName)
-                collectionView.dequeueSupplementaryViewExpectation = expectationWithDescription(dequeueSupplementaryViewExpectationName + expectationName)
+                collectionView.dequeueCellExpectation = expectation(withDescription: dequeueCellExpectationName + expectationName)
+                collectionView.dequeueSupplementaryViewExpectation = expectation(withDescription: dequeueSupplementaryViewExpectationName + expectationName)
 
-                let indexPath = NSIndexPath(forItem: rowIndex, inSection: sectionIndex)
+                let indexPath = IndexPath(item: rowIndex, section: sectionIndex)
 
                 // WHEN: we call the collection view data source methods
                 let numRows = collectionViewDataSource.collectionView(collectionView, numberOfItemsInSection: sectionIndex)
-                let cell = collectionViewDataSource.collectionView(collectionView, cellForItemAtIndexPath: indexPath)
-                let supplementaryView = collectionViewDataSource.collectionView?(collectionView, viewForSupplementaryElementOfKind: fakeSupplementaryViewKind, atIndexPath: indexPath)
+                let cell = collectionViewDataSource.collectionView(collectionView, cellForItemAt: indexPath)
+                let supplementaryView = collectionViewDataSource.collectionView?(collectionView, viewForSupplementaryElementOfKind: fakeSupplementaryViewKind, at: indexPath)
 
                 // THEN: we receive the expected return values
                 XCTAssertEqual(numRows, dataSource[sectionIndex].count, "Data source should return expected number of rows for section \(sectionIndex)")
@@ -221,14 +221,14 @@ final class DataSourceProviderTests: TestCase {
 
                 // THEN: the collectionView calls `dequeueReusableSupplementaryViewOfKind`
                 // THEN: the supplementary view factory calls its `ConfigurationHandler`
-                waitForExpectationsWithTimeout(defaultTimeout, handler: { (error) -> Void in
+                waitForExpectations(withTimeout: defaultTimeout, handler: { (error) -> Void in
                     XCTAssertNil(error, "Expections should not error")
                 })
 
                 // reset expectation names for next loop, ignore last item
                 if !(sectionIndex == dataSource.sections.count - 1 && rowIndex == dataSource[sectionIndex].count - 1) {
-                    cellFactoryExpectation = expectationWithDescription("cell_factory_" + expectationName)
-                    supplementaryFactoryExpectation = expectationWithDescription("supplementary_factory_" + expectationName)
+                    cellFactoryExpectation = expectation(withDescription: "cell_factory_" + expectationName)
+                    supplementaryFactoryExpectation = expectation(withDescription: "supplementary_factory_" + expectationName)
                 }
             }
         }
@@ -240,15 +240,15 @@ final class DataSourceProviderTests: TestCase {
     func test_thatDataSourceProvider_forTableView_returnsExpectedData_forSingleSection() {
         // GIVEN: a single section with data items
         let expectedModel = FakeViewModel()
-        let expectedIndexPath = NSIndexPath(forRow: 2, inSection: 0)
+        let expectedIndexPath = IndexPath(row: 2, section: 0)
 
         let section0 = Section(items: FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel(), FakeViewModel(),
                                headerTitle: "Header",
                                footerTitle: "Footer")
         let dataSource = DataSource([section0])
 
-        let factoryExpectation = expectationWithDescription(#function)
-        tableView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + #function)
+        let factoryExpectation = expectation(withDescription: #function)
+        tableView.dequeueCellExpectation = expectation(withDescription: dequeueCellExpectationName + #function)
 
         // GIVEN: a cell factory
         let factory = ViewFactory(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
@@ -269,9 +269,9 @@ final class DataSourceProviderTests: TestCase {
         tableView.dataSource = tableViewDataSource
 
         // WHEN: we call the table view data source methods
-        let numSections = tableViewDataSource.numberOfSectionsInTableView?(tableView)
+        let numSections = tableViewDataSource.numberOfSections?(in: tableView)
         let numRows = tableViewDataSource.tableView(tableView, numberOfRowsInSection: 0)
-        let cell = tableViewDataSource.tableView(tableView, cellForRowAtIndexPath: expectedIndexPath)
+        let cell = tableViewDataSource.tableView(tableView, cellForRowAt: expectedIndexPath)
         let header = tableViewDataSource.tableView?(tableView, titleForHeaderInSection: 0)
         let footer = tableViewDataSource.tableView?(tableView, titleForFooterInSection: 0)
 
@@ -294,7 +294,7 @@ final class DataSourceProviderTests: TestCase {
 
         // THEN: the tableView calls `dequeueReusableCellWithIdentifier`
         // THEN: the cell factory calls its `ConfigurationHandler`
-        waitForExpectationsWithTimeout(defaultTimeout, handler: { (error) -> Void in
+        waitForExpectations(withTimeout: defaultTimeout, handler: { (error) -> Void in
             XCTAssertNil(error, "Expectations should not error")
         })
     }
@@ -307,7 +307,7 @@ final class DataSourceProviderTests: TestCase {
         let section3 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let dataSource = DataSource([section0, section1, section2, section3])
 
-        var factoryExpectation = expectationWithDescription("factory_\(#function)")
+        var factoryExpectation = expectation(withDescription: "factory_\(#function)")
 
         // GIVEN: a cell factory
         let factory = ViewFactory(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
@@ -326,7 +326,7 @@ final class DataSourceProviderTests: TestCase {
         tableView.dataSource = tableViewDataSource
 
         // WHEN: we call the table view data source methods
-        let numSections = tableViewDataSource.numberOfSectionsInTableView?(tableView)
+        let numSections = tableViewDataSource.numberOfSections?(in: tableView)
 
         // THEN: we receive the expected return values
         XCTAssertNotNil(numSections, "Number of sections should not be nil")
@@ -337,14 +337,14 @@ final class DataSourceProviderTests: TestCase {
             for rowIndex in 0..<dataSourceProvider.dataSource[sectionIndex].items.count {
 
                 let expectationName = "\(#function)_\(sectionIndex)_\(rowIndex)"
-                tableView.dequeueCellExpectation = expectationWithDescription(dequeueCellExpectationName + expectationName)
+                tableView.dequeueCellExpectation = expectation(withDescription: dequeueCellExpectationName + expectationName)
 
                 // WHEN: we call the table view data source methods
                 let numRows = tableViewDataSource.tableView(tableView, numberOfRowsInSection: sectionIndex)
                 let header = tableViewDataSource.tableView?(tableView, titleForHeaderInSection: sectionIndex)
                 let footer = tableViewDataSource.tableView?(tableView, titleForFooterInSection: sectionIndex)
 
-                let cell = tableViewDataSource.tableView(tableView, cellForRowAtIndexPath: NSIndexPath(forRow: rowIndex, inSection: sectionIndex))
+                let cell = tableViewDataSource.tableView(tableView, cellForRowAt: IndexPath(row: rowIndex, section: sectionIndex))
 
                 // THEN: we receive the expected return values
                 XCTAssertEqual(numRows, dataSourceProvider.dataSource[sectionIndex].count, "Data source should return expected number of rows for section \(sectionIndex)")
@@ -357,13 +357,13 @@ final class DataSourceProviderTests: TestCase {
                 
                 // THEN: the tableView calls `dequeueReusableCellWithIdentifier`
                 // THEN: the cell factory calls its `ConfigurationHandler`
-                waitForExpectationsWithTimeout(defaultTimeout, handler: { (error) -> Void in
+                waitForExpectations(withTimeout: defaultTimeout, handler: { (error) -> Void in
                     XCTAssertNil(error, "Expectations should not error")
                 })
                 
                 // reset expectation names for next loop, ignore last item
                 if !(sectionIndex == dataSourceProvider.dataSource.sections.count - 1 && rowIndex == dataSourceProvider.dataSource[sectionIndex].count - 1) {
-                    factoryExpectation = expectationWithDescription("factory_" + expectationName)
+                    factoryExpectation = expectation(withDescription: "factory_" + expectationName)
                 }
             }
         }

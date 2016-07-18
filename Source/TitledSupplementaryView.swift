@@ -89,6 +89,6 @@ public final class TitledSupplementaryView: UICollectionReusableView {
     /// :nodoc:
     public override func layoutSubviews() {
         super.layoutSubviews()
-        label.frame = CGRectInset(bounds, horizontalInset, verticalInset)
+        label.frame = bounds.insetBy(dx: horizontalInset, dy: verticalInset)
     }
 }

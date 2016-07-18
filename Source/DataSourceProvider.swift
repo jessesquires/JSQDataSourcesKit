@@ -48,7 +48,7 @@ CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSource.Ite
      - parameter supplementaryFactory: The supplementary view factory.
 
      - returns: A new `DataSourceProvider` instance.
-     
+
      - warning: Table views do not have supplementary views, but this parameter is still required in order to satisfy
      the generic constraints for Swift. You can simply pass the same `cellFactory` here. The parameter will be ignored.
      The same applies to collection views that do not have supplementary views. Again, the parameter will be ignored.

@@ -45,7 +45,7 @@ final class BridgedDataSourceTests: TestCase {
 
         // WHEN: we query the collectionViewDataSource methods
         // THEN: we receive the expected data
-        let sections = dataSource.numberOfSectionsInCollectionView(collectionView)
+        let sections = dataSource.numberOfSections(in: collectionView)
         XCTAssertEqual(sections, 5)
 
         for s in 0..<sections {
@@ -53,11 +53,11 @@ final class BridgedDataSourceTests: TestCase {
             XCTAssertEqual(items, 3)
         }
 
-        let indexPath = NSIndexPath(forItem: 0, inSection: 0);
-        let cell = dataSource.collectionView(collectionView, cellForItemAtIndexPath: indexPath)
+        let indexPath = IndexPath(item: 0, section: 0);
+        let cell = dataSource.collectionView(collectionView, cellForItemAt: indexPath)
         XCTAssertNotNil(cell)
 
-        let view = dataSource.collectionView(collectionView, viewForSupplementaryElementOfKind: fakeSupplementaryViewKind, atIndexPath: indexPath)
+        let view = dataSource.collectionView(collectionView, viewForSupplementaryElementOfKind: fakeSupplementaryViewKind, at: indexPath)
         XCTAssertNotNil(view)
     }
 
@@ -85,7 +85,7 @@ final class BridgedDataSourceTests: TestCase {
 
         // WHEN: we query the tableViewDataSource methods
         // THEN: we receive the expected data
-        let sections = dataSource.numberOfSectionsInTableView(tableView)
+        let sections = dataSource.numberOfSections(in: tableView)
         XCTAssertEqual(sections, 5)
 
         for s in 0..<sections {
@@ -93,8 +93,8 @@ final class BridgedDataSourceTests: TestCase {
             XCTAssertEqual(items, 3)
         }
 
-        let indexPath = NSIndexPath(forItem: 0, inSection: 0);
-        let cell = dataSource.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        let indexPath = IndexPath(item: 0, section: 0);
+        let cell = dataSource.tableView(tableView, cellForRowAt: indexPath)
         XCTAssertNotNil(cell)
 
         let header = dataSource.tableView(tableView, titleForHeaderInSection: 1)
@@ -120,7 +120,7 @@ final class BridgedDataSourceTests: TestCase {
 
         // WHEN: we query the tableViewDataSource methods
         // THEN: we receive the expected data
-        let sections = dataSource.numberOfSectionsInTableView(tableView)
+        let sections = dataSource.numberOfSections(in: tableView)
         XCTAssertEqual(sections, 5)
 
         for s in 0..<sections {
@@ -128,13 +128,13 @@ final class BridgedDataSourceTests: TestCase {
             XCTAssertEqual(items, 3)
         }
 
-        let indexPath = NSIndexPath(forItem: 0, inSection: 0);
-        let cell = dataSource.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        let indexPath = IndexPath(item: 0, section: 0);
+        let cell = dataSource.tableView(tableView, cellForRowAt: indexPath)
         XCTAssertNotNil(cell)
 
         let header = dataSource.tableView(tableView, titleForHeaderInSection: 1)
         XCTAssertNil(header)
-
+        
         let footer = dataSource.tableView(tableView, titleForFooterInSection: 2)
         XCTAssertNil(footer)
     }

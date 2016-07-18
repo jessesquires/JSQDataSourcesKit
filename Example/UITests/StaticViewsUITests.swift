@@ -45,7 +45,7 @@ final class StaticViewsUITests: XCTestCase {
         staticTableViewMenuItem.tap()
         
         // THEN: the number of cells loaded matches the number of cells expected
-        let countTableCells = countElements(ofType: .Cell,
+        let countTableCells = countElements(ofType: .cell,
                                             inView: table,
                                             byUniqueIdentifier: { $0.identifier })
         
@@ -61,7 +61,7 @@ final class StaticViewsUITests: XCTestCase {
         staticCollectionViewMenuItem.tap()
         
         // THEN: the number of cells loaded matches the number of cells expected
-        let countCollectionViewCells = countElements(ofType: .Cell,
+        let countCollectionViewCells = countElements(ofType: .cell,
                                                      inView: collectionView,
                                                      byUniqueIdentifier: { $0.identifier })
         

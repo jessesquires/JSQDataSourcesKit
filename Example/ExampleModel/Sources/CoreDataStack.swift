@@ -31,23 +31,24 @@ public class CoreDataStack {
     public let persistentStoreCoordinator: NSPersistentStoreCoordinator
 
     public init(inMemory: Bool = false) {
-        let modelURL = NSBundle(forClass: CoreDataStack.self).URLForResource("Model", withExtension: "momd")!
+        let modelURL = Bundle(for: CoreDataStack.self).urlForResource("Model", withExtension: "momd")!
 
-        let model = NSManagedObjectModel(contentsOfURL: modelURL)!
-        let documentsDirectoryURL = try! NSFileManager.defaultManager().URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)
-        let storeURL = documentsDirectoryURL.URLByAppendingPathComponent("Model.sqlite")
+        let model = NSManagedObjectModel(contentsOf: modelURL)!
+        let documentsDirectoryURL = try! FileManager.default().urlForDirectory(.documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        let storeURL = try! documentsDirectoryURL.appendingPathComponent("Model.sqlite")
 
         persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
-        try! persistentStoreCoordinator.addPersistentStoreWithType(inMemory ? NSInMemoryStoreType : NSSQLiteStoreType, configuration: nil, URL: inMemory ? nil : storeURL, options: nil)
+        try! persistentStoreCoordinator.addPersistentStore(ofType: inMemory ? NSInMemoryStoreType : NSSQLiteStoreType, configurationName: nil, at: inMemory ? nil : storeURL, options: nil)
 
-        context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         context.persistentStoreCoordinator = persistentStoreCoordinator
     }
 
+    @discardableResult
     public func saveAndWait() -> Bool {
         var success = true
 
-        context.performBlockAndWait {
+        context.performAndWait {
             if !self.context.hasChanges {
                 success = true
             }

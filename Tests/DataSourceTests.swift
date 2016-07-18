@@ -151,9 +151,9 @@ final class DataSourceTests: XCTestCase {
 
         // WHEN: we ask for an object
         // THEN: we receive the exepected data
-        XCTAssertEqual(frc[NSIndexPath(forItem: 1, inSection: 0)], blueThings[1])
-        XCTAssertEqual(frc[NSIndexPath(forItem: 2, inSection: 1)], greenThings[2])
-        XCTAssertEqual(frc[NSIndexPath(forItem: 0, inSection: 2)], redThings[0])
+        XCTAssertEqual(frc[IndexPath(item: 1, section: 0)], blueThings[1])
+        XCTAssertEqual(frc[IndexPath(item: 2, section: 1)], greenThings[2])
+        XCTAssertEqual(frc[IndexPath(item: 0, section: 2)], redThings[0])
     }
 
     func test_thatDataSource_returnsExpectedData_fromIntSubscript() {
@@ -198,7 +198,7 @@ final class DataSourceTests: XCTestCase {
         let dataSource = DataSource(sections: sectionA, sectionB, sectionC)
 
         // WHEN: we ask for an item
-        let ip = NSIndexPath(forItem: 2, inSection: 2)
+        let ip = IndexPath(item: 2, section: 2)
         let item = dataSource[ip]
 
         // THEN: we receive the exepected data
@@ -212,10 +212,10 @@ final class DataSourceTests: XCTestCase {
         var dataSource = DataSource(sections: sectionA, sectionB)
 
         // WHEN: we set an item at a specific index path
-        let ip = NSIndexPath(forItem: 1, inSection: 0)
+        let ip = IndexPath(item: 1, section: 0)
         let item = FakeViewModel()
         dataSource[ip] = item
-
+        
         // THEN: the item is replaced
         XCTAssertEqual(dataSource[ip], item)
     }

@@ -50,7 +50,7 @@ class FetchedCollectionViewController: UICollectionViewController {
         // 1. create cell factory
         let cellFactory = ViewFactory(reuseIdentifier: CellId) { (cell, model: Thing?, type, collectionView, indexPath) -> CollectionViewCell in
             cell.label.text = model!.displayName
-            cell.label.textColor = UIColor.whiteColor()
+            cell.label.textColor = UIColor.white()
             cell.backgroundColor = model!.displayColor
             cell.accessibilityIdentifier = "\(cell.label.text)"
             return cell
@@ -60,16 +60,16 @@ class FetchedCollectionViewController: UICollectionViewController {
         let headerFactory = TitledSupplementaryViewFactory { (header, item: Thing?, kind, collectionView, indexPath) -> TitledSupplementaryView in
             header.label.text = "\(item!.colorName) header (\(indexPath.section))"
             header.label.textColor = item?.displayColor
-            header.backgroundColor = .darkGrayColor()
+            header.backgroundColor = .darkGray()
             return header
         }
 
         let footerFactory = TitledSupplementaryViewFactory { (footer, item: Thing?, kind, collectionView, indexPath) -> TitledSupplementaryView in
             footer.label.text = "\(item!.colorName) footer (\(indexPath.section))"
             footer.label.textColor = item?.displayColor
-            footer.backgroundColor = .lightGrayColor()
-            footer.label.font = .preferredFontForTextStyle(UIFontTextStyleFootnote)
-            footer.label.textAlignment = .Center
+            footer.backgroundColor = .lightGray()
+            footer.label.font = .preferredFont(forTextStyle: UIFontTextStyleFootnote)
+            footer.label.textAlignment = .center
             return footer
         }
 
@@ -91,7 +91,7 @@ class FetchedCollectionViewController: UICollectionViewController {
         collectionView?.dataSource = dataSourceProvider?.collectionViewDataSource
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchData()
     }
@@ -110,7 +110,7 @@ class FetchedCollectionViewController: UICollectionViewController {
 
     // MARK: Actions
 
-    @IBAction func didTapActionButton(sender: UIBarButtonItem) {
+    @IBAction func didTapActionButton(_ sender: UIBarButtonItem) {
         UIAlertController.showActionAlert(self, addNewAction: {
             self.addNewThing()
             }, deleteAction: {
@@ -128,14 +128,14 @@ class FetchedCollectionViewController: UICollectionViewController {
         collectionView!.deselectAllItems()
 
         var newThing: Thing?
-        stack.context.performBlockAndWait {
+        stack.context.performAndWait {
             newThing = Thing.newThing(self.stack.context)
         }
         stack.saveAndWait()
         fetchData()
 
-        if let indexPath = frc.indexPathForObject(newThing!) {
-            collectionView!.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: .CenteredVertically)
+        if let indexPath = frc.indexPath(forObject: newThing!) {
+            collectionView!.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
         }
     }
 
