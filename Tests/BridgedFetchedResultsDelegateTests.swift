@@ -26,10 +26,10 @@ import XCTest
 final class BridgedFetchedResultsDelegateTests: XCTestCase {
 
     func test_thatFetchedResultsDelegate_callsClosures_whenDelegateMethodsAreCalled() {
-        let willChangeContentExpectation = self.expectation(withDescription: "will change content")
-        let didChangeSectionExpectation = self.expectation(withDescription: "will change content")
-        let didChangeObjectExpectation = self.expectation(withDescription: "will change content")
-        let didChangeContentExpectation = self.expectation(withDescription: "will change content")
+        let willChangeContentExpectation = self.expectation(description: "will change content")
+        let didChangeSectionExpectation = self.expectation(description: "will change content")
+        let didChangeObjectExpectation = self.expectation(description: "will change content")
+        let didChangeContentExpectation = self.expectation(description: "will change content")
 
         // GIVEN: a fetched results delegate
         let delegate = BridgedFetchedResultsDelegate(
@@ -62,7 +62,7 @@ final class BridgedFetchedResultsDelegateTests: XCTestCase {
         delegate.controllerDidChangeContent(controller)
 
         // THEN: the delegate executes its closures
-        waitForExpectations(withTimeout: defaultTimeout) { (error) in
+        waitForExpectations(timeout: defaultTimeout) { (error) in
             XCTAssertNil(error, "Expectations should not error")
         }
     }

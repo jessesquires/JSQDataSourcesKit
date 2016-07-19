@@ -54,8 +54,8 @@ final class DataSourceProviderTests: TestCase {
         let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel())
         let dataSource = DataSource([section0])
 
-        let cellFactoryExpectation = expectation(withDescription: #function)
-        collectionView.dequeueCellExpectation = expectation(withDescription: dequeueCellExpectationName + #function)
+        let cellFactoryExpectation = expectation(description: #function)
+        collectionView.dequeueCellExpectation = expectation(description: dequeueCellExpectationName + #function)
 
         // GIVEN: a cell factory
         let cellFactory = ViewFactory(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionCell in
@@ -89,7 +89,7 @@ final class DataSourceProviderTests: TestCase {
 
         // THEN: the collectionView calls `dequeueReusableCellWithReuseIdentifier`
         // THEN: the cell factory calls its `ConfigurationHandler`
-        waitForExpectations(withTimeout: defaultTimeout, handler: { (error) -> Void in
+        waitForExpectations(timeout: defaultTimeout, handler: { (error) -> Void in
             XCTAssertNil(error, "Expectation should not error")
         })
     }
@@ -105,7 +105,7 @@ final class DataSourceProviderTests: TestCase {
             return cell
         }
 
-        let supplementaryFactoryExpectation = expectation(withDescription: "supplementary_factory_\(#function)")
+        let supplementaryFactoryExpectation = expectation(description: "supplementary_factory_\(#function)")
 
         // GIVEN: a supplementary view factory
         let supplementaryViewFactory = ViewFactory(reuseIdentifier: supplementaryViewReuseId,
@@ -140,7 +140,7 @@ final class DataSourceProviderTests: TestCase {
 
         // THEN: the collectionView calls `dequeueReusableSupplementaryViewOfKind`
         // THEN: the supplementary view factory calls its `ConfigurationHandler`
-        waitForExpectations(withTimeout: defaultTimeout, handler: { (error) -> Void in
+        waitForExpectations(timeout: defaultTimeout, handler: { (error) -> Void in
             XCTAssertNil(error, "Expectation should not error")
         })
     }
@@ -152,7 +152,7 @@ final class DataSourceProviderTests: TestCase {
         let section2 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let dataSource = DataSource([section0, section1, section2])
 
-        var cellFactoryExpectation = expectation(withDescription: "cell_factory_\(#function)")
+        var cellFactoryExpectation = expectation(description: "cell_factory_\(#function)")
 
         // GIVEN: a cell factory
         let cellFactory = ViewFactory(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionCell in
@@ -164,7 +164,7 @@ final class DataSourceProviderTests: TestCase {
             return cell
         }
 
-        var supplementaryFactoryExpectation = expectation(withDescription: "supplementary_factory_\(#function)")
+        var supplementaryFactoryExpectation = expectation(description: "supplementary_factory_\(#function)")
 
         // GIVEN: a supplementary view factory
         let supplementaryViewFactory = ViewFactory(reuseIdentifier: supplementaryViewReuseId, type: .supplementaryView(kind: fakeSupplementaryViewKind))
@@ -198,8 +198,8 @@ final class DataSourceProviderTests: TestCase {
             for rowIndex in 0..<dataSource[sectionIndex].items.count {
 
                 let expectationName = "\(#function)_\(sectionIndex)_\(rowIndex)"
-                collectionView.dequeueCellExpectation = expectation(withDescription: dequeueCellExpectationName + expectationName)
-                collectionView.dequeueSupplementaryViewExpectation = expectation(withDescription: dequeueSupplementaryViewExpectationName + expectationName)
+                collectionView.dequeueCellExpectation = expectation(description: dequeueCellExpectationName + expectationName)
+                collectionView.dequeueSupplementaryViewExpectation = expectation(description: dequeueSupplementaryViewExpectationName + expectationName)
 
                 let indexPath = IndexPath(item: rowIndex, section: sectionIndex)
 
@@ -221,14 +221,14 @@ final class DataSourceProviderTests: TestCase {
 
                 // THEN: the collectionView calls `dequeueReusableSupplementaryViewOfKind`
                 // THEN: the supplementary view factory calls its `ConfigurationHandler`
-                waitForExpectations(withTimeout: defaultTimeout, handler: { (error) -> Void in
+                waitForExpectations(timeout: defaultTimeout, handler: { (error) -> Void in
                     XCTAssertNil(error, "Expections should not error")
                 })
 
                 // reset expectation names for next loop, ignore last item
                 if !(sectionIndex == dataSource.sections.count - 1 && rowIndex == dataSource[sectionIndex].count - 1) {
-                    cellFactoryExpectation = expectation(withDescription: "cell_factory_" + expectationName)
-                    supplementaryFactoryExpectation = expectation(withDescription: "supplementary_factory_" + expectationName)
+                    cellFactoryExpectation = expectation(description: "cell_factory_" + expectationName)
+                    supplementaryFactoryExpectation = expectation(description: "supplementary_factory_" + expectationName)
                 }
             }
         }
@@ -247,8 +247,8 @@ final class DataSourceProviderTests: TestCase {
                                footerTitle: "Footer")
         let dataSource = DataSource([section0])
 
-        let factoryExpectation = expectation(withDescription: #function)
-        tableView.dequeueCellExpectation = expectation(withDescription: dequeueCellExpectationName + #function)
+        let factoryExpectation = expectation(description: #function)
+        tableView.dequeueCellExpectation = expectation(description: dequeueCellExpectationName + #function)
 
         // GIVEN: a cell factory
         let factory = ViewFactory(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
@@ -294,7 +294,7 @@ final class DataSourceProviderTests: TestCase {
 
         // THEN: the tableView calls `dequeueReusableCellWithIdentifier`
         // THEN: the cell factory calls its `ConfigurationHandler`
-        waitForExpectations(withTimeout: defaultTimeout, handler: { (error) -> Void in
+        waitForExpectations(timeout: defaultTimeout, handler: { (error) -> Void in
             XCTAssertNil(error, "Expectations should not error")
         })
     }
@@ -307,7 +307,7 @@ final class DataSourceProviderTests: TestCase {
         let section3 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let dataSource = DataSource([section0, section1, section2, section3])
 
-        var factoryExpectation = expectation(withDescription: "factory_\(#function)")
+        var factoryExpectation = expectation(description: "factory_\(#function)")
 
         // GIVEN: a cell factory
         let factory = ViewFactory(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
@@ -337,7 +337,7 @@ final class DataSourceProviderTests: TestCase {
             for rowIndex in 0..<dataSourceProvider.dataSource[sectionIndex].items.count {
 
                 let expectationName = "\(#function)_\(sectionIndex)_\(rowIndex)"
-                tableView.dequeueCellExpectation = expectation(withDescription: dequeueCellExpectationName + expectationName)
+                tableView.dequeueCellExpectation = expectation(description: dequeueCellExpectationName + expectationName)
 
                 // WHEN: we call the table view data source methods
                 let numRows = tableViewDataSource.tableView(tableView, numberOfRowsInSection: sectionIndex)
@@ -357,13 +357,13 @@ final class DataSourceProviderTests: TestCase {
                 
                 // THEN: the tableView calls `dequeueReusableCellWithIdentifier`
                 // THEN: the cell factory calls its `ConfigurationHandler`
-                waitForExpectations(withTimeout: defaultTimeout, handler: { (error) -> Void in
+                waitForExpectations(timeout: defaultTimeout, handler: { (error) -> Void in
                     XCTAssertNil(error, "Expectations should not error")
                 })
                 
                 // reset expectation names for next loop, ignore last item
                 if !(sectionIndex == dataSourceProvider.dataSource.sections.count - 1 && rowIndex == dataSourceProvider.dataSource[sectionIndex].count - 1) {
-                    factoryExpectation = expectation(withDescription: "factory_" + expectationName)
+                    factoryExpectation = expectation(description: "factory_" + expectationName)
                 }
             }
         }

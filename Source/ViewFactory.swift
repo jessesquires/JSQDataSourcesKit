@@ -201,6 +201,7 @@ public protocol ReusableViewFactoryProtocol {
 
      - returns: A configured view of type `View`.
      */
+    @discardableResult
     func configure(view: View, item: Item?, type: ReusableViewType, parentView: View.ParentView, indexPath: IndexPath) -> View
 }
 
