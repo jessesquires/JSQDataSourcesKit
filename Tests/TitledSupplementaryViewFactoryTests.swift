@@ -42,7 +42,7 @@ class TitledSupplementaryViewFactoryTests: TestCase {
         let section2 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), FakeViewModel())
         let dataSource = DataSource([section0, section1, section2])
 
-        var cellFactoryExpectation = expectation(withDescription: "cell_factory")
+        var cellFactoryExpectation = expectation(description: "cell_factory")
 
         // GIVEN: a cell factory
         let cellFactory = ViewFactory(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionCell in
@@ -50,7 +50,7 @@ class TitledSupplementaryViewFactoryTests: TestCase {
             return cell
         }
 
-        var titledViewDataConfigExpectation = expectation(withDescription: "titledViewDataConfigExpectation")
+        var titledViewDataConfigExpectation = expectation(description: "titledViewDataConfigExpectation")
 
         let supplementaryViewFactory = TitledSupplementaryViewFactory { (view, item: FakeViewModel?, type, collectionView, indexPath) -> TitledSupplementaryView in
             XCTAssertEqual(view.reuseIdentifier!, TitledSupplementaryView.identifier, "Dequeued supplementary view should have expected identifier")
@@ -82,8 +82,8 @@ class TitledSupplementaryViewFactoryTests: TestCase {
             for rowIndex in 0..<dataSource[sectionIndex].items.count {
 
                 let expectationName = "\(#function)_\(sectionIndex)_\(rowIndex)"
-                collectionView.dequeueCellExpectation = expectation(withDescription: dequeueCellExpectationName + expectationName)
-                collectionView.dequeueSupplementaryViewExpectation = expectation(withDescription: dequeueSupplementaryViewExpectationName + expectationName)
+                collectionView.dequeueCellExpectation = expectation(description: dequeueCellExpectationName + expectationName)
+                collectionView.dequeueSupplementaryViewExpectation = expectation(description: dequeueSupplementaryViewExpectationName + expectationName)
 
                 let indexPath = IndexPath(item: rowIndex, section: sectionIndex)
 
@@ -107,14 +107,14 @@ class TitledSupplementaryViewFactoryTests: TestCase {
                 // THEN: the collectionView calls `dequeueReusableSupplementaryViewOfKind`
                 // THEN: the supplementary view factory calls its `dataConfigurator`
                 // THEN: the supplementary view factory calls its `styleConfigurator`
-                waitForExpectations(withTimeout: defaultTimeout, handler: { (error) -> Void in
+                waitForExpectations(timeout: defaultTimeout, handler: { (error) -> Void in
                     XCTAssertNil(error, "Expections should not error")
                 })
 
                 // reset expectation names for next loop, ignore last item
                 if !(sectionIndex == dataSource.sections.count - 1 && rowIndex == dataSource[sectionIndex].count - 1) {
-                    cellFactoryExpectation = expectation(withDescription: "cell_factory_" + expectationName)
-                    titledViewDataConfigExpectation = expectation(withDescription: "titledViewDataConfigExpectation_" + expectationName)
+                    cellFactoryExpectation = expectation(description: "cell_factory_" + expectationName)
+                    titledViewDataConfigExpectation = expectation(description: "titledViewDataConfigExpectation_" + expectationName)
                 }
             }
         }

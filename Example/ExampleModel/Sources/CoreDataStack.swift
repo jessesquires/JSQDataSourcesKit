@@ -34,7 +34,7 @@ public class CoreDataStack {
         let modelURL = Bundle(for: CoreDataStack.self).urlForResource("Model", withExtension: "momd")!
 
         let model = NSManagedObjectModel(contentsOf: modelURL)!
-        let documentsDirectoryURL = try! FileManager.default().urlForDirectory(.documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        let documentsDirectoryURL = try! FileManager.default.urlForDirectory(.documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         let storeURL = try! documentsDirectoryURL.appendingPathComponent("Model.sqlite")
 
         persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model)

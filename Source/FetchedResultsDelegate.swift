@@ -115,7 +115,7 @@ extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UI
                         self.updatedObjects[indexPath] = anyObject as? Item
                     }
                 case .move:
-                    if let old = indexPath, new = newIndexPath {
+                    if let old = indexPath, let new = newIndexPath {
                         self.objectChanges.append((changeType, [old, new]))
                     }
                 }
@@ -142,10 +142,10 @@ extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UI
                 collectionView?.deleteItems(at: indexPaths)
             case .update:
                 if let indexPath = indexPaths.first,
-                    item = updatedObjects[indexPath],
-                    cell = collectionView?.cellForItem(at: indexPath) as? CellFactory.View,
-                    collectionView = collectionView {
-                    _ = cellFactory.configure(view: cell, item: item, type: .cell, parentView: collectionView, indexPath: indexPath)
+                    let item = updatedObjects[indexPath],
+                    let collectionView = collectionView,
+                    let cell = collectionView.cellForItem(at: indexPath) as? CellFactory.View {
+                    cellFactory.configure(view: cell, item: item, type: .cell, parentView: collectionView, indexPath: indexPath)
                 }
             case .move:
                 if let deleteIndexPath = indexPaths.first {
@@ -235,9 +235,9 @@ extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UI
                     }
                 case .update:
                     if let indexPath = indexPath,
-                        cell = self.tableView?.cellForRow(at: indexPath) as? CellFactory.View,
-                        tableView = self.tableView {
-                        _ = self.cellFactory.configure(view: cell, item: anyObject as? Item, type: .cell, parentView: tableView, indexPath: indexPath)
+                        let tableView = self.tableView,
+                        let cell = tableView.cellForRow(at: indexPath) as? CellFactory.View {
+                        self.cellFactory.configure(view: cell, item: anyObject as? Item, type: .cell, parentView: tableView, indexPath: indexPath)
                     }
                 case .move:
                     if let deleteIndexPath = indexPath {
