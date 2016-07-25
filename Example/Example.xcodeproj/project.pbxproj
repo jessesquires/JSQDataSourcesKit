@@ -29,6 +29,10 @@
 		88AD28A71D1F97BC000492FC /* ExampleModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 88AD28A31D1F97A3000492FC /* ExampleModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		88DCAD911CB87E6700C018AF /* JSQDataSourcesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88DCAD8E1CB87DD900C018AF /* JSQDataSourcesKit.framework */; };
 		88DCAD921CB87E6700C018AF /* JSQDataSourcesKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 88DCAD8E1CB87DD900C018AF /* JSQDataSourcesKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BF21124D1D46663600F1840A /* ComposedCellViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF21124C1D46663600F1840A /* ComposedCellViewFactory.swift */; };
+		BF5C03641D3FED6700CA3EA3 /* FancyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF5C03631D3FED6700CA3EA3 /* FancyCollectionViewCell.xib */; };
+		BF5C03691D3FED7F00CA3EA3 /* FancyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5C03681D3FED7F00CA3EA3 /* FancyCollectionViewCell.swift */; };
+		BF6AEBD11D3E91A40048AE97 /* MixedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6AEBD01D3E91A40048AE97 /* MixedCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +143,10 @@
 		88AD289D1D1F97A3000492FC /* ExampleModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ExampleModel.xcodeproj; path = ExampleModel/ExampleModel.xcodeproj; sourceTree = "<group>"; };
 		88DB89C11A86D1A900DED153 /* DataSources.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataSources.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88DCAD881CB87DD900C018AF /* JSQDataSourcesKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JSQDataSourcesKit.xcodeproj; path = ../JSQDataSourcesKit.xcodeproj; sourceTree = "<group>"; };
+		BF21124C1D46663600F1840A /* ComposedCellViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposedCellViewFactory.swift; sourceTree = "<group>"; };
+		BF5C03631D3FED6700CA3EA3 /* FancyCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FancyCollectionViewCell.xib; sourceTree = "<group>"; };
+		BF5C03681D3FED7F00CA3EA3 /* FancyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyCollectionViewCell.swift; sourceTree = "<group>"; };
+		BF6AEBD01D3E91A40048AE97 /* MixedCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MixedCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,8 +203,11 @@
 				886EC79F1CFF2E5E00BDE6FA /* CollectionViewCell.swift */,
 				886EC7A01CFF2E5E00BDE6FA /* CollectionViewCell.xib */,
 				886EC7A11CFF2E5E00BDE6FA /* CollectionViewController.swift */,
+				BF21124C1D46663600F1840A /* ComposedCellViewFactory.swift */,
 				886EC7A21CFF2E5E00BDE6FA /* ComposedSupplementaryViewFactory.swift */,
 				886EC7A41CFF2E5E00BDE6FA /* Extensions.swift */,
+				BF5C03681D3FED7F00CA3EA3 /* FancyCollectionViewCell.swift */,
+				BF5C03631D3FED6700CA3EA3 /* FancyCollectionViewCell.xib */,
 				886EC7A51CFF2E5E00BDE6FA /* FetchedCollectionViewController.swift */,
 				886EC7A61CFF2E5E00BDE6FA /* FetchedTableViewController.swift */,
 				886EC7A71CFF2E5E00BDE6FA /* Helpers.swift */,
@@ -204,6 +215,7 @@
 				886EC7A91CFF2E5F00BDE6FA /* Info.plist */,
 				886EC79B1CFF2E5E00BDE6FA /* LaunchScreen.xib */,
 				886EC79D1CFF2E5E00BDE6FA /* Main.storyboard */,
+				BF6AEBD01D3E91A40048AE97 /* MixedCollectionViewController.swift */,
 				886EC7AC1CFF2E5F00BDE6FA /* TableViewController.swift */,
 				886EC7AE1CFF2E5F00BDE6FA /* ViewController.swift */,
 			);
@@ -424,6 +436,7 @@
 				886EC7BB1CFF2E5F00BDE6FA /* Images.xcassets in Resources */,
 				886EC7B11CFF2E5F00BDE6FA /* Main.storyboard in Resources */,
 				886EC7B31CFF2E5F00BDE6FA /* CollectionViewCell.xib in Resources */,
+				BF5C03641D3FED6700CA3EA3 /* FancyCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,9 +470,12 @@
 				886EC7B41CFF2E5F00BDE6FA /* CollectionViewController.swift in Sources */,
 				886EC7BA1CFF2E5F00BDE6FA /* Helpers.swift in Sources */,
 				886EC7B81CFF2E5F00BDE6FA /* FetchedCollectionViewController.swift in Sources */,
+				BF21124D1D46663600F1840A /* ComposedCellViewFactory.swift in Sources */,
 				886EC7BE1CFF2E5F00BDE6FA /* TableViewController.swift in Sources */,
 				886EC7C01CFF2E5F00BDE6FA /* ViewController.swift in Sources */,
 				886EC7B21CFF2E5F00BDE6FA /* CollectionViewCell.swift in Sources */,
+				BF5C03691D3FED7F00CA3EA3 /* FancyCollectionViewCell.swift in Sources */,
+				BF6AEBD11D3E91A40048AE97 /* MixedCollectionViewController.swift in Sources */,
 				886EC7AF1CFF2E5F00BDE6FA /* AppDelegate.swift in Sources */,
 				886EC7B51CFF2E5F00BDE6FA /* ComposedSupplementaryViewFactory.swift in Sources */,
 			);
