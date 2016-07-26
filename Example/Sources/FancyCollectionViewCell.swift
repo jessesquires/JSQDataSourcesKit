@@ -22,8 +22,6 @@ class FancyCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var label: UILabel!
 
-    var testing = false
-
     override func awakeFromNib() {
         super.awakeFromNib()
         selectedBackgroundView = UIView()
