@@ -25,7 +25,7 @@ class FancyCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectedBackgroundView = UIView()
-        selectedBackgroundView?.backgroundColor = .orangeColor()
-        backgroundColor = .greenColor()
+        selectedBackgroundView?.backgroundColor = .orange()
+        backgroundColor = .green()
     }
 }

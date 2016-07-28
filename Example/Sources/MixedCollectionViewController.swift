@@ -26,14 +26,14 @@ struct FancyViewModel {
 }
 
 enum MixedItem {
-    case Standard(CellViewModel)
-    case Fancy(FancyViewModel)
+    case standard(CellViewModel)
+    case fancy(FancyViewModel)
 
     var reuseIdentifier: String {
         switch self {
-        case .Standard(_):
+        case .standard(_):
             return CellId
-        case .Fancy(_):
+        case .fancy(_):
             return FancyCellId
         }
     }
@@ -50,11 +50,11 @@ final class MixedCollectionViewController: UICollectionViewController, UICollect
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView(collectionView!)
-        collectionView!.registerNib(UINib(nibName: "FancyCollectionViewCell", bundle: nil),
+        collectionView!.register(UINib(nibName: "FancyCollectionViewCell", bundle: nil),
                                    forCellWithReuseIdentifier: FancyCellId)
 
-        let standardItem = MixedItem.Standard(CellViewModel())
-        let fancyItem = MixedItem.Fancy(FancyViewModel())
+        let standardItem = MixedItem.standard(CellViewModel())
+        let fancyItem = MixedItem.fancy(FancyViewModel())
 
         // 1. create view models
         let section0 = Section(items: standardItem, fancyItem, fancyItem)
@@ -81,8 +81,8 @@ final class MixedCollectionViewController: UICollectionViewController, UICollect
         // 3. create supplementary view factory
         let headerFactory = TitledSupplementaryViewFactory { (header, item: MixedItem?, kind, collectionView, indexPath) -> TitledSupplementaryView in
             header.label.text = "Section \(indexPath.section)"
-            header.backgroundColor = .darkGrayColor()
-            header.label.textColor = .whiteColor()
+            header.backgroundColor = .darkGray()
+            header.label.textColor = .white()
             return header
         }
 
@@ -95,7 +95,7 @@ final class MixedCollectionViewController: UICollectionViewController, UICollect
         collectionView?.dataSource = self.dataSourceProvider?.collectionViewDataSource
     }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.size.width, height: 50)
     }
 }
