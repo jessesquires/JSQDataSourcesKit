@@ -24,7 +24,7 @@ import JSQDataSourcesKit
 
 
 let CellId = "cell"
-
+let FancyCellId = "fancyCell"
 
 struct CellViewModel {
     let text = "My Title"
