@@ -95,7 +95,9 @@ final class MixedCollectionViewController: UICollectionViewController, UICollect
         collectionView?.dataSource = self.dataSourceProvider?.collectionViewDataSource
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.size.width, height: 50)
     }
 }
