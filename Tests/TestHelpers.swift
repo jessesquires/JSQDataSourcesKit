@@ -51,7 +51,7 @@ func generateThings(_ context: NSManagedObjectContext, color: Color) -> [Thing] 
         all.append(thing)
     }
 
-    all.sort(isOrderedBefore: { (t1, t2) -> Bool in
+    all.sort(by: { (t1, t2) -> Bool in
         return t1.name <= t2.name
     })
     return all

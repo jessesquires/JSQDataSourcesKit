@@ -121,7 +121,7 @@ final class FetchedResultsDelegateTests: TestCase {
         _ = try? frc.performFetch()
 
         // THEN: the table view reports the expected state
-        XCTAssertEqual(collectionView.numberOfSections(), 3)
+        XCTAssertEqual(collectionView.numberOfSections, 3)
 
         XCTAssertEqual(collectionView.numberOfItems(inSection: 0), blueThings.count)
         XCTAssertEqual(collectionView.numberOfItems(inSection: 1), greenThings.count)
@@ -141,7 +141,7 @@ final class FetchedResultsDelegateTests: TestCase {
         _ = try? frc.performFetch()
 
         // THEN: the table view reports the expected state
-        XCTAssertEqual(collectionView.numberOfSections(), 2)
+        XCTAssertEqual(collectionView.numberOfSections, 2)
         
         XCTAssertEqual(collectionView.numberOfItems(inSection: 0), 2)
         XCTAssertEqual(collectionView.numberOfItems(inSection: 1), 7)

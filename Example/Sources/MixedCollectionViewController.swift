@@ -81,8 +81,8 @@ final class MixedCollectionViewController: UICollectionViewController, UICollect
         // 3. create supplementary view factory
         let headerFactory = TitledSupplementaryViewFactory { (header, item: MixedItem?, kind, collectionView, indexPath) -> TitledSupplementaryView in
             header.label.text = "Section \(indexPath.section)"
-            header.backgroundColor = .darkGray()
-            header.label.textColor = .white()
+            header.backgroundColor = .darkGray
+            header.label.textColor = .white
             return header
         }
 

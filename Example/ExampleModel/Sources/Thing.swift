@@ -28,9 +28,9 @@ public enum Color: String {
 
     var displayColor: UIColor {
         switch(self) {
-        case .Red: return .red()
-        case .Blue: return .blue()
-        case .Green: return .green()
+        case .Red: return .red
+        case .Blue: return .blue
+        case .Green: return .green
         }
     }
 }
@@ -108,8 +108,8 @@ public class Thing: NSManagedObject {
     public class func newFetchRequest() -> NSFetchRequest<Thing> {
         let request = NSFetchRequest<Thing>(entityName: "Thing")
         request.sortDescriptors = [
-            SortDescriptor(key: "colorName", ascending: true),
-            SortDescriptor(key: "name", ascending: true)
+            NSSortDescriptor(key: "colorName", ascending: true),
+            NSSortDescriptor(key: "name", ascending: true)
         ]
         return request
     }

@@ -50,7 +50,7 @@ class FetchedCollectionViewController: UICollectionViewController {
         // 1. create cell factory
         let cellFactory = ViewFactory(reuseIdentifier: CellId) { (cell, model: Thing?, type, collectionView, indexPath) -> CollectionViewCell in
             cell.label.text = model!.displayName
-            cell.label.textColor = UIColor.white()
+            cell.label.textColor = UIColor.white
             cell.backgroundColor = model!.displayColor
             cell.accessibilityIdentifier = "\(cell.label.text)"
             return cell
@@ -60,14 +60,14 @@ class FetchedCollectionViewController: UICollectionViewController {
         let headerFactory = TitledSupplementaryViewFactory { (header, item: Thing?, kind, collectionView, indexPath) -> TitledSupplementaryView in
             header.label.text = "\(item!.colorName) header (\(indexPath.section))"
             header.label.textColor = item?.displayColor
-            header.backgroundColor = .darkGray()
+            header.backgroundColor = .darkGray
             return header
         }
 
         let footerFactory = TitledSupplementaryViewFactory { (footer, item: Thing?, kind, collectionView, indexPath) -> TitledSupplementaryView in
             footer.label.text = "\(item!.colorName) footer (\(indexPath.section))"
             footer.label.textColor = item?.displayColor
-            footer.backgroundColor = .lightGray()
+            footer.backgroundColor = .lightGray
             footer.label.font = .preferredFont(forTextStyle: UIFontTextStyleFootnote)
             footer.label.textAlignment = .center
             return footer
@@ -140,7 +140,7 @@ class FetchedCollectionViewController: UICollectionViewController {
     }
 
     func deleteSelected() {
-        let indexPaths = collectionView!.indexPathsForSelectedItems()
+        let indexPaths = collectionView!.indexPathsForSelectedItems
         frc.deleteThingsAtIndexPaths(indexPaths)
         stack.saveAndWait()
         fetchData()
@@ -148,21 +148,21 @@ class FetchedCollectionViewController: UICollectionViewController {
     }
 
     func changeNameSelected() {
-        let indexPaths = collectionView!.indexPathsForSelectedItems()
+        let indexPaths = collectionView!.indexPathsForSelectedItems
         frc.changeThingNamesAtIndexPaths(indexPaths)
         stack.saveAndWait()
         fetchData()
     }
 
     func changeColorSelected() {
-        let indexPaths = collectionView!.indexPathsForSelectedItems()
+        let indexPaths = collectionView!.indexPathsForSelectedItems
         frc.changeThingColorsAtIndexPaths(indexPaths)
         stack.saveAndWait()
         fetchData()
     }
 
     func changeAllSelected() {
-        let indexPaths = collectionView!.indexPathsForSelectedItems()
+        let indexPaths = collectionView!.indexPathsForSelectedItems
         frc.changeThingsAtIndexPaths(indexPaths)
         stack.saveAndWait()
         fetchData()
