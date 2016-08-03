@@ -31,11 +31,11 @@ public class CoreDataStack {
     public let persistentStoreCoordinator: NSPersistentStoreCoordinator
 
     public init(inMemory: Bool = false) {
-        let modelURL = Bundle(for: CoreDataStack.self).urlForResource("Model", withExtension: "momd")!
+        let modelURL = Bundle(for: CoreDataStack.self).url(forResource: "Model", withExtension: "momd")!
 
         let model = NSManagedObjectModel(contentsOf: modelURL)!
-        let documentsDirectoryURL = try! FileManager.default.urlForDirectory(.documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-        let storeURL = try! documentsDirectoryURL.appendingPathComponent("Model.sqlite")
+        let documentsDirectoryURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        let storeURL = documentsDirectoryURL.appendingPathComponent("Model.sqlite")
 
         persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
         try! persistentStoreCoordinator.addPersistentStore(ofType: inMemory ? NSInMemoryStoreType : NSSQLiteStoreType, configurationName: nil, at: inMemory ? nil : storeURL, options: nil)

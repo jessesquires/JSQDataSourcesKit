@@ -75,7 +75,7 @@ extension UITableView {
 extension UICollectionView {
 
     func deselectAllItems() {
-        if let indexPaths = indexPathsForSelectedItems() {
+        if let indexPaths = indexPathsForSelectedItems {
             for i in indexPaths {
                 deselectItem(at: i, animated: true)
             }
