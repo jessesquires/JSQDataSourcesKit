@@ -4,6 +4,13 @@ The changelog for `JSQDataSourcesKit`. Also see the [releases](https://github.co
 
 --------------------------------------
 
+4.0.1
+-----
+
+This release closes the [4.0.1 milestone](https://github.com/jessesquires/JSQDataSourcesKit/issues?utf8=✓&q=milestone%3A4.0.1+).
+
+- Fixed an issue with `carthage build` (#61, #62). Thanks @dcaunt!
+
 4.0.0
 -----
 
@@ -13,27 +20,27 @@ This release is essentially a complete re-write of the library. If you are curre
 
 As always, see the [updated documentation for details](http://www.jessesquires.com/JSQDataSourcesKit/index.html).
 
-## New 🎉 
+## New 🎉
 
 - tvOS support
 - Swift Package Manager support
 
-## Bug fixes 🐛 
+## Bug fixes 🐛
 
 - Fixed crash when dequeuing a supplementary view for an empty collection view section (#38). You can now have supplementary views for empty sections.
 
-## ⚠️  Breaking changes ⚠️ 
+## ⚠️  Breaking changes ⚠️
 
 ### Swift
 
-- Updated to Swift 2.2. 
+- Updated to Swift 2.2.
 - **Swift 2.2. and above is now required.**
 
 ### Major API changes
 
 This release includes a complete revamp of the API (#48). It is now much cleaner, simpler, and easier to use. It has also been updated to be more *Swifty* according to the latest Swift API Guidelines.
 
-This library was originally written *before* **protocol extensions** were introduced in Swift. The reimagining of this library and it's APIs are now heavily based on protocol extensions. 
+This library was originally written *before* **protocol extensions** were introduced in Swift. The reimagining of this library and it's APIs are now heavily based on protocol extensions.
 
 ##### New `DataSource`
 
@@ -53,7 +60,7 @@ All of the `*DataSourceProvider` classes have been unified into a single class, 
 
 The section objects are now unified into a single `Section` object and `SectionInfoProtocol` protocol, instead of having table-specific and collection-specific models. The new `Section` and `SectionInfoProtocol` replace the following:
 
-- Removed `CollectionViewSectionInfo` 
+- Removed `CollectionViewSectionInfo`
 - Removed `CollectionViewSection`
 - Removed `TableViewSectionInfo`
 - Removed `TableViewSection`
@@ -65,9 +72,9 @@ The cell factories have been unified into a single `ViewFactory` object and `Reu
 - Removed `CollectionViewCellFactoryType`
 - Removed `CollectionViewCellFactory`
 - Removed `TableViewCellFactoryType`
-- Removed `TableViewCellFactory` 
+- Removed `TableViewCellFactory`
 - Removed `CollectionSupplementaryViewFactoryType`
-- Removed `SupplementaryViewFactory` 
+- Removed `SupplementaryViewFactory`
 
 ##### FetchedResultsDelegateProviers
 
@@ -113,7 +120,7 @@ TableViewDataSourceProvider<SectionInfo, CellFactory>
 
 All we need to ensure is that `SectionInfo.Item == CellFactory.Item` for type-safey across these components, thus the top-level `Item` simply isn't needed. The behavior of these classes remains unchanged, and initialization is now less verbose.
 
-* :warning: The `*FetchedResultsDelegateProvider` and `*FetchedResultsDataSourceProvider` will now `assert` in `init` that the types of items that are fetched by the `NSFetchedResultsController` match the types of items that the `CellFactory`s configure. :warning: 
+* :warning: The `*FetchedResultsDelegateProvider` and `*FetchedResultsDataSourceProvider` will now `assert` in `init` that the types of items that are fetched by the `NSFetchedResultsController` match the types of items that the `CellFactory`s configure. :warning:
 
 * Initializers for `*FetchedResultsDelegateProvider` class have changed to the following. Namely, the `controller:` parameter has been renamed to `fetchedResultsController:` and is no longer optional.
 
@@ -124,12 +131,12 @@ init(tableView: cellFactory: fetchedResultsController:)
 
 ## Documentation
 
-All [documentation](http://www.jessesquires.com/JSQDataSourcesKit/index.html) has been updated. :scroll: 
+All [documentation](http://www.jessesquires.com/JSQDataSourcesKit/index.html) has been updated. :scroll:
 
 2.0.0
 -----
 
-# :tada: `JSQDataSourcesKit` 2.0 is here! :tada: 
+# :tada: `JSQDataSourcesKit` 2.0 is here! :tada:
 
 In short, this release contains tons of refinements and fixes. The codebase is substantially cleaner, and more user-friendly.
 
@@ -154,11 +161,11 @@ Find the complete list of closed issues [here](https://github.com/jessesquires/J
 
 ## Documentation
 
-All [documentation](http://www.jessesquires.com/JSQDataSourcesKit/index.html) has been updated. :scroll: 
+All [documentation](http://www.jessesquires.com/JSQDataSourcesKit/index.html) has been updated. :scroll:
 
 ## Example app
 
-The [example app](https://github.com/jessesquires/JSQDataSourcesKit/tree/develop/Example) is now much cleaner, and much more awesome. :sunglasses: 
+The [example app](https://github.com/jessesquires/JSQDataSourcesKit/tree/develop/Example) is now much cleaner, and much more awesome. :sunglasses:
 
 1.0.0
 -----
