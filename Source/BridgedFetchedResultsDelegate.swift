@@ -28,7 +28,7 @@ import Foundation
 
     typealias WillChangeContentHandler = (NSFetchedResultsController<NSFetchRequestResult>) -> Void
     typealias DidChangeSectionHandler = (NSFetchedResultsController<NSFetchRequestResult>, NSFetchedResultsSectionInfo, Int, NSFetchedResultsChangeType) -> Void
-    typealias DidChangeObjectHandler = (NSFetchedResultsController<NSFetchRequestResult>, AnyObject, IndexPath?, NSFetchedResultsChangeType, IndexPath?) -> Void
+    typealias DidChangeObjectHandler = (NSFetchedResultsController<NSFetchRequestResult>, Any, IndexPath?, NSFetchedResultsChangeType, IndexPath?) -> Void
     typealias DidChangeContentHandler = (NSFetchedResultsController<NSFetchRequestResult>) -> Void
 
     let willChangeContent: WillChangeContentHandler
@@ -63,7 +63,7 @@ extension BridgedFetchedResultsDelegate: NSFetchedResultsControllerDelegate {
     }
 
     @objc func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                          didChange anObject: AnyObject,
+                          didChange anObject: Any,
                           at indexPath: IndexPath?,
                           for type: NSFetchedResultsChangeType,
                           newIndexPath: IndexPath?) {

@@ -27,7 +27,7 @@ final class TitledSupplementaryViewTests: XCTestCase {
 
     func test_thatView_initializesWithFrame() {
         let identifier = TitledSupplementaryView.identifier
-        XCTAssertEqual(identifier, String(TitledSupplementaryView.self))
+        XCTAssertEqual(identifier, String(describing: TitledSupplementaryView.self))
 
         let view = TitledSupplementaryView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
         view.layoutIfNeeded()
@@ -39,7 +39,7 @@ final class TitledSupplementaryViewTests: XCTestCase {
 
     func test_thatView_adjustsLabelFrameForInsets() {
         let identifier = TitledSupplementaryView.identifier
-        XCTAssertEqual(identifier, String(TitledSupplementaryView.self))
+        XCTAssertEqual(identifier, String(describing: TitledSupplementaryView.self))
 
         let view = TitledSupplementaryView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
         view.verticalInset = 10

@@ -20,9 +20,10 @@ import Foundation
 import UIKit
 
 /// A `DataSourceProvider` is responsible for providing a data source object for a table view or collection view.
-public final class DataSourceProvider<DataSource: DataSourceProtocol, CellFactory: ReusableViewFactoryProtocol, SupplementaryFactory: ReusableViewFactoryProtocol
-    where
-CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSource.Item> {
+public final class DataSourceProvider<DataSource: DataSourceProtocol,
+    CellFactory: ReusableViewFactoryProtocol,
+    SupplementaryFactory: ReusableViewFactoryProtocol>
+where CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSource.Item {
 
     // MARK: Properties
 
@@ -35,7 +36,7 @@ CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSource.Ite
     /// The supplementary view factory.
     public let supplementaryFactory: SupplementaryFactory
 
-    private var bridgedDataSource: BridgedDataSource?
+    fileprivate var bridgedDataSource: BridgedDataSource?
 
 
     // MARK: Initialization

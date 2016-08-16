@@ -22,7 +22,7 @@ import JSQDataSourcesKit
 
 struct FancyViewModel {
     let text: String = "Fancy Text"
-    let cornerRadius: CGFloat = 5
+    let cornerRadius: CGFloat = 8
 }
 
 enum MixedItem {

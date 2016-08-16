@@ -41,11 +41,11 @@ public final class FetchedResultsDelegateProvider<CellFactory: ReusableViewFacto
 
     // MARK: private
 
-    private typealias Item = CellFactory.Item
+    fileprivate typealias Item = CellFactory.Item
 
-    private var bridgedDelegate: BridgedFetchedResultsDelegate?
+    fileprivate var bridgedDelegate: BridgedFetchedResultsDelegate?
 
-    private init(cellFactory: CellFactory, cellParentView: ParentView) {
+    fileprivate init(cellFactory: CellFactory, cellParentView: ParentView) {
         self.cellFactory = cellFactory
         self.cellParentView = cellParentView
     }
@@ -53,13 +53,13 @@ public final class FetchedResultsDelegateProvider<CellFactory: ReusableViewFacto
 
     // MARK: Private, collection view properties
 
-    private typealias SectionChangeTuple = (changeType: NSFetchedResultsChangeType, sectionIndex: Int)
-    private lazy var sectionChanges = [SectionChangeTuple]()
+    fileprivate typealias SectionChangeTuple = (changeType: NSFetchedResultsChangeType, sectionIndex: Int)
+    fileprivate lazy var sectionChanges = [SectionChangeTuple]()
 
-    private typealias ObjectChangeTuple = (changeType: NSFetchedResultsChangeType, indexPaths: [IndexPath])
-    private lazy var objectChanges = [ObjectChangeTuple]()
+    fileprivate typealias ObjectChangeTuple = (changeType: NSFetchedResultsChangeType, indexPaths: [IndexPath])
+    fileprivate lazy var objectChanges = [ObjectChangeTuple]()
 
-    private lazy var updatedObjects = [IndexPath: Item]()
+    fileprivate lazy var updatedObjects = [IndexPath: Item]()
 }
 
 
