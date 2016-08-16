@@ -290,7 +290,7 @@ public struct ViewFactory<Item, Cell: ReusableViewProtocol>: ReusableViewFactory
 
      - returns: The configured cell.
      */
-    public typealias ViewConfigurator = (cell: Cell, item: Item?, type: ReusableViewType, parentView: Cell.ParentView, indexPath: IndexPath) -> Cell
+    public typealias ViewConfigurator = (Cell, Item?, ReusableViewType, Cell.ParentView, IndexPath) -> Cell
 
 
     // MARK: Properties
@@ -335,6 +335,6 @@ public struct ViewFactory<Item, Cell: ReusableViewProtocol>: ReusableViewFactory
     /// :nodoc:
     public func configure(view: Cell, item: Item?, type: ReusableViewType, parentView: Cell.ParentView, indexPath: IndexPath) -> Cell {
         assert(self.type == type)
-        return viewConfigurator(cell: view, item: item, type: type, parentView: parentView, indexPath: indexPath)
+        return viewConfigurator(view, item, type, parentView, indexPath)
     }
 }

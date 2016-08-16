@@ -61,7 +61,7 @@ public final class TitledSupplementaryView: UICollectionReusableView {
     /// The default string used to identify instances of `TitledSupplementaryView`.
     public class var identifier: String {
         get {
-            return String(TitledSupplementaryView.self)
+            return String(describing: TitledSupplementaryView.self)
         }
     }
 

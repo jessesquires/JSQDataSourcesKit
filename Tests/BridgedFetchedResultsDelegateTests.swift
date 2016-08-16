@@ -49,10 +49,10 @@ final class BridgedFetchedResultsDelegateTests: XCTestCase {
         let controller = NSFetchedResultsController<NSFetchRequestResult>()
 
         class FakeSectionInfo: NSObject, NSFetchedResultsSectionInfo {
-            @objc var numberOfObjects: Int = 0
-            @objc var objects: [AnyObject]?
-            @objc var name: String = "name"
-            @objc var indexTitle: String?
+            @objc public var numberOfObjects: Int = 0
+            @objc public var objects: [Any]?
+            @objc public var name: String = "name"
+            @objc public var indexTitle: String?
         }
 
         // WHEN: we call the NSFetchedResultsControllerDelegate methods

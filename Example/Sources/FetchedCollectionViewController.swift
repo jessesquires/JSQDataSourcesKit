@@ -68,7 +68,7 @@ class FetchedCollectionViewController: UICollectionViewController {
             footer.label.text = "\(item!.colorName) footer (\(indexPath.section))"
             footer.label.textColor = item?.displayColor
             footer.backgroundColor = .lightGray
-            footer.label.font = .preferredFont(forTextStyle: UIFontTextStyleFootnote)
+            footer.label.font = .preferredFont(forTextStyle: .footnote)
             footer.label.textAlignment = .center
             return footer
         }

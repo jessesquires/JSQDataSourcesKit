@@ -26,11 +26,11 @@ import JSQDataSourcesKit
 
 extension UIAlertController {
     class func showActionAlert(_ presenter: UIViewController,
-                               addNewAction: () -> Void,
-                               deleteAction: () -> Void,
-                               changeNameAction: () -> Void,
-                               changeColorAction: () -> Void,
-                               changeAllAction: () -> Void) {
+                               addNewAction: @escaping () -> Void,
+                               deleteAction: @escaping () -> Void,
+                               changeNameAction: @escaping () -> Void,
+                               changeColorAction: @escaping () -> Void,
+                               changeAllAction: @escaping () -> Void) {
         let alert = UIAlertController(title: "You must select items first", message: nil, preferredStyle: .actionSheet)
 
         alert.addAction(UIAlertAction(title: "Add new", style: .default) { action in
