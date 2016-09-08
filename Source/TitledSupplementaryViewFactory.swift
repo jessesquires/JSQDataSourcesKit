@@ -57,7 +57,7 @@ public struct TitledSupplementaryViewFactory <Item>: ReusableViewFactoryProtocol
 
      - returns: A new `TitledSupplementaryView` instance.
      */
-    public init(configurator: ConfigurationHandler) {
+    public init(configurator: @escaping ConfigurationHandler) {
         self.configurator = configurator
     }
 
