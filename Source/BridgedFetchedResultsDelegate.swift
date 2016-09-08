@@ -36,10 +36,10 @@ import Foundation
     let didChangeObject: DidChangeObjectHandler
     let didChangeContent: DidChangeContentHandler
 
-    init(willChangeContent: WillChangeContentHandler,
-         didChangeSection: DidChangeSectionHandler,
-         didChangeObject: DidChangeObjectHandler,
-         didChangeContent: DidChangeContentHandler) {
+    init(willChangeContent: @escaping WillChangeContentHandler,
+         didChangeSection: @escaping DidChangeSectionHandler,
+         didChangeObject: @escaping DidChangeObjectHandler,
+         didChangeContent: @escaping DidChangeContentHandler) {
 
         self.willChangeContent = willChangeContent
         self.didChangeSection = didChangeSection

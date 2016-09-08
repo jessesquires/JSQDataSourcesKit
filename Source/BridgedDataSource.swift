@@ -47,7 +47,8 @@ internal typealias TableTitleForFooterInSectionHandler = (Int) -> String?
     var tableTitleForHeaderInSection: TableTitleForHeaderInSectionHandler?
     var tableTitleForFooterInSection: TableTitleForFooterInSectionHandler?
 
-    init(numberOfSections: NumberOfSectionsHandler, numberOfItemsInSection: NumberOfItemsInSectionHandler) {
+    init(numberOfSections: @escaping NumberOfSectionsHandler,
+         numberOfItemsInSection: @escaping NumberOfItemsInSectionHandler) {
         self.numberOfSections = numberOfSections
         self.numberOfItemsInSection = numberOfItemsInSection
     }
