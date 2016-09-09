@@ -290,7 +290,7 @@ public struct ViewFactory<Item, Cell: ReusableViewProtocol>: ReusableViewFactory
 
      - returns: The configured cell.
      */
-    public typealias ViewConfigurator = (Cell, Item?, ReusableViewType, Cell.ParentView, IndexPath) -> Cell
+    public typealias ViewConfigurator = (_ cell: Cell, _ item: Item?, _ type: ReusableViewType, _ parentView: Cell.ParentView, _ indexPath: IndexPath) -> Cell
 
 
     // MARK: Properties
