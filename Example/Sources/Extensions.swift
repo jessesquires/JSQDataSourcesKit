@@ -90,9 +90,11 @@ extension NSFetchedResultsController {
             return
         }
 
-        for i in indexPaths {
-            let thingToDelete = objectAtIndexPath(i) as! Thing
-            managedObjectContext.deleteObject(thingToDelete)
+        managedObjectContext.performBlock {
+            for i in indexPaths {
+                let thingToDelete = self.objectAtIndexPath(i) as! Thing
+                self.managedObjectContext.deleteObject(thingToDelete)
+            }
         }
     }
 
@@ -101,9 +103,11 @@ extension NSFetchedResultsController {
             return
         }
 
-        for i in indexPaths {
-            let thingToChange = objectAtIndexPath(i) as! Thing
-            thingToChange.changeNameRandomly()
+        managedObjectContext.performBlock {
+            for i in indexPaths {
+                let thingToChange = self.objectAtIndexPath(i) as! Thing
+                thingToChange.changeNameRandomly()
+            }
         }
     }
 
@@ -112,9 +116,11 @@ extension NSFetchedResultsController {
             return
         }
 
-        for i in indexPaths {
-            let thingToChange = objectAtIndexPath(i) as! Thing
-            thingToChange.changeColorRandomly()
+        managedObjectContext.performBlock {
+            for i in indexPaths {
+                let thingToChange = self.objectAtIndexPath(i) as! Thing
+                thingToChange.changeColorRandomly()
+            }
         }
     }
 
@@ -123,9 +129,11 @@ extension NSFetchedResultsController {
             return
         }
 
-        for i in indexPaths {
-            let thingToChange = objectAtIndexPath(i) as! Thing
-            thingToChange.changeRandomly()
+        managedObjectContext.performBlock {
+            for i in indexPaths {
+                let thingToChange = self.objectAtIndexPath(i) as! Thing
+                thingToChange.changeRandomly()
+            }
         }
     }
 }

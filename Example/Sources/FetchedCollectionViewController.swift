@@ -127,11 +127,14 @@ class FetchedCollectionViewController: UICollectionViewController {
     func addNewThing() {
         collectionView!.deselectAllItems()
 
-        let newThing = Thing.newThing(stack.context)
+        var newThing: Thing?
+        stack.context.performBlockAndWait {
+            newThing = Thing.newThing(self.stack.context)
+        }
         stack.saveAndWait()
         fetchData()
 
-        if let indexPath = frc.indexPathForObject(newThing) {
+        if let indexPath = frc.indexPathForObject(newThing!) {
             collectionView!.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: .CenteredVertically)
         }
     }

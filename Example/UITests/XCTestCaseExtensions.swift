@@ -24,8 +24,7 @@ extension XCTestCase {
      Returns to the previous screen in navigation stack if Back button is availible
      */
     func returnBackIfPossible() {
-        
-        let backButton = XCUIApplication().navigationBars.buttons.matchingIdentifier("Back").elementBoundByIndex(0)
+        let backButton = XCUIApplication().navigationBars.buttons.matching(identifier: "Back").element(boundBy: 0)
         
         if backButton.exists && backButton.hittable {
             backButton.tap()
@@ -36,14 +35,14 @@ extension XCTestCase {
      Scrolls down the current view halfscreen.
      */
     func scrollHalfScreenDown() {
-        scrollScreenVerticallyWithOffset(-0.8 * XCUIApplication().windows.elementBoundByIndex(0).frame.height / 2)
+        scrollScreenVerticallyWithOffset(-0.8 * XCUIApplication().windows.element(boundBy: 0).frame.height / 2)
     }
     
     /**
      Scrolls down the current view halfscreen.
      */
     func scrollHalfScreenUp() {
-        scrollScreenVerticallyWithOffset(0.8 * XCUIApplication().windows.elementBoundByIndex(0).frame.height / 2)
+        scrollScreenVerticallyWithOffset(0.8 * XCUIApplication().windows.element(boundBy: 0).frame.height / 2)
     }
     
     /**
@@ -52,7 +51,7 @@ extension XCTestCase {
      - parameter offset: Number of points that a view should be scrolled by.
      */
     func scrollScreenVerticallyWithOffset(offset: CGFloat) {
-        let mainWindow = XCUIApplication().windows.elementBoundByIndex(0)
+        let mainWindow = XCUIApplication().windows.element(boundBy: 0)
         
         // `start` is exactly the center of the main window
         let start = mainWindow.coordinateWithNormalizedOffset(CGVector(dx: 0.5, dy: 0.5))

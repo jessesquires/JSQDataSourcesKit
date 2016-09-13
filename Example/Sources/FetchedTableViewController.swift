@@ -102,12 +102,14 @@ class FetchedTableViewController: UITableViewController {
     func addNewThing() {
         tableView.deselectAllRows()
 
-        let newThing = Thing.newThing(stack.context)
+        var newThing: Thing?
+        stack.context.performBlockAndWait {
+            newThing = Thing.newThing(self.stack.context)
+        }
         stack.saveAndWait()
-
         fetchData()
 
-        if let indexPath = frc.indexPathForObject(newThing) {
+        if let indexPath = frc.indexPathForObject(newThing!) {
             tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Middle)
         }
     }

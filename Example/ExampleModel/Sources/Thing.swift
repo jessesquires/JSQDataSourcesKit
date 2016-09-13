@@ -104,7 +104,7 @@ public class Thing: NSManagedObject {
         return t
     }
 
-    public class func fetchRequest() -> NSFetchRequest {
+    public class func newFetchRequest() -> NSFetchRequest {
         let request = NSFetchRequest(entityName: "Thing")
         request.sortDescriptors = [
             NSSortDescriptor(key: "colorName", ascending: true),
