@@ -56,10 +56,10 @@ script:
   fi
 
 
-# Build for reporting test coverage
-# - if [ $RUN_TESTS == "YES" ]; then
-#       xcodebuild test -project JSQDataSourcesKit.xcodeproj -scheme JSQDataSourcesKit-iOS -sdk iphonesimulator;
-#   fi
+Build for reporting test coverage
+- if [ $RUN_TESTS == "YES" ]; then
+      xcodebuild test -project JSQDataSourcesKit.xcodeproj -scheme JSQDataSourcesKit-iOS -destination "platform=iOS Simulator,name=iPhone 7"
+  fi
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
