@@ -321,7 +321,7 @@ public struct ViewFactory<Item, Cell: ReusableViewProtocol>: ReusableViewFactory
 
      - returns: A new `CellFactory` instance.
      */
-    public init(reuseIdentifier: String, type: ReusableViewType = .cell, viewConfigurator: ViewConfigurator) {
+    public init(reuseIdentifier: String, type: ReusableViewType = .cell, viewConfigurator: @escaping ViewConfigurator) {
         self.reuseIdentifier = reuseIdentifier
         self.type = type
         self.viewConfigurator = viewConfigurator

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1DD7AC5D1D86C4BC00B676A6 /* OptionalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD7AC5C1D86C4BC00B676A6 /* OptionalDataSource.swift */; };
 		881A92DB1CB881550080BC5C /* FetchedResultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD2C1CB87CB400C018AF /* FetchedResultsDelegate.swift */; };
 		881A92DD1CB881550080BC5C /* JSQDataSourcesKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 88DCAD2F1CB87CB400C018AF /* JSQDataSourcesKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		881A92E11CB881550080BC5C /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD331CB87CB400C018AF /* Section.swift */; };
@@ -84,6 +85,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1DD7AC5C1D86C4BC00B676A6 /* OptionalDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalDataSource.swift; sourceTree = "<group>"; };
 		881A92CC1CB881270080BC5C /* JSQDataSourcesKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSQDataSourcesKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		882CA4531D1D7D48006112B9 /* BridgedFetchedResultsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgedFetchedResultsDelegate.swift; sourceTree = "<group>"; };
 		882CA4571D1D82E1006112B9 /* TestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCase.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				88DCAD2C1CB87CB400C018AF /* FetchedResultsDelegate.swift */,
 				88DCAD2D1CB87CB400C018AF /* Info.plist */,
 				88DCAD2F1CB87CB400C018AF /* JSQDataSourcesKit.h */,
+				1DD7AC5C1D86C4BC00B676A6 /* OptionalDataSource.swift */,
 				88DCAD331CB87CB400C018AF /* Section.swift */,
 				88DCAD351CB87CB400C018AF /* TitledSupplementaryView.swift */,
 				88DCAD371CB87CB400C018AF /* TitledSupplementaryViewFactory.swift */,
@@ -403,6 +406,7 @@
 				88DCAD761CB87CC000C018AF /* TitledSupplementaryView.swift in Sources */,
 				88DCAD741CB87CC000C018AF /* Section.swift in Sources */,
 				88B80CD81CBBF62A00EDF9D5 /* DataSourceProvider.swift in Sources */,
+				1DD7AC5D1D86C4BC00B676A6 /* OptionalDataSource.swift in Sources */,
 				888799491D0E2D1700BBCCBC /* DataSource.swift in Sources */,
 				88DCAD781CB87CC000C018AF /* TitledSupplementaryViewFactory.swift in Sources */,
 			);
