@@ -53,7 +53,8 @@ internal typealias TableCommitEditingStyleForRowAtIndexPathHandler = (UITableVie
     var tableCanEditRowAtIndexPath:TableCanEditRowAtIndexPathHandler?
     var tableCommitEditingStyleForRowAtIndexPath:TableCommitEditingStyleForRowAtIndexPathHandler?
 
-    init(numberOfSections: @escaping NumberOfSectionsHandler, numberOfItemsInSection: @escaping NumberOfItemsInSectionHandler) {
+    init(numberOfSections: @escaping NumberOfSectionsHandler,
+         numberOfItemsInSection: @escaping NumberOfItemsInSectionHandler) {
         self.numberOfSections = numberOfSections
         self.numberOfItemsInSection = numberOfItemsInSection
     }
