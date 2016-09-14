@@ -43,18 +43,15 @@ script:
       pod lib lint;
   fi
 
-
 - if [ $BUILD_EXAMPLE == "YES" ]; then
       xcodebuild clean build -project Example/Example.xcodeproj -scheme Example -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=NO | xcpretty -c;
   fi
-
 
 - if [ $RUN_TESTS == "YES" ]; then
       xcodebuild test -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO | xcpretty -c;
   else
       xcodebuild clean build -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO | xcpretty -c;
   fi
-
 
 # Build for reporting test coverage
 - if [ $RUN_TESTS == "YES" ]; then
