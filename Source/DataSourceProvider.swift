@@ -38,6 +38,7 @@ where CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSour
 
     fileprivate var bridgedDataSource: BridgedDataSource?
 
+
     //The data source that provides the editing functionality on the tableView
     public var dataSourceTableEditing:DataSourceTableEditingProtocol?
     
