@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DataSourceProvider Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/DataSourceProvider" class="dashAnchor"></a>
+    <a title="DataSourceProvider Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">JSQDataSourcesKit Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/jessesquires/JSQDataSourcesKit"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">JSQDataSourcesKit Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        DataSourceProvider Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/DataSourceProvider.html">DataSourceProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FetchedResultsController.html">FetchedResultsController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FetchedResultsDelegateProvider.html">FetchedResultsDelegateProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TitledSupplementaryView.html">TitledSupplementaryView</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/ReusableViewType.html">ReusableViewType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/CellParentViewProtocol.html">CellParentViewProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/DataSourceProtocol.html">DataSourceProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ReusableViewFactoryProtocol.html">ReusableViewFactoryProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ReusableViewProtocol.html">ReusableViewProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SectionInfoProtocol.html">SectionInfoProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/DataSource.html">DataSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Section.html">Section</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TitledSupplementaryViewFactory.html">TitledSupplementaryViewFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ViewFactory.html">ViewFactory</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>DataSourceProvider</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">DataSourceProvider</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/DataSource.html">DataSource</a></span><span class="p">:</span> <span class="kt"><a href="../Protocols/DataSourceProtocol.html">DataSourceProtocol</a></span><span class="p">,</span>
+    <span class="kt">CellFactory</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html">ReusableViewFactoryProtocol</a></span><span class="p">,</span>
+    <span class="kt">SupplementaryFactory</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html">ReusableViewFactoryProtocol</a></span><span class="o">&gt;</span>
+<span class="k">where</span> <span class="kt">CellFactory</span><span class="o">.</span><span class="kt">Item</span> <span class="o">==</span> <span class="kt"><a href="../Structs/DataSource.html">DataSource</a></span><span class="o">.</span><span class="kt">Item</span><span class="p">,</span> <span class="kt">SupplementaryFactory</span><span class="o">.</span><span class="kt">Item</span> <span class="o">==</span> <span class="kt"><a href="../Structs/DataSource.html">DataSource</a></span><span class="o">.</span><span class="kt">Item</span></code></pre>
+
+                </div>
+              </div>
+            <p>A <code>DataSourceProvider</code> is responsible for providing a data source object for a table view or collection view.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Properties"></a>
+                <a name="//apple_ref/swift/Section/Properties" class="dashAnchor"></a>
+                <a href="#/Properties">
+                  <h3 class="section-name">Properties</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC17JSQDataSourcesKit18DataSourceProvider10dataSourcex"></a>
+                    <a name="//apple_ref/swift/Property/dataSource" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC17JSQDataSourcesKit18DataSourceProvider10dataSourcex">dataSource</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The data source.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">dataSource</span><span class="p">:</span> <span class="kt"><a href="../Structs/DataSource.html">DataSource</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC17JSQDataSourcesKit18DataSourceProvider11cellFactoryq_"></a>
+                    <a name="//apple_ref/swift/Property/cellFactory" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC17JSQDataSourcesKit18DataSourceProvider11cellFactoryq_">cellFactory</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The cell factory.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">cellFactory</span><span class="p">:</span> <span class="kt">CellFactory</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC17JSQDataSourcesKit18DataSourceProvider20supplementaryFactoryq0_"></a>
+                    <a name="//apple_ref/swift/Property/supplementaryFactory" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC17JSQDataSourcesKit18DataSourceProvider20supplementaryFactoryq0_">supplementaryFactory</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The supplementary view factory.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">supplementaryFactory</span><span class="p">:</span> <span class="kt">SupplementaryFactory</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Initialization"></a>
+                <a name="//apple_ref/swift/Section/Initialization" class="dashAnchor"></a>
+                <a href="#/Initialization">
+                  <h3 class="section-name">Initialization</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC17JSQDataSourcesKit18DataSourceProvidercFT10dataSourcex11cellFactoryq_20supplementaryFactoryq0__GS0_xq_q0__"></a>
+                    <a name="//apple_ref/swift/Method/init(dataSource:cellFactory:supplementaryFactory:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC17JSQDataSourcesKit18DataSourceProvidercFT10dataSourcex11cellFactoryq_20supplementaryFactoryq0__GS0_xq_q0__">init(dataSource:cellFactory:supplementaryFactory:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes a new data source provider.</p>
+
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    <p>Table views do not have supplementary views, but this parameter is still required in order to satisfy
+the generic constraints for Swift. You can simply pass the same <code><a href="../Classes/DataSourceProvider.html#/s:vC17JSQDataSourcesKit18DataSourceProvider11cellFactoryq_">cellFactory</a></code> here. The parameter will be ignored.
+The same applies to collection views that do not have supplementary views. Again, the parameter will be ignored.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">dataSource</span><span class="p">:</span> <span class="kt"><a href="../Structs/DataSource.html">DataSource</a></span><span class="p">,</span> <span class="nv">cellFactory</span><span class="p">:</span> <span class="kt">CellFactory</span><span class="p">,</span> <span class="nv">supplementaryFactory</span><span class="p">:</span> <span class="kt">SupplementaryFactory</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dataSource</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The data source.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>cellFactory</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The cell factory.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>supplementaryFactory</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The supplementary view factory.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A new <code>DataSourceProvider</code> instance.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/UITableViewDataSource"></a>
+                <a name="//apple_ref/swift/Section/UITableViewDataSource" class="dashAnchor"></a>
+                <a href="#/UITableViewDataSource">
+                  <h3 class="section-name">UITableViewDataSource</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ve17JSQDataSourcesKit1_RxS_18DataSourceProtocol_S_27ReusableViewFactoryProtocol0_S1_w_4ViewCSo15UITableViewCellwx4Itemzw0_4Itemw_S5_zw0_S5_rCS_18DataSourceProvider19tableViewDataSourcePSo21UITableViewDataSource_"></a>
+                    <a name="//apple_ref/swift/Property/tableViewDataSource" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ve17JSQDataSourcesKit1_RxS_18DataSourceProtocol_S_27ReusableViewFactoryProtocol0_S1_w_4ViewCSo15UITableViewCellwx4Itemzw0_4Itemw_S5_zw0_S5_rCS_18DataSourceProvider19tableViewDataSourcePSo21UITableViewDataSource_">tableViewDataSource</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the <code>UITableViewDataSource</code> object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">tableViewDataSource</span><span class="p">:</span> <span class="kt">UITableViewDataSource</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/UICollectionViewDataSource"></a>
+                <a name="//apple_ref/swift/Section/UICollectionViewDataSource" class="dashAnchor"></a>
+                <a href="#/UICollectionViewDataSource">
+                  <h3 class="section-name">UICollectionViewDataSource</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ve17JSQDataSourcesKit1_RxS_18DataSourceProtocol_S_27ReusableViewFactoryProtocol0_S1_w_4ViewCSo20UICollectionViewCellw0_S2_CSo24UICollectionReusableViewwx4Itemzw0_4Itemw_S6_zw0_S6_rCS_18DataSourceProvider24collectionViewDataSourcePSo26UICollectionViewDataSource_"></a>
+                    <a name="//apple_ref/swift/Property/collectionViewDataSource" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ve17JSQDataSourcesKit1_RxS_18DataSourceProtocol_S_27ReusableViewFactoryProtocol0_S1_w_4ViewCSo20UICollectionViewCellw0_S2_CSo24UICollectionReusableViewwx4Itemzw0_4Itemw_S6_zw0_S6_rCS_18DataSourceProvider24collectionViewDataSourcePSo26UICollectionViewDataSource_">collectionViewDataSource</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the <code>UICollectionViewDataSource</code> object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">collectionViewDataSource</span><span class="p">:</span> <span class="kt">UICollectionViewDataSource</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2016-09-17)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

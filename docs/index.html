@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>JSQDataSourcesKit  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="JSQDataSourcesKit  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">JSQDataSourcesKit Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/jessesquires/JSQDataSourcesKit"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">JSQDataSourcesKit Reference</a>
+        <img id="carat" src="img/carat.png" />
+        JSQDataSourcesKit  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/DataSourceProvider.html">DataSourceProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/FetchedResultsController.html">FetchedResultsController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/FetchedResultsDelegateProvider.html">FetchedResultsDelegateProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/TitledSupplementaryView.html">TitledSupplementaryView</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/ReusableViewType.html">ReusableViewType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Protocols/CellParentViewProtocol.html">CellParentViewProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/DataSourceProtocol.html">DataSourceProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ReusableViewFactoryProtocol.html">ReusableViewFactoryProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ReusableViewProtocol.html">ReusableViewProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/SectionInfoProtocol.html">SectionInfoProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/DataSource.html">DataSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Section.html">Section</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/TitledSupplementaryViewFactory.html">TitledSupplementaryViewFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ViewFactory.html">ViewFactory</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <a href='#jsqdatasourceskit' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='jsqdatasourceskit'>JSQDataSourcesKit</h1>
+
+<p><a href="http://travis-ci.org/jessesquires/JSQDataSourcesKit"><img src="https://secure.travis-ci.org/jessesquires/JSQDataSourcesKit.svg" alt="Build Status"></a> <a href="https://cocoapods.org/pods/JSQDataSourcesKit"><img src="https://img.shields.io/cocoapods/v/JSQDataSourcesKit.svg" alt="Version Status"></a> <a href="http://opensource.org/licenses/MIT"><img src="https://img.shields.io/cocoapods/l/JSQDataSourcesKit.svg" alt="license MIT"></a> <a href="https://codecov.io/gh/jessesquires/JSQDataSourcesKit"><img src="https://codecov.io/gh/jessesquires/JSQDataSourcesKit/branch/develop/graph/badge.svg" alt="codecov"></a> <a href="http://www.jessesquires.com/JSQDataSourcesKit"><img src="https://img.shields.io/cocoapods/p/JSQDataSourcesKit.svg" alt="Platform"></a> <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible"></a></p>
+
+<p><em>Protocol-oriented, type-safe data source objects that keep your view controllers light</em></p>
+
+<p>A Swift library of data source and delegate objects inspired by <a href="https://github.com/andymatuschak">Andy Matuschak&rsquo;s</a> <em>type-safe, value-oriented collection view data source <a href="https://gist.github.com/andymatuschak/f1e1691fa1a327468f8e">gist</a></em>.</p>
+<a href='#about' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='about'>About</h2>
+
+<p>This library reduces the boilerplate code regarding the <code>UITableView</code>, <code>UICollectionView</code>, and <code>NSFetchedResultsController</code> data source objects, as well as the <code>NSFetchedResultsControllerDelegate</code> object. It helps <a href="http://www.objc.io/issue-1/">keep view controllers light</a>, while focusing on type-safety, <a href="http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)">SOLID</a> design principles, and easy interoperability with Cocoa. Further, it brings a more focused and data-driven perspective to these data sources. If you want to change your view then you change your data and its structure, without needing to update any data source or delegate protocol methods.</p>
+<a href='#requirements' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='requirements'>Requirements</h2>
+
+<ul>
+<li>iOS 8+</li>
+<li>Swift 3.0</li>
+<li>Xcode 8</li>
+</ul>
+<a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
+<a href='#a-href-http-cocoapods-org-cocoapods-a-recommended' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='a-href-http-cocoapods-org-cocoapods-a-recommended'><a href="http://cocoapods.org">CocoaPods</a> (recommended)</h4>
+<pre class="highlight ruby"><code><span class="n">use_frameworks!</span>
+
+<span class="c1"># For latest release in cocoapods</span>
+<span class="n">pod</span> <span class="s1">'JSQDataSourcesKit'</span>
+
+<span class="c1"># Feeling adventurous? Get the latest on develop</span>
+<span class="n">pod</span> <span class="s1">'JSQDataSourcesKit'</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s1">'https://github.com/jessesquires/JSQDataSourcesKit.git'</span><span class="p">,</span> <span class="ss">:branch</span> <span class="o">=&gt;</span> <span class="s1">'develop'</span>
+</code></pre>
+<a href='#a-href-https-github-com-carthage-carthage-carthage-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='a-href-https-github-com-carthage-carthage-carthage-a'><a href="https://github.com/Carthage/Carthage">Carthage</a></h4>
+<pre class="highlight shell"><code>github <span class="s2">"jessesquires/JSQDataSourcesKit"</span>
+</code></pre>
+<a href='#documentation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='documentation'>Documentation</h2>
+
+<p>Read the <a href="http://www.jessesquires.com/JSQDataSourcesKit">docs</a>. Generated with <a href="https://github.com/realm/jazzy">jazzy</a>. Hosted by <a href="https://pages.github.com">GitHub Pages</a>.</p>
+
+<p>More information on the <a href="https://github.com/jessesquires/JSQDataSourcesKit/tree/gh-pages"><code>gh-pages</code></a> branch.</p>
+<a href='#getting-started' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='getting-started'>Getting Started</h2>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">JSQDataSourcesKit</span>
+</code></pre>
+<a href='#design' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='design'>Design</h4>
+
+<p>This library has four primary components:</p>
+
+<ol>
+<li><code>Section</code> — represents a section of data</li>
+<li><code>DataSource</code> — represents a collection of <code>Section</code> types</li>
+<li><code>ReusableViewFactory</code> — responsible for dequeuing and configuring cells (for <code>UITableView</code> or <code>UICollectionView</code>)</li>
+<li><code>DataSourceProvider</code> — owns a data source and cell factory, and provides a <code>UICollectionViewDataSource</code> or <code>UITableViewDataSource</code> object.</li>
+</ol>
+<a href='#example' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='example'>Example</h4>
+
+<p>The following illustrates a simple example of how these components interact for a collection view.</p>
+<pre class="highlight swift"><code><span class="c1">// Given a view controller with a collection view</span>
+
+<span class="c1">// 1. create Sections and a DataSource with your model objects</span>
+<span class="k">let</span> <span class="nv">section0</span> <span class="o">=</span> <span class="kt">Section</span><span class="p">(</span><span class="nv">items</span><span class="p">:</span> <span class="o">...</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">section1</span> <span class="o">=</span> <span class="kt">Section</span><span class="p">(</span><span class="nv">items</span><span class="p">:</span> <span class="o">...</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">section2</span> <span class="o">=</span> <span class="kt">Section</span><span class="p">(</span><span class="nv">items</span><span class="p">:</span> <span class="o">...</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">dataSource</span> <span class="o">=</span> <span class="kt">DataSource</span><span class="p">(</span><span class="nv">sections</span><span class="p">:</span> <span class="n">section0</span><span class="p">,</span> <span class="n">section1</span><span class="p">,</span> <span class="n">section2</span><span class="p">)</span>
+
+<span class="c1">// 2. create cell factory</span>
+<span class="k">let</span> <span class="nv">cellFactory</span> <span class="o">=</span> <span class="kt">ViewFactory</span><span class="p">(</span><span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="s">"CellId"</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">model</span><span class="p">?,</span> <span class="n">type</span><span class="p">,</span> <span class="n">collectionView</span><span class="p">,</span> <span class="n">indexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">MyCellClass</span> <span class="k">in</span>
+    <span class="c1">// configure the cell with the model</span>
+    <span class="k">return</span> <span class="n">cell</span>
+<span class="p">}</span>
+
+<span class="c1">// 3. create supplementary view factory</span>
+<span class="k">let</span> <span class="nv">type</span> <span class="o">=</span> <span class="kt">ReusableViewType</span><span class="o">.</span><span class="nf">supplementaryView</span><span class="p">(</span><span class="nv">kind</span><span class="p">:</span> <span class="kt">UICollectionElementKindSectionHeader</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">headerFactory</span> <span class="o">=</span> <span class="kt">ViewFactory</span><span class="p">(</span><span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="s">"HeaderId"</span><span class="p">,</span> <span class="nv">type</span><span class="p">:</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">model</span><span class="p">?,</span> <span class="n">type</span><span class="p">,</span> <span class="n">collectionView</span><span class="p">,</span> <span class="n">indexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">MyHeaderView</span> <span class="k">in</span>
+    <span class="c1">// configure header view</span>
+    <span class="k">return</span> <span class="n">view</span>
+<span class="p">}</span>
+
+<span class="c1">// 4. create data source provider</span>
+<span class="k">let</span> <span class="nv">dataSourceProvider</span> <span class="o">=</span>  <span class="kt">DataSourceProvider</span><span class="p">(</span><span class="nv">dataSource</span><span class="p">:</span> <span class="n">dataSource</span><span class="p">,</span>
+                                             <span class="nv">cellFactory</span><span class="p">:</span> <span class="n">cellFactory</span><span class="p">,</span>
+                                             <span class="nv">supplementaryFactory</span><span class="p">:</span> <span class="n">headerFactory</span><span class="p">)</span>
+
+<span class="c1">// 5. set the collection view's data source</span>
+<span class="n">collectionView</span><span class="o">.</span><span class="n">dataSource</span> <span class="o">=</span> <span class="n">dataSourceProvider</span><span class="o">.</span><span class="n">collectionViewDataSource</span>
+</code></pre>
+<a href='#demo-project' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='demo-project'>Demo Project</h4>
+
+<p>The <a href="https://github.com/jessesquires/JSQDataSourcesKit/tree/develop/Example">example project</a> included exercises <em>all</em> functionality in this library.</p>
+<a href='#unit-tests' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='unit-tests'>Unit tests</h2>
+
+<p>There&rsquo;s a suite of unit tests for <code>JSQDataSourcesKit</code>. Run them in the usual way from Xcode. These tests are well commented and serve as further documentation for how to use this library.</p>
+<a href='#contribute' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='contribute'>Contribute</h2>
+
+<p>Please follow these sweet <a href="https://github.com/jessesquires/HowToContribute">contribution guidelines</a>.</p>
+<a href='#credits' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='credits'>Credits</h2>
+
+<p>Created and maintained by <a href="https://twitter.com/jesse_squires"><strong>@jesse_squires</strong></a>.</p>
+
+<ul>
+<li>Inspired by <strong><a href="https://github.com/andymatuschak">andymatuschak</a> /</strong> <a href="https://gist.github.com/andymatuschak/f1e1691fa1a327468f8e">gist f1e1691fa1a327468f8e</a></li>
+<li>Inspired by <strong><a href="https://github.com/ashfurrow">ashfurrow</a> /</strong> <a href="https://github.com/ashfurrow/UICollectionView-NSFetchedResultsController">UICollectionView-NSFetchedResultsController</a></li>
+</ul>
+<a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='license'>License</h2>
+
+<p><code>JSQDataSourcesKit</code> is released under an <a href="http://opensource.org/licenses/MIT">MIT License</a>. See <code>LICENSE</code> for details.</p>
+
+<blockquote>
+<p><strong>Copyright &copy; 2015-present Jesse Squires.</strong></p>
+</blockquote>
+
+<p><em>Please provide attribution, it is greatly appreciated.</em></p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2016-09-17)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
