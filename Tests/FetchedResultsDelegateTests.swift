@@ -61,26 +61,26 @@ final class FetchedResultsDelegateTests: TestCase {
         // THEN: the table view reports the expected state
         XCTAssertEqual(tableView.numberOfSections, 3)
 
-        XCTAssertEqual(tableView.numberOfRowsInSection(0), blueThings.count)
-        XCTAssertEqual(tableView.numberOfRowsInSection(1), greenThings.count)
-        XCTAssertEqual(tableView.numberOfRowsInSection(2), redThings.count)
+        XCTAssertEqual(tableView.numberOfRows(inSection: 0), blueThings.count)
+        XCTAssertEqual(tableView.numberOfRows(inSection: 1), greenThings.count)
+        XCTAssertEqual(tableView.numberOfRows(inSection: 2), redThings.count)
 
         // WHEN: we modify data, and re-fetch
         for obj in greenThings {
-            context.deleteObject(obj)
+            context.delete(obj)
         }
         generateThings(context, color: .Red)
         blueThings[0].color = .Red
         redThings[0].changeNameRandomly()
-        
+
         stack.saveAndWait()
         _ = try? frc.performFetch()
 
         // THEN: the table view reports the expected state
         XCTAssertEqual(tableView.numberOfSections, 2)
 
-        XCTAssertEqual(tableView.numberOfRowsInSection(0), 2)
-        XCTAssertEqual(tableView.numberOfRowsInSection(1), 7)
+        XCTAssertEqual(tableView.numberOfRows(inSection: 0), 2)
+        XCTAssertEqual(tableView.numberOfRows(inSection: 1), 7)
     }
 
     func test_fetchedResultsDelegate_integration_withCollectionView() {
@@ -121,17 +121,17 @@ final class FetchedResultsDelegateTests: TestCase {
         _ = try? frc.performFetch()
 
         // THEN: the table view reports the expected state
-        XCTAssertEqual(collectionView.numberOfSections(), 3)
+        XCTAssertEqual(collectionView.numberOfSections, 3)
 
-        XCTAssertEqual(collectionView.numberOfItemsInSection(0), blueThings.count)
-        XCTAssertEqual(collectionView.numberOfItemsInSection(1), greenThings.count)
-        XCTAssertEqual(collectionView.numberOfItemsInSection(2), redThings.count)
+        XCTAssertEqual(collectionView.numberOfItems(inSection: 0), blueThings.count)
+        XCTAssertEqual(collectionView.numberOfItems(inSection: 1), greenThings.count)
+        XCTAssertEqual(collectionView.numberOfItems(inSection: 2), redThings.count)
 
         collectionView.layoutSubviews()
 
         // WHEN: we modify data, and re-fetch
         for obj in greenThings {
-            context.deleteObject(obj)
+            context.delete(obj)
         }
         generateThings(context, color: .Red)
         blueThings[0].color = .Red
@@ -141,10 +141,10 @@ final class FetchedResultsDelegateTests: TestCase {
         _ = try? frc.performFetch()
 
         // THEN: the table view reports the expected state
-        XCTAssertEqual(collectionView.numberOfSections(), 2)
-
-        XCTAssertEqual(collectionView.numberOfItemsInSection(0), 2)
-        XCTAssertEqual(collectionView.numberOfItemsInSection(1), 7)
+        XCTAssertEqual(collectionView.numberOfSections, 2)
+        
+        XCTAssertEqual(collectionView.numberOfItems(inSection: 0), 2)
+        XCTAssertEqual(collectionView.numberOfItems(inSection: 1), 7)
     }
-
+    
 }

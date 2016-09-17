@@ -32,7 +32,7 @@ public protocol DataSourceProtocol {
 
 
     // MARK: Methods
-    
+
     /**
      - returns: The number of sections.
      */
@@ -82,25 +82,11 @@ extension DataSourceProtocol {
 
      - returns: The item specified by indexPath, or `nil`.
      */
-    func item(atIndexPath indexPath: NSIndexPath) -> Item? {
+    func item(atIndexPath indexPath: IndexPath) -> Item? {
         return item(atRow: indexPath.row, inSection: indexPath.section)
     }
 }
 
-
-extension DataSourceProtocol where Self: NSFetchedResultsController {
-    /**
-     - parameter indexPath: An index path specifying a row and section in the data source.
-
-     - returns: The item specified by indexPath, or `nil`.
-     */
-    public func item(atIndexPath indexPath: NSIndexPath) -> Item? {
-        guard indexPath.section < numberOfSections() else { return nil }
-        guard let objects = sections?[indexPath.section].objects else { return nil }
-        guard indexPath.item < objects.count else { return nil }
-        return (objectAtIndexPath(indexPath) as! Item)
-    }
-}
 
 /**
  A instance of `DataSource` is a concrete `DataSourceProtocol`.
@@ -194,7 +180,7 @@ public struct DataSource<S: SectionInfoProtocol>: DataSourceProtocol {
      - parameter indexPath: The index path of an item.
      - returns: The item at `indexPath`.
      */
-    public subscript (indexPath: NSIndexPath) -> S.Item {
+    public subscript (indexPath: IndexPath) -> S.Item {
         get {
             return sections[indexPath.section].items[indexPath.row]
         }
@@ -204,8 +190,9 @@ public struct DataSource<S: SectionInfoProtocol>: DataSourceProtocol {
     }
 }
 
+
 /// A generic `NSFetchedResultsController`.
-public class FetchedResultsController<T: NSManagedObject>: NSFetchedResultsController {
+public class FetchedResultsController<T: NSFetchRequestResult>: NSFetchedResultsController<NSFetchRequestResult> {
 
     /**
      Returns a fetch request controller initialized using the given arguments.
@@ -217,11 +204,11 @@ public class FetchedResultsController<T: NSManagedObject>: NSFetchedResultsContr
 
      - returns: An initialized fetch request controller.
      */
-    public override init(fetchRequest: NSFetchRequest,
-                         managedObjectContext context: NSManagedObjectContext,
-                                              sectionNameKeyPath: String?,
-                                              cacheName name: String?) {
-        super.init(fetchRequest: fetchRequest,
+    public init<T: NSFetchRequestResult>(fetchRequest: NSFetchRequest<T>,
+                managedObjectContext context: NSManagedObjectContext,
+                sectionNameKeyPath: String?,
+                cacheName name: String?) {
+        super.init(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>,
                    managedObjectContext: context,
                    sectionNameKeyPath: sectionNameKeyPath,
                    cacheName: name)
@@ -231,9 +218,9 @@ public class FetchedResultsController<T: NSManagedObject>: NSFetchedResultsContr
      - parameter indexPath: The index path of an object.
      - returns: The object at `indexPath`.
      */
-    public subscript (indexPath: NSIndexPath) -> T {
+    public subscript (indexPath: IndexPath) -> T {
         get {
-            return objectAtIndexPath(indexPath) as! T
+            return object(at: indexPath) as! T
         }
     }
 }
@@ -257,12 +244,15 @@ extension FetchedResultsController: DataSourceProtocol {
     /// :nodoc:
     public func items(inSection section: Int) -> [Item]? {
         guard section < numberOfSections() else { return nil }
-        return (sections?[section].objects as! [Item])
+        return sections?[section].objects as! [Item]?
     }
 
     /// :nodoc:
     public func item(atRow row: Int, inSection section: Int) -> Item? {
-        return item(atIndexPath: NSIndexPath(forRow: row, inSection: section))
+        guard section < numberOfSections() else { return nil }
+        guard let objects = sections?[section].objects else { return nil }
+        guard row < objects.count else { return nil }
+        return object(at: IndexPath(row: row, section: section)) as? Item
     }
 
     /// :nodoc:
@@ -270,7 +260,7 @@ extension FetchedResultsController: DataSourceProtocol {
         guard section < numberOfSections() else { return nil }
         return sections?[section].name
     }
-
+    
     /// :nodoc:
     public func footerTitle(inSection section: Int) -> String? {
         return nil

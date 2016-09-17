@@ -61,14 +61,14 @@ final class FetchedResultsViewsUITests: XCTestCase {
         fetchedResultsTableViewMenuItem.tap()
         
         // GIVEN: initial number of cells in the table
-        var numberOfCellsBeforeInTable = countElements(ofType: .Cell, inView: table, byUniqueIdentifier: { $0.identifier })
+        var numberOfCellsBeforeInTable = countElements(ofType: .cell, inView: table, byUniqueIdentifier: { $0.identifier })
         
         returnBackIfPossible()
         
         fetchedResultsCollectionViewMenuItem.tap()
         
         // GIVEN: initial number of cells in the collection view
-        var numberOfCellsBeforeInCollectionView = countElements(ofType: .Cell, inView: collectionView,
+        var numberOfCellsBeforeInCollectionView = countElements(ofType: .cell, inView: collectionView,
                                                                 byUniqueIdentifier: { $0.identifier })
         
         XCTAssertEqual(numberOfCellsBeforeInTable, numberOfCellsBeforeInCollectionView,
@@ -86,7 +86,7 @@ final class FetchedResultsViewsUITests: XCTestCase {
             fetchedResultsTableViewMenuItem.tap()
             
             // THEN: new items get added to the table
-            let numberOfCellsAfterInTable = countElements(ofType: .Cell, inView: table, byUniqueIdentifier: { $0.identifier })
+            let numberOfCellsAfterInTable = countElements(ofType: .cell, inView: table, byUniqueIdentifier: { $0.identifier })
             XCTAssertEqual(numberOfCellsAfterInTable, numberOfCellsBeforeInTable + numberOfItemsAdded,
                            "\"Add\" button should cause adding new cells")
             
@@ -97,7 +97,7 @@ final class FetchedResultsViewsUITests: XCTestCase {
             fetchedResultsCollectionViewMenuItem.tap()
             
             // THEN: new items get added to the collection view as well
-            let numberOfCellsAfterInCollectionView = countElements(ofType: .Cell, inView: collectionView,
+            let numberOfCellsAfterInCollectionView = countElements(ofType: .cell, inView: collectionView,
                                                                    byUniqueIdentifier: { $0.identifier })
             XCTAssertEqual(numberOfCellsAfterInCollectionView, numberOfCellsBeforeInCollectionView + numberOfItemsAdded,
                            "\"Add\" button should cause adding new cells")
@@ -165,7 +165,7 @@ final class FetchedResultsViewsUITests: XCTestCase {
         fetchedResultsCollectionViewMenuItem.tap()
         
         // GIVEN: initial number of cells in the collection view
-        let numberOfCellsBeforeInCollectionView = countElements(ofType: .Cell, inView: collectionView,
+        let numberOfCellsBeforeInCollectionView = countElements(ofType: .cell, inView: collectionView,
                                                                 byUniqueIdentifier: { $0.identifier })
         
         // WHEN: "Add new" option is tapped
@@ -174,7 +174,7 @@ final class FetchedResultsViewsUITests: XCTestCase {
         
         // THEN: a new cell appears in the collection view
         scrollOnStatusBarTap()
-        let numberOfCellsAfterInCollectionView = countElements(ofType: .Cell, inView: collectionView,
+        let numberOfCellsAfterInCollectionView = countElements(ofType: .cell, inView: collectionView,
                                                                byUniqueIdentifier: { $0.identifier })
         
         XCTAssertEqual(numberOfCellsAfterInCollectionView, numberOfCellsBeforeInCollectionView + 1,
@@ -188,7 +188,7 @@ final class FetchedResultsViewsUITests: XCTestCase {
         fetchedResultsTableViewMenuItem.tap()
         
         // GIVEN: initial number of cells in the table view
-        let numberOfCellsBeforeInTable = countElements(ofType: .Cell, inView: table, byUniqueIdentifier: { $0.identifier })
+        let numberOfCellsBeforeInTable = countElements(ofType: .cell, inView: table, byUniqueIdentifier: { $0.identifier })
         
         // WHEN: "Add new" option is tapped
         app.toolbars.buttons["Share"].tap()
@@ -196,7 +196,7 @@ final class FetchedResultsViewsUITests: XCTestCase {
         
         // THEN: a new cell appears in the table view
         scrollOnStatusBarTap()
-        let numberOfCellsAfterInTable = countElements(ofType: .Cell, inView: table, byUniqueIdentifier: { $0.identifier })
+        let numberOfCellsAfterInTable = countElements(ofType: .cell, inView: table, byUniqueIdentifier: { $0.identifier })
         
         XCTAssertEqual(numberOfCellsAfterInTable, numberOfCellsBeforeInTable + 1, "\"Add new\" should add one new cell")
     }
@@ -220,12 +220,12 @@ final class FetchedResultsViewsUITests: XCTestCase {
         fetchedResultsTableViewMenuItem.tap()
         
         // GIVEN: initial number of cells in the table view
-        let numberOfCellsBeforeInTable = countElements(ofType: .Cell, inView: table, byUniqueIdentifier: { $0.identifier })
+        let numberOfCellsBeforeInTable = countElements(ofType: .cell, inView: table, byUniqueIdentifier: { $0.identifier })
         
         scrollOnStatusBarTap()
         
         // WHEN: we select some of them
-        tapOn(numberOfCellsToDelete, hittableElementsOfType: .Cell, inView: table)
+        tapOn(numberOfCellsToDelete, hittableElementsOfType: .cell, inView: table)
         
         // WHEN: "Delete selected" option is tapped
         app.toolbars.buttons["Share"].tap()
@@ -233,7 +233,7 @@ final class FetchedResultsViewsUITests: XCTestCase {
         
         // THEN: Selected cells disappear
         scrollOnStatusBarTap()
-        let numberOfCellsAfterInTable = countElements(ofType: .Cell, inView: table, byUniqueIdentifier: { $0.identifier })
+        let numberOfCellsAfterInTable = countElements(ofType: .cell, inView: table, byUniqueIdentifier: { $0.identifier })
         XCTAssertEqual(numberOfCellsAfterInTable, numberOfCellsBeforeInTable - numberOfCellsToDelete,
                        "\"Delete selected\" should remove \(numberOfCellsToDelete) cells.")
         
@@ -247,12 +247,12 @@ final class FetchedResultsViewsUITests: XCTestCase {
         fetchedResultsCollectionViewMenuItem.tap()
         
         // GIVEN: initial number of cells in the table view
-        let numberOfCellsBeforeInCollectionView = countElements(ofType: .Cell, inView: collectionView,
+        let numberOfCellsBeforeInCollectionView = countElements(ofType: .cell, inView: collectionView,
                                                                 byUniqueIdentifier: { $0.identifier })
         scrollOnStatusBarTap()
         
         // WHEN: we select some of them
-        tapOn(numberOfCellsToDelete, hittableElementsOfType: .Cell, inView: collectionView)
+        tapOn(numberOfCellsToDelete, hittableElementsOfType: .cell, inView: collectionView)
         
         // WHEN: "Delete selected" option is tapped
         app.toolbars.buttons["Share"].tap()
@@ -260,7 +260,7 @@ final class FetchedResultsViewsUITests: XCTestCase {
         
         // THEN: Selected cells disappear
         scrollOnStatusBarTap()
-        let numberOfCellsAfterInCollectionView = countElements(ofType: .Cell, inView: collectionView,
+        let numberOfCellsAfterInCollectionView = countElements(ofType: .cell, inView: collectionView,
                                                                byUniqueIdentifier: { $0.identifier })
         XCTAssertEqual(numberOfCellsAfterInCollectionView, numberOfCellsBeforeInCollectionView - numberOfCellsToDelete,
                        "\"Delete selected\" should remove \(numberOfCellsToDelete) cells.")

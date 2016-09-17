@@ -28,9 +28,9 @@ public enum Color: String {
 
     var displayColor: UIColor {
         switch(self) {
-        case .Red: return .redColor()
-        case .Blue: return .blueColor()
-        case .Green: return .greenColor()
+        case .Red: return .red
+        case .Blue: return .blue
+        case .Green: return .green
         }
     }
 }
@@ -70,12 +70,12 @@ public class Thing: NSManagedObject {
     // MARK: Init
 
     public init(context: NSManagedObjectContext) {
-        let entityDescription = NSEntityDescription.entityForName("Thing", inManagedObjectContext: context)!
-        super.init(entity: entityDescription, insertIntoManagedObjectContext: context)
+        let entityDescription = NSEntityDescription.entity(forEntityName: "Thing", in: context)!
+        super.init(entity: entityDescription, insertInto: context)
     }
 
-    public override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
-        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
     }
 
 
@@ -97,15 +97,16 @@ public class Thing: NSManagedObject {
 
     // MARK: Class
 
-    public class func newThing(context: NSManagedObjectContext) -> Thing {
+    @discardableResult
+    public class func newThing(_ context: NSManagedObjectContext) -> Thing {
         let t = Thing(context: context)
         t.color = randomColor(withoutColor: nil)
         t.name = randomName()
         return t
     }
 
-    public class func newFetchRequest() -> NSFetchRequest {
-        let request = NSFetchRequest(entityName: "Thing")
+    public class func newFetchRequest() -> NSFetchRequest<Thing> {
+        let request = NSFetchRequest<Thing>(entityName: "Thing")
         request.sortDescriptors = [
             NSSortDescriptor(key: "colorName", ascending: true),
             NSSortDescriptor(key: "name", ascending: true)
@@ -126,5 +127,5 @@ private func randomColor(withoutColor color: Color?) -> Color {
 
 
 private func randomName() -> String {
-    return NSUUID().UUIDString.componentsSeparatedByString("-").first!
+    return UUID().uuidString.components(separatedBy: "-").first!
 }

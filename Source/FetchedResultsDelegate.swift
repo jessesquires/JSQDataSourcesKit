@@ -41,11 +41,11 @@ public final class FetchedResultsDelegateProvider<CellFactory: ReusableViewFacto
 
     // MARK: private
 
-    private typealias Item = CellFactory.Item
+    fileprivate typealias Item = CellFactory.Item
 
-    private var bridgedDelegate: BridgedFetchedResultsDelegate?
+    fileprivate var bridgedDelegate: BridgedFetchedResultsDelegate?
 
-    private init(cellFactory: CellFactory, cellParentView: ParentView) {
+    fileprivate init(cellFactory: CellFactory, cellParentView: ParentView) {
         self.cellFactory = cellFactory
         self.cellParentView = cellParentView
     }
@@ -53,13 +53,13 @@ public final class FetchedResultsDelegateProvider<CellFactory: ReusableViewFacto
 
     // MARK: Private, collection view properties
 
-    private typealias SectionChangeTuple = (changeType: NSFetchedResultsChangeType, sectionIndex: Int)
-    private lazy var sectionChanges = [SectionChangeTuple]()
+    fileprivate typealias SectionChangeTuple = (changeType: NSFetchedResultsChangeType, sectionIndex: Int)
+    fileprivate lazy var sectionChanges = [SectionChangeTuple]()
 
-    private typealias ObjectChangeTuple = (changeType: NSFetchedResultsChangeType, indexPaths: [NSIndexPath])
-    private lazy var objectChanges = [ObjectChangeTuple]()
+    fileprivate typealias ObjectChangeTuple = (changeType: NSFetchedResultsChangeType, indexPaths: [IndexPath])
+    fileprivate lazy var objectChanges = [ObjectChangeTuple]()
 
-    private lazy var updatedObjects = [NSIndexPath: Item]()
+    fileprivate lazy var updatedObjects = [IndexPath: Item]()
 }
 
 
@@ -99,34 +99,32 @@ extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UI
             didChangeSection: { [unowned self] (controller, sectionInfo, sectionIndex, changeType) in
                 self.sectionChanges.append((changeType, sectionIndex))
             },
-            didChangeObject: { [unowned self] (controller, anyObject, indexPath: NSIndexPath?, changeType, newIndexPath: NSIndexPath?) in
+            didChangeObject: { [unowned self] (controller, anyObject, indexPath: IndexPath?, changeType, newIndexPath: IndexPath?) in
                 switch changeType {
-                case .Insert:
+                case .insert:
                     if let insertIndexPath = newIndexPath {
                         self.objectChanges.append((changeType, [insertIndexPath]))
                     }
-                case .Delete:
+                case .delete:
                     if let deleteIndexPath = indexPath {
                         self.objectChanges.append((changeType, [deleteIndexPath]))
                     }
-                case .Update:
+                case .update:
                     if let indexPath = indexPath {
                         self.objectChanges.append((changeType, [indexPath]))
                         self.updatedObjects[indexPath] = anyObject as? Item
                     }
-                case .Move:
-                    if let old = indexPath, new = newIndexPath {
+                case .move:
+                    if let old = indexPath, let new = newIndexPath {
                         self.objectChanges.append((changeType, [old, new]))
                     }
                 }
             },
             didChangeContent: { [unowned self] (controller) in
-
                 self.collectionView?.performBatchUpdates({ [weak self] in
                     self?.applyObjectChanges()
                     self?.applySectionChanges()
-                    },
-                    completion:{ [weak self] finished in
+                    }, completion:{ [weak self] finished in
                         self?.reloadSupplementaryViewsIfNeeded()
                     })
             })
@@ -138,24 +136,24 @@ extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UI
         for (changeType, indexPaths) in objectChanges {
 
             switch(changeType) {
-            case .Insert:
-                collectionView?.insertItemsAtIndexPaths(indexPaths)
-            case .Delete:
-                collectionView?.deleteItemsAtIndexPaths(indexPaths)
-            case .Update:
+            case .insert:
+                collectionView?.insertItems(at: indexPaths)
+            case .delete:
+                collectionView?.deleteItems(at: indexPaths)
+            case .update:
                 if let indexPath = indexPaths.first,
-                    item = updatedObjects[indexPath],
-                    cell = collectionView?.cellForItemAtIndexPath(indexPath) as? CellFactory.View,
-                    collectionView = collectionView {
+                    let item = updatedObjects[indexPath],
+                    let collectionView = collectionView,
+                    let cell = collectionView.cellForItem(at: indexPath) as? CellFactory.View {
                     cellFactory.configure(view: cell, item: item, type: .cell, parentView: collectionView, indexPath: indexPath)
                 }
-            case .Move:
+            case .move:
                 if let deleteIndexPath = indexPaths.first {
-                    self.collectionView?.deleteItemsAtIndexPaths([deleteIndexPath])
+                    self.collectionView?.deleteItems(at: [deleteIndexPath])
                 }
 
                 if let insertIndexPath = indexPaths.last {
-                    self.collectionView?.insertItemsAtIndexPaths([insertIndexPath])
+                    self.collectionView?.insertItems(at: [insertIndexPath])
                 }
             }
         }
@@ -163,12 +161,12 @@ extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UI
 
     private func applySectionChanges() {
         for (changeType, sectionIndex) in sectionChanges {
-            let section = NSIndexSet(index: sectionIndex)
+            let section = IndexSet(integer: sectionIndex)
 
             switch(changeType) {
-            case .Insert:
+            case .insert:
                 collectionView?.insertSections(section)
-            case .Delete:
+            case .delete:
                 collectionView?.deleteSections(section)
             default:
                 break
@@ -187,7 +185,7 @@ extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UI
 extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UITableView {
 
     // MARK: Table views
-    
+
     /**
      Initializes a new fetched results delegate provider for table views.
 
@@ -217,44 +215,44 @@ extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UI
             },
             didChangeSection: { [unowned self] (controller, sectionInfo, sectionIndex, changeType) in
                 switch changeType {
-                case .Insert:
-                    self.tableView?.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-                case .Delete:
-                    self.tableView?.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+                case .insert:
+                    self.tableView?.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+                case .delete:
+                    self.tableView?.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
                 default:
                     break
                 }
             },
             didChangeObject: { [unowned self] (controller, anyObject, indexPath, changeType, newIndexPath) in
                 switch changeType {
-                case .Insert:
+                case .insert:
                     if let insertIndexPath = newIndexPath {
-                        self.tableView?.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
+                        self.tableView?.insertRows(at: [insertIndexPath], with: .fade)
                     }
-                case .Delete:
+                case .delete:
                     if let deleteIndexPath = indexPath {
-                        self.tableView?.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
+                        self.tableView?.deleteRows(at: [deleteIndexPath], with: .fade)
                     }
-                case .Update:
+                case .update:
                     if let indexPath = indexPath,
-                        cell = self.tableView?.cellForRowAtIndexPath(indexPath) as? CellFactory.View,
-                        tableView = self.tableView {
+                        let tableView = self.tableView,
+                        let cell = tableView.cellForRow(at: indexPath) as? CellFactory.View {
                         self.cellFactory.configure(view: cell, item: anyObject as? Item, type: .cell, parentView: tableView, indexPath: indexPath)
                     }
-                case .Move:
+                case .move:
                     if let deleteIndexPath = indexPath {
-                        self.tableView?.deleteRowsAtIndexPaths([deleteIndexPath], withRowAnimation: .Fade)
+                        self.tableView?.deleteRows(at: [deleteIndexPath], with: .fade)
                     }
 
                     if let insertIndexPath = newIndexPath {
-                        self.tableView?.insertRowsAtIndexPaths([insertIndexPath], withRowAnimation: .Fade)
+                        self.tableView?.insertRows(at: [insertIndexPath], with: .fade)
                     }
                 }
             },
             didChangeContent: { [unowned self] (controller) in
                 self.tableView?.endUpdates()
             })
-
+        
         return delegate
     }
 }

@@ -35,11 +35,11 @@ struct ComposedCellViewFactory: ReusableViewFactoryProtocol  {
         self.fancyCellFactory = fancyCellFactory
     }
 
-    func reuseIdentiferFor(item item: MixedItem?, type: ReusableViewType, indexPath: NSIndexPath) -> String {
+    func reuseIdentiferFor(item: MixedItem?, type: ReusableViewType, indexPath: IndexPath) -> String {
         return item!.reuseIdentifier
     }
 
-    func configure(view view: UICollectionViewCell, item: MixedItem?, type: ReusableViewType, parentView: UICollectionView, indexPath: NSIndexPath) -> UICollectionViewCell {
+    func configure(view: UICollectionViewCell, item: MixedItem?, type: ReusableViewType, parentView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {
         view.accessibilityIdentifier = "\(indexPath.section), \(indexPath.item)"
 
         guard let model = item else {
@@ -47,10 +47,10 @@ struct ComposedCellViewFactory: ReusableViewFactoryProtocol  {
         }
 
         switch model {
-        case let .Standard(standardModel):
+        case let .standard(standardModel):
             let cell = view as! CollectionViewCell
             return standardCellFactory.configure(view: cell, item: standardModel, type: type, parentView: parentView, indexPath: indexPath)
-        case let .Fancy(fancyModel):
+        case let .fancy(fancyModel):
             let cell = view as! FancyCollectionViewCell
             return fancyCellFactory.configure(view: cell, item: fancyModel, type: type, parentView: parentView, indexPath: indexPath)
         }

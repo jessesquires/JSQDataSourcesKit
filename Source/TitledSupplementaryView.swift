@@ -61,7 +61,7 @@ public final class TitledSupplementaryView: UICollectionReusableView {
     /// The default string used to identify instances of `TitledSupplementaryView`.
     public class var identifier: String {
         get {
-            return String(TitledSupplementaryView.self)
+            return String(describing: TitledSupplementaryView.self)
         }
     }
 
@@ -89,6 +89,6 @@ public final class TitledSupplementaryView: UICollectionReusableView {
     /// :nodoc:
     public override func layoutSubviews() {
         super.layoutSubviews()
-        label.frame = CGRectInset(bounds, horizontalInset, verticalInset)
+        label.frame = bounds.insetBy(dx: horizontalInset, dy: verticalInset)
     }
 }

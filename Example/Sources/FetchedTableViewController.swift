@@ -66,7 +66,7 @@ class FetchedTableViewController: UITableViewController {
         tableView.dataSource = dataSourceProvider?.tableViewDataSource
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchData()
     }
@@ -85,7 +85,7 @@ class FetchedTableViewController: UITableViewController {
 
     // MARK: Actions
 
-    @IBAction func didTapActionButton(sender: UIBarButtonItem) {
+    @IBAction func didTapActionButton(_ sender: UIBarButtonItem) {
         UIAlertController.showActionAlert(self, addNewAction: {
             self.addNewThing()
             }, deleteAction: {
@@ -103,14 +103,14 @@ class FetchedTableViewController: UITableViewController {
         tableView.deselectAllRows()
 
         var newThing: Thing?
-        stack.context.performBlockAndWait {
+        stack.context.performAndWait {
             newThing = Thing.newThing(self.stack.context)
         }
         stack.saveAndWait()
         fetchData()
 
-        if let indexPath = frc.indexPathForObject(newThing!) {
-            tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Middle)
+        if let indexPath = frc.indexPath(forObject: newThing!) {
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
         }
     }
 

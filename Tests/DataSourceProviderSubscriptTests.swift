@@ -88,8 +88,8 @@ final class DataSourceProviderSubscriptTests: XCTestCase {
         let dataSourceProvider = DataSourceProvider(dataSource: dataSource, cellFactory: factory, supplementaryFactory: factory)
 
         // WHEN: we ask for an item at a specific index path
-        let item1 = dataSourceProvider.dataSource[NSIndexPath(forItem: 2, inSection: 0)]
-        let item2 = dataSourceProvider.dataSource[NSIndexPath(forItem: 0, inSection: 1)]
+        let item1 = dataSourceProvider.dataSource[IndexPath(item: 2, section: 0)]
+        let item2 = dataSourceProvider.dataSource[IndexPath(item: 0, section: 1)]
 
         // THEN: we receive the expected item
         XCTAssertEqual(item1, section0[2], "Item returned from subscript should equal expected item")
@@ -111,7 +111,7 @@ final class DataSourceProviderSubscriptTests: XCTestCase {
         let dataSourceProvider = DataSourceProvider(dataSource: dataSource, cellFactory: factory, supplementaryFactory: factory)
 
         // WHEN: we set an item at a specific index path
-        let indexPath = NSIndexPath(forItem: 2, inSection: 0)
+        let indexPath = IndexPath(item: 2, section: 0)
         let expectedItem = FakeViewModel()
 
         dataSourceProvider.dataSource[indexPath] = expectedItem

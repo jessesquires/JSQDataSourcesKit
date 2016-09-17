@@ -18,14 +18,14 @@
 
 import UIKit
 
-class FancyCollectionViewCell: UICollectionViewCell {
+final class FancyCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var label: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         selectedBackgroundView = UIView()
-        selectedBackgroundView?.backgroundColor = .orangeColor()
-        backgroundColor = .greenColor()
+        selectedBackgroundView?.backgroundColor = .orange
+        backgroundColor = .green
     }
 }

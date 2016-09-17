@@ -24,11 +24,11 @@ final class ViewController: UITableViewController {
 
     let stack = CoreDataStack()
 
-    @IBAction func didTapDeleteButton(sender: UIBarButtonItem) {
+    @IBAction func didTapDeleteButton(_ sender: UIBarButtonItem) {
         removeAllThingsInStack(stack)
     }
 
-    @IBAction func didTapAddButton(sender: UIBarButtonItem) {
+    @IBAction func didTapAddButton(_ sender: UIBarButtonItem) {
         addThingsInStack(stack, count: 5)
     }
 }

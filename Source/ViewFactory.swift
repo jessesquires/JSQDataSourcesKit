@@ -46,7 +46,7 @@ public protocol CellParentViewProtocol {
 
      - returns: A valid `CellType` reusable cell.
      */
-    func dequeueReusableCellFor(identifier identifier: String, indexPath: NSIndexPath) -> CellType
+    func dequeueReusableCellFor(identifier: String, indexPath: IndexPath) -> CellType
 
     /**
      Returns a reusable supplementary view located by its identifier and kind.
@@ -57,7 +57,7 @@ public protocol CellParentViewProtocol {
 
      - returns: A valid `CellType` reusable view.
      */
-    func dequeueReusableSupplementaryViewFor(kind kind: String, identifier: String, indexPath: NSIndexPath) -> CellType?
+    func dequeueReusableSupplementaryViewFor(kind: String, identifier: String, indexPath: IndexPath) -> CellType?
 }
 
 extension UICollectionView: CellParentViewProtocol {
@@ -65,13 +65,13 @@ extension UICollectionView: CellParentViewProtocol {
     public typealias CellType = UICollectionReusableView
 
     /// :nodoc:
-    public func dequeueReusableCellFor(identifier identifier: String, indexPath: NSIndexPath) -> CellType {
-        return dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath)
+    public func dequeueReusableCellFor(identifier: String, indexPath: IndexPath) -> CellType {
+        return dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
     }
 
     /// :nodoc:
-    public func dequeueReusableSupplementaryViewFor(kind kind: String, identifier: String, indexPath: NSIndexPath) -> CellType? {
-        return dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: identifier, forIndexPath: indexPath)
+    public func dequeueReusableSupplementaryViewFor(kind: String, identifier: String, indexPath: IndexPath) -> CellType? {
+        return dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: identifier, for: indexPath)
     }
 }
 
@@ -80,12 +80,12 @@ extension UITableView: CellParentViewProtocol {
     public typealias CellType = UITableViewCell
 
     /// :nodoc:
-    public func dequeueReusableCellFor(identifier identifier: String, indexPath: NSIndexPath) -> CellType {
-        return dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath)
+    public func dequeueReusableCellFor(identifier: String, indexPath: IndexPath) -> CellType {
+        return dequeueReusableCell(withIdentifier: identifier, for: indexPath)
     }
 
     /// :nodoc:
-    public func dequeueReusableSupplementaryViewFor(kind kind: String, identifier: String, indexPath: NSIndexPath) -> CellType? {
+    public func dequeueReusableSupplementaryViewFor(kind: String, identifier: String, indexPath: IndexPath) -> CellType? {
         return nil
     }
 }
@@ -102,8 +102,8 @@ public protocol ReusableViewProtocol {
     // MARK: Associated types
 
     /**
-     The "parent" view of the cell. 
-     For `UICollectionViewCell` or `UICollectionReusableView` this is `UICollectionView`. 
+     The "parent" view of the cell.
+     For `UICollectionViewCell` or `UICollectionReusableView` this is `UICollectionView`.
      For `UITableViewCell` this is `UITableView`.
      */
     associatedtype ParentView: UIView, CellParentViewProtocol
@@ -188,7 +188,7 @@ public protocol ReusableViewFactoryProtocol {
 
      - returns: An identifier for a reusable view.
      */
-    func reuseIdentiferFor(item item: Item?, type: ReusableViewType, indexPath: NSIndexPath) -> String
+    func reuseIdentiferFor(item: Item?, type: ReusableViewType, indexPath: IndexPath) -> String
 
     /**
      Configures and returns the specified view.
@@ -201,7 +201,8 @@ public protocol ReusableViewFactoryProtocol {
 
      - returns: A configured view of type `View`.
      */
-    func configure(view view: View, item: Item?, type: ReusableViewType, parentView: View.ParentView, indexPath: NSIndexPath) -> View
+    @discardableResult
+    func configure(view: View, item: Item?, type: ReusableViewType, parentView: View.ParentView, indexPath: IndexPath) -> View
 }
 
 
@@ -218,7 +219,7 @@ public extension ReusableViewFactoryProtocol where View: UITableViewCell {
 
      - returns: An initialized or dequeued, and fully configured table cell.
      */
-    public func tableCellFor(item item: Item, tableView: UITableView, indexPath: NSIndexPath) -> View {
+    public func tableCellFor(item: Item, tableView: UITableView, indexPath: IndexPath) -> View {
         let reuseIdentifier = reuseIdentiferFor(item: item, type: .cell, indexPath: indexPath)
         let cell = tableView.dequeueReusableCellFor(identifier: reuseIdentifier, indexPath: indexPath) as! View
         return configure(view: cell, item: item, type: .cell, parentView: tableView, indexPath: indexPath)
@@ -239,7 +240,7 @@ public extension ReusableViewFactoryProtocol where View: UICollectionViewCell {
 
      - returns: An initialized or dequeued, and fully configured collection cell.
      */
-    public func collectionCellFor(item item: Item, collectionView: UICollectionView, indexPath: NSIndexPath) -> View {
+    public func collectionCellFor(item: Item, collectionView: UICollectionView, indexPath: IndexPath) -> View {
         let reuseIdentifier = reuseIdentiferFor(item: item, type: .cell, indexPath: indexPath)
         let cell = collectionView.dequeueReusableCellFor(identifier: reuseIdentifier, indexPath: indexPath) as! View
         return configure(view: cell, item: item, type: .cell, parentView: collectionView, indexPath: indexPath)
@@ -261,7 +262,7 @@ public extension ReusableViewFactoryProtocol where View: UICollectionReusableVie
 
      - returns: An initialized or dequeued, and fully configured supplementary view.
      */
-    public func supplementaryViewFor(item item: Item?, kind: String, collectionView: UICollectionView, indexPath: NSIndexPath) -> View {
+    public func supplementaryViewFor(item: Item?, kind: String, collectionView: UICollectionView, indexPath: IndexPath) -> View {
         let reuseIdentifier = reuseIdentiferFor(item: item, type: .supplementaryView(kind: kind), indexPath: indexPath)
         let view = collectionView.dequeueReusableSupplementaryViewFor(kind: kind, identifier: reuseIdentifier, indexPath: indexPath) as! View
         return configure(view: view, item: item, type: .supplementaryView(kind: kind), parentView: collectionView, indexPath: indexPath)
@@ -289,7 +290,7 @@ public struct ViewFactory<Item, Cell: ReusableViewProtocol>: ReusableViewFactory
 
      - returns: The configured cell.
      */
-    public typealias ViewConfigurator = (cell: Cell, item: Item?, type: ReusableViewType, parentView: Cell.ParentView, indexPath: NSIndexPath) -> Cell
+    public typealias ViewConfigurator = (_ cell: Cell, _ item: Item?, _ type: ReusableViewType, _ parentView: Cell.ParentView, _ indexPath: IndexPath) -> Cell
 
 
     // MARK: Properties
@@ -308,7 +309,7 @@ public struct ViewFactory<Item, Cell: ReusableViewProtocol>: ReusableViewFactory
     /// A closure used to configure the views.
     public let viewConfigurator: ViewConfigurator
 
-    
+
     // MARK: Initialization
 
     /**
@@ -320,20 +321,20 @@ public struct ViewFactory<Item, Cell: ReusableViewProtocol>: ReusableViewFactory
 
      - returns: A new `CellFactory` instance.
      */
-    public init(reuseIdentifier: String, type: ReusableViewType = .cell, viewConfigurator: ViewConfigurator) {
+    public init(reuseIdentifier: String, type: ReusableViewType = .cell, viewConfigurator: @escaping ViewConfigurator) {
         self.reuseIdentifier = reuseIdentifier
         self.type = type
         self.viewConfigurator = viewConfigurator
     }
 
     /// :nodoc:
-    public func reuseIdentiferFor(item item: Item?, type: ReusableViewType, indexPath: NSIndexPath) -> String {
+    public func reuseIdentiferFor(item: Item?, type: ReusableViewType, indexPath: IndexPath) -> String {
         return reuseIdentifier
     }
 
     /// :nodoc:
-    public func configure(view view: Cell, item: Item?, type: ReusableViewType, parentView: Cell.ParentView, indexPath: NSIndexPath) -> Cell {
+    public func configure(view: Cell, item: Item?, type: ReusableViewType, parentView: Cell.ParentView, indexPath: IndexPath) -> Cell {
         assert(self.type == type)
-        return viewConfigurator(cell: view, item: item, type: type, parentView: parentView, indexPath: indexPath)
+        return viewConfigurator(view, item, type, parentView, indexPath)
     }
 }

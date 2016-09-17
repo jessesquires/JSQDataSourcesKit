@@ -20,9 +20,10 @@ import Foundation
 import UIKit
 
 /// A `DataSourceProvider` is responsible for providing a data source object for a table view or collection view.
-public final class DataSourceProvider<DataSource: DataSourceProtocol, CellFactory: ReusableViewFactoryProtocol, SupplementaryFactory: ReusableViewFactoryProtocol
-    where
-CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSource.Item> {
+public final class DataSourceProvider<DataSource: DataSourceProtocol,
+    CellFactory: ReusableViewFactoryProtocol,
+    SupplementaryFactory: ReusableViewFactoryProtocol>
+where CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSource.Item {
 
     // MARK: Properties
 
@@ -35,7 +36,7 @@ CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSource.Ite
     /// The supplementary view factory.
     public let supplementaryFactory: SupplementaryFactory
 
-    private var bridgedDataSource: BridgedDataSource?
+    fileprivate var bridgedDataSource: BridgedDataSource?
 
 
     // MARK: Initialization
@@ -48,7 +49,7 @@ CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSource.Ite
      - parameter supplementaryFactory: The supplementary view factory.
 
      - returns: A new `DataSourceProvider` instance.
-     
+
      - warning: Table views do not have supplementary views, but this parameter is still required in order to satisfy
      the generic constraints for Swift. You can simply pass the same `cellFactory` here. The parameter will be ignored.
      The same applies to collection views that do not have supplementary views. Again, the parameter will be ignored.
