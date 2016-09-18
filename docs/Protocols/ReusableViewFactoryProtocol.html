@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ReusableViewFactoryProtocol Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Protocol/ReusableViewFactoryProtocol" class="dashAnchor"></a>
+    <a title="ReusableViewFactoryProtocol Protocol Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">JSQDataSourcesKit Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/jessesquires/JSQDataSourcesKit"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">JSQDataSourcesKit Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        ReusableViewFactoryProtocol Protocol Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/DataSourceProvider.html">DataSourceProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FetchedResultsController.html">FetchedResultsController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FetchedResultsDelegateProvider.html">FetchedResultsDelegateProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TitledSupplementaryView.html">TitledSupplementaryView</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/ReusableViewType.html">ReusableViewType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/CellParentViewProtocol.html">CellParentViewProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/DataSourceProtocol.html">DataSourceProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ReusableViewFactoryProtocol.html">ReusableViewFactoryProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ReusableViewProtocol.html">ReusableViewProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SectionInfoProtocol.html">SectionInfoProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/DataSource.html">DataSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Section.html">Section</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TitledSupplementaryViewFactory.html">TitledSupplementaryViewFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ViewFactory.html">ViewFactory</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>ReusableViewFactoryProtocol</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ReusableViewFactoryProtocol</span></code></pre>
+
+                </div>
+              </div>
+            <p>An instance conforming to <code>ReusableViewFactoryProtocol</code> is responsible for initializing
+and configuring reusable views to be displayed in either a <code>UICollectionView</code> or a <code>UITableView</code>.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Associated%20types"></a>
+                <a name="//apple_ref/swift/Section/Associated types" class="dashAnchor"></a>
+                <a href="#/Associated%20types">
+                  <h3 class="section-name">Associated types</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:P17JSQDataSourcesKit27ReusableViewFactoryProtocol4View"></a>
+                    <a name="//apple_ref/swift/Alias/View" class="dashAnchor"></a>
+                    <a class="token" href="#/s:P17JSQDataSourcesKit27ReusableViewFactoryProtocol4View">View</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type of views that the factory produces.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">associatedtype</span> <span class="kt">View</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewProtocol.html">ReusableViewProtocol</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:P17JSQDataSourcesKit27ReusableViewFactoryProtocol4Item"></a>
+                    <a name="//apple_ref/swift/Alias/Item" class="dashAnchor"></a>
+                    <a class="token" href="#/s:P17JSQDataSourcesKit27ReusableViewFactoryProtocol4Item">Item</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type of elements backing the collection view or table view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">associatedtype</span> <span class="kt">Item</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Methods"></a>
+                <a name="//apple_ref/swift/Section/Methods" class="dashAnchor"></a>
+                <a href="#/Methods">
+                  <h3 class="section-name">Methods</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP17JSQDataSourcesKit27ReusableViewFactoryProtocol17reuseIdentiferForFT4itemGSqwx4Item_4typeOS_16ReusableViewType9indexPathV10Foundation9IndexPath_SS"></a>
+                    <a name="//apple_ref/swift/Method/reuseIdentiferFor(item:type:indexPath:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP17JSQDataSourcesKit27ReusableViewFactoryProtocol17reuseIdentiferForFT4itemGSqwx4Item_4typeOS_16ReusableViewType9indexPathV10Foundation9IndexPath_SS">reuseIdentiferFor(item:type:indexPath:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Provides a view reuse identifer for the given item, type, and indexPath.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">reuseIdentiferFor</span><span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:P17JSQDataSourcesKit27ReusableViewFactoryProtocol4Item">Item</a></span><span class="p">?,</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/ReusableViewType.html">ReusableViewType</a></span><span class="p">,</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>item</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The item at <code>indexPath</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of reusable view.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>indexPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The index path that specifies the location of the view.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An identifier for a reusable view.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP17JSQDataSourcesKit27ReusableViewFactoryProtocol9configureFT4viewwx4View4itemGSqwx4Item_4typeOS_16ReusableViewType10parentViewWxS1_10ParentView_9indexPathV10Foundation9IndexPath_wxS1_"></a>
+                    <a name="//apple_ref/swift/Method/configure(view:item:type:parentView:indexPath:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP17JSQDataSourcesKit27ReusableViewFactoryProtocol9configureFT4viewwx4View4itemGSqwx4Item_4typeOS_16ReusableViewType10parentViewWxS1_10ParentView_9indexPathV10Foundation9IndexPath_wxS1_">configure(view:item:type:parentView:indexPath:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Configures and returns the specified view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="nv">view</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:P17JSQDataSourcesKit27ReusableViewFactoryProtocol4View">View</a></span><span class="p">,</span> <span class="nv">item</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:P17JSQDataSourcesKit27ReusableViewFactoryProtocol4Item">Item</a></span><span class="p">?,</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/ReusableViewType.html">ReusableViewType</a></span><span class="p">,</span> <span class="nv">parentView</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:P17JSQDataSourcesKit27ReusableViewFactoryProtocol4View">View</a></span><span class="o">.</span><span class="kt">ParentView</span><span class="p">,</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:P17JSQDataSourcesKit27ReusableViewFactoryProtocol4View">View</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>view</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The view to configure.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>item</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The item at <code>indexPath</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of reusable view.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>parentView</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The collection view or table view requesting this information.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>indexPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The index path that specifies the location of <code>view</code> and <code>item</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A configured view of type <code><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:P17JSQDataSourcesKit27ReusableViewFactoryProtocol4View">View</a></code>.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Table%20cells"></a>
+                <a name="//apple_ref/swift/Section/Table cells" class="dashAnchor"></a>
+                <a href="#/Table%20cells">
+                  <h3 class="section-name">Table cells</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe17JSQDataSourcesKitRxS_27ReusableViewFactoryProtocolwx4ViewCSo15UITableViewCellrS0_12tableCellForFT4itemwx4Item9tableViewCSo11UITableView9indexPathV10Foundation9IndexPath_wxS1_"></a>
+                    <a name="//apple_ref/swift/Method/tableCellFor(item:tableView:indexPath:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe17JSQDataSourcesKitRxS_27ReusableViewFactoryProtocolwx4ViewCSo15UITableViewCellrS0_12tableCellForFT4itemwx4Item9tableViewCSo11UITableView9indexPathV10Foundation9IndexPath_wxS1_">tableCellFor(item:tableView:indexPath:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new <code><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:P17JSQDataSourcesKit27ReusableViewFactoryProtocol4View">View</a></code> instance, or dequeues an existing cell for reuse, then configures and returns it.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tableCellFor</span><span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:P17JSQDataSourcesKit27ReusableViewFactoryProtocol4Item">Item</a></span><span class="p">,</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:P17JSQDataSourcesKit27ReusableViewFactoryProtocol4View">View</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>item</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The item at <code>indexPath</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tableView</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The table view requesting this information.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>indexPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The index path that specifies the location of the cell and item.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An initialized or dequeued, and fully configured table cell.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Collection%20cells"></a>
+                <a name="//apple_ref/swift/Section/Collection cells" class="dashAnchor"></a>
+                <a href="#/Collection%20cells">
+                  <h3 class="section-name">Collection cells</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe17JSQDataSourcesKitRxS_27ReusableViewFactoryProtocolwx4ViewCSo20UICollectionViewCellrS0_17collectionCellForFT4itemwx4Item14collectionViewCSo16UICollectionView9indexPathV10Foundation9IndexPath_wxS1_"></a>
+                    <a name="//apple_ref/swift/Method/collectionCellFor(item:collectionView:indexPath:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe17JSQDataSourcesKitRxS_27ReusableViewFactoryProtocolwx4ViewCSo20UICollectionViewCellrS0_17collectionCellForFT4itemwx4Item14collectionViewCSo16UICollectionView9indexPathV10Foundation9IndexPath_wxS1_">collectionCellFor(item:collectionView:indexPath:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new <code><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:P17JSQDataSourcesKit27ReusableViewFactoryProtocol4View">View</a></code> instance, or dequeues an existing cell for reuse, then configures and returns it.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">collectionCellFor</span><span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:P17JSQDataSourcesKit27ReusableViewFactoryProtocol4Item">Item</a></span><span class="p">,</span> <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:P17JSQDataSourcesKit27ReusableViewFactoryProtocol4View">View</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>item</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The item at <code>indexPath</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>collectionView</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The collection view requesting this information.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>indexPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The index path that specifies the location of the cell and item.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An initialized or dequeued, and fully configured collection cell.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Supplementary%20views"></a>
+                <a name="//apple_ref/swift/Section/Supplementary views" class="dashAnchor"></a>
+                <a href="#/Supplementary%20views">
+                  <h3 class="section-name">Supplementary views</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe17JSQDataSourcesKitRxS_27ReusableViewFactoryProtocolwx4ViewCSo24UICollectionReusableViewrS0_20supplementaryViewForFT4itemGSqwx4Item_4kindSS14collectionViewCSo16UICollectionView9indexPathV10Foundation9IndexPath_wxS1_"></a>
+                    <a name="//apple_ref/swift/Method/supplementaryViewFor(item:kind:collectionView:indexPath:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe17JSQDataSourcesKitRxS_27ReusableViewFactoryProtocolwx4ViewCSo24UICollectionReusableViewrS0_20supplementaryViewForFT4itemGSqwx4Item_4kindSS14collectionViewCSo16UICollectionView9indexPathV10Foundation9IndexPath_wxS1_">supplementaryViewFor(item:kind:collectionView:indexPath:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new <code><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:P17JSQDataSourcesKit27ReusableViewFactoryProtocol4View">View</a></code> instance, or dequeues an existing view for reuse, then configures and returns it.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">supplementaryViewFor</span><span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:P17JSQDataSourcesKit27ReusableViewFactoryProtocol4Item">Item</a></span><span class="p">?,</span> <span class="nv">kind</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:P17JSQDataSourcesKit27ReusableViewFactoryProtocol4View">View</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>item</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The item at <code>indexPath</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>kind</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The kind of supplementary view to retrieve.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>collectionView</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The collection view requesting this information.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>indexPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The index path that specifies the location of the view and item.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An initialized or dequeued, and fully configured supplementary view.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2016-09-17)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
