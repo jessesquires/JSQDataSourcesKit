@@ -39,7 +39,17 @@ github "jessesquires/JSQDataSourcesKit"
 
 Read the [docs][docsLink]. Generated with [jazzy](https://github.com/realm/jazzy). Hosted by [GitHub Pages](https://pages.github.com).
 
-More information on the [`gh-pages`](https://github.com/jessesquires/JSQDataSourcesKit/tree/gh-pages) branch.
+#### Generate
+
+````bash
+$ ./build_docs.sh
+````
+
+#### Preview
+
+````bash
+$ open index.html -a Safari
+````
 
 ## Getting Started
 
@@ -62,7 +72,7 @@ The following illustrates a simple example of how these components interact for 
 
 ````swift
 // Given a view controller with a collection view
-                                 
+
 // 1. create Sections and a DataSource with your model objects
 let section0 = Section(items: ...)
 let section1 = Section(items: ...)

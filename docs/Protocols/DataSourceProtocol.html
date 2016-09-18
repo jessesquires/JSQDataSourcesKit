@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DataSourceProtocol Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Protocol/DataSourceProtocol" class="dashAnchor"></a>
+    <a title="DataSourceProtocol Protocol Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">JSQDataSourcesKit Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/jessesquires/JSQDataSourcesKit"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">JSQDataSourcesKit Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        DataSourceProtocol Protocol Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/DataSourceProvider.html">DataSourceProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FetchedResultsController.html">FetchedResultsController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FetchedResultsDelegateProvider.html">FetchedResultsDelegateProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TitledSupplementaryView.html">TitledSupplementaryView</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/ReusableViewType.html">ReusableViewType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/CellParentViewProtocol.html">CellParentViewProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/DataSourceProtocol.html">DataSourceProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ReusableViewFactoryProtocol.html">ReusableViewFactoryProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ReusableViewProtocol.html">ReusableViewProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SectionInfoProtocol.html">SectionInfoProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/DataSource.html">DataSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Section.html">Section</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TitledSupplementaryViewFactory.html">TitledSupplementaryViewFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ViewFactory.html">ViewFactory</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>DataSourceProtocol</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">DataSourceProtocol</span></code></pre>
+
+                </div>
+              </div>
+            <p>An instance conforming to <code>DataSourceProtocol</code> represents a data source of items to be displayed
+in either a collection view or table view.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Associated%20types"></a>
+                <a name="//apple_ref/swift/Section/Associated types" class="dashAnchor"></a>
+                <a href="#/Associated%20types">
+                  <h3 class="section-name">Associated types</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:P17JSQDataSourcesKit18DataSourceProtocol4Item"></a>
+                    <a name="//apple_ref/swift/Alias/Item" class="dashAnchor"></a>
+                    <a class="token" href="#/s:P17JSQDataSourcesKit18DataSourceProtocol4Item">Item</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type of items in the data source.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">associatedtype</span> <span class="kt">Item</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Methods"></a>
+                <a name="//apple_ref/swift/Section/Methods" class="dashAnchor"></a>
+                <a href="#/Methods">
+                  <h3 class="section-name">Methods</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP17JSQDataSourcesKit18DataSourceProtocol16numberOfSectionsFT_Si"></a>
+                    <a name="//apple_ref/swift/Method/numberOfSections()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP17JSQDataSourcesKit18DataSourceProtocol16numberOfSectionsFT_Si">numberOfSections()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">numberOfSections</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The number of sections.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP17JSQDataSourcesKit18DataSourceProtocol13numberOfItemsFT9inSectionSi_Si"></a>
+                    <a name="//apple_ref/swift/Method/numberOfItems(inSection:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP17JSQDataSourcesKit18DataSourceProtocol13numberOfItemsFT9inSectionSi_Si">numberOfItems(inSection:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">numberOfItems</span><span class="p">(</span><span class="n">inSection</span> <span class="nv">section</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>section</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A section in the data source.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The number of items in the specified section.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP17JSQDataSourcesKit18DataSourceProtocol5itemsFT9inSectionSi_GSqGSawx4Item__"></a>
+                    <a name="//apple_ref/swift/Method/items(inSection:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP17JSQDataSourcesKit18DataSourceProtocol5itemsFT9inSectionSi_GSqGSawx4Item__">items(inSection:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">items</span><span class="p">(</span><span class="n">inSection</span> <span class="nv">section</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Protocols/DataSourceProtocol.html#/s:P17JSQDataSourcesKit18DataSourceProtocol4Item">Item</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>section</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A section in the data source.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The items in the specified section.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP17JSQDataSourcesKit18DataSourceProtocol4itemFT5atRowSi9inSectionSi_GSqwx4Item_"></a>
+                    <a name="//apple_ref/swift/Method/item(atRow:inSection:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP17JSQDataSourcesKit18DataSourceProtocol4itemFT5atRowSi9inSectionSi_GSqwx4Item_">item(atRow:inSection:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">item</span><span class="p">(</span><span class="n">atRow</span> <span class="nv">row</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="n">inSection</span> <span class="nv">section</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/DataSourceProtocol.html#/s:P17JSQDataSourcesKit18DataSourceProtocol4Item">Item</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>row</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A row in the data source.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>section</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A section in the data source.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The item specified by the section and row, or <code>nil</code>.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP17JSQDataSourcesKit18DataSourceProtocol11headerTitleFT9inSectionSi_GSqSS_"></a>
+                    <a name="//apple_ref/swift/Method/headerTitle(inSection:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP17JSQDataSourcesKit18DataSourceProtocol11headerTitleFT9inSectionSi_GSqSS_">headerTitle(inSection:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">headerTitle</span><span class="p">(</span><span class="n">inSection</span> <span class="nv">section</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>section</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A section in the data source.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The header title for the specified section.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP17JSQDataSourcesKit18DataSourceProtocol11footerTitleFT9inSectionSi_GSqSS_"></a>
+                    <a name="//apple_ref/swift/Method/footerTitle(inSection:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP17JSQDataSourcesKit18DataSourceProtocol11footerTitleFT9inSectionSi_GSqSS_">footerTitle(inSection:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">footerTitle</span><span class="p">(</span><span class="n">inSection</span> <span class="nv">section</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>section</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A section in the data source.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The footer title for the specified section.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2016-09-17)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

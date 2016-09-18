@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>FetchedResultsDelegateProvider Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/FetchedResultsDelegateProvider" class="dashAnchor"></a>
+    <a title="FetchedResultsDelegateProvider Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">JSQDataSourcesKit Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/jessesquires/JSQDataSourcesKit"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">JSQDataSourcesKit Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        FetchedResultsDelegateProvider Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/DataSourceProvider.html">DataSourceProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FetchedResultsController.html">FetchedResultsController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/FetchedResultsDelegateProvider.html">FetchedResultsDelegateProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TitledSupplementaryView.html">TitledSupplementaryView</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/ReusableViewType.html">ReusableViewType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/CellParentViewProtocol.html">CellParentViewProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/DataSourceProtocol.html">DataSourceProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ReusableViewFactoryProtocol.html">ReusableViewFactoryProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ReusableViewProtocol.html">ReusableViewProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SectionInfoProtocol.html">SectionInfoProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/DataSource.html">DataSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Section.html">Section</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TitledSupplementaryViewFactory.html">TitledSupplementaryViewFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ViewFactory.html">ViewFactory</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>FetchedResultsDelegateProvider</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">FetchedResultsDelegateProvider</span><span class="o">&lt;</span><span class="kt">CellFactory</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html">ReusableViewFactoryProtocol</a></span><span class="o">&gt;</span></code></pre>
+
+                </div>
+              </div>
+            <p>A <code>FetchedResultsDelegateProvider</code> is responsible for providing a delegate object for an instance of <code>NSFetchedResultsController</code>.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Type%20aliases"></a>
+                <a name="//apple_ref/swift/Section/Type aliases" class="dashAnchor"></a>
+                <a href="#/Type%20aliases">
+                  <h3 class="section-name">Type aliases</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:C17JSQDataSourcesKit30FetchedResultsDelegateProvider10ParentView"></a>
+                    <a name="//apple_ref/swift/Alias/ParentView" class="dashAnchor"></a>
+                    <a class="token" href="#/s:C17JSQDataSourcesKit30FetchedResultsDelegateProvider10ParentView">ParentView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The parent view of cell&rsquo;s that the cell factory produces.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">ParentView</span> <span class="o">=</span> <span class="kt">CellFactory</span><span class="o">.</span><span class="kt">View</span><span class="o">.</span><span class="kt">ParentView</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Properties"></a>
+                <a name="//apple_ref/swift/Section/Properties" class="dashAnchor"></a>
+                <a href="#/Properties">
+                  <h3 class="section-name">Properties</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC17JSQDataSourcesKit30FetchedResultsDelegateProvider14cellParentViewXwGSqWx4View10ParentView__"></a>
+                    <a name="//apple_ref/swift/Property/cellParentView" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC17JSQDataSourcesKit30FetchedResultsDelegateProvider14cellParentViewXwGSqWx4View10ParentView__">cellParentView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The table view or collection view displaying data for the fetched results controller.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">cellParentView</span><span class="p">:</span> <span class="kt"><a href="../Classes/FetchedResultsDelegateProvider.html#/s:C17JSQDataSourcesKit30FetchedResultsDelegateProvider10ParentView">ParentView</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC17JSQDataSourcesKit30FetchedResultsDelegateProvider11cellFactoryx"></a>
+                    <a name="//apple_ref/swift/Property/cellFactory" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC17JSQDataSourcesKit30FetchedResultsDelegateProvider11cellFactoryx">cellFactory</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The cell factory used to configure cells.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">cellFactory</span><span class="p">:</span> <span class="kt">CellFactory</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Collection%20views"></a>
+                <a name="//apple_ref/swift/Section/Collection views" class="dashAnchor"></a>
+                <a href="#/Collection%20views">
+                  <h3 class="section-name">Collection views</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe17JSQDataSourcesKitRxS_27ReusableViewFactoryProtocolWx4View10ParentView_zCSo16UICollectionViewWxS1_S2_8CellType_zCSo24UICollectionReusableViewrCS_30FetchedResultsDelegateProvidercFT11cellFactoryx14collectionViewS3__GS6_x_"></a>
+                    <a name="//apple_ref/swift/Method/init(cellFactory:collectionView:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe17JSQDataSourcesKitRxS_27ReusableViewFactoryProtocolWx4View10ParentView_zCSo16UICollectionViewWxS1_S2_8CellType_zCSo24UICollectionReusableViewrCS_30FetchedResultsDelegateProvidercFT11cellFactoryx14collectionViewS3__GS6_x_">init(cellFactory:collectionView:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes a new fetched results delegate provider for collection views.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">cellFactory</span><span class="p">:</span> <span class="kt">CellFactory</span><span class="p">,</span> <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>cellFactory</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The cell factory with which the fetched results controller delegate will configure cells.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>collectionView</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The collection view to be updated when the fetched results change.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A new <code>FetchedResultsDelegateProvider</code> instance.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ve17JSQDataSourcesKitRxS_27ReusableViewFactoryProtocolWx4View10ParentView_zCSo16UICollectionViewWxS1_S2_8CellType_zCSo24UICollectionReusableViewrCS_30FetchedResultsDelegateProvider18collectionDelegatePSo34NSFetchedResultsControllerDelegate_"></a>
+                    <a name="//apple_ref/swift/Property/collectionDelegate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ve17JSQDataSourcesKitRxS_27ReusableViewFactoryProtocolWx4View10ParentView_zCSo16UICollectionViewWxS1_S2_8CellType_zCSo24UICollectionReusableViewrCS_30FetchedResultsDelegateProvider18collectionDelegatePSo34NSFetchedResultsControllerDelegate_">collectionDelegate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the <code>NSFetchedResultsControllerDelegate</code> object for a collection view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">collectionDelegate</span><span class="p">:</span> <span class="kt">NSFetchedResultsControllerDelegate</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Table%20views"></a>
+                <a name="//apple_ref/swift/Section/Table views" class="dashAnchor"></a>
+                <a href="#/Table%20views">
+                  <h3 class="section-name">Table views</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Fe17JSQDataSourcesKitRxS_27ReusableViewFactoryProtocolWx4View10ParentView_zCSo11UITableViewWxS1_S2_8CellType_zCSo15UITableViewCellrCS_30FetchedResultsDelegateProvidercFT11cellFactoryx9tableViewS3__GS6_x_"></a>
+                    <a name="//apple_ref/swift/Method/init(cellFactory:tableView:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Fe17JSQDataSourcesKitRxS_27ReusableViewFactoryProtocolWx4View10ParentView_zCSo11UITableViewWxS1_S2_8CellType_zCSo15UITableViewCellrCS_30FetchedResultsDelegateProvidercFT11cellFactoryx9tableViewS3__GS6_x_">init(cellFactory:tableView:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes a new fetched results delegate provider for table views.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">cellFactory</span><span class="p">:</span> <span class="kt">CellFactory</span><span class="p">,</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>cellFactory</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The cell factory with which the fetched results controller delegate will configure cells.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tableView</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The table view to be updated when the fetched results change.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A new <code>FetchedResultsDelegateProvider</code> instance.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ve17JSQDataSourcesKitRxS_27ReusableViewFactoryProtocolWx4View10ParentView_zCSo11UITableViewWxS1_S2_8CellType_zCSo15UITableViewCellrCS_30FetchedResultsDelegateProvider13tableDelegatePSo34NSFetchedResultsControllerDelegate_"></a>
+                    <a name="//apple_ref/swift/Property/tableDelegate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ve17JSQDataSourcesKitRxS_27ReusableViewFactoryProtocolWx4View10ParentView_zCSo11UITableViewWxS1_S2_8CellType_zCSo15UITableViewCellrCS_30FetchedResultsDelegateProvider13tableDelegatePSo34NSFetchedResultsControllerDelegate_">tableDelegate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the <code>NSFetchedResultsControllerDelegate</code> object for a table view.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">tableDelegate</span><span class="p">:</span> <span class="kt">NSFetchedResultsControllerDelegate</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2016-09-17)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
