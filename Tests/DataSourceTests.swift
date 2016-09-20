@@ -220,7 +220,7 @@ final class DataSourceTests: XCTestCase {
         XCTAssertEqual(dataSource[ip], item)
     }
     
-    func test_thatDataSource_removesExpectedData_atIndexPath(){
+    func test_thatDataSource_removesExpectedData_atIndexPath() {
         // GIVEN: a data source
         let sectionA = Section(items: FakeViewModel(), FakeViewModel(), headerTitle: "Header")
         let sectionB = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
