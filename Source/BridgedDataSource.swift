@@ -31,7 +31,7 @@ internal typealias TableTitleForHeaderInSectionHandler = (Int) -> String?
 internal typealias TableTitleForFooterInSectionHandler = (Int) -> String?
 
 internal typealias TableCanEditRowAtIndexPathHandler = (UITableView, IndexPath) -> Bool
-internal typealias TableCommitEditingStyleForRowAtIndexPathHandler = (UITableView ,  UITableViewCellEditingStyle, IndexPath)->Void
+internal typealias TableCommitEditingStyleForRowAtIndexPathHandler = (UITableView, UITableViewCellEditingStyle, IndexPath) -> Void
 
 
 /*
@@ -50,8 +50,8 @@ internal typealias TableCommitEditingStyleForRowAtIndexPathHandler = (UITableVie
     var tableTitleForHeaderInSection: TableTitleForHeaderInSectionHandler?
     var tableTitleForFooterInSection: TableTitleForFooterInSectionHandler?
     
-    var tableCanEditRowAtIndexPath:TableCanEditRowAtIndexPathHandler?
-    var tableCommitEditingStyleForRowAtIndexPath:TableCommitEditingStyleForRowAtIndexPathHandler?
+    var tableCanEditRowAtIndexPath: TableCanEditRowAtIndexPathHandler?
+    var tableCommitEditingStyleForRowAtIndexPath: TableCommitEditingStyleForRowAtIndexPathHandler?
 
     init(numberOfSections: @escaping NumberOfSectionsHandler,
          numberOfItemsInSection: @escaping NumberOfItemsInSectionHandler) {
