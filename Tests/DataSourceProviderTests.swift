@@ -369,4 +369,93 @@ final class DataSourceProviderTests: TestCase {
         }
     }
     
+    func test_thatDataSourceProvider_forTableView_returnsExpectedData_afterRemovingRowFromTableView() {
+        // GIVEN: a single section with data items
+        let expectedModel = FakeViewModel()
+        let expectedIndexPath = IndexPath(row: 2, section: 0)
+        
+        let section0 = Section(items: FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel(), FakeViewModel(),
+                               headerTitle: "Header",
+                               footerTitle: "Footer")
+        let dataSource = DataSource([section0])
+        
+        let oldItemForExpectedIndexPath = dataSource.item(atRow: expectedIndexPath.row, inSection: expectedIndexPath.section)
+        let oldCount = dataSource.numberOfItems(inSection: expectedIndexPath.section)
+
+        let factoryExpectation = expectation(description: #function)
+        tableView.dequeueCellExpectation = expectation(description: dequeueCellExpectationName + #function)
+        
+        typealias TableCellFactory = ViewFactory<FakeViewModel, FakeTableCell>
+        var dataSourceProvider: DataSourceProvider<DataSource<Section<FakeViewModel>>, TableCellFactory, TableCellFactory>!
+
+        
+        // GIVEN: a cell factory
+        let factory = ViewFactory(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
+            
+            XCTAssertEqual(cell.reuseIdentifier!, self.cellReuseId, "Dequeued cell should have expected identifier")
+            XCTAssertEqual(tableView, self.tableView, "TableView should equal the tableView for the data source")
+            
+            factoryExpectation.fulfill()
+            return cell
+        }
+        
+        //GIVEN: a data source editing controller
+        let tableEditingController = DataSourceEditingController(
+            canEditConfigurator: { (indexPath, tableView) -> Bool in
+                return indexPath == expectedIndexPath
+            },
+            commitEditingStyle:{ (tableView, editingStyle, indexPath) in
+                if editingStyle == .delete{
+                    if let _ = dataSourceProvider.dataSource.remove(at: indexPath){
+                        tableView.deleteRows(at: [indexPath], with: .automatic)
+                    }
+                }
+        })
+
+        // GIVEN: a data source provider
+        dataSourceProvider = DataSourceProvider(dataSource: dataSource, cellFactory: factory, supplementaryFactory: factory, dataSourceTableEditing: tableEditingController)
+        let tableViewDataSource = dataSourceProvider.tableViewDataSource
+        
+        tableView.dataSource = tableViewDataSource
+        
+        // WHEN: we call the table view data source methods
+        let canEditRow = tableViewDataSource.tableView?(tableView, canEditRowAt: expectedIndexPath)
+        tableViewDataSource.tableView?(tableView, commit: .delete, forRowAt: expectedIndexPath)
+        let newItemForExpectedIndexPath = dataSourceProvider.dataSource.item(atRow: expectedIndexPath.row, inSection: expectedIndexPath.section)
+        let newCount = dataSourceProvider.dataSource.numberOfItems(inSection: expectedIndexPath.section)
+        
+        let numSections = tableViewDataSource.numberOfSections?(in: tableView)
+        let cell = tableViewDataSource.tableView(tableView, cellForRowAt: expectedIndexPath)
+        let header = tableViewDataSource.tableView?(tableView, titleForHeaderInSection: 0)
+        let footer = tableViewDataSource.tableView?(tableView, titleForFooterInSection: 0)
+        
+        // THEN: we receive the expected return values
+        XCTAssertNotNil(canEditRow, "canEditRow should not be nil")
+        XCTAssert(canEditRow!, "expectedIndexpath should be able to be removed from tableview")
+        
+        XCTAssertNotEqual(oldCount, newCount, "Number of items for \(expectedIndexPath.section) should not be equal after removing the expected row")
+        XCTAssertEqual(newCount, oldCount - 1, "Number of items for \(expectedIndexPath.section) should be less by one")
+        XCTAssertNotEqual(newItemForExpectedIndexPath, oldItemForExpectedIndexPath, "old item at row \(expectedIndexPath.row), section \(expectedIndexPath.section) shouldn't exist any more")
+
+        XCTAssertNotNil(numSections, "Number of sections should not be nil")
+        XCTAssertEqual(numSections!, dataSourceProvider.dataSource.sections.count, "Data source should return expected number of sections")
+        
+        XCTAssertNotNil(cell.reuseIdentifier, "Cell reuse identifier should not be nil")
+        XCTAssertEqual(cell.reuseIdentifier!, cellReuseId, "Data source should return cells with the expected identifier")
+        
+        XCTAssertNotNil(header, "Header should not be nil")
+        XCTAssertNotNil(section0.headerTitle, "Section 0 header title should not be nil")
+        XCTAssertEqual(header!, section0.headerTitle!, "Data source should return expected header title")
+        
+        XCTAssertNotNil(footer, "Footer should not be nil")
+        XCTAssertNotNil(section0.footerTitle, "Section 0 footer title should not be nil")
+        XCTAssertEqual(footer!, section0.footerTitle!, "Data source should return expected footer title")
+    
+        // THEN: the tableView calls `dequeueReusableCellWithIdentifier`
+        // THEN: the cell factory calls its `ConfigurationHandler`
+        waitForExpectations(timeout: defaultTimeout, handler: { (error) -> Void in
+            XCTAssertNil(error, "Expectations should not error")
+        })
+    }
+    
 }

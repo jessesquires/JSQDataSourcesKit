@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public protocol DataSourceTableEditingProtocol{
+public protocol DataSourceTableEditingProtocol {
     
     //MARK: Methods
     
@@ -30,7 +30,7 @@ public protocol DataSourceTableEditingProtocol{
      - parameter editingStyle: The editingStyle that requested on the current `indexPath` (for example `.delete`)
      - parameter indexPath:    The index path specifying the location of the cell.
      */
-    func configureCommitEditStyleForRow(in tableView: UITableView, editingStyle: UITableViewCellEditingStyle, at indexPath: IndexPath)
+    func configureCommitEditStyleForRow(in tableView: UITableView, editingStyle: UITableViewCellEditingStyle, at indexPath: IndexPath) -> Void
     
 }
 
@@ -43,7 +43,7 @@ public struct DataSourceEditingController: DataSourceTableEditingProtocol {
     public let commitEditingStyle: CommitEditingStyleConfigurator
     
     public init(canEditConfigurator: @escaping CanEditRowConfigurator,
-                commitEditingStyle: @escaping CommitEditingStyleConfigurator){
+                commitEditingStyle: @escaping CommitEditingStyleConfigurator) {
         
         self.canEditConfigurator = canEditConfigurator
         self.commitEditingStyle = commitEditingStyle
@@ -53,7 +53,7 @@ public struct DataSourceEditingController: DataSourceTableEditingProtocol {
         return canEditConfigurator(indexPath, tableView)
     }
     
-    public func configureCommitEditStyleForRow(in tableView: UITableView, editingStyle: UITableViewCellEditingStyle, at indexPath: IndexPath) {
+    public func configureCommitEditStyleForRow(in tableView: UITableView, editingStyle: UITableViewCellEditingStyle, at indexPath: IndexPath) -> Void {
         return commitEditingStyle(tableView, editingStyle, indexPath)
     }
     
