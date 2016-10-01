@@ -38,7 +38,9 @@ where CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSour
 
     fileprivate var bridgedDataSource: BridgedDataSource?
 
-
+    //The data source that provides the editing functionality on the tableView
+    public var dataSourceTableEditing:DataSourceTableEditingProtocol?
+    
     // MARK: Initialization
 
     /**
@@ -47,6 +49,8 @@ where CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSour
      - parameter dataSource:           The data source.
      - parameter cellFactory:          The cell factory.
      - parameter supplementaryFactory: The supplementary view factory.
+     - parameter dataSourceTableEditing : The datasource that will enable the tableView only 
+     to edit it's cells
 
      - returns: A new `DataSourceProvider` instance.
 
@@ -54,13 +58,13 @@ where CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSour
      the generic constraints for Swift. You can simply pass the same `cellFactory` here. The parameter will be ignored.
      The same applies to collection views that do not have supplementary views. Again, the parameter will be ignored.
      */
-    public init(dataSource: DataSource, cellFactory: CellFactory, supplementaryFactory: SupplementaryFactory) {
+    public init(dataSource: DataSource, cellFactory: CellFactory, supplementaryFactory: SupplementaryFactory,dataSourceTableEditing:DataSourceTableEditingProtocol? = nil) {
         self.dataSource = dataSource
         self.cellFactory = cellFactory
         self.supplementaryFactory = supplementaryFactory
+        self.dataSourceTableEditing = dataSourceTableEditing
     }
 }
-
 
 public extension DataSourceProvider where CellFactory.View: UITableViewCell {
 
@@ -94,6 +98,15 @@ public extension DataSourceProvider where CellFactory.View: UITableViewCell {
 
         dataSource.tableTitleForFooterInSection = { [unowned self] (section) -> String? in
             return self.dataSource.footerTitle(inSection: section)
+        }
+        
+        dataSource.tableCanEditRowAtIndexPath = { [unowned self] (tableView, indexPath) -> Bool in
+            guard let editDataSource = self.dataSourceTableEditing else {return false}
+            return editDataSource.configureCanEditRowAt(indexPath: indexPath, in: tableView)
+        }
+        
+        dataSource.tableCommitEditingStyleForRowAtIndexPath = {[unowned self] (tableView, editingStyle,indexPath) in
+            self.dataSourceTableEditing?.configureCommitEditStyleForRow(in: tableView, editingStyle: editingStyle, at: indexPath)
         }
 
         return dataSource

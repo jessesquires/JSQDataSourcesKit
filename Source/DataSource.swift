@@ -159,7 +159,19 @@ public struct DataSource<S: SectionInfoProtocol>: DataSourceProtocol {
         guard section < sections.count else { return nil }
         return sections[section].footerTitle
     }
-
+    
+    /// Removes an Item at a specific `IndexPath`
+    ///
+    /// - parameter indexPath: The index path specifying the location of the cell
+    ///
+    /// - returns: The item specified by indexPath, or `nil`
+    
+    @discardableResult
+    public mutating func remove(at indexPath:IndexPath)->S.Item?{
+        guard indexPath.section <= numberOfSections() else {return nil}
+        guard indexPath.row <= numberOfItems(inSection: indexPath.section) else {return nil}
+        return sections[indexPath.section].items.remove(at: indexPath.row)
+    }
 
     // MARK: Subscripts
 
