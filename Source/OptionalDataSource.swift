@@ -53,7 +53,7 @@ public struct DataSourceEditingController: DataSourceTableEditingProtocol {
         return canEditConfigurator(indexPath, tableView)
     }
     
-    public func configureCommitEditStyleForRow(in tableView: UITableView, editingStyle: UITableViewCellEditingStyle, at indexPath: IndexPath) -> Void {
+    public func configureCommitEditStyleForRow(in tableView: UITableView, editingStyle: UITableViewCellEditingStyle, at indexPath: IndexPath) {
         return commitEditingStyle(tableView, editingStyle, indexPath)
     }
     
