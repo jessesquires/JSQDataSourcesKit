@@ -52,7 +52,7 @@ script:
 
 # Build for reporting test coverage
 - if [ $RUN_TESTS == "YES" ]; then
-      xcodebuild test -project JSQDataSourcesKit.xcodeproj -scheme JSQDataSourcesKit-iOS -destination "platform=iOS Simulator,name=iPhone 7";
+      xcodebuild test -project JSQDataSourcesKit.xcodeproj -scheme JSQDataSourcesKit-iOS -destination "platform=iOS Simulator,name=iPhone 7" CODE_SIGNING_REQUIRED=NO;
   fi
 
 after_success:
