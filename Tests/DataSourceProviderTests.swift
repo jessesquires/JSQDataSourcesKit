@@ -400,7 +400,7 @@ final class DataSourceProviderTests: TestCase {
         }
         
         //GIVEN: a data source editing controller
-        let tableEditingController = DataSourceEditingController(
+        let tableDataSourceEditingController = TableDataSourceEditingController(
             canEditConfigurator: { (indexPath, tableView) -> Bool in
                 return indexPath == expectedIndexPath
             },
@@ -413,9 +413,10 @@ final class DataSourceProviderTests: TestCase {
         })
 
         // GIVEN: a data source provider
-        dataSourceProvider = DataSourceProvider(dataSource: dataSource, cellFactory: factory, supplementaryFactory: factory, dataSourceTableEditing: tableEditingController)
-        let tableViewDataSource = dataSourceProvider.tableViewDataSource
+        dataSourceProvider = DataSourceProvider(dataSource: dataSource, cellFactory: factory, supplementaryFactory: factory)
+        dataSourceProvider.setTableDataSourceEditingController(tableDataSourceEditingController)
         
+        let tableViewDataSource = dataSourceProvider.tableViewDataSource
         tableView.dataSource = tableViewDataSource
         
         // WHEN: we call the table view data source methods

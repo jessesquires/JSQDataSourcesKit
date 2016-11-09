@@ -9,32 +9,7 @@
 import Foundation
 import UIKit
 
-public protocol DataSourceTableEditingProtocol {
-    
-    //MARK: Methods
-    
-    /**
-     Returns a `Bool` which indicates if the cell will be available for editing or not
-    
-    - parameter indexPath: The index path specifying the location of the cell.
-    - parameter tableView: The table view requesting this information.
-    
-     - returns: A `Bool` which indicates if the cell will be available for editing or not
-     */
-    func configureCanEditRowAt(indexPath: IndexPath, in tableView: UITableView) -> Bool
-    
-    /**
-     Commit any neccessary action in respect of the `editingStyle` on the current `indexPath`
-    
-     - parameter tableView:    The table view requesting this information.
-     - parameter editingStyle: The editingStyle that requested on the current `indexPath` (for example `.delete`)
-     - parameter indexPath:    The index path specifying the location of the cell.
-     */
-    func configureCommitEditStyleForRow(in tableView: UITableView, editingStyle: UITableViewCellEditingStyle, at indexPath: IndexPath) -> Void
-    
-}
-
-public struct DataSourceEditingController: DataSourceTableEditingProtocol {
+public struct TableDataSourceEditingController {
    
     public typealias CanEditRowConfigurator = (IndexPath, UITableView) -> Bool
     public typealias CommitEditingStyleConfigurator = (UITableView, UITableViewCellEditingStyle, IndexPath) -> Void
@@ -49,11 +24,11 @@ public struct DataSourceEditingController: DataSourceTableEditingProtocol {
         self.commitEditingStyle = commitEditingStyle
     }
     
-    public func configureCanEditRowAt(indexPath: IndexPath, in tableView: UITableView) -> Bool {
+    public func canEditRowAt(indexPath: IndexPath, in tableView: UITableView) -> Bool {
         return canEditConfigurator(indexPath, tableView)
     }
     
-    public func configureCommitEditStyleForRow(in tableView: UITableView, editingStyle: UITableViewCellEditingStyle, at indexPath: IndexPath) {
+    public func commitEditStyleForRow(in tableView: UITableView, editingStyle: UITableViewCellEditingStyle, at indexPath: IndexPath) {
         return commitEditingStyle(tableView, editingStyle, indexPath)
     }
     

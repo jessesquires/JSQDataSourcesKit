@@ -43,8 +43,11 @@ final class TableViewController: UITableViewController {
             return cell
         }
         
-        //3. Optional - create if neccessary a datasourceEditingController to enable the editing functionality on the tableView
-        let tableEditingController = DataSourceEditingController(
+        // 3. create data source provider
+        dataSourceProvider = DataSourceProvider(dataSource: dataSource, cellFactory: factory, supplementaryFactory: factory)
+
+        // 4. Optional - create if neccessary a datasourceEditingController to enable the editing functionality on the tableView
+        let tableDataSourceEditingController = TableDataSourceEditingController(
             canEditConfigurator: { (indexPath, tableView) -> Bool in
                 return indexPath.row % 2 == 0
             },
@@ -55,9 +58,8 @@ final class TableViewController: UITableViewController {
                     }
                 }
             })
-
-        // 4. create data source provider
-        dataSourceProvider = DataSourceProvider(dataSource: dataSource, cellFactory: factory, supplementaryFactory: factory, dataSourceTableEditing: tableEditingController)
+        
+        dataSourceProvider?.setTableDataSourceEditingController(tableDataSourceEditingController)
 
         // 5. set data source
         tableView.dataSource = dataSourceProvider?.tableViewDataSource

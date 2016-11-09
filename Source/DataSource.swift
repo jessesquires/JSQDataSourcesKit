@@ -128,6 +128,34 @@ public struct DataSource<S: SectionInfoProtocol>: DataSourceProtocol {
     public func numberOfSections() -> Int {
         return sections.count
     }
+    
+    /**
+     Checks if a Section exists at a specific `IndexPath`.
+     
+     - parameter indexPath: The index path specifying the location of the cell.
+     - returns: `true` if the section exists at the specified `IndexPath`, otherwise it returns `false`.
+     */
+    public func sectionExists(for indexPath: IndexPath) -> Bool {
+        let section = indexPath.section
+        return section < numberOfSections()
+    }
+    
+    /**
+     Checks if an Item exists at a specific `IndexPath`.
+     
+     - parameter indexPath: The index path specifying the location of the cell.
+     - returns: `true` if the item exists at the specified `IndexPath`, otherwise it returns `false`.
+     */
+    public func itemExists(for indexPath: IndexPath) -> Bool {
+        if !sectionExists(for: indexPath) {
+            return false
+        }
+        
+        let section = indexPath.section
+        let row = indexPath.row
+        
+        return row < numberOfItems(inSection: section)
+    }
 
     /// :nodoc:
     public func numberOfItems(inSection section: Int) -> Int {
@@ -161,16 +189,17 @@ public struct DataSource<S: SectionInfoProtocol>: DataSourceProtocol {
     }
     
     /** 
-     Removes an Item at a specific `IndexPath`
+     Removes an Item at a specific `IndexPath`.
      
-     - parameter indexPath: The index path specifying the location of the cell
-     - returns: The item specified by indexPath, or `nil`
+     - parameter indexPath: The index path specifying the location of the cell.
+     - returns: The item specified by indexPath, or `nil`.
      */
     @discardableResult
     public mutating func remove(at indexPath: IndexPath) -> S.Item? {
-        guard indexPath.section <= numberOfSections() else { return nil }
-        guard indexPath.row <= numberOfItems(inSection: indexPath.section) else { return nil }
-        return sections[indexPath.section].items.remove(at: indexPath.row)
+        guard itemExists(for: indexPath) else { return nil }
+        let section = indexPath.section
+        let row = indexPath.row
+        return sections[section].items.remove(at: row)
     }
 
     // MARK: Subscripts

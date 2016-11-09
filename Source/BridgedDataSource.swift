@@ -30,8 +30,8 @@ internal typealias TableCellForRowAtIndexPathHandler = (UITableView, IndexPath) 
 internal typealias TableTitleForHeaderInSectionHandler = (Int) -> String?
 internal typealias TableTitleForFooterInSectionHandler = (Int) -> String?
 
-internal typealias TableCanEditRowAtIndexPathHandler = (UITableView, IndexPath) -> Bool
-internal typealias TableCommitEditingStyleForRowAtIndexPathHandler = (UITableView, UITableViewCellEditingStyle, IndexPath) -> Void
+internal typealias TableCanEditHandler = (UITableView, IndexPath) -> Bool
+internal typealias TableCommitEditingStyleHandler = (UITableView, UITableViewCellEditingStyle, IndexPath) -> Void
 
 
 /*
@@ -50,8 +50,8 @@ internal typealias TableCommitEditingStyleForRowAtIndexPathHandler = (UITableVie
     var tableTitleForHeaderInSection: TableTitleForHeaderInSectionHandler?
     var tableTitleForFooterInSection: TableTitleForFooterInSectionHandler?
     
-    var tableCanEditRowAtIndexPath: TableCanEditRowAtIndexPathHandler?
-    var tableCommitEditingStyleForRowAtIndexPath: TableCommitEditingStyleForRowAtIndexPathHandler?
+    var tableCanEditRow: TableCanEditHandler?
+    var tableCommitEditingStyleForRow: TableCommitEditingStyleHandler?
 
     init(numberOfSections: @escaping NumberOfSectionsHandler,
          numberOfItemsInSection: @escaping NumberOfItemsInSectionHandler) {
@@ -111,13 +111,13 @@ extension BridgedDataSource: UITableViewDataSource {
     }
     
     @objc func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if let closure = tableCanEditRowAtIndexPath{
+        if let closure = tableCanEditRow {
             return closure(tableView,indexPath)
         }
         return false
     }
     
     @objc func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        tableCommitEditingStyleForRowAtIndexPath?(tableView,editingStyle,indexPath)
+        tableCommitEditingStyleForRow?(tableView,editingStyle,indexPath)
     }
 }
