@@ -31,6 +31,10 @@ env:
    - DESTINATION="OS=10.0,name=Apple TV 1080p" SDK="$TVOS_SDK" SCHEME="$TVOS_SCHEME" RUN_TESTS="NO" BUILD_EXAMPLE="NO" POD_LINT="NO"
 
 script:
+- set -e
+- xcodebuild -version
+- xcodebuild -showsdks
+
 - if [ $POD_LINT == "YES" ]; then
       pod lib lint;
   fi
