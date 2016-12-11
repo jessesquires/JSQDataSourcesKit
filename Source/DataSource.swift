@@ -294,3 +294,11 @@ extension FetchedResultsController: DataSourceProtocol {
         return nil
     }
 }
+
+extension FetchedResultsController {
+
+    /// :nodoc:
+    public func item(atIndexPath indexPath: IndexPath) -> Item? {
+        return object(at: indexPath) as? T
+    }
+}

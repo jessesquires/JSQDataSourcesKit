@@ -4,31 +4,40 @@ The changelog for `JSQDataSourcesKit`. Also see the [releases](https://github.co
 
 --------------------------------------
 
+6.1.0
+-----
+
+This release closes the [6.1.0 milestone](https://github.com/jessesquires/JSQDataSourcesKit/milestone/11).
+
+## New
+
+- Added new `DataSourceProtocol` extension convenience method `func item(atIndexPath indexPath: IndexPath) -> Item?`.
+
 6.0.0
 -----
 
-This release closes the [6.0.0 milestone](https://github.com/jessesquires/JSQDataSourcesKit/issues?utf8=✓&q=milestone%3A6.0.0).
+This release closes the [6.0.0 milestone](https://github.com/jessesquires/JSQDataSourcesKit/milestone/9).
 
 **Swift 3.0 now required.**
 
 5.0.0
 -----
 
-This release closes the [5.0.0 milestone](https://github.com/jessesquires/JSQDataSourcesKit/issues?utf8=✓&q=milestone%3A5.0.0).
+This release closes the [5.0.0 milestone](https://github.com/jessesquires/JSQDataSourcesKit/milestone/8).
 
 **Swift 2.3 now required.**
 
 4.0.1
 -----
 
-This release closes the [4.0.1 milestone](https://github.com/jessesquires/JSQDataSourcesKit/issues?utf8=✓&q=milestone%3A4.0.1+).
+This release closes the [4.0.1 milestone](https://github.com/jessesquires/JSQDataSourcesKit/milestone/10).
 
 - Fixed an issue with `carthage build` (#61, #62). Thanks @dcaunt!
 
 4.0.0
 -----
 
-This release closes the [4.0.0 milestone](https://github.com/jessesquires/JSQDataSourcesKit/issues?utf8=✓&q=milestone%3A4.0.0+).
+This release closes the [4.0.0 milestone](https://github.com/jessesquires/JSQDataSourcesKit/milestone/7).
 
 This release is essentially a complete re-write of the library. If you are currently using this, migration to `4.0` will be pretty involved, but it will be worth it. The result is a *dramatically simpler* API.
 
@@ -109,12 +118,12 @@ The `*FetchedResultsDelegateProvider` classes have been unified into a single cl
 3.0.1
 -----
 
-Bug fixes from the [3.0.1](https://github.com/jessesquires/JSQDataSourcesKit/issues?q=milestone%3A3.0.1) milestone.
+Bug fixes from the [3.0.1](https://github.com/jessesquires/JSQDataSourcesKit/milestone/6) milestone.
 
 3.0.0
 -----
 
-This release closes the [3.0.0 milestone](https://github.com/jessesquires/JSQDataSourcesKit/issues?q=milestone%3A3.0.0).
+This release closes the [3.0.0 milestone](https://github.com/jessesquires/JSQDataSourcesKit/milestone/4).
 
 >**NOTE: This is actually a minor update, but there are breaking changes. Thus, the major version bump.**
 
@@ -171,7 +180,7 @@ In short, this release contains tons of refinements and fixes. The codebase is s
 
 ## Issues closed
 
-Find the complete list of closed issues [here](https://github.com/jessesquires/JSQDataSourcesKit/issues?q=milestone%3A2.0.0+is%3Aclosed) for the 2.0.0 milestone.
+Find the complete list of closed issues [here](https://github.com/jessesquires/JSQDataSourcesKit/milestone/3) for the 2.0.0 milestone.
 
 ## Documentation
 
