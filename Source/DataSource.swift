@@ -82,7 +82,7 @@ extension DataSourceProtocol {
 
      - returns: The item specified by indexPath, or `nil`.
      */
-    func item(atIndexPath indexPath: IndexPath) -> Item? {
+    public func item(atIndexPath indexPath: IndexPath) -> Item? {
         return item(atRow: indexPath.row, inSection: indexPath.section)
     }
 }
@@ -128,34 +128,6 @@ public struct DataSource<S: SectionInfoProtocol>: DataSourceProtocol {
     public func numberOfSections() -> Int {
         return sections.count
     }
-    
-    /**
-     Checks if a Section exists at a specific `IndexPath`.
-     
-     - parameter indexPath: The index path specifying the location of the cell.
-     - returns: `true` if the section exists at the specified `IndexPath`, otherwise it returns `false`.
-     */
-    public func sectionExists(for indexPath: IndexPath) -> Bool {
-        let section = indexPath.section
-        return section < numberOfSections()
-    }
-    
-    /**
-     Checks if an Item exists at a specific `IndexPath`.
-     
-     - parameter indexPath: The index path specifying the location of the cell.
-     - returns: `true` if the item exists at the specified `IndexPath`, otherwise it returns `false`.
-     */
-    public func itemExists(for indexPath: IndexPath) -> Bool {
-        if !sectionExists(for: indexPath) {
-            return false
-        }
-        
-        let section = indexPath.section
-        let row = indexPath.row
-        
-        return row < numberOfItems(inSection: section)
-    }
 
     /// :nodoc:
     public func numberOfItems(inSection section: Int) -> Int {
@@ -188,15 +160,15 @@ public struct DataSource<S: SectionInfoProtocol>: DataSourceProtocol {
         return sections[section].footerTitle
     }
     
-    /** 
-     Removes an Item at a specific `IndexPath`.
+    /**
+     Removes an item at the specified index path.
      
-     - parameter indexPath: The index path specifying the location of the cell.
-     - returns: The item specified by indexPath, or `nil`.
+     - parameter indexPath: The index path specifying the location of the item.
+     - returns: The item at `indexPath`, or `nil` if it does not exist.
      */
     @discardableResult
     public mutating func remove(at indexPath: IndexPath) -> S.Item? {
-        guard itemExists(for: indexPath) else { return nil }
+        guard item(atIndexPath: indexPath) != nil else { return nil }
         let section = indexPath.section
         let row = indexPath.row
         return sections[section].items.remove(at: row)

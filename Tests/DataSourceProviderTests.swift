@@ -387,7 +387,6 @@ final class DataSourceProviderTests: TestCase {
         
         typealias TableCellFactory = ViewFactory<FakeViewModel, FakeTableCell>
         var dataSourceProvider: DataSourceProvider<DataSource<Section<FakeViewModel>>, TableCellFactory, TableCellFactory>!
-
         
         // GIVEN: a cell factory
         let factory = ViewFactory(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
@@ -405,8 +404,8 @@ final class DataSourceProviderTests: TestCase {
                 return indexPath == expectedIndexPath
             },
             commitEditingStyle:{ (tableView, editingStyle, indexPath) in
-                if editingStyle == .delete{
-                    if let _ = dataSourceProvider.dataSource.remove(at: indexPath){
+                if editingStyle == .delete {
+                    if let _ = dataSourceProvider.dataSource.remove(at: indexPath) {
                         tableView.deleteRows(at: [indexPath], with: .automatic)
                     }
                 }
@@ -414,7 +413,7 @@ final class DataSourceProviderTests: TestCase {
 
         // GIVEN: a data source provider
         dataSourceProvider = DataSourceProvider(dataSource: dataSource, cellFactory: factory, supplementaryFactory: factory)
-        dataSourceProvider.setTableDataSourceEditingController(tableDataSourceEditingController)
+        dataSourceProvider.tableEditingController = tableDataSourceEditingController
         
         let tableViewDataSource = dataSourceProvider.tableViewDataSource
         tableView.dataSource = tableViewDataSource

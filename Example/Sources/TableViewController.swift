@@ -52,14 +52,14 @@ final class TableViewController: UITableViewController {
                 return indexPath.row % 2 == 0
             },
             commitEditingStyle:{ (tableView, editingStyle, indexPath) in
-                if editingStyle == .delete{
-                    if let _ = self.dataSourceProvider?.dataSource.remove(at: indexPath){
+                if editingStyle == .delete {
+                    if let _ = self.dataSourceProvider?.dataSource.remove(at: indexPath) {
                         tableView.deleteRows(at: [indexPath], with: .automatic)
                     }
                 }
             })
         
-        dataSourceProvider?.setTableDataSourceEditingController(tableDataSourceEditingController)
+        dataSourceProvider?.tableEditingController = tableDataSourceEditingController
 
         // 5. set data source
         tableView.dataSource = dataSourceProvider?.tableViewDataSource

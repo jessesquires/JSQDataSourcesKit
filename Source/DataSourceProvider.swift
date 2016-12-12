@@ -38,8 +38,7 @@ where CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSour
 
     fileprivate var bridgedDataSource: BridgedDataSource?
     
-    //The data source that provides the editing functionality on the tableView
-    fileprivate var dataSourceTableEditing: TableDataSourceEditingController?
+    fileprivate var _tableEditingController: TableDataSourceEditingController?
 
     // MARK: Initialization
 
@@ -76,10 +75,15 @@ public extension DataSourceProvider where CellFactory.View: UITableViewCell {
         return bridgedDataSource!
     }
     
-    public func setTableDataSourceEditingController(_ dataSourceTableEditing: TableDataSourceEditingController) {
-        self.dataSourceTableEditing = dataSourceTableEditing
+    public var tableEditingController: TableDataSourceEditingController? {
+        set {
+            _tableEditingController = newValue
+        }
+        get {
+            return _tableEditingController
+        }
     }
-
+    
     private func tableViewBridgedDataSource() -> BridgedDataSource {
         let dataSource = BridgedDataSource(
             numberOfSections: { [unowned self] () -> Int in
@@ -103,12 +107,12 @@ public extension DataSourceProvider where CellFactory.View: UITableViewCell {
         }
         
         dataSource.tableCanEditRow = { [unowned self] (tableView, indexPath) -> Bool in
-            guard let editDataSource = self.dataSourceTableEditing else { return false }
+            guard let editDataSource = self.tableEditingController else { return false }
             return editDataSource.canEditRowAt(indexPath: indexPath, in: tableView)
         }
         
         dataSource.tableCommitEditingStyleForRow = { [unowned self] (tableView, editingStyle,indexPath) in
-            self.dataSourceTableEditing?.commitEditStyleForRow(in: tableView, editingStyle: editingStyle, at: indexPath)
+            self.tableEditingController?.commitEditStyleForRow(in: tableView, editingStyle: editingStyle, at: indexPath)
         }
 
         return dataSource

@@ -228,12 +228,10 @@ final class DataSourceTests: XCTestCase {
         
         // WHEN: we set an item at a specific index path
         let ip = IndexPath(item: 1, section: 0)
-        let itemToRemove = dataSource.item(atRow: ip.row, inSection: ip.section)
+        let itemToRemove = dataSource.item(atIndexPath: ip)
         
         // THEN: Check if an item exists at the specified indexPath .Then check if the removedItem is the expected item
-
-        let itemExists = dataSource.itemExists(for:ip)
-        XCTAssertTrue(itemExists)
+        XCTAssertNotNil(itemToRemove)
         
         let removedItem = dataSource.remove(at: ip)
         XCTAssertEqual(removedItem, itemToRemove)
