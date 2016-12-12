@@ -299,6 +299,6 @@ extension FetchedResultsController {
 
     /// :nodoc:
     public func item(atIndexPath indexPath: IndexPath) -> Item? {
-        return object(at: indexPath) as? T
+        return object(at: indexPath) as? Item
     }
 }
