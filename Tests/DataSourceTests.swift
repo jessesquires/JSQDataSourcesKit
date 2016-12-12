@@ -156,6 +156,27 @@ final class DataSourceTests: XCTestCase {
         XCTAssertEqual(frc[IndexPath(item: 0, section: 2)], redThings[0])
     }
 
+    func test_thatFetchedResultsController_returnsExpectedData_atIndexPath() {
+        // GIVEN: a core data stack and objects in a context
+        let context = CoreDataStack(inMemory: true).context
+        let blueThings = generateThings(context, color: .Blue)
+        let greenThings = generateThings(context, color: .Green)
+        let redThings = generateThings(context, color: .Red)
+
+        // GIVEN: a fetched results controller
+        let frc = FetchedResultsController<Thing>(fetchRequest: Thing.newFetchRequest(),
+                                                  managedObjectContext: context,
+                                                  sectionNameKeyPath: "colorName",
+                                                  cacheName: nil)
+        _ = try? frc.performFetch()
+
+        // WHEN: we ask for an object
+        // THEN: we receive the exepected data
+        XCTAssertEqual(frc.item(atIndexPath: IndexPath(item: 1, section: 0)), blueThings[1])
+        XCTAssertEqual(frc.item(atIndexPath: IndexPath(item: 2, section: 1)), greenThings[2])
+        XCTAssertEqual(frc.item(atIndexPath: IndexPath(item: 0, section: 2)), redThings[0])
+    }
+
     func test_thatDataSource_returnsExpectedData_fromIntSubscript() {
         // GIVEN: a data source
         let sectionA = Section(items: FakeViewModel(), FakeViewModel(), headerTitle: "Header")
@@ -235,5 +256,21 @@ final class DataSourceTests: XCTestCase {
         
         let removedItem = dataSource.remove(at: ip)
         XCTAssertEqual(removedItem, itemToRemove)
+    }
+
+    func test_thatDataSource_returnsItem_atIndexPath() {
+        // GIVEN: a data source
+        let model = FakeViewModel()
+        let sectionA = Section(items: FakeViewModel(), FakeViewModel(), headerTitle: "Header")
+        let sectionB = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
+        let sectionC = Section(items: FakeViewModel(), FakeViewModel(), model)
+        let dataSource = DataSource(sections: sectionA, sectionB, sectionC)
+
+        // WHEN: we ask for an item
+        let ip = IndexPath(item: 2, section: 2)
+        let item = dataSource.item(atIndexPath: ip)
+
+        // THEN: we receive the exepected data
+        XCTAssertEqual(item, model)
     }
 }
