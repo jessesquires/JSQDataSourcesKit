@@ -247,15 +247,16 @@ final class DataSourceTests: XCTestCase {
         let sectionB = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
         var dataSource = DataSource(sections: sectionA, sectionB)
         
-        // WHEN: we set an item at a specific index path
+        // WHEN: we remove an item at a specific index path
         let ip = IndexPath(item: 1, section: 0)
-        let itemToRemove = dataSource.item(atIndexPath: ip)
-        
-        // THEN: Check if an item exists at the specified indexPath .Then check if the removedItem is the expected item
+        let itemToRemove = dataSource.remove(at: ip)
+
+        // THEN: the item is removed
         XCTAssertNotNil(itemToRemove)
-        
-        let removedItem = dataSource.remove(at: ip)
-        XCTAssertEqual(removedItem, itemToRemove)
+        XCTAssertEqual(dataSource.sections.count, 2)
+        XCTAssertEqual(dataSource.items(inSection: 0)?.count, 1)
+        XCTAssertEqual(dataSource.items(inSection: 1)?.count, 2)
+        XCTAssertEqual(sectionA.count, 2, "Original section should not be changed")
     }
 
     func test_thatDataSource_returnsItem_atIndexPath() {
