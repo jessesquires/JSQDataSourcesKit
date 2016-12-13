@@ -37,8 +37,7 @@ where CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSour
     public let supplementaryFactory: SupplementaryFactory
 
     fileprivate var bridgedDataSource: BridgedDataSource?
-    
-    fileprivate var _tableEditingController: TableDataSourceEditingController?
+    fileprivate var _tableEditingController: TableEditingController?
 
     // MARK: Initialization
 
@@ -73,8 +72,8 @@ public extension DataSourceProvider where CellFactory.View: UITableViewCell {
         }
         return bridgedDataSource!
     }
-    
-    public var tableEditingController: TableDataSourceEditingController? {
+
+    public var tableEditingController: TableEditingController? {
         set {
             _tableEditingController = newValue
         }
@@ -82,7 +81,7 @@ public extension DataSourceProvider where CellFactory.View: UITableViewCell {
             return _tableEditingController
         }
     }
-    
+
     private func tableViewBridgedDataSource() -> BridgedDataSource {
         let dataSource = BridgedDataSource(
             numberOfSections: { [unowned self] () -> Int in
@@ -90,7 +89,7 @@ public extension DataSourceProvider where CellFactory.View: UITableViewCell {
             },
             numberOfItemsInSection: { [unowned self] (section) -> Int in
                 return self.dataSource.numberOfItems(inSection: section)
-            })
+        })
 
         dataSource.tableCellForRowAtIndexPath = { [unowned self] (tableView, indexPath) -> UITableViewCell in
             let item = self.dataSource.item(atIndexPath: indexPath)!
@@ -104,12 +103,12 @@ public extension DataSourceProvider where CellFactory.View: UITableViewCell {
         dataSource.tableTitleForFooterInSection = { [unowned self] (section) -> String? in
             return self.dataSource.footerTitle(inSection: section)
         }
-        
+
         dataSource.tableCanEditRow = { [unowned self] (tableView, indexPath) -> Bool in
-            guard let editDataSource = self.tableEditingController else { return false }
-            return editDataSource.canEditRowAt(indexPath: indexPath, in: tableView)
+            guard let controller = self.tableEditingController else { return false }
+            return controller.canEditRow(in: tableView, at: indexPath)
         }
-        
+
         dataSource.tableCommitEditingStyleForRow = { [unowned self] (tableView, editingStyle,indexPath) in
             self.tableEditingController?.commitEditStyleForRow(in: tableView, editingStyle: editingStyle, at: indexPath)
         }
@@ -139,7 +138,7 @@ public extension DataSourceProvider where CellFactory.View: UICollectionViewCell
             },
             numberOfItemsInSection: { [unowned self] (section) -> Int in
                 return self.dataSource.numberOfItems(inSection: section)
-            })
+        })
 
         dataSource.collectionCellForItemAtIndexPath = { [unowned self] (collectionView, indexPath) -> UICollectionViewCell in
             let item = self.dataSource.item(atIndexPath: indexPath)!

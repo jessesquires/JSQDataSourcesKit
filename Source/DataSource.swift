@@ -159,20 +159,35 @@ public struct DataSource<S: SectionInfoProtocol>: DataSourceProtocol {
         guard section < sections.count else { return nil }
         return sections[section].footerTitle
     }
-    
+
+
+    // MARK: Public
+
     /**
-     Removes an item at the specified index path.
-     
+     Removes the item at the specified row and section.
+
+     - parameter row:     The row location of the item.
+     - parameter section: The section location of the item.
+
+     - returns: The item removed, or `nil` if it does not exist.
+     */
+    @discardableResult
+    public mutating func remove(atRow row: Int, inSection section: Int) -> S.Item? {
+        guard item(atRow: row, inSection: section) != nil else { return nil }
+        return sections[section].items.remove(at: row)
+    }
+
+    /**
+     Removes the item at the specified index path.
+
      - parameter indexPath: The index path specifying the location of the item.
      - returns: The item at `indexPath`, or `nil` if it does not exist.
      */
     @discardableResult
     public mutating func remove(at indexPath: IndexPath) -> S.Item? {
-        guard item(atIndexPath: indexPath) != nil else { return nil }
-        let section = indexPath.section
-        let row = indexPath.row
-        return sections[section].items.remove(at: row)
+        return remove(atRow: indexPath.row, inSection: indexPath.section)
     }
+
 
     // MARK: Subscripts
 
