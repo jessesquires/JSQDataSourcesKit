@@ -42,11 +42,26 @@ final class TableViewController: UITableViewController {
             cell.accessibilityIdentifier = "\(indexPath.section), \(indexPath.row)"
             return cell
         }
-
+        
         // 3. create data source provider
         dataSourceProvider = DataSourceProvider(dataSource: dataSource, cellFactory: factory, supplementaryFactory: factory)
 
-        // 4. set data source
+        // 4. Optional - create if neccessary a datasourceEditingController to enable the editing functionality on the tableView
+        let tableDataSourceEditingController = TableDataSourceEditingController(
+            canEditConfigurator: { (indexPath, tableView) -> Bool in
+                return indexPath.row % 2 == 0
+            },
+            commitEditingStyle:{ (tableView, editingStyle, indexPath) in
+                if editingStyle == .delete {
+                    if let _ = self.dataSourceProvider?.dataSource.remove(at: indexPath) {
+                        tableView.deleteRows(at: [indexPath], with: .automatic)
+                    }
+                }
+            })
+        
+        dataSourceProvider?.tableEditingController = tableDataSourceEditingController
+
+        // 5. set data source
         tableView.dataSource = dataSourceProvider?.tableViewDataSource
     }
     

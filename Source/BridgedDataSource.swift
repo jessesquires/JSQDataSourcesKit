@@ -30,6 +30,9 @@ internal typealias TableCellForRowAtIndexPathHandler = (UITableView, IndexPath) 
 internal typealias TableTitleForHeaderInSectionHandler = (Int) -> String?
 internal typealias TableTitleForFooterInSectionHandler = (Int) -> String?
 
+internal typealias TableCanEditHandler = (UITableView, IndexPath) -> Bool
+internal typealias TableCommitEditingStyleHandler = (UITableView, UITableViewCellEditingStyle, IndexPath) -> Void
+
 
 /*
  This class is responsible for implementing the `UICollectionViewDataSource` and `UITableViewDataSource` protocols.
@@ -46,6 +49,9 @@ internal typealias TableTitleForFooterInSectionHandler = (Int) -> String?
     var tableCellForRowAtIndexPath: TableCellForRowAtIndexPathHandler?
     var tableTitleForHeaderInSection: TableTitleForHeaderInSectionHandler?
     var tableTitleForFooterInSection: TableTitleForFooterInSectionHandler?
+    
+    var tableCanEditRow: TableCanEditHandler?
+    var tableCommitEditingStyleForRow: TableCommitEditingStyleHandler?
 
     init(numberOfSections: @escaping NumberOfSectionsHandler,
          numberOfItemsInSection: @escaping NumberOfItemsInSectionHandler) {
@@ -102,5 +108,16 @@ extension BridgedDataSource: UITableViewDataSource {
             return closure(section)
         }
         return nil
+    }
+    
+    @objc func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if let closure = tableCanEditRow {
+            return closure(tableView,indexPath)
+        }
+        return false
+    }
+    
+    @objc func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        tableCommitEditingStyleForRow?(tableView,editingStyle,indexPath)
     }
 }

@@ -37,7 +37,8 @@ where CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSour
     public let supplementaryFactory: SupplementaryFactory
 
     fileprivate var bridgedDataSource: BridgedDataSource?
-
+    
+    fileprivate var _tableEditingController: TableDataSourceEditingController?
 
     // MARK: Initialization
 
@@ -61,7 +62,6 @@ where CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSour
     }
 }
 
-
 public extension DataSourceProvider where CellFactory.View: UITableViewCell {
 
     // MARK: UITableViewDataSource
@@ -73,7 +73,16 @@ public extension DataSourceProvider where CellFactory.View: UITableViewCell {
         }
         return bridgedDataSource!
     }
-
+    
+    public var tableEditingController: TableDataSourceEditingController? {
+        set {
+            _tableEditingController = newValue
+        }
+        get {
+            return _tableEditingController
+        }
+    }
+    
     private func tableViewBridgedDataSource() -> BridgedDataSource {
         let dataSource = BridgedDataSource(
             numberOfSections: { [unowned self] () -> Int in
@@ -94,6 +103,15 @@ public extension DataSourceProvider where CellFactory.View: UITableViewCell {
 
         dataSource.tableTitleForFooterInSection = { [unowned self] (section) -> String? in
             return self.dataSource.footerTitle(inSection: section)
+        }
+        
+        dataSource.tableCanEditRow = { [unowned self] (tableView, indexPath) -> Bool in
+            guard let editDataSource = self.tableEditingController else { return false }
+            return editDataSource.canEditRowAt(indexPath: indexPath, in: tableView)
+        }
+        
+        dataSource.tableCommitEditingStyleForRow = { [unowned self] (tableView, editingStyle,indexPath) in
+            self.tableEditingController?.commitEditStyleForRow(in: tableView, editingStyle: editingStyle, at: indexPath)
         }
 
         return dataSource

@@ -82,7 +82,7 @@ extension DataSourceProtocol {
 
      - returns: The item specified by indexPath, or `nil`.
      */
-    func item(atIndexPath indexPath: IndexPath) -> Item? {
+    public func item(atIndexPath indexPath: IndexPath) -> Item? {
         return item(atRow: indexPath.row, inSection: indexPath.section)
     }
 }
@@ -159,7 +159,20 @@ public struct DataSource<S: SectionInfoProtocol>: DataSourceProtocol {
         guard section < sections.count else { return nil }
         return sections[section].footerTitle
     }
-
+    
+    /**
+     Removes an item at the specified index path.
+     
+     - parameter indexPath: The index path specifying the location of the item.
+     - returns: The item at `indexPath`, or `nil` if it does not exist.
+     */
+    @discardableResult
+    public mutating func remove(at indexPath: IndexPath) -> S.Item? {
+        guard item(atIndexPath: indexPath) != nil else { return nil }
+        let section = indexPath.section
+        let row = indexPath.row
+        return sections[section].items.remove(at: row)
+    }
 
     // MARK: Subscripts
 

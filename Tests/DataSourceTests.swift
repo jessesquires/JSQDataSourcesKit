@@ -201,7 +201,7 @@ final class DataSourceTests: XCTestCase {
         let ip = IndexPath(item: 2, section: 2)
         let item = dataSource[ip]
 
-        // THEN: we receive the exepected data
+        // THEN: we receive the expected data
         XCTAssertEqual(item, model)
     }
 
@@ -218,5 +218,22 @@ final class DataSourceTests: XCTestCase {
         
         // THEN: the item is replaced
         XCTAssertEqual(dataSource[ip], item)
+    }
+    
+    func test_thatDataSource_removesExpectedData_atIndexPath() {
+        // GIVEN: a data source
+        let sectionA = Section(items: FakeViewModel(), FakeViewModel(), headerTitle: "Header")
+        let sectionB = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
+        var dataSource = DataSource(sections: sectionA, sectionB)
+        
+        // WHEN: we set an item at a specific index path
+        let ip = IndexPath(item: 1, section: 0)
+        let itemToRemove = dataSource.item(atIndexPath: ip)
+        
+        // THEN: Check if an item exists at the specified indexPath .Then check if the removedItem is the expected item
+        XCTAssertNotNil(itemToRemove)
+        
+        let removedItem = dataSource.remove(at: ip)
+        XCTAssertEqual(removedItem, itemToRemove)
     }
 }
