@@ -7,24 +7,10 @@
 
 ## General information
 
-- Library version(s):
-- OS version(s):
-- Devices/Simulators affected:
+- Library version:
+- OS version:
+- Devices/Simulators:
 - Reproducible in the demo project (Yes/No): 
-- Related issues:
+- Any related issues:
 
-## Expected behavior
-
-> ...
-
-## Actual behavior
-
-> ...
-
-## Steps to reproduce
-
-> ...
-
-### Crash log? Screenshots? Videos? Sample project?
-
-> ...
+## What happened?
