@@ -48,7 +48,6 @@ where CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSour
      - parameter dataSource:           The data source.
      - parameter cellFactory:          The cell factory.
      - parameter supplementaryFactory: The supplementary view factory.
-     to edit it's cells
 
      - returns: A new `DataSourceProvider` instance.
 

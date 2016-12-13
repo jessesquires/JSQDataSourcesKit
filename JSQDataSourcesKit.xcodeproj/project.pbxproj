@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D68ECA31DFFEF4600A1AFB7 /* TableDataSourceEditingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD7AC5C1D86C4BC00B676A6 /* TableDataSourceEditingController.swift */; };
 		1DD7AC5D1D86C4BC00B676A6 /* TableDataSourceEditingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD7AC5C1D86C4BC00B676A6 /* TableDataSourceEditingController.swift */; };
 		881A92DB1CB881550080BC5C /* FetchedResultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD2C1CB87CB400C018AF /* FetchedResultsDelegate.swift */; };
 		881A92DD1CB881550080BC5C /* JSQDataSourcesKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 88DCAD2F1CB87CB400C018AF /* JSQDataSourcesKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -391,6 +392,7 @@
 				88B80CD91CBBF62A00EDF9D5 /* DataSourceProvider.swift in Sources */,
 				882CA4551D1D7DE1006112B9 /* BridgedFetchedResultsDelegate.swift in Sources */,
 				882CA4561D1D7DE1006112B9 /* DataSource.swift in Sources */,
+				1D68ECA31DFFEF4600A1AFB7 /* TableDataSourceEditingController.swift in Sources */,
 				881A92DB1CB881550080BC5C /* FetchedResultsDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
