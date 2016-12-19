@@ -20,48 +20,47 @@ import Foundation
 import UIKit
 
 /**
- An instance of `TableEditingController` that allows to handle the insertion/deletion of a row.
+ An instance of `TableEditingController` allows editing a table view via inserting and deleting rows.
  */
 public struct TableEditingController {
 
-    // MARK: Type aliases
+    // MARK: Typealiases
     
     /**
-     Asks if a row on the specified index path is editable for the specified table view.
+     Asks if a row at the specified index path is editable for the specified table view.
     
      - parameter tableView: The table view requesting this information.
-     - parameter indexPath: The index path of the row.
+     - parameter indexPath: The index path of the item.
      
-     - returns: If the specified row is editable.
+     - returns: `true` if the specified row is editable, `false` otherwise.
      */
     public typealias CanEditRowConfig = (_ tableView: UITableView, _ indexPath: IndexPath) -> Bool
     
     /**
-     Commits the insertion/deletion of a specified row.
+     Commits the editing actions for the specified index path.
      
-     - parameter tableView: The specified table view.
-     - parameter commit:    The specified editing style.
-     - parameter indexPath: The specified index path.
+     - parameter tableView: The table view being edited.
+     - parameter commit:    The editing style.
+     - parameter indexPath: The index path of the item.
      */
     public typealias CommitEditingConfig = (_ tableView: UITableView, _ commit: UITableViewCellEditingStyle, _ indexPath: IndexPath) -> Void
 
-    /// A closure used to verify if a given row is editable.
+    /// A closure that determines if a given row is editable.
     public let canEditRowConfig: CanEditRowConfig
     
-    /// A closure used to commit the insertion/deletion of a specified row.
+    /// A closure that commits the editing actions for a table view.
     public let commitEditingConfig: CommitEditingConfig
     
-    //MARK: - Initialization
+    // MARK: Initialization
     
     /**
      Constructs a new `TableEditingController`.
      
-     - parameter canEditRowConfig:    The closure which will ask to verify that a given row is editable.
-     - parameter commitEditingConfig: The closure which will commit the insertion/deletion of a specified row.
+     - parameter canEditRowConfig:    The closure that determines if a given row is editable.
+     - parameter commitEditingConfig: The closure that commits the editing actions for a table view.
      
      - returns: A new `TableEditingController` instance.
      */
-
     public init(canEditRowConfig: @escaping CanEditRowConfig, commitEditingConfig: @escaping CommitEditingConfig) {
         self.canEditRowConfig = canEditRowConfig
         self.commitEditingConfig = commitEditingConfig
