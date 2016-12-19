@@ -25,20 +25,20 @@ import UIKit
 public struct TableEditingController {
 
     // MARK: Typealiases
-    
+
     /**
      Asks if a row at the specified index path is editable for the specified table view.
-    
+
      - parameter tableView: The table view requesting this information.
      - parameter indexPath: The index path of the item.
-     
+
      - returns: `true` if the specified row is editable, `false` otherwise.
      */
     public typealias CanEditRowConfig = (_ tableView: UITableView, _ indexPath: IndexPath) -> Bool
-    
+
     /**
      Commits the editing actions for the specified index path.
-     
+
      - parameter tableView: The table view being edited.
      - parameter commit:    The editing style.
      - parameter indexPath: The index path of the item.
@@ -46,35 +46,23 @@ public struct TableEditingController {
     public typealias CommitEditingConfig = (_ tableView: UITableView, _ commit: UITableViewCellEditingStyle, _ indexPath: IndexPath) -> Void
 
     /// A closure that determines if a given row is editable.
-    public let canEditRowConfig: CanEditRowConfig
-    
+    public let canEditRow: CanEditRowConfig
+
     /// A closure that commits the editing actions for a table view.
-    public let commitEditingConfig: CommitEditingConfig
-    
+    public let commitEditing: CommitEditingConfig
+
     // MARK: Initialization
-    
+
     /**
      Constructs a new `TableEditingController`.
-     
-     - parameter canEditRowConfig:    The closure that determines if a given row is editable.
-     - parameter commitEditingConfig: The closure that commits the editing actions for a table view.
-     
+
+     - parameter canEditRow:    The closure that determines if a given row is editable.
+     - parameter commitEditing: The closure that commits the editing actions for a table view.
+
      - returns: A new `TableEditingController` instance.
      */
-    public init(canEditRowConfig: @escaping CanEditRowConfig, commitEditingConfig: @escaping CommitEditingConfig) {
-        self.canEditRowConfig = canEditRowConfig
-        self.commitEditingConfig = commitEditingConfig
-    }
-
-    // MARK: Internal
-
-    /// :nodoc:
-    func canEditRow(in tableView: UITableView, at indexPath: IndexPath) -> Bool {
-        return canEditRowConfig(tableView, indexPath)
-    }
-
-    /// :nodoc:
-    func commitEditStyleForRow(in tableView: UITableView, editingStyle: UITableViewCellEditingStyle, at indexPath: IndexPath) {
-        return commitEditingConfig(tableView, editingStyle, indexPath)
+    public init(canEditRow: @escaping CanEditRowConfig, commitEditing: @escaping CommitEditingConfig) {
+        self.canEditRow = canEditRow
+        self.commitEditing = commitEditing
     }
 }
