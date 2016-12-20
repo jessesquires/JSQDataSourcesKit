@@ -162,6 +162,40 @@ public struct DataSource<S: SectionInfoProtocol>: DataSourceProtocol {
 
 
     // MARK: Public
+    
+    /**
+     Adds the item at the specified index path.
+     
+     - parameter item:      The item to be inserted.
+     - parameter indexPath: The index path specifying the location for the item.
+     */
+    public mutating func insert(item: S.Item, at indexPath: IndexPath) {
+        insert(item: item, atRow: indexPath.row, inSection: indexPath.section)
+    }
+    
+    /**
+     Adds the item at the specified row and section.
+     
+     - parameter item:    The item to be inserted.
+     - parameter row:     The specified row location for the item.
+     - parameter section: The specified section location for the item.
+     */
+    public mutating func insert(item: S.Item, atRow row: Int, inSection section: Int) {
+        guard section < numberOfSections() else { return }
+        guard row <= numberOfItems(inSection: section) else { return }
+        sections[section].items.insert(item, at: row)
+    }
+    
+    /**
+     Appends the item at the specified section.
+     
+     - parameter item:    The item to be appended.
+     - parameter section: The specified section location for the item.
+     */
+    public mutating func append(_ item: S.Item, inSection section: Int) {
+        guard let items = items(inSection: section) else { return }
+        insert(item: item, atRow: items.endIndex, inSection: section)
+    }
 
     /**
      Removes the item at the specified row and section.

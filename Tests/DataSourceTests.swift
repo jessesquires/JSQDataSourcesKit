@@ -241,6 +241,85 @@ final class DataSourceTests: XCTestCase {
         XCTAssertEqual(dataSource[ip], item)
     }
     
+    func test_thatDataSource_insertsExpectedData_atIndexPath() {
+        // GIVEN: a data source
+        let sectionA = Section(items: FakeViewModel(), FakeViewModel(), headerTitle: "Header")
+        let sectionB = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
+        var dataSource = DataSource(sections: sectionA, sectionB)
+        
+        // WHEN: we add an item at a specific index path
+        let newItem = FakeViewModel()
+        let ip = IndexPath(item: 2, section: 1)
+        dataSource.insert(item: newItem, at: ip)
+        
+        let sectionItems = dataSource.items(inSection: ip.section)
+        let insertedIndex = sectionItems?.index(of: newItem)
+        
+        //THEN: the item is inserted at the specific index path
+        XCTAssertNotNil(sectionItems)
+        XCTAssertNotNil(insertedIndex)
+        XCTAssertEqual(insertedIndex, ip.row, "New item should be at the requested index")
+    }
+    
+    func test_thatDataSource_appendsExpectedData_inSection() {
+        // GIVEN: a data source
+        let sectionA = Section(items: FakeViewModel(), FakeViewModel(), headerTitle: "Header")
+        let sectionB = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
+        var dataSource = DataSource(sections: sectionA, sectionB)
+        
+        // WHEN: we append an item in a specific section
+        let newItem = FakeViewModel()
+        let section = 1
+        dataSource.append(newItem, inSection: section)
+        
+        let sectionItems = dataSource.items(inSection: section)
+        let insertedIndex = sectionItems?.index(of: newItem)
+        
+        //THEN: the item is appended in the specific section
+        XCTAssertNotNil(sectionItems)
+        XCTAssertNotNil(insertedIndex)
+        XCTAssertEqual(insertedIndex, sectionItems!.count - 1, "New item should be at the requested index")
+    }
+
+    func test_thatDataSource_doesntInsertData_atOutOfBounds_Section() {
+        // GIVEN: a data source
+        let sectionA = Section(items: FakeViewModel(), FakeViewModel(), headerTitle: "Header")
+        let sectionB = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
+        var dataSource = DataSource(sections: sectionA, sectionB)
+        
+        // WHEN: we add an item at a section that doesn't exist
+        let newItem = FakeViewModel()
+        let ip = IndexPath(item: 1, section: 2)
+        dataSource.insert(item: newItem, at: ip)
+        
+        let sectionItems = dataSource.items(inSection: 2)
+        
+        //THEN: the section should not exist hence the item should not be added
+        XCTAssertNil(sectionItems, "The requested section doesn't exist")
+
+    }
+    
+    func test_thatDataSource_doesntInsertData_atOutOfBounds_Row() {
+        // GIVEN: a data source
+        let sectionA = Section(items: FakeViewModel(), FakeViewModel(), headerTitle: "Header")
+        let sectionB = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
+        var dataSource = DataSource(sections: sectionA, sectionB)
+        
+        // WHEN: we add an item at an index that doesn't exist
+        let newItem = FakeViewModel()
+        let ip = IndexPath(item: 4, section: 1)
+        dataSource.insert(item: newItem, at: ip)
+        
+        let sectionItems = dataSource.items(inSection: 1)
+        let contains = sectionItems!.contains(newItem)
+        
+        //THEN: the item should not be added
+        XCTAssertNotNil(sectionItems)
+        XCTAssertFalse(contains, "The item shouldn't be added")
+        
+    }
+
+    
     func test_thatDataSource_removesExpectedData_atIndexPath() {
         // GIVEN: a data source
         let sectionA = Section(items: FakeViewModel(), FakeViewModel(), headerTitle: "Header")
