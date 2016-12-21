@@ -256,9 +256,8 @@ final class DataSourceTests: XCTestCase {
         let insertedIndex = sectionItems?.index(of: newItem)
         
         //THEN: the item is inserted at the specific index path
-        XCTAssertNotNil(sectionItems)
-        XCTAssertNotNil(insertedIndex)
         XCTAssertEqual(insertedIndex, ip.row, "New item should be at the requested index")
+        XCTAssertEqual(newItem, dataSource[ip], "New item should match the item at requested index path in dataSource")
     }
     
     func test_thatDataSource_appendsExpectedData_inSection() {
@@ -276,12 +275,11 @@ final class DataSourceTests: XCTestCase {
         let insertedIndex = sectionItems?.index(of: newItem)
         
         //THEN: the item is appended in the specific section
-        XCTAssertNotNil(sectionItems)
-        XCTAssertNotNil(insertedIndex)
         XCTAssertEqual(insertedIndex, sectionItems!.count - 1, "New item should be at the requested index")
+        XCTAssertEqual(newItem, sectionItems?.last, "New item should be at the end of the requested section")
     }
 
-    func test_thatDataSource_doesntInsertData_atOutOfBounds_Section() {
+    func test_thatDataSource_doesNotInsertData_atOutOfBounds_Section() {
         // GIVEN: a data source
         let sectionA = Section(items: FakeViewModel(), FakeViewModel(), headerTitle: "Header")
         let sectionB = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
@@ -299,7 +297,7 @@ final class DataSourceTests: XCTestCase {
 
     }
     
-    func test_thatDataSource_doesntInsertData_atOutOfBounds_Row() {
+    func test_thatDataSource_doesNotInsertData_atOutOfBounds_Row() {
         // GIVEN: a data source
         let sectionA = Section(items: FakeViewModel(), FakeViewModel(), headerTitle: "Header")
         let sectionB = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
@@ -310,12 +308,8 @@ final class DataSourceTests: XCTestCase {
         let ip = IndexPath(item: 4, section: 1)
         dataSource.insert(item: newItem, at: ip)
         
-        let sectionItems = dataSource.items(inSection: 1)
-        let contains = sectionItems!.contains(newItem)
-        
         //THEN: the item should not be added
-        XCTAssertNotNil(sectionItems)
-        XCTAssertFalse(contains, "The item shouldn't be added")
+        XCTAssertFalse(dataSource.items(inSection: 1)!.contains(newItem), "The item shouldn't be added")
         
     }
 
