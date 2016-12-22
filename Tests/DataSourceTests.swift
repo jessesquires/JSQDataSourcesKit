@@ -328,6 +328,22 @@ final class DataSourceTests: XCTestCase {
         XCTAssertEqual(dataSource.items(inSection: 1)?.count, 2)
         XCTAssertEqual(sectionA.count, 2, "Original section should not be changed")
     }
+    
+    func test_thatDataSource_doesNotRemoveData_fromInvalid_SectionOrRow() {
+        // GIVEN: a data source
+        let sectionA = Section(items: FakeViewModel(), FakeViewModel(), headerTitle: "Header")
+        let sectionB = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
+        var dataSource = DataSource(sections: sectionA, sectionB)
+        
+        // WHEN: we remove an item from an invalid section or row
+        let invalidIndex = 2
+        let itemToRemoveA = dataSource.remove(atRow: 0, inSection: invalidIndex)
+        let itemToRemoveB = dataSource.remove(atRow: invalidIndex, inSection: 0)
+
+        // THEN: the returned items should be nil
+        XCTAssertNil(itemToRemoveA, "The section \(invalidIndex) doesn't exist")
+        XCTAssertNil(itemToRemoveB, "There should be no item in row \(invalidIndex)")
+    }
 
     func test_thatDataSource_returnsItem_atIndexPath() {
         // GIVEN: a data source
@@ -341,7 +357,7 @@ final class DataSourceTests: XCTestCase {
         let ip = IndexPath(item: 2, section: 2)
         let item = dataSource.item(atIndexPath: ip)
 
-        // THEN: we receive the exepected data
+        // THEN: we receive the expected data
         XCTAssertEqual(item, model)
     }
 }
