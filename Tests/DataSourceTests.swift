@@ -340,7 +340,7 @@ final class DataSourceTests: XCTestCase {
         let itemToRemoveA = dataSource.remove(atRow: 0, inSection: invalidIndex)
         let itemToRemoveB = dataSource.remove(atRow: invalidIndex, inSection: 0)
 
-        //THEN: the return items should be nil
+        // THEN: the returned items should be nil
         XCTAssertNil(itemToRemoveA, "The section \(invalidIndex) doesn't exist")
         XCTAssertNil(itemToRemoveB, "There should be no item in row \(invalidIndex)")
     }
