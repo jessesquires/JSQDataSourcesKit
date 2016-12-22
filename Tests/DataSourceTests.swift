@@ -255,7 +255,7 @@ final class DataSourceTests: XCTestCase {
         let sectionItems = dataSource.items(inSection: ip.section)
         let insertedIndex = sectionItems?.index(of: newItem)
         
-        //THEN: the item is inserted at the specific index path
+        // THEN: the item is inserted at the specific index path
         XCTAssertEqual(insertedIndex, ip.row, "New item should be at the requested index")
         XCTAssertEqual(newItem, dataSource[ip], "New item should match the item at requested index path in dataSource")
     }
@@ -274,7 +274,7 @@ final class DataSourceTests: XCTestCase {
         let sectionItems = dataSource.items(inSection: section)
         let insertedIndex = sectionItems?.index(of: newItem)
         
-        //THEN: the item is appended in the specific section
+        // THEN: the item is appended in the specific section
         XCTAssertEqual(insertedIndex, sectionItems!.count - 1, "New item should be at the requested index")
         XCTAssertEqual(newItem, sectionItems?.last, "New item should be at the end of the requested section")
     }
@@ -292,9 +292,8 @@ final class DataSourceTests: XCTestCase {
         
         let sectionItems = dataSource.items(inSection: 2)
         
-        //THEN: the section should not exist hence the item should not be added
+        // THEN: the section should not exist hence the item should not be added
         XCTAssertNil(sectionItems, "The requested section doesn't exist")
-
     }
     
     func test_thatDataSource_doesNotInsertData_atOutOfBounds_Row() {
@@ -308,11 +307,9 @@ final class DataSourceTests: XCTestCase {
         let ip = IndexPath(item: 4, section: 1)
         dataSource.insert(item: newItem, at: ip)
         
-        //THEN: the item should not be added
+        // THEN: the item should not be added
         XCTAssertFalse(dataSource.items(inSection: 1)!.contains(newItem), "The item shouldn't be added")
-        
     }
-
     
     func test_thatDataSource_removesExpectedData_atIndexPath() {
         // GIVEN: a data source
