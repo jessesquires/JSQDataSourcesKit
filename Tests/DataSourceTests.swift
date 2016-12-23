@@ -241,6 +241,19 @@ final class DataSourceTests: XCTestCase {
         XCTAssertEqual(dataSource[ip], item)
     }
     
+    func test_thatDataSource_returnsNil_whenDataFromInvalidSection_areRequested() {
+        // GIVEN: a data source
+        let sectionA = Section(items: FakeViewModel(), FakeViewModel(), headerTitle: "Header")
+        let sectionB = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
+        let dataSource = DataSource(sections: sectionA, sectionB)
+        
+        // WHEN: we request an item from an invalid section
+        let requestedItem = dataSource.item(atRow: 0, inSection: 2)
+        
+        // THEN: the returned item should be nil
+        XCTAssertNil(requestedItem, "The requested section shouldn't exist")
+    }
+    
     func test_thatDataSource_insertsExpectedData_atIndexPath() {
         // GIVEN: a data source
         let sectionA = Section(items: FakeViewModel(), FakeViewModel(), headerTitle: "Header")
