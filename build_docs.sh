@@ -4,8 +4,6 @@
 # https://github.com/realm/jazzy
 # ------------------------------
 
-git submodule update --remote
-
 jazzy -o docs/ \
       --source-directory . \
       --readme README.md \
