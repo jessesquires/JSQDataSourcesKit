@@ -105,10 +105,6 @@ collectionView.dataSource = dataSourceProvider.collectionViewDataSource
 
 The [example project](https://github.com/jessesquires/JSQDataSourcesKit/tree/develop/Example) included exercises *all* functionality in this library.
 
-## Unit tests
-
-There's a suite of unit tests for `JSQDataSourcesKit`. Run them in the usual way from Xcode. These tests are well commented and serve as further documentation for how to use this library.
-
 ## Contribute
 
 Please follow these sweet [contribution guidelines](https://github.com/jessesquires/HowToContribute).
