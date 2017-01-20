@@ -53,6 +53,8 @@ $ open index.html -a Safari
 
 ## Getting Started
 
+Watch [my talk](https://www.skilled.io/u/swiftsummit/pushing-the-limits-of-protocol-oriented-programming) from [Swift Summit](https://swiftsummit.com). ([slides](https://speakerdeck.com/jessesquires/pushing-the-limits-of-protocol-oriented-programming))
+
 ````swift
 import JSQDataSourcesKit
 ````
