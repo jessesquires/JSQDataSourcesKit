@@ -53,6 +53,8 @@ $ open index.html -a Safari
 
 ## Getting Started
 
+Watch [my talk](https://www.skilled.io/u/swiftsummit/pushing-the-limits-of-protocol-oriented-programming) from [Swift Summit](https://swiftsummit.com). ([slides](https://speakerdeck.com/jessesquires/pushing-the-limits-of-protocol-oriented-programming))
+
 ````swift
 import JSQDataSourcesKit
 ````
@@ -104,10 +106,6 @@ collectionView.dataSource = dataSourceProvider.collectionViewDataSource
 #### Demo Project
 
 The [example project](https://github.com/jessesquires/JSQDataSourcesKit/tree/develop/Example) included exercises *all* functionality in this library.
-
-## Unit tests
-
-There's a suite of unit tests for `JSQDataSourcesKit`. Run them in the usual way from Xcode. These tests are well commented and serve as further documentation for how to use this library.
 
 ## Contribute
 

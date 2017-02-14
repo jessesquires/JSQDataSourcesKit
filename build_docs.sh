@@ -4,12 +4,13 @@
 # https://github.com/realm/jazzy
 # ------------------------------
 
-git submodule update --remote
-
-jazzy -o docs/ \
-      --source-directory . \
-      --readme README.md \
-      -a 'Jesse Squires' \
-      -u 'https://twitter.com/jesse_squires' \
-      -m 'JSQDataSourcesKit' \
-      -g 'https://github.com/jessesquires/JSQDataSourcesKit'
+jazzy \
+    --clean \
+    --author 'Jesse Squires' \
+    --author_url 'https://twitter.com/jesse_squires' \
+    --github_url 'https://github.com/jessesquires/JSQDataSourcesKit' \
+    --module 'JSQDataSourcesKit' \
+    --source-directory . \
+    --readme 'README.md' \
+    --documentation 'Guides/*.md' \
+    --output docs/ \      
