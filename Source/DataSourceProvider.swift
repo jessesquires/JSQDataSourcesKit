@@ -37,7 +37,7 @@ where CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSour
     public let supplementaryFactory: SupplementaryFactory
 
     fileprivate var bridgedDataSource: BridgedDataSource?
-    fileprivate var _tableEditingController: TableEditingController?
+    fileprivate var _tableEditingController: TableEditingController<DataSource.Item>?
 
     // MARK: Initialization
 
@@ -73,7 +73,7 @@ public extension DataSourceProvider where CellFactory.View: UITableViewCell {
         return bridgedDataSource!
     }
 
-    public var tableEditingController: TableEditingController? {
+    public var tableEditingController: TableEditingController<DataSource.Item>? {
         set {
             _tableEditingController = newValue
         }
@@ -106,11 +106,13 @@ public extension DataSourceProvider where CellFactory.View: UITableViewCell {
 
         dataSource.tableCanEditRow = { [unowned self] (tableView, indexPath) -> Bool in
             guard let controller = self.tableEditingController else { return false }
-            return controller.canEditRow(tableView, indexPath)
+            let item = self.dataSource.item(atIndexPath: indexPath)!
+            return controller.canEditRow(item, tableView, indexPath)
         }
 
         dataSource.tableCommitEditingStyleForRow = { [unowned self] (tableView, editingStyle, indexPath) in
-            self.tableEditingController?.commitEditing(tableView, editingStyle, indexPath)
+            let item = self.dataSource.item(atIndexPath: indexPath)!
+            self.tableEditingController?.commitEditing(item, tableView, editingStyle, indexPath)
         }
 
         return dataSource

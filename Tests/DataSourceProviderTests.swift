@@ -399,11 +399,11 @@ final class DataSourceProviderTests: TestCase {
         }
 
         // GIVEN: a data source editing controller
-        let tableDataSourceEditingController = TableEditingController(
-            canEditRow: { (tableView, indexPath) -> Bool in
+        let tableDataSourceEditingController = TableEditingController<FakeViewModel>(
+            canEditRow: { (item, tableView, indexPath) -> Bool in
                 return indexPath == expectedIndexPath
         },
-            commitEditing:{ (tableView, editingStyle, indexPath) in
+            commitEditing:{ (item, tableView, editingStyle, indexPath) in
                 if editingStyle == .delete {
                     if let _ = dataSourceProvider.dataSource.remove(at: indexPath) {
                         tableView.deleteRows(at: [indexPath], with: .automatic)

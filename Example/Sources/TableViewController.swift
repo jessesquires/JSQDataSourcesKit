@@ -52,11 +52,11 @@ final class TableViewController: UITableViewController {
 
         // ** optional editing **
         // if needed, enable the editing functionality on the tableView
-        let tableDataSourceEditingController = TableEditingController(
-            canEditRow: { (tableView, indexPath) -> Bool in
+        let tableDataSourceEditingController = TableEditingController<CellViewModel>(
+            canEditRow: { (item, tableView, indexPath) -> Bool in
                 return true
         },
-            commitEditing:{ [unowned self] (tableView, editingStyle, indexPath) in
+            commitEditing:{ [unowned self] (item, tableView, editingStyle, indexPath) in
                 if editingStyle == .delete {
                     if let _ = self.dataSourceProvider?.dataSource.remove(at: indexPath) {
                         tableView.deleteRows(at: [indexPath], with: .automatic)
