@@ -52,13 +52,13 @@ final class TableViewController: UITableViewController {
 
         // ** optional editing **
         // if needed, enable the editing functionality on the tableView
-        let tableDataSourceEditingController = TableEditingController(
-            canEditRow: { (tableView, indexPath) -> Bool in
+        let tableDataSourceEditingController: TableEditingController<DataSource<Section<CellViewModel>>> = TableEditingController(
+            canEditRow: { (tableView, indexPath, dataSource: inout DataSource) -> Bool in
                 return true
-        },
-            commitEditing:{ [unowned self] (tableView, editingStyle, indexPath) in
+            },
+            commitEditing: { (tableView, editingStyle, indexPath, dataSource: inout DataSource) in
                 if editingStyle == .delete {
-                    if let _ = self.dataSourceProvider?.dataSource.remove(at: indexPath) {
+                    if let _ = dataSource.remove(at: indexPath) {
                         tableView.deleteRows(at: [indexPath], with: .automatic)
                     }
                 }

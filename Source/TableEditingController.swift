@@ -22,7 +22,7 @@ import UIKit
 /**
  An instance of `TableEditingController` allows editing a table view via inserting and deleting rows.
  */
-public struct TableEditingController {
+public struct TableEditingController<DataSource: DataSourceProtocol> {
 
     // MARK: Typealiases
 
@@ -34,7 +34,7 @@ public struct TableEditingController {
 
      - returns: `true` if the specified row is editable, `false` otherwise.
      */
-    public typealias CanEditRowConfig = (_ tableView: UITableView, _ indexPath: IndexPath) -> Bool
+    public typealias CanEditRowConfig = (_ tableView: UITableView, _ indexPath: IndexPath, _ dataSource: inout DataSource) -> Bool
 
     /**
      Commits the editing actions for the specified index path.
@@ -43,14 +43,14 @@ public struct TableEditingController {
      - parameter commit:    The editing style.
      - parameter indexPath: The index path of the item.
      */
-    public typealias CommitEditingConfig = (_ tableView: UITableView, _ commit: UITableViewCellEditingStyle, _ indexPath: IndexPath) -> Void
+    public typealias CommitEditingConfig = (_ tableView: UITableView, _ commit: UITableViewCellEditingStyle, _ indexPath: IndexPath, _ dataSource: inout DataSource) -> Void
 
     /// A closure that determines if a given row is editable.
     public let canEditRow: CanEditRowConfig
 
     /// A closure that commits the editing actions for a table view.
     public let commitEditing: CommitEditingConfig
-
+    
     // MARK: Initialization
 
     /**
