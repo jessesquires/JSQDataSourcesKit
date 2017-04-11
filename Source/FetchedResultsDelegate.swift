@@ -81,10 +81,7 @@ extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UI
 
     /// Returns the `NSFetchedResultsControllerDelegate` object for a collection view.
     public var collectionDelegate: NSFetchedResultsControllerDelegate {
-        if bridgedDelegate == nil {
-            bridgedDelegate = bridgedCollectionFetchedResultsDelegate()
-        }
-        return bridgedDelegate!
+        return bridgedDelegate ?? bridgedCollectionFetchedResultsDelegate()
     }
 
     private weak var collectionView: UICollectionView? { return cellParentView }
