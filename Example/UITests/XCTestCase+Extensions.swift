@@ -18,6 +18,8 @@
 
 import XCTest
 
+typealias XCUIElementType = XCUIElement.`Type`
+
 extension XCTestCase {
     
     /**
@@ -88,7 +90,7 @@ extension XCTestCase {
      
      - returns: The number of presented unique elements.
      */
-    func countElements(ofType type: XCUIElement.Type,
+    func countElements(ofType type: XCUIElementType,
                        inView view: XCUIElement,
                        byUniqueIdentifier identifier: (XCUIElement) -> String) -> Int {
         var accumulator = Set<String>()
@@ -116,7 +118,7 @@ extension XCTestCase {
     
     ///  Sends a tap event to hittable elements of specified type.
     func tapOn(_ numberOfElementsToTapOn: Int,
-               hittableElementsOfType type: XCUIElement.Type,
+               hittableElementsOfType type: XCUIElementType,
                inView view: XCUIElement) {
         let hittableElements = view.descendants(matching: type).allElementsBoundByIndex.filter { $0.isHittable }
         

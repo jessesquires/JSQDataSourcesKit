@@ -61,14 +61,14 @@ final class FetchedResultsViewsUITests: XCTestCase {
         fetchedResultsTableViewMenuItem.tap()
         
         // GIVEN: initial number of cells in the table
-        var numberOfCellsBeforeInTable = countElements(ofType: XCUIElement.Type.cell, inView: table, byUniqueIdentifier: { $0.identifier })
+        var numberOfCellsBeforeInTable = countElements(ofType: XCUIElementType.cell, inView: table, byUniqueIdentifier: { $0.identifier })
         
         returnBackIfPossible()
         
         fetchedResultsCollectionViewMenuItem.tap()
         
         // GIVEN: initial number of cells in the collection view
-        var numberOfCellsBeforeInCollectionView = countElements(ofType: XCUIElement.Type.cell, inView: collectionView,
+        var numberOfCellsBeforeInCollectionView = countElements(ofType: XCUIElementType.cell, inView: collectionView,
                                                                 byUniqueIdentifier: { $0.identifier })
         
         XCTAssertEqual(numberOfCellsBeforeInTable, numberOfCellsBeforeInCollectionView,
@@ -86,7 +86,7 @@ final class FetchedResultsViewsUITests: XCTestCase {
             fetchedResultsTableViewMenuItem.tap()
             
             // THEN: new items get added to the table
-            let numberOfCellsAfterInTable = countElements(ofType: XCUIElement.Type.cell, inView: table, byUniqueIdentifier: { $0.identifier })
+            let numberOfCellsAfterInTable = countElements(ofType: XCUIElementType.cell, inView: table, byUniqueIdentifier: { $0.identifier })
             XCTAssertEqual(numberOfCellsAfterInTable, numberOfCellsBeforeInTable + numberOfItemsAdded,
                            "\"Add\" button should cause adding new cells")
             
@@ -97,7 +97,7 @@ final class FetchedResultsViewsUITests: XCTestCase {
             fetchedResultsCollectionViewMenuItem.tap()
             
             // THEN: new items get added to the collection view as well
-            let numberOfCellsAfterInCollectionView = countElements(ofType: XCUIElement.Type.cell, inView: collectionView,
+            let numberOfCellsAfterInCollectionView = countElements(ofType: XCUIElementType.cell, inView: collectionView,
                                                                    byUniqueIdentifier: { $0.identifier })
             XCTAssertEqual(numberOfCellsAfterInCollectionView, numberOfCellsBeforeInCollectionView + numberOfItemsAdded,
                            "\"Add\" button should cause adding new cells")
@@ -165,7 +165,7 @@ final class FetchedResultsViewsUITests: XCTestCase {
         fetchedResultsCollectionViewMenuItem.tap()
         
         // GIVEN: initial number of cells in the collection view
-        let numberOfCellsBeforeInCollectionView = countElements(ofType: XCUIElement.Type.cell,
+        let numberOfCellsBeforeInCollectionView = countElements(ofType: XCUIElementType.cell,
                                                                 inView: collectionView,
                                                                 byUniqueIdentifier: { $0.identifier })
         
@@ -175,7 +175,7 @@ final class FetchedResultsViewsUITests: XCTestCase {
         
         // THEN: a new cell appears in the collection view
         scrollOnStatusBarTap()
-        let numberOfCellsAfterInCollectionView = countElements(ofType: XCUIElement.Type.cell,
+        let numberOfCellsAfterInCollectionView = countElements(ofType: XCUIElementType.cell,
                                                                inView: collectionView,
                                                                byUniqueIdentifier: { $0.identifier })
         
@@ -190,7 +190,7 @@ final class FetchedResultsViewsUITests: XCTestCase {
         fetchedResultsTableViewMenuItem.tap()
         
         // GIVEN: initial number of cells in the table view
-        let numberOfCellsBeforeInTable = countElements(ofType: XCUIElement.Type.cell,
+        let numberOfCellsBeforeInTable = countElements(ofType: XCUIElementType.cell,
                                                        inView: table,
                                                        byUniqueIdentifier: { $0.identifier })
         
@@ -200,7 +200,7 @@ final class FetchedResultsViewsUITests: XCTestCase {
         
         // THEN: a new cell appears in the table view
         scrollOnStatusBarTap()
-        let numberOfCellsAfterInTable = countElements(ofType: XCUIElement.Type.cell,
+        let numberOfCellsAfterInTable = countElements(ofType: XCUIElementType.cell,
                                                       inView: table,
                                                       byUniqueIdentifier: { $0.identifier })
         
@@ -226,7 +226,7 @@ final class FetchedResultsViewsUITests: XCTestCase {
         fetchedResultsTableViewMenuItem.tap()
         
         // GIVEN: initial number of cells in the table view
-        let numberOfCellsBeforeInTable = countElements(ofType: XCUIElement.Type.cell,
+        let numberOfCellsBeforeInTable = countElements(ofType: XCUIElementType.cell,
                                                        inView: table,
                                                        byUniqueIdentifier: { $0.identifier })
         
