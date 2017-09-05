@@ -28,17 +28,18 @@ public struct TableEditingController<DataSource: DataSourceProtocol> {
 
     /**
      Asks if a row at the specified index path is editable for the specified table view.
-
+     - parameter item:      The item at `indexPath`.
      - parameter tableView: The table view requesting this information.
      - parameter indexPath: The index path of the item.
 
      - returns: `true` if the specified row is editable, `false` otherwise.
      */
-    public typealias CanEditRowConfig = (_ tableView: UITableView, _ indexPath: IndexPath, _ dataSource: inout DataSource) -> Bool
+    public typealias CanEditRowConfig = (_ item: DataSource.Item?, _ tableView: UITableView, _ indexPath: IndexPath) -> Bool
 
     /**
      Commits the editing actions for the specified index path.
 
+     - parameter item:      The item at `indexPath`.
      - parameter tableView: The table view being edited.
      - parameter commit:    The editing style.
      - parameter indexPath: The index path of the item.

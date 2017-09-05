@@ -106,7 +106,8 @@ public extension DataSourceProvider where CellFactory.View: UITableViewCell {
 
         dataSource.tableCanEditRow = { [unowned self] (tableView, indexPath) -> Bool in
             guard let controller = self.tableEditingController else { return false }
-            return controller.canEditRow(tableView, indexPath, &self.dataSource)
+            let item = self.dataSource.item(atIndexPath: indexPath)!
+            return controller.canEditRow(item, tableView, indexPath)
         }
 
         dataSource.tableCommitEditingStyleForRow = { [unowned self] (tableView, editingStyle, indexPath) in

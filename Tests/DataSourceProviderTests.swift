@@ -400,7 +400,7 @@ final class DataSourceProviderTests: TestCase {
 
         // GIVEN: a data source editing controller
         let tableDataSourceEditingController = TableEditingController<DataSource<Section<FakeViewModel>>>(
-            canEditRow: { (tableView, indexPath, dataSource: inout DataSource) -> Bool in
+            canEditRow: { (item, tableView, indexPath) -> Bool in
                 return indexPath == expectedIndexPath
         },
             commitEditing:{ (tableView, editingStyle, indexPath, dataSource: inout DataSource) in

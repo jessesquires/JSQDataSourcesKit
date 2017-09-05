@@ -53,7 +53,7 @@ final class TableViewController: UITableViewController {
         // ** optional editing **
         // if needed, enable the editing functionality on the tableView
         let tableDataSourceEditingController: TableEditingController<DataSource<Section<CellViewModel>>> = TableEditingController(
-            canEditRow: { (tableView, indexPath, dataSource: inout DataSource) -> Bool in
+            canEditRow: { (item, tableView, indexPath) -> Bool in
                 return true
             },
             commitEditing: { (tableView, editingStyle, indexPath, dataSource: inout DataSource) in
