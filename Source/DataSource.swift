@@ -4,7 +4,7 @@
 //
 //
 //  Documentation
-//  http://jessesquires.com/JSQDataSourcesKit
+//  http://jessesquires.github.io/JSQDataSourcesKit
 //
 //
 //  GitHub
