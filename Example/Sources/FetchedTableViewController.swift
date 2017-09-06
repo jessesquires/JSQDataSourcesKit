@@ -59,11 +59,26 @@ class FetchedTableViewController: UITableViewController {
         // 4. set delegate
         frc.delegate = delegateProvider.tableDelegate
 
+        // ** optional editing **
+        // if needed, enable the editing functionality on the tableView
+        let tableDataSourceEditingController: TableEditingController<FetchedResultsController<Thing>> = TableEditingController(
+            canEditRow: { (item, tableView, indexPath) -> Bool in
+                return item?.color == Color.Blue
+        },
+            commitEditing: { (dataSource: inout FetchedResultsController<Thing>, tableView, editingStyle, indexPath) in
+                if editingStyle == .delete {
+                    guard let item = dataSource.item(atIndexPath: indexPath) else { return }
+                    self.stack.context.delete(item)
+                }
+        })
+
         // 5. create data source provider
-        dataSourceProvider = DataSourceProvider(dataSource: frc, cellFactory: factory, supplementaryFactory: factory)
+        dataSourceProvider = DataSourceProvider(dataSource: frc, cellFactory: factory, supplementaryFactory: factory, tableEditingController: tableDataSourceEditingController)
 
         // 6. set data source
         tableView.dataSource = dataSourceProvider?.tableViewDataSource
+        
+
     }
 
     override func viewWillAppear(_ animated: Bool) {

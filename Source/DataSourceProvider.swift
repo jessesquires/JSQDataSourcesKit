@@ -44,25 +44,27 @@ where CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSour
     /**
      Initializes a new data source provider.
 
-     - parameter dataSource:           The data source.
-     - parameter cellFactory:          The cell factory.
-     - parameter supplementaryFactory: The supplementary view factory.
-
+     - parameter dataSource:             The data source.
+     - parameter cellFactory:            The cell factory.
+     - parameter supplementaryFactory:   The supplementary view factory.
+     - parameter tableEditingController: The tableEditing controller.
+     
      - returns: A new `DataSourceProvider` instance.
 
      - warning: Table views do not have supplementary views, but this parameter is still required in order to satisfy
      the generic constraints for Swift. You can simply pass the same `cellFactory` here. The parameter will be ignored.
      The same applies to collection views that do not have supplementary views. Again, the parameter will be ignored.
      */
-    public init(dataSource: DataSource, cellFactory: CellFactory, supplementaryFactory: SupplementaryFactory) {
+    public init(dataSource: DataSource, cellFactory: CellFactory, supplementaryFactory: SupplementaryFactory, tableEditingController: TableEditingController<DataSource>? = nil) {
         self.dataSource = dataSource
         self.cellFactory = cellFactory
         self.supplementaryFactory = supplementaryFactory
+        self._tableEditingController = tableEditingController
     }
 }
 
 public extension DataSourceProvider where CellFactory.View: UITableViewCell {
-
+    
     // MARK: UITableViewDataSource
 
     /// Returns the `UITableViewDataSource` object.
@@ -111,7 +113,7 @@ public extension DataSourceProvider where CellFactory.View: UITableViewCell {
         }
 
         dataSource.tableCommitEditingStyleForRow = { [unowned self] (tableView, editingStyle, indexPath) in
-            self.tableEditingController?.commitEditing(tableView, editingStyle, indexPath, &self.dataSource)
+            self.tableEditingController?.commitEditing(&self.dataSource, tableView, editingStyle, indexPath)
         }
 
         return dataSource

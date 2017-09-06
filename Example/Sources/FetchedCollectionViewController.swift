@@ -89,6 +89,7 @@ class FetchedCollectionViewController: UICollectionViewController {
 
         // 7. set data source
         collectionView?.dataSource = dataSourceProvider?.collectionViewDataSource
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {

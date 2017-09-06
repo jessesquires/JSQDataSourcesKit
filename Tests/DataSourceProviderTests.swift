@@ -403,7 +403,7 @@ final class DataSourceProviderTests: TestCase {
             canEditRow: { (item, tableView, indexPath) -> Bool in
                 return indexPath == expectedIndexPath
         },
-            commitEditing:{ (tableView, editingStyle, indexPath, dataSource: inout DataSource) in
+            commitEditing:{ (dataSource: inout DataSource, tableView, editingStyle, indexPath) in
                 if editingStyle == .delete {
                     if let _ = dataSource.remove(at: indexPath) {
                         tableView.deleteRows(at: [indexPath], with: .automatic)

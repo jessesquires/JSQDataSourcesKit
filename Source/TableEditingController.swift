@@ -39,12 +39,12 @@ public struct TableEditingController<DataSource: DataSourceProtocol> {
     /**
      Commits the editing actions for the specified index path.
 
-     - parameter item:      The item at `indexPath`.
-     - parameter tableView: The table view being edited.
-     - parameter commit:    The editing style.
-     - parameter indexPath: The index path of the item.
+     - parameter dataSource: The dataSource at `indexPath`.
+     - parameter tableView:  The table view being edited.
+     - parameter commit:     The editing style.
+     - parameter indexPath:  The index path of the item.
      */
-    public typealias CommitEditingConfig = (_ tableView: UITableView, _ commit: UITableViewCellEditingStyle, _ indexPath: IndexPath, _ dataSource: inout DataSource) -> Void
+    public typealias CommitEditingConfig = (_ dataSource: inout DataSource, _ tableView: UITableView, _ commit: UITableViewCellEditingStyle, _ indexPath: IndexPath) -> Void
 
     /// A closure that determines if a given row is editable.
     public let canEditRow: CanEditRowConfig
