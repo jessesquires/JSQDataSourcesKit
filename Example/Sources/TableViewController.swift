@@ -48,7 +48,7 @@ final class TableViewController: UITableViewController {
         let tableDataSourceEditingController: TableEditingController<DataSource<Section<CellViewModel>>> = TableEditingController(
             canEditRow: { (item, tableView, indexPath) -> Bool in
                 return true
-        },
+            },
             commitEditing: { (dataSource: inout DataSource, tableView, editingStyle, indexPath) in
                 if editingStyle == .delete {
                     if let _ = dataSource.remove(at: indexPath) {

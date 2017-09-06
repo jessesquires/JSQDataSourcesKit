@@ -64,7 +64,7 @@ class FetchedTableViewController: UITableViewController {
         let tableDataSourceEditingController: TableEditingController<FetchedResultsController<Thing>> = TableEditingController(
             canEditRow: { (item, tableView, indexPath) -> Bool in
                 return item?.color == Color.Blue
-        },
+            },
             commitEditing: { (dataSource: inout FetchedResultsController<Thing>, tableView, editingStyle, indexPath) in
                 if editingStyle == .delete {
                     guard let item = dataSource.item(atIndexPath: indexPath) else { return }
@@ -77,8 +77,6 @@ class FetchedTableViewController: UITableViewController {
 
         // 6. set data source
         tableView.dataSource = dataSourceProvider?.tableViewDataSource
-        
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
