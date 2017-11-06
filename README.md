@@ -11,9 +11,9 @@ This library reduces the boilerplate code regarding the `UITableView`, `UICollec
 
 ## Requirements
 
-* iOS 8+
-* Swift 3.0
-* Xcode 8
+* iOS 9+
+* Swift 4.0+
+* Xcode 9+
 
 ## Installation
 
