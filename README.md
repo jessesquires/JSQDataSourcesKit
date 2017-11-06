@@ -126,6 +126,6 @@ Created and maintained by [**@jesse_squires**](https://twitter.com/jesse_squires
 
 *Please provide attribution, it is greatly appreciated.*
 
-[docsLink]:http://www.jessesquires.com/JSQDataSourcesKit
+[docsLink]:http://jessesquires.github.io/JSQDataSourcesKit
 [podLink]:https://cocoapods.org/pods/JSQDataSourcesKit
 [mitLink]:http://opensource.org/licenses/MIT
