@@ -46,7 +46,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Enums.html">Enums</a>
+            <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Enums/ReusableViewType.html">ReusableViewType</a>
@@ -74,13 +74,16 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Structs.html">Structs</a>
+            <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Structs/DataSource.html">DataSource</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Section.html">Section</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TableEditingController.html">TableEditingController</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/TitledSupplementaryViewFactory.html">TitledSupplementaryViewFactory</a>
@@ -111,9 +114,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC17JSQDataSourcesKit24FetchedResultsControllercuRd__So20NSFetchRequestResultrFT12fetchRequestGCSo14NSFetchRequestqd___20managedObjectContextCSo22NSManagedObjectContext18sectionNameKeyPathGSqSS_9cacheNameGSqSS__GS0_x_"></a>
+                    <a name="/s:17JSQDataSourcesKit24FetchedResultsControllerCACyxGSo14NSFetchRequestCyqd__G05fetchH0_So22NSManagedObjectContextC07managedkL0SSSg18sectionNameKeyPathAL05cacheO0tcSo0gH6ResultRd__lufc"></a>
                     <a name="//apple_ref/swift/Method/init(fetchRequest:managedObjectContext:sectionNameKeyPath:cacheName:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC17JSQDataSourcesKit24FetchedResultsControllercuRd__So20NSFetchRequestResultrFT12fetchRequestGCSo14NSFetchRequestqd___20managedObjectContextCSo22NSManagedObjectContext18sectionNameKeyPathGSqSS_9cacheNameGSqSS__GS0_x_">init(fetchRequest:managedObjectContext:sectionNameKeyPath:cacheName:)</a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit24FetchedResultsControllerCACyxGSo14NSFetchRequestCyqd__G05fetchH0_So22NSManagedObjectContextC07managedkL0SSSg18sectionNameKeyPathAL05cacheO0tcSo0gH6ResultRd__lufc">init(fetchRequest:managedObjectContext:sectionNameKeyPath:cacheName:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -128,10 +131,10 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">NSFetchRequestResult</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">fetchRequest</span><span class="p">:</span> <span class="kt">NSFetchRequest</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">,</span>
-                <span class="n">managedObjectContext</span> <span class="nv">context</span><span class="p">:</span> <span class="kt">NSManagedObjectContext</span><span class="p">,</span>
-                <span class="nv">sectionNameKeyPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span>
-                <span class="n">cacheName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">fetchRequest</span><span class="p">:</span> <span class="kt">NSFetchRequest</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">,</span>
+               <span class="n">managedObjectContext</span> <span class="nv">context</span><span class="p">:</span> <span class="kt">NSManagedObjectContext</span><span class="p">,</span>
+               <span class="nv">sectionNameKeyPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span>
+               <span class="n">cacheName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span></code></pre>
 
                         </div>
                       </div>
@@ -148,7 +151,6 @@
                               <td>
                                 <div>
                                   <p>The fetch request used to get the objects.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -161,7 +163,6 @@
                               <td>
                                 <div>
                                   <p>The managed object against which <code>fetchRequest</code> is executed.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -174,7 +175,6 @@
                               <td>
                                 <div>
                                   <p>A key path on result objects that returns the section name.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -187,7 +187,6 @@
                               <td>
                                 <div>
                                   <p>The name of the cache file the receiver should use.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -197,7 +196,6 @@
                       <div>
                         <h4>Return Value</h4>
                         <p>An initialized fetch request controller.</p>
-
                       </div>
                     </section>
                   </div>
@@ -205,9 +203,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:iC17JSQDataSourcesKit24FetchedResultsController9subscriptFV10Foundation9IndexPathx"></a>
+                    <a name="/s:17JSQDataSourcesKit24FetchedResultsControllerC9subscriptx10Foundation9IndexPathVci"></a>
                     <a name="//apple_ref/swift/Method/subscript(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:iC17JSQDataSourcesKit24FetchedResultsController9subscriptFV10Foundation9IndexPathx">subscript(_:)</a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit24FetchedResultsControllerC9subscriptx10Foundation9IndexPathVci">subscript(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -238,7 +236,6 @@
                               <td>
                                 <div>
                                   <p>The index path of an object.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -248,7 +245,6 @@
                       <div>
                         <h4>Return Value</h4>
                         <p>The object at <code>indexPath</code>.</p>
-
                       </div>
                     </section>
                   </div>
@@ -258,8 +254,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2016-12-05)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2017 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2017-11-05)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

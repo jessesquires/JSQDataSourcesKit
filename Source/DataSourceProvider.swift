@@ -73,6 +73,7 @@ public extension DataSourceProvider where CellFactory.View: UITableViewCell {
         return bridgedDataSource!
     }
 
+    /// The table editing controller for this data source provider.
     public var tableEditingController: TableEditingController? {
         set {
             _tableEditingController = newValue

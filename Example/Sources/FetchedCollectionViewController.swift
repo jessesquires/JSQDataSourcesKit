@@ -52,7 +52,7 @@ class FetchedCollectionViewController: UICollectionViewController {
             cell.label.text = model!.displayName
             cell.label.textColor = UIColor.white
             cell.backgroundColor = model!.displayColor
-            cell.accessibilityIdentifier = "\(cell.label.text)"
+            cell.accessibilityIdentifier = "\(String(describing: cell.label.text))"
             return cell
         }
 

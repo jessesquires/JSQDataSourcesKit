@@ -18,6 +18,8 @@
 
 import XCTest
 
+typealias XCUIElementType = XCUIElement.`Type`
+
 extension XCTestCase {
     
     /**
@@ -75,9 +77,9 @@ extension XCTestCase {
      
      **Example**
      
-         let foo = countElements(ofType: .Cell,
-                                 inView: table,
-                                 byUniqueIdentifier: { $0.identifier })
+     let foo = countElements(ofType: .Cell,
+     inView: table,
+     byUniqueIdentifier: { $0.identifier })
      
      - important: This method scrolls from the current position down to the end. Make sure you scroll to the top before and
      after calling it.
@@ -89,9 +91,8 @@ extension XCTestCase {
      - returns: The number of presented unique elements.
      */
     func countElements(ofType type: XCUIElementType,
-                                       inView view: XCUIElement,
-                                              byUniqueIdentifier identifier: (XCUIElement) -> String) -> Int {
-        
+                       inView view: XCUIElement,
+                       byUniqueIdentifier identifier: (XCUIElement) -> String) -> Int {
         var accumulator = Set<String>()
 
         var setOfVisibleElementsIdentifiersBeforeScroll = Set<String>()
@@ -99,10 +100,9 @@ extension XCTestCase {
         
         // Repeat until scrolling makes no changes.
         repeat {
-            
             setOfVisibleElementsIdentifiersAfterScroll = setOfVisibleElementsIdentifiersBeforeScroll
-            
-            let currentlyVisibleElements = view.descendants(matching: type).allElementsBoundByIndex.filter{ $0.isHittable }
+
+            let currentlyVisibleElements = view.descendants(matching: type).allElementsBoundByIndex.filter { $0.isHittable }
             
             setOfVisibleElementsIdentifiersBeforeScroll = Set(currentlyVisibleElements.map { identifier($0) })
             
@@ -117,8 +117,9 @@ extension XCTestCase {
     }
     
     ///  Sends a tap event to hittable elements of specified type.
-    func tapOn(_ numberOfElementsToTapOn: Int, hittableElementsOfType type: XCUIElementType, inView view: XCUIElement) {
-        
+    func tapOn(_ numberOfElementsToTapOn: Int,
+               hittableElementsOfType type: XCUIElementType,
+               inView view: XCUIElement) {
         let hittableElements = view.descendants(matching: type).allElementsBoundByIndex.filter { $0.isHittable }
         
         if hittableElements.count < numberOfElementsToTapOn {
@@ -130,6 +131,5 @@ extension XCTestCase {
             element.tap()
             numberOfElementsTapped += 1
         }
-        
     }
 }
