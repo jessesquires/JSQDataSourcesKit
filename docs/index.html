@@ -13,7 +13,7 @@
     <a title="JSQDataSourcesKit  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">JSQDataSourcesKit Docs</a> (100% documented)</p>
+        <p><a href="index.html">JSQDataSourcesKit Docs</a> (98% documented)</p>
         <p class="header-right"><a href="https://github.com/jessesquires/JSQDataSourcesKit"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -45,7 +45,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Enums.html">Enums</a>
+            <a href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="Enums/ReusableViewType.html">ReusableViewType</a>
@@ -73,13 +73,16 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Structs.html">Structs</a>
+            <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="Structs/DataSource.html">DataSource</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Section.html">Section</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/TableEditingController.html">TableEditingController</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/TitledSupplementaryViewFactory.html">TitledSupplementaryViewFactory</a>
@@ -95,25 +98,26 @@
         <section>
           <section class="section">
             
-            <a href='#jsqdatasourceskit' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='jsqdatasourceskit'>JSQDataSourcesKit</h1>
+            <h1 id='jsqdatasourceskit' class='heading'>JSQDataSourcesKit</h1>
 
-<p><a href="http://travis-ci.org/jessesquires/JSQDataSourcesKit"><img src="https://secure.travis-ci.org/jessesquires/JSQDataSourcesKit.svg" alt="Build Status"></a> <a href="https://cocoapods.org/pods/JSQDataSourcesKit"><img src="https://img.shields.io/cocoapods/v/JSQDataSourcesKit.svg" alt="Version Status"></a> <a href="http://opensource.org/licenses/MIT"><img src="https://img.shields.io/cocoapods/l/JSQDataSourcesKit.svg" alt="license MIT"></a> <a href="https://codecov.io/gh/jessesquires/JSQDataSourcesKit"><img src="https://codecov.io/gh/jessesquires/JSQDataSourcesKit/branch/develop/graph/badge.svg" alt="codecov"></a> <a href="http://www.jessesquires.com/JSQDataSourcesKit"><img src="https://img.shields.io/cocoapods/p/JSQDataSourcesKit.svg" alt="Platform"></a> <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible"></a></p>
+<p><a href="http://travis-ci.org/jessesquires/JSQDataSourcesKit"><img src="https://secure.travis-ci.org/jessesquires/JSQDataSourcesKit.svg" alt="Build Status"></a> <a href="https://cocoapods.org/pods/JSQDataSourcesKit"><img src="https://img.shields.io/cocoapods/v/JSQDataSourcesKit.svg" alt="Version Status"></a> <a href="http://opensource.org/licenses/MIT"><img src="https://img.shields.io/cocoapods/l/JSQDataSourcesKit.svg" alt="license MIT"></a> <a href="https://codecov.io/gh/jessesquires/JSQDataSourcesKit"><img src="https://codecov.io/gh/jessesquires/JSQDataSourcesKit/branch/develop/graph/badge.svg" alt="codecov"></a> <a href="http://jessesquires.github.io/JSQDataSourcesKit"><img src="https://img.shields.io/cocoapods/p/JSQDataSourcesKit.svg" alt="Platform"></a> <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible"></a></p>
 
 <p><em>Protocol-oriented, type-safe data source objects that keep your view controllers light</em></p>
 
 <p>A Swift library of data source and delegate objects inspired by <a href="https://github.com/andymatuschak">Andy Matuschak&rsquo;s</a> <em>type-safe, value-oriented collection view data source <a href="https://gist.github.com/andymatuschak/f1e1691fa1a327468f8e">gist</a></em>.</p>
-<a href='#about' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='about'>About</h2>
+<h2 id='about' class='heading'>About</h2>
 
 <p>This library reduces the boilerplate code regarding the <code>UITableView</code>, <code>UICollectionView</code>, and <code>NSFetchedResultsController</code> data source objects, as well as the <code>NSFetchedResultsControllerDelegate</code> object. It helps <a href="http://www.objc.io/issue-1/">keep view controllers light</a>, while focusing on type-safety, <a href="http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)">SOLID</a> design principles, and easy interoperability with Cocoa. Further, it brings a more focused and data-driven perspective to these data sources. If you want to change your view then you change your data and its structure, without needing to update any data source or delegate protocol methods.</p>
-<a href='#requirements' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='requirements'>Requirements</h2>
+<h2 id='requirements' class='heading'>Requirements</h2>
 
 <ul>
-<li>iOS 8+</li>
-<li>Swift 3.0</li>
-<li>Xcode 8</li>
+<li>iOS 9.0+</li>
+<li>tvOS 10.0+</li>
+<li>Swift 4.0+</li>
+<li>Xcode 9+</li>
 </ul>
-<a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
-<a href='#a-href-http-cocoapods-org-cocoapods-a-recommended' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='a-href-http-cocoapods-org-cocoapods-a-recommended'><a href="http://cocoapods.org">CocoaPods</a> (recommended)</h4>
+<h2 id='installation' class='heading'>Installation</h2>
+<h4 id='a-href-http-cocoapods-org-cocoapods-a-recommended' class='heading'><a href="http://cocoapods.org">CocoaPods</a> (recommended)</h4>
 <pre class="highlight ruby"><code><span class="n">use_frameworks!</span>
 
 <span class="c1"># For latest release in cocoapods</span>
@@ -122,32 +126,34 @@
 <span class="c1"># Feeling adventurous? Get the latest on develop</span>
 <span class="n">pod</span> <span class="s1">'JSQDataSourcesKit'</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s1">'https://github.com/jessesquires/JSQDataSourcesKit.git'</span><span class="p">,</span> <span class="ss">:branch</span> <span class="o">=&gt;</span> <span class="s1">'develop'</span>
 </code></pre>
-<a href='#a-href-https-github-com-carthage-carthage-carthage-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='a-href-https-github-com-carthage-carthage-carthage-a'><a href="https://github.com/Carthage/Carthage">Carthage</a></h4>
+<h4 id='a-href-https-github-com-carthage-carthage-carthage-a' class='heading'><a href="https://github.com/Carthage/Carthage">Carthage</a></h4>
 <pre class="highlight shell"><code>github <span class="s2">"jessesquires/JSQDataSourcesKit"</span>
 </code></pre>
-<a href='#documentation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='documentation'>Documentation</h2>
+<h2 id='documentation' class='heading'>Documentation</h2>
 
-<p>Read the <a href="http://www.jessesquires.com/JSQDataSourcesKit">docs</a>. Generated with <a href="https://github.com/realm/jazzy">jazzy</a>. Hosted by <a href="https://pages.github.com">GitHub Pages</a>.</p>
-<a href='#generate' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='generate'>Generate</h4>
+<p>Read the <a href="http://jessesquires.github.io/JSQDataSourcesKit">docs</a>. Generated with <a href="https://github.com/realm/jazzy">jazzy</a>. Hosted by <a href="https://pages.github.com">GitHub Pages</a>.</p>
+<h4 id='generate' class='heading'>Generate</h4>
 <pre class="highlight shell"><code><span class="gp">$ </span>./build_docs.sh
 </code></pre>
-<a href='#preview' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='preview'>Preview</h4>
+<h4 id='preview' class='heading'>Preview</h4>
 <pre class="highlight shell"><code><span class="gp">$ </span>open index.html -a Safari
 </code></pre>
-<a href='#getting-started' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='getting-started'>Getting Started</h2>
+<h2 id='getting-started' class='heading'>Getting Started</h2>
+
+<p>Watch <a href="https://www.skilled.io/u/swiftsummit/pushing-the-limits-of-protocol-oriented-programming">my talk</a> from <a href="https://swiftsummit.com">Swift Summit</a>. (<a href="https://speakerdeck.com/jessesquires/pushing-the-limits-of-protocol-oriented-programming">slides</a>)</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">JSQDataSourcesKit</span>
 </code></pre>
-<a href='#design' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='design'>Design</h4>
+<h4 id='design' class='heading'>Design</h4>
 
 <p>This library has four primary components:</p>
 
 <ol>
-<li><code>Section</code> — represents a section of data</li>
-<li><code>DataSource</code> — represents a collection of <code>Section</code> types</li>
+<li><code><a href="Structs/Section.html">Section</a></code> — represents a section of data</li>
+<li><code><a href="Structs/DataSource.html">DataSource</a></code> — represents a collection of <code><a href="Structs/Section.html">Section</a></code> types</li>
 <li><code>ReusableViewFactory</code> — responsible for dequeuing and configuring cells (for <code>UITableView</code> or <code>UICollectionView</code>)</li>
-<li><code>DataSourceProvider</code> — owns a data source and cell factory, and provides a <code>UICollectionViewDataSource</code> or <code>UITableViewDataSource</code> object.</li>
+<li><code><a href="Classes/DataSourceProvider.html">DataSourceProvider</a></code> — owns a data source and cell factory, and provides a <code>UICollectionViewDataSource</code> or <code>UITableViewDataSource</code> object.</li>
 </ol>
-<a href='#example' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='example'>Example</h4>
+<h4 id='example' class='heading'>Example</h4>
 
 <p>The following illustrates a simple example of how these components interact for a collection view.</p>
 <pre class="highlight swift"><code><span class="c1">// Given a view controller with a collection view</span>
@@ -179,16 +185,13 @@
 <span class="c1">// 5. set the collection view's data source</span>
 <span class="n">collectionView</span><span class="o">.</span><span class="n">dataSource</span> <span class="o">=</span> <span class="n">dataSourceProvider</span><span class="o">.</span><span class="n">collectionViewDataSource</span>
 </code></pre>
-<a href='#demo-project' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='demo-project'>Demo Project</h4>
+<h4 id='demo-project' class='heading'>Demo Project</h4>
 
 <p>The <a href="https://github.com/jessesquires/JSQDataSourcesKit/tree/develop/Example">example project</a> included exercises <em>all</em> functionality in this library.</p>
-<a href='#unit-tests' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='unit-tests'>Unit tests</h2>
-
-<p>There&rsquo;s a suite of unit tests for <code>JSQDataSourcesKit</code>. Run them in the usual way from Xcode. These tests are well commented and serve as further documentation for how to use this library.</p>
-<a href='#contribute' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='contribute'>Contribute</h2>
+<h2 id='contribute' class='heading'>Contribute</h2>
 
 <p>Please follow these sweet <a href="https://github.com/jessesquires/HowToContribute">contribution guidelines</a>.</p>
-<a href='#credits' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='credits'>Credits</h2>
+<h2 id='credits' class='heading'>Credits</h2>
 
 <p>Created and maintained by <a href="https://twitter.com/jesse_squires"><strong>@jesse_squires</strong></a>.</p>
 
@@ -196,7 +199,7 @@
 <li>Inspired by <strong><a href="https://github.com/andymatuschak">andymatuschak</a> /</strong> <a href="https://gist.github.com/andymatuschak/f1e1691fa1a327468f8e">gist f1e1691fa1a327468f8e</a></li>
 <li>Inspired by <strong><a href="https://github.com/ashfurrow">ashfurrow</a> /</strong> <a href="https://github.com/ashfurrow/UICollectionView-NSFetchedResultsController">UICollectionView-NSFetchedResultsController</a></li>
 </ul>
-<a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='license'>License</h2>
+<h2 id='license' class='heading'>License</h2>
 
 <p><code>JSQDataSourcesKit</code> is released under an <a href="http://opensource.org/licenses/MIT">MIT License</a>. See <code>LICENSE</code> for details.</p>
 
@@ -209,8 +212,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2016-12-05)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2017 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2017-11-05)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

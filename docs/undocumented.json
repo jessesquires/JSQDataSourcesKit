@@ -1,6 +1,12 @@
 {
   "warnings": [
-
+    {
+      "file": "/Users/jesse/GitHub/JSQDataSourcesKit/Source/DataSourceProvider.swift",
+      "line": 76,
+      "symbol": "DataSourceProvider.tableEditingController",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
   ],
   "source_directory": "/Users/jesse/GitHub/JSQDataSourcesKit"
 }

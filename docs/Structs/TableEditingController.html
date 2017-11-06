@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>ViewFactory Structure Reference</title>
+    <title>TableEditingController Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/ViewFactory" class="dashAnchor"></a>
-    <a title="ViewFactory Structure Reference"></a>
+    <a name="//apple_ref/swift/Struct/TableEditingController" class="dashAnchor"></a>
+    <a title="TableEditingController Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">JSQDataSourcesKit Docs</a> (98% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">JSQDataSourcesKit Reference</a>
         <img id="carat" src="../img/carat.png" />
-        ViewFactory Structure Reference
+        TableEditingController Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -98,34 +98,32 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>ViewFactory</h1>
+            <h1>TableEditingController</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ViewFactory</span><span class="o">&lt;</span><span class="kt">Item</span><span class="p">,</span> <span class="kt">Cell</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewProtocol.html">ReusableViewProtocol</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html">ReusableViewFactoryProtocol</a></span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TableEditingController</span></code></pre>
 
                 </div>
               </div>
-            <p>A <code>ViewFactory</code> is a concrete <code><a href="../Protocols/ReusableViewFactoryProtocol.html">ReusableViewFactoryProtocol</a></code> type.
-This factory is responsible for producing and configuring reusable views for a specific item.
-Cells can be for either collection views or table views.</p>
+            <p>An instance of <code>TableEditingController</code> allows editing a table view via inserting and deleting rows.</p>
 
           </section>
           <section class="section task-group-section">
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Type%20aliases"></a>
-                <a name="//apple_ref/swift/Section/Type aliases" class="dashAnchor"></a>
-                <a href="#/Type%20aliases">
-                  <h3 class="section-name">Type aliases</h3>
+                <a name="/Typealiases"></a>
+                <a name="//apple_ref/swift/Section/Typealiases" class="dashAnchor"></a>
+                <a href="#/Typealiases">
+                  <h3 class="section-name">Typealiases</h3>
                 </a>
               </div>
               <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17JSQDataSourcesKit11ViewFactoryV0D12Configuratora"></a>
-                    <a name="//apple_ref/swift/Alias/ViewConfigurator" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit11ViewFactoryV0D12Configuratora">ViewConfigurator</a>
+                    <a name="/s:17JSQDataSourcesKit22TableEditingControllerV16CanEditRowConfiga"></a>
+                    <a name="//apple_ref/swift/Alias/CanEditRowConfig" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit22TableEditingControllerV16CanEditRowConfiga">CanEditRowConfig</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -133,14 +131,14 @@ Cells can be for either collection views or table views.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Configures the cell for the specified item, parent view, and index path.</p>
+                        <p>Asks if a row at the specified index path is editable for the specified table view.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">ViewConfigurator</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span> <span class="nv">cell</span><span class="p">:</span> <span class="kt">Cell</span><span class="p">,</span> <span class="n">_</span> <span class="nv">item</span><span class="p">:</span> <span class="kt">Item</span><span class="p">?,</span> <span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/ReusableViewType.html">ReusableViewType</a></span><span class="p">,</span> <span class="n">_</span> <span class="nv">parentView</span><span class="p">:</span> <span class="kt">Cell</span><span class="o">.</span><span class="kt">ParentView</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Cell</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">CanEditRowConfig</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -151,48 +149,12 @@ Cells can be for either collection views or table views.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>cell</em>
+                                <em>tableView</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The cell to be configured at the index path.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>item</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The item at <code>indexPath</code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>type</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The type of reusable view.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>parentView</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The collection view or table view requesting this information.</p>
+                                  <p>The table view requesting this information.</p>
                                 </div>
                               </td>
                             </tr>
@@ -204,7 +166,7 @@ Cells can be for either collection views or table views.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The index path at which the cell will be displayed.</p>
+                                  <p>The index path of the item.</p>
                                 </div>
                               </td>
                             </tr>
@@ -213,28 +175,17 @@ Cells can be for either collection views or table views.</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>The configured cell.</p>
+                        <p><code>true</code> if the specified row is editable, <code>false</code> otherwise.</p>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/Properties"></a>
-                <a name="//apple_ref/swift/Section/Properties" class="dashAnchor"></a>
-                <a href="#/Properties">
-                  <h3 class="section-name">Properties</h3>
-                </a>
-              </div>
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17JSQDataSourcesKit11ViewFactoryV15reuseIdentifierSSv"></a>
-                    <a name="//apple_ref/swift/Property/reuseIdentifier" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit11ViewFactoryV15reuseIdentifierSSv">reuseIdentifier</a>
+                    <a name="/s:17JSQDataSourcesKit22TableEditingControllerV06CommitE6Configa"></a>
+                    <a name="//apple_ref/swift/Alias/CommitEditingConfig" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit22TableEditingControllerV06CommitE6Configa">CommitEditingConfig</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -242,20 +193,84 @@ Cells can be for either collection views or table views.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A unique identifier that describes the purpose of the cells that the factory produces.
-The factory dequeues cells from the collection view or table view with this reuse identifier.</p>
-<div class="aside aside-note">
-    <p class="aside-title">Note</p>
-    Clients are responsible for registering a cell for this identifier with the collection view or table view.
-
-</div>
+                        <p>Commits the editing actions for the specified index path.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">CommitEditingConfig</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="n">_</span> <span class="nv">commit</span><span class="p">:</span> <span class="kt">UITableViewCellEditingStyle</span><span class="p">,</span> <span class="n">_</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tableView</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The table view being edited.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>commit</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The editing style.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>indexPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The index path of the item.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17JSQDataSourcesKit22TableEditingControllerV10canEditRowSbSo11UITableViewC_10Foundation9IndexPathVtcv"></a>
+                    <a name="//apple_ref/swift/Property/canEditRow" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit22TableEditingControllerV10canEditRowSbSo11UITableViewC_10Foundation9IndexPathVtcv">canEditRow</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A closure that determines if a given row is editable.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">canEditRow</span><span class="p">:</span> <span class="kt"><a href="../Structs/TableEditingController.html#/s:17JSQDataSourcesKit22TableEditingControllerV16CanEditRowConfiga">CanEditRowConfig</a></span></code></pre>
 
                         </div>
                       </div>
@@ -265,9 +280,9 @@ The factory dequeues cells from the collection view or table view with this reus
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17JSQDataSourcesKit11ViewFactoryV4typeAA08ReusableD4TypeOv"></a>
-                    <a name="//apple_ref/swift/Property/type" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit11ViewFactoryV4typeAA08ReusableD4TypeOv">type</a>
+                    <a name="/s:17JSQDataSourcesKit22TableEditingControllerV06commitE0ySo11UITableViewC_SC0hi4CellE5StyleO10Foundation9IndexPathVtcv"></a>
+                    <a name="//apple_ref/swift/Property/commitEditing" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit22TableEditingControllerV06commitE0ySo11UITableViewC_SC0hi4CellE5StyleO10Foundation9IndexPathVtcv">commitEditing</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -275,41 +290,14 @@ The factory dequeues cells from the collection view or table view with this reus
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The type of the reusable view.</p>
+                        <p>A closure that commits the editing actions for a table view.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/ReusableViewType.html">ReusableViewType</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:17JSQDataSourcesKit11ViewFactoryV16viewConfiguratorq_q__xSgAA08ReusableD4TypeO06ParentD0Qy_10Foundation9IndexPathVtcv"></a>
-                    <a name="//apple_ref/swift/Property/viewConfigurator" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit11ViewFactoryV16viewConfiguratorq_q__xSgAA08ReusableD4TypeO06ParentD0Qy_10Foundation9IndexPathVtcv">viewConfigurator</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A closure used to configure the views.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">viewConfigurator</span><span class="p">:</span> <span class="kt"><a href="../Structs/ViewFactory.html#/s:17JSQDataSourcesKit11ViewFactoryV0D12Configuratora">ViewConfigurator</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">commitEditing</span><span class="p">:</span> <span class="kt"><a href="../Structs/TableEditingController.html#/s:17JSQDataSourcesKit22TableEditingControllerV06CommitE6Configa">CommitEditingConfig</a></span></code></pre>
 
                         </div>
                       </div>
@@ -330,9 +318,9 @@ The factory dequeues cells from the collection view or table view with this reus
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17JSQDataSourcesKit11ViewFactoryVACyxq_GSS15reuseIdentifier_AA08ReusableD4TypeO4typeq_q__xSgAG06ParentD0Qy_10Foundation9IndexPathVtc16viewConfiguratortcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(reuseIdentifier:type:viewConfigurator:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit11ViewFactoryVACyxq_GSS15reuseIdentifier_AA08ReusableD4TypeO4typeq_q__xSgAG06ParentD0Qy_10Foundation9IndexPathVtc16viewConfiguratortcfc">init(reuseIdentifier:type:viewConfigurator:)</a>
+                    <a name="/s:17JSQDataSourcesKit22TableEditingControllerVACSbSo11UITableViewC_10Foundation9IndexPathVtc10canEditRow_yAE_SC0gh4CellE5StyleOAHtc06commitE0tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(canEditRow:commitEditing:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit22TableEditingControllerVACSbSo11UITableViewC_10Foundation9IndexPathVtc10canEditRow_yAE_SC0gh4CellE5StyleOAHtc06commitE0tcfc">init(canEditRow:commitEditing:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -340,14 +328,14 @@ The factory dequeues cells from the collection view or table view with this reus
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Constructs a new cell factory.</p>
+                        <p>Constructs a new <code>TableEditingController</code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/ReusableViewType.html">ReusableViewType</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">cell</span><span class="p">,</span> <span class="nv">viewConfigurator</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Structs/ViewFactory.html#/s:17JSQDataSourcesKit11ViewFactoryV0D12Configuratora">ViewConfigurator</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">canEditRow</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Structs/TableEditingController.html#/s:17JSQDataSourcesKit22TableEditingControllerV16CanEditRowConfiga">CanEditRowConfig</a></span><span class="p">,</span> <span class="nv">commitEditing</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Structs/TableEditingController.html#/s:17JSQDataSourcesKit22TableEditingControllerV06CommitE6Configa">CommitEditingConfig</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -358,36 +346,24 @@ The factory dequeues cells from the collection view or table view with this reus
                             <tr>
                               <td>
                                 <code>
-                                <em>reuseIdentifier</em>
+                                <em>canEditRow</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The reuse identifier with which the factory will dequeue cells.</p>
+                                  <p>The closure that determines if a given row is editable.</p>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <code>
-                                <em>type</em>
+                                <em>commitEditing</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The type of the reusable view.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>viewConfigurator</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The closure with which the factory will configure cells.</p>
+                                  <p>The closure that commits the editing actions for a table view.</p>
                                 </div>
                               </td>
                             </tr>
@@ -396,7 +372,7 @@ The factory dequeues cells from the collection view or table view with this reus
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>A new <code>CellFactory</code> instance.</p>
+                        <p>A new <code>TableEditingController</code> instance.</p>
                       </div>
                     </section>
                   </div>
