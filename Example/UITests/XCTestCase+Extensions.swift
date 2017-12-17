@@ -18,7 +18,7 @@
 
 import XCTest
 
-typealias XCUIElementType = XCUIElement.`Type`
+typealias XCUIElementType = XCUIElement.ElementType
 
 extension XCTestCase {
     
