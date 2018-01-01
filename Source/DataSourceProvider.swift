@@ -36,9 +36,9 @@ where CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSour
     /// The supplementary view factory.
     public let supplementaryFactory: SupplementaryFactory
 
-    fileprivate var bridgedDataSource: BridgedDataSource?
+    private var bridgedDataSource: BridgedDataSource?
 
-    fileprivate var tableEditingController: TableEditingController<DataSource>?
+    private var tableEditingController: TableEditingController<DataSource>?
 
     // MARK: Initialization
 

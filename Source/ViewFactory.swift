@@ -144,20 +144,19 @@ public enum ReusableViewType {
 }
 
 
-extension ReusableViewType: Equatable { }
-
-/// :nodoc:
-public func ==(lhs: ReusableViewType, rhs: ReusableViewType) -> Bool {
-    switch (lhs, rhs) {
-    case (.cell, .cell):
-        return true
-    case (.supplementaryView(let kind1), .supplementaryView(let kind2)):
-        return kind1 == kind2
-    default:
-        return false
+extension ReusableViewType: Equatable {
+    /// :nodoc:
+    public static func == (lhs: ReusableViewType, rhs: ReusableViewType) -> Bool {
+        switch (lhs, rhs) {
+        case (.cell, .cell):
+            return true
+        case (.supplementaryView(let kind1), .supplementaryView(let kind2)):
+            return kind1 == kind2
+        default:
+            return false
+        }
     }
 }
-
 
 
 // MARK: ReusableViewFactory
@@ -290,7 +289,7 @@ public struct ViewFactory<Item, Cell: ReusableViewProtocol>: ReusableViewFactory
 
      - returns: The configured cell.
      */
-    public typealias ViewConfigurator = (_ cell: Cell, _ item: Item?, _ type: ReusableViewType, _ parentView: Cell.ParentView, _ indexPath: IndexPath) -> Cell
+    public typealias ViewConfigurator = (Cell, Item?, ReusableViewType, Cell.ParentView, IndexPath) -> Cell
 
 
     // MARK: Properties

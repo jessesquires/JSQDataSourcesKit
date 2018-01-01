@@ -34,7 +34,7 @@ public struct TableEditingController<DataSource: DataSourceProtocol> {
 
      - returns: `true` if the specified row is editable, `false` otherwise.
      */
-    public typealias CanEditRowConfig = (_ item: DataSource.Item?, _ tableView: UITableView, _ indexPath: IndexPath) -> Bool
+    public typealias CanEditRowConfig = (DataSource.Item?, UITableView, IndexPath) -> Bool
 
     /**
      Commits the editing actions for the specified index path.
@@ -44,7 +44,7 @@ public struct TableEditingController<DataSource: DataSourceProtocol> {
      - parameter commit:     The editing style.
      - parameter indexPath:  The index path of the item.
      */
-    public typealias CommitEditingConfig = (_ dataSource: inout DataSource, _ tableView: UITableView, _ commit: UITableViewCellEditingStyle, _ indexPath: IndexPath) -> Void
+    public typealias CommitEditingConfig = (inout DataSource, UITableView, UITableViewCellEditingStyle, IndexPath) -> Void
 
     /// A closure that determines if a given row is editable.
     public let canEditRow: CanEditRowConfig

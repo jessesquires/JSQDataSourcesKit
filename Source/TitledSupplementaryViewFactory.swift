@@ -19,7 +19,6 @@
 import Foundation
 import UIKit
 
-
 /**
  A `TitledSupplementaryViewFactory` is a specialized supplementary view factory that conforms to `ReusableViewFactoryProtocol`.
 
@@ -40,7 +39,7 @@ public struct TitledSupplementaryViewFactory <Item>: ReusableViewFactoryProtocol
 
      - returns: The configured `TitledSupplementaryView` instance.
      */
-    public typealias ConfigurationHandler = (_ view: TitledSupplementaryView, _ item: Item?, _ type: ReusableViewType, _ collectionView: UICollectionView, _ indexPath: IndexPath) -> TitledSupplementaryView
+    public typealias ConfigurationHandler = (TitledSupplementaryView, Item?, ReusableViewType, UICollectionView, IndexPath) -> TitledSupplementaryView
 
 
     // MARK: Private Properties

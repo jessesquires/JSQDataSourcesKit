@@ -20,7 +20,6 @@ import CoreData
 import Foundation
 import UIKit
 
-
 /// A `FetchedResultsDelegateProvider` is responsible for providing a delegate object for an instance of `NSFetchedResultsController`.
 public final class FetchedResultsDelegateProvider<CellFactory: ReusableViewFactoryProtocol> {
 
@@ -41,11 +40,11 @@ public final class FetchedResultsDelegateProvider<CellFactory: ReusableViewFacto
 
     // MARK: private
 
-    fileprivate typealias Item = CellFactory.Item
+    private typealias Item = CellFactory.Item
 
-    fileprivate var bridgedDelegate: BridgedFetchedResultsDelegate?
+    private var bridgedDelegate: BridgedFetchedResultsDelegate?
 
-    fileprivate init(cellFactory: CellFactory, cellParentView: ParentView) {
+    private init(cellFactory: CellFactory, cellParentView: ParentView) {
         self.cellFactory = cellFactory
         self.cellParentView = cellParentView
     }
@@ -53,13 +52,13 @@ public final class FetchedResultsDelegateProvider<CellFactory: ReusableViewFacto
 
     // MARK: Private, collection view properties
 
-    fileprivate typealias SectionChangeTuple = (changeType: NSFetchedResultsChangeType, sectionIndex: Int)
-    fileprivate lazy var sectionChanges = [SectionChangeTuple]()
+    private typealias SectionChangeTuple = (changeType: NSFetchedResultsChangeType, sectionIndex: Int)
+    private lazy var sectionChanges = [SectionChangeTuple]()
 
-    fileprivate typealias ObjectChangeTuple = (changeType: NSFetchedResultsChangeType, indexPaths: [IndexPath])
-    fileprivate lazy var objectChanges = [ObjectChangeTuple]()
+    private typealias ObjectChangeTuple = (changeType: NSFetchedResultsChangeType, indexPaths: [IndexPath])
+    private lazy var objectChanges = [ObjectChangeTuple]()
 
-    fileprivate lazy var updatedObjects = [IndexPath: Item]()
+    private lazy var updatedObjects = [IndexPath: Item]()
 }
 
 

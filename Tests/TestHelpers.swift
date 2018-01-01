@@ -36,10 +36,10 @@ struct FakeViewModel: Equatable, CustomStringConvertible {
             return "<\(FakeViewModel.self): \(name)>"
         }
     }
-}
 
-func ==(lhs: FakeViewModel, rhs: FakeViewModel) -> Bool {
-    return lhs.name == rhs.name
+    static func ==(lhs: FakeViewModel, rhs: FakeViewModel) -> Bool {
+        return lhs.name == rhs.name
+    }
 }
 
 @discardableResult
