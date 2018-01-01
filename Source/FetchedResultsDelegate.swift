@@ -51,14 +51,9 @@ public final class FetchedResultsDelegateProvider<CellConfig: ReusableViewConfig
     
     
     // MARK: Private, collection view properties
-    
-    private typealias SectionChangeTuple = (changeType: NSFetchedResultsChangeType, sectionIndex: Int)
-    private lazy var sectionChanges = [SectionChangeTuple]()
-    
-    private typealias ObjectChangeTuple = (changeType: NSFetchedResultsChangeType, indexPaths: [IndexPath])
-    private lazy var objectChanges = [ObjectChangeTuple]()
-    
-    private lazy var updatedObjects = [IndexPath: Item]()
+
+    private lazy var sectionChanges = [() -> Void]()
+    private lazy var objectChanges = [() -> Void]()
 }
 
 
@@ -88,86 +83,73 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIC
     private func bridgedCollectionFetchedResultsDelegate() -> BridgedFetchedResultsDelegate {
         let delegate = BridgedFetchedResultsDelegate(
             willChangeContent: { [unowned self] (controller) in
+
                 self.sectionChanges.removeAll()
                 self.objectChanges.removeAll()
-                self.updatedObjects.removeAll()
             },
             didChangeSection: { [unowned self] (controller, sectionInfo, sectionIndex, changeType) in
-                self.sectionChanges.append((changeType, sectionIndex))
+
+                let section = IndexSet(integer: sectionIndex)
+                self.sectionChanges.append { [unowned self] in
+                    switch(changeType) {
+                    case .insert:
+                        self.collectionView?.insertSections(section)
+                    case .delete:
+                        self.collectionView?.deleteSections(section)
+                    default:
+                        break
+                    }
+                }
             },
             didChangeObject: { [unowned self] (controller, anyObject, indexPath: IndexPath?, changeType, newIndexPath: IndexPath?) in
+
                 switch changeType {
                 case .insert:
                     if let insertIndexPath = newIndexPath {
-                        self.objectChanges.append((changeType, [insertIndexPath]))
+                        self.objectChanges.append { [unowned self] in
+                            self.collectionView?.insertItems(at: [insertIndexPath])
+                        }
                     }
                 case .delete:
                     if let deleteIndexPath = indexPath {
-                        self.objectChanges.append((changeType, [deleteIndexPath]))
+                        self.objectChanges.append { [unowned self] in
+                            self.collectionView?.deleteItems(at: [deleteIndexPath])
+                        }
                     }
                 case .update:
                     if let indexPath = indexPath {
-                        self.objectChanges.append((changeType, [indexPath]))
-                        self.updatedObjects[indexPath] = anyObject as? Item
+                        self.objectChanges.append { [unowned self] in
+                            if let item = anyObject as? Item,
+                                let collectionView = self.collectionView,
+                                let cell = collectionView.cellForItem(at: indexPath) as? CellConfig.View {
+                                self.cellConfig.configure(view: cell, item: item, type: .cell, parentView: collectionView, indexPath: indexPath)
+                            }
+                        }
                     }
                 case .move:
                     if let old = indexPath, let new = newIndexPath {
-                        self.objectChanges.append((changeType, [old, new]))
+                        self.objectChanges.append { [unowned self] in
+                            self.collectionView?.deleteItems(at: [old])
+                            self.collectionView?.insertItems(at: [new])
+                        }
                     }
                 }
             },
             didChangeContent: { [unowned self] (controller) in
+
                 self.collectionView?.performBatchUpdates({ [weak self] in
-                    self?.applyObjectChanges()
-                    self?.applySectionChanges()
-                    }, completion:{ [weak self] finished in
+                    // apply object changes
+                    self?.objectChanges.forEach { $0() }
+
+                    // apply section changes
+                    self?.sectionChanges.forEach { $0() }
+
+                    }, completion: { [weak self] finished in
                         self?.reloadSupplementaryViewsIfNeeded()
                 })
         })
         
         return delegate
-    }
-    
-    private func applyObjectChanges() {
-        for (changeType, indexPaths) in objectChanges {
-            
-            switch(changeType) {
-            case .insert:
-                collectionView?.insertItems(at: indexPaths)
-            case .delete:
-                collectionView?.deleteItems(at: indexPaths)
-            case .update:
-                if let indexPath = indexPaths.first,
-                    let item = updatedObjects[indexPath],
-                    let collectionView = collectionView,
-                    let cell = collectionView.cellForItem(at: indexPath) as? CellConfig.View {
-                    cellConfig.configure(view: cell, item: item, type: .cell, parentView: collectionView, indexPath: indexPath)
-                }
-            case .move:
-                if let deleteIndexPath = indexPaths.first {
-                    self.collectionView?.deleteItems(at: [deleteIndexPath])
-                }
-                
-                if let insertIndexPath = indexPaths.last {
-                    self.collectionView?.insertItems(at: [insertIndexPath])
-                }
-            }
-        }
-    }
-    
-    private func applySectionChanges() {
-        for (changeType, sectionIndex) in sectionChanges {
-            let section = IndexSet(integer: sectionIndex)
-            
-            switch(changeType) {
-            case .insert:
-                collectionView?.insertSections(section)
-            case .delete:
-                collectionView?.deleteSections(section)
-            default:
-                break
-            }
-        }
     }
     
     private func reloadSupplementaryViewsIfNeeded() {
