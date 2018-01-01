@@ -21,63 +21,60 @@ import Foundation
 import UIKit
 
 /// A `FetchedResultsDelegateProvider` is responsible for providing a delegate object for an instance of `NSFetchedResultsController`.
-public final class FetchedResultsDelegateProvider<CellFactory: ReusableViewFactoryProtocol> {
-
+public final class FetchedResultsDelegateProvider<CellConfig: ReusableViewConfigProtocol> {
+    
     // MARK: Type aliases
-
-    /// The parent view of cell's that the cell factory produces.
-    public typealias ParentView = CellFactory.View.ParentView
-
-
+    
+    /// The parent view of cell's that the cell configuration produces.
+    public typealias ParentView = CellConfig.View.ParentView
+    
+    
     // MARK: Properties
-
+    
     /// The table view or collection view displaying data for the fetched results controller.
     public weak var cellParentView: ParentView?
-
-    /// The cell factory used to configure cells.
-    public let cellFactory: CellFactory
-
-
-    // MARK: private
-
-    private typealias Item = CellFactory.Item
-
+    
+    /// The cell configuration.
+    public let cellConfig: CellConfig
+    
+    
+    // MARK: Private
+    
+    private typealias Item = CellConfig.Item
+    
     private var bridgedDelegate: BridgedFetchedResultsDelegate?
-
-    private init(cellFactory: CellFactory, cellParentView: ParentView) {
-        self.cellFactory = cellFactory
+    
+    private init(cellConfig: CellConfig, cellParentView: ParentView) {
+        self.cellConfig = cellConfig
         self.cellParentView = cellParentView
     }
-
-
+    
+    
     // MARK: Private, collection view properties
-
+    
     private typealias SectionChangeTuple = (changeType: NSFetchedResultsChangeType, sectionIndex: Int)
     private lazy var sectionChanges = [SectionChangeTuple]()
-
+    
     private typealias ObjectChangeTuple = (changeType: NSFetchedResultsChangeType, indexPaths: [IndexPath])
     private lazy var objectChanges = [ObjectChangeTuple]()
-
+    
     private lazy var updatedObjects = [IndexPath: Item]()
 }
 
 
-extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UICollectionView {
-
+extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UICollectionView {
+    
     // MARK: Collection views
-
-    /**
-     Initializes a new fetched results delegate provider for collection views.
-
-     - parameter cellFactory:    The cell factory with which the fetched results controller delegate will configure cells.
-     - parameter collectionView: The collection view to be updated when the fetched results change.
-
-     - returns: A new `FetchedResultsDelegateProvider` instance.
-     */
-    public convenience init(cellFactory: CellFactory, collectionView: UICollectionView) {
-        self.init(cellFactory: cellFactory, cellParentView: collectionView)
+    
+    /// Initializes a new fetched results delegate provider for collection views.
+    ///
+    /// - Parameters:
+    ///   - cellConfig: The cell configuration with which the fetched results controller delegate will configure cells.
+    ///   - collectionView: The collection view to be updated when the fetched results change.
+    public convenience init(cellConfig: CellConfig, collectionView: UICollectionView) {
+        self.init(cellConfig: cellConfig, cellParentView: collectionView)
     }
-
+    
     /// Returns the `NSFetchedResultsControllerDelegate` object for a collection view.
     public var collectionDelegate: NSFetchedResultsControllerDelegate {
         if bridgedDelegate == nil {
@@ -85,9 +82,9 @@ extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UI
         }
         return bridgedDelegate!
     }
-
+    
     private weak var collectionView: UICollectionView? { return cellParentView }
-
+    
     private func bridgedCollectionFetchedResultsDelegate() -> BridgedFetchedResultsDelegate {
         let delegate = BridgedFetchedResultsDelegate(
             willChangeContent: { [unowned self] (controller) in
@@ -125,15 +122,15 @@ extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UI
                     self?.applySectionChanges()
                     }, completion:{ [weak self] finished in
                         self?.reloadSupplementaryViewsIfNeeded()
-                    })
-            })
-
+                })
+        })
+        
         return delegate
     }
-
+    
     private func applyObjectChanges() {
         for (changeType, indexPaths) in objectChanges {
-
+            
             switch(changeType) {
             case .insert:
                 collectionView?.insertItems(at: indexPaths)
@@ -143,25 +140,25 @@ extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UI
                 if let indexPath = indexPaths.first,
                     let item = updatedObjects[indexPath],
                     let collectionView = collectionView,
-                    let cell = collectionView.cellForItem(at: indexPath) as? CellFactory.View {
-                    cellFactory.configure(view: cell, item: item, type: .cell, parentView: collectionView, indexPath: indexPath)
+                    let cell = collectionView.cellForItem(at: indexPath) as? CellConfig.View {
+                    cellConfig.configure(view: cell, item: item, type: .cell, parentView: collectionView, indexPath: indexPath)
                 }
             case .move:
                 if let deleteIndexPath = indexPaths.first {
                     self.collectionView?.deleteItems(at: [deleteIndexPath])
                 }
-
+                
                 if let insertIndexPath = indexPaths.last {
                     self.collectionView?.insertItems(at: [insertIndexPath])
                 }
             }
         }
     }
-
+    
     private func applySectionChanges() {
         for (changeType, sectionIndex) in sectionChanges {
             let section = IndexSet(integer: sectionIndex)
-
+            
             switch(changeType) {
             case .insert:
                 collectionView?.insertSections(section)
@@ -172,7 +169,7 @@ extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UI
             }
         }
     }
-
+    
     private func reloadSupplementaryViewsIfNeeded() {
         if sectionChanges.count > 0 {
             collectionView?.reloadData()
@@ -181,22 +178,19 @@ extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UI
 }
 
 
-extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UITableView {
-
+extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UITableView {
+    
     // MARK: Table views
-
-    /**
-     Initializes a new fetched results delegate provider for table views.
-
-     - parameter cellFactory: The cell factory with which the fetched results controller delegate will configure cells.
-     - parameter tableView:   The table view to be updated when the fetched results change.
-
-     - returns: A new `FetchedResultsDelegateProvider` instance.
-     */
-    public convenience init(cellFactory: CellFactory, tableView: UITableView) {
-        self.init(cellFactory: cellFactory, cellParentView: tableView)
+    
+    /// Initializes a new fetched results delegate provider for table views.
+    ///
+    /// - Parameters:
+    ///   - cellConfig: The cell configuration with which the fetched results controller delegate will configure cells.
+    ///   - tableView: The table view to be updated when the fetched results change.
+    public convenience init(cellConfig: CellConfig, tableView: UITableView) {
+        self.init(cellConfig: cellConfig, cellParentView: tableView)
     }
-
+    
     /// Returns the `NSFetchedResultsControllerDelegate` object for a table view.
     public var tableDelegate: NSFetchedResultsControllerDelegate {
         if bridgedDelegate == nil {
@@ -204,9 +198,9 @@ extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UI
         }
         return bridgedDelegate!
     }
-
+    
     private weak var tableView: UITableView? { return cellParentView }
-
+    
     private func bridgedTableFetchedResultsDelegate() -> BridgedFetchedResultsDelegate {
         let delegate = BridgedFetchedResultsDelegate(
             willChangeContent: { [unowned self] (controller) in
@@ -235,14 +229,14 @@ extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UI
                 case .update:
                     if let indexPath = indexPath,
                         let tableView = self.tableView,
-                        let cell = tableView.cellForRow(at: indexPath) as? CellFactory.View {
-                        self.cellFactory.configure(view: cell, item: anyObject as? Item, type: .cell, parentView: tableView, indexPath: indexPath)
+                        let cell = tableView.cellForRow(at: indexPath) as? CellConfig.View {
+                        self.cellConfig.configure(view: cell, item: anyObject as? Item, type: .cell, parentView: tableView, indexPath: indexPath)
                     }
                 case .move:
                     if let deleteIndexPath = indexPath {
                         self.tableView?.deleteRows(at: [deleteIndexPath], with: .fade)
                     }
-
+                    
                     if let insertIndexPath = newIndexPath {
                         self.tableView?.insertRows(at: [insertIndexPath], with: .fade)
                     }
@@ -250,7 +244,7 @@ extension FetchedResultsDelegateProvider where CellFactory.View.ParentView == UI
             },
             didChangeContent: { [unowned self] (controller) in
                 self.tableView?.endUpdates()
-            })
+        })
         
         return delegate
     }

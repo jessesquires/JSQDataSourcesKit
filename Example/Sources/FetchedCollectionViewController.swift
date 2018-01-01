@@ -28,11 +28,11 @@ class FetchedCollectionViewController: UICollectionViewController {
 
     let stack = CoreDataStack()
 
-    typealias ThingCellFactory = ViewFactory<Thing, CollectionViewCell>
-    typealias ThingSupplementaryViewFactory = ComposedCollectionSupplementaryViewFactory<Thing>
-    var dataSourceProvider: DataSourceProvider<FetchedResultsController<Thing>, ThingCellFactory, ThingSupplementaryViewFactory>!
+    typealias ThingCellConfig = ReusableViewConfig<Thing, CollectionViewCell>
+    typealias ThingSupplementaryViewConfig = ComposedCollectionSupplementaryViewConfig<Thing>
+    var dataSourceProvider: DataSourceProvider<FetchedResultsController<Thing>, ThingCellConfig, ThingSupplementaryViewConfig>!
 
-    var delegateProvider: FetchedResultsDelegateProvider<ThingCellFactory>!
+    var delegateProvider: FetchedResultsDelegateProvider<ThingCellConfig>!
 
     var frc: FetchedResultsController<Thing>!
 
@@ -47,8 +47,8 @@ class FetchedCollectionViewController: UICollectionViewController {
         let layout = collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
         layout.footerReferenceSize = CGSize(width: collectionView!.frame.size.width, height: 25)
 
-        // 1. create cell factory
-        let cellFactory = ViewFactory(reuseIdentifier: CellId) { (cell, model: Thing?, type, collectionView, indexPath) -> CollectionViewCell in
+        // 1. create cell config
+        let cellConfig = ReusableViewConfig(reuseIdentifier: CellId) { (cell, model: Thing?, type, collectionView, indexPath) -> CollectionViewCell in
             cell.label.text = model!.displayName
             cell.label.textColor = UIColor.white
             cell.backgroundColor = model!.displayColor
@@ -56,15 +56,15 @@ class FetchedCollectionViewController: UICollectionViewController {
             return cell
         }
 
-        // 2. create supplementary view factory
-        let headerFactory = TitledSupplementaryViewFactory { (header, item: Thing?, kind, collectionView, indexPath) -> TitledSupplementaryView in
+        // 2. create supplementary view config
+        let headerConfig = TitledSupplementaryViewConfig { (header, item: Thing?, kind, collectionView, indexPath) -> TitledSupplementaryView in
             header.label.text = "\(item!.colorName) header (\(indexPath.section))"
             header.label.textColor = item?.displayColor
             header.backgroundColor = .darkGray
             return header
         }
 
-        let footerFactory = TitledSupplementaryViewFactory { (footer, item: Thing?, kind, collectionView, indexPath) -> TitledSupplementaryView in
+        let footerConfig = TitledSupplementaryViewConfig { (footer, item: Thing?, kind, collectionView, indexPath) -> TitledSupplementaryView in
             footer.label.text = "\(item!.colorName) footer (\(indexPath.section))"
             footer.label.textColor = item?.displayColor
             footer.backgroundColor = .lightGray
@@ -73,19 +73,19 @@ class FetchedCollectionViewController: UICollectionViewController {
             return footer
         }
 
-        let composedFactory = ComposedCollectionSupplementaryViewFactory(headerViewFactory: headerFactory, footerViewFactory: footerFactory)
+        let composedConfig = ComposedCollectionSupplementaryViewConfig(headerConfig: headerConfig, footerConfig: footerConfig)
 
         // 3. create fetched results controller
         frc = fetchedResultsController(inContext: stack.context)
 
         // 4. create delegate provider
-        delegateProvider = FetchedResultsDelegateProvider(cellFactory: cellFactory, collectionView: collectionView!)
+        delegateProvider = FetchedResultsDelegateProvider(cellConfig: cellConfig, collectionView: collectionView!)
 
         // 5. set delegate
         frc.delegate = delegateProvider.collectionDelegate
 
         // 6. create data source provider
-        dataSourceProvider = DataSourceProvider(dataSource: frc, cellFactory: cellFactory, supplementaryFactory: composedFactory)
+        dataSourceProvider = DataSourceProvider(dataSource: frc, cellConfig: cellConfig, supplementaryConfig: composedConfig)
 
         // 7. set data source
         collectionView?.dataSource = dataSourceProvider?.collectionViewDataSource
@@ -113,14 +113,14 @@ class FetchedCollectionViewController: UICollectionViewController {
     @IBAction func didTapActionButton(_ sender: UIBarButtonItem) {
         UIAlertController.showActionAlert(self, addNewAction: {
             self.addNewThing()
-            }, deleteAction: {
-                self.deleteSelected()
-            }, changeNameAction: {
-                self.changeNameSelected()
-            }, changeColorAction: {
-                self.changeColorSelected()
-            }, changeAllAction: {
-                self.changeAllSelected()
+        }, deleteAction: {
+            self.deleteSelected()
+        }, changeNameAction: {
+            self.changeNameSelected()
+        }, changeColorAction: {
+            self.changeColorSelected()
+        }, changeAllAction: {
+            self.changeAllSelected()
         })
     }
 
