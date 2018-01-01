@@ -37,34 +37,52 @@ where CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSour
     public let supplementaryFactory: SupplementaryFactory
 
     fileprivate var bridgedDataSource: BridgedDataSource?
-    fileprivate var _tableEditingController: TableEditingController<DataSource>?
+
+    fileprivate var tableEditingController: TableEditingController<DataSource>?
 
     // MARK: Initialization
 
-    /**
-     Initializes a new data source provider.
 
-     - parameter dataSource:             The data source.
-     - parameter cellFactory:            The cell factory.
-     - parameter supplementaryFactory:   The supplementary view factory.
-     - parameter tableEditingController: The tableEditing controller.
-     
-     - returns: A new `DataSourceProvider` instance.
-
-     - warning: Table views do not have supplementary views, but this parameter is still required in order to satisfy
-     the generic constraints for Swift. You can simply pass the same `cellFactory` here. The parameter will be ignored.
-     The same applies to collection views that do not have supplementary views. Again, the parameter will be ignored.
-     */
-    public init(dataSource: DataSource, cellFactory: CellFactory, supplementaryFactory: SupplementaryFactory, tableEditingController: TableEditingController<DataSource>? = nil) {
+    /// Initializes a new data source provider.
+    ///
+    /// - Parameters:
+    ///   - dataSource: The data source.
+    ///   - cellFactory: The cell factory.
+    ///   - supplementaryFactory: The supplementary view factory.
+    ///
+    /// - Warning: Table views do not have supplementary views, but this parameter is still required in order to satisfy
+    /// the generic constraints for Swift. You can simply pass the same `cellFactory` here. The parameter will be ignored.
+    /// The same applies to collection views that do not have supplementary views. Again, the parameter will be ignored.
+    public init(dataSource: DataSource,
+                cellFactory: CellFactory,
+                supplementaryFactory: SupplementaryFactory) {
         self.dataSource = dataSource
         self.cellFactory = cellFactory
         self.supplementaryFactory = supplementaryFactory
-        self._tableEditingController = tableEditingController
     }
 }
 
 public extension DataSourceProvider where CellFactory.View: UITableViewCell {
-    
+
+    /// Initializes a new data source provider.
+    ///
+    /// - Parameters:
+    ///   - dataSource: The data source.
+    ///   - cellFactory: The cell factory.
+    ///   - supplementaryFactory: The supplementary view factory.
+    ///   - tableEditingController: The table editing controller.
+    ///
+    /// - Warning: Table views do not have supplementary views, but this parameter is still required in order to satisfy
+    /// the generic constraints for Swift. You can simply pass the same `cellFactory` here. The parameter will be ignored.
+    /// The same applies to collection views that do not have supplementary views. Again, the parameter will be ignored.
+    public convenience init(dataSource: DataSource,
+                            cellFactory: CellFactory,
+                            supplementaryFactory: SupplementaryFactory,
+                            tableEditingController: TableEditingController<DataSource>? = nil) {
+        self.init(dataSource: dataSource, cellFactory: cellFactory, supplementaryFactory: supplementaryFactory)
+        self.tableEditingController = tableEditingController
+    }
+
     // MARK: UITableViewDataSource
 
     /// Returns the `UITableViewDataSource` object.
@@ -73,16 +91,6 @@ public extension DataSourceProvider where CellFactory.View: UITableViewCell {
             bridgedDataSource = tableViewBridgedDataSource()
         }
         return bridgedDataSource!
-    }
-
-    /// The table editing controller for this data source provider.
-    public var tableEditingController: TableEditingController<DataSource>? {
-        set {
-            _tableEditingController = newValue
-        }
-        get {
-            return _tableEditingController
-        }
     }
 
     private func tableViewBridgedDataSource() -> BridgedDataSource {

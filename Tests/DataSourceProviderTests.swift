@@ -399,7 +399,7 @@ final class DataSourceProviderTests: TestCase {
         }
 
         // GIVEN: a data source editing controller
-        let tableDataSourceEditingController = TableEditingController<DataSource<Section<FakeViewModel>>>(
+        let editingController = TableEditingController<DataSource<Section<FakeViewModel>>>(
             canEditRow: { (item, tableView, indexPath) -> Bool in
                 return indexPath == expectedIndexPath
         },
@@ -412,8 +412,10 @@ final class DataSourceProviderTests: TestCase {
         })
 
         // GIVEN: a data source provider
-        dataSourceProvider = DataSourceProvider(dataSource: dataSource, cellFactory: factory, supplementaryFactory: factory)
-        dataSourceProvider.tableEditingController = tableDataSourceEditingController
+        dataSourceProvider = DataSourceProvider(dataSource: dataSource,
+                                                cellFactory: factory,
+                                                supplementaryFactory: factory,
+                                                tableEditingController: editingController)
 
         let tableViewDataSource = dataSourceProvider.tableViewDataSource
         tableView.dataSource = tableViewDataSource

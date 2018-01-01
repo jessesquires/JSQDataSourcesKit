@@ -21,8 +21,7 @@ import CoreData
 import ExampleModel
 import JSQDataSourcesKit
 
-
-class FetchedTableViewController: UITableViewController {
+final class FetchedTableViewController: UITableViewController {
 
     // MARK: Properties
 
@@ -61,10 +60,10 @@ class FetchedTableViewController: UITableViewController {
 
         // ** optional editing **
         // if needed, enable the editing functionality on the tableView
-        let tableDataSourceEditingController: TableEditingController<FetchedResultsController<Thing>> = TableEditingController(
+        let editingController: TableEditingController<FetchedResultsController<Thing>> = TableEditingController(
             canEditRow: { (item, tableView, indexPath) -> Bool in
                 return item?.color == Color.Blue
-            },
+        },
             commitEditing: { (dataSource: inout FetchedResultsController<Thing>, tableView, editingStyle, indexPath) in
                 if editingStyle == .delete {
                     guard let item = dataSource.item(atIndexPath: indexPath) else { return }
@@ -73,7 +72,10 @@ class FetchedTableViewController: UITableViewController {
         })
 
         // 5. create data source provider
-        dataSourceProvider = DataSourceProvider(dataSource: frc, cellFactory: factory, supplementaryFactory: factory, tableEditingController: tableDataSourceEditingController)
+        dataSourceProvider = DataSourceProvider(dataSource: frc,
+                                                cellFactory: factory,
+                                                supplementaryFactory: factory,
+                                                tableEditingController: editingController)
 
         // 6. set data source
         tableView.dataSource = dataSourceProvider?.tableViewDataSource
@@ -101,14 +103,14 @@ class FetchedTableViewController: UITableViewController {
     @IBAction func didTapActionButton(_ sender: UIBarButtonItem) {
         UIAlertController.showActionAlert(self, addNewAction: {
             self.addNewThing()
-            }, deleteAction: {
-                self.deleteSelected()
-            }, changeNameAction: {
-                self.changeNameSelected()
-            }, changeColorAction: {
-                self.changeColorSelected()
-            }, changeAllAction: {
-                self.changeAllSelected()
+        }, deleteAction: {
+            self.deleteSelected()
+        }, changeNameAction: {
+            self.changeNameSelected()
+        }, changeColorAction: {
+            self.changeColorSelected()
+        }, changeAllAction: {
+            self.changeAllSelected()
         })
     }
 
@@ -150,5 +152,4 @@ class FetchedTableViewController: UITableViewController {
         stack.saveAndWait()
         fetchData()
     }
-    
 }

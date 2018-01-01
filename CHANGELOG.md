@@ -18,6 +18,7 @@ This release closes the [7.0.0 milestone](https://github.com/jessesquires/JSQDat
 ## New
 
 - Added new `DataSourceProtocol` extension convenience method `func item(atIndexPath indexPath: IndexPath) -> Item?`.
+- Added new `TableEditingController` to support table view editing functionality provided by `UITableViewDataSource`. (#29, #80, #100)
 
 6.0.0
 -----

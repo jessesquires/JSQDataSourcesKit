@@ -17,9 +17,7 @@
 //
 
 import UIKit
-
 import JSQDataSourcesKit
-
 
 final class TableViewController: UITableViewController {
 
@@ -45,10 +43,10 @@ final class TableViewController: UITableViewController {
 
         // ** optional editing **
         // if needed, enable the editing functionality on the tableView
-        let tableDataSourceEditingController: TableEditingController<DataSource<Section<CellViewModel>>> = TableEditingController(
+        let editingController: TableEditingController<DataSource<Section<CellViewModel>>> = TableEditingController(
             canEditRow: { (item, tableView, indexPath) -> Bool in
                 return true
-            },
+        },
             commitEditing: { (dataSource: inout DataSource, tableView, editingStyle, indexPath) in
                 if editingStyle == .delete {
                     if let _ = dataSource.remove(at: indexPath) {
@@ -58,10 +56,12 @@ final class TableViewController: UITableViewController {
         })
 
         // 3. create data source provider
-        dataSourceProvider = DataSourceProvider(dataSource: dataSource, cellFactory: factory, supplementaryFactory: factory, tableEditingController: tableDataSourceEditingController)
+        dataSourceProvider = DataSourceProvider(dataSource: dataSource,
+                                                cellFactory: factory,
+                                                supplementaryFactory: factory,
+                                                tableEditingController: editingController)
 
         // 4. set data source
         tableView.dataSource = dataSourceProvider?.tableViewDataSource
-
     }
 }
