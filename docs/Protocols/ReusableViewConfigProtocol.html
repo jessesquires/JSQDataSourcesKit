@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>ReusableViewFactoryProtocol Protocol Reference</title>
+    <title>ReusableViewConfigProtocol Protocol Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Protocol/ReusableViewFactoryProtocol" class="dashAnchor"></a>
-    <a title="ReusableViewFactoryProtocol Protocol Reference"></a>
+    <a name="//apple_ref/swift/Protocol/ReusableViewConfigProtocol" class="dashAnchor"></a>
+    <a title="ReusableViewConfigProtocol Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">JSQDataSourcesKit Docs</a> (100% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">JSQDataSourcesKit Reference</a>
         <img id="carat" src="../img/carat.png" />
-        ReusableViewFactoryProtocol Protocol Reference
+        ReusableViewConfigProtocol Protocol Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -71,7 +71,7 @@
                 <a href="../Protocols/DataSourceProtocol.html">DataSourceProtocol</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols/ReusableViewFactoryProtocol.html">ReusableViewFactoryProtocol</a>
+                <a href="../Protocols/ReusableViewConfigProtocol.html">ReusableViewConfigProtocol</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Protocols/ReusableViewProtocol.html">ReusableViewProtocol</a>
@@ -88,16 +88,16 @@
                 <a href="../Structs/DataSource.html">DataSource</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/ReusableViewConfig.html">ReusableViewConfig</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Section.html">Section</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/TableEditingController.html">TableEditingController</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/TitledSupplementaryViewFactory.html">TitledSupplementaryViewFactory</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/ViewFactory.html">ViewFactory</a>
+                <a href="../Structs/TitledSupplementaryViewConfig.html">TitledSupplementaryViewConfig</a>
               </li>
             </ul>
           </li>
@@ -106,14 +106,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>ReusableViewFactoryProtocol</h1>
+            <h1>ReusableViewConfigProtocol</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ReusableViewFactoryProtocol</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ReusableViewConfigProtocol</span></code></pre>
 
                 </div>
               </div>
-            <p>An instance conforming to <code>ReusableViewFactoryProtocol</code> is responsible for initializing
+            <p>An instance conforming to <code>ReusableViewConfigProtocol</code> is responsible for initializing
 and configuring reusable views to be displayed in either a <code>UICollectionView</code> or a <code>UITableView</code>.</p>
 
           </section>
@@ -130,9 +130,9 @@ and configuring reusable views to be displayed in either a <code>UICollectionVie
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP4Item"></a>
+                    <a name="/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP4Item"></a>
                     <a name="//apple_ref/swift/Alias/Item" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP4Item">Item</a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP4Item">Item</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -157,9 +157,9 @@ and configuring reusable views to be displayed in either a <code>UICollectionVie
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP0E0"></a>
+                    <a name="/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP0E0"></a>
                     <a name="//apple_ref/swift/Alias/View" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP0E0">View</a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP0E0">View</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -167,7 +167,7 @@ and configuring reusable views to be displayed in either a <code>UICollectionVie
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The type of views that the factory produces.</p>
+                        <p>The type of views that the configuration produces.</p>
 
                       </div>
                       <div class="declaration">
@@ -195,9 +195,9 @@ and configuring reusable views to be displayed in either a <code>UICollectionVie
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP17reuseIdentiferForSS4ItemQzSg4item_AA0dE4TypeO4type10Foundation9IndexPathV05indexQ0tF"></a>
+                    <a name="/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP17reuseIdentiferForSS4ItemQzSg4item_AA0dE4TypeO4type10Foundation9IndexPathV05indexQ0tF"></a>
                     <a name="//apple_ref/swift/Method/reuseIdentiferFor(item:type:indexPath:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP17reuseIdentiferForSS4ItemQzSg4item_AA0dE4TypeO4type10Foundation9IndexPathV05indexQ0tF">reuseIdentiferFor(item:type:indexPath:)</a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP17reuseIdentiferForSS4ItemQzSg4item_AA0dE4TypeO4type10Foundation9IndexPathV05indexQ0tF">reuseIdentiferFor(item:type:indexPath:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -212,7 +212,7 @@ and configuring reusable views to be displayed in either a <code>UICollectionVie
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">reuseIdentiferFor</span><span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP4Item">Item</a></span><span class="p">?,</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/ReusableViewType.html">ReusableViewType</a></span><span class="p">,</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">reuseIdentiferFor</span><span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewConfigProtocol.html#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP4Item">Item</a></span><span class="p">?,</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/ReusableViewType.html">ReusableViewType</a></span><span class="p">,</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -269,9 +269,9 @@ and configuring reusable views to be displayed in either a <code>UICollectionVie
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP9configure0E0QzAF4view_4ItemQzSg4itemAA0dE4TypeO4typeAE_06ParentE0QZ06parentE010Foundation9IndexPathV05indexR0tF"></a>
+                    <a name="/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP9configure0E0QzAF4view_4ItemQzSg4itemAA0dE4TypeO4typeAE_06ParentE0QZ06parentE010Foundation9IndexPathV05indexR0tF"></a>
                     <a name="//apple_ref/swift/Method/configure(view:item:type:parentView:indexPath:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP9configure0E0QzAF4view_4ItemQzSg4itemAA0dE4TypeO4typeAE_06ParentE0QZ06parentE010Foundation9IndexPathV05indexR0tF">configure(view:item:type:parentView:indexPath:)</a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP9configure0E0QzAF4view_4ItemQzSg4itemAA0dE4TypeO4typeAE_06ParentE0QZ06parentE010Foundation9IndexPathV05indexR0tF">configure(view:item:type:parentView:indexPath:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -286,7 +286,7 @@ and configuring reusable views to be displayed in either a <code>UICollectionVie
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="nv">view</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP0E0">View</a></span><span class="p">,</span> <span class="nv">item</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP4Item">Item</a></span><span class="p">?,</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/ReusableViewType.html">ReusableViewType</a></span><span class="p">,</span> <span class="nv">parentView</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP0E0">View</a></span><span class="o">.</span><span class="kt">ParentView</span><span class="p">,</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP0E0">View</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">configure</span><span class="p">(</span><span class="nv">view</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewConfigProtocol.html#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP0E0">View</a></span><span class="p">,</span> <span class="nv">item</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewConfigProtocol.html#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP4Item">Item</a></span><span class="p">?,</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/ReusableViewType.html">ReusableViewType</a></span><span class="p">,</span> <span class="nv">parentView</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewConfigProtocol.html#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP0E0">View</a></span><span class="o">.</span><span class="kt">ParentView</span><span class="p">,</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/ReusableViewConfigProtocol.html#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP0E0">View</a></span></code></pre>
 
                         </div>
                       </div>
@@ -359,7 +359,7 @@ and configuring reusable views to be displayed in either a <code>UICollectionVie
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>A configured view of type <code><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP0E0">View</a></code>.</p>
+                        <p>A configured view of type <code><a href="../Protocols/ReusableViewConfigProtocol.html#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP0E0">View</a></code>.</p>
                       </div>
                     </section>
                   </div>
@@ -378,9 +378,9 @@ and configuring reusable views to be displayed in either a <code>UICollectionVie
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolPA2aBRzSo07UITableE4CellC0E0RczlE05tableI3ForAG4ItemQz4item_So0hE0C0jE010Foundation9IndexPathV05indexP0tF"></a>
+                    <a name="/s:17JSQDataSourcesKit26ReusableViewConfigProtocolPA2aBRzSo07UITableE4CellC0E0RczlE05tableI3ForAG4ItemQz4item_So0hE0C0jE010Foundation9IndexPathV05indexP0tF"></a>
                     <a name="//apple_ref/swift/Method/tableCellFor(item:tableView:indexPath:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolPA2aBRzSo07UITableE4CellC0E0RczlE05tableI3ForAG4ItemQz4item_So0hE0C0jE010Foundation9IndexPathV05indexP0tF">tableCellFor(item:tableView:indexPath:)</a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolPA2aBRzSo07UITableE4CellC0E0RczlE05tableI3ForAG4ItemQz4item_So0hE0C0jE010Foundation9IndexPathV05indexP0tF">tableCellFor(item:tableView:indexPath:)</a>
                     </code>
                       <span class="declaration-note">
                         Extension method
@@ -391,14 +391,14 @@ and configuring reusable views to be displayed in either a <code>UICollectionVie
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Creates a new <code><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP0E0">View</a></code> instance, or dequeues an existing cell for reuse, then configures and returns it.</p>
+                        <p>Creates a new <code><a href="../Protocols/ReusableViewConfigProtocol.html#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP0E0">View</a></code> instance, or dequeues an existing cell for reuse, then configures and returns it.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tableCellFor</span><span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP4Item">Item</a></span><span class="p">,</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP0E0">View</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tableCellFor</span><span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewConfigProtocol.html#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP4Item">Item</a></span><span class="p">,</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/ReusableViewConfigProtocol.html#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP0E0">View</a></span></code></pre>
 
                         </div>
                       </div>
@@ -466,9 +466,9 @@ and configuring reusable views to be displayed in either a <code>UICollectionVie
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolPA2aBRzSo012UICollectionE4CellC0E0RczlE010collectionI3ForAG4ItemQz4item_So0hE0C0jE010Foundation9IndexPathV05indexP0tF"></a>
+                    <a name="/s:17JSQDataSourcesKit26ReusableViewConfigProtocolPA2aBRzSo012UICollectionE4CellC0E0RczlE010collectionI3ForAG4ItemQz4item_So0hE0C0jE010Foundation9IndexPathV05indexP0tF"></a>
                     <a name="//apple_ref/swift/Method/collectionCellFor(item:collectionView:indexPath:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolPA2aBRzSo012UICollectionE4CellC0E0RczlE010collectionI3ForAG4ItemQz4item_So0hE0C0jE010Foundation9IndexPathV05indexP0tF">collectionCellFor(item:collectionView:indexPath:)</a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolPA2aBRzSo012UICollectionE4CellC0E0RczlE010collectionI3ForAG4ItemQz4item_So0hE0C0jE010Foundation9IndexPathV05indexP0tF">collectionCellFor(item:collectionView:indexPath:)</a>
                     </code>
                       <span class="declaration-note">
                         Extension method
@@ -479,14 +479,14 @@ and configuring reusable views to be displayed in either a <code>UICollectionVie
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Creates a new <code><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP0E0">View</a></code> instance, or dequeues an existing cell for reuse, then configures and returns it.</p>
+                        <p>Creates a new <code><a href="../Protocols/ReusableViewConfigProtocol.html#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP0E0">View</a></code> instance, or dequeues an existing cell for reuse, then configures and returns it.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">collectionCellFor</span><span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP4Item">Item</a></span><span class="p">,</span> <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP0E0">View</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">collectionCellFor</span><span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewConfigProtocol.html#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP4Item">Item</a></span><span class="p">,</span> <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/ReusableViewConfigProtocol.html#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP0E0">View</a></span></code></pre>
 
                         </div>
                       </div>
@@ -554,9 +554,9 @@ and configuring reusable views to be displayed in either a <code>UICollectionVie
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolPA2aBRzSo012UICollectiondE0C0E0RczlE013supplementaryE3ForAG4ItemQzSg4item_SS4kindSo0hE0C010collectionE010Foundation9IndexPathV05indexQ0tF"></a>
+                    <a name="/s:17JSQDataSourcesKit26ReusableViewConfigProtocolPA2aBRzSo012UICollectiondE0C0E0RczlE013supplementaryE3ForAG4ItemQzSg4item_SS4kindSo0hE0C010collectionE010Foundation9IndexPathV05indexQ0tF"></a>
                     <a name="//apple_ref/swift/Method/supplementaryViewFor(item:kind:collectionView:indexPath:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolPA2aBRzSo012UICollectiondE0C0E0RczlE013supplementaryE3ForAG4ItemQzSg4item_SS4kindSo0hE0C010collectionE010Foundation9IndexPathV05indexQ0tF">supplementaryViewFor(item:kind:collectionView:indexPath:)</a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolPA2aBRzSo012UICollectiondE0C0E0RczlE013supplementaryE3ForAG4ItemQzSg4item_SS4kindSo0hE0C010collectionE010Foundation9IndexPathV05indexQ0tF">supplementaryViewFor(item:kind:collectionView:indexPath:)</a>
                     </code>
                       <span class="declaration-note">
                         Extension method
@@ -567,14 +567,14 @@ and configuring reusable views to be displayed in either a <code>UICollectionVie
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Creates a new <code><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP0E0">View</a></code> instance, or dequeues an existing view for reuse, then configures and returns it.</p>
+                        <p>Creates a new <code><a href="../Protocols/ReusableViewConfigProtocol.html#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP0E0">View</a></code> instance, or dequeues an existing view for reuse, then configures and returns it.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">supplementaryViewFor</span><span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP4Item">Item</a></span><span class="p">?,</span> <span class="nv">kind</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/ReusableViewFactoryProtocol.html#/s:17JSQDataSourcesKit27ReusableViewFactoryProtocolP0E0">View</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">supplementaryViewFor</span><span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReusableViewConfigProtocol.html#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP4Item">Item</a></span><span class="p">?,</span> <span class="nv">kind</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">collectionView</span><span class="p">:</span> <span class="kt">UICollectionView</span><span class="p">,</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/ReusableViewConfigProtocol.html#/s:17JSQDataSourcesKit26ReusableViewConfigProtocolP0E0">View</a></span></code></pre>
 
                         </div>
                       </div>

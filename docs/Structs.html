@@ -70,7 +70,7 @@
                 <a href="Protocols/DataSourceProtocol.html">DataSourceProtocol</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/ReusableViewFactoryProtocol.html">ReusableViewFactoryProtocol</a>
+                <a href="Protocols/ReusableViewConfigProtocol.html">ReusableViewConfigProtocol</a>
               </li>
               <li class="nav-group-task">
                 <a href="Protocols/ReusableViewProtocol.html">ReusableViewProtocol</a>
@@ -87,16 +87,16 @@
                 <a href="Structs/DataSource.html">DataSource</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/ReusableViewConfig.html">ReusableViewConfig</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/Section.html">Section</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/TableEditingController.html">TableEditingController</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/TitledSupplementaryViewFactory.html">TitledSupplementaryViewFactory</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/ViewFactory.html">ViewFactory</a>
+                <a href="Structs/TitledSupplementaryViewConfig.html">TitledSupplementaryViewConfig</a>
               </li>
             </ul>
           </li>
@@ -112,19 +112,19 @@
           <section class="section task-group-section">
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/ReusableViewFactory"></a>
-                <a name="//apple_ref/swift/Section/ReusableViewFactory" class="dashAnchor"></a>
-                <a href="#/ReusableViewFactory">
-                  <h3 class="section-name">ReusableViewFactory</h3>
+                <a name="/ReusableViewConfig"></a>
+                <a name="//apple_ref/swift/Section/ReusableViewConfig" class="dashAnchor"></a>
+                <a href="#/ReusableViewConfig">
+                  <h3 class="section-name">ReusableViewConfig</h3>
                 </a>
               </div>
               <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17JSQDataSourcesKit11ViewFactoryV"></a>
-                    <a name="//apple_ref/swift/Struct/ViewFactory" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit11ViewFactoryV">ViewFactory</a>
+                    <a name="/s:17JSQDataSourcesKit18ReusableViewConfigV"></a>
+                    <a name="//apple_ref/swift/Struct/ReusableViewConfig" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit18ReusableViewConfigV">ReusableViewConfig</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -132,17 +132,17 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A <code>ViewFactory</code> is a concrete <code><a href="Protocols/ReusableViewFactoryProtocol.html">ReusableViewFactoryProtocol</a></code> type.
-This factory is responsible for producing and configuring reusable views for a specific item.
+                        <p>A <code>ReusableViewConfig</code> is a concrete <code><a href="Protocols/ReusableViewConfigProtocol.html">ReusableViewConfigProtocol</a></code> type.
+This config is responsible for producing and configuring reusable views for a specific item.
 Cells can be for either collection views or table views.</p>
 
-                        <a href="Structs/ViewFactory.html" class="slightly-smaller">See more</a>
+                        <a href="Structs/ReusableViewConfig.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ViewFactory</span><span class="o">&lt;</span><span class="kt">Item</span><span class="p">,</span> <span class="kt">Cell</span><span class="p">:</span> <span class="kt"><a href="Protocols/ReusableViewProtocol.html">ReusableViewProtocol</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="Protocols/ReusableViewFactoryProtocol.html">ReusableViewFactoryProtocol</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ReusableViewConfig</span><span class="o">&lt;</span><span class="kt">Item</span><span class="p">,</span> <span class="kt">Cell</span><span class="p">:</span> <span class="kt"><a href="Protocols/ReusableViewProtocol.html">ReusableViewProtocol</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="Protocols/ReusableViewConfigProtocol.html">ReusableViewConfigProtocol</a></span></code></pre>
 
                         </div>
                       </div>
@@ -254,9 +254,9 @@ It is a collection of section-based data.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17JSQDataSourcesKit30TitledSupplementaryViewFactoryV"></a>
-                    <a name="//apple_ref/swift/Struct/TitledSupplementaryViewFactory" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit30TitledSupplementaryViewFactoryV">TitledSupplementaryViewFactory</a>
+                    <a name="/s:17JSQDataSourcesKit29TitledSupplementaryViewConfigV"></a>
+                    <a name="//apple_ref/swift/Struct/TitledSupplementaryViewConfig" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit29TitledSupplementaryViewConfigV">TitledSupplementaryViewConfig</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -264,17 +264,16 @@ It is a collection of section-based data.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A <code>TitledSupplementaryViewFactory</code> is a specialized supplementary view factory that conforms to <code><a href="Protocols/ReusableViewFactoryProtocol.html">ReusableViewFactoryProtocol</a></code>.</p>
+                        <p>A <code>TitledSupplementaryViewConfig</code> is a specialized supplementary view config that conforms to <code><a href="Protocols/ReusableViewConfigProtocol.html">ReusableViewConfigProtocol</a></code>.
+This config is responsible for producing and configuring <code><a href="Classes/TitledSupplementaryView.html">TitledSupplementaryView</a></code> instances.</p>
 
-<p>This factory is responsible for producing and configuring <code><a href="Classes/TitledSupplementaryView.html">TitledSupplementaryView</a></code> instances.</p>
-
-                        <a href="Structs/TitledSupplementaryViewFactory.html" class="slightly-smaller">See more</a>
+                        <a href="Structs/TitledSupplementaryViewConfig.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TitledSupplementaryViewFactory</span> <span class="o">&lt;</span><span class="kt">Item</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="Protocols/ReusableViewFactoryProtocol.html">ReusableViewFactoryProtocol</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TitledSupplementaryViewConfig</span> <span class="o">&lt;</span><span class="kt">Item</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="Protocols/ReusableViewConfigProtocol.html">ReusableViewConfigProtocol</a></span></code></pre>
 
                         </div>
                       </div>
