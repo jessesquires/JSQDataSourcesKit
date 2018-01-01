@@ -383,7 +383,7 @@ final class DataSourceProviderTests: TestCase {
         tableView.dequeueCellExpectation = expectation(description: dequeueCellExpectationName + #function)
         
         typealias TableCellConfig = ReusableViewConfig<FakeViewModel, FakeTableCell>
-        var dataSourceProvider: DataSourceProvider<DataSource<Section<FakeViewModel>>, TableCellConfig, TableCellConfig>!
+        var dataSourceProvider: DataSourceProvider<DataSource<FakeViewModel>, TableCellConfig, TableCellConfig>!
         
         // GIVEN: a cell config
         let config = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
@@ -396,7 +396,7 @@ final class DataSourceProviderTests: TestCase {
         }
         
         // GIVEN: a data source editing controller
-        let editingController = TableEditingController<DataSource<Section<FakeViewModel>>>(
+        let editingController = TableEditingController<DataSource<FakeViewModel>>(
             canEditRow: { (item, tableView, indexPath) -> Bool in
                 return indexPath == expectedIndexPath
         },

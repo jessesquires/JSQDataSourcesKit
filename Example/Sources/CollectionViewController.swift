@@ -21,7 +21,7 @@ import JSQDataSourcesKit
 
 final class CollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    typealias Source = DataSource< Section<CellViewModel> >
+    typealias Source = DataSource<CellViewModel>
     typealias CollectionCellConfig = ReusableViewConfig<CellViewModel, CollectionViewCell>
     typealias HeaderViewConfig = TitledSupplementaryViewConfig<CellViewModel>
     

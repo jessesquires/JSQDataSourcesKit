@@ -22,7 +22,7 @@ import JSQDataSourcesKit
 final class TableViewController: UITableViewController {
     
     typealias TableCellConfig = ReusableViewConfig<CellViewModel, UITableViewCell>
-    var dataSourceProvider: DataSourceProvider<DataSource<Section<CellViewModel>>, TableCellConfig, TableCellConfig>?
+    var dataSourceProvider: DataSourceProvider<DataSource<CellViewModel>, TableCellConfig, TableCellConfig>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,7 @@ final class TableViewController: UITableViewController {
         
         // ** optional editing **
         // if needed, enable the editing functionality on the tableView
-        let editingController: TableEditingController<DataSource<Section<CellViewModel>>> = TableEditingController(
+        let editingController: TableEditingController<DataSource<CellViewModel>> = TableEditingController(
             canEditRow: { (item, tableView, indexPath) -> Bool in
                 return true
         },

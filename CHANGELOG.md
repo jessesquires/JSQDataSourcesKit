@@ -12,14 +12,19 @@ This release closes the [7.0.0 milestone](https://github.com/jessesquires/JSQDat
 ## Breaking
 
 - Converted to Swift 4.0
+
 - iOS 9.0 minimum now required
+
 - tvOS 10.0 minimum now required
+
 - **Significant renaming refactor:** renamed all "factory" references to "config", see #73 for details and reasoning
     - `ReusableViewFactoryProtocol` --> `ReusableViewConfigProtocol`
     - `ViewFactory` --> `ReusableViewConfig`
     - `TitledSupplementaryViewFactory` --> `TitledSupplementaryViewConfig`
     - Updated function param names `cellFactory:` --> `cellConfig:`
     - Updated function param names `supplementaryFactory:` --> `supplementaryConfig:`
+
+- Removed `SectionInfoProtocol` in favor of using a concrete `Section`. `DataSource` now references `Section` directly. (#103)
 
 ## New
 

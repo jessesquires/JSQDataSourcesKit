@@ -40,7 +40,7 @@ enum MixedItem {
 
 final class MixedCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    typealias Source = DataSource< Section<MixedItem> >
+    typealias Source = DataSource<MixedItem>
     typealias CollectionCellConfig = ComposedCellViewConfig
     typealias HeaderViewConfig = TitledSupplementaryViewConfig<MixedItem>
     
