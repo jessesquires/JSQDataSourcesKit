@@ -21,8 +21,7 @@ import CoreData
 import ExampleModel
 import JSQDataSourcesKit
 
-
-class FetchedCollectionViewController: UICollectionViewController {
+final class FetchedCollectionViewController: UICollectionViewController {
 
     // MARK: properties
 

@@ -17,9 +17,7 @@
 //
 
 import UIKit
-
 import JSQDataSourcesKit
-
 
 final class CollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     

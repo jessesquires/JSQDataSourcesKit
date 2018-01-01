@@ -18,7 +18,7 @@
 
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell {
+final class CollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var label: UILabel!
 

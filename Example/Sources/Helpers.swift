@@ -22,7 +22,6 @@ import UIKit
 import ExampleModel
 import JSQDataSourcesKit
 
-
 let CellId = "cell"
 let FancyCellId = "fancyCell"
 
@@ -30,14 +29,12 @@ struct CellViewModel {
     let text = "My Title"
 }
 
-
 func addThingsInStack(_ stack: CoreDataStack, count: Int) {
     for _ in 0..<count {
         Thing.newThing(stack.context)
     }
     assert(stack.saveAndWait())
 }
-
 
 func removeAllThingsInStack(_ stack: CoreDataStack) {
     do {
@@ -52,14 +49,12 @@ func removeAllThingsInStack(_ stack: CoreDataStack) {
     }
 }
 
-
 func fetchedResultsController(inContext context: NSManagedObjectContext) -> FetchedResultsController<Thing> {
     return FetchedResultsController<Thing>(fetchRequest: Thing.newFetchRequest(),
                                            managedObjectContext: context,
                                            sectionNameKeyPath: "colorName",
                                            cacheName: nil)
 }
-
 
 func configureCollectionView(_ collectionView: UICollectionView) {
     let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout

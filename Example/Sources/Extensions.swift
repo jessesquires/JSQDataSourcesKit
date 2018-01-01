@@ -16,13 +16,11 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
-
 import CoreData
 import Foundation
 import UIKit
 import ExampleModel
 import JSQDataSourcesKit
-
 
 extension UIAlertController {
     class func showActionAlert(_ presenter: UIViewController,
