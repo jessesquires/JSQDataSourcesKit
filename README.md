@@ -11,10 +11,10 @@ This library reduces the boilerplate code regarding the `UITableView`, `UICollec
 
 ## Requirements
 
+* Xcode 9+
+* Swift 4.0+
 * iOS 9.0+
 * tvOS 10.0+
-* Swift 4.0+
-* Xcode 9+
 
 ## Installation
 
@@ -54,13 +54,13 @@ $ open index.html -a Safari
 
 ## Getting Started
 
-Watch [my talk](https://www.skilled.io/u/swiftsummit/pushing-the-limits-of-protocol-oriented-programming) from [Swift Summit](https://swiftsummit.com). ([slides](https://speakerdeck.com/jessesquires/pushing-the-limits-of-protocol-oriented-programming))
+Watch [my talk](https://www.skilled.io/u/swiftsummit/pushing-the-limits-of-protocol-oriented-programming) from [Swift Summit](https://swiftsummit.com). See the [slides here](https://speakerdeck.com/jessesquires/pushing-the-limits-of-protocol-oriented-programming).
 
 ````swift
 import JSQDataSourcesKit
 ````
 
-#### Design
+### Design
 
 This library has four primary components:
 
@@ -69,7 +69,7 @@ This library has four primary components:
 3. `ReusableViewFactory` — responsible for dequeuing and configuring cells (for `UITableView` or `UICollectionView`)
 4. `DataSourceProvider` — owns a data source and cell factory, and provides a `UICollectionViewDataSource` or `UITableViewDataSource` object.
 
-#### Example
+### Example
 
 The following illustrates a simple example of how these components interact for a collection view.
 
@@ -104,7 +104,7 @@ let dataSourceProvider =  DataSourceProvider(dataSource: dataSource,
 collectionView.dataSource = dataSourceProvider.collectionViewDataSource
 ````
 
-#### Demo Project
+### Demo Project
 
 The [example project](https://github.com/jessesquires/JSQDataSourcesKit/tree/develop/Example) included exercises *all* functionality in this library.
 
