@@ -13,4 +13,4 @@ jazzy \
     --source-directory . \
     --readme 'README.md' \
     --documentation 'Guides/*.md' \
-    --output docs/ \      
+    --output docs/ \

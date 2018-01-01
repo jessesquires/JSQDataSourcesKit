@@ -28,6 +28,14 @@
       <nav class="sidebar">
         <ul class="nav-groups">
           <li class="nav-group-name">
+            <a href="Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="getting-started.html">Getting Started</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a href="Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -100,7 +108,7 @@
             
             <h1 id='jsqdatasourceskit' class='heading'>JSQDataSourcesKit</h1>
 
-<p><a href="http://travis-ci.org/jessesquires/JSQDataSourcesKit"><img src="https://secure.travis-ci.org/jessesquires/JSQDataSourcesKit.svg" alt="Build Status"></a> <a href="https://cocoapods.org/pods/JSQDataSourcesKit"><img src="https://img.shields.io/cocoapods/v/JSQDataSourcesKit.svg" alt="Version Status"></a> <a href="http://opensource.org/licenses/MIT"><img src="https://img.shields.io/cocoapods/l/JSQDataSourcesKit.svg" alt="license MIT"></a> <a href="https://codecov.io/gh/jessesquires/JSQDataSourcesKit"><img src="https://codecov.io/gh/jessesquires/JSQDataSourcesKit/branch/develop/graph/badge.svg" alt="codecov"></a> <a href="http://jessesquires.github.io/JSQDataSourcesKit"><img src="https://img.shields.io/cocoapods/p/JSQDataSourcesKit.svg" alt="Platform"></a> <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible"></a></p>
+<p><a href="https://travis-ci.org/jessesquires/JSQDataSourcesKit"><img src="https://secure.travis-ci.org/jessesquires/JSQDataSourcesKit.svg" alt="Build Status"></a> <a href="https://cocoapods.org/pods/JSQDataSourcesKit"><img src="https://img.shields.io/cocoapods/v/JSQDataSourcesKit.svg" alt="Version Status"></a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/cocoapods/l/JSQDataSourcesKit.svg" alt="license MIT"></a> <a href="https://codecov.io/gh/jessesquires/JSQDataSourcesKit"><img src="https://codecov.io/gh/jessesquires/JSQDataSourcesKit/branch/develop/graph/badge.svg" alt="codecov"></a> <a href="https://jessesquires.github.io/JSQDataSourcesKit"><img src="https://img.shields.io/cocoapods/p/JSQDataSourcesKit.svg" alt="Platform"></a> <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible"></a></p>
 
 <p><em>Protocol-oriented, type-safe data source objects that keep your view controllers light</em></p>
 
@@ -111,13 +119,13 @@
 <h2 id='requirements' class='heading'>Requirements</h2>
 
 <ul>
+<li>Xcode 9+</li>
+<li>Swift 4.0+</li>
 <li>iOS 9.0+</li>
 <li>tvOS 10.0+</li>
-<li>Swift 4.0+</li>
-<li>Xcode 9+</li>
 </ul>
 <h2 id='installation' class='heading'>Installation</h2>
-<h4 id='a-href-http-cocoapods-org-cocoapods-a-recommended' class='heading'><a href="http://cocoapods.org">CocoaPods</a> (recommended)</h4>
+<h4 id='a-href-https-cocoapods-org-cocoapods-a-recommended' class='heading'><a href="https://cocoapods.org">CocoaPods</a> (recommended)</h4>
 <pre class="highlight ruby"><code><span class="n">use_frameworks!</span>
 
 <span class="c1"># For latest release in cocoapods</span>
@@ -131,69 +139,19 @@
 </code></pre>
 <h2 id='documentation' class='heading'>Documentation</h2>
 
-<p>Read the <a href="http://jessesquires.github.io/JSQDataSourcesKit">docs</a>. Generated with <a href="https://github.com/realm/jazzy">jazzy</a>. Hosted by <a href="https://pages.github.com">GitHub Pages</a>.</p>
+<p>Read the <a href="https://jessesquires.github.io/JSQDataSourcesKit">docs</a>. Generated with <a href="https://github.com/realm/jazzy">jazzy</a>. Hosted by <a href="https://pages.github.com">GitHub Pages</a>.</p>
 <h4 id='generate' class='heading'>Generate</h4>
 <pre class="highlight shell"><code><span class="gp">$ </span>./build_docs.sh
 </code></pre>
 <h4 id='preview' class='heading'>Preview</h4>
 <pre class="highlight shell"><code><span class="gp">$ </span>open index.html -a Safari
 </code></pre>
-<h2 id='getting-started' class='heading'>Getting Started</h2>
-
-<p>Watch <a href="https://www.skilled.io/u/swiftsummit/pushing-the-limits-of-protocol-oriented-programming">my talk</a> from <a href="https://swiftsummit.com">Swift Summit</a>. (<a href="https://speakerdeck.com/jessesquires/pushing-the-limits-of-protocol-oriented-programming">slides</a>)</p>
-<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">JSQDataSourcesKit</span>
-</code></pre>
-<h4 id='design' class='heading'>Design</h4>
-
-<p>This library has four primary components:</p>
-
-<ol>
-<li><code><a href="Structs/Section.html">Section</a></code> — represents a section of data</li>
-<li><code><a href="Structs/DataSource.html">DataSource</a></code> — represents a collection of <code><a href="Structs/Section.html">Section</a></code> types</li>
-<li><code>ReusableViewFactory</code> — responsible for dequeuing and configuring cells (for <code>UITableView</code> or <code>UICollectionView</code>)</li>
-<li><code><a href="Classes/DataSourceProvider.html">DataSourceProvider</a></code> — owns a data source and cell factory, and provides a <code>UICollectionViewDataSource</code> or <code>UITableViewDataSource</code> object.</li>
-</ol>
-<h4 id='example' class='heading'>Example</h4>
-
-<p>The following illustrates a simple example of how these components interact for a collection view.</p>
-<pre class="highlight swift"><code><span class="c1">// Given a view controller with a collection view</span>
-
-<span class="c1">// 1. create Sections and a DataSource with your model objects</span>
-<span class="k">let</span> <span class="nv">section0</span> <span class="o">=</span> <span class="kt">Section</span><span class="p">(</span><span class="nv">items</span><span class="p">:</span> <span class="o">...</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">section1</span> <span class="o">=</span> <span class="kt">Section</span><span class="p">(</span><span class="nv">items</span><span class="p">:</span> <span class="o">...</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">section2</span> <span class="o">=</span> <span class="kt">Section</span><span class="p">(</span><span class="nv">items</span><span class="p">:</span> <span class="o">...</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">dataSource</span> <span class="o">=</span> <span class="kt">DataSource</span><span class="p">(</span><span class="nv">sections</span><span class="p">:</span> <span class="n">section0</span><span class="p">,</span> <span class="n">section1</span><span class="p">,</span> <span class="n">section2</span><span class="p">)</span>
-
-<span class="c1">// 2. create cell factory</span>
-<span class="k">let</span> <span class="nv">cellFactory</span> <span class="o">=</span> <span class="kt">ViewFactory</span><span class="p">(</span><span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="s">"CellId"</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">model</span><span class="p">?,</span> <span class="n">type</span><span class="p">,</span> <span class="n">collectionView</span><span class="p">,</span> <span class="n">indexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">MyCellClass</span> <span class="k">in</span>
-    <span class="c1">// configure the cell with the model</span>
-    <span class="k">return</span> <span class="n">cell</span>
-<span class="p">}</span>
-
-<span class="c1">// 3. create supplementary view factory</span>
-<span class="k">let</span> <span class="nv">type</span> <span class="o">=</span> <span class="kt">ReusableViewType</span><span class="o">.</span><span class="nf">supplementaryView</span><span class="p">(</span><span class="nv">kind</span><span class="p">:</span> <span class="kt">UICollectionElementKindSectionHeader</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">headerFactory</span> <span class="o">=</span> <span class="kt">ViewFactory</span><span class="p">(</span><span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="s">"HeaderId"</span><span class="p">,</span> <span class="nv">type</span><span class="p">:</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">model</span><span class="p">?,</span> <span class="n">type</span><span class="p">,</span> <span class="n">collectionView</span><span class="p">,</span> <span class="n">indexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">MyHeaderView</span> <span class="k">in</span>
-    <span class="c1">// configure header view</span>
-    <span class="k">return</span> <span class="n">view</span>
-<span class="p">}</span>
-
-<span class="c1">// 4. create data source provider</span>
-<span class="k">let</span> <span class="nv">dataSourceProvider</span> <span class="o">=</span>  <span class="kt">DataSourceProvider</span><span class="p">(</span><span class="nv">dataSource</span><span class="p">:</span> <span class="n">dataSource</span><span class="p">,</span>
-                                             <span class="nv">cellFactory</span><span class="p">:</span> <span class="n">cellFactory</span><span class="p">,</span>
-                                             <span class="nv">supplementaryFactory</span><span class="p">:</span> <span class="n">headerFactory</span><span class="p">)</span>
-
-<span class="c1">// 5. set the collection view's data source</span>
-<span class="n">collectionView</span><span class="o">.</span><span class="n">dataSource</span> <span class="o">=</span> <span class="n">dataSourceProvider</span><span class="o">.</span><span class="n">collectionViewDataSource</span>
-</code></pre>
-<h4 id='demo-project' class='heading'>Demo Project</h4>
-
-<p>The <a href="https://github.com/jessesquires/JSQDataSourcesKit/tree/develop/Example">example project</a> included exercises <em>all</em> functionality in this library.</p>
 <h2 id='contribute' class='heading'>Contribute</h2>
 
 <p>Please follow these sweet <a href="https://github.com/jessesquires/HowToContribute">contribution guidelines</a>.</p>
 <h2 id='credits' class='heading'>Credits</h2>
 
-<p>Created and maintained by <a href="https://twitter.com/jesse_squires"><strong>@jesse_squires</strong></a>.</p>
+<p>Created and maintained by <a href="https://twitter.com/jesse_squires"><strong>@jesse_squires</strong></a></p>
 
 <ul>
 <li>Inspired by <strong><a href="https://github.com/andymatuschak">andymatuschak</a> /</strong> <a href="https://gist.github.com/andymatuschak/f1e1691fa1a327468f8e">gist f1e1691fa1a327468f8e</a></li>
@@ -201,7 +159,7 @@
 </ul>
 <h2 id='license' class='heading'>License</h2>
 
-<p><code>JSQDataSourcesKit</code> is released under an <a href="http://opensource.org/licenses/MIT">MIT License</a>. See <code>LICENSE</code> for details.</p>
+<p><code>JSQDataSourcesKit</code> is released under an <a href="https://opensource.org/licenses/MIT">MIT License</a>. See <code>LICENSE</code> for details.</p>
 
 <blockquote>
 <p><strong>Copyright &copy; 2015-present Jesse Squires.</strong></p>
@@ -212,7 +170,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2017-11-05)</p>
+          <p>&copy; 2017 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2017-12-31)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

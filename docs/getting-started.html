@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Getting Started  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="Getting Started  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">JSQDataSourcesKit Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/jessesquires/JSQDataSourcesKit"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">JSQDataSourcesKit Reference</a>
+        <img id="carat" src="img/carat.png" />
+        Getting Started  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="getting-started.html">Getting Started</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/DataSourceProvider.html">DataSourceProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/FetchedResultsController.html">FetchedResultsController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/FetchedResultsDelegateProvider.html">FetchedResultsDelegateProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/TitledSupplementaryView.html">TitledSupplementaryView</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/ReusableViewType.html">ReusableViewType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Protocols/CellParentViewProtocol.html">CellParentViewProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/DataSourceProtocol.html">DataSourceProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ReusableViewFactoryProtocol.html">ReusableViewFactoryProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ReusableViewProtocol.html">ReusableViewProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/SectionInfoProtocol.html">SectionInfoProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/DataSource.html">DataSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Section.html">Section</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/TableEditingController.html">TableEditingController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/TitledSupplementaryViewFactory.html">TitledSupplementaryViewFactory</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ViewFactory.html">ViewFactory</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='getting-started' class='heading'>Getting Started</h1>
+
+<p>Watch <a href="https://www.skilled.io/u/swiftsummit/pushing-the-limits-of-protocol-oriented-programming">my talk</a> from <a href="https://swiftsummit.com">Swift Summit</a>. See the <a href="https://speakerdeck.com/jessesquires/pushing-the-limits-of-protocol-oriented-programming">slides here</a>.</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">JSQDataSourcesKit</span>
+</code></pre>
+<h2 id='design' class='heading'>Design</h2>
+
+<p>This library has four primary components:</p>
+
+<ol>
+<li><code><a href="Structs/Section.html">Section</a></code> — represents a section of data</li>
+<li><code><a href="Structs/DataSource.html">DataSource</a></code> — represents a collection of <code><a href="Structs/Section.html">Section</a></code> types</li>
+<li><code>ReusableViewFactory</code> — responsible for dequeuing and configuring cells (for <code>UITableView</code> or <code>UICollectionView</code>)</li>
+<li><code><a href="Classes/DataSourceProvider.html">DataSourceProvider</a></code> — owns a data source and cell factory, and provides a <code>UICollectionViewDataSource</code> or <code>UITableViewDataSource</code> object.</li>
+</ol>
+<h2 id='example' class='heading'>Example</h2>
+
+<p>The following illustrates a simple example of how these components interact for a collection view.</p>
+<pre class="highlight swift"><code><span class="c1">// Given a view controller with a collection view</span>
+
+<span class="c1">// 1. create Sections and a DataSource with your model objects</span>
+<span class="k">let</span> <span class="nv">section0</span> <span class="o">=</span> <span class="kt">Section</span><span class="p">(</span><span class="nv">items</span><span class="p">:</span> <span class="o">...</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">section1</span> <span class="o">=</span> <span class="kt">Section</span><span class="p">(</span><span class="nv">items</span><span class="p">:</span> <span class="o">...</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">section2</span> <span class="o">=</span> <span class="kt">Section</span><span class="p">(</span><span class="nv">items</span><span class="p">:</span> <span class="o">...</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">dataSource</span> <span class="o">=</span> <span class="kt">DataSource</span><span class="p">(</span><span class="nv">sections</span><span class="p">:</span> <span class="n">section0</span><span class="p">,</span> <span class="n">section1</span><span class="p">,</span> <span class="n">section2</span><span class="p">)</span>
+
+<span class="c1">// 2. create cell factory</span>
+<span class="k">let</span> <span class="nv">cellFactory</span> <span class="o">=</span> <span class="kt">ViewFactory</span><span class="p">(</span><span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="s">"CellId"</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">model</span><span class="p">?,</span> <span class="n">type</span><span class="p">,</span> <span class="n">collectionView</span><span class="p">,</span> <span class="n">indexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">MyCellClass</span> <span class="k">in</span>
+    <span class="c1">// configure the cell with the model</span>
+    <span class="k">return</span> <span class="n">cell</span>
+<span class="p">}</span>
+
+<span class="c1">// 3. create supplementary view factory</span>
+<span class="k">let</span> <span class="nv">type</span> <span class="o">=</span> <span class="kt">ReusableViewType</span><span class="o">.</span><span class="nf">supplementaryView</span><span class="p">(</span><span class="nv">kind</span><span class="p">:</span> <span class="kt">UICollectionElementKindSectionHeader</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">headerFactory</span> <span class="o">=</span> <span class="kt">ViewFactory</span><span class="p">(</span><span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="s">"HeaderId"</span><span class="p">,</span> <span class="nv">type</span><span class="p">:</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">model</span><span class="p">?,</span> <span class="n">type</span><span class="p">,</span> <span class="n">collectionView</span><span class="p">,</span> <span class="n">indexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">MyHeaderView</span> <span class="k">in</span>
+    <span class="c1">// configure header view</span>
+    <span class="k">return</span> <span class="n">view</span>
+<span class="p">}</span>
+
+<span class="c1">// 4. create data source provider</span>
+<span class="k">let</span> <span class="nv">dataSourceProvider</span> <span class="o">=</span>  <span class="kt">DataSourceProvider</span><span class="p">(</span><span class="nv">dataSource</span><span class="p">:</span> <span class="n">dataSource</span><span class="p">,</span>
+                                             <span class="nv">cellFactory</span><span class="p">:</span> <span class="n">cellFactory</span><span class="p">,</span>
+                                             <span class="nv">supplementaryFactory</span><span class="p">:</span> <span class="n">headerFactory</span><span class="p">)</span>
+
+<span class="c1">// 5. set the collection view's data source</span>
+<span class="n">collectionView</span><span class="o">.</span><span class="n">dataSource</span> <span class="o">=</span> <span class="n">dataSourceProvider</span><span class="o">.</span><span class="n">collectionViewDataSource</span>
+</code></pre>
+<h2 id='demo-project' class='heading'>Demo Project</h2>
+
+<p>The <a href="https://github.com/jessesquires/JSQDataSourcesKit/tree/develop/Example">example project</a> included exercises <em>all</em> functionality in this library.</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2017-12-31)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
