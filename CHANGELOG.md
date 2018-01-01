@@ -4,10 +4,16 @@ The changelog for `JSQDataSourcesKit`. Also see the [releases](https://github.co
 
 --------------------------------------
 
-6.1.0
+7.0.0
 -----
 
-This release closes the [6.1.0 milestone](https://github.com/jessesquires/JSQDataSourcesKit/milestone/11).
+This release closes the [7.0.0 milestone](https://github.com/jessesquires/JSQDataSourcesKit/milestone/12).
+
+## Breaking
+
+- Converted to Swift 4.0
+- iOS 9.0 minimum now required
+- tvOS 10.0 minimum now required
 
 ## New
 

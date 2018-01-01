@@ -46,7 +46,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Enums.html">Enums</a>
+            <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Enums/ReusableViewType.html">ReusableViewType</a>
@@ -74,13 +74,16 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Structs.html">Structs</a>
+            <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Structs/DataSource.html">DataSource</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Section.html">Section</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TableEditingController.html">TableEditingController</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/TitledSupplementaryViewFactory.html">TitledSupplementaryViewFactory</a>
@@ -121,9 +124,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC17JSQDataSourcesKit18DataSourceProvider10dataSourcex"></a>
+                    <a name="/s:17JSQDataSourcesKit18DataSourceProviderC04dataE0xv"></a>
                     <a name="//apple_ref/swift/Property/dataSource" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC17JSQDataSourcesKit18DataSourceProvider10dataSourcex">dataSource</a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit18DataSourceProviderC04dataE0xv">dataSource</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -148,9 +151,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC17JSQDataSourcesKit18DataSourceProvider11cellFactoryq_"></a>
+                    <a name="/s:17JSQDataSourcesKit18DataSourceProviderC11cellFactoryq_v"></a>
                     <a name="//apple_ref/swift/Property/cellFactory" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC17JSQDataSourcesKit18DataSourceProvider11cellFactoryq_">cellFactory</a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit18DataSourceProviderC11cellFactoryq_v">cellFactory</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -175,9 +178,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC17JSQDataSourcesKit18DataSourceProvider20supplementaryFactoryq0_"></a>
+                    <a name="/s:17JSQDataSourcesKit18DataSourceProviderC20supplementaryFactoryq0_v"></a>
                     <a name="//apple_ref/swift/Property/supplementaryFactory" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC17JSQDataSourcesKit18DataSourceProvider20supplementaryFactoryq0_">supplementaryFactory</a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit18DataSourceProviderC20supplementaryFactoryq0_v">supplementaryFactory</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -213,9 +216,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC17JSQDataSourcesKit18DataSourceProvidercFT10dataSourcex11cellFactoryq_20supplementaryFactoryq0__GS0_xq_q0__"></a>
+                    <a name="/s:17JSQDataSourcesKit18DataSourceProviderCACyxq_q0_Gx04dataE0_q_11cellFactoryq0_013supplementaryI0tcfc"></a>
                     <a name="//apple_ref/swift/Method/init(dataSource:cellFactory:supplementaryFactory:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC17JSQDataSourcesKit18DataSourceProvidercFT10dataSourcex11cellFactoryq_20supplementaryFactoryq0__GS0_xq_q0__">init(dataSource:cellFactory:supplementaryFactory:)</a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit18DataSourceProviderCACyxq_q0_Gx04dataE0_q_11cellFactoryq0_013supplementaryI0tcfc">init(dataSource:cellFactory:supplementaryFactory:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -224,11 +227,10 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Initializes a new data source provider.</p>
-
 <div class="aside aside-warning">
     <p class="aside-title">Warning</p>
     <p>Table views do not have supplementary views, but this parameter is still required in order to satisfy
-the generic constraints for Swift. You can simply pass the same <code><a href="../Classes/DataSourceProvider.html#/s:vC17JSQDataSourcesKit18DataSourceProvider11cellFactoryq_">cellFactory</a></code> here. The parameter will be ignored.
+the generic constraints for Swift. You can simply pass the same <code><a href="../Classes/DataSourceProvider.html#/s:17JSQDataSourcesKit18DataSourceProviderC11cellFactoryq_v">cellFactory</a></code> here. The parameter will be ignored.
 The same applies to collection views that do not have supplementary views. Again, the parameter will be ignored.</p>
 
 </div>
@@ -255,7 +257,6 @@ The same applies to collection views that do not have supplementary views. Again
                               <td>
                                 <div>
                                   <p>The data source.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -268,7 +269,6 @@ The same applies to collection views that do not have supplementary views. Again
                               <td>
                                 <div>
                                   <p>The cell factory.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -281,7 +281,6 @@ The same applies to collection views that do not have supplementary views. Again
                               <td>
                                 <div>
                                   <p>The supplementary view factory.</p>
-
                                 </div>
                               </td>
                             </tr>
@@ -291,7 +290,6 @@ The same applies to collection views that do not have supplementary views. Again
                       <div>
                         <h4>Return Value</h4>
                         <p>A new <code>DataSourceProvider</code> instance.</p>
-
                       </div>
                     </section>
                   </div>
@@ -310,9 +308,9 @@ The same applies to collection views that do not have supplementary views. Again
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ve17JSQDataSourcesKit1_RxS_18DataSourceProtocol_S_27ReusableViewFactoryProtocol0_S1_w_4ViewCSo15UITableViewCellwx4Itemzw0_4Itemw_S5_zw0_S5_rCS_18DataSourceProvider19tableViewDataSourcePSo21UITableViewDataSource_"></a>
+                    <a name="/s:17JSQDataSourcesKit18DataSourceProviderCA2A0dE8ProtocolRzAA019ReusableViewFactoryG0R_AaER0_4ItemQy_AFRtzAFQy0_AGRSSo07UITableI4CellC0I0Rc_r1_lE05tableidE0So0lidE0_pv"></a>
                     <a name="//apple_ref/swift/Property/tableViewDataSource" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ve17JSQDataSourcesKit1_RxS_18DataSourceProtocol_S_27ReusableViewFactoryProtocol0_S1_w_4ViewCSo15UITableViewCellwx4Itemzw0_4Itemw_S5_zw0_S5_rCS_18DataSourceProvider19tableViewDataSourcePSo21UITableViewDataSource_">tableViewDataSource</a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit18DataSourceProviderCA2A0dE8ProtocolRzAA019ReusableViewFactoryG0R_AaER0_4ItemQy_AFRtzAFQy0_AGRSSo07UITableI4CellC0I0Rc_r1_lE05tableidE0So0lidE0_pv">tableViewDataSource</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -334,6 +332,33 @@ The same applies to collection views that do not have supplementary views. Again
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17JSQDataSourcesKit18DataSourceProviderCA2A0dE8ProtocolRzAA019ReusableViewFactoryG0R_AaER0_4ItemQy_AFRtzAFQy0_AGRSSo07UITableI4CellC0I0Rc_r1_lE22tableEditingControllerAA05TableoP0VSgv"></a>
+                    <a name="//apple_ref/swift/Property/tableEditingController" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit18DataSourceProviderCA2A0dE8ProtocolRzAA019ReusableViewFactoryG0R_AaER0_4ItemQy_AFRtzAFQy0_AGRSSo07UITableI4CellC0I0Rc_r1_lE22tableEditingControllerAA05TableoP0VSgv">tableEditingController</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The table editing controller for this data source provider.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">tableEditingController</span><span class="p">:</span> <span class="kt"><a href="../Structs/TableEditingController.html">TableEditingController</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
             <div class="task-group">
@@ -348,9 +373,9 @@ The same applies to collection views that do not have supplementary views. Again
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ve17JSQDataSourcesKit1_RxS_18DataSourceProtocol_S_27ReusableViewFactoryProtocol0_S1_w_4ViewCSo20UICollectionViewCellw0_S2_CSo24UICollectionReusableViewwx4Itemzw0_4Itemw_S6_zw0_S6_rCS_18DataSourceProvider24collectionViewDataSourcePSo26UICollectionViewDataSource_"></a>
+                    <a name="/s:17JSQDataSourcesKit18DataSourceProviderCA2A0dE8ProtocolRzAA019ReusableViewFactoryG0R_AaER0_4ItemQy_AFRtzAFQy0_AGRSSo012UICollectionI4CellC0I0Rc_So0lhI0CALRc0_r1_lE010collectionidE0So0lidE0_pv"></a>
                     <a name="//apple_ref/swift/Property/collectionViewDataSource" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ve17JSQDataSourcesKit1_RxS_18DataSourceProtocol_S_27ReusableViewFactoryProtocol0_S1_w_4ViewCSo20UICollectionViewCellw0_S2_CSo24UICollectionReusableViewwx4Itemzw0_4Itemw_S6_zw0_S6_rCS_18DataSourceProvider24collectionViewDataSourcePSo26UICollectionViewDataSource_">collectionViewDataSource</a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit18DataSourceProviderCA2A0dE8ProtocolRzAA019ReusableViewFactoryG0R_AaER0_4ItemQy_AFRtzAFQy0_AGRSSo012UICollectionI4CellC0I0Rc_So0lhI0CALRc0_r1_lE010collectionidE0So0lidE0_pv">collectionViewDataSource</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -377,8 +402,8 @@ The same applies to collection views that do not have supplementary views. Again
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2016-12-05)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2017 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2017-11-05)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

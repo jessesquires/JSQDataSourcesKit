@@ -1,10 +1,10 @@
 //
 //  Created by Jesse Squires
-//  http://www.jessesquires.com
+//  https://www.jessesquires.com
 //
 //
 //  Documentation
-//  http://jessesquires.github.io/JSQDataSourcesKit
+//  https://jessesquires.github.io/JSQDataSourcesKit
 //
 //
 //  GitHub
@@ -13,7 +13,7 @@
 //
 //  License
 //  Copyright © 2015 Jesse Squires
-//  Released under an MIT license: http://opensource.org/licenses/MIT
+//  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
 import Foundation
@@ -266,10 +266,10 @@ public class FetchedResultsController<T: NSFetchRequestResult>: NSFetchedResults
 
      - returns: An initialized fetch request controller.
      */
-    public init<T: NSFetchRequestResult>(fetchRequest: NSFetchRequest<T>,
-                managedObjectContext context: NSManagedObjectContext,
-                sectionNameKeyPath: String?,
-                cacheName name: String?) {
+    public init<T>(fetchRequest: NSFetchRequest<T>,
+                   managedObjectContext context: NSManagedObjectContext,
+                   sectionNameKeyPath: String?,
+                   cacheName name: String?) {
         super.init(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>,
                    managedObjectContext: context,
                    sectionNameKeyPath: sectionNameKeyPath,
@@ -308,7 +308,7 @@ extension FetchedResultsController: DataSourceProtocol {
         guard section < numberOfSections() else { return nil }
         return sections?[section].objects as! [Item]?
     }
-
+    
     /// :nodoc:
     public func item(atRow row: Int, inSection section: Int) -> Item? {
         guard section < numberOfSections() else { return nil }

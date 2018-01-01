@@ -1,10 +1,10 @@
 //
 //  Created by Jesse Squires
-//  http://www.jessesquires.com
+//  https://www.jessesquires.com
 //
 //
 //  Documentation
-//  http://jessesquires.github.io/JSQDataSourcesKit
+//  https://jessesquires.github.io/JSQDataSourcesKit
 //
 //
 //  GitHub
@@ -13,7 +13,7 @@
 //
 //  License
 //  Copyright © 2015 Jesse Squires
-//  Released under an MIT license: http://opensource.org/licenses/MIT
+//  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
 import XCTest
@@ -45,7 +45,7 @@ final class StaticViewsUITests: XCTestCase {
         staticTableViewMenuItem.tap()
         
         // THEN: the number of cells loaded matches the number of cells expected
-        let countTableCells = countElements(ofType: .cell,
+        let countTableCells = countElements(ofType: XCUIElementType.cell,
                                             inView: table,
                                             byUniqueIdentifier: { $0.identifier })
         
@@ -61,7 +61,7 @@ final class StaticViewsUITests: XCTestCase {
         staticCollectionViewMenuItem.tap()
         
         // THEN: the number of cells loaded matches the number of cells expected
-        let countCollectionViewCells = countElements(ofType: .cell,
+        let countCollectionViewCells = countElements(ofType: XCUIElementType.cell,
                                                      inView: collectionView,
                                                      byUniqueIdentifier: { $0.identifier })
         

@@ -1,10 +1,10 @@
 //
 //  Created by Jesse Squires
-//  http://www.jessesquires.com
+//  https://www.jessesquires.com
 //
 //
 //  Documentation
-//  http://jessesquires.github.io/JSQDataSourcesKit
+//  https://jessesquires.github.io/JSQDataSourcesKit
 //
 //
 //  GitHub
@@ -13,14 +13,14 @@
 //
 //  License
 //  Copyright © 2015 Jesse Squires
-//  Released under an MIT license: http://opensource.org/licenses/MIT
+//  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
 import CoreData
 import Foundation
 
 
-/*
+/**
  This class is responsible for implementing the `NSFetchedResultsControllerDelegate` protocol.
  It avoids making `FetchedResultsDelegateProvider` inherit from `NSObject`, and keeps classes small and focused.
  */

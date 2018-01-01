@@ -1,5 +1,5 @@
 # JSQDataSourcesKit
-[![Build Status](https://secure.travis-ci.org/jessesquires/JSQDataSourcesKit.svg)](http://travis-ci.org/jessesquires/JSQDataSourcesKit) [![Version Status](https://img.shields.io/cocoapods/v/JSQDataSourcesKit.svg)][podLink] [![license MIT](https://img.shields.io/cocoapods/l/JSQDataSourcesKit.svg)][mitLink] [![codecov](https://codecov.io/gh/jessesquires/JSQDataSourcesKit/branch/develop/graph/badge.svg)](https://codecov.io/gh/jessesquires/JSQDataSourcesKit) [![Platform](https://img.shields.io/cocoapods/p/JSQDataSourcesKit.svg)][docsLink] [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Build Status](https://secure.travis-ci.org/jessesquires/JSQDataSourcesKit.svg)](https://travis-ci.org/jessesquires/JSQDataSourcesKit) [![Version Status](https://img.shields.io/cocoapods/v/JSQDataSourcesKit.svg)][podLink] [![license MIT](https://img.shields.io/cocoapods/l/JSQDataSourcesKit.svg)][mitLink] [![codecov](https://codecov.io/gh/jessesquires/JSQDataSourcesKit/branch/develop/graph/badge.svg)](https://codecov.io/gh/jessesquires/JSQDataSourcesKit) [![Platform](https://img.shields.io/cocoapods/p/JSQDataSourcesKit.svg)][docsLink] [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 *Protocol-oriented, type-safe data source objects that keep your view controllers light*
 
@@ -11,13 +11,14 @@ This library reduces the boilerplate code regarding the `UITableView`, `UICollec
 
 ## Requirements
 
-* iOS 8+
-* Swift 3.0
-* Xcode 8
+* iOS 9.0+
+* tvOS 10.0+
+* Swift 4.0+
+* Xcode 9+
 
 ## Installation
 
-#### [CocoaPods](http://cocoapods.org) (recommended)
+#### [CocoaPods](https://cocoapods.org) (recommended)
 
 ````ruby
 use_frameworks!
@@ -113,7 +114,7 @@ Please follow these sweet [contribution guidelines](https://github.com/jessesqui
 
 ## Credits
 
-Created and maintained by [**@jesse_squires**](https://twitter.com/jesse_squires).
+Created and maintained by [**@jesse_squires**](https://twitter.com/jesse_squires)
 
 * Inspired by **[andymatuschak](https://github.com/andymatuschak) /** [gist f1e1691fa1a327468f8e](https://gist.github.com/andymatuschak/f1e1691fa1a327468f8e)
 * Inspired by **[ashfurrow](https://github.com/ashfurrow) /** [UICollectionView-NSFetchedResultsController](https://github.com/ashfurrow/UICollectionView-NSFetchedResultsController)
@@ -126,6 +127,6 @@ Created and maintained by [**@jesse_squires**](https://twitter.com/jesse_squires
 
 *Please provide attribution, it is greatly appreciated.*
 
-[docsLink]:http://jessesquires.github.io/JSQDataSourcesKit
+[docsLink]:https://jessesquires.github.io/JSQDataSourcesKit
 [podLink]:https://cocoapods.org/pods/JSQDataSourcesKit
-[mitLink]:http://opensource.org/licenses/MIT
+[mitLink]:https://opensource.org/licenses/MIT

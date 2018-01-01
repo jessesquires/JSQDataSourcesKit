@@ -1,10 +1,10 @@
 //
 //  Created by Jesse Squires
-//  http://www.jessesquires.com
+//  https://www.jessesquires.com
 //
 //
 //  Documentation
-//  http://jessesquires.github.io/JSQDataSourcesKit
+//  https://jessesquires.github.io/JSQDataSourcesKit
 //
 //
 //  GitHub
@@ -13,7 +13,7 @@
 //
 //  License
 //  Copyright © 2015 Jesse Squires
-//  Released under an MIT license: http://opensource.org/licenses/MIT
+//  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
 import UIKit
@@ -46,7 +46,7 @@ class FetchedTableViewController: UITableViewController {
             cell.textLabel?.text = model!.displayName
             cell.textLabel?.textColor = model!.displayColor
             cell.detailTextLabel?.text = "\(indexPath.section), \(indexPath.row)"
-            cell.accessibilityIdentifier = "\(cell.textLabel?.text!)"
+            cell.accessibilityIdentifier = "\(String(describing: cell.textLabel?.text!))"
             return cell
         }
 
