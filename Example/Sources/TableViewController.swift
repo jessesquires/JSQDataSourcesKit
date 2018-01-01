@@ -43,27 +43,25 @@ final class TableViewController: UITableViewController {
             return cell
         }
 
-        // 3. create data source provider
-        dataSourceProvider = DataSourceProvider(dataSource: dataSource, cellFactory: factory, supplementaryFactory: factory)
-
-        // 4. set data source
-        tableView.dataSource = dataSourceProvider?.tableViewDataSource
-
-
         // ** optional editing **
         // if needed, enable the editing functionality on the tableView
-        let tableDataSourceEditingController = TableEditingController(
-            canEditRow: { (tableView, indexPath) -> Bool in
+        let tableDataSourceEditingController: TableEditingController<DataSource<Section<CellViewModel>>> = TableEditingController(
+            canEditRow: { (item, tableView, indexPath) -> Bool in
                 return true
-        },
-            commitEditing:{ [unowned self] (tableView, editingStyle, indexPath) in
+            },
+            commitEditing: { (dataSource: inout DataSource, tableView, editingStyle, indexPath) in
                 if editingStyle == .delete {
-                    if let _ = self.dataSourceProvider?.dataSource.remove(at: indexPath) {
+                    if let _ = dataSource.remove(at: indexPath) {
                         tableView.deleteRows(at: [indexPath], with: .automatic)
                     }
                 }
         })
 
-        dataSourceProvider?.tableEditingController = tableDataSourceEditingController
+        // 3. create data source provider
+        dataSourceProvider = DataSourceProvider(dataSource: dataSource, cellFactory: factory, supplementaryFactory: factory, tableEditingController: tableDataSourceEditingController)
+
+        // 4. set data source
+        tableView.dataSource = dataSourceProvider?.tableViewDataSource
+
     }
 }

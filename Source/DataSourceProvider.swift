@@ -37,32 +37,34 @@ where CellFactory.Item == DataSource.Item, SupplementaryFactory.Item == DataSour
     public let supplementaryFactory: SupplementaryFactory
 
     fileprivate var bridgedDataSource: BridgedDataSource?
-    fileprivate var _tableEditingController: TableEditingController?
+    fileprivate var _tableEditingController: TableEditingController<DataSource>?
 
     // MARK: Initialization
 
     /**
      Initializes a new data source provider.
 
-     - parameter dataSource:           The data source.
-     - parameter cellFactory:          The cell factory.
-     - parameter supplementaryFactory: The supplementary view factory.
-
+     - parameter dataSource:             The data source.
+     - parameter cellFactory:            The cell factory.
+     - parameter supplementaryFactory:   The supplementary view factory.
+     - parameter tableEditingController: The tableEditing controller.
+     
      - returns: A new `DataSourceProvider` instance.
 
      - warning: Table views do not have supplementary views, but this parameter is still required in order to satisfy
      the generic constraints for Swift. You can simply pass the same `cellFactory` here. The parameter will be ignored.
      The same applies to collection views that do not have supplementary views. Again, the parameter will be ignored.
      */
-    public init(dataSource: DataSource, cellFactory: CellFactory, supplementaryFactory: SupplementaryFactory) {
+    public init(dataSource: DataSource, cellFactory: CellFactory, supplementaryFactory: SupplementaryFactory, tableEditingController: TableEditingController<DataSource>? = nil) {
         self.dataSource = dataSource
         self.cellFactory = cellFactory
         self.supplementaryFactory = supplementaryFactory
+        self._tableEditingController = tableEditingController
     }
 }
 
 public extension DataSourceProvider where CellFactory.View: UITableViewCell {
-
+    
     // MARK: UITableViewDataSource
 
     /// Returns the `UITableViewDataSource` object.
@@ -74,7 +76,7 @@ public extension DataSourceProvider where CellFactory.View: UITableViewCell {
     }
 
     /// The table editing controller for this data source provider.
-    public var tableEditingController: TableEditingController? {
+    public var tableEditingController: TableEditingController<DataSource>? {
         set {
             _tableEditingController = newValue
         }
@@ -107,11 +109,12 @@ public extension DataSourceProvider where CellFactory.View: UITableViewCell {
 
         dataSource.tableCanEditRow = { [unowned self] (tableView, indexPath) -> Bool in
             guard let controller = self.tableEditingController else { return false }
-            return controller.canEditRow(tableView, indexPath)
+            let item = self.dataSource.item(atIndexPath: indexPath)!
+            return controller.canEditRow(item, tableView, indexPath)
         }
 
         dataSource.tableCommitEditingStyleForRow = { [unowned self] (tableView, editingStyle, indexPath) in
-            self.tableEditingController?.commitEditing(tableView, editingStyle, indexPath)
+            self.tableEditingController?.commitEditing(&self.dataSource, tableView, editingStyle, indexPath)
         }
 
         return dataSource
