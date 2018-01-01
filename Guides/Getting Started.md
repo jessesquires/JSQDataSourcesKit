@@ -12,8 +12,8 @@ This library has four primary components:
 
 1. `Section` — represents a section of data
 2. `DataSource` — represents a collection of `Section` types
-3. `ReusableViewFactory` — responsible for dequeuing and configuring cells (for `UITableView` or `UICollectionView`)
-4. `DataSourceProvider` — owns a data source and cell factory, and provides a `UICollectionViewDataSource` or `UITableViewDataSource` object.
+3. `ReusableViewConfig` — responsible for dequeuing and configuring cells (for `UITableView` or `UICollectionView`)
+4. `DataSourceProvider` — owns a data source and view config, and provides a `UICollectionViewDataSource` or `UITableViewDataSource` object.
 
 ## Example
 
@@ -28,23 +28,23 @@ let section1 = Section(items: ...)
 let section2 = Section(items: ...)
 let dataSource = DataSource(sections: section0, section1, section2)
 
-// 2. create cell factory
-let cellFactory = ViewFactory(reuseIdentifier: "CellId") { (cell, model?, type, collectionView, indexPath) -> MyCellClass in
+// 2. create cell config
+let cellConfig = ReusableViewConfig(reuseIdentifier: "CellId") { (cell, model?, type, collectionView, indexPath) -> MyCellClass in
     // configure the cell with the model
     return cell
 }
 
-// 3. create supplementary view factory
+// 3. create supplementary view config
 let type = ReusableViewType.supplementaryView(kind: UICollectionElementKindSectionHeader)
-let headerFactory = ViewFactory(reuseIdentifier: "HeaderId", type: type) { (view, model?, type, collectionView, indexPath) -> MyHeaderView in
+let headerConfig = ReusableViewConfig(reuseIdentifier: "HeaderId", type: type) { (view, model?, type, collectionView, indexPath) -> MyHeaderView in
     // configure header view
     return view
 }
 
 // 4. create data source provider
 let dataSourceProvider =  DataSourceProvider(dataSource: dataSource,
-                                             cellFactory: cellFactory,
-                                             supplementaryFactory: headerFactory)
+                                             cellConfig: cellConfig,
+                                             supplementaryConfig: headerConfig)
 
 // 5. set the collection view's data source
 collectionView.dataSource = dataSourceProvider.collectionViewDataSource

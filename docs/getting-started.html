@@ -75,9 +75,6 @@
               <li class="nav-group-task">
                 <a href="Protocols/ReusableViewProtocol.html">ReusableViewProtocol</a>
               </li>
-              <li class="nav-group-task">
-                <a href="Protocols/SectionInfoProtocol.html">SectionInfoProtocol</a>
-              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -118,8 +115,8 @@
 <ol>
 <li><code><a href="Structs/Section.html">Section</a></code> — represents a section of data</li>
 <li><code><a href="Structs/DataSource.html">DataSource</a></code> — represents a collection of <code><a href="Structs/Section.html">Section</a></code> types</li>
-<li><code>ReusableViewFactory</code> — responsible for dequeuing and configuring cells (for <code>UITableView</code> or <code>UICollectionView</code>)</li>
-<li><code><a href="Classes/DataSourceProvider.html">DataSourceProvider</a></code> — owns a data source and cell factory, and provides a <code>UICollectionViewDataSource</code> or <code>UITableViewDataSource</code> object.</li>
+<li><code><a href="Structs/ReusableViewConfig.html">ReusableViewConfig</a></code> — responsible for dequeuing and configuring cells (for <code>UITableView</code> or <code>UICollectionView</code>)</li>
+<li><code><a href="Classes/DataSourceProvider.html">DataSourceProvider</a></code> — owns a data source and view config, and provides a <code>UICollectionViewDataSource</code> or <code>UITableViewDataSource</code> object.</li>
 </ol>
 <h2 id='example' class='heading'>Example</h2>
 
@@ -132,23 +129,23 @@
 <span class="k">let</span> <span class="nv">section2</span> <span class="o">=</span> <span class="kt">Section</span><span class="p">(</span><span class="nv">items</span><span class="p">:</span> <span class="o">...</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">dataSource</span> <span class="o">=</span> <span class="kt">DataSource</span><span class="p">(</span><span class="nv">sections</span><span class="p">:</span> <span class="n">section0</span><span class="p">,</span> <span class="n">section1</span><span class="p">,</span> <span class="n">section2</span><span class="p">)</span>
 
-<span class="c1">// 2. create cell factory</span>
-<span class="k">let</span> <span class="nv">cellFactory</span> <span class="o">=</span> <span class="kt">ViewFactory</span><span class="p">(</span><span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="s">"CellId"</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">model</span><span class="p">?,</span> <span class="n">type</span><span class="p">,</span> <span class="n">collectionView</span><span class="p">,</span> <span class="n">indexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">MyCellClass</span> <span class="k">in</span>
+<span class="c1">// 2. create cell config</span>
+<span class="k">let</span> <span class="nv">cellConfig</span> <span class="o">=</span> <span class="kt">ReusableViewConfig</span><span class="p">(</span><span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="s">"CellId"</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">model</span><span class="p">?,</span> <span class="n">type</span><span class="p">,</span> <span class="n">collectionView</span><span class="p">,</span> <span class="n">indexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">MyCellClass</span> <span class="k">in</span>
     <span class="c1">// configure the cell with the model</span>
     <span class="k">return</span> <span class="n">cell</span>
 <span class="p">}</span>
 
-<span class="c1">// 3. create supplementary view factory</span>
+<span class="c1">// 3. create supplementary view config</span>
 <span class="k">let</span> <span class="nv">type</span> <span class="o">=</span> <span class="kt">ReusableViewType</span><span class="o">.</span><span class="nf">supplementaryView</span><span class="p">(</span><span class="nv">kind</span><span class="p">:</span> <span class="kt">UICollectionElementKindSectionHeader</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">headerFactory</span> <span class="o">=</span> <span class="kt">ViewFactory</span><span class="p">(</span><span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="s">"HeaderId"</span><span class="p">,</span> <span class="nv">type</span><span class="p">:</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">model</span><span class="p">?,</span> <span class="n">type</span><span class="p">,</span> <span class="n">collectionView</span><span class="p">,</span> <span class="n">indexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">MyHeaderView</span> <span class="k">in</span>
+<span class="k">let</span> <span class="nv">headerConfig</span> <span class="o">=</span> <span class="kt">ReusableViewConfig</span><span class="p">(</span><span class="nv">reuseIdentifier</span><span class="p">:</span> <span class="s">"HeaderId"</span><span class="p">,</span> <span class="nv">type</span><span class="p">:</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">view</span><span class="p">,</span> <span class="n">model</span><span class="p">?,</span> <span class="n">type</span><span class="p">,</span> <span class="n">collectionView</span><span class="p">,</span> <span class="n">indexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">MyHeaderView</span> <span class="k">in</span>
     <span class="c1">// configure header view</span>
     <span class="k">return</span> <span class="n">view</span>
 <span class="p">}</span>
 
 <span class="c1">// 4. create data source provider</span>
 <span class="k">let</span> <span class="nv">dataSourceProvider</span> <span class="o">=</span>  <span class="kt">DataSourceProvider</span><span class="p">(</span><span class="nv">dataSource</span><span class="p">:</span> <span class="n">dataSource</span><span class="p">,</span>
-                                             <span class="nv">cellFactory</span><span class="p">:</span> <span class="n">cellFactory</span><span class="p">,</span>
-                                             <span class="nv">supplementaryFactory</span><span class="p">:</span> <span class="n">headerFactory</span><span class="p">)</span>
+                                             <span class="nv">cellConfig</span><span class="p">:</span> <span class="n">cellConfig</span><span class="p">,</span>
+                                             <span class="nv">supplementaryConfig</span><span class="p">:</span> <span class="n">headerConfig</span><span class="p">)</span>
 
 <span class="c1">// 5. set the collection view's data source</span>
 <span class="n">collectionView</span><span class="o">.</span><span class="n">dataSource</span> <span class="o">=</span> <span class="n">dataSourceProvider</span><span class="o">.</span><span class="n">collectionViewDataSource</span>
@@ -160,7 +157,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2017-12-31)</p>
+          <p>&copy; 2018 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2018-01-01)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
