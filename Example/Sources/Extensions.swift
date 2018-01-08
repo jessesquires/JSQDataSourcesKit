@@ -17,10 +17,10 @@
 //
 
 import CoreData
-import Foundation
-import UIKit
 import ExampleModel
+import Foundation
 import JSQDataSourcesKit
+import UIKit
 
 extension UIAlertController {
     class func showActionAlert(_ presenter: UIViewController,
@@ -57,7 +57,6 @@ extension UIAlertController {
     }
 }
 
-
 extension UITableView {
 
     func deselectAllRows() {
@@ -69,7 +68,6 @@ extension UITableView {
     }
 }
 
-
 extension UICollectionView {
 
     func deselectAllItems() {
@@ -80,7 +78,6 @@ extension UICollectionView {
         }
     }
 }
-
 
 extension FetchedResultsController {
 

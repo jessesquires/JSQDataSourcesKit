@@ -16,10 +16,10 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
-import UIKit
 import CoreData
 import ExampleModel
 import JSQDataSourcesKit
+import UIKit
 
 final class FetchedCollectionViewController: UICollectionViewController {
 
@@ -34,7 +34,6 @@ final class FetchedCollectionViewController: UICollectionViewController {
     var delegateProvider: FetchedResultsDelegateProvider<ThingCellConfig>!
 
     var frc: FetchedResultsController<Thing>!
-
 
     // MARK: view lifecycle
 
@@ -95,7 +94,6 @@ final class FetchedCollectionViewController: UICollectionViewController {
         fetchData()
     }
 
-
     // MARK: Helpers
 
     private func fetchData() {
@@ -105,7 +103,6 @@ final class FetchedCollectionViewController: UICollectionViewController {
             print("Fetch error = \(error)")
         }
     }
-
 
     // MARK: Actions
 

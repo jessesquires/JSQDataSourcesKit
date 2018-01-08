@@ -22,7 +22,6 @@ import XCTest
 
 import JSQDataSourcesKit
 
-
 final class TitledSupplementaryViewTests: XCTestCase {
 
     func test_thatView_initializesWithFrame() {
@@ -64,7 +63,7 @@ final class TitledSupplementaryViewTests: XCTestCase {
     func test_thatView_preparesForReuse_ForAttributedText() {
         let view = TitledSupplementaryView(frame: CGRect(x: 0, y: 0, width: 320, height: 100))
         view.layoutIfNeeded()
-        view.label.attributedText = NSAttributedString(string:"title text")
+        view.label.attributedText = NSAttributedString(string: "title text")
 
         XCTAssertNotNil(view.label.attributedText)
 

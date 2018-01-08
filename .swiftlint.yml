@@ -1,0 +1,53 @@
+excluded:
+  - Pods
+  - docs
+  - build
+  - scripts
+
+disabled_rules:
+  # metrics
+  - nesting
+  - function_parameter_count
+
+  # lint
+  - notification_center_detachment
+  - unused_closure_parameter
+  - weak_delegate
+
+  # idiomatic
+  - fallthrough
+  - force_cast
+  - type_name
+
+  # style
+  - identifier_name
+  - closure_parameter_position
+
+opt_in_rules:
+  # performance
+  - empty_count
+  - first_where
+  - sorted_first_last
+  - contains_over_first_not_nil
+
+  # idiomatic
+  - fatal_error_message
+
+  # style
+  - attributes
+  - number_separator
+  - operator_usage_whitespace
+  - sorted_imports
+  - vertical_parameter_alignment_on_call
+
+  # lint
+  - overridden_super_call
+
+line_length: 200
+file_length: 600
+
+type_body_length: 500
+
+function_body_length: 250
+
+cyclomatic_complexity: 15

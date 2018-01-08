@@ -22,7 +22,6 @@ import XCTest
 
 @testable import JSQDataSourcesKit
 
-
 final class BridgedDataSourceTests: TestCase {
 
     func test_thatBridgedDataSource_implements_collectionViewDataSource() {
@@ -53,7 +52,7 @@ final class BridgedDataSourceTests: TestCase {
             XCTAssertEqual(items, 3)
         }
 
-        let indexPath = IndexPath(item: 0, section: 0);
+        let indexPath = IndexPath(item: 0, section: 0)
         let cell = dataSource.collectionView(collectionView, cellForItemAt: indexPath)
         XCTAssertNotNil(cell)
 
@@ -93,7 +92,7 @@ final class BridgedDataSourceTests: TestCase {
             XCTAssertEqual(items, 3)
         }
 
-        let indexPath = IndexPath(item: 0, section: 0);
+        let indexPath = IndexPath(item: 0, section: 0)
         let cell = dataSource.tableView(tableView, cellForRowAt: indexPath)
         XCTAssertNotNil(cell)
 
@@ -128,13 +127,13 @@ final class BridgedDataSourceTests: TestCase {
             XCTAssertEqual(items, 3)
         }
 
-        let indexPath = IndexPath(item: 0, section: 0);
+        let indexPath = IndexPath(item: 0, section: 0)
         let cell = dataSource.tableView(tableView, cellForRowAt: indexPath)
         XCTAssertNotNil(cell)
 
         let header = dataSource.tableView(tableView, titleForHeaderInSection: 1)
         XCTAssertNil(header)
-        
+
         let footer = dataSource.tableView(tableView, titleForFooterInSection: 2)
         XCTAssertNil(footer)
     }

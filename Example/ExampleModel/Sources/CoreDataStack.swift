@@ -16,14 +16,14 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
-import Foundation
 import CoreData
-
+import Foundation
 
 // A quick and dirty core data stack for testing
 // DO NOT DO THIS IN REAL LIFE
 // In fact, use https://github.com/jessesquires/JSQCoreDataKit
 
+// swiftlint:disable force_try
 
 public class CoreDataStack {
 
@@ -61,5 +61,6 @@ public class CoreDataStack {
         }
         return success
     }
-    
 }
+
+// swiftlint:enable force_try

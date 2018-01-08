@@ -16,11 +16,11 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
-import Foundation
 import CoreData
-import UIKit
 import ExampleModel
+import Foundation
 import JSQDataSourcesKit
+import UIKit
 
 let CellId = "cell"
 let FancyCellId = "fancyCell"

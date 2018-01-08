@@ -22,45 +22,41 @@ import UIKit
 
 /// A `FetchedResultsDelegateProvider` is responsible for providing a delegate object for an instance of `NSFetchedResultsController`.
 public final class FetchedResultsDelegateProvider<CellConfig: ReusableViewConfigProtocol> {
-    
+
     // MARK: Type aliases
-    
+
     /// The parent view of cell's that the cell configuration produces.
     public typealias ParentView = CellConfig.View.ParentView
-    
-    
+
     // MARK: Properties
-    
+
     /// The table view or collection view displaying data for the fetched results controller.
     public weak var cellParentView: ParentView?
-    
+
     /// The cell configuration.
     public let cellConfig: CellConfig
-    
-    
+
     // MARK: Private
-    
+
     private typealias Item = CellConfig.Item
-    
+
     private var bridgedDelegate: BridgedFetchedResultsDelegate?
-    
+
     private init(cellConfig: CellConfig, cellParentView: ParentView) {
         self.cellConfig = cellConfig
         self.cellParentView = cellParentView
     }
-    
-    
+
     // MARK: Private, collection view properties
 
     private lazy var sectionChanges = [() -> Void]()
     private lazy var objectChanges = [() -> Void]()
 }
 
-
 extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UICollectionView {
-    
+
     // MARK: Collection views
-    
+
     /// Initializes a new fetched results delegate provider for collection views.
     ///
     /// - Parameters:
@@ -69,7 +65,7 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIC
     public convenience init(cellConfig: CellConfig, collectionView: UICollectionView) {
         self.init(cellConfig: cellConfig, cellParentView: collectionView)
     }
-    
+
     /// Returns the `NSFetchedResultsControllerDelegate` object for a collection view.
     public var collectionDelegate: NSFetchedResultsControllerDelegate {
         if bridgedDelegate == nil {
@@ -77,9 +73,9 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIC
         }
         return bridgedDelegate!
     }
-    
+
     private weak var collectionView: UICollectionView? { return cellParentView }
-    
+
     private func bridgedCollectionFetchedResultsDelegate() -> BridgedFetchedResultsDelegate {
         let delegate = BridgedFetchedResultsDelegate(
             willChangeContent: { [unowned self] (controller) in
@@ -91,7 +87,7 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIC
 
                 let section = IndexSet(integer: sectionIndex)
                 self.sectionChanges.append { [unowned self] in
-                    switch(changeType) {
+                    switch changeType {
                     case .insert:
                         self.collectionView?.insertSections(section)
                     case .delete:
@@ -148,22 +144,21 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIC
                         self?.reloadSupplementaryViewsIfNeeded()
                 })
         })
-        
+
         return delegate
     }
-    
+
     private func reloadSupplementaryViewsIfNeeded() {
-        if sectionChanges.count > 0 {
+        if !sectionChanges.isEmpty {
             collectionView?.reloadData()
         }
     }
 }
 
-
 extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UITableView {
-    
+
     // MARK: Table views
-    
+
     /// Initializes a new fetched results delegate provider for table views.
     ///
     /// - Parameters:
@@ -172,7 +167,7 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIT
     public convenience init(cellConfig: CellConfig, tableView: UITableView) {
         self.init(cellConfig: cellConfig, cellParentView: tableView)
     }
-    
+
     /// Returns the `NSFetchedResultsControllerDelegate` object for a table view.
     public var tableDelegate: NSFetchedResultsControllerDelegate {
         if bridgedDelegate == nil {
@@ -180,9 +175,9 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIT
         }
         return bridgedDelegate!
     }
-    
+
     private weak var tableView: UITableView? { return cellParentView }
-    
+
     private func bridgedTableFetchedResultsDelegate() -> BridgedFetchedResultsDelegate {
         let delegate = BridgedFetchedResultsDelegate(
             willChangeContent: { [unowned self] (controller) in
@@ -218,7 +213,7 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIT
                     if let deleteIndexPath = indexPath {
                         self.tableView?.deleteRows(at: [deleteIndexPath], with: .fade)
                     }
-                    
+
                     if let insertIndexPath = newIndexPath {
                         self.tableView?.insertRows(at: [insertIndexPath], with: .fade)
                     }
@@ -227,7 +222,7 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIT
             didChangeContent: { [unowned self] (controller) in
                 self.tableView?.endUpdates()
         })
-        
+
         return delegate
     }
 }

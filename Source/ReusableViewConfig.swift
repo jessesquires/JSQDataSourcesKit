@@ -28,15 +28,14 @@ import UIKit
  For `UITableViewCell`, this would be `UITableView`.
  */
 public protocol CellParentViewProtocol {
-    
+
     // MARK: Associated types
-    
+
     /// The type of cell for this parent view.
     associatedtype CellType: UIView
-    
-    
+
     // MARK: Methods
-    
+
     /**
      Returns a reusable cell located by its identifier.
      
@@ -46,7 +45,7 @@ public protocol CellParentViewProtocol {
      - returns: A valid `CellType` reusable cell.
      */
     func dequeueReusableCellFor(identifier: String, indexPath: IndexPath) -> CellType
-    
+
     /**
      Returns a reusable supplementary view located by its identifier and kind.
      
@@ -62,12 +61,12 @@ public protocol CellParentViewProtocol {
 extension UICollectionView: CellParentViewProtocol {
     /// :nodoc:
     public typealias CellType = UICollectionReusableView
-    
+
     /// :nodoc:
     public func dequeueReusableCellFor(identifier: String, indexPath: IndexPath) -> CellType {
         return dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
     }
-    
+
     /// :nodoc:
     public func dequeueReusableSupplementaryViewFor(kind: String, identifier: String, indexPath: IndexPath) -> CellType? {
         return dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: identifier, for: indexPath)
@@ -77,19 +76,17 @@ extension UICollectionView: CellParentViewProtocol {
 extension UITableView: CellParentViewProtocol {
     /// :nodoc:
     public typealias CellType = UITableViewCell
-    
+
     /// :nodoc:
     public func dequeueReusableCellFor(identifier: String, indexPath: IndexPath) -> CellType {
         return dequeueReusableCell(withIdentifier: identifier, for: indexPath)
     }
-    
+
     /// :nodoc:
     public func dequeueReusableSupplementaryViewFor(kind: String, identifier: String, indexPath: IndexPath) -> CellType? {
         return nil
     }
 }
-
-
 
 // MARK: ReusableViewProtocol
 
@@ -97,25 +94,23 @@ extension UITableView: CellParentViewProtocol {
  This protocol unifies `UICollectionViewCell`, `UICollectionReusableView`, and `UITableViewCell` by providing a common interface for cells.
  */
 public protocol ReusableViewProtocol {
-    
+
     // MARK: Associated types
-    
+
     /**
      The "parent" view of the cell.
      For `UICollectionViewCell` or `UICollectionReusableView` this is `UICollectionView`.
      For `UITableViewCell` this is `UITableView`.
      */
     associatedtype ParentView: UIView, CellParentViewProtocol
-    
-    
+
     // MARK: Properties
-    
+
     /// A string that identifies the purpose of the view.
     var reuseIdentifier: String? { get }
-    
-    
+
     // MARK: Methods
-    
+
     /// Performs any clean up necessary to prepare the view for use again.
     func prepareForReuse()
 }
@@ -134,14 +129,13 @@ extension UITableViewCell: ReusableViewProtocol {
  Specifies the type of reusable view.
  */
 public enum ReusableViewType {
-    
+
     /// A collection or table view cell.
     case cell
-    
+
     /// A supplementary view and its associated kind identifer.
     case supplementaryView(kind: String)
 }
-
 
 extension ReusableViewType: Equatable {
     /// :nodoc:
@@ -157,7 +151,6 @@ extension ReusableViewType: Equatable {
     }
 }
 
-
 // MARK: ReusableViewConfigProtocol
 
 /**
@@ -165,18 +158,17 @@ extension ReusableViewType: Equatable {
  and configuring reusable views to be displayed in either a `UICollectionView` or a `UITableView`.
  */
 public protocol ReusableViewConfigProtocol {
-    
+
     // MARK: Associated types
-    
+
     /// The type of elements backing the collection view or table view.
     associatedtype Item
-    
+
     /// The type of views that the configuration produces.
     associatedtype View: ReusableViewProtocol
-    
-    
+
     // MARK: Methods
-    
+
     /**
      Provides a view reuse identifer for the given item, type, and indexPath.
      
@@ -187,7 +179,7 @@ public protocol ReusableViewConfigProtocol {
      - returns: An identifier for a reusable view.
      */
     func reuseIdentiferFor(item: Item?, type: ReusableViewType, indexPath: IndexPath) -> String
-    
+
     /**
      Configures and returns the specified view.
      
@@ -203,11 +195,10 @@ public protocol ReusableViewConfigProtocol {
     func configure(view: View, item: Item?, type: ReusableViewType, parentView: View.ParentView, indexPath: IndexPath) -> View
 }
 
-
 public extension ReusableViewConfigProtocol where View: UITableViewCell {
-    
+
     // MARK: Table cells
-    
+
     /**
      Creates a new `View` instance, or dequeues an existing cell for reuse, then configures and returns it.
      
@@ -224,11 +215,10 @@ public extension ReusableViewConfigProtocol where View: UITableViewCell {
     }
 }
 
-
 public extension ReusableViewConfigProtocol where View: UICollectionViewCell {
-    
+
     // MARK: Collection cells
-    
+
     /**
      Creates a new `View` instance, or dequeues an existing cell for reuse, then configures and returns it.
      
@@ -245,11 +235,10 @@ public extension ReusableViewConfigProtocol where View: UICollectionViewCell {
     }
 }
 
-
 public extension ReusableViewConfigProtocol where View: UICollectionReusableView {
-    
+
     // MARK: Supplementary views
-    
+
     /**
      Creates a new `View` instance, or dequeues an existing view for reuse, then configures and returns it.
      
@@ -267,7 +256,6 @@ public extension ReusableViewConfigProtocol where View: UICollectionReusableView
     }
 }
 
-
 // MARK: ReusableViewConfig
 
 /**
@@ -275,10 +263,10 @@ public extension ReusableViewConfigProtocol where View: UICollectionReusableView
  This config is responsible for producing and configuring reusable views for a specific item.
  Cells can be for either collection views or table views.
  */
-public struct ReusableViewConfig<Item, Cell: ReusableViewProtocol>: ReusableViewConfigProtocol  {
-    
+public struct ReusableViewConfig<Item, Cell: ReusableViewProtocol>: ReusableViewConfigProtocol {
+
     // MARK: Type aliases
-    
+
     /**
      Configures the cell for the specified item, parent view, and index path.
      
@@ -291,10 +279,9 @@ public struct ReusableViewConfig<Item, Cell: ReusableViewProtocol>: ReusableView
      - returns: The configured cell.
      */
     public typealias ViewConfigurator = (Cell, Item?, ReusableViewType, Cell.ParentView, IndexPath) -> Cell
-    
-    
+
     // MARK: Properties
-    
+
     /**
      A unique identifier that describes the purpose of the cells that the config produces.
      The config dequeues cells from the collection view or table view with this reuse identifier.
@@ -302,16 +289,15 @@ public struct ReusableViewConfig<Item, Cell: ReusableViewProtocol>: ReusableView
      - note: Clients are responsible for registering a cell for this identifier with the collection view or table view.
      */
     public let reuseIdentifier: String
-    
+
     /// The type of the reusable view.
     public let type: ReusableViewType
-    
+
     /// A closure used to configure the views.
     public let viewConfigurator: ViewConfigurator
-    
-    
+
     // MARK: Initialization
-    
+
     /// Constructs a new reusable view config.
     ///
     /// - Parameters:
@@ -323,12 +309,12 @@ public struct ReusableViewConfig<Item, Cell: ReusableViewProtocol>: ReusableView
         self.type = type
         self.viewConfigurator = viewConfigurator
     }
-    
+
     /// :nodoc:
     public func reuseIdentiferFor(item: Item?, type: ReusableViewType, indexPath: IndexPath) -> String {
         return reuseIdentifier
     }
-    
+
     /// :nodoc:
     public func configure(view: Cell, item: Item?, type: ReusableViewType, parentView: Cell.ParentView, indexPath: IndexPath) -> Cell {
         assert(self.type == type)

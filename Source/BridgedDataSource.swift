@@ -19,7 +19,6 @@
 import Foundation
 import UIKit
 
-
 internal typealias NumberOfSectionsHandler = () -> Int
 internal typealias NumberOfItemsInSectionHandler = (Int) -> Int
 
@@ -33,12 +32,12 @@ internal typealias TableTitleForFooterInSectionHandler = (Int) -> String?
 internal typealias TableCanEditHandler = (UITableView, IndexPath) -> Bool
 internal typealias TableCommitEditingStyleHandler = (UITableView, UITableViewCellEditingStyle, IndexPath) -> Void
 
-
 /**
  This class is responsible for implementing the `UICollectionViewDataSource` and `UITableViewDataSource` protocols.
  It avoids making `DataSourceProvider` inherit from `NSObject`, and keeps classes small and focused.
  */
-@objc internal final class BridgedDataSource: NSObject {
+@objc
+internal final class BridgedDataSource: NSObject {
 
     let numberOfSections: NumberOfSectionsHandler
     let numberOfItemsInSection: NumberOfItemsInSectionHandler
@@ -49,7 +48,7 @@ internal typealias TableCommitEditingStyleHandler = (UITableView, UITableViewCel
     var tableCellForRowAtIndexPath: TableCellForRowAtIndexPathHandler?
     var tableTitleForHeaderInSection: TableTitleForHeaderInSectionHandler?
     var tableTitleForFooterInSection: TableTitleForFooterInSectionHandler?
-    
+
     var tableCanEditRow: TableCanEditHandler?
     var tableCommitEditingStyleForRow: TableCommitEditingStyleHandler?
 
@@ -60,64 +59,73 @@ internal typealias TableCommitEditingStyleHandler = (UITableView, UITableViewCel
     }
 }
 
-
 extension BridgedDataSource: UICollectionViewDataSource {
-    @objc func numberOfSections(in collectionView: UICollectionView) -> Int {
+    @objc
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return numberOfSections()
     }
 
-    @objc func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    @objc
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return numberOfItemsInSection(section)
     }
 
-    @objc func collectionView(_ collectionView: UICollectionView,
-                              cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    @objc
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return collectionCellForItemAtIndexPath!(collectionView, indexPath)
     }
 
-    @objc func collectionView(_ collectionView: UICollectionView,
-                              viewForSupplementaryElementOfKind kind: String,
-                              at indexPath: IndexPath) -> UICollectionReusableView {
+    @objc
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
         return collectionSupplementaryViewAtIndexPath!(collectionView, kind, indexPath)
     }
 }
 
-
 extension BridgedDataSource: UITableViewDataSource {
-    @objc func numberOfSections(in tableView: UITableView) -> Int {
+    @objc
+    func numberOfSections(in tableView: UITableView) -> Int {
         return numberOfSections()
     }
 
-    @objc func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    @objc
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return numberOfItemsInSection(section)
     }
 
-    @objc func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    @objc
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return tableCellForRowAtIndexPath!(tableView, indexPath)
     }
 
-    @objc func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    @objc
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if let closure = tableTitleForHeaderInSection {
             return closure(section)
         }
         return nil
     }
 
-    @objc func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    @objc
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if let closure = tableTitleForFooterInSection {
             return closure(section)
         }
         return nil
     }
-    
-    @objc func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+
+    @objc
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if let closure = tableCanEditRow {
-            return closure(tableView,indexPath)
+            return closure(tableView, indexPath)
         }
         return false
     }
-    
-    @objc func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        tableCommitEditingStyleForRow?(tableView,editingStyle,indexPath)
+
+    @objc
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        tableCommitEditingStyleForRow?(tableView, editingStyle, indexPath)
     }
 }

@@ -16,10 +16,9 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
-import Foundation
 import CoreData
+import Foundation
 import UIKit
-
 
 public enum Color: String {
     case Red
@@ -27,14 +26,13 @@ public enum Color: String {
     case Green
 
     var displayColor: UIColor {
-        switch(self) {
+        switch self {
         case .Red: return .red
         case .Blue: return .blue
         case .Green: return .green
         }
     }
 }
-
 
 public class Thing: NSManagedObject {
 
@@ -62,9 +60,7 @@ public class Thing: NSManagedObject {
     }
 
     public override var description: String {
-        get {
-            return "<Thing: \(name), \(color)>"
-        }
+        return "<Thing: \(name), \(color)>"
     }
 
     // MARK: Init
@@ -77,7 +73,6 @@ public class Thing: NSManagedObject {
     public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
         super.init(entity: entity, insertInto: context)
     }
-
 
     // MARK: Methods
 
@@ -93,7 +88,6 @@ public class Thing: NSManagedObject {
         changeColorRandomly()
         changeNameRandomly()
     }
-
 
     // MARK: Class
 
@@ -115,16 +109,14 @@ public class Thing: NSManagedObject {
     }
 }
 
-
 private func randomColor(withoutColor color: Color?) -> Color {
-    var colorSet = Set(arrayLiteral: Color.Red, Color.Blue, Color.Green)
+    var colorSet = Set([Color.Red, Color.Blue, Color.Green])
     if let color = color {
         colorSet.remove(color)
     }
     let colors = Array(colorSet)
     return colors[Int(arc4random_uniform(UInt32(colors.count)))]
 }
-
 
 private func randomName() -> String {
     return UUID().uuidString.components(separatedBy: "-").first!

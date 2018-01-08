@@ -16,23 +16,23 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
-import UIKit
 import JSQDataSourcesKit
+import UIKit
 
 final class TableViewController: UITableViewController {
-    
+
     typealias TableCellConfig = ReusableViewConfig<CellViewModel, UITableViewCell>
     var dataSourceProvider: DataSourceProvider<DataSource<CellViewModel>, TableCellConfig, TableCellConfig>?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // 1. create view models
         let section0 = Section(items: CellViewModel(), CellViewModel(), CellViewModel(), headerTitle: "First")
         let section1 = Section(items: CellViewModel(), CellViewModel(), CellViewModel(), CellViewModel(), headerTitle: "Second", footerTitle: "Only 2nd has a footer")
         let section2 = Section(items: CellViewModel(), CellViewModel(), headerTitle: "Third")
         let dataSource = DataSource(sections: section0, section1, section2)
-        
+
         // 2. create cell config
         let config = ReusableViewConfig(reuseIdentifier: CellId) { (cell, model: CellViewModel?, type, tableView, indexPath) -> UITableViewCell in
             cell.textLabel?.text = model!.text
@@ -40,7 +40,7 @@ final class TableViewController: UITableViewController {
             cell.accessibilityIdentifier = "\(indexPath.section), \(indexPath.row)"
             return cell
         }
-        
+
         // ** optional editing **
         // if needed, enable the editing functionality on the tableView
         let editingController: TableEditingController<DataSource<CellViewModel>> = TableEditingController(
@@ -49,18 +49,18 @@ final class TableViewController: UITableViewController {
         },
             commitEditing: { (dataSource: inout DataSource, tableView, editingStyle, indexPath) in
                 if editingStyle == .delete {
-                    if let _ = dataSource.remove(at: indexPath) {
+                    if dataSource.remove(at: indexPath) != nil {
                         tableView.deleteRows(at: [indexPath], with: .automatic)
                     }
                 }
         })
-        
+
         // 3. create data source provider
         dataSourceProvider = DataSourceProvider(dataSource: dataSource,
                                                 cellConfig: config,
                                                 supplementaryConfig: config,
                                                 tableEditingController: editingController)
-        
+
         // 4. set data source
         tableView.dataSource = dataSourceProvider?.tableViewDataSource
     }

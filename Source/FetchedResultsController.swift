@@ -16,8 +16,8 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 // 
 
-import Foundation
 import CoreData
+import Foundation
 
 /// A generic `NSFetchedResultsController`.
 public class FetchedResultsController<T: NSFetchRequestResult>: NSFetchedResultsController<NSFetchRequestResult> {

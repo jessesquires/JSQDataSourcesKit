@@ -24,9 +24,9 @@ import UIKit
  This config is responsible for producing and configuring `TitledSupplementaryView` instances.
  */
 public struct TitledSupplementaryViewConfig <Item>: ReusableViewConfigProtocol {
-    
+
     // MARK: Typealiases
-    
+
     /**
      Configures the `TitledSupplementaryView` for the specified data item, collection view, and index path.
      
@@ -39,30 +39,27 @@ public struct TitledSupplementaryViewConfig <Item>: ReusableViewConfigProtocol {
      - returns: The configured `TitledSupplementaryView` instance.
      */
     public typealias ConfigurationHandler = (TitledSupplementaryView, Item?, ReusableViewType, UICollectionView, IndexPath) -> TitledSupplementaryView
-    
-    
+
     // MARK: Private Properties
-    
+
     private let configurator: ConfigurationHandler
-    
-    
+
     // MARK: Initialization
-    
+
     /// Constructs a new `TitledSupplementaryView`.
     ///
     /// - Parameter configurator: The closure to configure the `TitledSupplementaryView` with the backing data item.
     public init(configurator: @escaping ConfigurationHandler) {
         self.configurator = configurator
     }
-    
-    
+
     // MARK: ReusableViewConfigProtocol
-    
+
     /// :nodoc:
     public func reuseIdentiferFor(item: Item?, type: ReusableViewType, indexPath: IndexPath) -> String {
         return TitledSupplementaryView.identifier
     }
-    
+
     /// :nodoc:
     public func configure(view: TitledSupplementaryView,
                           item: Item?,

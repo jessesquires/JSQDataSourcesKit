@@ -19,12 +19,12 @@
 import CoreData
 import Foundation
 
-
 /**
  This class is responsible for implementing the `NSFetchedResultsControllerDelegate` protocol.
  It avoids making `FetchedResultsDelegateProvider` inherit from `NSObject`, and keeps classes small and focused.
  */
-@objc internal final class BridgedFetchedResultsDelegate: NSObject {
+@objc
+internal final class BridgedFetchedResultsDelegate: NSObject {
 
     typealias WillChangeContentHandler = (NSFetchedResultsController<NSFetchRequestResult>) -> Void
     typealias DidChangeSectionHandler = (NSFetchedResultsController<NSFetchRequestResult>, NSFetchedResultsSectionInfo, Int, NSFetchedResultsChangeType) -> Void
@@ -48,29 +48,32 @@ import Foundation
     }
 }
 
-
 extension BridgedFetchedResultsDelegate: NSFetchedResultsControllerDelegate {
 
-    @objc func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    @objc
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         willChangeContent(controller)
     }
 
-    @objc func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                          didChange sectionInfo: NSFetchedResultsSectionInfo,
-                          atSectionIndex sectionIndex: Int,
-                          for type: NSFetchedResultsChangeType) {
+    @objc
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange sectionInfo: NSFetchedResultsSectionInfo,
+                    atSectionIndex sectionIndex: Int,
+                    for type: NSFetchedResultsChangeType) {
         didChangeSection(controller, sectionInfo, sectionIndex, type)
     }
 
-    @objc func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                          didChange anObject: Any,
-                          at indexPath: IndexPath?,
-                          for type: NSFetchedResultsChangeType,
-                          newIndexPath: IndexPath?) {
+    @objc
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
         didChangeObject(controller, anObject, indexPath, type, newIndexPath)
     }
 
-    @objc func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    @objc
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         didChangeContent(controller)
     }
 }

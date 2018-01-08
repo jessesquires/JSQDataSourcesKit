@@ -51,7 +51,7 @@ public struct TableEditingController<DataSource: DataSourceProtocol> {
 
     /// A closure that commits the editing actions for a table view.
     public let commitEditing: CommitEditingConfig
-    
+
     // MARK: Initialization
 
     /**

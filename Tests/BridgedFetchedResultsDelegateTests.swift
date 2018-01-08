@@ -22,7 +22,6 @@ import XCTest
 
 @testable import JSQDataSourcesKit
 
-
 final class BridgedFetchedResultsDelegateTests: XCTestCase {
 
     func test_thatFetchedResultsDelegate_callsClosures_whenDelegateMethodsAreCalled() {

@@ -16,9 +16,9 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
-import XCTest
 @testable import ExampleModel
+import XCTest
 
 class ExampleModelTests: XCTestCase {
-    
+
 }

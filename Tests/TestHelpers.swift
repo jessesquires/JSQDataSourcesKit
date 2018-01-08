@@ -17,14 +17,12 @@
 //
 
 import CoreData
+import ExampleModel
 import Foundation
 import UIKit
 import XCTest
-import ExampleModel
-
 
 let defaultTimeout = TimeInterval(5)
-
 
 // MARK: model
 
@@ -32,12 +30,10 @@ struct FakeViewModel: Equatable, CustomStringConvertible {
     let name = UUID().uuidString
 
     var description: String {
-        get {
-            return "<\(FakeViewModel.self): \(name)>"
-        }
+        return "<\(FakeViewModel.self): \(name)>"
     }
 
-    static func ==(lhs: FakeViewModel, rhs: FakeViewModel) -> Bool {
+    static func == (lhs: FakeViewModel, rhs: FakeViewModel) -> Bool {
         return lhs.name == rhs.name
     }
 }
@@ -57,7 +53,6 @@ func generateThings(_ context: NSManagedObjectContext, color: Color) -> [Thing] 
     return all
 }
 
-
 // MARK: table view
 
 class FakeTableCell: UITableViewCell { }
@@ -71,7 +66,6 @@ class FakeTableView: UITableView {
         return super.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
     }
 }
-
 
 // MARK: collection view
 

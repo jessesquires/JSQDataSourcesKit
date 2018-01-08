@@ -46,7 +46,7 @@ public struct DataSource<Item> {
     }
 
     // MARK: Methods
-    
+
     /**
      Inserts the item at the specified index path.
      - parameter item:      The item to be inserted.
@@ -55,7 +55,7 @@ public struct DataSource<Item> {
     public mutating func insert(item: Item, at indexPath: IndexPath) {
         insert(item: item, atRow: indexPath.row, inSection: indexPath.section)
     }
-    
+
     /**
      Inserts the item at the specified row and section.
      - parameter item:    The item to be inserted.
@@ -67,7 +67,7 @@ public struct DataSource<Item> {
         guard row <= numberOfItems(inSection: section) else { return }
         sections[section].items.insert(item, at: row)
     }
-    
+
     /**
      Appends the item at the specified section.
      - parameter item:    The item to be appended.
@@ -99,7 +99,6 @@ public struct DataSource<Item> {
     public mutating func remove(at indexPath: IndexPath) -> Item? {
         return remove(atRow: indexPath.row, inSection: indexPath.section)
     }
-
 
     // MARK: Subscripts
 

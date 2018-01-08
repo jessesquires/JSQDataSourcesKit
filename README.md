@@ -15,6 +15,7 @@ This library reduces the boilerplate code regarding the `UITableView`, `UICollec
 * Swift 4.0+
 * iOS 9.0+
 * tvOS 10.0+
+* [SwiftLint](https://github.com/realm/SwiftLint)
 
 ## Installation
 

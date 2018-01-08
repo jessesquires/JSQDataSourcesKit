@@ -16,14 +16,13 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
+import CoreData
+import ExampleModel
 import Foundation
 import UIKit
 import XCTest
-import CoreData
-import ExampleModel
 
 import JSQDataSourcesKit
-
 
 final class DataSourceTests: XCTestCase {
 
@@ -48,7 +47,7 @@ final class DataSourceTests: XCTestCase {
         XCTAssertEqual(dataSource.items(inSection: 2)!, sectionC.items)
         XCTAssertNil(dataSource.items(inSection: 3))
 
-        XCTAssertEqual(dataSource.item(atRow:0, inSection: 0), sectionA[0])
+        XCTAssertEqual(dataSource.item(atRow: 0, inSection: 0), sectionA[0])
         XCTAssertEqual(dataSource.item(atRow: 1, inSection: 0), sectionA[1])
         XCTAssertNil(dataSource.item(atRow: 2, inSection: 0))
 
@@ -236,57 +235,57 @@ final class DataSourceTests: XCTestCase {
         let ip = IndexPath(item: 1, section: 0)
         let item = FakeViewModel()
         dataSource[ip] = item
-        
+
         // THEN: the item is replaced
         XCTAssertEqual(dataSource[ip], item)
     }
-    
+
     func test_thatDataSource_returnsNil_whenDataFromInvalidSection_areRequested() {
         // GIVEN: a data source
         let sectionA = Section(items: FakeViewModel(), FakeViewModel(), headerTitle: "Header")
         let sectionB = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
         let dataSource = DataSource(sections: sectionA, sectionB)
-        
+
         // WHEN: we request an item from an invalid section
         let requestedItem = dataSource.item(atRow: 0, inSection: 2)
-        
+
         // THEN: the returned item should be nil
         XCTAssertNil(requestedItem, "The requested section shouldn't exist")
     }
-    
+
     func test_thatDataSource_insertsExpectedData_atIndexPath() {
         // GIVEN: a data source
         let sectionA = Section(items: FakeViewModel(), FakeViewModel(), headerTitle: "Header")
         let sectionB = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
         var dataSource = DataSource(sections: sectionA, sectionB)
-        
+
         // WHEN: we add an item at a specific index path
         let newItem = FakeViewModel()
         let ip = IndexPath(item: 2, section: 1)
         dataSource.insert(item: newItem, at: ip)
-        
+
         let sectionItems = dataSource.items(inSection: ip.section)
         let insertedIndex = sectionItems?.index(of: newItem)
-        
+
         // THEN: the item is inserted at the specific index path
         XCTAssertEqual(insertedIndex, ip.row, "New item should be at the requested index")
         XCTAssertEqual(newItem, dataSource[ip], "New item should match the item at requested index path in dataSource")
     }
-    
+
     func test_thatDataSource_appendsExpectedData_inSection() {
         // GIVEN: a data source
         let sectionA = Section(items: FakeViewModel(), FakeViewModel(), headerTitle: "Header")
         let sectionB = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
         var dataSource = DataSource(sections: sectionA, sectionB)
-        
+
         // WHEN: we append an item in a specific section
         let newItem = FakeViewModel()
         let section = 1
         dataSource.append(newItem, inSection: section)
-        
+
         let sectionItems = dataSource.items(inSection: section)
         let insertedIndex = sectionItems?.index(of: newItem)
-        
+
         // THEN: the item is appended in the specific section
         XCTAssertEqual(insertedIndex, sectionItems!.count - 1, "New item should be at the requested index")
         XCTAssertEqual(newItem, sectionItems?.last, "New item should be at the end of the requested section")
@@ -297,39 +296,39 @@ final class DataSourceTests: XCTestCase {
         let sectionA = Section(items: FakeViewModel(), FakeViewModel(), headerTitle: "Header")
         let sectionB = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
         var dataSource = DataSource(sections: sectionA, sectionB)
-        
+
         // WHEN: we add an item at a section that doesn't exist
         let newItem = FakeViewModel()
         let ip = IndexPath(item: 1, section: 2)
         dataSource.insert(item: newItem, at: ip)
-        
+
         let sectionItems = dataSource.items(inSection: 2)
-        
+
         // THEN: the section should not exist hence the item should not be added
         XCTAssertNil(sectionItems, "The requested section doesn't exist")
     }
-    
+
     func test_thatDataSource_doesNotInsertData_atOutOfBounds_Row() {
         // GIVEN: a data source
         let sectionA = Section(items: FakeViewModel(), FakeViewModel(), headerTitle: "Header")
         let sectionB = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
         var dataSource = DataSource(sections: sectionA, sectionB)
-        
+
         // WHEN: we add an item at an index that doesn't exist
         let newItem = FakeViewModel()
         let ip = IndexPath(item: 4, section: 1)
         dataSource.insert(item: newItem, at: ip)
-        
+
         // THEN: the item should not be added
         XCTAssertFalse(dataSource.items(inSection: 1)!.contains(newItem), "The item shouldn't be added")
     }
-    
+
     func test_thatDataSource_removesExpectedData_atIndexPath() {
         // GIVEN: a data source
         let sectionA = Section(items: FakeViewModel(), FakeViewModel(), headerTitle: "Header")
         let sectionB = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
         var dataSource = DataSource(sections: sectionA, sectionB)
-        
+
         // WHEN: we remove an item at a specific index path
         let ip = IndexPath(item: 1, section: 0)
         let itemToRemove = dataSource.remove(at: ip)
@@ -341,13 +340,13 @@ final class DataSourceTests: XCTestCase {
         XCTAssertEqual(dataSource.items(inSection: 1)?.count, 2)
         XCTAssertEqual(sectionA.count, 2, "Original section should not be changed")
     }
-    
+
     func test_thatDataSource_doesNotRemoveData_fromInvalid_SectionOrRow() {
         // GIVEN: a data source
         let sectionA = Section(items: FakeViewModel(), FakeViewModel(), headerTitle: "Header")
         let sectionB = Section(items: FakeViewModel(), FakeViewModel(), footerTitle: "Footer")
         var dataSource = DataSource(sections: sectionA, sectionB)
-        
+
         // WHEN: we remove an item from an invalid section or row
         let invalidIndex = 2
         let itemToRemoveA = dataSource.remove(atRow: 0, inSection: invalidIndex)

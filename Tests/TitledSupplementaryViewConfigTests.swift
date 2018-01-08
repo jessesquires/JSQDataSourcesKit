@@ -17,9 +17,9 @@
 //
 
 import Foundation
+import JSQDataSourcesKit
 import UIKit
 import XCTest
-import JSQDataSourcesKit
 
 final class TitledSupplementaryViewConfigTests: TestCase {
 

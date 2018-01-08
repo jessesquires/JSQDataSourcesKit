@@ -16,8 +16,8 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
-import UIKit
 import ExampleModel
+import UIKit
 
 final class ViewController: UITableViewController {
 

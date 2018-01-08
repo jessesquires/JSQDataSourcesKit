@@ -22,7 +22,6 @@ import XCTest
 
 import JSQDataSourcesKit
 
-
 final class SectionTests: XCTestCase {
 
     func test_thatSection_initializes() {
