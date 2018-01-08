@@ -43,7 +43,7 @@ Read the [docs][docsLink]. Generated with [jazzy](https://github.com/realm/jazzy
 #### Generate
 
 ````bash
-$ ./build_docs.sh
+$ ./scripts/build_docs.sh
 ````
 
 #### Preview
