@@ -36,7 +36,8 @@ where CellConfig.Item == DataSource.Item, SupplementaryConfig.Item == DataSource
     /// The supplementary view configuration.
     public let supplementaryConfig: SupplementaryConfig
 
-    private var bridgedDataSource: BridgedDataSource?
+    /// The container holding the data source implementation
+    public var dataSourceContainer: DataSourceContainer = DataSourceContainer()
 
     private var tableEditingController: TableEditingController<DataSource>?
 
@@ -86,10 +87,13 @@ public extension DataSourceProvider where CellConfig.View: UITableViewCell {
 
     /// Returns the `UITableViewDataSource` object.
     public var tableViewDataSource: UITableViewDataSource {
-        if bridgedDataSource == nil {
-            bridgedDataSource = tableViewBridgedDataSource()
+        if let tableViewDataSource = dataSourceContainer[UITableViewDataSource.self] {
+            return tableViewDataSource
         }
-        return bridgedDataSource!
+        
+        let tableViewDataSource = tableViewBridgedDataSource()
+        dataSourceContainer.add(dataSource: tableViewDataSource as UITableViewDataSource)
+        return tableViewDataSource
     }
 
     private func tableViewBridgedDataSource() -> BridgedDataSource {
@@ -134,10 +138,13 @@ public extension DataSourceProvider where CellConfig.View: UICollectionViewCell,
 
     /// Returns the `UICollectionViewDataSource` object.
     public var collectionViewDataSource: UICollectionViewDataSource {
-        if bridgedDataSource == nil {
-            bridgedDataSource = collectionViewBridgedDataSource()
+        if let collectionViewDataSource = dataSourceContainer[UICollectionViewDataSource.self] {
+            return collectionViewDataSource
         }
-        return bridgedDataSource!
+        
+        let collectionViewDataSource = collectionViewBridgedDataSource()
+        dataSourceContainer.add(dataSource: collectionViewDataSource as UICollectionViewDataSource)
+        return collectionViewDataSource
     }
 
     private func collectionViewBridgedDataSource() -> BridgedDataSource {
