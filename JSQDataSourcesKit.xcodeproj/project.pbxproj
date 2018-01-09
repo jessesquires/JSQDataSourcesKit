@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		1D68ECA31DFFEF4600A1AFB7 /* TableEditingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD7AC5C1D86C4BC00B676A6 /* TableEditingController.swift */; };
 		1DD7AC5D1D86C4BC00B676A6 /* TableEditingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD7AC5C1D86C4BC00B676A6 /* TableEditingController.swift */; };
+		6D31F9B72003ED55005B1B0A /* DataSourceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D31F9B62003ED55005B1B0A /* DataSourceContainer.swift */; };
+		6D31F9BB2003FDBA005B1B0A /* DataSourceContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D31F9BA2003FDBA005B1B0A /* DataSourceContainerTests.swift */; };
+		6D31F9BC2003FF97005B1B0A /* DataSourceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D31F9B62003ED55005B1B0A /* DataSourceContainer.swift */; };
 		881A92DB1CB881550080BC5C /* FetchedResultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD2C1CB87CB400C018AF /* FetchedResultsDelegate.swift */; };
 		881A92DD1CB881550080BC5C /* JSQDataSourcesKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 88DCAD2F1CB87CB400C018AF /* JSQDataSourcesKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		881A92E11CB881550080BC5C /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DCAD331CB87CB400C018AF /* Section.swift */; };
@@ -91,6 +94,8 @@
 
 /* Begin PBXFileReference section */
 		1DD7AC5C1D86C4BC00B676A6 /* TableEditingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableEditingController.swift; sourceTree = "<group>"; };
+		6D31F9B62003ED55005B1B0A /* DataSourceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceContainer.swift; sourceTree = "<group>"; };
+		6D31F9BA2003FDBA005B1B0A /* DataSourceContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceContainerTests.swift; sourceTree = "<group>"; };
 		881A92CC1CB881270080BC5C /* JSQDataSourcesKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSQDataSourcesKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88253C511FFAF5C20022FCA8 /* DataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceProtocol.swift; sourceTree = "<group>"; };
 		88253C531FFAF7730022FCA8 /* FetchedResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedResultsController.swift; sourceTree = "<group>"; };
@@ -183,6 +188,7 @@
 				88C99A761CBB302600A9804A /* BridgedDataSource.swift */,
 				882CA4531D1D7D48006112B9 /* BridgedFetchedResultsDelegate.swift */,
 				888799481D0E2D1700BBCCBC /* DataSource.swift */,
+				6D31F9B62003ED55005B1B0A /* DataSourceContainer.swift */,
 				88253C511FFAF5C20022FCA8 /* DataSourceProtocol.swift */,
 				88B80CD71CBBF62A00EDF9D5 /* DataSourceProvider.swift */,
 				88253C531FFAF7730022FCA8 /* FetchedResultsController.swift */,
@@ -203,6 +209,7 @@
 			children = (
 				88C99A7A1CBB628A00A9804A /* BridgedDataSourceTests.swift */,
 				882CA4591D1D957A006112B9 /* BridgedFetchedResultsDelegateTests.swift */,
+				6D31F9BA2003FDBA005B1B0A /* DataSourceContainerTests.swift */,
 				88DCAD391CB87CB400C018AF /* DataSourceProviderSubscriptTests.swift */,
 				88DCAD3A1CB87CB400C018AF /* DataSourceProviderTests.swift */,
 				882CA45E1D1EE1EA006112B9 /* DataSourceTests.swift */,
@@ -418,6 +425,7 @@
 				88C99A791CBB303000A9804A /* BridgedDataSource.swift in Sources */,
 				881A92E51CB881550080BC5C /* TitledSupplementaryViewConfig.swift in Sources */,
 				88253C551FFAF7730022FCA8 /* FetchedResultsController.swift in Sources */,
+				6D31F9BC2003FF97005B1B0A /* DataSourceContainer.swift in Sources */,
 				88B80CD91CBBF62A00EDF9D5 /* DataSourceProvider.swift in Sources */,
 				882CA4551D1D7DE1006112B9 /* BridgedFetchedResultsDelegate.swift in Sources */,
 				882CA4561D1D7DE1006112B9 /* DataSource.swift in Sources */,
@@ -437,6 +445,7 @@
 				88C99A771CBB302600A9804A /* BridgedDataSource.swift in Sources */,
 				88DCAD761CB87CC000C018AF /* TitledSupplementaryView.swift in Sources */,
 				88DCAD741CB87CC000C018AF /* Section.swift in Sources */,
+				6D31F9B72003ED55005B1B0A /* DataSourceContainer.swift in Sources */,
 				88B80CD81CBBF62A00EDF9D5 /* DataSourceProvider.swift in Sources */,
 				1DD7AC5D1D86C4BC00B676A6 /* TableEditingController.swift in Sources */,
 				888799491D0E2D1700BBCCBC /* DataSource.swift in Sources */,
@@ -459,6 +468,7 @@
 				88DCAD821CB87CC900C018AF /* SectionTests.swift in Sources */,
 				88DCAD7A1CB87CC900C018AF /* DataSourceProviderTests.swift in Sources */,
 				88DCAD7B1CB87CC900C018AF /* TestHelpers.swift in Sources */,
+				6D31F9BB2003FDBA005B1B0A /* DataSourceContainerTests.swift in Sources */,
 				882CA45A1D1D957A006112B9 /* BridgedFetchedResultsDelegateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
