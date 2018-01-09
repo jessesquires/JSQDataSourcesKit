@@ -10,4 +10,5 @@ else
     Download from https://github.com/realm/SwiftLint,
     or brew [install | upgrade] swiftlint.
     "
+    exit 1
 fi
