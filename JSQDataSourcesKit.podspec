@@ -13,7 +13,8 @@ Pod::Spec.new do |s|
    s.source = { :git => 'https://github.com/jessesquires/JSQDataSourcesKit.git', :tag => s.version }
    s.source_files = 'Source/*.swift'
 
-   s.platform = :ios, '9.0'
+   s.swift_version = '4.0'
+   s.ios.deployment_target = '9.0'
    s.tvos.deployment_target = '10.0'
 
    s.frameworks = 'CoreData'
