@@ -14,7 +14,8 @@ if which jazzy >/dev/null; then
         --source-directory . \
         --readme 'README.md' \
         --documentation 'Guides/*.md' \
-        --output docs/ \;
+        --output docs/
+        exit
 else
     echo "
     Error: jazzy not installed! <https://github.com/realm/jazzy>

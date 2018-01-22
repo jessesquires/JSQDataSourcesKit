@@ -4,6 +4,7 @@ VERSION="0.24.0"
 
 if which swiftlint >/dev/null && [ $(swiftlint version) == $VERSION ]; then
     swiftlint lint --config ./.swiftlint.yml
+    exit
 else
     echo "
     Warning: SwiftLint $VERSION not installed!
