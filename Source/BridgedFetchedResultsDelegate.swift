@@ -19,10 +19,9 @@
 import CoreData
 import Foundation
 
-/**
- This class is responsible for implementing the `NSFetchedResultsControllerDelegate` protocol.
- It avoids making `FetchedResultsDelegateProvider` inherit from `NSObject`, and keeps classes small and focused.
- */
+/// This class is responsible for implementing the `NSFetchedResultsControllerDelegate` protocol.
+/// It avoids making `FetchedResultsDelegateProvider` inherit from `NSObject`, and keeps classes small and focused.
+///
 @objc
 internal final class BridgedFetchedResultsDelegate: NSObject {
 

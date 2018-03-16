@@ -32,10 +32,8 @@ internal typealias TableTitleForFooterInSectionHandler = (Int) -> String?
 internal typealias TableCanEditHandler = (UITableView, IndexPath) -> Bool
 internal typealias TableCommitEditingStyleHandler = (UITableView, UITableViewCellEditingStyle, IndexPath) -> Void
 
-/**
- This class is responsible for implementing the `UICollectionViewDataSource` and `UITableViewDataSource` protocols.
- It avoids making `DataSourceProvider` inherit from `NSObject`, and keeps classes small and focused.
- */
+/// This class is responsible for implementing the `UICollectionViewDataSource` and `UITableViewDataSource` protocols.
+/// It avoids making `DataSourceProvider` inherit from `NSObject`, and keeps classes small and focused.
 @objc
 internal final class BridgedDataSource: NSObject {
 

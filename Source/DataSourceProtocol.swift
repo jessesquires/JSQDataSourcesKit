@@ -36,8 +36,8 @@ public protocol DataSourceProtocol {
     /// - Returns: The number of items in the specified section.
     func numberOfItems(inSection section: Int) -> Int
 
-     /// - Parameter section: A section in the data source.
-     /// - Returns: The items in the specified section.
+    /// - Parameter section: A section in the data source.
+    /// - Returns: The items in the specified section.
     func items(inSection section: Int) -> [Item]?
 
     /// - Parameters:
