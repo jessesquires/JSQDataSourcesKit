@@ -18,11 +18,9 @@
 
 import UIKit
 
-/**
- A `TitledSupplementaryView` is a `UICollectionReusableView` subclass with a single `UILabel`.
- It is intended for use as an analog to a `UITableView` header title.
- These views can be used with `TitledSupplementaryViewConfig`.
- */
+/// A `TitledSupplementaryView` is a `UICollectionReusableView` subclass with a single `UILabel`.
+/// It is intended for use as an analog to a `UITableView` header title.
+/// These views can be used with `TitledSupplementaryViewConfig`.
 public final class TitledSupplementaryView: UICollectionReusableView {
 
     // MARK: Properties

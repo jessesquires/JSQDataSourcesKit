@@ -258,36 +258,31 @@ public extension ReusableViewConfigProtocol where View: UICollectionReusableView
 
 // MARK: ReusableViewConfig
 
-/**
- A `ReusableViewConfig` is a concrete `ReusableViewConfigProtocol` type.
- This config is responsible for producing and configuring reusable views for a specific item.
- Cells can be for either collection views or table views.
- */
+/// A `ReusableViewConfig` is a concrete `ReusableViewConfigProtocol` type.
+/// This config is responsible for producing and configuring reusable views for a specific item.
+/// Cells can be for either collection views or table views.
 public struct ReusableViewConfig<Item, Cell: ReusableViewProtocol>: ReusableViewConfigProtocol {
 
     // MARK: Type aliases
 
-    /**
-     Configures the cell for the specified item, parent view, and index path.
-     
-     - parameter cell:       The cell to be configured at the index path.
-     - parameter item:       The item at `indexPath`.
-     - parameter type:       The type of reusable view.
-     - parameter parentView: The collection view or table view requesting this information.
-     - parameter indexPath:  The index path at which the cell will be displayed.
-     
-     - returns: The configured cell.
-     */
+    /// Configures the cell for the specified item, parent view, and index path.
+    ///
+    /// - Parameters:
+    ///   - cell:       The cell to be configured at the index path.
+    ///   - item:       The item at `indexPath`.
+    ///   - type:       The type of reusable view.
+    ///   - parentView: The collection view or table view requesting this information.
+    ///   - indexPath:  The index path at which the cell will be displayed.
+    ///
+    /// - Returns: The configured cell.
     public typealias ViewConfigurator = (Cell, Item?, ReusableViewType, Cell.ParentView, IndexPath) -> Cell
 
     // MARK: Properties
 
-    /**
-     A unique identifier that describes the purpose of the cells that the config produces.
-     The config dequeues cells from the collection view or table view with this reuse identifier.
-     
-     - note: Clients are responsible for registering a cell for this identifier with the collection view or table view.
-     */
+    /// A unique identifier that describes the purpose of the cells that the config produces.
+    /// The config dequeues cells from the collection view or table view with this reuse identifier.
+    ///
+    /// - Note: Clients are responsible for registering a cell for this identifier with the collection view or table view.
     public let reuseIdentifier: String
 
     /// The type of the reusable view.

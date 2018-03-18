@@ -22,16 +22,15 @@ import Foundation
 /// A generic `NSFetchedResultsController`.
 public class FetchedResultsController<T: NSFetchRequestResult>: NSFetchedResultsController<NSFetchRequestResult> {
 
-    /**
-     Returns a fetch request controller initialized using the given arguments.
+    /// Returns a fetch request controller initialized using the given arguments.
+    ///
+    /// - Parameters:
+    ///   - fetchRequest:       The fetch request used to get the objects.
+    ///   - context:            The managed object against which `fetchRequest` is executed.
+    ///   - sectionNameKeyPath: A key path on result objects that returns the section name.
+    ///   - name:               The name of the cache file the receiver should use.
 
-     - parameter fetchRequest:       The fetch request used to get the objects.
-     - parameter context:            The managed object against which `fetchRequest` is executed.
-     - parameter sectionNameKeyPath: A key path on result objects that returns the section name.
-     - parameter name:               The name of the cache file the receiver should use.
-
-     - returns: An initialized fetch request controller.
-     */
+    /// - Returns: An initialized fetch request controller.
     public init<T>(fetchRequest: NSFetchRequest<T>,
                    managedObjectContext context: NSManagedObjectContext,
                    sectionNameKeyPath: String?,
@@ -42,10 +41,8 @@ public class FetchedResultsController<T: NSFetchRequestResult>: NSFetchedResults
                    cacheName: name)
     }
 
-    /**
-     - parameter indexPath: The index path of an object.
-     - returns: The object at `indexPath`.
-     */
+    /// - Parameter indexPath: The index path of an object.
+    /// - Returns: The object at `indexPath`.
     public subscript (indexPath: IndexPath) -> T {
         get {
             return object(at: indexPath) as! T
