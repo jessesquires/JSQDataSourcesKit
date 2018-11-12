@@ -30,7 +30,7 @@ internal typealias TableTitleForHeaderInSectionHandler = (Int) -> String?
 internal typealias TableTitleForFooterInSectionHandler = (Int) -> String?
 
 internal typealias TableCanEditHandler = (UITableView, IndexPath) -> Bool
-internal typealias TableCommitEditingStyleHandler = (UITableView, UITableViewCellEditingStyle, IndexPath) -> Void
+internal typealias TableCommitEditingStyleHandler = (UITableView, UITableViewCell.EditingStyle, IndexPath) -> Void
 
 /// This class is responsible for implementing the `UICollectionViewDataSource` and `UITableViewDataSource` protocols.
 /// It avoids making `DataSourceProvider` inherit from `NSObject`, and keeps classes small and focused.
@@ -123,7 +123,7 @@ extension BridgedDataSource: UITableViewDataSource {
     }
 
     @objc
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         tableCommitEditingStyleForRow?(tableView, editingStyle, indexPath)
     }
 }

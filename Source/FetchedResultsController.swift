@@ -44,9 +44,7 @@ public class FetchedResultsController<T: NSFetchRequestResult>: NSFetchedResults
     /// - Parameter indexPath: The index path of an object.
     /// - Returns: The object at `indexPath`.
     public subscript (indexPath: IndexPath) -> T {
-        get {
-            return object(at: indexPath) as! T
-        }
+        return object(at: indexPath) as! T
     }
 }
 

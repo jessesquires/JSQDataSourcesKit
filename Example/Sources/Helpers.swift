@@ -65,10 +65,10 @@ func configureCollectionView(_ collectionView: UICollectionView) {
                             forCellWithReuseIdentifier: CellId)
 
     collectionView.register(TitledSupplementaryView.self,
-                            forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+                            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                             withReuseIdentifier: TitledSupplementaryView.identifier)
 
     collectionView.register(TitledSupplementaryView.self,
-                            forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
+                            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
                             withReuseIdentifier: TitledSupplementaryView.identifier)
 }

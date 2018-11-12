@@ -19,7 +19,6 @@
 import Foundation
 import UIKit
 
-
 /// A `TitledSupplementaryViewConfig` is a specialized supplementary view config that conforms to `ReusableViewConfigProtocol`.
 /// This config is responsible for producing and configuring `TitledSupplementaryView` instances.
 public struct TitledSupplementaryViewConfig <Item>: ReusableViewConfigProtocol {
