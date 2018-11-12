@@ -123,7 +123,7 @@ extension BridgedDataSource: UITableViewDataSource {
     }
 
     @objc
-    private func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         tableCommitEditingStyleForRow?(tableView, editingStyle, indexPath)
     }
 }
