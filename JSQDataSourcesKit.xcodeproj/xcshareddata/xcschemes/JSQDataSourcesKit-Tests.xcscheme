@@ -17,8 +17,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "887DD08D1B3BAC6C00FC4BF1"
-               BuildableName = "JSQDataSourcesKitTests.xctest"
-               BlueprintName = "JSQDataSourcesKitTests"
+               BuildableName = "JSQDataSourcesKit-Tests.xctest"
+               BlueprintName = "JSQDataSourcesKit-Tests"
                ReferencedContainer = "container:JSQDataSourcesKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
