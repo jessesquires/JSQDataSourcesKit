@@ -106,7 +106,7 @@
             <h1>TableEditingController</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TableEditingController</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/DataSource.html">DataSource</a></span><span class="p">:</span> <span class="kt"><a href="../Protocols/DataSourceProtocol.html">DataSourceProtocol</a></span><span class="o">&gt;</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TableEditingController</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/DataSource.html">DataSource</a></span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt"><a href="../Structs/DataSource.html">DataSource</a></span> <span class="p">:</span> <span class="kt"><a href="../Protocols/DataSourceProtocol.html">DataSourceProtocol</a></span></code></pre>
 
                 </div>
               </div>
@@ -143,7 +143,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">CanEditRowConfig</span> <span class="o">=</span> <span class="p">(</span><span class="kt"><a href="../Structs/DataSource.html">DataSource</a></span><span class="o">.</span><span class="kt">Item</span><span class="p">?,</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">CanEditRowConfig</span> <span class="o">=</span> <span class="p">(</span><span class="kt"><a href="../Structs/DataSource.html">DataSource</a></span><span class="o">.</span><span class="kt">Item</span><span class="p">?,</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -217,7 +217,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">CommitEditingConfig</span> <span class="o">=</span> <span class="p">(</span><span class="k">inout</span> <span class="kt"><a href="../Structs/DataSource.html">DataSource</a></span><span class="p">,</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="kt">UITableViewCellEditingStyle</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">CommitEditingConfig</span> <span class="o">=</span> <span class="p">(</span><span class="k">inout</span> <span class="kt"><a href="../Structs/DataSource.html">DataSource</a></span><span class="p">,</span> <span class="kt">UITableView</span><span class="p">,</span> <span class="kt">UITableViewCell</span><span class="o">.</span><span class="kt">EditingStyle</span><span class="p">,</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
 
                         </div>
                       </div>
@@ -282,9 +282,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17JSQDataSourcesKit22TableEditingControllerV10canEditRowSb4ItemQzSg_So11UITableViewC10Foundation9IndexPathVtcv"></a>
+                    <a name="/s:17JSQDataSourcesKit22TableEditingControllerV10canEditRowySb4ItemQzSg_So11UITableViewC10Foundation9IndexPathVtcvp"></a>
                     <a name="//apple_ref/swift/Property/canEditRow" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit22TableEditingControllerV10canEditRowSb4ItemQzSg_So11UITableViewC10Foundation9IndexPathVtcv">canEditRow</a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit22TableEditingControllerV10canEditRowySb4ItemQzSg_So11UITableViewC10Foundation9IndexPathVtcvp">canEditRow</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -299,7 +299,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">canEditRow</span><span class="p">:</span> <span class="kt"><a href="../Structs/TableEditingController.html#/s:17JSQDataSourcesKit22TableEditingControllerV16CanEditRowConfiga">CanEditRowConfig</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">canEditRow</span><span class="p">:</span> <span class="kt"><a href="../Structs/TableEditingController.html#/s:17JSQDataSourcesKit22TableEditingControllerV16CanEditRowConfiga">CanEditRowConfig</a></span></code></pre>
 
                         </div>
                       </div>
@@ -309,9 +309,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17JSQDataSourcesKit22TableEditingControllerV06commitE0yxz_So11UITableViewCSC0hi4CellE5StyleO10Foundation9IndexPathVtcv"></a>
+                    <a name="/s:17JSQDataSourcesKit22TableEditingControllerV06commitE0yyxz_So11UITableViewCSo0hi4CellE5StyleV10Foundation9IndexPathVtcvp"></a>
                     <a name="//apple_ref/swift/Property/commitEditing" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit22TableEditingControllerV06commitE0yxz_So11UITableViewCSC0hi4CellE5StyleO10Foundation9IndexPathVtcv">commitEditing</a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit22TableEditingControllerV06commitE0yyxz_So11UITableViewCSo0hi4CellE5StyleV10Foundation9IndexPathVtcvp">commitEditing</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -326,7 +326,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">commitEditing</span><span class="p">:</span> <span class="kt"><a href="../Structs/TableEditingController.html#/s:17JSQDataSourcesKit22TableEditingControllerV06CommitE6Configa">CommitEditingConfig</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">commitEditing</span><span class="p">:</span> <span class="kt"><a href="../Structs/TableEditingController.html#/s:17JSQDataSourcesKit22TableEditingControllerV06CommitE6Configa">CommitEditingConfig</a></span></code></pre>
 
                         </div>
                       </div>
@@ -347,9 +347,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17JSQDataSourcesKit22TableEditingControllerVACyxGSb4ItemQzSg_So11UITableViewC10Foundation9IndexPathVtc10canEditRow_yxz_AISC0hi4CellE5StyleOALtc06commitE0tcfc"></a>
+                    <a name="/s:17JSQDataSourcesKit22TableEditingControllerV10canEditRow06commitE0ACyxGSb4ItemQzSg_So11UITableViewC10Foundation9IndexPathVtc_yxz_AKSo0lm4CellE5StyleVANtctcfc"></a>
                     <a name="//apple_ref/swift/Method/init(canEditRow:commitEditing:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit22TableEditingControllerVACyxGSb4ItemQzSg_So11UITableViewC10Foundation9IndexPathVtc10canEditRow_yxz_AISC0hi4CellE5StyleOALtc06commitE0tcfc">init(canEditRow:commitEditing:)</a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit22TableEditingControllerV10canEditRow06commitE0ACyxGSb4ItemQzSg_So11UITableViewC10Foundation9IndexPathVtc_yxz_AKSo0lm4CellE5StyleVANtctcfc">init(canEditRow:commitEditing:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -364,7 +364,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">canEditRow</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Structs/TableEditingController.html#/s:17JSQDataSourcesKit22TableEditingControllerV16CanEditRowConfiga">CanEditRowConfig</a></span><span class="p">,</span> <span class="nv">commitEditing</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Structs/TableEditingController.html#/s:17JSQDataSourcesKit22TableEditingControllerV06CommitE6Configa">CommitEditingConfig</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">canEditRow</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Structs/TableEditingController.html#/s:17JSQDataSourcesKit22TableEditingControllerV16CanEditRowConfiga">CanEditRowConfig</a></span><span class="p">,</span> <span class="nv">commitEditing</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Structs/TableEditingController.html#/s:17JSQDataSourcesKit22TableEditingControllerV06CommitE6Configa">CommitEditingConfig</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -411,8 +411,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2018-01-01)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2019-03-06)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

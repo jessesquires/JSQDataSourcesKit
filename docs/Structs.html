@@ -10,6 +10,7 @@
     
   </head>
   <body>
+    <a name="//apple_ref/swift/Section/Structures" class="dashAnchor"></a>
     <a title="Structures  Reference"></a>
     <header>
       <div class="content-wrapper">
@@ -108,6 +109,39 @@
           </section>
           <section class="section task-group-section">
             <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17JSQDataSourcesKit10DataSourceV"></a>
+                    <a name="//apple_ref/swift/Struct/DataSource" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit10DataSourceV">DataSource</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A <code>DataSource</code> is a concrete <code><a href="Protocols/DataSourceProtocol.html">DataSourceProtocol</a></code>.
+It represents a collection of section-based data.</p>
+
+                        <a href="Structs/DataSource.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DataSource</span><span class="o">&lt;</span><span class="kt">Item</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
               <div class="task-name-container">
                 <a name="/ReusableViewConfig"></a>
                 <a name="//apple_ref/swift/Section/ReusableViewConfig" class="dashAnchor"></a>
@@ -139,7 +173,7 @@ Cells can be for either collection views or table views.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ReusableViewConfig</span><span class="o">&lt;</span><span class="kt">Item</span><span class="p">,</span> <span class="kt">Cell</span><span class="p">:</span> <span class="kt"><a href="Protocols/ReusableViewProtocol.html">ReusableViewProtocol</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="Protocols/ReusableViewConfigProtocol.html">ReusableViewConfigProtocol</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ReusableViewConfig</span><span class="o">&lt;</span><span class="kt">Item</span><span class="p">,</span> <span class="kt">Cell</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="Protocols/ReusableViewConfigProtocol.html">ReusableViewConfigProtocol</a></span> <span class="k">where</span> <span class="kt">Cell</span> <span class="p">:</span> <span class="kt"><a href="Protocols/ReusableViewProtocol.html">ReusableViewProtocol</a></span></code></pre>
 
                         </div>
                       </div>
@@ -171,7 +205,7 @@ Cells can be for either collection views or table views.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Section</span><span class="o">&lt;</span><span class="kt">Item</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Section</span><span class="o">&lt;</span><span class="kt">Item</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -203,40 +237,7 @@ Cells can be for either collection views or table views.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TableEditingController</span><span class="o">&lt;</span><span class="kt"><a href="Structs/DataSource.html">DataSource</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/DataSourceProtocol.html">DataSourceProtocol</a></span><span class="o">&gt;</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:17JSQDataSourcesKit10DataSourceV"></a>
-                    <a name="//apple_ref/swift/Struct/DataSource" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit10DataSourceV">DataSource</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A <code>DataSource</code> is a concrete <code><a href="Protocols/DataSourceProtocol.html">DataSourceProtocol</a></code>.
-It represents a collection of section-based data.</p>
-
-                        <a href="Structs/DataSource.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DataSource</span><span class="o">&lt;</span><span class="kt">Item</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TableEditingController</span><span class="o">&lt;</span><span class="kt"><a href="Structs/DataSource.html">DataSource</a></span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt"><a href="Structs/DataSource.html">DataSource</a></span> <span class="p">:</span> <span class="kt"><a href="Protocols/DataSourceProtocol.html">DataSourceProtocol</a></span></code></pre>
 
                         </div>
                       </div>
@@ -269,7 +270,7 @@ This config is responsible for producing and configuring <code><a href="Classes/
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TitledSupplementaryViewConfig</span> <span class="o">&lt;</span><span class="kt">Item</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="Protocols/ReusableViewConfigProtocol.html">ReusableViewConfigProtocol</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TitledSupplementaryViewConfig</span><span class="o">&lt;</span><span class="kt">Item</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="Protocols/ReusableViewConfigProtocol.html">ReusableViewConfigProtocol</a></span></code></pre>
 
                         </div>
                       </div>
@@ -281,8 +282,8 @@ This config is responsible for producing and configuring <code><a href="Classes/
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2018-01-01)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2019-03-06)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

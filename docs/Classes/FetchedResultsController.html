@@ -106,7 +106,7 @@
             <h1>FetchedResultsController</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">FetchedResultsController</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">NSFetchRequestResult</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt">NSFetchedResultsController</span><span class="o">&lt;</span><span class="kt">NSFetchRequestResult</span><span class="o">&gt;</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">FetchedResultsController</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSFetchedResultsController</span><span class="o">&lt;</span><span class="kt">NSFetchRequestResult</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">NSFetchRequestResult</span></code></pre>
 
                 </div>
               </div>
@@ -119,9 +119,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17JSQDataSourcesKit24FetchedResultsControllerCACyxGSo14NSFetchRequestCyqd__G05fetchH0_So22NSManagedObjectContextC07managedkL0SSSg18sectionNameKeyPathAL05cacheO0tcSo0gH6ResultRd__lufc"></a>
+                    <a name="/s:17JSQDataSourcesKit24FetchedResultsControllerC12fetchRequest20managedObjectContext18sectionNameKeyPath05cacheM0ACyxGSo07NSFetchH0Cyqd__G_So09NSManagedjK0CSSSgANtcSo0qH6ResultRd__lufc"></a>
                     <a name="//apple_ref/swift/Method/init(fetchRequest:managedObjectContext:sectionNameKeyPath:cacheName:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit24FetchedResultsControllerCACyxGSo14NSFetchRequestCyqd__G05fetchH0_So22NSManagedObjectContextC07managedkL0SSSg18sectionNameKeyPathAL05cacheO0tcSo0gH6ResultRd__lufc">init(fetchRequest:managedObjectContext:sectionNameKeyPath:cacheName:)</a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit24FetchedResultsControllerC12fetchRequest20managedObjectContext18sectionNameKeyPath05cacheM0ACyxGSo07NSFetchH0Cyqd__G_So09NSManagedjK0CSSSgANtcSo0qH6ResultRd__lufc">init(fetchRequest:managedObjectContext:sectionNameKeyPath:cacheName:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -136,7 +136,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">fetchRequest</span><span class="p">:</span> <span class="kt">NSFetchRequest</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">,</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">fetchRequest</span><span class="p">:</span> <span class="kt">NSFetchRequest</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">,</span>
                <span class="n">managedObjectContext</span> <span class="nv">context</span><span class="p">:</span> <span class="kt">NSManagedObjectContext</span><span class="p">,</span>
                <span class="nv">sectionNameKeyPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span>
                <span class="n">cacheName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span></code></pre>
@@ -208,9 +208,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17JSQDataSourcesKit24FetchedResultsControllerC9subscriptx10Foundation9IndexPathVci"></a>
+                    <a name="/s:17JSQDataSourcesKit24FetchedResultsControllerCyx10Foundation9IndexPathVcip"></a>
                     <a name="//apple_ref/swift/Method/subscript(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit24FetchedResultsControllerC9subscriptx10Foundation9IndexPathVci">subscript(_:)</a>
+                    <a class="token" href="#/s:17JSQDataSourcesKit24FetchedResultsControllerCyx10Foundation9IndexPathVcip">subscript(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -224,7 +224,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">subscript</span> <span class="p">(</span><span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">T</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">subscript</span><span class="p">(</span><span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">T</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -259,8 +259,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2018-01-01)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="https://twitter.com/jesse_squires" target="_blank" rel="external">Jesse Squires</a>. All rights reserved. (Last updated: 2019-03-06)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
