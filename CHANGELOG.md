@@ -11,9 +11,14 @@ This release closes the [8.0.0 milestone](https://github.com/jessesquires/JSQDat
 
 ## Breaking
 
-- Converted to Swift 4.2
 - iOS 11.0 minimum now required
 - tvOS 11.0 minimum now required
+
+## New
+
+- Upgraded to Swift 4.2
+- Update to Xcode 10.2
+- Update SwiftLint to 0.31.0
 
 7.0.0
 -----
