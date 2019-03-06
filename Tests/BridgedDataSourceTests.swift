@@ -28,18 +28,18 @@ final class BridgedDataSourceTests: TestCase {
         // GIVEN: a data source
         let dataSource = BridgedDataSource(
             numberOfSections: { () -> Int in
-                return 5
+                5
             },
-            numberOfItemsInSection: { (section) -> Int in
-                return 3
+            numberOfItemsInSection: { _ -> Int in
+                3
         })
 
-        dataSource.collectionCellForItemAtIndexPath = { (UICollectionView, NSIndexPath) -> UICollectionViewCell in
-            return UICollectionViewCell()
+        dataSource.collectionCellForItemAtIndexPath = { UICollectionView, NSIndexPath -> UICollectionViewCell in
+            UICollectionViewCell()
         }
 
-        dataSource.collectionSupplementaryViewAtIndexPath = { (UICollectionView, String, NSIndexPath) -> UICollectionReusableView in
-            return UICollectionReusableView()
+        dataSource.collectionSupplementaryViewAtIndexPath = { UICollectionView, String, NSIndexPath -> UICollectionReusableView in
+            UICollectionReusableView()
         }
 
         // WHEN: we query the collectionViewDataSource methods
@@ -64,22 +64,22 @@ final class BridgedDataSourceTests: TestCase {
         // GIVEN: a data source
         let dataSource = BridgedDataSource(
             numberOfSections: { () -> Int in
-                return 5
+                5
             },
-            numberOfItemsInSection: { (section) -> Int in
-                return 3
+            numberOfItemsInSection: { _ -> Int in
+                3
         })
 
-        dataSource.tableCellForRowAtIndexPath = { (UITableView, NSIndexPath) -> UITableViewCell in
-            return UITableViewCell()
+        dataSource.tableCellForRowAtIndexPath = { UITableView, NSIndexPath -> UITableViewCell in
+            UITableViewCell()
         }
 
-        dataSource.tableTitleForHeaderInSection = { (Int) -> String? in
-            return "header"
+        dataSource.tableTitleForHeaderInSection = { Int -> String? in
+            "header"
         }
 
-        dataSource.tableTitleForFooterInSection = { (Int) -> String? in
-            return "footer"
+        dataSource.tableTitleForFooterInSection = { Int -> String? in
+            "footer"
         }
 
         // WHEN: we query the tableViewDataSource methods
@@ -107,14 +107,14 @@ final class BridgedDataSourceTests: TestCase {
         // GIVEN: a data source
         let dataSource = BridgedDataSource(
             numberOfSections: { () -> Int in
-                return 5
+                5
             },
-            numberOfItemsInSection: { (section) -> Int in
-                return 3
+            numberOfItemsInSection: { _ -> Int in
+                3
         })
 
-        dataSource.tableCellForRowAtIndexPath = { (UITableView, NSIndexPath) -> UITableViewCell in
-            return UITableViewCell()
+        dataSource.tableCellForRowAtIndexPath = { UITableView, NSIndexPath -> UITableViewCell in
+            UITableViewCell()
         }
 
         // WHEN: we query the tableViewDataSource methods

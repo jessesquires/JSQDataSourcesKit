@@ -41,8 +41,8 @@ final class FetchedResultsDelegateTests: TestCase {
                                                   cacheName: nil)
 
         // GIVEN: a cell config
-        let config = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, model: Thing?, type, tableView, indexPath) -> FakeTableCell in
-            return cell
+        let config = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, _: Thing?, _, _, _) -> FakeTableCell in
+            cell
         }
 
         // GIVEN: a data source provider
@@ -97,14 +97,15 @@ final class FetchedResultsDelegateTests: TestCase {
                                                   cacheName: nil)
 
         // GIVEN: a cell config
-        let config = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, model: Thing?, type, tableView, indexPath) -> FakeCollectionCell in
-            return cell
+        let config = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, _: Thing?, _, _, _) -> FakeCollectionCell in
+            cell
         }
 
         // GIVEN: a supplementary config
-        let supplementaryConfig = ReusableViewConfig(reuseIdentifier: supplementaryViewReuseId, type: .supplementaryView(kind: fakeSupplementaryViewKind)) {
-                                                        (view, model: Thing?, type, collectionView, indexPath) -> FakeCollectionSupplementaryView in
-            return view
+        let supplementaryConfig = ReusableViewConfig(
+            reuseIdentifier: supplementaryViewReuseId,
+            type: .supplementaryView(kind: fakeSupplementaryViewKind)) { (view, _: Thing?, _, _, _) -> FakeCollectionSupplementaryView in
+                view
         }
 
         // GIVEN: a data source provider

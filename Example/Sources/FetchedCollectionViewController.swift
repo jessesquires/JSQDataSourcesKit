@@ -46,7 +46,7 @@ final class FetchedCollectionViewController: UICollectionViewController {
         layout.footerReferenceSize = CGSize(width: collectionView!.frame.size.width, height: 25)
 
         // 1. create cell config
-        let cellConfig = ReusableViewConfig(reuseIdentifier: CellId) { (cell, model: Thing?, type, collectionView, indexPath) -> CollectionViewCell in
+        let cellConfig = ReusableViewConfig(reuseIdentifier: CellId) { (cell, model: Thing?, _, _, _) -> CollectionViewCell in
             cell.label.text = model!.displayName
             cell.label.textColor = UIColor.white
             cell.backgroundColor = model!.displayColor
@@ -55,14 +55,14 @@ final class FetchedCollectionViewController: UICollectionViewController {
         }
 
         // 2. create supplementary view config
-        let headerConfig = TitledSupplementaryViewConfig { (header, item: Thing?, kind, collectionView, indexPath) -> TitledSupplementaryView in
+        let headerConfig = TitledSupplementaryViewConfig { (header, item: Thing?, _, _, indexPath) -> TitledSupplementaryView in
             header.label.text = "\(item!.colorName) header (\(indexPath.section))"
             header.label.textColor = item?.displayColor
             header.backgroundColor = .darkGray
             return header
         }
 
-        let footerConfig = TitledSupplementaryViewConfig { (footer, item: Thing?, kind, collectionView, indexPath) -> TitledSupplementaryView in
+        let footerConfig = TitledSupplementaryViewConfig { (footer, item: Thing?, _, _, indexPath) -> TitledSupplementaryView in
             footer.label.text = "\(item!.colorName) footer (\(indexPath.section))"
             footer.label.textColor = item?.displayColor
             footer.backgroundColor = .lightGray
@@ -107,8 +107,10 @@ final class FetchedCollectionViewController: UICollectionViewController {
     // MARK: Actions
 
     @IBAction func didTapActionButton(_ sender: UIBarButtonItem) {
-        UIAlertController.showActionAlert(self, addNewAction: {
-            self.addNewThing()
+        UIAlertController.showActionAlert(
+            self,
+            addNewAction: {
+                self.addNewThing()
         }, deleteAction: {
             self.deleteSelected()
         }, changeNameAction: {
@@ -136,7 +138,7 @@ final class FetchedCollectionViewController: UICollectionViewController {
     }
 
     func deleteSelected() {
-        let indexPaths = collectionView!.indexPathsForSelectedItems
+        let indexPaths = collectionView!.indexPathsForSelectedItems ?? []
         frc.deleteThingsAtIndexPaths(indexPaths)
         stack.saveAndWait()
         fetchData()
@@ -144,21 +146,21 @@ final class FetchedCollectionViewController: UICollectionViewController {
     }
 
     func changeNameSelected() {
-        let indexPaths = collectionView!.indexPathsForSelectedItems
+        let indexPaths = collectionView!.indexPathsForSelectedItems ?? []
         frc.changeThingNamesAtIndexPaths(indexPaths)
         stack.saveAndWait()
         fetchData()
     }
 
     func changeColorSelected() {
-        let indexPaths = collectionView!.indexPathsForSelectedItems
+        let indexPaths = collectionView!.indexPathsForSelectedItems ?? []
         frc.changeThingColorsAtIndexPaths(indexPaths)
         stack.saveAndWait()
         fetchData()
     }
 
     func changeAllSelected() {
-        let indexPaths = collectionView!.indexPathsForSelectedItems
+        let indexPaths = collectionView!.indexPathsForSelectedItems ?? []
         frc.changeThingsAtIndexPaths(indexPaths)
         stack.saveAndWait()
         fetchData()

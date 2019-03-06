@@ -34,7 +34,7 @@ final class TableViewController: UITableViewController {
         let dataSource = DataSource(sections: section0, section1, section2)
 
         // 2. create cell config
-        let config = ReusableViewConfig(reuseIdentifier: CellId) { (cell, model: CellViewModel?, type, tableView, indexPath) -> UITableViewCell in
+        let config = ReusableViewConfig(reuseIdentifier: CellId) { (cell, model: CellViewModel?, _, _, indexPath) -> UITableViewCell in
             cell.textLabel?.text = model!.text
             cell.detailTextLabel?.text = "\(indexPath.section), \(indexPath.row)"
             cell.accessibilityIdentifier = "\(indexPath.section), \(indexPath.row)"
@@ -44,8 +44,8 @@ final class TableViewController: UITableViewController {
         // ** optional editing **
         // if needed, enable the editing functionality on the tableView
         let editingController: TableEditingController<DataSource<CellViewModel>> = TableEditingController(
-            canEditRow: { (item, tableView, indexPath) -> Bool in
-                return true
+            canEditRow: { _, tableView, indexPath -> Bool in
+                true
         },
             commitEditing: { (dataSource: inout DataSource, tableView, editingStyle, indexPath) in
                 if editingStyle == .delete {

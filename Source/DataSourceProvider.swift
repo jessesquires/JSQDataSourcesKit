@@ -61,7 +61,7 @@ where CellConfig.Item == DataSource.Item, SupplementaryConfig.Item == DataSource
     }
 }
 
-public extension DataSourceProvider where CellConfig.View: UITableViewCell {
+extension DataSourceProvider where CellConfig.View: UITableViewCell {
 
     /// Initializes a new data source provider.
     ///
@@ -95,32 +95,32 @@ public extension DataSourceProvider where CellConfig.View: UITableViewCell {
     private func tableViewBridgedDataSource() -> BridgedDataSource {
         let dataSource = BridgedDataSource(
             numberOfSections: { [unowned self] () -> Int in
-                return self.dataSource.numberOfSections()
+                self.dataSource.numberOfSections()
             },
-            numberOfItemsInSection: { [unowned self] (section) -> Int in
-                return self.dataSource.numberOfItems(inSection: section)
+            numberOfItemsInSection: { [unowned self] section -> Int in
+                self.dataSource.numberOfItems(inSection: section)
         })
 
-        dataSource.tableCellForRowAtIndexPath = { [unowned self] (tableView, indexPath) -> UITableViewCell in
+        dataSource.tableCellForRowAtIndexPath = { [unowned self] tableView, indexPath -> UITableViewCell in
             let item = self.dataSource.item(atIndexPath: indexPath)!
             return self.cellConfig.tableCellFor(item: item, tableView: tableView, indexPath: indexPath)
         }
 
-        dataSource.tableTitleForHeaderInSection = { [unowned self] (section) -> String? in
-            return self.dataSource.headerTitle(inSection: section)
+        dataSource.tableTitleForHeaderInSection = { [unowned self] section -> String? in
+            self.dataSource.headerTitle(inSection: section)
         }
 
-        dataSource.tableTitleForFooterInSection = { [unowned self] (section) -> String? in
-            return self.dataSource.footerTitle(inSection: section)
+        dataSource.tableTitleForFooterInSection = { [unowned self] section -> String? in
+            self.dataSource.footerTitle(inSection: section)
         }
 
-        dataSource.tableCanEditRow = { [unowned self] (tableView, indexPath) -> Bool in
+        dataSource.tableCanEditRow = { [unowned self] tableView, indexPath -> Bool in
             guard let controller = self.tableEditingController else { return false }
             let item = self.dataSource.item(atIndexPath: indexPath)!
             return controller.canEditRow(item, tableView, indexPath)
         }
 
-        dataSource.tableCommitEditingStyleForRow = { [unowned self] (tableView, editingStyle, indexPath) in
+        dataSource.tableCommitEditingStyleForRow = { [unowned self] tableView, editingStyle, indexPath in
             self.tableEditingController?.commitEditing(&self.dataSource, tableView, editingStyle, indexPath)
         }
 
@@ -128,7 +128,7 @@ public extension DataSourceProvider where CellConfig.View: UITableViewCell {
     }
 }
 
-public extension DataSourceProvider where CellConfig.View: UICollectionViewCell, SupplementaryConfig.View: UICollectionReusableView {
+extension DataSourceProvider where CellConfig.View: UICollectionViewCell, SupplementaryConfig.View: UICollectionReusableView {
 
     // MARK: UICollectionViewDataSource
 
@@ -144,18 +144,18 @@ public extension DataSourceProvider where CellConfig.View: UICollectionViewCell,
 
         let dataSource = BridgedDataSource(
             numberOfSections: { [unowned self] () -> Int in
-                return self.dataSource.numberOfSections()
+                self.dataSource.numberOfSections()
             },
-            numberOfItemsInSection: { [unowned self] (section) -> Int in
-                return self.dataSource.numberOfItems(inSection: section)
+            numberOfItemsInSection: { [unowned self] section -> Int in
+                self.dataSource.numberOfItems(inSection: section)
         })
 
-        dataSource.collectionCellForItemAtIndexPath = { [unowned self] (collectionView, indexPath) -> UICollectionViewCell in
+        dataSource.collectionCellForItemAtIndexPath = { [unowned self] collectionView, indexPath -> UICollectionViewCell in
             let item = self.dataSource.item(atIndexPath: indexPath)!
             return self.cellConfig.collectionCellFor(item: item, collectionView: collectionView, indexPath: indexPath)
         }
 
-        dataSource.collectionSupplementaryViewAtIndexPath = { [unowned self] (collectionView, kind, indexPath) -> UICollectionReusableView in
+        dataSource.collectionSupplementaryViewAtIndexPath = { [unowned self] collectionView, kind, indexPath -> UICollectionReusableView in
             var item: SupplementaryConfig.Item?
             if indexPath.section < self.dataSource.numberOfSections() {
                 if indexPath.item < self.dataSource.numberOfItems(inSection: indexPath.section) {

@@ -54,7 +54,7 @@ final class DataSourceProviderTests: TestCase {
         collectionView.dequeueCellExpectation = expectation(description: dequeueCellExpectationName + #function)
 
         // GIVEN: a cell config
-        let cellConfig = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionCell in
+        let cellConfig = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, _, collectionView, indexPath) -> FakeCollectionCell in
             XCTAssertEqual(cell.reuseIdentifier!, self.cellReuseId, "Dequeued cell should have expected identifier")
             XCTAssertEqual(model, expectedModel, "Model object should equal expected value")
             XCTAssertEqual(collectionView, self.collectionView, "CollectionView should equal the collectionView for the data source")
@@ -85,9 +85,9 @@ final class DataSourceProviderTests: TestCase {
 
         // THEN: the collectionView calls `dequeueReusableCellWithReuseIdentifier`
         // THEN: the cell config calls its `ConfigurationHandler`
-        waitForExpectations(timeout: defaultTimeout, handler: { (error) -> Void in
+        waitForExpectations(timeout: defaultTimeout) { error -> Void in
             XCTAssertNil(error, "Expectation should not error")
-        })
+        }
     }
 
     func test_thatDataSourceProvider_forCollectionView_returnsExpectedData_forSingleSection_withoutItems() {
@@ -97,16 +97,15 @@ final class DataSourceProviderTests: TestCase {
         XCTAssertEqual(dataSource.sections.count, 1)
 
         // GIVEN: a cell config
-        let cellConfig = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionCell in
-            return cell
+        let cellConfig = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, _: FakeViewModel?, _, _, _) -> FakeCollectionCell in
+            cell
         }
 
         let supplementaryConfigExpectation = expectation(description: "supplementary_config_\(#function)")
 
         // GIVEN: a supplementary view config
         let supplementaryConfig = ReusableViewConfig(reuseIdentifier: supplementaryViewReuseId,
-                                                     type: .supplementaryView(kind: fakeSupplementaryViewKind)) {
-                                                        (view, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionSupplementaryView in
+                                                     type: .supplementaryView(kind: fakeSupplementaryViewKind)) { (view, _: FakeViewModel?, _, _, _) -> FakeCollectionSupplementaryView in
             supplementaryConfigExpectation.fulfill()
             return view
         }
@@ -136,9 +135,9 @@ final class DataSourceProviderTests: TestCase {
 
         // THEN: the collectionView calls `dequeueReusableSupplementaryViewOfKind`
         // THEN: the supplementary view config calls its `ConfigurationHandler`
-        waitForExpectations(timeout: defaultTimeout, handler: { (error) -> Void in
+        waitForExpectations(timeout: defaultTimeout) { error -> Void in
             XCTAssertNil(error, "Expectation should not error")
-        })
+        }
     }
 
     func test_thatDataSourceProvider_forCollectionView_returnsExpectedData_forMultipleSections() {
@@ -151,7 +150,7 @@ final class DataSourceProviderTests: TestCase {
         var cellConfigExpectation = expectation(description: "cell_config_\(#function)")
 
         // GIVEN: a cell config
-        let cellConfig = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionCell in
+        let cellConfig = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, _, collectionView, indexPath) -> FakeCollectionCell in
             XCTAssertEqual(cell.reuseIdentifier!, self.cellReuseId, "Dequeued cell should have expected identifier")
             XCTAssertEqual(model, dataSource[indexPath.section][indexPath.row], "Model object should equal expected value")
             XCTAssertEqual(collectionView, self.collectionView, "CollectionView should equal the collectionView for the data source")
@@ -163,8 +162,9 @@ final class DataSourceProviderTests: TestCase {
         var supplementaryConfigExpectation = expectation(description: "supplementary_config_\(#function)")
 
         // GIVEN: a supplementary view config
-        let supplementaryConfig = ReusableViewConfig(reuseIdentifier: supplementaryViewReuseId, type: .supplementaryView(kind: fakeSupplementaryViewKind)) {
-            (view, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionSupplementaryView in
+        let supplementaryConfig = ReusableViewConfig(
+        reuseIdentifier: supplementaryViewReuseId,
+        type: .supplementaryView(kind: fakeSupplementaryViewKind)) { (view, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionSupplementaryView in
             XCTAssertEqual(view.reuseIdentifier!, self.supplementaryViewReuseId, "Dequeued supplementary view should have expected identifier")
             XCTAssertEqual(model, dataSource[indexPath.section][indexPath.row], "Model object should equal expected value")
             XCTAssertEqual(type, ReusableViewType.supplementaryView(kind: fakeSupplementaryViewKind), "View type should have expected type")
@@ -217,9 +217,9 @@ final class DataSourceProviderTests: TestCase {
 
                 // THEN: the collectionView calls `dequeueReusableSupplementaryViewOfKind`
                 // THEN: the supplementary view config calls its `ConfigurationHandler`
-                waitForExpectations(timeout: defaultTimeout, handler: { (error) -> Void in
+                waitForExpectations(timeout: defaultTimeout) { error -> Void in
                     XCTAssertNil(error, "Expections should not error")
-                })
+                }
 
                 // reset expectation names for next loop, ignore last item
                 if !(sectionIndex == dataSource.sections.count - 1 && rowIndex == dataSource[sectionIndex].count - 1) {
@@ -236,8 +236,8 @@ final class DataSourceProviderTests: TestCase {
         // GIVEN: a single section with data items
         let expectedModel = FakeViewModel()
         let expectedIndexPath = IndexPath(row: 2, section: 0)
-
-        let section0 = Section(items: FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel(), FakeViewModel(),
+        let items = [FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel(), FakeViewModel()]
+        let section0 = Section(items: items,
                                headerTitle: "Header",
                                footerTitle: "Footer")
         let dataSource = DataSource([section0])
@@ -246,7 +246,7 @@ final class DataSourceProviderTests: TestCase {
         tableView.dequeueCellExpectation = expectation(description: dequeueCellExpectationName + #function)
 
         // GIVEN: a cell config
-        let config = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
+        let config = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, _, tableView, indexPath) -> FakeTableCell in
             XCTAssertEqual(cell.reuseIdentifier!, self.cellReuseId, "Dequeued cell should have expected identifier")
 
             XCTAssertEqual(model, expectedModel, "Model object should equal expected value")
@@ -289,9 +289,9 @@ final class DataSourceProviderTests: TestCase {
 
         // THEN: the tableView calls `dequeueReusableCellWithIdentifier`
         // THEN: the cell config calls its `ConfigurationHandler`
-        waitForExpectations(timeout: defaultTimeout, handler: { (error) -> Void in
+        waitForExpectations(timeout: defaultTimeout) { error -> Void in
             XCTAssertNil(error, "Expectations should not error")
-        })
+        }
     }
 
     func test_thatDataSourceProvider_forTableView_returnsExpectedData_forMultipleSections() {
@@ -305,7 +305,7 @@ final class DataSourceProviderTests: TestCase {
         var configExpectation = expectation(description: "config_\(#function)")
 
         // GIVEN: a cell config
-        let config = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
+        let config = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, _, tableView, indexPath) -> FakeTableCell in
             XCTAssertEqual(cell.reuseIdentifier!, self.cellReuseId, "Dequeued cell should have expected identifier")
             XCTAssertEqual(model, dataSource[indexPath.section][indexPath.row], "Model object should equal expected value")
             XCTAssertEqual(tableView, self.tableView, "TableView should equal the tableView for the data source")
@@ -352,9 +352,9 @@ final class DataSourceProviderTests: TestCase {
 
                 // THEN: the tableView calls `dequeueReusableCellWithIdentifier`
                 // THEN: the cell config calls its `ConfigurationHandler`
-                waitForExpectations(timeout: defaultTimeout, handler: { (error) -> Void in
+                waitForExpectations(timeout: defaultTimeout) { error -> Void in
                     XCTAssertNil(error, "Expectations should not error")
-                })
+                }
 
                 // reset expectation names for next loop, ignore last item
                 if !(sectionIndex == dataSourceProvider.dataSource.sections.count - 1 && rowIndex == dataSourceProvider.dataSource[sectionIndex].count - 1) {
@@ -368,8 +368,8 @@ final class DataSourceProviderTests: TestCase {
         // GIVEN: a single section with data items
         let expectedModel = FakeViewModel()
         let expectedIndexPath = IndexPath(row: 2, section: 0)
-
-        let section0 = Section(items: FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel(), FakeViewModel(),
+        let items = [ FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel(), FakeViewModel()]
+        let section0 = Section(items: items,
                                headerTitle: "Header",
                                footerTitle: "Footer")
         let dataSource = DataSource([section0])
@@ -384,7 +384,7 @@ final class DataSourceProviderTests: TestCase {
         var dataSourceProvider: DataSourceProvider<DataSource<FakeViewModel>, TableCellConfig, TableCellConfig>!
 
         // GIVEN: a cell config
-        let config = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, tableView, indexPath) -> FakeTableCell in
+        let config = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, _: FakeViewModel?, _, tableView, _) -> FakeTableCell in
 
             XCTAssertEqual(cell.reuseIdentifier!, self.cellReuseId, "Dequeued cell should have expected identifier")
             XCTAssertEqual(tableView, self.tableView, "TableView should equal the tableView for the data source")
@@ -395,8 +395,8 @@ final class DataSourceProviderTests: TestCase {
 
         // GIVEN: a data source editing controller
         let editingController = TableEditingController<DataSource<FakeViewModel>>(
-            canEditRow: { (item, tableView, indexPath) -> Bool in
-                return indexPath == expectedIndexPath
+            canEditRow: { _, tableView, indexPath -> Bool in
+                indexPath == expectedIndexPath
         },
             commitEditing: { (dataSource: inout DataSource, tableView, editingStyle, indexPath) in
                 if editingStyle == .delete {
@@ -450,8 +450,8 @@ final class DataSourceProviderTests: TestCase {
 
         // THEN: the tableView calls `dequeueReusableCellWithIdentifier`
         // THEN: the cell config calls its `ConfigurationHandler`
-        waitForExpectations(timeout: defaultTimeout, handler: { (error) -> Void in
+        waitForExpectations(timeout: defaultTimeout) { error -> Void in
             XCTAssertNil(error, "Expectations should not error")
-        })
+        }
     }
 }

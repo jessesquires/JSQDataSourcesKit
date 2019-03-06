@@ -143,8 +143,10 @@ extension ReusableViewType: Equatable {
         switch (lhs, rhs) {
         case (.cell, .cell):
             return true
+
         case (.supplementaryView(let kind1), .supplementaryView(let kind2)):
             return kind1 == kind2
+
         default:
             return false
         }
@@ -195,7 +197,7 @@ public protocol ReusableViewConfigProtocol {
     func configure(view: View, item: Item?, type: ReusableViewType, parentView: View.ParentView, indexPath: IndexPath) -> View
 }
 
-public extension ReusableViewConfigProtocol where View: UITableViewCell {
+extension ReusableViewConfigProtocol where View: UITableViewCell {
 
     // MARK: Table cells
 
@@ -215,7 +217,7 @@ public extension ReusableViewConfigProtocol where View: UITableViewCell {
     }
 }
 
-public extension ReusableViewConfigProtocol where View: UICollectionViewCell {
+extension ReusableViewConfigProtocol where View: UICollectionViewCell {
 
     // MARK: Collection cells
 
@@ -235,7 +237,7 @@ public extension ReusableViewConfigProtocol where View: UICollectionViewCell {
     }
 }
 
-public extension ReusableViewConfigProtocol where View: UICollectionReusableView {
+extension ReusableViewConfigProtocol where View: UICollectionReusableView {
 
     // MARK: Supplementary views
 

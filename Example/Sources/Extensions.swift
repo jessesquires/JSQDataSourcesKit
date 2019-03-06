@@ -23,6 +23,7 @@ import JSQDataSourcesKit
 import UIKit
 
 extension UIAlertController {
+    // swiftlint:disable:next function_parameter_count
     class func showActionAlert(_ presenter: UIViewController,
                                addNewAction: @escaping () -> Void,
                                deleteAction: @escaping () -> Void,
@@ -31,23 +32,23 @@ extension UIAlertController {
                                changeAllAction: @escaping () -> Void) {
         let alert = UIAlertController(title: "You must select items first", message: nil, preferredStyle: .actionSheet)
 
-        alert.addAction(UIAlertAction(title: "Add new", style: .default) { action in
+        alert.addAction(UIAlertAction(title: "Add new", style: .default) { _ in
             addNewAction()
             })
 
-        alert.addAction(UIAlertAction(title: "Delete selected", style: .default) { action in
+        alert.addAction(UIAlertAction(title: "Delete selected", style: .default) { _ in
             deleteAction()
             })
 
-        alert.addAction(UIAlertAction(title: "Change name selected", style: .default) { action in
+        alert.addAction(UIAlertAction(title: "Change name selected", style: .default) { _ in
             changeNameAction()
             })
 
-        alert.addAction(UIAlertAction(title: "Change color selected", style: .default) { action in
+        alert.addAction(UIAlertAction(title: "Change color selected", style: .default) { _ in
             changeColorAction()
             })
 
-        alert.addAction(UIAlertAction(title: "Change all selected", style: .default) { action in
+        alert.addAction(UIAlertAction(title: "Change all selected", style: .default) { _ in
             changeAllAction()
             })
 
@@ -81,8 +82,8 @@ extension UICollectionView {
 
 extension FetchedResultsController {
 
-    func deleteThingsAtIndexPaths(_ indexPaths: [IndexPath]?) {
-        guard let indexPaths = indexPaths else {
+    func deleteThingsAtIndexPaths(_ indexPaths: [IndexPath]) {
+        guard !indexPaths.isEmpty else {
             return
         }
 
@@ -94,8 +95,8 @@ extension FetchedResultsController {
         }
     }
 
-    func changeThingNamesAtIndexPaths(_ indexPaths: [IndexPath]?) {
-        guard let indexPaths = indexPaths else {
+    func changeThingNamesAtIndexPaths(_ indexPaths: [IndexPath]) {
+        guard !indexPaths.isEmpty else {
             return
         }
 
@@ -107,8 +108,8 @@ extension FetchedResultsController {
         }
     }
 
-    func changeThingColorsAtIndexPaths(_ indexPaths: [IndexPath]?) {
-        guard let indexPaths = indexPaths else {
+    func changeThingColorsAtIndexPaths(_ indexPaths: [IndexPath]) {
+        guard !indexPaths.isEmpty else {
             return
         }
 
@@ -120,8 +121,8 @@ extension FetchedResultsController {
         }
     }
 
-    func changeThingsAtIndexPaths(_ indexPaths: [IndexPath]?) {
-        guard let indexPaths = indexPaths else {
+    func changeThingsAtIndexPaths(_ indexPaths: [IndexPath]) {
+        guard !indexPaths.isEmpty else {
             return
         }
 

@@ -40,7 +40,7 @@ final class FetchedTableViewController: UITableViewController {
         super.viewDidLoad()
 
         // 1. create config
-        let config = ReusableViewConfig(reuseIdentifier: CellId) { (cell, model: Thing?, type, tableView, indexPath) -> UITableViewCell in
+        let config = ReusableViewConfig(reuseIdentifier: CellId) { (cell, model: Thing?, _, _, indexPath) -> UITableViewCell in
             cell.textLabel?.text = model!.displayName
             cell.textLabel?.textColor = model!.displayColor
             cell.detailTextLabel?.text = "\(indexPath.section), \(indexPath.row)"
@@ -60,10 +60,10 @@ final class FetchedTableViewController: UITableViewController {
         // ** optional editing **
         // if needed, enable the editing functionality on the tableView
         let editingController: TableEditingController<FetchedResultsController<Thing>> = TableEditingController(
-            canEditRow: { (item, tableView, indexPath) -> Bool in
-                return item?.color == Color.Blue
+            canEditRow: { item, _, indexPath -> Bool in
+                item?.color == Color.Blue
         },
-            commitEditing: { (dataSource: inout FetchedResultsController<Thing>, tableView, editingStyle, indexPath) in
+            commitEditing: { (dataSource: inout FetchedResultsController<Thing>, _, editingStyle, indexPath) in
                 if editingStyle == .delete {
                     guard let item = dataSource.item(atIndexPath: indexPath) else { return }
                     self.stack.context.delete(item)
@@ -98,7 +98,9 @@ final class FetchedTableViewController: UITableViewController {
     // MARK: Actions
 
     @IBAction func didTapActionButton(_ sender: UIBarButtonItem) {
-        UIAlertController.showActionAlert(self, addNewAction: {
+        UIAlertController.showActionAlert(
+            self,
+            addNewAction: {
             self.addNewThing()
         }, deleteAction: {
             self.deleteSelected()
@@ -127,25 +129,25 @@ final class FetchedTableViewController: UITableViewController {
     }
 
     func deleteSelected() {
-        frc.deleteThingsAtIndexPaths(tableView.indexPathsForSelectedRows)
+        frc.deleteThingsAtIndexPaths(tableView.indexPathsForSelectedRows ?? [])
         stack.saveAndWait()
         fetchData()
     }
 
     func changeNameSelected() {
-        frc.changeThingNamesAtIndexPaths(tableView.indexPathsForSelectedRows)
+        frc.changeThingNamesAtIndexPaths(tableView.indexPathsForSelectedRows ?? [])
         stack.saveAndWait()
         fetchData()
     }
 
     func changeColorSelected() {
-        frc.changeThingColorsAtIndexPaths(tableView.indexPathsForSelectedRows)
+        frc.changeThingColorsAtIndexPaths(tableView.indexPathsForSelectedRows ?? [])
         stack.saveAndWait()
         fetchData()
     }
 
     func changeAllSelected() {
-        frc.changeThingsAtIndexPaths(tableView.indexPathsForSelectedRows)
+        frc.changeThingsAtIndexPaths(tableView.indexPathsForSelectedRows ?? [])
         stack.saveAndWait()
         fetchData()
     }

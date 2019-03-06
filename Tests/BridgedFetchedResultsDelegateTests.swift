@@ -32,16 +32,16 @@ final class BridgedFetchedResultsDelegateTests: XCTestCase {
 
         // GIVEN: a fetched results delegate
         let delegate = BridgedFetchedResultsDelegate(
-            willChangeContent: { (controller) in
+            willChangeContent: { _ in
                 willChangeContentExpectation.fulfill()
             },
-            didChangeSection: { (controller, sectionInfo, sectionIndex, changeType) in
+            didChangeSection: { _, _, _, _ in
                 didChangeSectionExpectation.fulfill()
             },
-            didChangeObject: { (controller, anyObject, indexPath: IndexPath?, changeType, newIndexPath: IndexPath?) in
+            didChangeObject: { (_, _, _: IndexPath?, _, _: IndexPath?) in
                 didChangeObjectExpectation.fulfill()
             },
-            didChangeContent: { (controller) in
+            didChangeContent: { _ in
                 didChangeContentExpectation.fulfill()
         })
 
@@ -61,7 +61,7 @@ final class BridgedFetchedResultsDelegateTests: XCTestCase {
         delegate.controllerDidChangeContent(controller)
 
         // THEN: the delegate executes its closures
-        waitForExpectations(timeout: defaultTimeout) { (error) in
+        waitForExpectations(timeout: defaultTimeout) { error in
             XCTAssertNil(error, "Expectations should not error")
         }
     }

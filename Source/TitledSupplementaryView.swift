@@ -43,7 +43,7 @@ public final class TitledSupplementaryView: UICollectionReusableView {
     }
 
     /// :nodoc:
-    public override var backgroundColor: UIColor? {
+    override public var backgroundColor: UIColor? {
         get {
             return super.backgroundColor
         }
@@ -68,7 +68,7 @@ public final class TitledSupplementaryView: UICollectionReusableView {
     }
 
     /// :nodoc:
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         label = UILabel()
         super.init(coder: aDecoder)
         addSubview(label)
@@ -82,7 +82,7 @@ public final class TitledSupplementaryView: UICollectionReusableView {
     }
 
     /// :nodoc:
-    public override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         label.frame = bounds.insetBy(dx: horizontalInset, dy: verticalInset)
     }

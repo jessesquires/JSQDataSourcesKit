@@ -7,21 +7,17 @@ excluded:
 disabled_rules:
   # metrics
   - nesting
-  - function_parameter_count
 
   # lint
   - notification_center_detachment
-  - unused_closure_parameter
   - weak_delegate
 
   # idiomatic
-  - fallthrough
   - force_cast
   - type_name
 
   # style
   - identifier_name
-  - closure_parameter_position
 
 opt_in_rules:
   # performance
@@ -29,9 +25,22 @@ opt_in_rules:
   - first_where
   - sorted_first_last
   - contains_over_first_not_nil
+  - last_where
 
   # idiomatic
   - fatal_error_message
+  - xctfail_message
+  - discouraged_object_literal
+  - discouraged_optional_boolean
+  # - discouraged_optional_collection
+  - for_where
+  - function_default_parameter_at_end
+  - legacy_random
+  - no_extension_access_modifier
+  - redundant_type_annotation
+  - static_operator
+  - toggle_bool
+  - unavailable_function
 
   # style
   - attributes
@@ -39,9 +48,28 @@ opt_in_rules:
   - operator_usage_whitespace
   - sorted_imports
   - vertical_parameter_alignment_on_call
+  - void_return
+  - closure_spacing
+  - empty_enum_arguments
+  - implicit_return
+  - modifier_order
+  - multiline_arguments
+  - multiline_parameters
+  - trailing_closure
+  - unneeded_parentheses_in_closure_argument
+  - vertical_whitespace_between_cases
 
   # lint
   - overridden_super_call
+  - yoda_condition
+  - weak_computed_property
+  - anyobject_protocol
+  - array_init
+  - empty_xctest_method
+  - identical_operands
+  - prohibited_super_call
+  - unused_import
+  - unused_private_declaration
 
 line_length: 200
 file_length: 600

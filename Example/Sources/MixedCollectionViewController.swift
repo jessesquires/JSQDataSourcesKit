@@ -32,6 +32,7 @@ enum MixedItem {
         switch self {
         case .standard:
             return CellId
+
         case .fancy:
             return FancyCellId
         }
@@ -62,14 +63,14 @@ final class MixedCollectionViewController: UICollectionViewController, UICollect
         let dataSource = DataSource(sections: section0, section1, section2)
 
         // 2. create cell configs
-        let standardCellConfig = ReusableViewConfig(reuseIdentifier: CellId) { (cell, model: CellViewModel?, type, collectionView, indexPath) -> CollectionViewCell in
+        let standardCellConfig = ReusableViewConfig(reuseIdentifier: CellId) { (cell, model: CellViewModel?, _, _, indexPath) -> CollectionViewCell in
             if let model = model {
                 cell.label.text = model.text + "\n\(indexPath.section), \(indexPath.item)"
             }
             return cell
         }
 
-        let fancyCellConfig = ReusableViewConfig(reuseIdentifier: CellId) { (cell, model: FancyViewModel?, type, collectionView, indexPath) -> FancyCollectionViewCell in
+        let fancyCellConfig = ReusableViewConfig(reuseIdentifier: CellId) { (cell, model: FancyViewModel?, _, _, indexPath) -> FancyCollectionViewCell in
             if let model = model {
                 cell.label.text = model.text + "\n\(indexPath.section), \(indexPath.item)"
                 cell.layer.cornerRadius = model.cornerRadius
@@ -79,7 +80,7 @@ final class MixedCollectionViewController: UICollectionViewController, UICollect
         let cellConfig = ComposedCellViewConfig(standardCellConfig: standardCellConfig, fancyCellConfig: fancyCellConfig)
 
         // 3. create supplementary view config
-        let headerConfig = TitledSupplementaryViewConfig { (header, item: MixedItem?, kind, collectionView, indexPath) -> TitledSupplementaryView in
+        let headerConfig = TitledSupplementaryViewConfig { (header, _: MixedItem?, _, _, indexPath) -> TitledSupplementaryView in
             header.label.text = "Section \(indexPath.section)"
             header.backgroundColor = .darkGray
             header.label.textColor = .white

@@ -59,7 +59,7 @@ public class Thing: NSManagedObject {
         return color.displayColor
     }
 
-    public override var description: String {
+    override public var description: String {
         return "<Thing: \(name), \(color)>"
     }
 
@@ -70,7 +70,7 @@ public class Thing: NSManagedObject {
         super.init(entity: entityDescription, insertInto: context)
     }
 
-    public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+    override public init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
         super.init(entity: entity, insertInto: context)
     }
 
@@ -115,7 +115,7 @@ private func randomColor(withoutColor color: Color?) -> Color {
         colorSet.remove(color)
     }
     let colors = Array(colorSet)
-    return colors[Int(arc4random_uniform(UInt32(colors.count)))]
+    return colors[Int.random(in: 0...colors.count)]
 }
 
 private func randomName() -> String {

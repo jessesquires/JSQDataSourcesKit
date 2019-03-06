@@ -48,8 +48,10 @@ public struct ComposedCollectionSupplementaryViewConfig <Item>: ReusableViewConf
         switch type {
         case .supplementaryView(kind: UICollectionView.elementKindSectionHeader):
             return headerConfig.configure(view: view, item: item, type: type, parentView: parentView, indexPath: indexPath)
+
         case .supplementaryView(kind: UICollectionView.elementKindSectionFooter):
             return footerConfig.configure(view: view, item: item, type: type, parentView: parentView, indexPath: indexPath)
+
         default:
             fatalError("attempt to dequeue supplementary view with unknown kind: \(type)")
         }

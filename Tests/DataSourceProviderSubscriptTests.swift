@@ -31,8 +31,8 @@ final class DataSourceProviderSubscriptTests: XCTestCase {
         let dataSource = DataSource([section0, section1, section2])
 
         // GIVEN: a cell config
-        let config = ReusableViewConfig(reuseIdentifier: "cellId") { (cell, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionCell in
-            return cell
+        let config = ReusableViewConfig(reuseIdentifier: "cellId") { (cell, _: FakeViewModel?, _, _, _) -> FakeCollectionCell in
+            cell
         }
 
         // GIVEN: a data source provider
@@ -53,8 +53,8 @@ final class DataSourceProviderSubscriptTests: XCTestCase {
         let dataSource = DataSource([section0, section1, section2])
 
         // GIVEN: a cell config
-        let config = ReusableViewConfig(reuseIdentifier: "cellId") { (cell, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionCell in
-            return cell
+        let config = ReusableViewConfig(reuseIdentifier: "cellId") { (cell, _: FakeViewModel?, _, _, _) -> FakeCollectionCell in
+            cell
         }
 
         // GIVEN: a data source provider
@@ -78,8 +78,8 @@ final class DataSourceProviderSubscriptTests: XCTestCase {
         let dataSource = DataSource([section0, section1])
 
         // GIVEN: a cell config
-        let config = ReusableViewConfig(reuseIdentifier: "cellId") { (cell, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionCell in
-            return cell
+        let config = ReusableViewConfig(reuseIdentifier: "cellId") { (cell, _: FakeViewModel?, _, _, _) -> FakeCollectionCell in
+            cell
         }
 
         // GIVEN: a data source provider
@@ -101,8 +101,8 @@ final class DataSourceProviderSubscriptTests: XCTestCase {
         let dataSource = DataSource([section0, section1])
 
         // GIVEN: a cell config
-        let config = ReusableViewConfig(reuseIdentifier: "cellId") { (cell, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionCell in
-            return cell
+        let config = ReusableViewConfig(reuseIdentifier: "cellId") { (cell, _: FakeViewModel?, _, _, _) -> FakeCollectionCell in
+            cell
         }
 
         // GIVEN: a data source provider

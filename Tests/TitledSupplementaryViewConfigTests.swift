@@ -43,7 +43,7 @@ final class TitledSupplementaryViewConfigTests: TestCase {
         var cellConfigExpectation = expectation(description: "cell_config")
 
         // GIVEN: a cell config
-        let cellConfig = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, type, collectionView, indexPath) -> FakeCollectionCell in
+        let cellConfig = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, _: FakeViewModel?, _, _, _) -> FakeCollectionCell in
             cellConfigExpectation.fulfill()
             return cell
         }
@@ -96,7 +96,8 @@ final class TitledSupplementaryViewConfigTests: TestCase {
 
                 // THEN: we receive the expected return values for supplementary views
                 XCTAssertNotNil(supplementaryView, "Supplementary view should not be nil")
-                XCTAssertEqual(supplementaryView!.reuseIdentifier!, TitledSupplementaryView.identifier,
+                XCTAssertEqual(supplementaryView!.reuseIdentifier!,
+                               TitledSupplementaryView.identifier,
                                "Data source should return supplementary views with the expected identifier")
 
                 // THEN: the collectionView calls `dequeueReusableCellWithReuseIdentifier`
@@ -105,9 +106,9 @@ final class TitledSupplementaryViewConfigTests: TestCase {
                 // THEN: the collectionView calls `dequeueReusableSupplementaryViewOfKind`
                 // THEN: the supplementary view config calls its `dataConfigurator`
                 // THEN: the supplementary view config calls its `styleConfigurator`
-                waitForExpectations(timeout: defaultTimeout, handler: { (error) -> Void in
+                waitForExpectations(timeout: defaultTimeout) { error -> Void in
                     XCTAssertNil(error, "Expections should not error")
-                })
+                }
 
                 // reset expectation names for next loop, ignore last item
                 if !(sectionIndex == dataSource.sections.count - 1 && rowIndex == dataSource[sectionIndex].count - 1) {

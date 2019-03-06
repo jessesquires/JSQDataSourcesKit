@@ -50,6 +50,7 @@ struct ComposedCellViewConfig: ReusableViewConfigProtocol {
         case let .standard(standardModel):
             let cell = view as! CollectionViewCell
             return standardCellConfig.configure(view: cell, item: standardModel, type: type, parentView: parentView, indexPath: indexPath)
+
         case let .fancy(fancyModel):
             let cell = view as! FancyCollectionViewCell
             return fancyCellConfig.configure(view: cell, item: fancyModel, type: type, parentView: parentView, indexPath: indexPath)

@@ -16,6 +16,8 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
+// swiftlint:disable trailing_closure
+
 import XCTest
 
 final class StaticViewsUITests: XCTestCase {
@@ -49,7 +51,8 @@ final class StaticViewsUITests: XCTestCase {
                                             inView: table,
                                             byUniqueIdentifier: { $0.identifier })
 
-        XCTAssertEqual(countTableCells, numberOfCellsInStaticTableView,
+        XCTAssertEqual(countTableCells,
+                       numberOfCellsInStaticTableView,
                        "The number of cells loaded should be the same as the number of cells expected")
     }
 
@@ -65,7 +68,10 @@ final class StaticViewsUITests: XCTestCase {
                                                      inView: collectionView,
                                                      byUniqueIdentifier: { $0.identifier })
 
-        XCTAssertEqual(countCollectionViewCells, numberOfCellsInStaticCollectionView,
+        XCTAssertEqual(countCollectionViewCells,
+                       numberOfCellsInStaticCollectionView,
                        "The number of cells loaded should be the same as the number of cells expected")
     }
 }
+
+// swiftlint:enable trailing_closure

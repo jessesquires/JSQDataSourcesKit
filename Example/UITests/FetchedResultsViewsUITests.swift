@@ -16,6 +16,8 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
+// swiftlint:disable trailing_closure
+
 import XCTest
 
 final class FetchedResultsViewsUITests: XCTestCase {
@@ -61,17 +63,21 @@ final class FetchedResultsViewsUITests: XCTestCase {
         fetchedResultsTableViewMenuItem.tap()
 
         // GIVEN: initial number of cells in the table
-        var numberOfCellsBeforeInTable = countElements(ofType: XCUIElementType.cell, inView: table, byUniqueIdentifier: { $0.identifier })
+        var numberOfCellsBeforeInTable = countElements(ofType: XCUIElementType.cell,
+                                                       inView: table,
+                                                       byUniqueIdentifier: { $0.identifier })
 
         returnBackIfPossible()
 
         fetchedResultsCollectionViewMenuItem.tap()
 
         // GIVEN: initial number of cells in the collection view
-        var numberOfCellsBeforeInCollectionView = countElements(ofType: XCUIElementType.cell, inView: collectionView,
+        var numberOfCellsBeforeInCollectionView = countElements(ofType: XCUIElementType.cell,
+                                                                inView: collectionView,
                                                                 byUniqueIdentifier: { $0.identifier })
 
-        XCTAssertEqual(numberOfCellsBeforeInTable, numberOfCellsBeforeInCollectionView,
+        XCTAssertEqual(numberOfCellsBeforeInTable,
+                       numberOfCellsBeforeInCollectionView,
                        "Table and Collection views should be syncronized")
 
         returnBackIfPossible()
@@ -85,8 +91,11 @@ final class FetchedResultsViewsUITests: XCTestCase {
             fetchedResultsTableViewMenuItem.tap()
 
             // THEN: new items get added to the table
-            let numberOfCellsAfterInTable = countElements(ofType: XCUIElementType.cell, inView: table, byUniqueIdentifier: { $0.identifier })
-            XCTAssertEqual(numberOfCellsAfterInTable, numberOfCellsBeforeInTable + numberOfItemsAdded,
+            let numberOfCellsAfterInTable = countElements(ofType: XCUIElementType.cell,
+                                                          inView: table,
+                                                          byUniqueIdentifier: { $0.identifier })
+            XCTAssertEqual(numberOfCellsAfterInTable,
+                           numberOfCellsBeforeInTable + numberOfItemsAdded,
                            "\"Add\" button should cause adding new cells")
 
             numberOfCellsBeforeInTable = numberOfCellsAfterInTable
@@ -95,9 +104,11 @@ final class FetchedResultsViewsUITests: XCTestCase {
             fetchedResultsCollectionViewMenuItem.tap()
 
             // THEN: new items get added to the collection view as well
-            let numberOfCellsAfterInCollectionView = countElements(ofType: XCUIElementType.cell, inView: collectionView,
+            let numberOfCellsAfterInCollectionView = countElements(ofType: XCUIElementType.cell,
+                                                                   inView: collectionView,
                                                                    byUniqueIdentifier: { $0.identifier })
-            XCTAssertEqual(numberOfCellsAfterInCollectionView, numberOfCellsBeforeInCollectionView + numberOfItemsAdded,
+            XCTAssertEqual(numberOfCellsAfterInCollectionView,
+                           numberOfCellsBeforeInCollectionView + numberOfItemsAdded,
                            "\"Add\" button should cause adding new cells")
 
             numberOfCellsBeforeInCollectionView = numberOfCellsAfterInCollectionView
@@ -177,7 +188,8 @@ final class FetchedResultsViewsUITests: XCTestCase {
                                                                inView: collectionView,
                                                                byUniqueIdentifier: { $0.identifier })
 
-        XCTAssertEqual(numberOfCellsAfterInCollectionView, numberOfCellsBeforeInCollectionView + 1,
+        XCTAssertEqual(numberOfCellsAfterInCollectionView,
+                       numberOfCellsBeforeInCollectionView + 1,
                        "\"Add new\" should add one new cell")
 
         returnBackIfPossible()
@@ -241,7 +253,8 @@ final class FetchedResultsViewsUITests: XCTestCase {
         let numberOfCellsAfterInTable = countElements(ofType: .cell,
                                                       inView: table,
                                                       byUniqueIdentifier: { $0.identifier })
-        XCTAssertEqual(numberOfCellsAfterInTable, numberOfCellsBeforeInTable - numberOfCellsToDelete,
+        XCTAssertEqual(numberOfCellsAfterInTable,
+                       numberOfCellsBeforeInTable - numberOfCellsToDelete,
                        "\"Delete selected\" should remove \(numberOfCellsToDelete) cells.")
 
         returnBackIfPossible()
@@ -271,7 +284,10 @@ final class FetchedResultsViewsUITests: XCTestCase {
         let numberOfCellsAfterInCollectionView = countElements(ofType: .cell,
                                                                inView: collectionView,
                                                                byUniqueIdentifier: { $0.identifier })
-        XCTAssertEqual(numberOfCellsAfterInCollectionView, numberOfCellsBeforeInCollectionView - numberOfCellsToDelete,
+        XCTAssertEqual(numberOfCellsAfterInCollectionView,
+                       numberOfCellsBeforeInCollectionView - numberOfCellsToDelete,
                        "\"Delete selected\" should remove \(numberOfCellsToDelete) cells.")
     }
 }
+
+// swiftlint:enable trailing_closure

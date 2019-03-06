@@ -38,14 +38,14 @@ final class CollectionViewController: UICollectionViewController, UICollectionVi
         let dataSource = DataSource(sections: section0, section1, section2)
 
         // 2. create cell config
-        let cellConfig = ReusableViewConfig(reuseIdentifier: CellId) { (cell, model: CellViewModel?, type, collectionView, indexPath) -> CollectionViewCell in
+        let cellConfig = ReusableViewConfig(reuseIdentifier: CellId) { (cell, model: CellViewModel?, _, _, indexPath) -> CollectionViewCell in
             cell.label.text = model!.text + "\n\(indexPath.section), \(indexPath.item)"
             cell.accessibilityIdentifier = "\(indexPath.section), \(indexPath.item)"
             return cell
         }
 
         // 3. create supplementary view config
-        let headerConfig = TitledSupplementaryViewConfig { (header, item: CellViewModel?, kind, collectionView, indexPath) -> TitledSupplementaryView in
+        let headerConfig = TitledSupplementaryViewConfig { (header, _: CellViewModel?, _, _, indexPath) -> TitledSupplementaryView in
             header.label.text = "Section \(indexPath.section)"
             header.backgroundColor = .darkGray
             header.label.textColor = .white

@@ -74,30 +74,32 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIC
         return bridgedDelegate!
     }
 
-    private weak var collectionView: UICollectionView? { return cellParentView }
+    private var collectionView: UICollectionView? { return cellParentView }
 
     private func bridgedCollectionFetchedResultsDelegate() -> BridgedFetchedResultsDelegate {
         let delegate = BridgedFetchedResultsDelegate(
-            willChangeContent: { [unowned self] (controller) in
+            willChangeContent: { [unowned self] _ in
 
                 self.sectionChanges.removeAll()
                 self.objectChanges.removeAll()
             },
-            didChangeSection: { [unowned self] (controller, sectionInfo, sectionIndex, changeType) in
+            didChangeSection: { [unowned self] _, _, sectionIndex, changeType in
 
                 let section = IndexSet(integer: sectionIndex)
                 self.sectionChanges.append { [unowned self] in
                     switch changeType {
                     case .insert:
                         self.collectionView?.insertSections(section)
+
                     case .delete:
                         self.collectionView?.deleteSections(section)
+
                     default:
                         break
                     }
                 }
             },
-            didChangeObject: { [unowned self] (controller, anyObject, indexPath: IndexPath?, changeType, newIndexPath: IndexPath?) in
+            didChangeObject: { [unowned self] (_, anyObject, indexPath: IndexPath?, changeType, newIndexPath: IndexPath?) in
 
                 switch changeType {
                 case .insert:
@@ -106,12 +108,14 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIC
                             self.collectionView?.insertItems(at: [insertIndexPath])
                         }
                     }
+
                 case .delete:
                     if let deleteIndexPath = indexPath {
                         self.objectChanges.append { [unowned self] in
                             self.collectionView?.deleteItems(at: [deleteIndexPath])
                         }
                     }
+
                 case .update:
                     if let indexPath = indexPath {
                         self.objectChanges.append { [unowned self] in
@@ -122,6 +126,7 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIC
                             }
                         }
                     }
+
                 case .move:
                     if let old = indexPath, let new = newIndexPath {
                         self.objectChanges.append { [unowned self] in
@@ -131,7 +136,7 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIC
                     }
                 }
             },
-            didChangeContent: { [unowned self] (controller) in
+            didChangeContent: { [unowned self] _ in
 
                 self.collectionView?.performBatchUpdates({ [weak self] in
                     // apply object changes
@@ -140,7 +145,7 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIC
                     // apply section changes
                     self?.sectionChanges.forEach { $0() }
 
-                    }, completion: { [weak self] finished in
+                    }, completion: { [weak self] _ in
                         self?.reloadSupplementaryViewsIfNeeded()
                 })
         })
@@ -176,39 +181,44 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIT
         return bridgedDelegate!
     }
 
-    private weak var tableView: UITableView? { return cellParentView }
+    private var tableView: UITableView? { return cellParentView }
 
     private func bridgedTableFetchedResultsDelegate() -> BridgedFetchedResultsDelegate {
         let delegate = BridgedFetchedResultsDelegate(
-            willChangeContent: { [unowned self] (controller) in
+            willChangeContent: { [unowned self] _ in
                 self.tableView?.beginUpdates()
             },
-            didChangeSection: { [unowned self] (controller, sectionInfo, sectionIndex, changeType) in
+            didChangeSection: { [unowned self] _, _, sectionIndex, changeType in
                 switch changeType {
                 case .insert:
                     self.tableView?.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+
                 case .delete:
                     self.tableView?.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+
                 default:
                     break
                 }
             },
-            didChangeObject: { [unowned self] (controller, anyObject, indexPath, changeType, newIndexPath) in
+            didChangeObject: { [unowned self] _, anyObject, indexPath, changeType, newIndexPath in
                 switch changeType {
                 case .insert:
                     if let insertIndexPath = newIndexPath {
                         self.tableView?.insertRows(at: [insertIndexPath], with: .fade)
                     }
+
                 case .delete:
                     if let deleteIndexPath = indexPath {
                         self.tableView?.deleteRows(at: [deleteIndexPath], with: .fade)
                     }
+
                 case .update:
                     if let indexPath = indexPath,
                         let tableView = self.tableView,
                         let cell = tableView.cellForRow(at: indexPath) as? CellConfig.View {
                         self.cellConfig.configure(view: cell, item: anyObject as? Item, type: .cell, parentView: tableView, indexPath: indexPath)
                     }
+
                 case .move:
                     if let deleteIndexPath = indexPath {
                         self.tableView?.deleteRows(at: [deleteIndexPath], with: .fade)
@@ -219,7 +229,7 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIT
                     }
                 }
             },
-            didChangeContent: { [unowned self] (controller) in
+            didChangeContent: { [unowned self] _ in
                 self.tableView?.endUpdates()
         })
 
