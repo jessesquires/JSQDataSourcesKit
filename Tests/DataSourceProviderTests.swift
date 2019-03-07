@@ -232,66 +232,57 @@ final class DataSourceProviderTests: TestCase {
 
     // MARK: TableView
 
-    func test_thatDataSourceProvider_forTableView_returnsExpectedData_forSingleSection() {
-        // GIVEN: a single section with data items
-        let expectedModel = FakeViewModel()
-        let expectedIndexPath = IndexPath(row: 2, section: 0)
-        let items = [FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel(), FakeViewModel()]
-        let section0 = Section(items: items,
-                               headerTitle: "Header",
-                               footerTitle: "Footer")
-        let dataSource = DataSource([section0])
+    func test_singleSection_DataSourceProvider_forTableview_returns_expected_sections() {
+        let provider = singleSectionDataSource()
+        let dataSourceProvider = DataSourceProvider(dataSource: provider.datasource,
+                                                    cellConfig: provider.config,
+                                                    supplementaryConfig: provider.config)
 
-        let configExpectation = expectation(description: #function)
-        tableView.dequeueCellExpectation = expectation(description: dequeueCellExpectationName + #function)
-
-        // GIVEN: a cell config
-        let config = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, _, tableView, indexPath) -> FakeTableCell in
-            XCTAssertEqual(cell.reuseIdentifier!, self.cellReuseId, "Dequeued cell should have expected identifier")
-
-            XCTAssertEqual(model, expectedModel, "Model object should equal expected value")
-            XCTAssertEqual(tableView, self.tableView, "TableView should equal the tableView for the data source")
-            XCTAssertEqual(indexPath, expectedIndexPath, "IndexPath should equal expected value")
-
-            configExpectation.fulfill()
-            return cell
-        }
-
-        // GIVEN: a data source provider
-        let dataSourceProvider = DataSourceProvider(dataSource: dataSource, cellConfig: config, supplementaryConfig: config)
         let tableViewDataSource = dataSourceProvider.tableViewDataSource
+        registerProvider(provider, tableViewDataSource)
 
-        tableView.dataSource = tableViewDataSource
-
-        // WHEN: we call the table view data source methods
         let numSections = tableViewDataSource.numberOfSections?(in: tableView)
-        let numRows = tableViewDataSource.tableView(tableView, numberOfRowsInSection: 0)
-        let cell = tableViewDataSource.tableView(tableView, cellForRowAt: expectedIndexPath)
-        let header = tableViewDataSource.tableView?(tableView, titleForHeaderInSection: 0)
-        let footer = tableViewDataSource.tableView?(tableView, titleForFooterInSection: 0)
 
         // THEN: we receive the expected return values
         XCTAssertNotNil(numSections, "Number of sections should not be nil")
         XCTAssertEqual(numSections!, dataSourceProvider.dataSource.sections.count, "Data source should return expected number of sections")
+    }
 
-        XCTAssertEqual(numRows, section0.count, "Data source should return expected number of rows for section 0")
+    func test_singleSection_DataSourceProvider_forTableview_returns_expected_row_count() {
+        let provider = singleSectionDataSource()
+        let dataSourceProvider = DataSourceProvider(dataSource: provider.datasource, cellConfig: provider.config, supplementaryConfig: provider.config)
+
+        let tableViewDataSource = dataSourceProvider.tableViewDataSource
+        registerProvider(provider, tableViewDataSource)
+
+        let numRows = tableViewDataSource.tableView(tableView, numberOfRowsInSection: 0)
+
+        XCTAssertEqual(numRows, provider.datasource.sections.first?.items.count, "Data source should return expected number of rows for section 0")
+
+        let cell = tableViewDataSource.tableView(tableView, cellForRowAt: IndexPath(row: 2, section: 0))
 
         XCTAssertNotNil(cell.reuseIdentifier, "Cell reuse identifier should not be nil")
         XCTAssertEqual(cell.reuseIdentifier!, cellReuseId, "Data source should return cells with the expected identifier")
+    }
+
+    func test_singleSection_DataSourceProvider_forTableview_configures_headerFooterViews() {
+        let provider = singleSectionDataSource()
+        let dataSourceProvider = DataSourceProvider(dataSource: provider.datasource, cellConfig: provider.config, supplementaryConfig: provider.config)
+
+        let tableViewDataSource = dataSourceProvider.tableViewDataSource
+        registerProvider(provider, tableViewDataSource)
+
+        let header = tableViewDataSource.tableView?(tableView, titleForHeaderInSection: 0)
+        let footer = tableViewDataSource.tableView?(tableView, titleForFooterInSection: 0)
+        let section0 = provider.datasource.sections.first
 
         XCTAssertNotNil(header, "Header should not be nil")
-        XCTAssertNotNil(section0.headerTitle, "Section 0 header title should not be nil")
-        XCTAssertEqual(header!, section0.headerTitle!, "Data source should return expected header title")
+        XCTAssertNotNil(section0!.headerTitle, "Section 0 header title should not be nil")
+        XCTAssertEqual(header!, provider.datasource.sections.first!.headerTitle!, "Data source should return expected header title")
 
         XCTAssertNotNil(footer, "Footer should not be nil")
-        XCTAssertNotNil(section0.footerTitle, "Section 0 footer title should not be nil")
-        XCTAssertEqual(footer!, section0.footerTitle!, "Data source should return expected footer title")
-
-        // THEN: the tableView calls `dequeueReusableCellWithIdentifier`
-        // THEN: the cell config calls its `ConfigurationHandler`
-        waitForExpectations(timeout: defaultTimeout) { error -> Void in
-            XCTAssertNil(error, "Expectations should not error")
-        }
+        XCTAssertNotNil(section0!.footerTitle, "Section 0 footer title should not be nil")
+        XCTAssertEqual(footer!, provider.datasource.sections.first!.footerTitle!, "Data source should return expected footer title")
     }
 
     func test_thatDataSourceProvider_forTableView_returnsExpectedData_forMultipleSections() {
@@ -368,10 +359,9 @@ final class DataSourceProviderTests: TestCase {
         // GIVEN: a single section with data items
         let expectedModel = FakeViewModel()
         let expectedIndexPath = IndexPath(row: 2, section: 0)
-        let items = [ FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel(), FakeViewModel()]
-        let section0 = Section(items: items,
-                               headerTitle: "Header",
-                               footerTitle: "Footer")
+
+        let section0 = Section(items: FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel(), FakeViewModel(), headerTitle: "Header", footerTitle: "Footer")
+
         let dataSource = DataSource([section0])
 
         let oldItemForExpectedIndexPath = dataSource.item(atRow: expectedIndexPath.row, inSection: expectedIndexPath.section)
@@ -383,8 +373,10 @@ final class DataSourceProviderTests: TestCase {
         typealias TableCellConfig = ReusableViewConfig<FakeViewModel, FakeTableCell>
         var dataSourceProvider: DataSourceProvider<DataSource<FakeViewModel>, TableCellConfig, TableCellConfig>!
 
+        // swiftlint:disable unused_closure_parameter
+
         // GIVEN: a cell config
-        let config = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, _: FakeViewModel?, _, tableView, _) -> FakeTableCell in
+        let config = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, model: FakeViewModel?, _, tableView, _) -> FakeTableCell in
 
             XCTAssertEqual(cell.reuseIdentifier!, self.cellReuseId, "Dequeued cell should have expected identifier")
             XCTAssertEqual(tableView, self.tableView, "TableView should equal the tableView for the data source")
@@ -395,7 +387,7 @@ final class DataSourceProviderTests: TestCase {
 
         // GIVEN: a data source editing controller
         let editingController = TableEditingController<DataSource<FakeViewModel>>(
-            canEditRow: { _, tableView, indexPath -> Bool in
+            canEditRow: { item, tableView, indexPath -> Bool in
                 indexPath == expectedIndexPath
         },
             commitEditing: { (dataSource: inout DataSource, tableView, editingStyle, indexPath) in
@@ -405,6 +397,8 @@ final class DataSourceProviderTests: TestCase {
                     }
                 }
         })
+
+        // swiftlint:enable unused_closure_parameter
 
         // GIVEN: a data source provider
         dataSourceProvider = DataSourceProvider(dataSource: dataSource,
@@ -453,5 +447,34 @@ final class DataSourceProviderTests: TestCase {
         waitForExpectations(timeout: defaultTimeout) { error -> Void in
             XCTAssertNil(error, "Expectations should not error")
         }
+    }
+}
+
+extension DataSourceProviderTests {
+
+    // MARK: TableView
+
+    /// Creates a tuple with a single section datasource (e.g. DataSource<FakeViewModel>) and a ReusableViewConfig.
+    ///
+    /// - Returns: Tuple with DataSource<FakeViewModel> and a cell config.
+    fileprivate func singleSectionDataSource() -> (datasource: DataSource<FakeViewModel>, config: ReusableViewConfig<FakeViewModel, FakeTableCell>) {
+        let section0 = Section(items: FakeViewModel(), FakeViewModel(), FakeViewModel(), headerTitle: "Header", footerTitle: "Footer")
+
+        // GIVEN: a cell config
+        let config = ReusableViewConfig(reuseIdentifier: cellReuseId) { (cell, _: FakeViewModel?, _, _, _) -> FakeTableCell in
+            cell
+        }
+
+        return (DataSource([section0]), config)
+    }
+
+    /// Registers a datasource with the test classes tableviewcontroller.
+    ///
+    /// - Parameters:
+    ///   - provider: Tuple created from ```singleSectionDataSource```.
+    ///   - tableViewDataSource: UITableViewDataSource.
+    fileprivate func registerProvider(_ provider: (datasource: DataSource<FakeViewModel>, config: ReusableViewConfig<FakeViewModel, FakeTableCell>), _ tableViewDataSource: UITableViewDataSource) {
+        tableView.register(FakeTableCell.self, forCellReuseIdentifier: provider.config.reuseIdentifier)
+        tableView.dataSource = tableViewDataSource
     }
 }

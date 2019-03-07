@@ -115,7 +115,7 @@ private func randomColor(withoutColor color: Color?) -> Color {
         colorSet.remove(color)
     }
     let colors = Array(colorSet)
-    return colors[Int.random(in: 0...colors.count)]
+    return colors[Int.random(in: 0...colors.count - 1)]
 }
 
 private func randomName() -> String {
