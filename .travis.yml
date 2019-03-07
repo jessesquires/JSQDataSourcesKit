@@ -1,5 +1,12 @@
-language: objective-c
+language: swift
 osx_image: xcode10.1
+addons:
+  homebrew:
+    packages:
+    - swiftlint
+    update: true
+cache:
+  bundler: true
 branches:
   only:
     - master
@@ -22,9 +29,8 @@ env:
    - DESTINATION="OS=12.1,name=Apple TV" SDK="$TVOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="NO" POD_LINT="NO"
 
 before_install:
-   - gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet
-   - brew update
-   - brew outdated swiftlint || brew upgrade swiftlint
+  - rvm install 2.5.1
+  - bundle install --without=documentation
 
 script:
 - set -o pipefail
@@ -48,6 +54,8 @@ script:
 - if [ $RUN_TESTS == "YES" ]; then
       xcodebuild test -project JSQDataSourcesKit.xcodeproj -scheme JSQDataSourcesKit -destination "platform=iOS Simulator,name=iPhone X" CODE_SIGNING_REQUIRED=NO;
   fi
+  
+- bundle exec danger
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
