@@ -1,6 +1,6 @@
 
 has_app_changes = !git.added_files.grep(/Source.*\.swift/).empty?
-has_test_changes = !git.modified_files.grep(/Tests/.*\.swift/).empty?
+has_test_changes = !git.modified_files.grep(/Tests/).empty?
 
 ###
 ### Specific files to watch
@@ -44,9 +44,7 @@ else
 	# auto_label.delete("WIP")
 end
 
-###
 ### General warnings
-###
 
 # Warn when there is a big PR
 warn("Big PR, try to keep changes smaller if you can") if git.lines_of_code > 500
