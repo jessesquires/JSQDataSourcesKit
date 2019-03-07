@@ -68,6 +68,8 @@ GEM
       danger-plugin-api (~> 1.0)
     danger-plugin-api (1.0.0)
       danger (> 2.0)
+    danger-prose (2.0.7)
+      danger
     danger-swiftlint (0.19.0)
       danger
       rake (> 10)
@@ -128,6 +130,7 @@ DEPENDENCIES
   cocoapods
   danger
   danger-auto_label
+  danger-prose
   danger-swiftlint
   danger-xcode_summary
   xcpretty-json-formatter

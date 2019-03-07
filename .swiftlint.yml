@@ -25,7 +25,6 @@ opt_in_rules:
   - first_where
   - sorted_first_last
   - contains_over_first_not_nil
-  - last_where
 
   # idiomatic
   - fatal_error_message
@@ -57,12 +56,10 @@ opt_in_rules:
   - multiline_parameters
   - trailing_closure
   - unneeded_parentheses_in_closure_argument
-  - vertical_whitespace_between_cases
 
   # lint
   - overridden_super_call
   - yoda_condition
-  - weak_computed_property
   - anyobject_protocol
   - array_init
   - empty_xctest_method

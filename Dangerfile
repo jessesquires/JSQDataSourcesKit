@@ -23,12 +23,11 @@ def didModify(files_array)
 	return did_modify_files
 end
 
+### WARNINGS
+
 warn('Changes to CI/CD files') if didModify(@DANGER_CI_CD_FILES)
 warn('Changes to dependency related files') if didModify(@DANGER_DEPENDENCY_FILES)
-
-# Sometimes it's a README fix, or something like that - which isn't relevant for
-# including in a project's CHANGELOG for example
-not_declared_trivial = !(github.pr_title.include? "#trivial")
+warn("Big PR, try to keep changes smaller if you can") if git.lines_of_code > 500
 
 # Make it more obvious that a PR is a work in progress and shouldn't be merged yet
 warn("PR is classed as Work in Progress") if github.pr_title.include? "[WIP]"
@@ -36,23 +35,22 @@ warn("PR is classed as Work in Progress") if github.pr_title.include? "[WIP]"
 ###
 ### Auto label
 ###
-if github.pr_title.include? "[WIP]"
-	auto_label.wip=(github.pr_json["number"])
-else
-	auto_label.remove("WIP")
-	# If you want to delete label
-	# auto_label.delete("WIP")
-end
 
-### General warnings
+# if github.pr_title.include? "[WIP]"
+# 	auto_label.wip=(github.pr_json["number"])
+# else
+# 	auto_label.remove("WIP")
+# 	# If you want to delete label
+# 	# auto_label.delete("WIP")
+# end
 
-# Warn when there is a big PR
-warn("Big PR, try to keep changes smaller if you can") if git.lines_of_code > 500
+# Let people say that this isn't worth a CHANGELOG entry in the PR if they choose
+declared_trivial = (github.pr_title + github.pr_body).include?("#trivial") || !has_app_changes
 
 # Changelog entries are required for changes to library files.
 no_changelog_entry = !git.modified_files.include?("CHANGELOG.md")
 
-if has_app_changes && no_changelog_entry && not_declared_trivial && !temp_skip_changelog
+if has_app_changes && no_changelog_entry && !declared_trivial
   warn("Any changes to library code should be reflected in the Changelog. Please consider adding a note there and adhere to the [Changelog Guidelines](https://github.com/jessesquires/JSQDataSourcesKit/CHANGELOG.md).")
 end
 
@@ -60,6 +58,17 @@ if has_app_changes && !has_test_changes
 	warn("Library files were updated without test coverage.  Consider updating or adding tests to cover changes.")
 end
 
+# Run danger-prose to lint and check spelling.
+modified_prose_lintable_files = (git.added_files.grep(%r{.*\.md/}) + git.modified_files.grep(%r{.*\.md/}))
+
+unless modified_prose_lintable_files.empty?
+  prose.lint_files modified_prose_lintable_files
+  prose.language = "en-us"
+  prose.ignored_words = ["JSQDataSourcesKit", "jessesquires", "enum", "enums", "CocoaPods"]
+  prose.ignore_acronyms = true
+  prose.ignore_numbers = true
+  prose.check_spelling modified_prose_lintable_files
+end
 
 # Run SwiftLint
 
