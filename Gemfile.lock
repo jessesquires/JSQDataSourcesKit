@@ -127,12 +127,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cocoapods
-  danger
+  cocoapods (~> 1.6.0)
+  danger (~> 5.0)
   danger-auto_label
   danger-prose
   danger-swiftlint
   danger-xcode_summary
+  xcpretty (~> 0.3.0)
   xcpretty-json-formatter
 
 BUNDLED WITH
