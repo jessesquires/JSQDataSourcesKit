@@ -237,7 +237,7 @@ final class DataSourceProviderTests: TestCase {
         let expectedModel = FakeViewModel()
         let expectedIndexPath = IndexPath(row: 2, section: 0)
         let items = [FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel(), FakeViewModel()]
-        let section0 = Section(items: items,
+        let section0 = Section(items,
                                headerTitle: "Header",
                                footerTitle: "Footer")
         let dataSource = DataSource([section0])
@@ -369,7 +369,7 @@ final class DataSourceProviderTests: TestCase {
         let expectedModel = FakeViewModel()
         let expectedIndexPath = IndexPath(row: 2, section: 0)
         let items = [ FakeViewModel(), FakeViewModel(), expectedModel, FakeViewModel(), FakeViewModel()]
-        let section0 = Section(items: items,
+        let section0 = Section(items,
                                headerTitle: "Header",
                                footerTitle: "Footer")
         let dataSource = DataSource([section0])
