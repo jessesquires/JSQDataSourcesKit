@@ -15,11 +15,9 @@ if has_source_changes && !has_test_changes
     warn("Library files were updated without test coverage. Please update or add tests, if needed.")
 end
 
-# Milestones are required to track what's included in each release
-if has_source_changes
-  has_milestone = !github.pr_json['milestone'].nil?
-  warn('All pull requests should have a milestone attached.', sticky: false) unless has_milestone
-end
+# Milestones are required for all PRs to track what's included in each release
+has_milestone = !github.pr_json['milestone'].nil?
+warn('All pull requests should have a milestone attached.', sticky: false) unless has_milestone
 
 # Docs are regenerated when releasing
 has_doc_changes = !git.modified_files.grep(/docs\//).empty?
