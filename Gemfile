@@ -8,5 +8,5 @@ gem 'danger-xcode_summary'
 gem 'danger-auto_label'
 gem 'danger-prose'
 
-gem 'xcpretty', '~> 0.3.0'
+gem 'xcpretty'
 gem 'xcpretty-json-formatter'
