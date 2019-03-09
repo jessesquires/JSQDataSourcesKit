@@ -1,12 +1,15 @@
 os: osx
 osx_image: xcode10.1
 rvm: 2.5.1
+
 addons:
   homebrew:
     packages:
     - swiftlint
     update: true
+
 cache: bundler
+
 branches:
   only:
     - master
