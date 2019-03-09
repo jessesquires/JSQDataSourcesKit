@@ -17,6 +17,7 @@
 //
 
 /// Represents and manages a section of items.
+// Example /Source/ change to test danger
 public struct Section<Item> {
 
     // MARK: Properties
