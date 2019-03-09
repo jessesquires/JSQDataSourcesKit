@@ -133,7 +133,7 @@ DEPENDENCIES
   danger-prose
   danger-swiftlint
   danger-xcode_summary
-  xcpretty (~> 0.3.0)
+  xcpretty
   xcpretty-json-formatter
 
 BUNDLED WITH

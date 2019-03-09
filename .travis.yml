@@ -44,13 +44,13 @@ script:
   fi
 
 - if [ $BUILD_EXAMPLE == "YES" ]; then
-      xcodebuild build analyze -project Example/Example.xcodeproj -scheme Example -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | xcpretty -c;
+      xcodebuild build analyze -project Example/Example.xcodeproj -scheme Example -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
   fi
 
 - if [ $RUN_TESTS == "YES" ]; then
-      xcodebuild analyze test -project "$PROJECT" -scheme JSQDataSourcesKit -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | xcpretty -c;
+      xcodebuild analyze test -project "$PROJECT" -scheme JSQDataSourcesKit -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
   else
-      xcodebuild build analyze -project "$PROJECT" -scheme JSQDataSourcesKit -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | xcpretty -c;
+      xcodebuild build analyze -project "$PROJECT" -scheme JSQDataSourcesKit -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
   fi
 
 # Build for reporting test coverage
