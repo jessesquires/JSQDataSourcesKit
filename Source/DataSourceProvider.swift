@@ -16,8 +16,11 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
-import Foundation
 import UIKit
+import Foundation
+
+
+
 
 /// A `DataSourceProvider` is responsible for providing a data source object for a table view or collection view.
 public final class DataSourceProvider < DataSource: DataSourceProtocol,
@@ -61,7 +64,7 @@ where CellConfig.Item == DataSource.Item, SupplementaryConfig.Item == DataSource
     }
 }
 
-extension DataSourceProvider where CellConfig.View: UITableViewCell {
+public extension DataSourceProvider where CellConfig.View: UITableViewCell {
 
     /// Initializes a new data source provider.
     ///
