@@ -8,7 +8,9 @@ addons:
     - swiftlint
     update: true
 
-cache: bundler
+cache:
+  - bundler
+  - pip
 
 branches:
   only:
@@ -32,6 +34,7 @@ env:
    - DESTINATION="OS=12.1,name=Apple TV" SDK="$TVOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="NO" POD_LINT="NO"
 
 before_install:
+    - pip3 install proselint
     - gem update --system
     - gem install bundler
 
