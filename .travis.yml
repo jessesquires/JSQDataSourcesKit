@@ -19,10 +19,7 @@ branches:
 
 env:
    global:
-   - LANG=en_US.UTF-8
-
    - PROJECT="JSQDataSourcesKit.xcodeproj"
-
    - IOS_SDK=iphonesimulator12.1
    - TVOS_SDK=appletvsimulator12.1
 
@@ -47,14 +44,9 @@ script:
   fi
 
 - if [ $RUN_TESTS == "YES" ]; then
-      xcodebuild analyze test -project "$PROJECT" -scheme JSQDataSourcesKit -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
+      xcodebuild analyze test -project "$PROJECT" -scheme JSQDataSourcesKit -sdk "$SDK" -destination "$DESTINATION" -enableCodeCoverage YES -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
   else
       xcodebuild build analyze -project "$PROJECT" -scheme JSQDataSourcesKit -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
-  fi
-
-# Build for reporting test coverage
-- if [ $RUN_TESTS == "YES" ]; then
-      xcodebuild test -project JSQDataSourcesKit.xcodeproj -scheme JSQDataSourcesKit -destination "platform=iOS Simulator,name=iPhone X" CODE_SIGNING_REQUIRED=NO;
   fi
 
 - bundle exec danger
