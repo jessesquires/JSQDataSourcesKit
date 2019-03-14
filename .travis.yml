@@ -24,11 +24,11 @@ env:
    - TVOS_SDK=appletvsimulator12.1
 
    matrix:
-   - DESTINATION="OS=11.4,name=iPhone X" SDK="$IOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="YES"
+   - DESTINATION="OS=11.4,name=iPhone X" SDK="$IOS_SDK" BUILD_EXAMPLE="YES"
 
-   - DESTINATION="OS=12.1,name=iPhone X" SDK="$IOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="YES"
+   - DESTINATION="OS=12.1,name=iPhone X" SDK="$IOS_SDK" BUILD_EXAMPLE="YES"
 
-   - DESTINATION="OS=12.1,name=Apple TV" SDK="$TVOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="NO"
+   - DESTINATION="OS=12.1,name=Apple TV" SDK="$TVOS_SDK" BUILD_EXAMPLE="NO"
 
 before_install:
   - pip3 install proselint
@@ -43,11 +43,7 @@ script:
       xcodebuild build analyze -project Example/Example.xcodeproj -scheme Example -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
   fi
 
-- if [ $RUN_TESTS == "YES" ]; then
-      xcodebuild analyze test -project "$PROJECT" -scheme JSQDataSourcesKit -sdk "$SDK" -destination "$DESTINATION" -enableCodeCoverage YES -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
-  else
-      xcodebuild build analyze -project "$PROJECT" -scheme JSQDataSourcesKit -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
-  fi
+- xcodebuild analyze test -project "$PROJECT" -scheme JSQDataSourcesKit -sdk "$SDK" -destination "$DESTINATION" -enableCodeCoverage YES -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
 
 - bundle exec danger
 
