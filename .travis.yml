@@ -27,24 +27,20 @@ env:
    - TVOS_SDK=appletvsimulator12.1
 
    matrix:
-   - DESTINATION="OS=11.4,name=iPhone X" SDK="$IOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="YES"
+   - DESTINATION="OS=11.4,name=iPhone X" SDK="$IOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="YES"
 
-   - DESTINATION="OS=12.1,name=iPhone X" SDK="$IOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="YES" POD_LINT="NO"
+   - DESTINATION="OS=12.1,name=iPhone X" SDK="$IOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="YES"
 
-   - DESTINATION="OS=12.1,name=Apple TV" SDK="$TVOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="NO" POD_LINT="NO"
+   - DESTINATION="OS=12.1,name=Apple TV" SDK="$TVOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="NO"
 
 before_install:
-    - pip3 install proselint
-    - gem update --system
-    - gem install bundler
+  - pip3 install proselint
+  - gem update --system
+  - gem install bundler
 
 script:
 - set -o pipefail
 - xcodebuild -version -sdk
-
-- if [ $POD_LINT == "YES" ]; then
-      bundle exec pod lib lint --skip-tests;
-  fi
 
 - if [ $BUILD_EXAMPLE == "YES" ]; then
       xcodebuild build analyze -project Example/Example.xcodeproj -scheme Example -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
@@ -65,3 +61,9 @@ script:
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
+
+jobs:
+  include:
+  - stage: lint
+    name: "pod lint"
+    script: bundle exec pod lib lint
