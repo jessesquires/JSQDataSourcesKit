@@ -45,19 +45,24 @@ jobs:
 
     - <<: *test
       name: iOS iPhone X 12.1
-      osx_image: xcode10.1
       env: DESTINATION="OS=12.1,name=iPhone X" SDK="$IOS_SDK" BUILD_EXAMPLE="YES"
 
     - <<: *test
       name: Apple TV 12.1
-      osx_image: xcode10.1
       env: DESTINATION="OS=12.1,name=Apple TV" SDK="$TVOS_SDK" BUILD_EXAMPLE="NO"
 
-    - stage: build example project
+    - &build
+      stage: build
+      name: iOS iPhone X 11.4
+      env: DESTINATION="OS=11.4,name=iPhone X" SDK="$IOS_SDK" BUILD_EXAMPLE="YES"
       script:
         - set -o pipefail
         - xcodebuild -version -sdk
-        - xcodebuild build analyze -project Example/Example.xcodeproj -scheme Example -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
+        - xcodebuild clean build -project Example/Example.xcodeproj -scheme Example -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
+
+    - <<: *build
+      name: iOS iPhone X 12.1
+      env: DESTINATION="OS=12.1,name=iPhone X" SDK="$IOS_SDK" BUILD_EXAMPLE="YES"
 
     - stage: lint
       name: "pod lint"
@@ -71,6 +76,6 @@ jobs:
 
 stages:
   - test
-  - build example project
+  - build
   - lint
   - carthage
