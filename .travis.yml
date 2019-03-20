@@ -54,7 +54,7 @@ jobs:
     - &build-examples
       stage: build examples
       name: iOS 11.4
-      env: DESTINATION="OS=11.4,name=iPhone X" SDK="$IOS_SDK" BUILD_EXAMPLE="YES"
+      env: DESTINATION="OS=11.4,name=iPhone X" SDK="$IOS_SDK"
       script:
         - set -o pipefail
         - xcodebuild -version -sdk
@@ -62,7 +62,7 @@ jobs:
 
     - <<: *build-examples
       name: iOS 12.1
-      env: DESTINATION="OS=12.1,name=iPhone X" SDK="$IOS_SDK" BUILD_EXAMPLE="YES"
+      env: DESTINATION="OS=12.1,name=iPhone X" SDK="$IOS_SDK"
 
     - stage: lint
       name: "pod lint"
