@@ -1,6 +1,5 @@
 os: osx
 osx_image: xcode10.1
-language: swift
 rvm: 2.6.0
 
 addons:
@@ -21,6 +20,7 @@ branches:
 env:
    global:
    - PROJECT="JSQDataSourcesKit.xcodeproj"
+   - SCHEME="JSQDataSourcesKit"
    - IOS_SDK=iphonesimulator12.1
    - TVOS_SDK=appletvsimulator12.1
 
@@ -33,35 +33,35 @@ jobs:
   include:
     - &test
       stage: test
-      name: iOS iPhone X 11.4
-      env: DESTINATION="OS=11.4,name=iPhone X" SDK="$IOS_SDK" BUILD_EXAMPLE="YES"
+      name: iOS 11.4
+      env: DESTINATION="OS=11.4,name=iPhone X" SDK="$IOS_SDK"
       script:
         - set -o pipefail
         - xcodebuild -version -sdk
-        - xcodebuild clean test -project "$PROJECT" -scheme JSQDataSourcesKit -sdk "$SDK" -destination "$DESTINATION" -enableCodeCoverage YES -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
+        - xcodebuild clean test -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -enableCodeCoverage YES -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
       after_success:
         - bundle exec danger
         - bash <(curl -s https://codecov.io/bash)
 
     - <<: *test
-      name: iOS iPhone X 12.1
-      env: DESTINATION="OS=12.1,name=iPhone X" SDK="$IOS_SDK" BUILD_EXAMPLE="YES"
+      name: iOS 12.1
+      env: DESTINATION="OS=12.1,name=iPhone X" SDK="$IOS_SDK"
 
     - <<: *test
-      name: Apple TV 12.1
-      env: DESTINATION="OS=12.1,name=Apple TV" SDK="$TVOS_SDK" BUILD_EXAMPLE="NO"
+      name: tvOS 12.1
+      env: DESTINATION="OS=12.1,name=Apple TV" SDK="$TVOS_SDK"
 
-    - &build
-      stage: build
-      name: iOS iPhone X 11.4
+    - &build-examples
+      stage: build examples
+      name: iOS 11.4
       env: DESTINATION="OS=11.4,name=iPhone X" SDK="$IOS_SDK" BUILD_EXAMPLE="YES"
       script:
         - set -o pipefail
         - xcodebuild -version -sdk
         - xcodebuild clean build -project Example/Example.xcodeproj -scheme Example -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
 
-    - <<: *build
-      name: iOS iPhone X 12.1
+    - <<: *build-examples
+      name: iOS 12.1
       env: DESTINATION="OS=12.1,name=iPhone X" SDK="$IOS_SDK" BUILD_EXAMPLE="YES"
 
     - stage: lint
@@ -76,6 +76,6 @@ jobs:
 
 stages:
   - test
-  - build
+  - build examples
   - lint
   - carthage
