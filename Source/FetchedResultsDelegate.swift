@@ -134,6 +134,8 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIC
                             self.collectionView?.insertItems(at: [new])
                         }
                     }
+                @unknown default:
+                    print("Unknown NSFetchedResultsChangeType.  Please implement case for new type.")
                 }
             },
             didChangeContent: { [unowned self] _ in
@@ -227,6 +229,8 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIT
                     if let insertIndexPath = newIndexPath {
                         self.tableView?.insertRows(at: [insertIndexPath], with: .fade)
                     }
+                @unknown default:
+                    print("Unknown NSFetchedResultsChangeType.  Please implement case for new type.")
                 }
             },
             didChangeContent: { [unowned self] _ in
