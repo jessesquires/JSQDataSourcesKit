@@ -1,5 +1,5 @@
 os: osx
-osx_image: xcode10.1
+osx_image: xcode10.2
 rvm: 2.6.0
 
 addons:
@@ -69,7 +69,7 @@ jobs:
       script: bundle exec pod lib lint
 
     - stage: carthage
-      osx_image: xcode10.1
+      osx_image: xcode10.2
       name: carthage
       os: osx
       script: carthage build --no-skip-current --configuration Release
