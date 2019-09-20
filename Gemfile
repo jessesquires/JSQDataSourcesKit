@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem 'cocoapods', '~> 1.6.0'
+gem 'cocoapods'
 
 gem 'danger', '~> 5.0'
 gem 'danger-swiftlint'
