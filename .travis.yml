@@ -1,5 +1,5 @@
 os: osx
-osx_image: xcode10.1
+osx_image: xcode11
 rvm: 2.6.0
 
 addons:
@@ -21,8 +21,8 @@ env:
    global:
    - PROJECT="JSQDataSourcesKit.xcodeproj"
    - SCHEME="JSQDataSourcesKit"
-   - IOS_SDK=iphonesimulator12.1
-   - TVOS_SDK=appletvsimulator12.1
+   - IOS_SDK=iphonesimulator13.0
+   - TVOS_SDK=appletvsimulator13.0
 
 before_install:
   - pip3 install proselint
@@ -33,8 +33,8 @@ jobs:
   include:
     - &test
       stage: test
-      name: iOS 11.4
-      env: DESTINATION="OS=11.4,name=iPhone X" SDK="$IOS_SDK"
+      name: iOS 11.1
+      env: DESTINATION="OS=11.1,name=iPhone X" SDK="$IOS_SDK"
       script:
         - set -o pipefail
         - xcodebuild -version -sdk
@@ -44,32 +44,43 @@ jobs:
         - bash <(curl -s https://codecov.io/bash)
 
     - <<: *test
-      name: iOS 12.1
-      env: DESTINATION="OS=12.1,name=iPhone X" SDK="$IOS_SDK"
+      name: iOS 12.0
+      env: DESTINATION="OS=12.0,name=iPhone X" SDK="$IOS_SDK"
 
     - <<: *test
-      name: tvOS 12.1
-      env: DESTINATION="OS=12.1,name=Apple TV" SDK="$TVOS_SDK"
+      name: iOS 13.0
+      env: DESTINATION="OS=13.0,name=iPhone 11" SDK="$IOS_SDK"
+
+    - <<: *test
+      name: tvOS 12.0
+      env: DESTINATION="OS=12.0,name=Apple TV" SDK="$TVOS_SDK"
+
+    - <<: *test
+      name: tvOS 13.0
+      env: DESTINATION="OS=13.0,name=Apple TV" SDK="$TVOS_SDK"
 
     - &build-examples
       stage: build examples
-      name: iOS 11.4
-      env: DESTINATION="OS=11.4,name=iPhone X" SDK="$IOS_SDK"
+      name: iOS 11.1
+      env: DESTINATION="OS=11.1,name=iPhone X" SDK="$IOS_SDK"
       script:
         - set -o pipefail
         - xcodebuild -version -sdk
         - xcodebuild clean build -project Example/Example.xcodeproj -scheme Example -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
 
     - <<: *build-examples
-      name: iOS 12.1
-      env: DESTINATION="OS=12.1,name=iPhone X" SDK="$IOS_SDK"
+      name: iOS 12.0
+      env: DESTINATION="OS=12.0,name=iPhone X" SDK="$IOS_SDK"
+
+    - <<: *build-examples
+      name: iOS 13.0
+      env: DESTINATION="OS=13.0,name=iPhone X" SDK="$IOS_SDK"
 
     - stage: lint
       name: pod lint
       script: bundle exec pod lib lint
 
     - stage: carthage
-      osx_image: xcode10.1
       name: carthage
       os: osx
       script: carthage build --no-skip-current --configuration Release
