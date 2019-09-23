@@ -135,7 +135,7 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIC
                         }
                     }
                 @unknown default:
-                    print("Unknown NSFetchedResultsChangeType.  Please implement case for new type.")
+                    fatalError("*** Error: unknown NSFetchedResultsChangeType: \(changeType)")
                 }
             },
             didChangeContent: { [unowned self] _ in
@@ -230,7 +230,7 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIT
                         self.tableView?.insertRows(at: [insertIndexPath], with: .fade)
                     }
                 @unknown default:
-                    print("Unknown NSFetchedResultsChangeType.  Please implement case for new type.")
+                    fatalError("*** Error: unknown NSFetchedResultsChangeType: \(changeType)")
                 }
             },
             didChangeContent: { [unowned self] _ in
