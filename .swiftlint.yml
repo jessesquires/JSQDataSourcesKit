@@ -26,6 +26,10 @@ opt_in_rules:
   - sorted_first_last
   - contains_over_first_not_nil
   - last_where
+  - reduce_into
+  - contains_over_filter_count
+  - contains_over_filter_is_empty
+  - empty_collection_literal
 
   # idiomatic
   - fatal_error_message
@@ -41,6 +45,7 @@ opt_in_rules:
   - static_operator
   - toggle_bool
   - unavailable_function
+  - no_space_in_method_call
 
   # style
   - attributes
@@ -70,6 +75,10 @@ opt_in_rules:
   - prohibited_super_call
   - unused_import
   - unused_private_declaration
+  - unused_capture_list
+  - duplicate_enum_cases
+  - legacy_multiple
+  - unused_declaration
 
 line_length: 200
 file_length: 600
