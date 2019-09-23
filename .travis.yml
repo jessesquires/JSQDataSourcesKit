@@ -94,7 +94,7 @@ jobs:
       script: carthage build --no-skip-current --configuration Release
 
 stages:
-  - test
+  - unit tests
   - ui tests
   - build examples
   - lint
