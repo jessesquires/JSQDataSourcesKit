@@ -32,7 +32,7 @@ before_install:
 jobs:
   include:
     - &test
-      stage: test
+      stage: unit tests
       name: iOS 11.1
       env: DESTINATION="OS=11.1,name=iPhone X" SDK="$IOS_SDK"
       script:
@@ -58,6 +58,14 @@ jobs:
     - <<: *test
       name: tvOS 13.0
       env: DESTINATION="OS=13.0,name=Apple TV" SDK="$TVOS_SDK"
+
+    - stage: ui tests
+      name: iOS 13.0
+      env: DESTINATION="OS=13.0,name=iPhone 11" SDK="$IOS_SDK"
+      script:
+        - set -o pipefail
+        - xcodebuild -version -sdk
+        - xcodebuild clean test -project Example/Example.xcodeproj -scheme Example -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
 
     - &build-examples
       stage: build examples
