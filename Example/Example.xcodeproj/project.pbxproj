@@ -43,13 +43,6 @@
 			remoteGlobalIDString = 88DB89C01A86D1A900DED153;
 			remoteInfo = Example;
 		};
-		886EC78C1CFF2C8400BDE6FA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 88DCAD881CB87DD900C018AF /* JSQDataSourcesKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 881A92CC1CB881270080BC5C;
-			remoteInfo = "JSQDataSourcesKit-tvOS";
-		};
 		887863391B3699C800E2F51C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 88DB89B91A86D1A900DED153 /* Project object */;
@@ -257,8 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				88DCAD8E1CB87DD900C018AF /* JSQDataSourcesKit.framework */,
-				886EC78D1CFF2C8400BDE6FA /* JSQDataSourcesKit.framework */,
-				88DCAD901CB87DD900C018AF /* JSQDataSourcesKitTests.xctest */,
+				88DCAD901CB87DD900C018AF /* JSQDataSourcesKit-Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -329,7 +321,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "Hexed Bits";
 				TargetAttributes = {
 					886EC7801CFF2C8400BDE6FA = {
@@ -354,7 +346,7 @@
 			};
 			buildConfigurationList = 88DB89BC1A86D1A900DED153 /* Build configuration list for PBXProject "Example" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -383,13 +375,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		886EC78D1CFF2C8400BDE6FA /* JSQDataSourcesKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = JSQDataSourcesKit.framework;
-			remoteRef = 886EC78C1CFF2C8400BDE6FA /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		88AD28A31D1F97A3000492FC /* ExampleModel.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -411,10 +396,10 @@
 			remoteRef = 88DCAD8D1CB87DD900C018AF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		88DCAD901CB87DD900C018AF /* JSQDataSourcesKitTests.xctest */ = {
+		88DCAD901CB87DD900C018AF /* JSQDataSourcesKit-Tests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = JSQDataSourcesKitTests.xctest;
+			path = "JSQDataSourcesKit-Tests.xctest";
 			remoteRef = 88DCAD8F1CB87DD900C018AF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -575,6 +560,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
@@ -592,6 +579,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -611,6 +600,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -659,7 +649,7 @@
 				PRODUCT_NAME = DataSources;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -668,6 +658,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -707,7 +698,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = DataSources;
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
