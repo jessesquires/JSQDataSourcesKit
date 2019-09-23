@@ -41,7 +41,7 @@ final class StaticViewsUITests: XCTestCase {
     func test_ThatStaticTableView_LoadsItsCells() {
 
         // GIVEN: a table currently presenting on the screen
-        let table = XCUIApplication().tables.element
+        let table = XCUIApplication().tables.matching(identifier: Identifiers.staticTableView.rawValue).firstMatch
 
         // WHEN: we choose to present the static table view
         staticTableViewMenuItem.tap()
@@ -58,7 +58,7 @@ final class StaticViewsUITests: XCTestCase {
 
     func test_ThatStaticCollectionView_loadsItsCells() {
         // GIVEN: a collection view currently presenting on the screen
-        let collectionView = XCUIApplication().collectionViews.element
+        let collectionView = XCUIApplication().collectionViews.matching(identifier: Identifiers.staticCollectionView.rawValue).firstMatch
 
         // WHEN: we choose to present the static collection view
         staticCollectionViewMenuItem.tap()

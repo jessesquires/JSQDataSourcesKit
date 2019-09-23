@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		876B25551D02662B00E8B477 /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B25511D02661100E8B477 /* XCTestCase+Extensions.swift */; };
 		876B25571D03770600E8B477 /* FetchedResultsViewsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B25561D03770600E8B477 /* FetchedResultsViewsUITests.swift */; };
+		88477E822339909700A7744C /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88477E812339909700A7744C /* Identifiers.swift */; };
+		88477E832339921700A7744C /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88477E812339909700A7744C /* Identifiers.swift */; };
 		886EC7921CFF2D4900BDE6FA /* ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886EC7901CFF2D4900BDE6FA /* ExampleTests.swift */; };
 		886EC7971CFF2DD200BDE6FA /* StaticViewsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886EC7951CFF2DD200BDE6FA /* StaticViewsUITests.swift */; };
 		886EC7AF1CFF2E5F00BDE6FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886EC79A1CFF2E5E00BDE6FA /* AppDelegate.swift */; };
@@ -112,6 +114,7 @@
 /* Begin PBXFileReference section */
 		876B25511D02661100E8B477 /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
 		876B25561D03770600E8B477 /* FetchedResultsViewsUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsViewsUITests.swift; sourceTree = "<group>"; };
+		88477E812339909700A7744C /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		886EC7811CFF2C8400BDE6FA /* ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		886EC7901CFF2D4900BDE6FA /* ExampleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleTests.swift; sourceTree = "<group>"; };
 		886EC7911CFF2D4900BDE6FA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -210,6 +213,7 @@
 				886EC79D1CFF2E5E00BDE6FA /* Main.storyboard */,
 				BF6AEBD01D3E91A40048AE97 /* MixedCollectionViewController.swift */,
 				886EC7AC1CFF2E5F00BDE6FA /* TableViewController.swift */,
+				88477E812339909700A7744C /* Identifiers.swift */,
 				886EC7AE1CFF2E5F00BDE6FA /* ViewController.swift */,
 			);
 			path = Sources;
@@ -441,6 +445,7 @@
 			files = (
 				876B25551D02662B00E8B477 /* XCTestCase+Extensions.swift in Sources */,
 				876B25571D03770600E8B477 /* FetchedResultsViewsUITests.swift in Sources */,
+				88477E832339921700A7744C /* Identifiers.swift in Sources */,
 				886EC7971CFF2DD200BDE6FA /* StaticViewsUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,6 +466,7 @@
 				886EC7B91CFF2E5F00BDE6FA /* FetchedTableViewController.swift in Sources */,
 				886EC7B41CFF2E5F00BDE6FA /* CollectionViewController.swift in Sources */,
 				886EC7BA1CFF2E5F00BDE6FA /* Helpers.swift in Sources */,
+				88477E822339909700A7744C /* Identifiers.swift in Sources */,
 				886EC7B81CFF2E5F00BDE6FA /* FetchedCollectionViewController.swift in Sources */,
 				BF21124D1D46663600F1840A /* ComposedCellViewConfig.swift in Sources */,
 				886EC7BE1CFF2E5F00BDE6FA /* TableViewController.swift in Sources */,
