@@ -1,11 +1,11 @@
 os: osx
-osx_image: xcode10.2
+osx_image: xcode10.1
 rvm: 2.6.0
 
 addons:
   homebrew:
     packages:
-      - swiftlint
+    - swiftlint
     update: true
 
 cache:
@@ -21,8 +21,8 @@ env:
    global:
    - PROJECT="JSQDataSourcesKit.xcodeproj"
    - SCHEME="JSQDataSourcesKit"
-   - IOS_SDK=iphonesimulator12.2
-   - TVOS_SDK=appletvsimulator12.2
+   - IOS_SDK=iphonesimulator12.1
+   - TVOS_SDK=appletvsimulator12.1
 
 before_install:
   - pip3 install proselint
@@ -44,12 +44,12 @@ jobs:
         - bash <(curl -s https://codecov.io/bash)
 
     - <<: *test
-      name: iOS 12.2
-      env: DESTINATION="OS=12.2,name=iPhone X" SDK="$IOS_SDK"
+      name: iOS 12.1
+      env: DESTINATION="OS=12.1,name=iPhone X" SDK="$IOS_SDK"
 
     - <<: *test
-      name: tvOS 12.2
-      env: DESTINATION="OS=12.2,name=Apple TV" SDK="$TVOS_SDK"
+      name: tvOS 12.1
+      env: DESTINATION="OS=12.1,name=Apple TV" SDK="$TVOS_SDK"
 
     - &build-examples
       stage: build examples
@@ -61,14 +61,15 @@ jobs:
         - xcodebuild clean build -project Example/Example.xcodeproj -scheme Example -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
 
     - <<: *build-examples
-      name: iOS 12.2
-      env: DESTINATION="OS=12.2,name=iPhone X" SDK="$IOS_SDK"
+      name: iOS 12.1
+      env: DESTINATION="OS=12.1,name=iPhone X" SDK="$IOS_SDK"
 
     - stage: lint
       name: pod lint
       script: bundle exec pod lib lint
 
     - stage: carthage
+      osx_image: xcode10.1
       name: carthage
       os: osx
       script: carthage build --no-skip-current --configuration Release
