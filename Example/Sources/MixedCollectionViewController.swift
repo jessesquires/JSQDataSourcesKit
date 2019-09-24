@@ -49,6 +49,8 @@ final class MixedCollectionViewController: UICollectionViewController, UICollect
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.collectionView.accessibilityIdentifier = Identifiers.mixedCollectionView.rawValue
+
         configureCollectionView(collectionView!)
         collectionView!.register(UINib(nibName: "FancyCollectionViewCell", bundle: nil),
                                  forCellWithReuseIdentifier: FancyCellId)

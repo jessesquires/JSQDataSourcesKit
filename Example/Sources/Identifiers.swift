@@ -19,6 +19,13 @@
 import Foundation
 
 enum Identifiers: String {
+    case mainTableView
+
     case staticTableView
     case staticCollectionView
+
+    case fetchedResultsTableView
+    case fetchedResultsCollectionView
+
+    case mixedCollectionView
 }

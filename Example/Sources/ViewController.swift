@@ -23,6 +23,10 @@ final class ViewController: UITableViewController {
 
     let stack = CoreDataStack()
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.tableView.accessibilityIdentifier = Identifiers.mainTableView.rawValue
+    }
     @IBAction func didTapDeleteButton(_ sender: UIBarButtonItem) {
         removeAllThingsInStack(stack)
     }
