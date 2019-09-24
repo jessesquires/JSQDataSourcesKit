@@ -12,8 +12,8 @@ This release closes the [8.1.0 milestone](https://github.com/jessesquires/JSQDat
 ## Changed
 
 - Upgraded to Swift 5.1
-- Update to Xcode 11
-- Update SwiftLint to 0.35.0
+- Updated to Xcode 11
+- Updated SwiftLint to 0.35.0
 
 8.0.0
 -----
