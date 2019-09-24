@@ -134,6 +134,8 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIC
                             self.collectionView?.insertItems(at: [new])
                         }
                     }
+                @unknown default:
+                    fatalError("*** Error: unknown NSFetchedResultsChangeType: \(changeType)")
                 }
             },
             didChangeContent: { [unowned self] _ in
@@ -227,6 +229,8 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIT
                     if let insertIndexPath = newIndexPath {
                         self.tableView?.insertRows(at: [insertIndexPath], with: .fade)
                     }
+                @unknown default:
+                    fatalError("*** Error: unknown NSFetchedResultsChangeType: \(changeType)")
                 }
             },
             didChangeContent: { [unowned self] _ in

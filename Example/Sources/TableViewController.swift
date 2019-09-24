@@ -26,6 +26,7 @@ final class TableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.accessibilityIdentifier = Identifiers.staticTableView.rawValue
 
         // 1. create view models
         let section0 = Section(items: CellViewModel(), CellViewModel(), CellViewModel(), headerTitle: "First")

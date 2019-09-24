@@ -16,8 +16,6 @@
 //  Released under an MIT license: https://opensource.org/licenses/MIT
 //
 
-// swiftlint:disable trailing_closure
-
 import XCTest
 
 final class StaticViewsUITests: XCTestCase {
@@ -28,28 +26,22 @@ final class StaticViewsUITests: XCTestCase {
     private let staticTableViewMenuItem = XCUIApplication().tables.element.cells.element(boundBy: 0)
     private let staticCollectionViewMenuItem = XCUIApplication().tables.element.cells.element(boundBy: 1)
 
+    let app = XCUIApplication()
+
     override func setUp() {
         super.setUp()
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-        // UI tests must launch the application that they test.
-        // Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
+        continueAfterFailure = true
+        app.launch()
     }
 
     func test_ThatStaticTableView_LoadsItsCells() {
-
-        // GIVEN: a table currently presenting on the screen
-        let table = XCUIApplication().tables.element
-
+        // GIVEN: a static table view
         // WHEN: we choose to present the static table view
         staticTableViewMenuItem.tap()
 
         // THEN: the number of cells loaded matches the number of cells expected
-        let countTableCells = countElements(ofType: XCUIElementType.cell,
-                                            inView: table,
-                                            byUniqueIdentifier: { $0.identifier })
+        let table = app.tables[Identifiers.staticTableView.rawValue]
+        let countTableCells = countElements(ofType: .cell, inView: table) { $0.identifier }
 
         XCTAssertEqual(countTableCells,
                        numberOfCellsInStaticTableView,
@@ -57,21 +49,16 @@ final class StaticViewsUITests: XCTestCase {
     }
 
     func test_ThatStaticCollectionView_loadsItsCells() {
-        // GIVEN: a collection view currently presenting on the screen
-        let collectionView = XCUIApplication().collectionViews.element
-
+        // GIVEN: a static collection view
         // WHEN: we choose to present the static collection view
         staticCollectionViewMenuItem.tap()
 
         // THEN: the number of cells loaded matches the number of cells expected
-        let countCollectionViewCells = countElements(ofType: XCUIElementType.cell,
-                                                     inView: collectionView,
-                                                     byUniqueIdentifier: { $0.identifier })
+        let collection = app.collectionViews[Identifiers.staticCollectionView.rawValue]
+        let countCollectionCells = countElements(ofType: .cell, inView: collection) { $0.identifier }
 
-        XCTAssertEqual(countCollectionViewCells,
+        XCTAssertEqual(countCollectionCells,
                        numberOfCellsInStaticCollectionView,
                        "The number of cells loaded should be the same as the number of cells expected")
     }
 }
-
-// swiftlint:enable trailing_closure

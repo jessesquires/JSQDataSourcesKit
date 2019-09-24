@@ -39,6 +39,7 @@ final class FetchedCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.collectionView.accessibilityIdentifier = Identifiers.fetchedResultsCollectionView.rawValue
 
         configureCollectionView(collectionView!)
         collectionView!.allowsMultipleSelection = true

@@ -4,6 +4,17 @@ The changelog for `JSQDataSourcesKit`. Also see the [releases](https://github.co
 
 --------------------------------------
 
+8.1.0
+-----
+
+This release closes the [8.1.0 milestone](https://github.com/jessesquires/JSQDataSourcesKit/milestone/14?closed=1).
+
+## Changed
+
+- Upgraded to Swift 5.1
+- Updated to Xcode 11
+- Updated SwiftLint to 0.35.0
+
 8.0.0
 -----
 

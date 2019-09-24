@@ -29,6 +29,7 @@ final class CollectionViewController: UICollectionViewController, UICollectionVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.collectionView.accessibilityIdentifier = Identifiers.staticCollectionView.rawValue
         configureCollectionView(collectionView!)
 
         // 1. create view models

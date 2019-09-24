@@ -265,7 +265,7 @@ final class DataSourceTests: XCTestCase {
         dataSource.insert(item: newItem, at: ip)
 
         let sectionItems = dataSource.items(inSection: ip.section)
-        let insertedIndex = sectionItems?.index(of: newItem)
+        let insertedIndex = sectionItems?.firstIndex(of: newItem)
 
         // THEN: the item is inserted at the specific index path
         XCTAssertEqual(insertedIndex, ip.row, "New item should be at the requested index")
@@ -284,7 +284,7 @@ final class DataSourceTests: XCTestCase {
         dataSource.append(newItem, inSection: section)
 
         let sectionItems = dataSource.items(inSection: section)
-        let insertedIndex = sectionItems?.index(of: newItem)
+        let insertedIndex = sectionItems?.firstIndex(of: newItem)
 
         // THEN: the item is appended in the specific section
         XCTAssertEqual(insertedIndex, sectionItems!.count - 1, "New item should be at the requested index")

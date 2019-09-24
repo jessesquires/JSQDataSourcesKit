@@ -25,12 +25,9 @@ extension XCTestCase {
     /**
      Returns to the previous screen in navigation stack if Back button is availible
      */
-    func returnBackIfPossible() {
-        let backButton = XCUIApplication().navigationBars.buttons.matching(identifier: "Back").element(boundBy: 0)
-
-        if backButton.exists && backButton.isHittable {
-            backButton.tap()
-        }
+    func navigateBack() {
+        let backButton = XCUIApplication().navigationBars.buttons["JSQDataSourcesKit"]
+        backButton.tap()
     }
 
     /**
@@ -41,7 +38,7 @@ extension XCTestCase {
     }
 
     /**
-     Scrolls down the current view halfscreen.
+     Scrolls up the current view halfscreen.
      */
     func scrollHalfScreenUp() {
         scrollScreenVerticallyWithOffset(0.8 * XCUIApplication().windows.element(boundBy: 0).frame.height / 2)
@@ -61,15 +58,6 @@ extension XCTestCase {
         let end = start.withOffset(CGVector(dx: 0, dy: offset))
 
         start.press(forDuration: 0, thenDragTo: end)
-    }
-
-    /**
-     Taps the status bar so the view is scrolled up at the beginning.
-     
-     - warning: Will not work if In-Call status bar is presented.
-     */
-    func scrollOnStatusBarTap() {
-        XCUIApplication().statusBars.element.tap()
     }
 
     /**

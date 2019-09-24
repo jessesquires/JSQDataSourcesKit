@@ -38,6 +38,7 @@ final class FetchedTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.accessibilityIdentifier = Identifiers.fetchedResultsTableView.rawValue
 
         // 1. create config
         let config = ReusableViewConfig(reuseIdentifier: CellId) { (cell, model: Thing?, _, _, indexPath) -> UITableViewCell in
