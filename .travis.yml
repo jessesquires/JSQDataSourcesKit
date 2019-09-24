@@ -95,7 +95,7 @@ jobs:
 
 stages:
   - unit tests
-  - ui tests
   - build examples
   - lint
   - carthage
+  - ui tests
