@@ -28,11 +28,11 @@ final class FetchedResultsViewsUITests: XCTestCase {
     let app = XCUIApplication()
 
     let getCollectionView = {
-        XCUIApplication().collectionViews.matching(identifier: Identifiers.fetchedResultsCollectionView.rawValue).firstMatch
+        XCUIApplication().collectionViews[Identifiers.fetchedResultsCollectionView.rawValue]
     }
 
     let getTableView = {
-        XCUIApplication().tables.matching(identifier: Identifiers.fetchedResultsTableView.rawValue).firstMatch
+        XCUIApplication().tables[Identifiers.fetchedResultsTableView.rawValue]
     }
 
     let getDeleteButton = {
