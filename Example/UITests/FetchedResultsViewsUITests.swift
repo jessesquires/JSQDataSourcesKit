@@ -148,34 +148,31 @@ final class FetchedResultsViewsUITests: XCTestCase {
     func test_ThatActionButton_AddNewOption_AddsCell() {
         fetchedResultsCollectionViewMenuItem.tap()
 
-        // GIVEN: initial number of cells in the collection
+        // GIVEN: initial empty collection
         let collection = getCollectionView()
-        let numberOfCellsBeforeInCollection = countElements(ofType: .cell, inView: collection) { $0.identifier }
 
         // WHEN: "Add new" option is tapped
         getShareButton().tap()
         app.sheets["You must select items first"].buttons["Add new"].tap()
 
-        // THEN: a new cell appears in the collection view
-        let numberOfCellsAfterInCollection = countElements(ofType: .cell, inView: collection) { $0.identifier }
-        XCTAssertEqual(numberOfCellsAfterInCollection,
-                       numberOfCellsBeforeInCollection + 1,
-                       "\"Add new\" should add one new cell")
+        // THEN: one new cell appears in the collection view
+        let numberOfCellsInCollection = countElements(ofType: .cell, inView: collection) { $0.identifier }
+        XCTAssertEqual(numberOfCellsInCollection, 1, "\"Add new\" should add one new cell")
 
         navigateBack()
+        getDeleteButton().tap()
         fetchedResultsTableViewMenuItem.tap()
 
-        // GIVEN: initial number of cells in the table view
+        // GIVEN: initial empty table
         let table = getTableView()
-        let numberOfCellsBeforeInTable = countElements(ofType: .cell, inView: table) { $0.identifier }
 
         // WHEN: "Add new" option is tapped
         getShareButton().tap()
         app.sheets["You must select items first"].buttons["Add new"].tap()
 
-        // THEN: a new cell appears in the table view
-        let numberOfCellsAfterInTable = countElements(ofType: .cell, inView: table) { $0.identifier }
-        XCTAssertEqual(numberOfCellsAfterInTable, numberOfCellsBeforeInTable + 1, "\"Add new\" should add one new cell")
+        // THEN: one new cell appears in the table view
+        let numberOfCellsInTable = countElements(ofType: .cell, inView: table) { $0.identifier }
+        XCTAssertEqual(numberOfCellsInTable, 1, "\"Add new\" should add one new cell")
     }
 
     func test_ThatActionButton_DeleteSelectedOption_RemovesSelectedCells() {
