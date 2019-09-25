@@ -155,6 +155,9 @@ final class FetchedResultsViewsUITests: XCTestCase {
         getShareButton().tap()
         app.sheets["You must select items first"].buttons["Add new"].tap()
 
+        let result1 = waitToAppearFor(element: collection.cells.element(boundBy: 0))
+        XCTAssertEqual(result1, .completed)
+
         // THEN: one new cell appears in the collection view
         let numberOfCellsInCollection = countElements(ofType: .cell, inView: collection) { $0.identifier }
         XCTAssertEqual(numberOfCellsInCollection, 1, "\"Add new\" should add one new cell")
@@ -169,6 +172,8 @@ final class FetchedResultsViewsUITests: XCTestCase {
         // WHEN: "Add new" option is tapped
         getShareButton().tap()
         app.sheets["You must select items first"].buttons["Add new"].tap()
+        let result2 = waitToAppearFor(element: table.cells.element(boundBy: 0))
+        XCTAssertEqual(result2, .completed)
 
         // THEN: one new cell appears in the table view
         let numberOfCellsInTable = countElements(ofType: .cell, inView: table) { $0.identifier }
