@@ -119,4 +119,17 @@ extension XCTestCase {
             numberOfElementsTapped += 1
         }
     }
+
+    @discardableResult
+    func waitToAppearFor(element: XCUIElement, timeout: Double = 5.0) -> XCTWaiter.Result {
+        let waiter = XCTWaiter()
+        let nsPredicate = NSPredicate(format: "exists == true")
+        let expectations = [XCTNSPredicateExpectation(predicate: nsPredicate, object: element)]
+        let result = waiter.wait(for: expectations, timeout: timeout)
+
+        if result == .timedOut && element.exists && nsPredicate.evaluate(with: element) {
+            return .completed
+        }
+        return result
+    }
 }
