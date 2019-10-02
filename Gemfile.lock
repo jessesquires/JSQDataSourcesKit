@@ -57,7 +57,7 @@ GEM
     concurrent-ruby (1.1.5)
     cork (0.3.0)
       colored2 (~> 3.1)
-    danger (6.0.9)
+    danger (6.1.0)
       claide (~> 1.0)
       claide-plugins (>= 0.9.2)
       colored2 (~> 3.1)
@@ -83,7 +83,7 @@ GEM
     danger-xcode_summary (0.5.1)
       danger-plugin-api (~> 1.0)
     escape (0.0.4)
-    faraday (0.15.4)
+    faraday (0.16.2)
       multipart-post (>= 1.2, < 3)
     faraday-http-cache (2.0.0)
       faraday (~> 0.8)
@@ -138,7 +138,7 @@ PLATFORMS
 
 DEPENDENCIES
   cocoapods (~> 1.8)
-  danger (~> 6.0)
+  danger (~> 6.1)
   danger-auto_label
   danger-prose
   danger-swiftlint
