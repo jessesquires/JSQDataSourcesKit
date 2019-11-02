@@ -26,29 +26,30 @@ env:
 
 before_install:
   - pip3 install proselint
-  - make setup
+  - bundle update --bundler
+  - bundle install --without=documentation
 
 jobs:
   include:
     - &test
       stage: unit tests
-      name: iOS 11.4
-      env: DESTINATION="OS=11.4,name=iPhone X" SDK="$IOS_SDK"
+      name: iOS 11.1
+      env: DESTINATION="OS=11.1,name=iPhone X" SDK="$IOS_SDK"
       script:
         - set -o pipefail
         - xcodebuild -version -sdk
         - xcodebuild clean test -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -enableCodeCoverage YES -configuration Debug ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO | bundle exec xcpretty -c;
       after_success:
-        - make danger
+        - bundle exec danger
         - bash <(curl -s https://codecov.io/bash)
 
     - <<: *test
-      name: iOS 12.1
-      env: DESTINATION="OS=12.1,name=iPhone X" SDK="$IOS_SDK"
+      name: iOS 12.0
+      env: DESTINATION="OS=12.0,name=iPhone X" SDK="$IOS_SDK"
 
     - <<: *test
-      name: iOS 13.2
-      env: DESTINATION="OS=13.2,name=iPhone 11" SDK="$IOS_SDK"
+      name: iOS 13.0
+      env: DESTINATION="OS=13.0,name=iPhone 11" SDK="$IOS_SDK"
 
     - <<: *test
       name: tvOS 11.0
@@ -59,12 +60,12 @@ jobs:
       env: DESTINATION="OS=12.0,name=Apple TV" SDK="$TVOS_SDK"
 
     - <<: *test
-      name: tvOS 13.2
-      env: DESTINATION="OS=13.2,name=Apple TV" SDK="$TVOS_SDK"
+      name: tvOS 13.0
+      env: DESTINATION="OS=13.0,name=Apple TV" SDK="$TVOS_SDK"
 
     - stage: ui tests
-      name: iOS 13.2
-      env: DESTINATION="OS=13.2,name=iPhone 11" SDK="$IOS_SDK"
+      name: iOS 13.0
+      env: DESTINATION="OS=13.0,name=iPhone 11" SDK="$IOS_SDK"
       script:
         - set -o pipefail
         - xcodebuild -version -sdk
@@ -84,8 +85,8 @@ jobs:
       env: DESTINATION="OS=12.0,name=iPhone X" SDK="$IOS_SDK"
 
     - <<: *build-examples
-      name: iOS 13.2
-      env: DESTINATION="OS=13.2,name=iPhone 11" SDK="$IOS_SDK"
+      name: iOS 13.0
+      env: DESTINATION="OS=13.0,name=iPhone 11" SDK="$IOS_SDK"
 
     - stage: lint
       name: pod lint
