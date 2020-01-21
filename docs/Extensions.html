@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Classes  Reference</title>
+    <title>Extensions  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Section/Classes" class="dashAnchor"></a>
-    <a title="Classes  Reference"></a>
+    <a name="//apple_ref/swift/Section/Extensions" class="dashAnchor"></a>
+    <a title="Extensions  Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="index.html">JSQDataSourcesKit Docs</a> (100% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="index.html">JSQDataSourcesKit Reference</a>
         <img id="carat" src="img/carat.png" />
-        Classes  Reference
+        Extensions  Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -120,19 +120,28 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Classes</h1>
-            <p>The following classes are available globally.</p>
+            <h1>Extensions</h1>
+            <p>The following extensions are available globally.</p>
 
           </section>
           <section class="section task-group-section">
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/CellParentViewProtocol"></a>
+                <a name="//apple_ref/swift/Section/CellParentViewProtocol" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/CellParentViewProtocol"></a>
+                  <h3 class="section-name"><p>CellParentViewProtocol</p>
+</h3>
+                </div>
+              </div>
               <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17JSQDataSourcesKit18DataSourceProviderC"></a>
-                    <a name="//apple_ref/swift/Class/DataSourceProvider" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit18DataSourceProviderC">DataSourceProvider</a>
+                    <a name="/c:objc(cs)UICollectionView"></a>
+                    <a name="//apple_ref/swift/Extension/UICollectionView" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)UICollectionView">UICollectionView</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -140,18 +149,13 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A <code>DataSourceProvider</code> is responsible for providing a data source object for a table view or collection view.</p>
-
-                        <a href="Classes/DataSourceProvider.html" class="slightly-smaller">See more</a>
+                        
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">DataSourceProvider</span> <span class="o">&lt;</span> <span class="kt"><a href="Structs/DataSource.html">DataSource</a></span><span class="p">:</span> <span class="kt"><a href="Protocols/DataSourceProtocol.html">DataSourceProtocol</a></span><span class="p">,</span>
-    <span class="kt">CellConfig</span><span class="p">:</span> <span class="kt"><a href="Protocols/ReusableViewConfigProtocol.html">ReusableViewConfigProtocol</a></span><span class="p">,</span>
-    <span class="kt">SupplementaryConfig</span><span class="p">:</span> <span class="kt"><a href="Protocols/ReusableViewConfigProtocol.html">ReusableViewConfigProtocol</a></span><span class="o">&gt;</span>
-<span class="k">where</span> <span class="kt">CellConfig</span><span class="o">.</span><span class="kt">Item</span> <span class="o">==</span> <span class="kt"><a href="Structs/DataSource.html">DataSource</a></span><span class="o">.</span><span class="kt">Item</span><span class="p">,</span> <span class="kt">SupplementaryConfig</span><span class="o">.</span><span class="kt">Item</span> <span class="o">==</span> <span class="kt"><a href="Structs/DataSource.html">DataSource</a></span><span class="o">.</span><span class="kt">Item</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">UICollectionView</span><span class="p">:</span> <span class="kt"><a href="Protocols/CellParentViewProtocol.html">CellParentViewProtocol</a></span></code></pre>
 
                         </div>
                       </div>
@@ -161,9 +165,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17JSQDataSourcesKit24FetchedResultsControllerC"></a>
-                    <a name="//apple_ref/swift/Class/FetchedResultsController" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit24FetchedResultsControllerC">FetchedResultsController</a>
+                    <a name="/c:objc(cs)UITableView"></a>
+                    <a name="//apple_ref/swift/Extension/UITableView" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)UITableView">UITableView</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -171,16 +175,52 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A generic <code>NSFetchedResultsController</code>.</p>
-
-                        <a href="Classes/FetchedResultsController.html" class="slightly-smaller">See more</a>
+                        
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">FetchedResultsController</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSFetchedResultsController</span><span class="o">&lt;</span><span class="kt">NSFetchRequestResult</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">NSFetchRequestResult</span></code></pre>
-<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">FetchedResultsController</span><span class="p">:</span> <span class="kt"><a href="Protocols/DataSourceProtocol.html">DataSourceProtocol</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">UITableView</span><span class="p">:</span> <span class="kt"><a href="Protocols/CellParentViewProtocol.html">CellParentViewProtocol</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/ReusableViewProtocol"></a>
+                <a name="//apple_ref/swift/Section/ReusableViewProtocol" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/ReusableViewProtocol"></a>
+                  <h3 class="section-name"><p>ReusableViewProtocol</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)UICollectionReusableView"></a>
+                    <a name="//apple_ref/swift/Extension/UICollectionReusableView" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)UICollectionReusableView">UICollectionReusableView</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">UICollectionReusableView</span><span class="p">:</span> <span class="kt"><a href="Protocols/ReusableViewProtocol.html">ReusableViewProtocol</a></span></code></pre>
 
                         </div>
                       </div>
@@ -190,9 +230,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:17JSQDataSourcesKit30FetchedResultsDelegateProviderC"></a>
-                    <a name="//apple_ref/swift/Class/FetchedResultsDelegateProvider" class="dashAnchor"></a>
-                    <a class="token" href="#/s:17JSQDataSourcesKit30FetchedResultsDelegateProviderC">FetchedResultsDelegateProvider</a>
+                    <a name="/c:objc(cs)UITableViewCell"></a>
+                    <a name="//apple_ref/swift/Extension/UITableViewCell" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)UITableViewCell">UITableViewCell</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -200,45 +240,13 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A <code>FetchedResultsDelegateProvider</code> is responsible for providing a delegate object for an instance of <code>NSFetchedResultsController</code>.</p>
-
-                        <a href="Classes/FetchedResultsDelegateProvider.html" class="slightly-smaller">See more</a>
+                        
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">FetchedResultsDelegateProvider</span><span class="o">&lt;</span><span class="kt">CellConfig</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">CellConfig</span> <span class="p">:</span> <span class="kt"><a href="Protocols/ReusableViewConfigProtocol.html">ReusableViewConfigProtocol</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@JSQDataSourcesKit@objc(cs)TitledSupplementaryView"></a>
-                    <a name="//apple_ref/swift/Class/TitledSupplementaryView" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@JSQDataSourcesKit@objc(cs)TitledSupplementaryView">TitledSupplementaryView</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A <code>TitledSupplementaryView</code> is a <code>UICollectionReusableView</code> subclass with a single <code>UILabel</code>.
-It is intended for use as an analog to a <code>UITableView</code> header title.
-These views can be used with <code><a href="Structs/TitledSupplementaryViewConfig.html">TitledSupplementaryViewConfig</a></code>.</p>
-
-                        <a href="Classes/TitledSupplementaryView.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">TitledSupplementaryView</span> <span class="p">:</span> <span class="kt">UICollectionReusableView</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">UITableViewCell</span><span class="p">:</span> <span class="kt"><a href="Protocols/ReusableViewProtocol.html">ReusableViewProtocol</a></span></code></pre>
 
                         </div>
                       </div>
