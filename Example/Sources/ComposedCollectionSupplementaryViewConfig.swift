@@ -37,7 +37,7 @@ public struct ComposedCollectionSupplementaryViewConfig <Item>: ReusableViewConf
     }
 
     public func reuseIdentiferFor(item: Item?, type: ReusableViewType, indexPath: IndexPath) -> String {
-        return TitledSupplementaryView.identifier
+        TitledSupplementaryView.identifier
     }
 
     public func configure(view: TitledSupplementaryView,

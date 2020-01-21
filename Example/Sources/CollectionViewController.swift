@@ -65,6 +65,6 @@ final class CollectionViewController: UICollectionViewController, UICollectionVi
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width, height: 50)
+        CGSize(width: collectionView.frame.size.width, height: 50)
     }
 }

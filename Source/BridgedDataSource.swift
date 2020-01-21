@@ -60,42 +60,42 @@ internal final class BridgedDataSource: NSObject {
 extension BridgedDataSource: UICollectionViewDataSource {
     @objc
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return numberOfSections()
+        numberOfSections()
     }
 
     @objc
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return numberOfItemsInSection(section)
+        numberOfItemsInSection(section)
     }
 
     @objc
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionCellForItemAtIndexPath!(collectionView, indexPath)
+        collectionCellForItemAtIndexPath!(collectionView, indexPath)
     }
 
     @objc
     func collectionView(_ collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
-        return collectionSupplementaryViewAtIndexPath!(collectionView, kind, indexPath)
+        collectionSupplementaryViewAtIndexPath!(collectionView, kind, indexPath)
     }
 }
 
 extension BridgedDataSource: UITableViewDataSource {
     @objc
     func numberOfSections(in tableView: UITableView) -> Int {
-        return numberOfSections()
+        numberOfSections()
     }
 
     @objc
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numberOfItemsInSection(section)
+        numberOfItemsInSection(section)
     }
 
     @objc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableCellForRowAtIndexPath!(tableView, indexPath)
+        tableCellForRowAtIndexPath!(tableView, indexPath)
     }
 
     @objc

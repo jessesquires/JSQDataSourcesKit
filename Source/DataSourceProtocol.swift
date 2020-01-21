@@ -60,6 +60,6 @@ extension DataSourceProtocol {
     /// - Parameter indexPath: An index path specifying a row and section in the data source.
     /// - Returns: The item specified by indexPath, or `nil`.
     public func item(atIndexPath indexPath: IndexPath) -> Item? {
-        return item(atRow: indexPath.row, inSection: indexPath.section)
+        item(atRow: indexPath.row, inSection: indexPath.section)
     }
 }

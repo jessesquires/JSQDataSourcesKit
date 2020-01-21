@@ -64,12 +64,12 @@ extension UICollectionView: CellParentViewProtocol {
 
     /// :nodoc:
     public func dequeueReusableCellFor(identifier: String, indexPath: IndexPath) -> CellType {
-        return dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
+        dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
     }
 
     /// :nodoc:
     public func dequeueReusableSupplementaryViewFor(kind: String, identifier: String, indexPath: IndexPath) -> CellType? {
-        return dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: identifier, for: indexPath)
+        dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: identifier, for: indexPath)
     }
 }
 
@@ -79,12 +79,12 @@ extension UITableView: CellParentViewProtocol {
 
     /// :nodoc:
     public func dequeueReusableCellFor(identifier: String, indexPath: IndexPath) -> CellType {
-        return dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+        dequeueReusableCell(withIdentifier: identifier, for: indexPath)
     }
 
     /// :nodoc:
     public func dequeueReusableSupplementaryViewFor(kind: String, identifier: String, indexPath: IndexPath) -> CellType? {
-        return nil
+        nil
     }
 }
 
@@ -309,7 +309,7 @@ public struct ReusableViewConfig<Item, Cell: ReusableViewProtocol>: ReusableView
 
     /// :nodoc:
     public func reuseIdentiferFor(item: Item?, type: ReusableViewType, indexPath: IndexPath) -> String {
-        return reuseIdentifier
+        reuseIdentifier
     }
 
     /// :nodoc:

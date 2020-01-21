@@ -67,14 +67,12 @@ opt_in_rules:
   # lint
   - overridden_super_call
   - yoda_condition
-  - weak_computed_property
   - anyobject_protocol
   - array_init
   - empty_xctest_method
   - identical_operands
   - prohibited_super_call
   - unused_import
-  - unused_private_declaration
   - unused_capture_list
   - duplicate_enum_cases
   - legacy_multiple

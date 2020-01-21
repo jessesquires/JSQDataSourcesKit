@@ -44,7 +44,7 @@ public class FetchedResultsController<T: NSFetchRequestResult>: NSFetchedResults
     /// - Parameter indexPath: The index path of an object.
     /// - Returns: The object at `indexPath`.
     public subscript (indexPath: IndexPath) -> T {
-        return object(at: indexPath) as! T
+        object(at: indexPath) as! T
     }
 }
 
@@ -54,7 +54,7 @@ extension FetchedResultsController: DataSourceProtocol {
 
     /// :nodoc:
     public func numberOfSections() -> Int {
-        return sections?.count ?? 0
+        sections?.count ?? 0
     }
 
     /// :nodoc:
@@ -85,13 +85,13 @@ extension FetchedResultsController: DataSourceProtocol {
 
     /// :nodoc:
     public func footerTitle(inSection section: Int) -> String? {
-        return nil
+        nil
     }
 }
 
 extension FetchedResultsController {
     /// :nodoc:
     public func item(atIndexPath indexPath: IndexPath) -> Item? {
-        return object(at: indexPath) as? Item
+        object(at: indexPath) as? Item
     }
 }

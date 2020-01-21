@@ -53,7 +53,7 @@ public struct TitledSupplementaryViewConfig <Item>: ReusableViewConfigProtocol {
 
     /// :nodoc:
     public func reuseIdentiferFor(item: Item?, type: ReusableViewType, indexPath: IndexPath) -> String {
-        return TitledSupplementaryView.identifier
+        TitledSupplementaryView.identifier
     }
 
     /// :nodoc:
@@ -62,6 +62,6 @@ public struct TitledSupplementaryViewConfig <Item>: ReusableViewConfigProtocol {
                           type: ReusableViewType,
                           parentView: UICollectionView,
                           indexPath: IndexPath) -> TitledSupplementaryView {
-        return configurator(view, item, type, parentView, indexPath)
+        configurator(view, item, type, parentView, indexPath)
     }
 }

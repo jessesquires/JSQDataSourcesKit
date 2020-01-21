@@ -74,7 +74,7 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIC
         return bridgedDelegate!
     }
 
-    private var collectionView: UICollectionView? { return cellParentView }
+    private var collectionView: UICollectionView? { cellParentView }
 
     private func bridgedCollectionFetchedResultsDelegate() -> BridgedFetchedResultsDelegate {
         let delegate = BridgedFetchedResultsDelegate(
@@ -183,7 +183,7 @@ extension FetchedResultsDelegateProvider where CellConfig.View.ParentView == UIT
         return bridgedDelegate!
     }
 
-    private var tableView: UITableView? { return cellParentView }
+    private var tableView: UITableView? { cellParentView }
 
     private func bridgedTableFetchedResultsDelegate() -> BridgedFetchedResultsDelegate {
         let delegate = BridgedFetchedResultsDelegate(

@@ -30,11 +30,11 @@ struct FakeViewModel: Equatable, CustomStringConvertible {
     let name = UUID().uuidString
 
     var description: String {
-        return "<\(FakeViewModel.self): \(name)>"
+        "<\(FakeViewModel.self): \(name)>"
     }
 
     static func == (lhs: FakeViewModel, rhs: FakeViewModel) -> Bool {
-        return lhs.name == rhs.name
+        lhs.name == rhs.name
     }
 }
 

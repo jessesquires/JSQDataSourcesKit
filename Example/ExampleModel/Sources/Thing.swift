@@ -44,7 +44,7 @@ public class Thing: NSManagedObject {
 
     public var color: Color {
         get {
-            return Color(rawValue: colorName)!
+            Color(rawValue: colorName)!
         }
         set {
             colorName = newValue.rawValue
@@ -52,15 +52,15 @@ public class Thing: NSManagedObject {
     }
 
     public var displayName: String {
-        return "Thing \(name)"
+        "Thing \(name)"
     }
 
     public var displayColor: UIColor {
-        return color.displayColor
+        color.displayColor
     }
 
     override public var description: String {
-        return "<Thing: \(name), \(color)>"
+        "<Thing: \(name), \(color)>"
     }
 
     // MARK: Init
@@ -119,5 +119,5 @@ private func randomColor(withoutColor color: Color?) -> Color {
 }
 
 private func randomName() -> String {
-    return UUID().uuidString.components(separatedBy: "-").first!
+    UUID().uuidString.components(separatedBy: "-").first!
 }

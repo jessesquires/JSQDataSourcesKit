@@ -36,7 +36,7 @@ struct ComposedCellViewConfig: ReusableViewConfigProtocol {
     }
 
     func reuseIdentiferFor(item: MixedItem?, type: ReusableViewType, indexPath: IndexPath) -> String {
-        return item!.reuseIdentifier
+        item!.reuseIdentifier
     }
 
     func configure(view: UICollectionViewCell, item: MixedItem?, type: ReusableViewType, parentView: UICollectionView, indexPath: IndexPath) -> UICollectionViewCell {

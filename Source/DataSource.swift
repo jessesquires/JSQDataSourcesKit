@@ -95,7 +95,7 @@ public struct DataSource<Item> {
      */
     @discardableResult
     public mutating func remove(at indexPath: IndexPath) -> Item? {
-        return remove(atRow: indexPath.row, inSection: indexPath.section)
+        remove(atRow: indexPath.row, inSection: indexPath.section)
     }
 
     // MARK: Subscripts
@@ -106,7 +106,7 @@ public struct DataSource<Item> {
      */
     public subscript (index: Int) -> Section<Item> {
         get {
-            return sections[index]
+            sections[index]
         }
         set {
             sections[index] = newValue
@@ -119,7 +119,7 @@ public struct DataSource<Item> {
      */
     public subscript (indexPath: IndexPath) -> Item {
         get {
-            return sections[indexPath.section].items[indexPath.row]
+            sections[indexPath.section].items[indexPath.row]
         }
         set {
             sections[indexPath.section].items[indexPath.row] = newValue
@@ -130,7 +130,7 @@ public struct DataSource<Item> {
 extension DataSource: DataSourceProtocol {
     /// :nodoc:
     public func numberOfSections() -> Int {
-        return sections.count
+        sections.count
     }
 
     /// :nodoc:

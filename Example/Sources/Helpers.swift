@@ -50,10 +50,10 @@ func removeAllThingsInStack(_ stack: CoreDataStack) {
 }
 
 func fetchedResultsController(inContext context: NSManagedObjectContext) -> FetchedResultsController<Thing> {
-    return FetchedResultsController<Thing>(fetchRequest: Thing.newFetchRequest(),
-                                           managedObjectContext: context,
-                                           sectionNameKeyPath: "colorName",
-                                           cacheName: nil)
+    FetchedResultsController<Thing>(fetchRequest: Thing.newFetchRequest(),
+                                    managedObjectContext: context,
+                                    sectionNameKeyPath: "colorName",
+                                    cacheName: nil)
 }
 
 func configureCollectionView(_ collectionView: UICollectionView) {

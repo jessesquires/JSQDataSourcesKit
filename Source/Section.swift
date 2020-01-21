@@ -32,7 +32,7 @@ public struct Section<Item> {
 
     /// The number of elements in the section.
     public var count: Int {
-        return items.count
+        items.count
     }
 
     // MARK: Initialization
@@ -65,7 +65,7 @@ public struct Section<Item> {
     /// - Returns: The item at `index`.
     public subscript (index: Int) -> Item {
         get {
-            return items[index]
+            items[index]
         }
         set {
             items[index] = newValue

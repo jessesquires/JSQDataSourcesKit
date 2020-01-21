@@ -45,7 +45,7 @@ public final class TitledSupplementaryView: UICollectionReusableView {
     /// :nodoc:
     override public var backgroundColor: UIColor? {
         get {
-            return super.backgroundColor
+            super.backgroundColor
         }
         set {
             super.backgroundColor = newValue
@@ -57,7 +57,7 @@ public final class TitledSupplementaryView: UICollectionReusableView {
 
     /// The default string used to identify instances of `TitledSupplementaryView`.
     public class var identifier: String {
-        return String(describing: TitledSupplementaryView.self)
+        String(describing: TitledSupplementaryView.self)
     }
 
     /// :nodoc:
