@@ -76,7 +76,7 @@ GEM
       danger (> 2.0)
     danger-prose (2.0.7)
       danger
-    danger-swiftlint (0.24.0)
+    danger-swiftlint (0.24.1)
       danger
       rake (> 10)
       thor (~> 0.19)
