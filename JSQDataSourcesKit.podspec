@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
    s.name = 'JSQDataSourcesKit'
-   s.version = '8.1.0'
+   s.version = '8.1.1'
    s.license = 'MIT'
 
    s.summary = 'Protocol-oriented, type-safe data source objects that keep your view controllers light'
@@ -19,4 +19,6 @@ Pod::Spec.new do |s|
 
    s.frameworks = 'CoreData'
    s.requires_arc = true
+
+   s.deprecated = true
 end
